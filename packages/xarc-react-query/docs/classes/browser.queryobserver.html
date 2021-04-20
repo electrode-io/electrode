@@ -61,7 +61,7 @@
 					<a href="browser.queryobserver.html">QueryObserver</a>
 				</li>
 			</ul>
-			<h1>Class QueryObserver&lt;TQueryFnData, TError, TData, TQueryData&gt;</h1>
+			<h1>Class QueryObserver&lt;TQueryFnData, TError, TData, TQueryData, TQueryKey&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -82,6 +82,9 @@
 					</li>
 					<li>
 						<h4>TQueryData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+					</li>
+					<li>
+						<h4>TQueryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a> = <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -176,14 +179,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Observer&lt;TQueryFnData, TError, TData, TQueryData&gt;<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Observer&lt;TQueryFnData, TError, TData, TQueryData, TQueryKey&gt;<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides Subscribable&lt;QueryObserverListener&lt;TData, TError&gt;&gt;.constructor</p>
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:27</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:27</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -200,6 +203,9 @@
 								<li>
 									<h4>TQueryData = <span class="tsd-signature-type">TQueryFnData</span></h4>
 								</li>
+								<li>
+									<h4>TQueryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a> = <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h4>
+								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -207,10 +213,10 @@
 									<h5>client: <a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a></h5>
 								</li>
 								<li>
-									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -223,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">clear<wbr>Refetch<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:51</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:51</li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">clear<wbr>Stale<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:50</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:50</li>
 						</ul>
 					</aside>
 				</section>
@@ -243,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">clear<wbr>Timers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:49</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:49</li>
 						</ul>
 					</aside>
 				</section>
@@ -253,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:17</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -263,7 +269,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:18</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +279,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Query<wbr>Initial<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:19</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +289,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:20</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -293,7 +299,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Result<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:22</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:22</li>
 						</ul>
 					</aside>
 				</section>
@@ -303,7 +309,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Result<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:21</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:21</li>
 						</ul>
 					</aside>
 				</section>
@@ -313,7 +319,7 @@
 					<div class="tsd-signature tsd-kind-icon">execute<wbr>Fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:45</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:45</li>
 						</ul>
 					</aside>
 				</section>
@@ -324,7 +330,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Subscribable.listeners</p>
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/subscribable.d.ts:3</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/subscribable.d.ts:3</li>
 						</ul>
 					</aside>
 				</section>
@@ -334,17 +340,17 @@
 					<div class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:57</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:57</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="options" class="tsd-anchor"></a>
 					<h3>options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:16</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -354,7 +360,7 @@
 					<div class="tsd-signature tsd-kind-icon">previous<wbr>Query<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:23</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:23</li>
 						</ul>
 					</aside>
 				</section>
@@ -364,7 +370,7 @@
 					<div class="tsd-signature tsd-kind-icon">previous<wbr>Select<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:24</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -374,7 +380,7 @@
 					<div class="tsd-signature tsd-kind-icon">refetch<wbr>Interval<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:26</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:26</li>
 						</ul>
 					</aside>
 				</section>
@@ -384,7 +390,7 @@
 					<div class="tsd-signature tsd-kind-icon">should<wbr>Notify<wbr>Listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:53</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:53</li>
 						</ul>
 					</aside>
 				</section>
@@ -394,7 +400,7 @@
 					<div class="tsd-signature tsd-kind-icon">stale<wbr>Timeout<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:25</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:25</li>
 						</ul>
 					</aside>
 				</section>
@@ -404,7 +410,7 @@
 					<div class="tsd-signature tsd-kind-icon">tracked<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:27</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:27</li>
 						</ul>
 					</aside>
 				</section>
@@ -414,7 +420,7 @@
 					<div class="tsd-signature tsd-kind-icon">update<wbr>Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:55</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:55</li>
 						</ul>
 					</aside>
 				</section>
@@ -424,7 +430,7 @@
 					<div class="tsd-signature tsd-kind-icon">update<wbr>Refetch<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:47</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:47</li>
 						</ul>
 					</aside>
 				</section>
@@ -434,7 +440,7 @@
 					<div class="tsd-signature tsd-kind-icon">update<wbr>Stale<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:46</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:46</li>
 						</ul>
 					</aside>
 				</section>
@@ -444,7 +450,7 @@
 					<div class="tsd-signature tsd-kind-icon">update<wbr>Timers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:48</li>
+							<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:48</li>
 						</ul>
 					</aside>
 				</section>
@@ -461,7 +467,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:29</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:29</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -472,22 +478,22 @@
 					<a name="createresult" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> create<wbr>Result</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Result<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Result<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:52</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:52</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>query: <a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>query: <a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -504,7 +510,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:34</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:34</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -521,7 +527,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:44</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:44</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -538,19 +544,19 @@
 					<a name="fetchoptimistic" class="tsd-anchor"></a>
 					<h3>fetch<wbr>Optimistic</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Optimistic<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Optimistic<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:43</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:43</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -561,16 +567,16 @@
 					<a name="getcurrentquery" class="tsd-anchor"></a>
 					<h3>get<wbr>Current<wbr>Query</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Current<wbr>Query<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Current<wbr>Query<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:40</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:40</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -584,7 +590,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:37</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:37</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -601,7 +607,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:39</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:39</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -618,19 +624,19 @@
 					<a name="getoptimisticresult" class="tsd-anchor"></a>
 					<h3>get<wbr>Optimistic<wbr>Result</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Optimistic<wbr>Result<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Optimistic<wbr>Result<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:36</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:36</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -648,7 +654,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Subscribable.hasListeners</p>
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/subscribable.d.ts:6</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/subscribable.d.ts:6</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -665,7 +671,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:56</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:56</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -689,7 +695,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Subscribable.onSubscribe</p>
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:30</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:30</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -707,7 +713,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Subscribable.onUnsubscribe</p>
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:31</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:31</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -724,7 +730,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:42</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:42</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -747,7 +753,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:41</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:41</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -758,19 +764,19 @@
 					<a name="setoptions" class="tsd-anchor"></a>
 					<h3>set<wbr>Options</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span>, notifyOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">NotifyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span>, notifyOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">NotifyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:35</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryKey</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> notifyOptions: <span class="tsd-signature-type">NotifyOptions</span></h5>
@@ -790,7 +796,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:32</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:32</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -807,7 +813,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:33</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:33</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -825,7 +831,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Subscribable.subscribe</p>
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/subscribable.d.ts:5</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/subscribable.d.ts:5</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -860,7 +866,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:38</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:38</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -883,7 +889,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/react-query/3.13.0/react-query/types/core/queryObserver.d.ts:54</li>
+									<li>Defined in node_modules/.f/_/react-query/3.13.10/react-query/types/core/queryObserver.d.ts:54</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
