@@ -1,3 +1,197 @@
+# 4/20/2021
+
+- remove manual fyn local deps (for lots of packages)
+- remote subappV1 with webpack5 module federation
+- enable extra module for remote entry to support CDN mapping
+- expose xrun command from xarc-app-dev so apps don't have to dep on xarc-run directly
+- add options to let user configure CDN options for webpack
+- convert webpack config composer to be Typescript
+
+## Packages
+
+- `@xarc/app@10.0.6` `(10.0.5 => 10.0.6)`
+- `@xarc/app-dev@10.0.6` `(10.0.5 => 10.0.6)`
+- `@xarc/create-app@6.0.3` `(6.0.2 => 6.0.3)`
+- `@xarc/jsx-renderer@1.0.9` `(1.0.8 => 1.0.9)`
+- `@xarc/opt-eslint@2.0.1` `(2.0.0 => 2.0.1)`
+- `@xarc/opt-jest@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-karma@2.0.2` `(2.0.1 => 2.0.2)`
+- `@xarc/opt-less@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-mocha@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-postcss@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-preact@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-react@2.0.1` `(2.0.0 => 2.0.1)`
+- `@xarc/opt-sass@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/opt-stylus@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/react@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-query@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-recoil@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-redux@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-redux-observable@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-redux-saga@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/react-router@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/subapp@0.2.2` `(0.2.1 => 0.2.2)`
+- `@xarc/tag-renderer@1.0.8` `(1.0.7 => 1.0.8)`
+- `@xarc/webpack@11.0.4` `(11.0.3 => 11.0.4)`
+- `subapp-pbundle@0.0.43` `(0.0.42 => 0.0.43)`
+- `subapp-react@0.0.40` `(0.0.39 => 0.0.40)`
+- `subapp-redux@1.0.49` `(1.0.48 => 1.0.49)`
+- `subapp-server@1.3.14` `(1.3.13 => 1.3.14)`
+- `subapp-web@1.0.49` `(1.0.48 => 1.0.49)`
+- `webpack-config-composer@1.1.4` `(1.1.3 => 1.1.4)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-app-dev`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+  - remote subappV1 with webpack5 module federation ([#1846](https://github.com/electrode-io/electrode/pull/1846)) [commit](http://github.com/electrode-io/electrode/commit/fa6fc24ad3b54598c1c851f3bb1caec670e50216)
+  - expose xrun command from xarc-app-dev so apps don't have to dep on xarc-run directly [commit](http://github.com/electrode-io/electrode/commit/2dc22555d423d73ac4dec16492aaa46c5765898f)
+  - add options to let user configure CDN options for webpack ([#1849](https://github.com/electrode-io/electrode/pull/1849)) [commit](http://github.com/electrode-io/electrode/commit/8a154796e4b0bcf67f8b08d38d25c2f3a5d35487)
+
+- `packages/xarc-create-app`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-index-page`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-jsx-renderer`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-eslint`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-jest`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-karma`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-less`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-mocha`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-postcss`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-preact`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-react`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-sass`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-opt-stylus`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-query`
+
+  - fix xarc-react-query tests due to downstream changes [commit](http://github.com/electrode-io/electrode/commit/bce44450026f657618014f1d13e49f3ec87c0c78)
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-recoil`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-redux`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-redux-observable`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-redux-saga`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-react-router`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-subapp`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-tag-renderer`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/xarc-webpack`
+
+  - enable extra module for remote entry to support CDN mapping [commit](http://github.com/electrode-io/electrode/commit/ed7e6fe508da16d836ae3438435db0d60606c294)
+  - convert webpack config composer to be Typescript ([#1847](https://github.com/electrode-io/electrode/pull/1847)) [commit](http://github.com/electrode-io/electrode/commit/212c50831d86d76a748a4711c875cbb8f4382abc)
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+  - remote subappV1 with webpack5 module federation ([#1846](https://github.com/electrode-io/electrode/pull/1846)) [commit](http://github.com/electrode-io/electrode/commit/fa6fc24ad3b54598c1c851f3bb1caec670e50216)
+  - add options to let user configure CDN options for webpack ([#1849](https://github.com/electrode-io/electrode/pull/1849)) [commit](http://github.com/electrode-io/electrode/commit/8a154796e4b0bcf67f8b08d38d25c2f3a5d35487)
+
+- `packages/electrode-archetype-webpack-dll`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/electrode-archetype-webpack-dll-dev`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/electrode-react-webapp`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/electrode-ui-logger`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/subapp-pbundle`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/subapp-react`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/subapp-redux`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/subapp-server`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+
+- `packages/subapp-web`
+
+  - remove manual fyn local deps [commit](http://github.com/electrode-io/electrode/commit/1c22f034c361af47b4ae9894d6f6d80385c020b3)
+  - remote subappV1 with webpack5 module federation ([#1846](https://github.com/electrode-io/electrode/pull/1846)) [commit](http://github.com/electrode-io/electrode/commit/fa6fc24ad3b54598c1c851f3bb1caec670e50216)
+
+- `packages/webpack-config-composer`
+
+  - convert webpack config composer to be Typescript ([#1847](https://github.com/electrode-io/electrode/pull/1847)) [commit](http://github.com/electrode-io/electrode/commit/212c50831d86d76a748a4711c875cbb8f4382abc)
+  - remote subappV1 with webpack5 module federation ([#1846](https://github.com/electrode-io/electrode/pull/1846)) [commit](http://github.com/electrode-io/electrode/commit/fa6fc24ad3b54598c1c851f3bb1caec670e50216)
+
 # 4/8/2021
 
 - update create-app template to register routes as a plugin
