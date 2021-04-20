@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-jest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electrode X jest addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",

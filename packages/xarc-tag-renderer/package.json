@@ -1,6 +1,6 @@
 {
   "name": "@xarc/tag-renderer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {

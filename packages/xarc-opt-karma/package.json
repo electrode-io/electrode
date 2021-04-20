@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-karma",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Electrode karma addon for unit tests",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",
