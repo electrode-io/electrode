@@ -8,7 +8,7 @@ import {
 } from "@xarc/subapp";
 import { __createDynamicComponent, CreateComponentOptions } from "../common/create-component";
 import { BrowserReactLib } from "./react-lib-browser";
-import { __reactFrameworkFeature, __addFeature } from "../common";
+import { __reactFrameworkFeature, __addFeature } from "../common/internal";
 import { appContextFeature } from "./feat-app-context-browser";
 import { ReactClientRenderPipeline } from "./react-render-pipeline";
 //

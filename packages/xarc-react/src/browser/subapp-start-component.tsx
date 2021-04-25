@@ -3,7 +3,7 @@
 
 import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { envHooks } from "@xarc/subapp";
-import { SubAppDef, SubAppMountInfo, xarcV2, MountType } from "./index";
+import { SubAppDef, SubAppMountInfo, xarcV2, MountType } from "@xarc/subapp";
 import { ReactClientRenderPipeline } from "./react-render-pipeline";
 
 export type SubAppStartComponentPropsType = {

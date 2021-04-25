@@ -7,14 +7,21 @@ import { SubAppSSRData } from "@xarc/subapp";
 export const _staticPropsFeatureId = "state-provider";
 export const _staticPropsFeatureSubId = "static-props";
 
+/**
+ * Parameters type for the static props feature `getStaticProps` method.
+ */
 export type StaticPropsMethodParams = {
   ssrData: SubAppSSRData;
 };
 
+/**
+ * Signature type for the `getStaticProps` method to pass to the static props feature.
+ *
+ */
 export type getStaticPropsMethod = (params: StaticPropsMethodParams) => Promise<any>;
 
 /**
- *
+ * type for the static props feature's server module.
  */
 export type StaticPropsServerModule = {
   getStaticProps: getStaticPropsMethod;

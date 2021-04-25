@@ -7,12 +7,58 @@ import {
   StaticPropsFeatureOptions,
   _staticPropsFeatureId,
   _staticPropsFeatureSubId
-} from "../common";
+} from "../common/feat-static-props-types";
 
 /**
- * Add support for static props to a subapp
+ * Add support for static props to a subapp.
  *
- * TODO: handle hot module reload
+ * This feature allows you to have an async function `getStaticProps` on your app
+ * server to prepare the data as props for your subapp's React component.  Subapp
+ * renderer will pass it into your subapp, and send the data to browser also.
+ *
+ * @remark TODO: handle hot module reload
+ *
+ * Example:
+ *
+ * **Subapp implementation module** `sample.tsx`:
+ *
+ * ```tsx
+ * import { ReactSubApp, staticPropsFeature, AppContext, React } from "@xarc/react";
+ *
+ * const Sample = () => {
+ *   return (
+ *     <AppContext.Consumer>
+ *       {({ isSsr, ssr }) => {
+ *         if (isSsr) {
+ *           return <div>Server Side Rendering {ssr.request.url}</div>;
+ *         }
+ *       }}
+ *     </AppContext.Consumer>
+ *   );
+ * };
+ *
+ * export subapp: ReactSubApp = {
+ *   Component: Sample,
+ *   wantFeatures: [
+ *     staticPropsFeature({
+ *       serverModule: require.resolve("./sample-static-props")
+ *     })
+ *   ]
+ * }
+ * ```
+ *
+ * **Server side static props provider module** `sample-static-props.ts`:
+ *
+ * ```ts
+ * export const getStaticProps() = async () => {
+ *   return {
+ *     props: {
+ *       "hello": world
+ *     }
+ *   }
+ * }
+ * ```
+ *
  *
  * @param options - static props feature options
  * @returns subapp feature factory for static props

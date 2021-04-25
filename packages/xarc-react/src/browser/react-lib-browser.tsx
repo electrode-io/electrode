@@ -3,7 +3,7 @@
 import { render, hydrate } from "react-dom";
 import { createElement, Component } from "react"; // eslint-disable-line
 import { SubAppFeatureResult, xarcV2, ClientFrameworkLib, envHooks } from "@xarc/subapp";
-import { SubAppCSRData } from "./index";
+import { SubAppCSRData } from "@xarc/subapp";
 import { ReactClientRenderPipeline } from "./react-render-pipeline";
 import { SubAppStartComponent } from "./subapp-start-component";
 

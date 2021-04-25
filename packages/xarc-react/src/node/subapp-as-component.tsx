@@ -5,7 +5,8 @@ import {
   SSR_PIPELINES,
   LoadSubAppOptions
 } from "@xarc/subapp";
-import { AppContext, SubAppInlineOptions } from "../common";
+import { SubAppInlineOptions } from "../common";
+import { AppContext } from "../common/app-context";
 import { SSRReactLib } from ".";
 
 type PropsType = {

@@ -1,5 +1,5 @@
 import { SubAppCSRData, xarcV2, ClientRenderPipeline, envHooks } from "@xarc/subapp";
-import { SubAppMountInfo } from "../common";
+import { SubAppMountInfo } from "@xarc/subapp";
 import { BrowserReactLib } from "./react-lib-browser";
 
 const _dynamics = [];

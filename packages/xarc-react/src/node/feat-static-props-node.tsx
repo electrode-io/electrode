@@ -7,7 +7,7 @@ import {
   StaticPropsFeatureOptions,
   _staticPropsFeatureId,
   _staticPropsFeatureSubId
-} from "../common";
+} from "../common/feat-static-props-types";
 
 /**
  * Add support for static props to a subapp

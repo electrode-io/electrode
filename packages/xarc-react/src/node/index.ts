@@ -10,7 +10,7 @@ import {
 } from "@xarc/subapp";
 import { __createDynamicComponent, CreateComponentOptions } from "../common/create-component";
 import { SSRReactLib } from "./react-lib-node";
-import { __reactFrameworkFeature, __addFeature } from "../common";
+import { __reactFrameworkFeature, __addFeature } from "../common/internal";
 import { appContextFeature } from "./feat-app-context-node";
 
 //
@@ -33,11 +33,42 @@ export function reactFrameworkFeature(): SubAppFeatureFactory {
 }
 
 /**
- * declare a subapp to use React framework (node.js version)
+ * Declare a subapp.
+ *
+ * - Your file that implements the SubApp should export it with the name `subapp`.
+ *
+ * For Example, to declare a subapp named `"Sample"` to load its implementation module
+ * `sample.tsx`:
+ *
+ * **Subapp implementation module:** `sample.tsx`
+ *
+ * ```tsx
+ * import { ReactSubApp, React } from "@xarc/react";
+ *
+ * const Sample = () => <div>Sample<div/>
+ *
+ * export subapp: ReactSubApp = {
+ *   Component: Sample,
+ *   wantFeatures: [
+ *     // additional features for the subapp
+ *   ]
+ * }
+ * ```
+ *
+ * **Your app entry module:** `app.tsx`
+ *
+ * ```tsx
+ * import { declareSubApp } from "@xarc/react";
+ *
+ * export const Sample = declareSubApp({
+ *   name: "Sample",
+ *   getModule: () => import("./sample")
+ * })
+ * ```
  *
  * @param options - subapp options
  */
-export function __declareSubApp(options: SubAppOptions): SubAppDef {
+function __declareSubApp(options: SubAppOptions): SubAppDef {
   // add framework feature if it's not exist
   let opts = __addFeature(options, "framework", reactFrameworkFeature);
   opts = __addFeature(opts, "app-context-provider", appContextFeature);

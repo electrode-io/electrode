@@ -2,11 +2,23 @@
 
 import { SubAppRenderPipeline } from "./subapp-render-pipeline";
 
+/**
+ * CDN mapping data type
+ *
+ * @remark
+ *  Internal use
+ */
 export type CDNData = {
   /** mapping data */
   md: Record<string, any>;
 };
 
+/**
+ * xarcV2 client runtime type.
+ *
+ * @remark
+ *  Internal use
+ */
 export type _xarcV2RunTimeInfo = {
   instId: number;
   subApps: Record<string, any>;
@@ -68,7 +80,10 @@ export interface XarcSubAppClientV2 {
 }
 
 /**
- * Options for calling declareSubApp
+ * Options for calling the `declareSubApp` API.
+ *
+ * To see example of implement and declare a subapp, see a framework specific
+ * SubApp implementation type, such as `ReactSubApp`.
  */
 export type SubAppOptions = {
   /**
@@ -132,6 +147,9 @@ export type SubAppOptions = {
 
 /**
  * SubApp client side rendering data
+ *
+ * @remark
+ *  Internal use
  */
 export type SubAppCSRData = LoadSubAppOptions & {
   element?: Element;
@@ -139,6 +157,12 @@ export type SubAppCSRData = LoadSubAppOptions & {
   getInitialState?(): any;
 };
 
+/**
+ * Parameters for starting a subapp
+ *
+ * @remark
+ *  Internal use
+ */
 export type SubAppStartParams = {
   /** server side render data */
   ssrData?: SubAppSSRData;
@@ -146,10 +170,23 @@ export type SubAppStartParams = {
   csrData?: SubAppCSRData;
 };
 
+/**
+ * Subapp rendering pipeline factory parameters
+ *
+ * @remark
+ *  Internal use
+ *
+ *
+ */
 export type PipelineFactoryParams = SubAppStartParams;
 
 /**
- * definition of a subapp from declareSubApp
+ * definition of a subapp from `declareSubApp`
+ *
+ * To see example of implement and declare a subapp, see a framework specific
+ * SubApp implementation type, such as `ReactSubApp`.
+ *
+ *
  */
 export type SubAppDef = SubAppOptions & {
   /**
@@ -230,6 +267,11 @@ export type SubAppDef = SubAppOptions & {
 
 /**
  * Declare what info a subapp feature should have
+ *
+ * @remark
+ *  Internal use
+ *
+ *
  */
 export type SubAppFeatureInfo = {
   /**
@@ -246,6 +288,11 @@ export type SubAppFeatureInfo = {
 
 /**
  * Declare a subapp feature factory
+ *
+ * @remark
+ *  Internal use
+ *
+ *
  */
 export interface ISubAppFeatureFactory {
   /**
@@ -255,15 +302,28 @@ export interface ISubAppFeatureFactory {
 }
 
 /**
- * What a subapp feature should provide
+ * The factory type for a subapp feature.
+ *
+ * A subapp feature should export a factory for creating the feature.
+ *
+ * @remark
+ *  Internal use
+ *
+ *
  */
 export type SubAppFeatureFactory = ISubAppFeatureFactory & SubAppFeatureInfo;
 
+/**
+ * The result type a subapp feature execution should return.
+ */
 export type SubAppFeatureResult = {
   Component?: any;
   props?: any;
 };
 
+/**
+ * Parameters for a subapp feature execution
+ */
 export type SubAppFeatureExecuteParams = {
   input: SubAppFeatureResult;
   ssrData?: SubAppSSRData;
@@ -272,7 +332,7 @@ export type SubAppFeatureExecuteParams = {
 };
 
 /**
- * Declare the implementation of a subapp feature
+ * subapp feature interface.  All subapp features need to implement this interface.
  */
 export interface ISubAppFeature {
   /**
@@ -281,6 +341,9 @@ export interface ISubAppFeature {
   execute(param: SubAppFeatureExecuteParams): SubAppFeatureResult | Promise<SubAppFeatureResult>;
 }
 
+/**
+ * The type for a subapp feature implementation.
+ */
 export type SubAppFeature = ISubAppFeature & SubAppFeatureInfo;
 
 /**
@@ -344,7 +407,10 @@ export type SubAppMountInfo = {
 };
 
 /**
- * A subapp
+ * Base type for a generic implementation of a SubApp.
+ *
+ * An actual subapp implementation should use a type derived from this for a specific
+ * framework.  For example, `ReactSubApp` for React.
  */
 export type SubApp<ComponentType> = {
   /**
@@ -372,6 +438,9 @@ export type SubApp<ComponentType> = {
 
 /**
  * container of declared subapps
+ *
+ * @remark
+ *  Internal use
  */
 export class SubAppContainer {
   readyCount: number;
