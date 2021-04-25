@@ -13,6 +13,13 @@ import {
   WEBPACK_EVENT_STATS
 } from "./dev-admin/webpack-dev-relay";
 
+//
+// when first load, the app will start before webpack finish compiling
+// so webpack will inform app that modules refreshed when they didn't.
+// set a one time flag to avoid refreshing when first start up
+//
+let initialLoad = true;
+
 import { loadXarcOptions } from "./utils";
 
 export class AppDevMiddleware {
@@ -43,21 +50,41 @@ export class AppDevMiddleware {
       });
     }
 
-    if (!_.isEmpty(data.refreshModules)) {
-      data.refreshModules.forEach(m => {
-        try {
-          const xarcOptions = loadXarcOptions();
-          const xarcCwd = xarcOptions.cwd;
-          const moduleFullPath = require.resolve(Path.resolve(xarcCwd, m));
-          delete require.cache[moduleFullPath];
-        } catch (err) {
-          //
-        }
-      });
+    if (!initialLoad && !_.isEmpty(data.refreshModules)) {
+      const { refreshed, failed } = data.refreshModules.reduce(
+        (agg, moduleName) => {
+          if (!moduleName.startsWith("webpack/runtime")) {
+            try {
+              const xarcOptions = loadXarcOptions();
+              const xarcCwd = xarcOptions.cwd;
+              const moduleFullPath = require.resolve(Path.resolve(xarcCwd, moduleName));
+              delete require.cache[moduleFullPath];
+              agg.refreshed.push(moduleName);
+            } catch (err) {
+              agg.failed.push({ moduleName, err });
+            }
+          }
 
-      refreshAllSubApps();
-      refreshAllSubApps2();
+          return agg;
+        },
+        { refreshed: [], failed: [] }
+      );
+
+      if (failed.length > 0) {
+        const failMsg = failed
+          .map(({ moduleName, err }) => `${moduleName} (${err.message})`)
+          .join(", ");
+        console.error(`Failed refresh modules for hot reload: ${failMsg}`);
+      }
+
+      if (refreshed.length > 0) {
+        console.log(`Refreshed modules for hot reload: ${refreshed.join(", ")}`);
+        refreshAllSubApps();
+        refreshAllSubApps2();
+      }
     }
+
+    initialLoad = false;
 
     // activate extend require for isomorphic assets
     getXRequire().activate();

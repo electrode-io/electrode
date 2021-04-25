@@ -1,4 +1,5 @@
-import { createDynamicComponent, getContainer } from "../../../src/node";
+import { createDynamicComponent } from "../../../src/node";
+import { getContainer } from "@xarc/subapp";
 import { renderToString } from "react-dom/server";
 
 import { describe, it } from "mocha";

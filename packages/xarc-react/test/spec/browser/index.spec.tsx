@@ -1,4 +1,5 @@
-import { createDynamicComponent, getContainer } from "../../../src/browser/index";
+import { createDynamicComponent } from "../../../src/browser/index";
+import { getContainer } from "@xarc/subapp";
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
