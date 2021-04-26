@@ -20,6 +20,7 @@ export * from "../common/index";
 export * from "@xarc/tag-renderer";
 export * from "./feat-static-props-node";
 export * from "./subapp-as-component";
+export { AppContext } from "../common/app-context";
 export { SSRReactLib, subAppReady, loadSubApp, appContextFeature, RenderOptions, PageRenderer };
 
 /**

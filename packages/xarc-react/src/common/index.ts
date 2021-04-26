@@ -16,13 +16,12 @@ export { xarcV2 } from "@xarc/subapp";
  * ```tsx
  * import { ReactSubApp, React } from "@xarc/react";
  *
- * const Sample = () => <div>sample react component</div>
+ * const Sample = () => <div>sample react component</div>;
  *
- * export subapp: ReactSubApp = {
+ * export const subapp: ReactSubApp = {
  *   Component: Sample
- * }
+ * };
  * ```
- *
  */
 export type ReactSubApp = SubApp<React.Component | React.FunctionComponent>;
 

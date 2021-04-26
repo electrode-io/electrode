@@ -17,6 +17,7 @@ import { ReactClientRenderPipeline } from "./react-render-pipeline";
 export * from "../common";
 export * from "./feat-static-props-browser";
 export * from "./subapp-as-component";
+export { AppContext } from "../common/app-context";
 export { appContextFeature };
 
 /**

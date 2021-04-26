@@ -32,12 +32,10 @@ import {
  *   );
  * };
  *
- * export subapp: ReactSubApp = {
+ * export const subapp: ReactSubApp = {
  *   Component: Sample,
- *   wantFeatures: [
- *     appContextFeature()
- *   ]
- * }
+ *   wantFeatures: [appContextFeature()],
+ * };
  * ```
  *
  * @param options - app context feature options
