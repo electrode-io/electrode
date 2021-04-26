@@ -1,3 +1,46 @@
+# 4/26/2021
+
+- avoid refreshing module on initial startup
+- [minor] cleanup subappV2 exports, and update tsdoc for APIs
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@10.0.7` `(10.0.6 => 10.0.7)`
+- `@xarc/app-dev@10.0.7` `(10.0.6 => 10.0.7)`
+- `@xarc/create-app@6.1.0` `(6.0.3 => 6.1.0)`
+- `@xarc/react@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/subapp@0.3.0` `(0.2.2 => 0.3.0)`
+
+### Lerna Updated
+
+- `@xarc/react-query@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/react-recoil@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/react-redux@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/react-redux-observable@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/react-redux-saga@0.3.0` `(0.2.2 => 0.3.0)`
+- `@xarc/react-router@0.3.0` `(0.2.2 => 0.3.0)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - avoid refreshing module on initial startup [commit](http://github.com/electrode-io/electrode/commit/6bb528022c58466c408d8270649b8b1aad186a79)
+
+- `packages/xarc-create-app`
+
+  - [minor] update create-app deps [commit](http://github.com/electrode-io/electrode/commit/bd0bc8900b255c4220af8e3d02675d1755e0df43)
+
+- `packages/xarc-react`
+
+  - [minor] cleanup subappV2 exports, and update tsdoc for APIs [commit](http://github.com/electrode-io/electrode/commit/67c2d46ad77401b40d61d83a71b3ce9e26b8f8d5)
+  - avoid refreshing module on initial startup [commit](http://github.com/electrode-io/electrode/commit/6bb528022c58466c408d8270649b8b1aad186a79)
+
+- `packages/xarc-subapp`
+
+  - [minor] cleanup subappV2 exports, and update tsdoc for APIs [commit](http://github.com/electrode-io/electrode/commit/67c2d46ad77401b40d61d83a71b3ce9e26b8f8d5)
+
 # 4/20/2021
 
 - remove manual fyn local deps (for lots of packages)
