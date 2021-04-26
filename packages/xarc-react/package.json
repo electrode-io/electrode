@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "xarc web app platform support for React framework",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -26,7 +26,7 @@
   "dependencies": {
     "@types/react": ">= 16",
     "@xarc/render-context": "^1.0.6",
-    "@xarc/subapp": "^0.2.2",
+    "@xarc/subapp": "^0.3.0",
     "@xarc/tag-renderer": "^1.0.8",
     "react": ">= 16",
     "react-dom": ">= 16",

@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-router",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "xarc React Router support for SubApp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -24,7 +24,7 @@
   "author": "WalmartLabs GTP.js team",
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/subapp": "^0.2.2",
+    "@xarc/subapp": "^0.3.0",
     "history": "^4.10.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
