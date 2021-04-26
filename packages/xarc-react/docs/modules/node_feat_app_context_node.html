@@ -84,20 +84,46 @@
 					<a name="appcontextfeature" class="tsd-anchor"></a>
 					<h3>app<wbr>Context<wbr>Feature</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">app<wbr>Context<wbr>Feature<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="common_feat_app_context_types.html#appcontextfeatureoptions" class="tsd-signature-type" data-tsd-kind="Type alias">AppContextFeatureOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.html#subappfeaturefactory" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureFactory</a></li>
+						<li class="tsd-signature tsd-kind-icon">app<wbr>Context<wbr>Feature<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="common_feat_app_context_types.html#appcontextfeatureoptions" class="tsd-signature-type" data-tsd-kind="Type alias">AppContextFeatureOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SubAppFeatureFactory</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/b9b2ee31/packages/xarc-react/src/node/feat-app-context-node.tsx#L17">src/node/feat-app-context-node.tsx:17</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-react/src/node/feat-app-context-node.tsx#L46">src/node/feat-app-context-node.tsx:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Add support for react app context to a subapp</p>
 								</div>
-								<p>This is added by the declareSubApp API automatically.</p>
+								<dl class="tsd-comment-tags">
+									<dt>remark</dt>
+									<dd><p>This is added by the <a href="node.html#declaresubapp">declareSubApp</a> API automatically.</p>
+										<p>Example:</p>
+										<pre><code class="language-tsx"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ReactSubApp</span><span style="color: #000000">, </span><span style="color: #001080">appContextFeature</span><span style="color: #000000">, </span><span style="color: #001080">AppContext</span><span style="color: #000000">, </span><span style="color: #001080">React</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@xarc/react&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">Sample</span><span style="color: #000000"> = () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;</span><span style="color: #267F99">AppContext.Consumer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      </span><span style="color: #0000FF">{</span><span style="color: #000000FF">({ </span><span style="color: #001080">isSsr</span><span style="color: #000000FF">, </span><span style="color: #001080">ssr</span><span style="color: #000000FF"> }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> {</span>
+<span style="color: #000000FF">        </span><span style="color: #AF00DB">if</span><span style="color: #000000FF"> (</span><span style="color: #001080">isSsr</span><span style="color: #000000FF">) {</span>
+<span style="color: #000000FF">          </span><span style="color: #AF00DB">return</span><span style="color: #000000FF"> </span><span style="color: #800000">&lt;div&gt;</span><span style="color: #000000FF">Server Side Rendering </span><span style="color: #0000FF">{</span><span style="color: #001080">ssr</span><span style="color: #000000FF">.</span><span style="color: #001080">request</span><span style="color: #000000FF">.</span><span style="color: #001080">url</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/div&gt;</span><span style="color: #000000FF">;</span>
+<span style="color: #000000FF">        }</span>
+<span style="color: #000000FF">      }</span><span style="color: #0000FF">}</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">AppContext.Consumer</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  );</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #0000FF">export</span><span style="color: #000000"> subapp: </span><span style="color: #001080">ReactSubApp</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">Component:</span><span style="color: #000000"> </span><span style="color: #001080">Sample</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">wantFeatures:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    </span><span style="color: #795E26">appContextFeature</span><span style="color: #000000">()</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -108,7 +134,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="common.html#subappfeaturefactory" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureFactory</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SubAppFeatureFactory</span></h4>
 							<p>subapp feature factory for app context</p>
 						</li>
 					</ul>
@@ -135,6 +161,9 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="common_feat_static_props_types.html">common/feat-<wbr>static-<wbr>props-<wbr>types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="common_internal.html">common/internal</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node.html">node</a>
