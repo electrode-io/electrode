@@ -354,3 +354,7 @@ export const defaultConfigs = {
     return applyPartials(baseConfig, [...profiles.base, ...profiles.karma, moreParts]);
   }
 };
+
+import * as util from "./util";
+
+export { util };

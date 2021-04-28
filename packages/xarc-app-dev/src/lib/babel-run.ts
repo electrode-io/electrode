@@ -13,6 +13,7 @@
  */
 import Path from "path";
 import { loadXarcOptions } from "../lib/utils";
+import { util } from "@xarc/webpack";
 
 const serverDir = process.argv[2] || "src/server";
 
@@ -24,18 +25,10 @@ try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(xarcCwd, serverDir, "dev.js"));
 } catch (e) {
-  const cwdNM = Path.resolve(xarcCwd, "node_modules");
-  const cwd = xarcCwd;
-
   // fallback to default action that loads babel-register and then requires
   // src/server, under which there should be an index.js file.
   require("@babel/register")({
-    only: [
-      x => {
-        const y = Path.normalize(x);
-        return y.startsWith(cwd) && !y.startsWith(cwdNM);
-      }
-    ],
+    ignore: [util.getBabelExclude(xarcOptions)],
     extensions: [".js", ".jsx"]
       .concat(xarcOptions.babel.enableTypeScript && [".ts", ".tsx"])
       .filter(x => x),
