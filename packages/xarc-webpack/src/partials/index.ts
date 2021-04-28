@@ -6,7 +6,6 @@ import * as Fs from "fs";
 const assert = require("assert");
 const Partial = require("webpack-config-composer/lib/partial");
 
-
 //
 // This specifies a general order of partials to be applied.
 // Any new partial need to be added here.  Name is the filename
@@ -57,7 +56,7 @@ const files = Fs.readdirSync(__dirname)
 const partials = files.reduce((a, p) => {
   const k = `_${p}`;
   assert(orders.indexOf(k) >= 0, `No default order specified for partial ${p}`);
-  a[k] = new Partial(k, { config: require(`./${p}`) });
+  a[k] = new Partial(k, { config: () => require(`./${p}`) });
   a[k].options.order = (orders.indexOf(k) + 1) * 100;
   return a;
 }, {});

@@ -6,7 +6,6 @@ import * as _ from "lodash";
 import * as Path from "path";
 
 const xsh = require("xsh");
-const partials = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 import { logger } from "@xarc/dev-base";
@@ -66,6 +65,8 @@ function searchUserCustomConfig(options) {
 // returns a new options copy
 //
 export function initWebpackConfigComposer(options) {
+  const partials = require("../partials");
+
   options = Object.assign({ profileNames: [] }, options);
 
   if (!options.composer) {
