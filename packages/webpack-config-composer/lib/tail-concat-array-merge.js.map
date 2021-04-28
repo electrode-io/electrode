@@ -1,1 +1,0 @@
-{"version":3,"file":"tail-concat-array-merge.js","sourceRoot":"","sources":["../src/tail-concat-array-merge.ts"],"names":[],"mappings":";AAAA,iBAAS,CAAC,CAAC,EAAE,CAAC,EAAE,EAAE;IAChB,OAAO,CAAC,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC,IAAI,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC,CAAC;QAC3C,CAAC,CAAC,EAAE,CAAC,MAAM,CAAC,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC;QACxB,CAAC,CAAC,SAAS,CAAC;AAChB,CAAC,CAAC"}
