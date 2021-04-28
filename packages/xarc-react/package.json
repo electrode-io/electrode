@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "xarc web app platform support for React framework",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
