@@ -1,6 +1,6 @@
 {
   "name": "@xarc/create-app",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "dist/index.js",
   "scripts": {
@@ -38,8 +38,8 @@
     "@babel/preset-env": "^7.6.2",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
-    "@xarc/app": "^10.0.8",
-    "@xarc/app-dev": "^10.0.8",
+    "@xarc/app": "^10.0.9",
+    "@xarc/app-dev": "^10.0.9",
     "@xarc/module-dev": "^2.2.4",
     "@xarc/react": "^0.3.1",
     "@xarc/react-query": "^0.3.0",
