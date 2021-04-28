@@ -1,5 +1,3 @@
-
-
 import headConcatArrayMerge from "../../src/head-concat-array-merge";
 import { expect } from "chai";
 

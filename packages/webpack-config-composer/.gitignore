@@ -6,3 +6,4 @@ node_modules
 # should use latest dep, as an app that consumes a module would have its
 # own lockfile, but remove this if you want to commit the package lock file.
 *-lock*
+lib

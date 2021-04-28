@@ -15,7 +15,7 @@ class Partial {
             this[DATA] = { config: data };
         }
         else {
-            this[DATA] = Object.assign({ config: {}, options: {} }, data);
+            this[DATA] = { config: {}, options: {}, ...data };
         }
         this.setOverride(_.identity);
     }
@@ -26,7 +26,7 @@ class Partial {
         return this[DATA].config;
     }
     set options(options) {
-        this[DATA].options = Object.assign({}, options);
+        this[DATA].options = { ...options };
     }
     get options() {
         return this[DATA].options;
@@ -38,24 +38,14 @@ class Partial {
         this[OVERRIDE] = fn || _.identity;
     }
     compose(options) {
-        options = Object.assign({}, this.options, options);
-        const config = this.config.webpackPartial || this.config;
-        const configType = typeof config;
-        let ret;
-        if (configType === "object") {
-            ret = config;
+        options = { ...this.options, ...options };
+        let config = this.config;
+        while (typeof config === "function") {
+            config = config(options);
+            config = config.webpackPartial || config;
         }
-        else if (configType === "function") {
-            ret = config(options);
-            if (typeof ret === "function") {
-                ret = ret(options);
-            }
-        }
-        else {
-            throw new Error(`can't process config from Partial ${this._name}`);
-        }
-        const override = this[OVERRIDE](ret, options);
-        return override || ret;
+        const override = this[OVERRIDE](config, options);
+        return override || config;
     }
 }
 module.exports = Partial;

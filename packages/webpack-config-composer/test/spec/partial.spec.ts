@@ -15,6 +15,26 @@ describe("partial", () => {
     expect(partial[OVERRIDE]).to.deep.equal(_.identity);
   });
 
+  it("should handle config returned from function", () => {
+    const partial = new Partial("test", {
+      config: () => {
+        return { test: 1 };
+      },
+    });
+    const config = partial.compose({});
+    expect(config.test).equal(1);
+  });
+
+  it("should handle using webpackPartial from config returned from function", () => {
+    const partial = new Partial("test", {
+      config: () => {
+        return { webpackPartial: { test: 1 } };
+      },
+    });
+    const config = partial.compose({});
+    expect(config.test).equal(1);
+  });
+
   it("should setOverride", () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const fn = () => {};

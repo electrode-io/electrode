@@ -1,5 +1,3 @@
-
-
 import deleteCustomProps from "../../src/delete-custom-props";
 import { expect } from "chai";
 
@@ -8,8 +6,8 @@ describe("delete custom props", () => {
     const o = {
       module: {
         __dirname: "/test",
-        _name: "test"
-      }
+        _name: "test",
+      },
     };
     const x = deleteCustomProps(o);
     expect(x.module.__dirname).to.equal("/test");
@@ -20,8 +18,8 @@ describe("delete custom props", () => {
     const o = {
       module: {
         __filename: "/test",
-        _name: "test"
-      }
+        _name: "test",
+      },
     };
     const x = deleteCustomProps(o);
     expect(x.module.__filename).to.equal("/test");
