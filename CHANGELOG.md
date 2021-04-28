@@ -1,3 +1,36 @@
+# 4/28/2021
+
+- [fix] update create app's dev dep
+- [fix] defer webpack partial config loading
+- [fix] webpack-config-composer minor things
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/create-app@6.1.1` `(6.1.0 => 6.1.1)`
+- `@xarc/webpack@11.0.6` `(11.0.5 => 11.0.6)`
+- `webpack-config-composer@1.1.5` `(1.1.4 => 1.1.5)`
+
+### Lerna Updated
+
+- `@xarc/app@10.0.9` `(10.0.8 => 10.0.9)`
+- `@xarc/app-dev@10.0.9` `(10.0.8 => 10.0.9)`
+
+## Commits
+
+- `packages/xarc-create-app`
+
+  - [fix] update create app's dev dep [commit](http://github.com/electrode-io/electrode/commit/a4e257bd5f1d4133a03ad118f982b8ccadb792fe)
+
+- `packages/xarc-webpack`
+
+  - [fix] defer webpack partial config loading [commit](http://github.com/electrode-io/electrode/commit/447a4f183b7be0a2c045de35cc2e650eb67395f0)
+
+- `packages/webpack-config-composer`
+
+  - [fix] webpack-config-composer minor things [commit](http://github.com/electrode-io/electrode/commit/c6cb1adcbb5760d62292c9d24138b73f2b80f0b0)
+
 # 4/27/2021
 
 - [fix] clean module name for refreshing
