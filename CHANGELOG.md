@@ -1,3 +1,31 @@
+# 4/27/2021
+
+- [fix] clean module name for refreshing
+- [fix] dev mode babel run use includeRegExp and excludeRegExp
+- [fix] xarc/react AppContext export
+
+## Packages
+
+- `@xarc/app@10.0.8` `(10.0.7 => 10.0.8)`
+- `@xarc/app-dev@10.0.8` `(10.0.7 => 10.0.8)`
+- `@xarc/react@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/webpack@11.0.5` `(11.0.4 => 11.0.5)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - [fix] clean module name for refreshing [commit](http://github.com/electrode-io/electrode/commit/9c99f5e704dda8f90fbd3f5bea0d121b02aab1e0)
+  - [fix] dev mode babel run use includeRegExp and excludeRegExp [commit](http://github.com/electrode-io/electrode/commit/f71e4f8cb1d6103cf4a64a250cb0273818ce9b80)
+
+- `packages/xarc-react`
+
+  - [fix] xarc/react AppContext export [commit](http://github.com/electrode-io/electrode/commit/51b5c27d89b0a347e1325c175d949410d52862f7)
+
+- `packages/xarc-webpack`
+
+  - [fix] dev mode babel run use includeRegExp and excludeRegExp [commit](http://github.com/electrode-io/electrode/commit/f71e4f8cb1d6103cf4a64a250cb0273818ce9b80)
+
 # 4/26/2021
 
 - avoid refreshing module on initial startup
