@@ -53,6 +53,7 @@ export class AppDevMiddleware {
     if (!initialLoad && !_.isEmpty(data.refreshModules)) {
       const { refreshed, failed } = data.refreshModules.reduce(
         (agg, moduleName) => {
+          moduleName = moduleName.split("|")[0];
           if (!moduleName.startsWith("webpack/runtime")) {
             try {
               const xarcOptions = loadXarcOptions();
@@ -78,7 +79,7 @@ export class AppDevMiddleware {
       }
 
       if (refreshed.length > 0) {
-        console.log(`Refreshed modules for hot reload: ${refreshed.join(", ")}`);
+        console.log(`Refreshed modules for hot reload`);
         refreshAllSubApps();
         refreshAllSubApps2();
       }
