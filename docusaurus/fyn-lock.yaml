@@ -3218,15 +3218,6 @@ binary-extensions:
  1.13.1:
   $: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
   _: 'https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.13.1.tgz'
-bindings:
- _latest: 1.5.0
- _:
-  ^1.5.0: 1.5.0
- 1.5.0:
-  $: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
-  _: 'https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz'
-  dependencies:
-   file-uri-to-path: 1.0.0
 bluebird:
  _latest: 3.7.2
  _:
@@ -5715,13 +5706,6 @@ file-loader:
    schema-utils: ^3.0.0
   peerDependencies:
    webpack: '^4.0.0 || ^5.0.0'
-file-uri-to-path:
- _latest: 2.0.0
- _:
-  1.0.0: 1.0.0
- 1.0.0:
-  $: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
-  _: 'https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz'
 filesize:
  _latest: 6.1.0
  _:
@@ -5944,12 +5928,10 @@ fsevents:
   os:
    - darwin
  1.2.13:
+  optFailed: 2
   hasI: 1
   $: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==
   _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.13.tgz'
-  dependencies:
-   bindings: ^1.5.0
-   nan: ^2.12.1
   deprecated: 'fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.'
   os:
    - darwin
@@ -8442,13 +8424,6 @@ mute-stream:
  0.0.8:
   $: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
   _: 'https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.8.tgz'
-nan:
- _latest: 2.14.2
- _:
-  ^2.12.1: 2.14.2
- 2.14.2:
-  $: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
-  _: 'https://registry.npmjs.org/nan/-/nan-2.14.2.tgz'
 nanomatch:
  _latest: 1.2.13
  _:

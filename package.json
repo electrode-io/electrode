@@ -16,12 +16,13 @@
   },
   "devDependencies": {
     "@xarc/module-dev": "^4.0.0",
-    "@xarc/run": "^1.0.4",
+    "@xarc/run": "^1.0.5",
     "bluebird": "^3.7.2",
-    "fynpo": "^0.3.0",
-    "lerna": "^3.22.1",
+    "fynpo": "^0.3.2",
+    "lerna": "^4.0.0",
     "lodash": "^4.17.21",
-    "semver": "^7.3.4",
+    "prettier": "^2.2.1",
+    "semver": "^7.3.5",
     "xsh": "^0.4.5"
   },
   "bugs": {
@@ -39,7 +40,7 @@
   "license": "Apache-2.0",
   "prettier": {
     "printWidth": 100,
-    "arrowParens": "avoid",
-    "trailingComma": "none"
+    "singleQuote": false,
+    "jsxSingleQuote": false
   }
 }

@@ -29,7 +29,7 @@
   "license": "Apache-2.0",
   "prettier": {
     "printWidth": 100,
-    "arrowParens": "avoid",
-    "trailingComma": "none"
+    "singleQuote": false,
+    "jsxSingleQuote": false
   }
 }

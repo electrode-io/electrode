@@ -12,7 +12,7 @@ const { spawn } = require("child_process");
 
 const packagesDir = Path.join(__dirname, "packages");
 
-const removeNpmScope = name => {
+const removeNpmScope = (name) => {
   if (name.startsWith("@")) {
     const parts = name.split("/");
     if (parts.length === 2) {
@@ -26,7 +26,7 @@ const removeNpmScope = name => {
   return name;
 };
 
-const pullLocalPackages = dir => {
+const pullLocalPackages = (dir) => {
   dir = Path.isAbsolute(dir) ? dir : Path.join(__dirname, dir);
   const localPkgs = [
     "@xarc/app",
@@ -37,7 +37,7 @@ const pullLocalPackages = dir => {
     "electrode-ui-config",
     "subapp-redux",
     "subapp-server",
-    "subapp-web"
+    "subapp-web",
   ];
   const localDevPkgs = ["@xarc/app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
@@ -48,7 +48,7 @@ const pullLocalPackages = dir => {
 
   const updateToLocalPkgs = (section, pkgs) => {
     if (appPkg[section]) {
-      pkgs.forEach(pkg => {
+      pkgs.forEach((pkg) => {
         if (appPkg[section][pkg]) {
           _.set(
             appPkg,
@@ -76,11 +76,11 @@ const runAppTest = (dir, forceLocal) => {
         cwd: dir,
         // somehow the stdout from fyn got chopped off by node.js, and the only way to
         // get them all is let spawn pipe the output directly to parent stdout
-        stdio: [null, process.stdout, process.stderr]
+        stdio: [null, process.stdout, process.stderr],
       }
     );
 
-    child.on("close", code => {
+    child.on("close", (code) => {
       if (code) {
         reject(new Error(`Failed runAppTest for app at ${dir} - fyn exit code ${code}`));
       } else {
@@ -119,15 +119,15 @@ xrun.load("user", {
       const tasks = [
         // "test-boilerplate", // TODO: webpack 5
         "test-stylus-sample",
-        ".test-jest-sample"
+        ".test-jest-sample",
       ];
       let updated;
       return exec("lerna updated")
-        .then(output => {
+        .then((output) => {
           updated = output.stdout
             .split("\n")
-            .filter(x => x.startsWith("- "))
-            .map(x => x.substr(2));
+            .filter((x) => x.startsWith("- "))
+            .map((x) => x.substr(2));
 
           const updatedStr = updated.join(" ");
 
@@ -137,12 +137,12 @@ xrun.load("user", {
 
           return xrun.serial(tasks);
         })
-        .catch(err => {
+        .catch((err) => {
           if (!err.output.stderr.includes("No changed packages found")) {
             throw err;
           }
         });
-    }
+    },
   },
 
   ".build-sample-dll": () => {
@@ -158,28 +158,28 @@ xrun.load("user", {
     dep: [".build-sample-dll"],
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/universal-react-node"));
-    }
+    },
   },
 
   ".test-tree-shaking": {
     desc: "Run tests for the demo-tree-shaking sample app",
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/demo-tree-shaking"));
-    }
+    },
   },
 
   ".test-stylus-sample": {
     desc: "Run tests for the boilerplage app stylus-sample",
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/stylus-sample"));
-    }
+    },
   },
 
   ".test-jest-sample": {
     desc: "Run tests for the boilerplage app react-jest-app",
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/react-jest-app"));
-    }
+    },
   },
 
   "samples-local": {
@@ -190,11 +190,11 @@ xrun.load("user", {
         "stylus-sample",
         "universal-material-ui",
         "universal-react-node",
-        "react-jest-app"
-      ].forEach(a => {
+        "react-jest-app",
+      ].forEach((a) => {
         pullLocalPackages(Path.join(__dirname, "samples", a));
       });
-    }
+    },
   },
 
   ".test-create-app": {
@@ -203,6 +203,6 @@ xrun.load("user", {
       await testCreateApp(testDir, "my-app");
       const testAppDir = Path.join(testDir, "my-app");
       pullLocalPackages(testAppDir);
-    }
-  }
+    },
+  },
 });

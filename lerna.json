@@ -4,14 +4,10 @@
     "bootstrap": {
       "ignore": [],
       "npmClientArgs": [],
-      "npmRunScripts": [
-        "build"
-      ]
+      "npmRunScripts": ["build"]
     },
     "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ],
+      "ignoreChanges": ["*.md"],
       "tags": {
         "xarc8": {
           "enabled": false,
@@ -30,9 +26,7 @@
             "@xarc/opt-karma": true,
             "@xarc/create-app": true
           },
-          "regex": [
-            ".*"
-          ],
+          "regex": [".*"],
           "addToVersion": true
         }
       }

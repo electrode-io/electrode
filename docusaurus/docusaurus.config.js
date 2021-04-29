@@ -1,7 +1,6 @@
 module.exports = {
   title: "electrode OSS",
-  tagline:
-    "Quickly build React/Node.js applications with an emphasis on performance, component reusability, and simple deployment.",
+  tagline: "Web Applications with node.js and React",
   url: "https://www.electrode.io",
   baseUrl: "/electrode/",
   favicon: "/img/electrode-logo.svg",

@@ -26,11 +26,11 @@ let gitClean = false;
 
 const versionLocking = [
   ["@xarc/app", "@xarc/app-dev"],
-  ["electrode-archetype-webpack-dll", "electrode-archetype-webpack-dll-dev"]
+  ["electrode-archetype-webpack-dll", "electrode-archetype-webpack-dll-dev"],
 ];
 
 const versionLockMap = versionLocking.reduce((mapping, locks) => {
-  locks.forEach(name => (mapping[name] = locks));
+  locks.forEach((name) => (mapping[name] = locks));
   return mapping;
 }, {});
 
@@ -41,7 +41,7 @@ const checkGitClean = () => {
     .catch(() => (gitClean = false));
 };
 
-const removeNpmScope = name => {
+const removeNpmScope = (name) => {
   if (name.startsWith("@")) {
     const parts = name.split("/");
     if (parts.length === 2) {
@@ -52,7 +52,7 @@ const removeNpmScope = name => {
   return name;
 };
 
-const processLerna2Updated = output => {
+const processLerna2Updated = (output) => {
   /*
 lerna info version 2.11.0
 lerna info versioning independent
@@ -74,7 +74,7 @@ lerna info result
   const tagSig = "Comparing with";
   let tagIndex;
   let tagLine = lernaInfo
-    .find(x => {
+    .find((x) => {
       tagIndex = x.indexOf(tagSig);
       return tagIndex >= 0;
     })
@@ -88,12 +88,12 @@ lerna info result
   const tag = tagLine.substr(tagIndex + tagSig.length).trim();
   const packages = output.stdout
     .split("\n")
-    .filter(x => x.trim().length > 0)
-    .map(x => x.substr(2).split(" ")[0]);
+    .filter((x) => x.trim().length > 0)
+    .map((x) => x.substr(2).split(" ")[0]);
   return { tag, packages };
 };
 
-const processLerna3Updated = output => {
+const processLerna3Updated = (output) => {
   /*
 lerna notice cli v3.22.1
 lerna info versioning independent
@@ -114,7 +114,7 @@ lerna success found 7 packages ready to publish
   const tagSig = "Looking for changed packages since";
   let tagIndex;
   let tagLine = lernaInfo
-    .find(x => {
+    .find((x) => {
       tagIndex = x.indexOf(tagSig);
       return tagIndex >= 0;
     })
@@ -141,12 +141,12 @@ lerna success found 7 packages ready to publish
   return { tag, packages, pkgGraph };
 };
 
-const listGitCommits = updated => {
+const listGitCommits = (updated) => {
   const tag = updated.tag;
   return xsh
     .exec(true, `git log ${tag}...HEAD --pretty=format:'%H %s'`)
-    .then(output => {
-      const commits = output.stdout.split("\n").filter(x => {
+    .then((output) => {
+      const commits = output.stdout.split("\n").filter((x) => {
         return !x.startsWith("Merge pull request #") && !x.includes("[no-changelog]");
       });
       return commits.reduce(
@@ -160,7 +160,7 @@ const listGitCommits = updated => {
         { updated, ids: [] }
       );
     })
-    .then(commits => {
+    .then((commits) => {
       if (changeLog.indexOf(commits.ids[0]) >= 0) {
         console.log("change log already contain a commit from new commits");
         process.exit(1);
@@ -177,16 +177,16 @@ const collateCommitsPackages = ({ commits, updated }) => {
     samples: {},
     others: {},
     files: {},
-    updated
+    updated,
   };
 
   return Promise.map(
     commitIds,
-    id => {
+    (id) => {
       // any package that was affected by at least one commit is add to collated.realPackages
-      return xsh.exec(true, `git diff-tree --no-commit-id --name-only -r ${id}`).then(output => {
+      return xsh.exec(true, `git diff-tree --no-commit-id --name-only -r ${id}`).then((output) => {
         // determine packages changed
-        const files = output.stdout.split("\n").filter(x => x.trim().length > 0);
+        const files = output.stdout.split("\n").filter((x) => x.trim().length > 0);
         const handled = { packages: {}, samples: {}, others: {}, files: {} };
         files.reduce((a, x) => {
           const parts = x.split("/");
@@ -227,7 +227,7 @@ const collateCommitsPackages = ({ commits, updated }) => {
   });
 };
 
-const determinePackageVersions = collated => {
+const determinePackageVersions = (collated) => {
   const types = ["patch", "minor", "major"];
 
   const findVersion = (name, packages, minBumpType = -1) => {
@@ -268,7 +268,7 @@ const determinePackageVersions = collated => {
 
   return Promise.resolve().then(() => {
     // update versions for packages that have direct changes
-    collated.realPackages.forEach(name => findVersion(name, collated.packages));
+    collated.realPackages.forEach((name) => findVersion(name, collated.packages));
 
     // update any package that depend on a directly bumped package with the same bump type
     const { updated } = collated;
@@ -276,7 +276,7 @@ const determinePackageVersions = collated => {
     const indirectBumps = [];
 
     // check for version locking of direct bump packages
-    collated.realPackages.filter(pkgName => {
+    collated.realPackages.filter((pkgName) => {
       const verLocks = versionLockMap[pkgName];
       if (verLocks) {
         console.log("verLocks", pkgName, verLocks);
@@ -292,22 +292,22 @@ const determinePackageVersions = collated => {
     });
 
     const directBumps = collated.realPackages.filter(
-      name => collated.packages[name] && collated.packages[name].newVersion
+      (name) => collated.packages[name] && collated.packages[name].newVersion
     );
 
     do {
       count = 0;
-      updated.packages.map(name => {
+      updated.packages.map((name) => {
         const pkg = collated.packages[name];
         if (!pkg || !pkg.newVersion) {
           // does pkg dep on a bumped pkg?
           const deps = updated.pkgGraph[name];
           const bumpDeps = deps
-            .map(depName => collated.packages[depName])
-            .filter(x => x && x.newVersion);
+            .map((depName) => collated.packages[depName])
+            .filter((x) => x && x.newVersion);
           if (bumpDeps.length > 0) {
             count++;
-            const minBumpType = _.max(bumpDeps.map(x => x.updateType));
+            const minBumpType = _.max(bumpDeps.map((x) => x.updateType));
             findVersion(name, collated.packages, minBumpType);
             indirectBumps.push(name);
           }
@@ -316,7 +316,7 @@ const determinePackageVersions = collated => {
     } while (count > 0);
 
     // check for version locking of indirect bump packages
-    const indirectLockBumps = indirectBumps.filter(pkgName => {
+    const indirectLockBumps = indirectBumps.filter((pkgName) => {
       const verLocks = versionLockMap[pkgName];
       if (verLocks) {
         for (const lockPkgName of _.without(verLocks, pkgName)) {
@@ -340,7 +340,7 @@ const determinePackageVersions = collated => {
 
 const lernaRc = require("../lerna.json");
 
-const getTaggedVersion = pkg => {
+const getTaggedVersion = (pkg) => {
   const newVer = pkg.newVersion;
 
   const fynpoTags = _.get(lernaRc, "command.publish.tags");
@@ -353,7 +353,7 @@ const getTaggedVersion = pkg => {
       if (tagInfo.enabled === false) continue;
       let enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
       if (enabled === undefined && tagInfo.regex) {
-        enabled = Boolean(tagInfo.regex.find(r => new RegExp(r).exec(pkg.originalPkg.name)));
+        enabled = Boolean(tagInfo.regex.find((r) => new RegExp(r).exec(pkg.originalPkg.name)));
       }
       if (enabled) {
         if (tag !== "latest" && tagInfo.addToVersion) {
@@ -370,7 +370,7 @@ const getTaggedVersion = pkg => {
   return newVer;
 };
 
-const updateChangelog = collated => {
+const updateChangelog = (collated) => {
   const d = new Date();
   const output = [];
   const hasIndirectBumps = collated.indirectBumps.length > 0;
@@ -388,15 +388,15 @@ const updateChangelog = collated => {
 
   const directUpdateLines = collated.directBumps
     .sort()
-    .map(p => emitPackageMsg(p, collated.packages))
-    .filter(x => x);
+    .map((p) => emitPackageMsg(p, collated.packages))
+    .filter((x) => x);
   output.push(...directUpdateLines);
 
   if (hasIndirectBumps) {
     const indirectUpdateLines = collated.indirectBumps
       .sort()
-      .map(p => emitPackageMsg(p, collated.packages))
-      .filter(x => x);
+      .map((p) => emitPackageMsg(p, collated.packages))
+      .filter((x) => x);
     output.push("\n### Lerna Updated\n\n", ...indirectUpdateLines);
   }
   output.push(`\n## Commits\n\n`);
@@ -405,9 +405,9 @@ const updateChangelog = collated => {
 
   const prUrl = "https://github.com/electrode-io/electrode/pull";
 
-  const linkifyPR = x => x.replace(/\(#([0-9]+)\)$/, `([#$1](${prUrl}/$1))`);
+  const linkifyPR = (x) => x.replace(/\(#([0-9]+)\)$/, `([#$1](${prUrl}/$1))`);
 
-  const emitCommitMsg = msg => {
+  const emitCommitMsg = (msg) => {
     emitCommitMsg[msg.id] = true;
     output.push(`  - ${linkifyPR(msg.m)} [commit](${commitUrl}/${msg.id})\n`);
   };
@@ -415,7 +415,7 @@ const updateChangelog = collated => {
   const outputCommitMsgs = (items, prefix) => {
     const keys = Object.keys(items);
     if (keys.length === 0) return;
-    keys.sort().forEach(p => {
+    keys.sort().forEach((p) => {
       const pkg = items[p];
       if (!pkg.msgs || pkg.msgs.length === 0) return;
       output.push("- `" + prefix + removeNpmScope(p) + "`\n\n");
@@ -435,7 +435,7 @@ const updateChangelog = collated => {
   const filesItems = Object.keys(collated.files).reduce(
     (a, x) => {
       a.MISC.msgs = a.MISC.msgs.concat(
-        collated.files[x].msgs.filter(msg => {
+        collated.files[x].msgs.filter((msg) => {
           if (!emitCommitMsg[msg.id]) {
             return (emitCommitMsg[msg.id] = true);
           }
@@ -452,17 +452,17 @@ const updateChangelog = collated => {
   Fs.writeFileSync(changeLogFile, `${updateText}${changeLog}`);
 };
 
-const showPublishInfo = collated => {
+const showPublishInfo = (collated) => {
   console.log(
     "publish command: node_modules/.bin/lerna publish",
-    (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" ")
+    (collated.forcePackages || []).map((p) => `--force-publish ${p}`).join(" ")
   );
-  const majorBumps = collated.realPackages.filter(pkgName => {
+  const majorBumps = collated.realPackages.filter((pkgName) => {
     const pkg = collated.packages[pkgName];
     if (!pkg.newVersion) return false;
     return pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
   });
-  const majorArchetypes = majorBumps.filter(p => p.startsWith("electrode-archetype-react"));
+  const majorArchetypes = majorBumps.filter((p) => p.startsWith("electrode-archetype-react"));
   if (majorArchetypes.length > 0) {
     console.log(
       `\nThese archetypes had major bumps:\n\n${majorArchetypes.join("\n")}`,
@@ -473,7 +473,7 @@ const showPublishInfo = collated => {
   }
 };
 
-const commitChangeLogFile = clean => {
+const commitChangeLogFile = (clean) => {
   console.log("Change log updated.");
   if (!gitClean) {
     console.log("Your git branch is not clean, skip committing changelog file");
@@ -485,7 +485,7 @@ const commitChangeLogFile = clean => {
     .then(() => {
       console.log("Changelog committed");
     })
-    .catch(e => {
+    .catch((e) => {
       console.log("Commit changelog failed", e);
     });
 };
