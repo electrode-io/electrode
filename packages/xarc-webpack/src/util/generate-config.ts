@@ -4,6 +4,7 @@
 
 import * as _ from "lodash";
 import * as Path from "path";
+import * as Fs from "fs";
 
 const xsh = require("xsh");
 const WebpackConfigComposer = require("webpack-config-composer");
@@ -59,6 +60,25 @@ function searchUserCustomConfig(options) {
 
   return customConfig;
 }
+
+const regExpSig = "@xarc/__RegExp__@";
+
+/**
+ * JSON.stringify custom stringifier, for converting Regex to string
+ *
+ * @param _key - unused
+ * @param value - data to stringify
+ * @returns string | unknown
+ */
+export const jsonStringifier = (_key: string, value: unknown): string | unknown => {
+  if (value instanceof RegExp) {
+    return `${regExpSig}${value.toString()}`;
+  } else if (typeof value === "function") {
+    return value.toString();
+  } else {
+    return value;
+  }
+};
 
 //
 // create a webpack config composer and add it to options as composer
@@ -123,9 +143,12 @@ WARNING: </>`);
   config[xarcWebpackConfig] = true;
 
   try {
-    logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
+    Fs.writeFileSync(".etmp/webpack.config.json", JSON.stringify(config, jsonStringifier, 2));
+    logger.info(
+      "saved webpack config as '.etmp/webpack.config.json'. If you customize it, then the final one is different."
+    );
   } catch (err) {
-    logger.error("unable to stringify webpack config");
+    logger.error("unable to save webpack config as '.etmp/webpack.config.json'", err);
   }
 
   return config;
