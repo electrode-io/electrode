@@ -17,6 +17,9 @@ const { getDefaultRouteOptions, updateFullTemplate } = require("./utils");
 /**
  * hook to tap into subapp server before server starts.
  * Good place to register new api routes or any other enhancements of fastify server.
+ * @param {object} server Underlying framework's server instance
+ * @param {object} subAppsByPath map of absolute path and subapp's manifest
+ * @returns {Void} Returns nothing.
  */
 function _setupSubappServer(server, subAppsByPath) {
   const subAppServers = Object.keys(subAppsByPath).map((subAppPath) => {

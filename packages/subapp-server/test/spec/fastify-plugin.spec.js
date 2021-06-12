@@ -12,14 +12,12 @@ describe("fastify-plugin", function () {
       connection: { port: 0, host: "localhost" }
     });
 
-    const cachedEnvSrcDir = process.env.APP_SRC_DIR;
-
     const srcDir = Path.join(__dirname, "../data/fastify-plugin-test");
-    
-    /** 
+
+    /**
      * Patch APP_SRC_DIR as subapp-util relies on this env variable
      * else it takes relative path of lib or src
-     * 
+     *
      * srcDir as PluginOpts doesn't get used in subapp-util
      */
     process.env.APP_SRC_DIR = srcDir;
@@ -57,14 +55,12 @@ describe("fastify-plugin", function () {
       connection: { port: 0, host: "localhost" }
     });
 
-    const cachedEnvSrcDir = process.env.APP_SRC_DIR;
-
     const srcDir = Path.join(__dirname, "../data/fastify-plugin-test");
-    
-    /** 
+
+    /**
      * Patch APP_SRC_DIR as subapp-util relies on this env variable
      * else it takes relative path of lib or src
-     * 
+     *
      * srcDir as PluginOpts doesn't get used in subapp-util
      */
     process.env.APP_SRC_DIR = srcDir;

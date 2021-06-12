@@ -1,6 +1,6 @@
 import { loadSubApp } from "subapp-react";
 
-const Demo3 = props => {
+const Demo3 = () => {
   return (
     <div style={{ padding: "5px", border: "solid", marginLeft: "15%", marginRight: "15%" }}>
       <p>subapp demo3</p>
