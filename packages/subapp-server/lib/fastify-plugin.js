@@ -95,6 +95,7 @@ async function registerFastifyRoutesFromFile({ fastify, srcDir, routes, topOpts 
     routeOptions.uiConfig = _.get(fastify, "settings.app.config.ui", {});
 
     const routeRenderer = routesFromFile.setupRouteTemplate({
+      server: fastify,
       subAppsByPath,
       srcDir,
       routeOptions

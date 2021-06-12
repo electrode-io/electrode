@@ -11,6 +11,8 @@ describe("setupSubAppHapiRoutes", () => {
   let server;
   let stubPathResolve;
   let stubRouteHandler;
+  let cachedAppSrcDir;
+
   const stubWithArgs = (lib, method, argsFakeCallPairs) => {
     const stubbed = sinon.stub(lib, method);
     argsFakeCallPairs.forEach(([args, fakeCall]) =>
@@ -70,12 +72,15 @@ describe("setupSubAppHapiRoutes", () => {
         logLevel: "none"
       }
     });
+    cachedAppSrcDir = process.env.APP_SRC_DIR;
+    delete process.env.APP_SRC_DIR;
   });
 
   afterEach(async () => {
     await server.stop();
     if (stubPathResolve) stubPathResolve.restore();
     if (stubRouteHandler) stubRouteHandler.restore();
+    process.env.APP_SRC_DIR = cachedAppSrcDir;
   });
 
   it.skip("should setup subapp routes with `templateFile` specified in options", async () => {
