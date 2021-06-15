@@ -24,15 +24,19 @@ const xarcCwd = xarcOptions.cwd;
 try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(xarcCwd, serverDir, "dev.js"));
-} catch (e) {
+} catch (err) {
+  if (err.code !== "MODULE_NOT_FOUND") {
+    throw err;
+  }
+
   // fallback to default action that loads babel-register and then requires
   // src/server, under which there should be an index.js file.
   require("@babel/register")({
     ignore: [util.getBabelExclude(xarcOptions)],
     extensions: [".js", ".jsx"]
       .concat(xarcOptions.babel.enableTypeScript && [".ts", ".tsx"])
-      .filter(x => x),
-    cache: true
+      .filter((x) => x),
+    cache: true,
   });
 
   const fullServerDir = Path.resolve(xarcCwd, serverDir);
