@@ -14,7 +14,28 @@ const {
 
 const { getDefaultRouteOptions, updateFullTemplate } = require("./utils");
 
-function setupRouteTemplate({ subAppsByPath, srcDir, routeOptions }) {
+/**
+ * hook to tap into subapp server before server starts.
+ * Good place to register new api routes or any other enhancements of fastify server.
+ * @param {object} server Underlying framework's server instance
+ * @param {object} subAppsByPath map of absolute path and subapp's manifest
+ * @returns {Void} Returns nothing.
+ */
+function _setupSubappServer(server, subAppsByPath) {
+  const subAppServers = Object.keys(subAppsByPath).map((subAppPath) => {
+    const subAppName = subAppsByPath[subAppPath].name;
+    return subAppUtil.loadSubAppServerByName(subAppName, false);
+  }).filter(x => x && x.setup);
+
+  //invoke the setup method of subapp's server code
+  if (subAppServers && subAppServers.length > 0) {
+    for (const subAppServer of subAppServers) {
+      subAppServer.setup(server);
+    }
+  }
+}
+
+function setupRouteTemplate({ server, subAppsByPath, srcDir, routeOptions }) {
   updateFullTemplate(routeOptions.dir, routeOptions);
   const chunkSelector = resolveChunkSelector(routeOptions);
   routeOptions.__internals = { chunkSelector };
@@ -43,6 +64,9 @@ function setupRouteTemplate({ subAppsByPath, srcDir, routeOptions }) {
         options: options || {}
       };
     });
+
+    // Call setup method if subappServer exposes the same
+    _setupSubappServer(server, subAppsByPath);
   }
 
   const routeHandler = templateRouting.makeRouteTemplateSelector(routeOptions);

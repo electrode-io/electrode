@@ -65,6 +65,7 @@ async function registerRoutesFromFile({ server, srcDir, routes, topOpts }) {
 
     // setup the template for rendering the route
     const routeRenderer = routesFromFile.setupRouteTemplate({
+      server,
       subAppsByPath,
       srcDir,
       routeOptions
