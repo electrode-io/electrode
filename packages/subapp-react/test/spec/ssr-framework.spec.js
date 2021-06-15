@@ -189,6 +189,27 @@ describe("SSR React framework", function () {
     expect(res).contains("Hello foo bar");
   });
 
+
+  it("should render Component from subapp with initial props from server's prepare while using attachInitialState", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" }),
+        attachInitialState: false
+      },
+      options: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+  });
+
   it("should init redux store in context and render Component", async () => {
     const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
     let storeReady;

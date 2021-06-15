@@ -115,7 +115,13 @@ class FrameworkLib {
     // to the component when rendering it
     const prepare = subAppServer.prepare || subApp.prepare;
     if (prepare) {
-      this._initialProps = await prepare({ request, context });
+      this.initialState = this._initialProps = await prepare({ request, context });
+
+      // if subapp didn't request to skip sending initial state, then stringify it
+      // and attach it to the index html.
+      if (subAppServer.attachInitialState !== false) {
+        this.initialStateStr = JSON.stringify(this.initialState);
+      }
     }
 
     return this._initialProps;
