@@ -1,6 +1,6 @@
 {
   "name": "subapp-react",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "Electrode subapp support for React/Redux/React Router",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
-    "@xarc/app": "^10.0.6",
+    "@xarc/app": "^10.0.10",
     "babel-preset-minify": "^0.5.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "jsdom": "^15.2.1",
