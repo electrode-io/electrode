@@ -1,3 +1,43 @@
+# 6/15/2021
+
+subapp v1:
+- Add hook for initializing subapp Server code
+- Serialize server's prepare data to client for hydration
+
+## Packages
+
+- `@xarc/app@10.0.10` `(10.0.9 => 10.0.10)`
+- `@xarc/app-dev@10.0.10` `(10.0.9 => 10.0.10)`
+- `@xarc/webpack@11.0.7` `(11.0.6 => 11.0.7)`
+- `subapp-react@0.0.41` `(0.0.40 => 0.0.41)`
+- `subapp-server@1.3.15` `(1.3.14 => 1.3.15)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - [patch] report error that's not module not found [commit](http://github.com/electrode-io/electrode/commit/06a90c9d3536405117ac9b4f68fe284783c3e1d3)
+
+- `packages/xarc-webpack`
+
+  - [fix] save webpack config to json file [commit](http://github.com/electrode-io/electrode/commit/cb1eb80f816681a269ca798097d8826946932004)
+
+- `packages/subapp-react`
+
+  - Serialize server's prepare data to client for hydration ([#1852](https://github.com/electrode-io/electrode/pull/1852)) [commit](http://github.com/electrode-io/electrode/commit/0a720f47065c063c8abc294b1ae2a8d03678b6c7)
+
+- `packages/subapp-server`
+
+  - Add hook for initializing subapp Server code ([#1851](https://github.com/electrode-io/electrode/pull/1851)) [commit](http://github.com/electrode-io/electrode/commit/04dcdd613747eedb37b374b78bb058ed5980a6ac)
+
+- `.vscode`
+
+  - [chore] update vscode launch settings [commit](http://github.com/electrode-io/electrode/commit/6a089f6ad01011eb47b730ef88890d41f6396fc8)
+
+- `MISC`
+
+  - [chore] update top lockfile [commit](http://github.com/electrode-io/electrode/commit/5d93189b92673bcd0deb865215ea3a3e2a5fd514)
+
 # 4/28/2021
 
 - [fix] update create app's dev dep
