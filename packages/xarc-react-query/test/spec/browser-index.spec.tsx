@@ -81,7 +81,7 @@ describe("reactQueryFeature browser", function () {
 
     const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
-    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":"test"}</p>`);
+    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
   });
 
   it("should render subapp with react-query when input component does not exist", async () => {
