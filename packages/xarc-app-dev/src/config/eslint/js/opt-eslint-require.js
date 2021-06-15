@@ -8,3 +8,4 @@ try {
     require.resolve("electrode-archetype-opt-eslint/package.json")
   );
 }
+//# fynSourceMap=false

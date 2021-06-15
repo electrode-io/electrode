@@ -24,10 +24,11 @@ module.exports = function (content) {
 
   this.emitFile(url, content);
 
-  const cdn = "var url = " + JSON.stringify(url) + ";\n" + 
+  const cdn = "var url = " + JSON.stringify(url) + ";\n" +
     "var cdnUrl = typeof _wml !== \"undefined\" && _wml.cdn && _wml.cdn.map(url);\n";
 
   return cdn + "module.exports = cdnUrl || __webpack_public_path__ + url;";
 };
 
 module.exports.raw = true;
+//# fynSourceMap=false

@@ -46,7 +46,7 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
   m = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/,
   l =
     window.requestAnimationFrame ||
-    function(t) {
+    function (t) {
       return t(), 0;
     },
   d = {
@@ -57,9 +57,9 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
     animateClose: !0,
     theme: null,
     useToJSON: !0,
-    sortPropertiesBy: null
+    sortPropertiesBy: null,
   },
-  c = (function() {
+  c = (function () {
     function c(t, e, r, n) {
       void 0 === e && (e = 1),
         void 0 === r && (r = d),
@@ -79,17 +79,17 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
     }
     return (
       Object.defineProperty(c.prototype, "isOpen", {
-        get: function() {
+        get: function () {
           return null !== this._isOpen ? this._isOpen : this.open > 0;
         },
-        set: function(t) {
+        set: function (t) {
           this._isOpen = t;
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isDate", {
-        get: function() {
+        get: function () {
           return (
             this.json instanceof Date ||
             ("string" === this.type &&
@@ -97,75 +97,75 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
           );
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isUrl", {
-        get: function() {
+        get: function () {
           return "string" === this.type && 0 === this.json.indexOf("http");
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isArray", {
-        get: function() {
+        get: function () {
           return Array.isArray(this.json);
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isObject", {
-        get: function() {
+        get: function () {
           return e(this.json);
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isEmptyObject", {
-        get: function() {
+        get: function () {
           return !this.keys.length && !this.isArray;
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "isEmpty", {
-        get: function() {
+        get: function () {
           return this.isEmptyObject || (this.keys && !this.keys.length && this.isArray);
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "useToJSON", {
-        get: function() {
+        get: function () {
           return this.config.useToJSON && "stringifiable" === this.type;
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "hasKey", {
-        get: function() {
+        get: function () {
           return void 0 !== this.key;
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "constructorName", {
-        get: function() {
+        get: function () {
           return r(this.json);
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "type", {
-        get: function() {
+        get: function () {
           return this.config.useToJSON && this.json && this.json.toJSON
             ? "stringifiable"
             : t(this.json);
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
       Object.defineProperty(c.prototype, "keys", {
-        get: function() {
+        get: function () {
           if (this.isObject) {
             var t = Object.keys(this.json);
             return !this.isArray && this.config.sortPropertiesBy
@@ -175,9 +175,9 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
           return [];
         },
         enumerable: !0,
-        configurable: !0
+        configurable: !0,
       }),
-      (c.prototype.toggleOpen = function() {
+      (c.prototype.toggleOpen = function () {
         (this.isOpen = !this.isOpen),
           this.element &&
             (this.isOpen
@@ -185,7 +185,7 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
               : this.removeChildren(this.config.animateClose),
             this.element.classList.toggle(i("open")));
       }),
-      (c.prototype.openAtDepth = function(t) {
+      (c.prototype.openAtDepth = function (t) {
         void 0 === t && (t = 1),
           t < 0 ||
             ((this.open = t),
@@ -197,20 +197,20 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
                 : (this.appendChildren(this.config.animateOpen),
                   this.element.classList.add(i("open")))));
       }),
-      (c.prototype.getInlinepreview = function() {
+      (c.prototype.getInlinepreview = function () {
         var t = this;
         if (this.isArray)
           return this.json.length > this.config.hoverPreviewArrayCount
             ? "Array[" + this.json.length + "]"
             : "[" + this.json.map(o).join(", ") + "]";
         var e = this.keys,
-          r = e.slice(0, this.config.hoverPreviewFieldCount).map(function(e) {
+          r = e.slice(0, this.config.hoverPreviewFieldCount).map(function (e) {
             return e + ":" + o(t.json[e]);
           }),
           n = e.length >= this.config.hoverPreviewFieldCount ? "…" : "";
         return "{" + r.join(", ") + n + "}";
       }),
-      (c.prototype.render = function() {
+      (c.prototype.render = function () {
         this.element = s("div", "row");
         var t = this.isObject ? s("a", "toggler-link") : s("span");
         if (
@@ -256,31 +256,31 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
           this.element
         );
       }),
-      (c.prototype.appendChildren = function(t) {
+      (c.prototype.appendChildren = function (t) {
         var e = this;
         void 0 === t && (t = !1);
         var r = this.element.querySelector("div." + i("children"));
         if (r && !this.isEmpty)
           if (t) {
             var n = 0,
-              o = function() {
+              o = function () {
                 var t = e.keys[n],
                   i = new c(e.json[t], e.open - 1, e.config, t);
                 r.appendChild(i.render()), (n += 1) < e.keys.length && (n > 10 ? o() : l(o));
               };
             l(o);
           } else
-            this.keys.forEach(function(t) {
+            this.keys.forEach(function (t) {
               var n = new c(e.json[t], e.open - 1, e.config, t);
               r.appendChild(n.render());
             });
       }),
-      (c.prototype.removeChildren = function(t) {
+      (c.prototype.removeChildren = function (t) {
         void 0 === t && (t = !1);
         var e = this.element.querySelector("div." + i("children"));
         if (t) {
           var r = 0,
-            n = function() {
+            n = function () {
               e && e.children.length && (e.removeChild(e.children[0]), (r += 1) > 10 ? n() : l(n));
             };
           l(n);
@@ -291,3 +291,4 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
   })();
 
 /* eslint-enable */
+//# fynSourceMap=false

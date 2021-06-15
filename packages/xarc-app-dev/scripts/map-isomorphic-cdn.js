@@ -29,7 +29,7 @@ function mapIsomorphicCdn(appDir) {
 
   if (paths.length > 1) {
     logger.error("CDN upload files has different base paths");
-    paths.forEach(p => {
+    paths.forEach((p) => {
       logger.info(` - "${p}"`);
     });
     exit(1);
@@ -53,3 +53,4 @@ if (isMain) {
 }
 
 module.exports = mapIsomorphicCdn;
+//# fynSourceMap=false

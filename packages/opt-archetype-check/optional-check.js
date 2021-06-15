@@ -221,3 +221,4 @@ if (require.main === module) {
 }
 
 module.exports.isSameMajorVersion = isSameMajorVersion;
+//# fynSourceMap=false

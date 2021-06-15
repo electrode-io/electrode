@@ -17,38 +17,38 @@ const Levels = {
   error: {
     color: "red",
     index: 0,
-    name: "error"
+    name: "error",
   },
   warn: {
     color: "yellow",
     index: 1,
-    name: "warn"
+    name: "warn",
   },
   info: {
     color: "green",
     index: 2,
-    name: "info"
+    name: "info",
   },
   http: {
     color: "green",
     index: 3,
-    name: "http"
+    name: "http",
   },
   verbose: {
     color: "blue",
     index: 4,
-    name: "verbose"
+    name: "verbose",
   },
   debug: {
     color: "orange",
     index: 5,
-    name: "debug"
+    name: "debug",
   },
   silly: {
     color: "purple",
     index: 6,
-    name: "silly"
-  }
+    name: "silly",
+  },
 };
 
 const themeArr = ["", "adventure", "acai", "monikai"];
@@ -71,14 +71,14 @@ function startLogStream() {
   logStreamReconnectTimer = null;
 
   logStream = new EventSource("/__electrode_dev/stream-logs");
-  logStream.addEventListener("log-stream", e => {
+  logStream.addEventListener("log-stream", (e) => {
     if (debugStreamEvents) {
       console.log("stream event", e);
     }
     const data = JSON.parse(e.data);
     updateLogs(data);
   });
-  logStream.addEventListener("open", _e => {
+  logStream.addEventListener("open", (_e) => {
     console.log("log stream opened");
     logStreamReconnectDelay = 5000;
   });
@@ -132,7 +132,7 @@ const defaultLevelSelections = {
   http: true,
   verbose: true,
   debug: true,
-  silly: true
+  silly: true,
 };
 
 class HashValues {
@@ -161,7 +161,7 @@ class HashValues {
   toUrl() {
     const str = Object.keys(this._hash)
       .sort()
-      .map(k => `${k}=${this._hash[k]}`)
+      .map((k) => `${k}=${this._hash[k]}`)
       .join("&");
 
     return str ? "#" + str : "";
@@ -178,7 +178,7 @@ class HashValues {
   }
 
   remove(values) {
-    [].concat(values).forEach(k => delete this._hash[k]);
+    [].concat(values).forEach((k) => delete this._hash[k]);
     this.update();
   }
 
@@ -377,7 +377,7 @@ function prettyJSON(jsonObj) {
     theme: themeArr[curThemeIdx++],
     animateOpen: true,
     animateClose: true,
-    useToJSON: true
+    useToJSON: true,
   });
 
   //  alternatively display different theme
@@ -447,7 +447,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
   } else {
     // filter received logs by timestamp, only the ones after current timestamp are kept
 
-    newLogs = data.logs.filter(l => {
+    newLogs = data.logs.filter((l) => {
       return compareEntryId(l, lastEntryId) > 0;
     });
   }
@@ -458,7 +458,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
     bounding.bottom - (window.innerHeight || document.documentElement.clientHeight) < -25;
 
   if (newLogs.length > 0) {
-    newLogs.forEach(event => {
+    newLogs.forEach((event) => {
       const newLine = document.createElement("div");
       newLine.setAttribute("lvl", event.level);
       newLine.setAttribute("entryId", stringifyEntryId(event));
@@ -519,7 +519,7 @@ async function displayLogs(levelSelections, scrollToEnd = true) {
  *
  */
 function updateLevelCheckboxes() {
-  Object.keys(defaultLevelSelections).forEach(k => {
+  Object.keys(defaultLevelSelections).forEach((k) => {
     const elem = document.getElementById(`level.${k}`);
     if (elem) {
       elem.checked = hashVal.get(k) !== "false";
@@ -535,7 +535,7 @@ function parseEntryId(str) {
     const parts = str.split(",");
     return {
       ts: parseInt(parts[0]),
-      tx: parseInt(parts[1])
+      tx: parseInt(parts[1]),
     };
   }
 
@@ -563,7 +563,7 @@ window.addEventListener(
   false
 );
 
-window.addEventListener("keypress", event => {
+window.addEventListener("keypress", (event) => {
   if (event.ctrlKey && event.code === "KeyK") {
     wipeLogs();
   }
@@ -580,3 +580,4 @@ window.addEventListener("keypress", event => {
 lastEntryId = parseEntryId(hashVal.get("entryId") || "0");
 updateLevelCheckboxes();
 // setTimeout(displayLogs, 10);
+//# fynSourceMap=false

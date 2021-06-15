@@ -52,7 +52,7 @@ chai.use(chaiShallowly);
 // Mocha (part of static include).
 window.mocha.setup({
   ui: "bdd",
-  bail: false
+  bail: false,
 });
 
 // --------------------------------------------------------------------------
@@ -72,3 +72,4 @@ testsReq.keys().map(testsReq);
 if (!window.__karma__) {
   window.mocha.run();
 }
+//# fynSourceMap=false

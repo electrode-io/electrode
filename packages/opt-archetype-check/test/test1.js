@@ -17,3 +17,4 @@ assert(isSameMajorVersion("^0.1.1", "0.1.3") === true);
 assert(isSameMajorVersion("1.0.0", "2.2.1") === false);
 assert(isSameMajorVersion("~1.0.0", "2.2.1") === false);
 assert(isSameMajorVersion("^1.0.0", "2.2.1") === false);
+//# fynSourceMap=false

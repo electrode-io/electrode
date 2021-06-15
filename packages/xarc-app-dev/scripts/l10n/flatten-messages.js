@@ -41,7 +41,7 @@ function readFileAsJSON(filePath) {
 async function getAllDefaultMessages(messageFilesPathPattern) {
   const fileJsons = await xaa.map(await getFilePaths(messageFilesPathPattern), readFileAsJSON);
   return fileJsons.reduce((previousValue, defaultMessageDescriptors) => {
-    defaultMessageDescriptors.forEach(descriptor => {
+    defaultMessageDescriptors.forEach((descriptor) => {
       previousValue[descriptor.id] = descriptor;
     });
     return previousValue;
@@ -59,7 +59,7 @@ function flattenMessagesL10n() {
     .then(() => {
       if (isMain) process.exit(0);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log("flatten messages failed", err);
       if (isMain) process.exit(1);
     });
@@ -70,3 +70,4 @@ module.exports = flattenMessagesL10n;
 if (isMain) {
   flattenMessagesL10n();
 }
+//# fynSourceMap=false

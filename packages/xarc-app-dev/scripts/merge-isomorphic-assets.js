@@ -12,8 +12,8 @@ function mergeIsomorphicAssets() {
   const filenames = filterScanDir.sync({
     dir: process.cwd(),
     includeRoot: true,
-    filterDir: dir => ["dist", "dll"].indexOf(dir) >= 0,
-    filter: (f, p, e) => e.noExt === "isomorphic-assets"
+    filterDir: (dir) => ["dist", "dll"].indexOf(dir) >= 0,
+    filter: (f, p, e) => e.noExt === "isomorphic-assets",
   });
 
   if (filenames.length > 1) {
@@ -37,3 +37,4 @@ module.exports = mergeIsomorphicAssets;
 if (isMain) {
   mergeIsomorphicAssets();
 }
+//# fynSourceMap=false
