@@ -5,28 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach",
+      "name": "Attach samples/subapp2-poc",
       "port": 9229,
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Ignite",
-      "cwd": "${workspaceFolder}/packages/electrode-ignite",
-      "program": "${workspaceFolder}/packages/electrode-ignite/cli/ignite.js",
-      "console": "integratedTerminal"
-    },
-    {
-      "type": "node",
-      "request": "attach",
-      "name": "Attach to Remote 127.0.0.1:9229",
-      "address": "127.0.0.1",
-      "port": 9229,
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "${workspaceFolder}"
+      "type": "pwa-node",
+      "localRoot": "${workspaceFolder}/samples/subapp2-poc",
+      "outFiles": [
+        "!**/node_modules/**",
+        "${workspaceFolder}/samples/subapp2-poc/src/**/*.(ts|tsx|js|jsx)",
+        "${workspaceFolder}/samples/subapp2-poc/**/*.js",
+        "${workspaceFolder}/samples/subapp2-poc/node_modules/.f/_/@xarc/**/*.js"
+      ]
     },
     {
       "type": "node",
