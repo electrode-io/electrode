@@ -58,7 +58,7 @@ function makeConfig(options) {
         exposeRemote++;
       }
       const shared = Object.keys(remote.shared).reduce((sh, x) => {
-        sh[x] = { ...remote.shared[x], eager };
+        sh[x] = { eager, ...remote.shared[x] };
         return sh;
       }, {});
 
@@ -71,7 +71,8 @@ function makeConfig(options) {
         entry:
           cdnMapping && !process.env.WEBPACK_DEV && require.resolve("../client/webpack5-jsonp-cdn"),
         exposes,
-        shared
+        shared,
+        remotes: remote.remotes
       } as any);
     });
     config.plugins = [].concat(config.plugins, modFedPlugins).filter(x => x);
