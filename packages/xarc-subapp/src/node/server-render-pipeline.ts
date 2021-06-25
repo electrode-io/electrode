@@ -84,6 +84,10 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     - If you know that your subapp module doesn't support SSR, then you can ignore these errors.
     - You will *not* see SSR content.
 `);
+        } else {
+          console.error(
+            `If you know your subapp doesn't support SSR, then set its ssr flag to false.`
+          );
         }
       }
 
