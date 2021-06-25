@@ -4,7 +4,7 @@ import {
   SubAppSSRData,
   SubAppSSRResult,
   SubAppFeatureResult,
-  envHooks
+  envHooks,
 } from "@xarc/subapp";
 // import { render } from "react-dom";
 import { createElement, Component } from "react";
@@ -24,6 +24,10 @@ export class SSRReactLib implements ServerFrameworkLib {
       await subapp._getModule();
     }
 
+    if (subapp._module.loadError) {
+      return {};
+    }
+
     const Comp = subapp._getExport<Component>()?.Component;
 
     const featNames = Object.keys(subapp._features);
@@ -33,7 +37,7 @@ export class SSRReactLib implements ServerFrameworkLib {
     const featIds = ["state-provider", "router-provider", "app-context-provider"];
 
     for (const featId of featIds) {
-      const featName = featNames.find(x => subapp._features[x].id === featId);
+      const featName = featNames.find((x) => subapp._features[x].id === featId);
       if (featName) {
         const feat = subapp._features[featName];
         let nextRes = feat.execute({ input: result, ssrData: data });
@@ -68,7 +72,7 @@ export class SSRReactLib implements ServerFrameworkLib {
     if (!subapp._module) {
       return {
         content: `<h3>SubApp ${subapp.name} can't SSR sync because its module not yet loaded</h3>`,
-        props: undefined
+        props: undefined,
       };
     }
 
@@ -76,7 +80,7 @@ export class SSRReactLib implements ServerFrameworkLib {
 
     return {
       content,
-      props: prepResult.props
+      props: prepResult.props,
     };
   }
 }

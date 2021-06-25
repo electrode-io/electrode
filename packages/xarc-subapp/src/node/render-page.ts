@@ -11,7 +11,7 @@ import {
   startSubApp,
   isSubAppReady,
   subAppReady,
-  InitProps
+  InitProps,
 } from "./index";
 
 /**
@@ -26,6 +26,19 @@ export type RenderOptions = {
 
   /** namespace to load the subapps */
   namespace?: string;
+
+  /**
+   * Turn on/off server side rendering for the entire render, regardless if subapp
+   * wants ssr. Setting this flag to `true` will not make a subapp that sets its
+   * own `ssr` to `false` do SSR.
+   */
+  ssr?: boolean;
+
+  /**
+   * If you only want to prepare data for when `ssr` is `true`, set this to `true`.
+   * This will affect all subapps in this render
+   */
+  prepareOnly?: boolean;
 };
 
 /**
@@ -44,7 +57,7 @@ export class PageRenderer {
       nonce,
       prodAssetData,
       devAssetData,
-      templateInserts: { head = {}, body = {} } = {}
+      templateInserts: { head = {}, body = {} } = {},
     } = options;
 
     const { charSet = "UTF-8" } = options;
@@ -66,7 +79,7 @@ ${head.end}
 </head>
 <body>
 ${body.begin}
-${subApps.map(sa => TokenInvoke(loadSubApp, sa))}
+${subApps.map((sa) => TokenInvoke(loadSubApp, sa))}
 ${body.beforeStart}
 ${TokenInvoke(startSubApp)}
 ${body.afterStart}
@@ -80,7 +93,7 @@ ${body.end}
 
   _getSSRSubAppNames() {
     const { subApps } = this._options;
-    return subApps.map(s => s.ssr && s.name).filter(x => x);
+    return subApps.map((s) => s.ssr && s.name).filter((x) => x);
   }
 
   /**
@@ -89,11 +102,11 @@ ${body.end}
    * @returns Promise<RenderContext>
    */
   async render(options: RenderOptions): Promise<RenderContext> {
-    if (!isSubAppReady()) {
+    if (options.ssr !== false && !isSubAppReady()) {
       const ssrNames = this._getSSRSubAppNames();
       // make sure the subapps this render depends on are ready
       const readyNames = await subAppReady(ssrNames);
-      const badNames = ssrNames.filter(sn => !readyNames.includes(sn));
+      const badNames = ssrNames.filter((sn) => !readyNames.includes(sn));
 
       if (badNames.length > 0) {
         throw new Error(
