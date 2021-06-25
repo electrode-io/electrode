@@ -78,9 +78,9 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
           `Failed to getModule for subapp ${subapp.name}:`,
           cleanStack(subapp._module.loadError)
         );
-        console.error(`Originating stack:`, cleanStack(subapp._module.captureErr));
+        console.error(`  Originating stack:`, cleanStack(subapp._module.captureErr));
         if (this.options.ssr === false || this.options.prepareOnly) {
-          console.error(`Things may be OK due to one of these settings: ssr: ${this.options.ssr}, prepareOnly: ${this.options.prepareOnly}
+          console.error(`  Things may be OK due to one of these settings: ssr: ${this.options.ssr}, prepareOnly: ${this.options.prepareOnly}
     - Will continue to prepare your subapps to send to the browser
     - If you know that your subapp module doesn't support SSR, then you can ignore these errors.
     - You will *not* see SSR content.
