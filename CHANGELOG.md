@@ -1,6 +1,45 @@
+# 6/25/2021
+
+- fix: handle ssr off for subapps (subapp v2)
+- Allow remotes and eager flag to be configurable as part of app config
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/react@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/subapp@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/webpack@11.0.8` `(11.0.7 => 11.0.8)`
+
+### Lerna Updated
+
+- `@xarc/app-dev@10.0.11` `(10.0.10 => 10.0.11)`
+- `@xarc/app-dev@10.0.11` `(10.0.10 => 10.0.11)`
+- `@xarc/react-query@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/react-recoil@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/react-redux@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/react-redux-observable@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/react-redux-saga@0.3.1` `(0.3.0 => 0.3.1)`
+- `@xarc/react-router@0.3.1` `(0.3.0 => 0.3.1)`
+
+## Commits
+
+- `packages/xarc-react`
+
+  - fix: handle ssr off for subapps ([#1854](https://github.com/electrode-io/electrode/pull/1854)) [commit](http://github.com/electrode-io/electrode/commit/94fa6234557ce642a05f90a35628146360fefa0e)
+
+- `packages/xarc-subapp`
+
+  - fix: handle ssr off for subapps ([#1854](https://github.com/electrode-io/electrode/pull/1854)) [commit](http://github.com/electrode-io/electrode/commit/94fa6234557ce642a05f90a35628146360fefa0e)
+
+- `packages/xarc-webpack`
+
+  - Allow remotes and eager flag to be configurable as part of app config ([#1853](https://github.com/electrode-io/electrode/pull/1853)) [commit](http://github.com/electrode-io/electrode/commit/1f3f6192a9b1f9404de379e9c739c8f29af4a017)
+
 # 6/15/2021
 
 subapp v1:
+
 - Add hook for initializing subapp Server code
 - Serialize server's prepare data to client for hydration
 
