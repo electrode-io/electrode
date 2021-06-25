@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux-observable",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "xarc React.js application redux observable support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -27,7 +27,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^0.3.0",
+    "@xarc/react-redux": "^0.3.1",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0"
