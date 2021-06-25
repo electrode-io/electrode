@@ -1,4 +1,5 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-console */
+
 import _ from "lodash";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
 import {
@@ -71,7 +72,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     this.startTime = Date.now();
     this.preparePromise = this.framework.prepareSSR(this.ssrData).then((result) => {
       const { subapp } = this.ssrData;
-      if (subapp._module.loadError && !subapp._module.warned) {
+      if (subapp._module?.loadError && !subapp._module.warned) {
         subapp._module.warned = true;
         console.error(
           `Failed to getModule for subapp ${subapp.name}:`,

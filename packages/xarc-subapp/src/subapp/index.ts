@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+
 import { SubAppDef, SubAppOptions, SubAppFeatureFactory, SubApp } from "./types";
 import { envHooks } from "./envhooks";
 export * from "./types";
