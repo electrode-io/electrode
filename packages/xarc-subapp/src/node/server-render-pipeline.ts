@@ -1,17 +1,31 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-console */
+
 import _ from "lodash";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
 import {
   SubAppSSRData,
   SubAppFeatureResult,
   LoadSubAppOptions,
-  SubAppMountInfo
+  SubAppMountInfo,
 } from "../subapp/types";
 import { ServerFrameworkLib } from "./types";
 import { safeStringifyJson } from "./utils";
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
 const xarc = "window.xarcV2";
+
+function cleanStack(err) {
+  const stacks = err.stack.split("\n");
+  return stacks
+    .filter(
+      (l) =>
+        !l.includes("(internal/") &&
+        !l.includes("/isomorphic-loader/") &&
+        !l.includes("/pirates/lib/index")
+    )
+    .map((l) => l.replace(process.cwd(), "."))
+    .join("\n");
+}
 
 /**
  * The server side rendering pipeline for a subapp
@@ -42,7 +56,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
 
   constructor(data: SubAppSSRData) {
     const { context, options } = data;
-    this.options = options;
+    this.options = { ...options, ..._.pick(context.options, ["ssr", "prepareOnly"]) };
     this.ssrData = data;
     this.outputSpot = context.output.reserve();
     this.framework = data.subapp._frameworkFactory();
@@ -56,7 +70,28 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
   /** start to run through all the subapp's features to prepare data for calling renderToString */
   startPrepare(): void {
     this.startTime = Date.now();
-    this.preparePromise = this.framework.prepareSSR(this.ssrData).then(result => {
+    this.preparePromise = this.framework.prepareSSR(this.ssrData).then((result) => {
+      const { subapp } = this.ssrData;
+      if (subapp._module?.loadError && !subapp._module.warned) {
+        subapp._module.warned = true;
+        console.error(
+          `Failed to getModule for subapp ${subapp.name}:`,
+          cleanStack(subapp._module.loadError)
+        );
+        console.error(`  Originating stack:`, cleanStack(subapp._module.captureErr));
+        if (this.options.ssr === false || this.options.prepareOnly) {
+          console.error(`  Things may be OK due to one of these settings: ssr: ${this.options.ssr}, prepareOnly: ${this.options.prepareOnly}
+    - Will continue to prepare your subapps to send to the browser
+    - If you know that your subapp module doesn't support SSR, then you can ignore these errors.
+    - You will *not* see SSR content.
+`);
+        } else {
+          console.error(
+            `If you know your subapp doesn't support SSR, then set its ssr flag to false.`
+          );
+        }
+      }
+
       return (this.prepResult = result);
     });
   }

@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+
 import { SubAppDef, SubAppOptions, SubAppFeatureFactory, SubApp } from "./types";
 import { envHooks } from "./envhooks";
 export * from "./types";
@@ -35,7 +37,7 @@ let id = 1;
  *
  * @returns Promise resolving to module loaded
  */
-function _getModule(): Promise<any> {
+async function _getModule(): Promise<any> {
   /* eslint-disable no-invalid-this */
   const container = envHooks.getContainer();
   const subapp = container.get(this.name);
@@ -43,7 +45,8 @@ function _getModule(): Promise<any> {
   const getMod = typeof subapp.getModule === "function" ? subapp.getModule() : subapp.getModule;
 
   if (getMod.then) {
-    return getMod.then(mod => {
+    try {
+      const mod = await getMod;
       // get subapp def from container again in case subapp was re-declared by a reloaded module
       // while getModule was in flight.
       const subappB = container.get(this.name);
@@ -57,7 +60,16 @@ function _getModule(): Promise<any> {
       container.updateReady();
 
       return mod;
-    });
+    } catch (err) {
+      const mod = {
+        loadError: err,
+        captureErr: new Error(`load subapp ${this.name} module failed`),
+        warned: false,
+      };
+      const subappB = container.get(this.name);
+      subappB._module = mod;
+      return mod;
+    }
   } else {
     //
     // allow specifying subapp statically (not using dynamic import)
@@ -68,7 +80,7 @@ function _getModule(): Promise<any> {
     subappB._module = mod;
     loadFeatures(this, subappB._getExport<unknown>()?.wantFeatures);
     container.updateReady();
-    return Promise.resolve(mod);
+    return mod;
   }
 }
 
@@ -107,7 +119,7 @@ export function __declareSubApp(opts: SubAppOptions, override?: Partial<SubAppDe
       _mount: noop,
       _unmount: noop,
       _renderPipelines: [],
-      _getExport
+      _getExport,
     },
     override,
     opts

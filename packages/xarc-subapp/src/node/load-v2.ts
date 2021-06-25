@@ -43,11 +43,11 @@ export function loadSubApp(_setupContext: any, { props: setupProps }): any {
           subapp,
           options: props,
           request,
-          path: request.path
-        }
+          path: request.path,
+        },
       });
 
       return undefined;
-    }
+    },
   };
 }
