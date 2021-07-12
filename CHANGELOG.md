@@ -1,3 +1,23 @@
+# 7/12/2021
+
+## Packages
+
+### Directly Updated
+
+- `subapp-web@1.0.50` `(1.0.49 => 1.0.50)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.44` `(0.0.43 => 0.0.44)`
+- `subapp-react@0.0.42` `(0.0.41 => 0.0.42)`
+- `subapp-redux@1.0.50` `(1.0.49 => 1.0.50)`
+
+## Commits
+
+- `packages/subapp-web`
+
+  - changes for production matchEntry ([#1855](https://github.com/electrode-io/electrode/pull/1855)) [commit](http://github.com/electrode-io/electrode/commit/5a7246725afd0013f23ec659b94957cbe2b07636)
+
 # 6/25/2021
 
 - fix: handle ssr off for subapps (subapp v2)
