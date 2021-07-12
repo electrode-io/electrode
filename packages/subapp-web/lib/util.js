@@ -76,7 +76,8 @@ const utils = {
       (x.startsWith(`${entryName}.bundle`) ||
         // if a subapp comes from a package in node_modules, webpack5 names entry like this
         x.startsWith(`${entryName}~_.bundle`) ||
-        x.startsWith(`${entryName}.~`));
+        x.startsWith(`${entryName}.~`) ||
+        x.startsWith(`${entryName}~`));
     // map all IDs to actual assets
     const bundleAssets = entryPoints
       .map(id => {
