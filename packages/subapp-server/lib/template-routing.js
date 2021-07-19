@@ -23,9 +23,12 @@ const otherStats = getOtherStats();
 /*eslint-disable max-statements*/
 function initializeTemplate(
   { templateFile, tokenHandlers, cacheId, cacheKey, options },
-  routeOptions
+  routeOptions,
+  request
 ) {
-  cacheKey = cacheKey || (cacheId && `${templateFile}#${cacheId}`) || templateFile;
+  const url = _.get(request, "url.path", request.url);
+
+  cacheKey = cacheKey || `${templateFile}#${cacheId}#${url}`;
 
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
@@ -54,7 +57,10 @@ function initializeTemplate(
 
   const templateFullPath = resolvePath(templateFile);
   const templateModule = require(templateFullPath); //  eslint-disable-line
-  const template = _.get(templateModule, "default", templateModule);
+
+  const templateExp = templateModule.templateTags || templateModule.default || templateModule;
+
+  const template = typeof templateExp === "function" ? templateExp(routeOptions) : templateExp;
 
   if (template.$$typeof === xarcJsxElement || template.children) {
     // JSX
@@ -67,9 +73,8 @@ function initializeTemplate(
     });
   } else {
     // Tag
-    const templateTags = _.get(template, "templateTags", template);
     asyncTemplate = new TagRenderer({
-      templateTags,
+      templateTags: template,
       tokenHandlers: finalTokenHandlers.map(x => loadTokenModuleHandler(x)),
       insertTokenIds: routeOptions.insertTokenIds,
       routeOptions
@@ -103,7 +108,7 @@ function makeRouteTemplateSelector(routeOptions) {
     if (templateSelection && !templateSelection.templateFile && !templateSelection.htmlFile) {
       selection = Object.assign({}, templateSelection, defaultSelection);
     }
-    const asyncTemplate = initializeTemplate(selection, routeOptions);
+    const asyncTemplate = initializeTemplate(selection, routeOptions, options.request);
     return asyncTemplate.render(options);
   };
 
