@@ -10,6 +10,7 @@ import Fs from "fs";
 import _ from "lodash";
 import Url from "url";
 import { XarcInternalOptions, XarcOptions } from "../config/opt2/xarc-options";
+import { optionalRequire } from "optional-require";
 
 export const getOptArchetypeRequire = require("@xarc/webpack/lib/util/get-opt-require"); // eslint-disable-line
 
@@ -29,7 +30,7 @@ export const formUrl = ({
   host = "",
   port = "",
   path = "",
-  search = ""
+  search = "",
 }): string => {
   const proto = protocol.toString().toLowerCase();
   const sp = port.toString();
@@ -155,18 +156,18 @@ export function loadXarcOptions(
     const data = Fs.readFileSync(filename, "utf-8");
     return (cachedXarcOptions = JSON.parse(data, jsonParser));
   } catch (err) {
-    // eslint-disable-next-line
+    const runner = optionalRequire("@xarc/run") ? "xrun" : "clap";
     if (showError) {
+      // eslint-disable-next-line
       console.error(ck`
-<red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in
-dev mode.  This means you are trying to use something not through
-xarc's development tasks.
+<red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in dev mode.
 
 full path: ${filename}
 
-Please run "clap setup-dev" once to initialize the file
-<cyan>.etmp/xarc-options.json</> before doing your thing that loads
-xarc's development code.
+CAUSE: This means you are loading xarc's development code directly instead of through its task runner.
+
+<green>SOLUTION: Please run "${runner} setup-dev" once to initialize the file <cyan>.etmp/xarc-options.json</>
+    before loading xarc's development code.</>
 `);
 
       console.error(err.stack); // eslint-disable-line
@@ -175,7 +176,7 @@ xarc's development code.
     return (cachedXarcOptions = {
       webpack: {},
       babel: {},
-      options: {}
+      options: {},
     } as XarcInternalOptions);
   }
 }
@@ -257,5 +258,5 @@ export function getDevAdminPortFromEnv(fallback?: number): number {
       process.env.ELECTRODE_ADMIN_PORT
   );
 
-  return [fromEnv, fallback, 0].find(x => isValidPort(x));
+  return [fromEnv, fallback, 0].find((x) => isValidPort(x));
 }
