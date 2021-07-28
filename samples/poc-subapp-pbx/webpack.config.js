@@ -4,14 +4,23 @@
 //
 "use strict";
 
-const { initWebpackConfigComposer, compose, options } = require("@xarc/webpack");
+const { xarcWebpack } = require("@xarc/app-dev");
+
+// Get the env set by process.env.ELECTRODE_WEBPACK_PROFILE
+// Electrode's dev tasks will set it accordingly.
+// If you are loading webpack with this config directly, then you have to
+// set it manually, else it's defaulted to production.
+
+// const env = xarcWebpack.getEnvProfile();
+
+const options = xarcWebpack.getComposeOptions();
 
 //
 // options contains information pertain to Electrode's internal webpack
 // partials and profiles, so in order to get those, it should be passed
 // to initWebpackConfigComposer.
 //
-const { composer, ...opts } = initWebpackConfigComposer(options);
+const { composer, ...opts } = xarcWebpack.initWebpackConfigComposer(options);
 
 //
 // Electrode webpack config partials names all start with _
@@ -40,10 +49,10 @@ composer.getPartial("_dev").setOverride((config, options) => {
 // logic that pertains to Electrode's internal webpack config partials, such
 // as removing the custom _name field to identify webpack plugins.
 //
-const finalConfig = compose({ composer, ...opts });
+const finalConfig = xarcWebpack.compose({ composer, ...opts });
 
 // final config can be override or even modified at will:
 
-finalConfig.devtool = "eval-source-map";
+// finalConfig.devtool = "eval-source-map";
 
 module.exports = finalConfig;
