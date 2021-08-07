@@ -18,7 +18,7 @@
     "@xarc/module-dev": "^4.0.0",
     "@xarc/run": "^1.0.5",
     "bluebird": "^3.7.2",
-    "fynpo": "^0.3.2",
+    "fynpo": "^0.3.4",
     "lerna": "^4.0.0",
     "lodash": "^4.17.21",
     "prettier": "^2.2.1",
