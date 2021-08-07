@@ -5,7 +5,7 @@
 import Fs from "fs";
 import Path from "path";
 
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 
 import { extendRequire, setXRequire, getXRequire } from "isomorphic-loader";
 

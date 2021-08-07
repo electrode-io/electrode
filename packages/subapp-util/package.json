@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "filter-scan-dir": "^1.0.9",
-    "optional-require": "^1.0.0"
+    "optional-require": "^1.1.6"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.3"

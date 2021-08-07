@@ -30,7 +30,7 @@
     "dist"
   ],
   "dependencies": {
-    "optional-require": "^1.0.0",
+    "optional-require": "^1.1.6",
     "subapp-util": "^1.1.2",
     "subapp-web": "^1.0.50"
   },

@@ -9,7 +9,7 @@ import Fs from "fs";
 import Path from "path";
 import assert from "assert";
 import requireAt from "require-at";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 import xrun from "@xarc/run";
 import { getDevOptions } from "../config/archetype";
 import ck from "chalker";
@@ -34,7 +34,7 @@ export {
   /** The task runner @xarc/run */
   xrun,
   /** The task runner @xarc/run */
-  xrun as xclap
+  xrun as xclap,
 };
 
 let xarcCwd: string;
@@ -153,8 +153,8 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
   const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
   const config = xarcOptions.config;
-  const karmaConfig = file => Path.join(config.karma, file);
-  const mochaConfig = file => Path.join(config.mocha, file);
+  const karmaConfig = (file) => Path.join(config.karma, file);
+  const mochaConfig = (file) => Path.join(config.mocha, file);
 
   const shell = xsh.$;
   const exec = xsh.exec;
@@ -174,12 +174,12 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
 
       timer = setTimeout(async () => {
         timer = undefined;
-        const run = msg => {
+        const run = (msg) => {
           child = true;
           console.log(`${msg} '${cmd}'`);
           const ch = spawn(cmd, {
             shell: true,
-            stdio: "inherit"
+            stdio: "inherit",
           });
           ch.on("close", () => {
             if (child === "restart") {
@@ -195,7 +195,7 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
         } else if (child.kill && child.pid) {
           const ch = child;
           child = "restart";
-          (await psChildren(ch.pid)).reverse().forEach(c => process.kill(c.pid));
+          (await psChildren(ch.pid)).reverse().forEach((c) => process.kill(c.pid));
           ch.kill();
         }
       }, 500);
@@ -274,7 +274,7 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
     const url = `http://${HOST}:${PORT}${PATH}`;
     const statsPath = Path.resolve(xarcCwd, "dist/server/stats.json");
     const stats = JSON.parse(Fs.readFileSync(statsPath, "utf-8"));
-    const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
+    const cssAsset = stats.assets.find((asset) => asset.name.endsWith(".css"));
     const cssAssetPath = Path.resolve(xarcCwd, `dist/js/${cssAsset.name}`);
     const targetPath = Path.resolve(xarcCwd, "dist/js/critical.css");
     const serverPromise = require(Path.resolve(
@@ -290,7 +290,7 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
       strict: false,
       maxEmbeddedBase64Length: 1000,
       renderWaitTime: 2000,
-      blockJSRequests: false
+      blockJSRequests: false,
     };
     serverPromise.then(() => {
       penthouse(penthouseOptions, (err, css) => {
@@ -298,7 +298,7 @@ export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) 
           throw err;
         }
         const minifiedCSS = new CleanCSS().minify(css).styles;
-        Fs.writeFile(targetPath, minifiedCSS, writeErr => {
+        Fs.writeFile(targetPath, minifiedCSS, (writeErr) => {
           if (writeErr) {
             throw writeErr;
           }
@@ -374,7 +374,7 @@ ie >= 11
       );
     };
 
-    const optimizeModuleForProd = module => {
+    const optimizeModuleForProd = (module) => {
       const modulePath = Path.resolve(xarcCwd, "node_modules", module);
       assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
       createGitIgnoreDir(
@@ -400,7 +400,10 @@ ie >= 11
 
       const files = [".babelrc.js", resultFile];
 
-      if (!Fs.existsSync(destDir) || files.find(file => Fs.existsSync(Path.join(destDir, file)))) {
+      if (
+        !Fs.existsSync(destDir) ||
+        files.find((file) => Fs.existsSync(Path.join(destDir, file)))
+      ) {
         return;
       }
 
@@ -422,25 +425,27 @@ module.exports =  {
     const AppMode = xarcOptions.AppMode;
 
     const babelCliIgnore = quote(
-      [...jestTestDirectories.map(dir => `**/${dir}`), `**/*.spec.js`, `**/*.spec.jsx`]
+      [...jestTestDirectories.map((dir) => `**/${dir}`), `**/*.spec.js`, `**/*.spec.jsx`]
         .concat(xarcOptions.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
         .concat(`**/.__dev_hmr`)
-        .filter(x => x)
+        .filter((x) => x)
         .join(",")
     );
 
     const babelCliExtensions = quote(
       [".js", ".jsx"]
         .concat(xarcOptions.babel.enableTypeScript && [".ts", ".tsx"])
-        .filter(x => x)
+        .filter((x) => x)
         .join(",")
     );
 
-    const babelEnvTargetsArr = Object.keys(xarcOptions.babel.envTargets).filter(k => k !== "node");
+    const babelEnvTargetsArr = Object.keys(xarcOptions.babel.envTargets).filter(
+      (k) => k !== "node"
+    );
 
     const buildDistDirs = babelEnvTargetsArr
-      .filter(name => name !== "default")
-      .map(name => `dist-${name}`);
+      .filter((name) => name !== "default")
+      .map((name) => `dist-${name}`);
 
     let tasks = {
       ".mk-prod-dir": () =>
@@ -464,7 +469,7 @@ module.exports =  {
       build: {
         dep: [".remove-log-files", ".production-env"],
         desc: `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`,
-        task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"]
+        task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"],
       },
 
       //
@@ -486,13 +491,13 @@ module.exports =  {
           ".clean.dist",
           ".build-browser-coverage-1",
           "build-dist:flatten-l10n",
-          "build-dist:clean-tmp"
-        ]
+          "build-dist:clean-tmp",
+        ],
       },
 
       "build-dev-static": {
         desc: "Build static copy of your app's client bundle for development",
-        task: [".clean.dist", "build-dist-dev-static"]
+        task: [".clean.dist", "build-dist-dev-static"],
       },
 
       "build-dist": [
@@ -505,7 +510,7 @@ module.exports =  {
         "build-dist:flatten-l10n",
         "build-dist:merge-isomorphic-assets",
         "copy-dll",
-        "build-dist:clean-tmp"
+        "build-dist:clean-tmp",
       ],
 
       ".copy-xarc-options-to-dist": () => shell.cp(Path.join(eTmpDir, "xarc-options.json"), "dist"),
@@ -520,7 +525,7 @@ module.exports =  {
             quote(getWebpackStartConfig("webpack.config.dev.static.js")),
             `--color`
           );
-        }
+        },
       },
 
       ".ss-prod-react": () => optimizeModuleForProd("react"),
@@ -535,7 +540,7 @@ module.exports =  {
       "ss-prod-react": {
         desc: `Make optimized copy of react&react-dom for server side in dir ${xarcOptions.prodModulesDir}`,
         dep: [".ss-clean.prod-react", ".mk-prod-dir"],
-        task: xrun2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
+        task: xrun2.concurrent(".ss-prod-react", ".ss-prod-react-dom"),
       },
 
       "build-dist-dll": () => undefined,
@@ -550,53 +555,53 @@ module.exports =  {
               [
                 `${webpackCmd()} --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
-                `--color`
+                `--color`,
               ],
               {
                 xclap: {
-                  delayRunMs: index * 2000
+                  delayRunMs: index * 2000,
                 },
                 execOptions: {
                   env: {
-                    ENV_TARGET: name
-                  }
-                }
+                    ENV_TARGET: name,
+                  },
+                },
               }
             )
           )
-        )
+        ),
       },
 
       "mv-to-dist:clean": {
         desc: `clean static resources within ${buildDistDirs}`,
         task: () => {
-          buildDistDirs.forEach(dir => {
+          buildDistDirs.forEach((dir) => {
             // clean static resources within `dist-X` built by user specified env targets
             // and leave [.js, .map, .json] files only
             const removedFiles = scanDir.sync({
               dir: Path.resolve(xarcCwd, dir),
               includeRoot: true,
-              ignoreExt: [".js", ".map", ".json"]
+              ignoreExt: [".js", ".map", ".json"],
             });
             shell.rm("-rf", ...removedFiles);
           });
           return;
-        }
+        },
       },
 
       "mv-to-dist:mv-dirs": {
         desc: `move ${buildDistDirs} to dist`,
         task: () => {
-          buildDistDirs.forEach(dir => {
+          buildDistDirs.forEach((dir) => {
             scanDir
               .sync({
                 dir,
                 includeRoot: true,
-                filterExt: [".js", ".json", ".map"]
+                filterExt: [".js", ".json", ".map"],
                 // the regex above matches all the sw-registration.js, sw-registration.js.map,
                 // main.bundle.js and main.bundle.js.map and stats.json
               })
-              .forEach(file => {
+              .forEach((file) => {
                 if (file.endsWith(".js")) {
                   shell.cp("-r", file, "dist/js");
                 } else if (file.endsWith(".map")) {
@@ -607,20 +612,20 @@ module.exports =  {
               });
           });
           return;
-        }
+        },
       },
 
       "mv-to-dist:keep-targets": {
         desc: `write each targets to respective isomorphic-assets.json`,
         task: () => {
-          buildDistDirs.forEach(dir => {
+          buildDistDirs.forEach((dir) => {
             // add `targets` field to `dist-X/isomorphic-assets.json`
             const isomorphicPath = Path.resolve(xarcCwd, dir, "isomorphic-assets.json");
             if (Fs.existsSync(isomorphicPath)) {
               Fs.readFile(
                 isomorphicPath,
                 {
-                  encoding: "utf8"
+                  encoding: "utf8",
                 },
                 (err, data) => {
                   if (err) throw err;
@@ -628,7 +633,7 @@ module.exports =  {
                   const { envTargets } = xarcOptions.babel;
                   assetsJson.targets = envTargets[dir.split("-")[1]];
                   // eslint-disable-next-line no-shadow
-                  Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                  Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), (err) => {
                     if (err) throw err;
                   });
                 }
@@ -636,12 +641,12 @@ module.exports =  {
             }
           });
           return;
-        }
+        },
       },
 
       "build-dist:clean-tmp": {
         desc: false,
-        task: () => shell.rm("-rf", "./tmp")
+        task: () => shell.rm("-rf", "./tmp"),
       },
 
       "build-dist:flatten-l10n": flattenMessagesL10n,
@@ -679,25 +684,25 @@ module.exports =  {
             includeRoot: true,
             includeDir: true,
             grouping: true,
-            filterDir: x => (x === `.__dev_hmr` && "dirs") || "otherDirs",
+            filterDir: (x) => (x === `.__dev_hmr` && "dirs") || "otherDirs",
             filter: (x, p) =>
-              x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0 || p === `.__dev_hmr`
+              x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0 || p === `.__dev_hmr`,
           });
-          scanned.files.forEach(f => {
+          scanned.files.forEach((f) => {
             try {
               Fs.unlinkSync(f);
             } catch (err) {
               //
             }
           });
-          [].concat(scanned.dirs, scanned.otherDirs).forEach(d => {
+          [].concat(scanned.dirs, scanned.otherDirs).forEach((d) => {
             try {
               if (d) Fs.rmdirSync(d);
             } catch (err) {
               // ignore
             }
           });
-        }
+        },
       },
 
       "build-lib:all": {
@@ -707,7 +712,7 @@ module.exports =  {
           ".clean.lib:server",
           ".mk.lib.client.dir",
           ".mk.lib.server.dir",
-          ".build.babelrc"
+          ".build.babelrc",
         ],
         task: xrun2.exec(
           [
@@ -715,15 +720,15 @@ module.exports =  {
             `--out-dir=${AppMode.lib.dir}`,
             `--extensions=${babelCliExtensions}`,
             `--source-maps=inline --copy-files`,
-            `--verbose --ignore=${babelCliIgnore}`
+            `--verbose --ignore=${babelCliIgnore}`,
           ],
           {
             env: {
-              XARC_BABEL_TARGET: "node"
-            }
+              XARC_BABEL_TARGET: "node",
+            },
           }
         ),
-        finally: [".build-lib:delete-babel-ignored-files"]
+        finally: [".build-lib:delete-babel-ignored-files"],
       },
 
       // TODO: to be removed
@@ -738,14 +743,14 @@ module.exports =  {
                     dir: AppMode.src.dir,
                     includeDir: true,
                     grouping: true,
-                    filterDir: x => !x.startsWith("server") && "dirs",
-                    filter: () => false
+                    filterDir: (x) => !x.startsWith("server") && "dirs",
+                    filter: () => false,
                   }).dirs
                 )
-                .filter(x => x)
+                .filter((x) => x)
             : [AppMode.client];
 
-          return dirs.map(x =>
+          return dirs.map((x) =>
             mkCmd(
               `~$babel ${Path.posix.join(AppMode.src.dir, x)}`,
               `--out-dir=${Path.posix.join(AppMode.lib.dir, x)}`,
@@ -755,7 +760,7 @@ module.exports =  {
             )
           );
         },
-        finally: [".build-lib:delete-babel-ignored-files"]
+        finally: [".build-lib:delete-babel-ignored-files"],
       },
 
       ".clean.lib:server": () => shell.rm("-rf", AppMode.lib.server),
@@ -777,8 +782,8 @@ module.exports =  {
             `--source-maps=inline --copy-files`,
             `--ignore=${babelCliIgnore}`
           ),
-          ".build-lib:delete-babel-ignored-files"
-        ]
+          ".build-lib:delete-babel-ignored-files",
+        ],
       },
 
       check: ["lint", "test-cov"],
@@ -823,7 +828,7 @@ module.exports =  {
                   ["config/assets.json", "lib/server"],
                   `node ${context.args.join(" ")} lib/server`
                 )
-            )
+            ),
           ]);
 
           if (!Fs.existsSync("dist")) {
@@ -836,7 +841,7 @@ module.exports =  {
           }
 
           return xrun2.serial(() => console.log("dist exist, skipping build task"), mockTask);
-        }
+        },
       },
 
       "setup-dev": {
@@ -845,7 +850,7 @@ You only need to run this if you are doing something not through the xarc tasks.
         dep: [".webpack-dev", ".development-env"],
         task() {
           console.log(`xarc dev options configured.`);
-        }
+        },
       },
 
       dev: {
@@ -855,7 +860,7 @@ You only need to run this if you are doing something not through the xarc tasks.
         task() {
           const args = this.args.join(" ");
           return [".webpack-dev", [`server-admin ${args}`, "generate-service-worker"]];
-        }
+        },
       },
 
       hot: {
@@ -863,12 +868,12 @@ You only need to run this if you are doing something not through the xarc tasks.
         task: () => {
           xarcOptions.webpack.enableHotModuleReload = true;
           return "dev";
-        }
+        },
       },
 
       "dev-static": {
         desc: "Start server in development mode with statically built files",
-        task: ["build-dev-static", "app-server"]
+        task: ["build-dev-static", "app-server"],
       },
 
       "npm:test": ["check"],
@@ -878,39 +883,39 @@ You only need to run this if you are doing something not through the xarc tasks.
 
       "app-server": {
         desc: "Start the app server only. Must run 'clap build' first.",
-        task: () => startAppServer()
+        task: () => startAppServer(),
       },
 
       "server-debug": {
         desc: "Start the app serve with 'node debug'",
-        task: () => startAppServer(["debug"])
+        task: () => startAppServer(["debug"]),
       },
 
       "server-build-debug": {
         desc: "Build and debug with devTools",
-        task: ["build", "server-devtools"]
+        task: ["build", "server-devtools"],
       },
 
       "server-build-debug-brk": {
         desc: "Build and debug with devTools with breakpoint starting the app",
-        task: ["build", "server-devtools-debug-brk"]
+        task: ["build", "server-devtools-debug-brk"],
       },
 
       "server-devtools": {
         desc: "Debug the app server with 'node --inspect'",
-        task: () => startAppServer(["--inspect"])
+        task: () => startAppServer(["--inspect"]),
       },
 
       "server-devtools-debug-brk": {
         desc: "Debug the app server with 'node --inspect --debug-brk'",
-        task: () => startAppServer(["--inspect", "--debug-brk"])
+        task: () => startAppServer(["--inspect", "--debug-brk"]),
       },
 
       "server-prod": {
         dep: [".production-env", ".static-files-env"],
         desc:
           "Start server in production mode with static files routes.  Must run 'clap build' first.",
-        task: () => startAppServer()
+        task: () => startAppServer(),
       },
 
       ".init-bundle.valid.log": () =>
@@ -923,9 +928,9 @@ You only need to run this if you are doing something not through the xarc tasks.
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
           const exec = quote(Path.join(xarcOptions.devDir, "lib/babel-run"));
-          const isNodeArgs = x => x.startsWith("--inspect");
+          const isNodeArgs = (x) => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs).join(" ");
-          const otherArgs = context.args.filter(x => !isNodeArgs(x)).join(" ");
+          const otherArgs = context.args.filter((x) => !isNodeArgs(x)).join(" ");
 
           // get user specified port for admin
           const userPort = getDevAdminPortFromEnv(xarcOptions.adminPort);
@@ -941,7 +946,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             `--watch config ${AppMode.src.server}`,
             `-- ${AppMode.src.server}`
           );
-        }
+        },
       },
 
       "server-admin.test": {
@@ -951,9 +956,9 @@ You only need to run this if you are doing something not through the xarc tasks.
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
           const exec = quote(Path.join(xarcOptions.devDir, "lib/babel-run"));
-          const isNodeArgs = x => x.startsWith("--inspect");
+          const isNodeArgs = (x) => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs);
-          const otherArgs = context.args.filter(x => !isNodeArgs(x));
+          const otherArgs = context.args.filter((x) => !isNodeArgs(x));
           return mkCmd(
             `~(tty)$node`,
             nodeArgs.join(" "),
@@ -963,7 +968,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             `--watch config ${AppMode.src.server}`,
             `-- ${AppMode.src.server}`
           );
-        }
+        },
       },
 
       "dev-proxy": {
@@ -973,7 +978,7 @@ You only need to run this if you are doing something not through the xarc tasks.
           const debug = context.argOpts.debug ? "--inspect-brk " : "";
           const proxySpawn = require.resolve("@xarc/app-dev/lib/dev-admin/redbird-spawn");
           return `~(tty)$node ${debug}${proxySpawn} ${context.args.join(" ")}`;
-        }
+        },
       },
 
       "test-server": xrun2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
@@ -983,8 +988,8 @@ You only need to run this if you are doing something not through the xarc tasks.
       "test-cov": [
         "?.karma.test-frontend-cov",
         "?.jest.test-frontend-cov",
-        "test-server-cov"
-      ].filter(x => x),
+        "test-server-cov",
+      ].filter((x) => x),
       "test-dev": ["test-frontend-dev", "test-server-dev"],
 
       "test-watch": ["test-watch-all"],
@@ -1005,25 +1010,25 @@ You only need to run this if you are doing something not through the xarc tasks.
               "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
             throw new Error(`Missing Dependencies\n${error}`);
           }
-        }
+        },
       },
       "generate-service-worker": {
         desc:
           "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
           "file for prod/dev mode",
-        task: () => generateServiceWorker()
+        task: () => generateServiceWorker(),
       },
       pwa: {
         desc:
           "PWA must have dist by running `clap build` first and then start the app server only.",
-        task: ["build", "server"]
+        task: ["build", "server"],
       },
 
       "generate-browsers-listrc": {
         desc:
           "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
-        task: () => generateBrowsersListRc()
-      }
+        task: () => generateBrowsersListRc(),
+      },
     };
 
     tasks = Object.assign(tasks, {
@@ -1037,8 +1042,8 @@ You only need to run this if you are doing something not through the xarc tasks.
       ".build-lib": {
         desc: false,
         dep: [".clean.lib", ".mk-prod-dir"],
-        task: ["build-lib:all", ".build-lib:app-mode"]
-      }
+        task: ["build-lib:all", ".build-lib:app-mode"],
+      },
     });
 
     if (Fs.existsSync(Path.resolve(xarcCwd, AppMode.src.client, "dll.config.js"))) {
@@ -1052,9 +1057,9 @@ You only need to run this if you are doing something not through the xarc tasks.
               quote(getWebpackStartConfig("webpack.config.dll.js")),
               `--color`
             );
-          }
+          },
         },
-        "copy-dll": () => shell.cp("-r", "dll/*", "dist")
+        "copy-dll": () => shell.cp("-r", "dll/*", "dist"),
       });
     }
 
@@ -1074,7 +1079,7 @@ You only need to run this if you are doing something not through the xarc tasks.
               `--colors`,
               noSingleRun
             );
-          }
+          },
         },
 
         ".karma.test-frontend-ci": {
@@ -1087,7 +1092,7 @@ You only need to run this if you are doing something not through the xarc tasks.
               `--colors`,
               noSingleRun
             );
-          }
+          },
         },
 
         ".karma.test-frontend-cov": {
@@ -1104,7 +1109,7 @@ You only need to run this if you are doing something not through the xarc tasks.
               );
             }
             return undefined;
-          }
+          },
         },
 
         ".karma.test-frontend-dev": ["test-frontend"],
@@ -1117,7 +1122,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             `--colors --browsers Chrome --no-single-run --auto-watch`,
             noSingleRun
           );
-        }
+        },
       });
     } else {
       const karmaTasksDisabled = () => {
@@ -1129,7 +1134,7 @@ You only need to run this if you are doing something not through the xarc tasks.
         ".karma.test-frontend-ci": karmaTasksDisabled,
         ".karma.test-frontend-cov": karmaTasksDisabled,
         ".karma.test-frontend-dev": karmaTasksDisabled,
-        ".karma.test-frontend-dev-watch": karmaTasksDisabled
+        ".karma.test-frontend-dev-watch": karmaTasksDisabled,
       });
     }
 
@@ -1139,19 +1144,19 @@ You only need to run this if you are doing something not through the xarc tasks.
           desc: "Run jest tests (--inspect-brk to start debugger)",
           task() {
             return `.jest.test-frontend-cov ${this.argv.slice(1).join(" ")}`;
-          }
+          },
         },
         ".jest.test-frontend-cov"() {
-          const testDir = jestTestDirectories.find(x => shell.test("-d", x));
+          const testDir = jestTestDirectories.find((x) => shell.test("-d", x));
           let runJest: any = testDir;
           if (!runJest) {
             const scanned = scanDir.sync({
               dir: Path.resolve(xarcCwd, AppMode.src.dir),
               grouping: true,
               includeDir: true,
-              filterDir: d => (jestTestDirectories.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
+              filterDir: (d) => (jestTestDirectories.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
               filterExt: [".js", ".jsx", ".ts", ".tsx"],
-              filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+              filter: (x) => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0,
             });
 
             runJest = Boolean(scanned.dirs || scanned.files.length > 0);
@@ -1167,7 +1172,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             logger.info("Running jest unit tests");
 
             const brk = this.argv.indexOf("--inspect-brk") >= 0 ? "--inspect-brk" : "";
-            const jestOpts = this.argv.slice(1).filter(x => x !== "--inspect-brk");
+            const jestOpts = this.argv.slice(1).filter((x) => x !== "--inspect-brk");
 
             return mkCmd(
               `~(tty)$node`,
@@ -1179,14 +1184,14 @@ You only need to run this if you are doing something not through the xarc tasks.
           } else {
             return undefined;
           }
-        }
+        },
       });
     } else {
       Object.assign(tasks, {
         jest: () => {
           logger.info(`Running jest tests is not enabled because @xarc/opt-jest is not installed.
     Please add it to your devDependencies to enable running jest tests.`);
-        }
+        },
       });
     }
 
@@ -1211,7 +1216,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             return mkCmd(`~$mocha -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`);
           }
           return undefined;
-        }
+        },
       });
     } else {
       const mochaTestDisabled = () => {
@@ -1220,7 +1225,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       };
       Object.assign(tasks, {
         "test-server-cov": mochaTestDisabled,
-        "test-server-dev": mochaTestDisabled
+        "test-server-dev": mochaTestDisabled,
       });
     }
 

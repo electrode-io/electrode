@@ -2,7 +2,7 @@
 
 import Path from "path";
 import { merge } from "lodash";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 
 const optionalRequire = makeOptionalRequire(require);
 

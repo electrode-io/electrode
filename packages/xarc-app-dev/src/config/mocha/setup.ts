@@ -1,4 +1,4 @@
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 const optionalRequire = makeOptionalRequire(require);
 
 const Enzyme = optionalRequire("enzyme");
@@ -14,7 +14,7 @@ const chai = optionalRequire("chai");
  * @param addons
  */
 function chaiUse(addons) {
-  [].concat(addons).forEach(x => {
+  [].concat(addons).forEach((x) => {
     const AddonMod = x && optionalRequire(x);
     if (AddonMod) {
       chai.use(AddonMod);

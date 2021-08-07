@@ -4,7 +4,7 @@ import Fs from "fs";
 import Path from "path";
 import { jestTestDirectories, allSourceDirs } from "./constants";
 import { logger } from "../logger";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 
 const optionalRequire = makeOptionalRequire(require);
 
@@ -27,8 +27,8 @@ const optionalRequire = makeOptionalRequire(require);
 function lint(options, xarcOptions) {
   const ext = options.ext ? ` --ext ${options.ext}` : "";
 
-  const checkCustom = t => {
-    const f = ["", ".json", ".yml", ".yaml", ".js"].find(e => {
+  const checkCustom = (t) => {
+    const f = ["", ".json", ".yml", ".yaml", ".js"].find((e) => {
       const x = Path.resolve(xarcOptions.cwd, Path.join(t, `.eslintrc${e}`));
       return Fs.existsSync(x);
     });
@@ -49,12 +49,12 @@ function lint(options, xarcOptions) {
   );
 
   const ignorePattern = options.ignorePatterns
-    ? options.ignorePatterns.map(p => `--ignore-pattern ${p}`)
+    ? options.ignorePatterns.map((p) => `--ignore-pattern ${p}`)
     : "";
 
   const version = require("eslint/package.json")
     .version.split(".")
-    .map(x => parseInt(x));
+    .map((x) => parseInt(x));
   const noUnmatchError = version[0] > 6 && version[1] > 8 ? ` --no-error-on-unmatched-pattern` : "";
 
   const commands = [
@@ -63,10 +63,10 @@ function lint(options, xarcOptions) {
     grouped.archetype.length > 0 &&
       `~$eslint${ext}${noUnmatchError} -c ${options.config} ${grouped.archetype.join(
         " "
-      )} ${ignorePattern}`
+      )} ${ignorePattern}`,
   ];
 
-  return Promise.resolve(commands.filter(x => x));
+  return Promise.resolve(commands.filter((x) => x));
 }
 
 /**
@@ -84,7 +84,7 @@ function eslintDisabledTasks() {
   return {
     lint: lintDisabled,
     "lint-server": lintDisabled,
-    "lint-server-test": lintDisabled
+    "lint-server-test": lintDisabled,
   };
 }
 
@@ -99,7 +99,7 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
   const tasks = {};
 
   const config = xarcOptions.config;
-  const eslintConfig = file => Path.join(config.eslint, file);
+  const eslintConfig = (file) => Path.join(config.eslint, file);
 
   if (!xarcOptions.options.eslint) {
     return eslintDisabledTasks();
@@ -110,7 +110,7 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
   // legacy src/client and src/server only setup?
   let isLegacySrc = false;
   try {
-    const files = Fs.readdirSync("src").filter(x => !x.startsWith("."));
+    const files = Fs.readdirSync("src").filter((x) => !x.startsWith("."));
     isLegacySrc = files.sort().join("") === "clientserver";
   } catch (err) {
     //
@@ -120,8 +120,8 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
     "lint-client",
     hasTest && "lint-client-test",
     "lint-server",
-    hasTestServer && "lint-server-test"
-  ].filter(x => x);
+    hasTestServer && "lint-server-test",
+  ].filter((x) => x);
 
   Object.assign(tasks, {
     lint: xrun.concurrent(...lintTasks),
@@ -136,10 +136,10 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
             targets: isLegacySrc
               ? [AppMode.src.client, "templates"]
               : [AppMode.src.dir, "templates"],
-            ignorePatterns: [AppMode.src.server]
+            ignorePatterns: [AppMode.src.server],
           },
           xarcOptions
-        )
+        ),
     },
 
     "lint-server": {
@@ -149,11 +149,11 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
           {
             ext: ".js,.jsx,.ts,.tsx",
             config: eslintConfig(".eslintrc-node"),
-            targets: [AppMode.src.server]
+            targets: [AppMode.src.server],
           },
           xarcOptions
-        )
-    }
+        ),
+    },
   });
 
   if (hasTest) {
@@ -164,11 +164,11 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
           {
             ext: ".js,.jsx,.ts,.tsx",
             config: eslintConfig(".eslintrc-react-test"),
-            targets: ["test", ...jestTestDirectories.map(dir => `${dir}`)],
-            ignorePatterns: ["test/server"]
+            targets: ["test", ...jestTestDirectories.map((dir) => `${dir}`)],
+            ignorePatterns: ["test/server"],
           },
           xarcOptions
-        )
+        ),
     };
   }
 
@@ -182,10 +182,10 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
             config: process.env.SERVER_ES6
               ? eslintConfig(".eslintrc-mocha-test-es6")
               : eslintConfig(".eslintrc-mocha-test"),
-            targets: ["test/server"]
+            targets: ["test/server"],
           },
           xarcOptions
-        )
+        ),
     };
   }
 
@@ -208,7 +208,7 @@ export function eslint7Tasks(xarcOptions: any, xrun: any) {
       desc: `Run eslint for your sources - require setup .eslintrc.js`,
       task: () => {
         const validDirs = allSourceDirs
-          .map(d => {
+          .map((d) => {
             const dir = Path.join(xarcOptions.cwd, d);
             try {
               const stat = Fs.statSync(dir);
@@ -220,11 +220,11 @@ export function eslint7Tasks(xarcOptions: any, xrun: any) {
             }
             return "";
           })
-          .filter(x => x)
+          .filter((x) => x)
           .join(" ");
         return xrun.exec(`eslint --ext .js,.ts,.jsx,.tsx ${validDirs}`);
-      }
-    }
+      },
+    },
   };
 }
 

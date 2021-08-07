@@ -79,7 +79,7 @@
     "@xarc/render-context": "^1.0.6",
     "lodash": "^4.17.15",
     "munchy": "^1.0.9",
-    "optional-require": "^1.0.0",
+    "optional-require": "^1.1.6",
     "require-at": "^1.0.6",
     "xaa": "^1.4.0"
   },

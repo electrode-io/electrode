@@ -17,7 +17,7 @@
     "xsh": "^0.4.4"
   },
   "dependencies": {
-    "optional-require": "^1.0.0"
+    "optional-require": "^1.1.6"
   },
   "nyc": {
     "all": true,

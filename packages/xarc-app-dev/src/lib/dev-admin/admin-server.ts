@@ -14,7 +14,7 @@ import isCI from "is-ci";
 import { doCleanup } from "./cleanup";
 import * as xaa from "xaa";
 import { formUrl } from "../utils";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 const optionalRequire = makeOptionalRequire(require);
 
 const WT = optionalRequire("worker_threads");
@@ -28,7 +28,7 @@ import { devProxy } from "../../config/dev-proxy";
 const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
-  controlPaths
+  controlPaths,
 } = devProxy;
 
 const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
@@ -47,10 +47,10 @@ const PROMPT_SPIN_INTERVAL = 3500;
 
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
-    XARC_BABEL_TARGET: "node"
+    XARC_BABEL_TARGET: "node",
   },
   [DEV_SERVER_NAME]: {} as any,
-  [PROXY_SERVER_NAME]: {} as any
+  [PROXY_SERVER_NAME]: {} as any,
 };
 
 const getTerminalColumns = () => {
@@ -116,7 +116,7 @@ export class AdminServer {
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
     this._adminHttp = new AdminHttp({
       getLogs: (app: string) => this.getLogs(app),
-      port: this._opts.port
+      port: this._opts.port,
     });
   }
 
@@ -132,7 +132,7 @@ export class AdminServer {
       name: DEV_ADMIN_STATUS,
       display: ck`[<green.inverse>DEV ADMIN</>]`,
       spinner: PROMPT_SPINNER,
-      spinInterval: PROMPT_SPIN_INTERVAL
+      spinInterval: PROMPT_SPIN_INTERVAL,
     });
     this.updateStatus("webpack is PENDING");
     this.handleUserInput();
@@ -255,7 +255,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       } else if (child.terminate) {
         child.postMessage("kill");
         const defer1 = xaa.defer();
-        child.once("message", msg => defer1.resolve(msg));
+        child.once("message", (msg) => defer1.resolve(msg));
         await xaa.try(() => xaa.runTimeout(defer1.promise, 1000));
         child.terminate();
         const defer2 = xaa.defer();
@@ -278,7 +278,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     await Promise.all([
       this.kill(DEV_SERVER_NAME, "SIGINT"),
       this.kill(APP_SERVER_NAME, "SIGINT"),
-      this.kill(PROXY_SERVER_NAME, "SIGINT")
+      this.kill(PROXY_SERVER_NAME, "SIGINT"),
     ]);
 
     this._io.shutdown();
@@ -322,7 +322,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       x: () => this.kill(DEV_SERVER_NAME, "SIGINT"),
       z: () => this.toggleFullLogUrlMessage(APP_SERVER_NAME),
       // dev proxy server
-      p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" })
+      p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" }),
     };
 
     if (str === "^c") {
@@ -401,7 +401,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
         XARC_ADMIN_SERVER: true,
         // pass admin port to child process
         XARC_ADMIN_PORT: this._adminHttp._port,
-        ...SERVER_ENVS[name]
+        ...SERVER_ENVS[name],
       });
 
       if (Worker) {
@@ -409,7 +409,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       } else {
         const forkOpts: any = {
           env,
-          silent: true
+          silent: true,
         };
 
         if (options.passThruArgs) {
@@ -446,7 +446,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   //
   async startWebpackDevServer(debug = undefined) {
     const progSig = `<s> [webpack.Progress] `;
-    const waitStart = async info => {
+    const waitStart = async (info) => {
       const cwdRegex = new RegExp(process.env.XARC_CWD || process.cwd(), "g");
       let removeTimer;
       let progLine = "";
@@ -463,8 +463,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
         }, 2000).unref();
       };
 
-      const watchWdsLog = input => {
-        const processLine = data => {
+      const watchWdsLog = (input) => {
+        const processLine = (data) => {
           const line = data.toString();
           if (line.trim().length < 1) {
             return;
@@ -474,7 +474,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
             this._io.addItem({
               name: WDS_PROGRESS,
               spinner: true,
-              display: `Webpack Progress`
+              display: `Webpack Progress`,
             });
             this._io.updateItem(WDS_PROGRESS, progLine);
             const match = progLine.match(/\d{1,3}%/);
@@ -508,9 +508,9 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
       this._webpackDevRelay.setWebpackServer(info._child);
 
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const listenForReport = () =>
-          info._child.once("message", data => {
+          info._child.once("message", (data) => {
             if (data.name === "webpack-report") {
               if (data.port) {
                 SERVER_ENVS[PROXY_SERVER_NAME].WEBPACK_DEV_PORT = data.port;
@@ -537,7 +537,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       exec: Path.join(__dirname, "dev-server.js"),
       debug: debug || false,
       skipWatch: debug === "--inspect-brk",
-      waitStart
+      waitStart,
     });
   }
 
@@ -559,7 +559,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       name: LOG_ALERT,
       display: ck`[<orange.inverse>ALERT</>]`,
       spinner: PROMPT_SPINNER,
-      spinInterval: PROMPT_SPIN_INTERVAL
+      spinInterval: PROMPT_SPIN_INTERVAL,
     });
     const instruction = `<orange>View full logs at: <cyan.underline>${url}</></> - \
 <green>Press Z to hide or show this message</>`;
@@ -639,7 +639,7 @@ ${instruction}`
       }
       context._showFullLink = undefined;
       if (store.length > 25000) {
-        const cleanup = store.filter(x => x !== false);
+        const cleanup = store.filter((x) => x !== false);
         context.store = cleanup.slice(cleanup.length - 9999);
       }
     }, delay);
@@ -648,7 +648,7 @@ ${instruction}`
   saveLineOutput(context) {
     const { inputs, store } = context;
 
-    const handler = data => {
+    const handler = (data) => {
       const timeDiff = Date.now() - context._deferTimestamp;
       // if an error line has been detected, then only consider other lines following it
       // within 30 milliseconds as part of it.
@@ -680,7 +680,7 @@ ${instruction}`
       this._adminHttp.sendLogsToStreamClients();
     };
 
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       const reader = readline.createInterface({ input });
       reader.on("line", handler);
       return reader;
@@ -693,7 +693,7 @@ ${instruction}`
       tag: this._app,
       store: [],
       fullLogUrl: this._fullAppLogUrl,
-      checkLine: str => {
+      checkLine: (str) => {
         if (
           !this._fullyStarted &&
           (str.includes("server running") || str.includes("Server listening"))
@@ -707,7 +707,7 @@ ${instruction}`
           this.logTime(`App is ready in dev mode, total time took`);
         }
         return str;
-      }
+      },
     };
 
     await this.startServer({
@@ -721,12 +721,12 @@ ${instruction}`
       noTimeoutCheck: skipWatch,
       passThruArgs: this._passThru,
       logSaver,
-      waitStart: async info => {
+      waitStart: async (info) => {
         logSaver.inputs = [info._child.stdout, info._child.stderr];
         this.saveLineOutput(logSaver);
         await this.waitForAppServerStart(info);
         this._webpackDevRelay.setAppServer(info._child);
-      }
+      },
     });
   }
 
@@ -755,7 +755,7 @@ ${instruction}`
     let lineBuffers = [];
     let deferWrite;
 
-    reader.on("line", data => {
+    reader.on("line", (data) => {
       clearTimeout(deferWrite);
       deferWrite = setTimeout(() => {
         output.show(lineBuffers.join("\n"));
@@ -774,7 +774,7 @@ ${instruction}`
       killKey: "O",
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
-      waitStart: async info => {
+      waitStart: async (info) => {
         info._child.on("message", (data: any) => {
           // this._io.show(ck`<orange>proxy message ${JSON.stringify(data)}</>`, this._appPort);
           if (data.name === "proxy-started") {
@@ -786,7 +786,7 @@ ${instruction}`
         });
         this.passThruLineOutput(this._proxy, info._child.stdout, this._io);
         this.passThruLineOutput(this._proxy, info._child.stderr, this._io);
-      }
+      },
     });
   }
 
@@ -800,7 +800,7 @@ ${instruction}`
         this.sendMsg(PROXY_SERVER_NAME, {
           ...update,
           name: "update-ports",
-          quiet: true
+          quiet: true,
         });
       }, 250).unref();
     }
@@ -822,7 +822,7 @@ ${instruction}`
       }
     };
 
-    const checkStarted = data => {
+    const checkStarted = (data) => {
       if (started) {
         return true;
       }
@@ -912,7 +912,7 @@ ${info.name} - assuming it started.</>`);
     if (!info._watcher && !info.options.skipWatch && !_.isEmpty(info.options.watch)) {
       info._watcher = chokidar.watch(info.options.watch, {
         cwd: process.env.XARC_CWD || process.cwd(),
-        persistent: true
+        persistent: true,
       });
       info._watcher.on("change", restart);
     }

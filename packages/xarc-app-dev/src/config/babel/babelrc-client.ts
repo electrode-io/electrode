@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-comment */
 
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 import { getPluginFrom, loadXarcOptions } from "./common";
 import _ from "lodash";
 
@@ -18,7 +18,7 @@ const {
   looseClassProps,
   hasMultiTargets,
   target: babelTarget,
-  envTargets = {}
+  envTargets = {},
 } = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
@@ -30,17 +30,17 @@ const basePlugins = [
     {
       compiler: {
         promises: true,
-        generators: false
+        generators: false,
       },
       runtimePattern: null,
-      useRuntimeModule: true
-    }
+      useRuntimeModule: true,
+    },
   ],
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
-    { legacy: legacyDecorators, ...proposalDecorators }
+    { legacy: legacyDecorators, ...proposalDecorators },
   ],
   //
   // allow class properties. loose option compile to assignment expression instead
@@ -49,7 +49,7 @@ const basePlugins = [
   //
   (enableTypeScript || transformClassProps) && [
     "@babel/plugin-proposal-class-properties",
-    { loose: looseClassProps, ...transformClassProps }
+    { loose: looseClassProps, ...transformClassProps },
   ],
   //
   // i18n has not been used at all and these are very outdated
@@ -73,8 +73,8 @@ const basePlugins = [
   "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
-    { requireDirective: flowRequireDirective, ...enableFlow }
-  ]
+    { requireDirective: flowRequireDirective, ...enableFlow },
+  ],
 ];
 
 const { BABEL_ENV, NODE_ENV, ENABLE_KARMA_COV } = process.env;
@@ -92,9 +92,9 @@ const plugins = basePlugins.concat(
     [
       "babel-plugin-transform-react-remove-prop-types",
       {
-        removeImport: true
-      }
-    ]
+        removeImport: true,
+      },
+    ],
   ],
   // css module support
   enableCssModule && [
@@ -106,20 +106,20 @@ const plugins = basePlugins.concat(
         filetypes: {
           ".scss": {
             syntax: "postcss-scss",
-            plugins: ["postcss-nested"]
+            plugins: ["postcss-nested"],
           },
           ".styl": {
-            syntax: "sugarss"
+            syntax: "sugarss",
           },
           ".less": {
-            syntax: "postcss-less"
-          }
-        }
-      }
-    ]
+            syntax: "postcss-less",
+          },
+        },
+      },
+    ],
   ],
   enableKarmaCov && [
-    getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
+    getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul"),
   ]
 );
 
@@ -149,14 +149,14 @@ const presets = [
       modules: "auto",
       loose: true,
       targets,
-      ...useBuiltIns
-    }
+      ...useBuiltIns,
+    },
   ],
   enableTypeScript && "@babel/preset-typescript",
-  "@babel/preset-react"
+  "@babel/preset-react",
 ];
 
 export = {
-  presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x)
+  presets: presets.filter((x) => x),
+  plugins: plugins.filter((x) => x),
 };

@@ -48,7 +48,7 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^1.3.9",
     "mkdirp": "^1.0.3",
-    "optional-require": "^1.0.2",
+    "optional-require": "^1.1.6",
     "require-at": "^1.0.6",
     "url-loader": "^4.1.0",
     "webpack": "^5.33.2",

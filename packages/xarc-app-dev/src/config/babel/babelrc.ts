@@ -6,7 +6,7 @@
  * and this file will set preset-env targets accordingly.
  */
 import ck from "chalker";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 import _ from "lodash";
 import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
 
@@ -28,7 +28,7 @@ const {
   looseClassProps,
   hasMultiTargets,
   target: babelTarget,
-  envTargets = {}
+  envTargets = {},
 } = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
@@ -72,17 +72,17 @@ const getReactCssModulePlugin = (): any => {
         filetypes: {
           ".scss": {
             syntax: "postcss-scss",
-            plugins: ["postcss-nested"]
+            plugins: ["postcss-nested"],
           },
           ".styl": {
-            syntax: "sugarss"
+            syntax: "sugarss",
           },
           ".less": {
-            syntax: "postcss-less"
-          }
-        }
-      }
-    ]
+            syntax: "postcss-less",
+          },
+        },
+      },
+    ],
   ];
 };
 
@@ -94,17 +94,17 @@ const basePlugins = [
     {
       compiler: {
         promises: true,
-        generators: false
+        generators: false,
       },
       runtimePattern: null,
-      useRuntimeModule: true
-    }
+      useRuntimeModule: true,
+    },
   ],
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
-    { legacy: legacyDecorators, ...proposalDecorators }
+    { legacy: legacyDecorators, ...proposalDecorators },
   ],
   //
   // allow class properties. loose option compile to assignment expression instead
@@ -113,7 +113,7 @@ const basePlugins = [
   //
   (enableTypeScript || transformClassProps) && [
     "@babel/plugin-proposal-class-properties",
-    { loose: looseClassProps, ...transformClassProps }
+    { loose: looseClassProps, ...transformClassProps },
   ],
   //
   // i18n has not been used at all and these are very outdated
@@ -137,8 +137,8 @@ const basePlugins = [
   "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
-    { requireDirective: flowRequireDirective, ...enableFlow }
-  ]
+    { requireDirective: flowRequireDirective, ...enableFlow },
+  ],
 ];
 
 // @ts-ignore
@@ -150,16 +150,16 @@ const plugins = basePlugins.concat(
       [
         "babel-plugin-transform-react-remove-prop-types",
         {
-          removeImport: true
-        }
-      ]
+          removeImport: true,
+        },
+      ],
     ],
   // css module support
   // Note: this is needed for server side (node.js) also.
   getReactCssModulePlugin(),
   !isNodeTarget &&
     enableKarmaCov && [
-      getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
+      getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul"),
     ]
 );
 
@@ -177,7 +177,7 @@ const useBuiltIns =
   !isNodeTarget && hasMultiTargets
     ? {
         useBuiltIns: "entry",
-        corejs: require("core-js/package.json").version.split(".")[0] // eslint-disable-line
+        corejs: require("core-js/package.json").version.split(".")[0], // eslint-disable-line
       }
     : {};
 
@@ -204,14 +204,14 @@ const presets = [
       modules: "auto",
       loose: true,
       targets,
-      ...useBuiltIns
-    }
+      ...useBuiltIns,
+    },
   ],
   enableTypeScript && "@babel/preset-typescript",
-  "@babel/preset-react"
+  "@babel/preset-react",
 ];
 
 export = {
-  presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x)
+  presets: presets.filter((x) => x),
+  plugins: plugins.filter((x) => x),
 };

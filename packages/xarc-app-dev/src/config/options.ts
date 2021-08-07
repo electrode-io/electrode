@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
 import Path from "path";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 import * as utils from "../lib/utils"; // really import ESM into single var utils
 import _ from "lodash";
 import xenvConfig from "xenv-config";
@@ -20,7 +20,7 @@ const optionalRequire = makeOptionalRequire(require);
  */
 export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
-    .filter(x => x.startsWith("electrode-archetype-opt-") || x.startsWith("@xarc/opt-"))
+    .filter((x) => x.startsWith("electrode-archetype-opt-") || x.startsWith("@xarc/opt-"))
     .reduce((acc, name) => {
       //
       // In dev mode, when all dev deps are installed, we can safely load
@@ -41,7 +41,7 @@ export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
           if (process.env._ELECTRODE_DEV_ || (process.env.NODE_ENV === "production" && !isDev)) {
             throw err;
           }
-        }
+        },
       });
 
       if (optPkg) {
@@ -64,7 +64,7 @@ export const getUserConfigOptions = (packageNames, devPackageNames) => {
     // Check for any optional archetype in application's devDependencies or dependencies
     //
     ...checkOptArchetypeInAppDep(devPackageNames, true).options,
-    ...checkOptArchetypeInAppDep(packageNames).options
+    ...checkOptArchetypeInAppDep(packageNames).options,
   };
 };
 
@@ -81,7 +81,7 @@ export function getDefaultArchetypeOptions() {
   //
   const appPkg = optionalRequire(Path.resolve("package.json")) || {
     dependencies: {},
-    devDependencies: {}
+    devDependencies: {},
   };
   const packageNames = Object.keys(appPkg.dependencies);
   const devPackageNames = Object.keys(appPkg.devDependencies);
@@ -96,7 +96,7 @@ export function getDefaultArchetypeOptions() {
     eTmpDir: ETMP_DIR,
     prodModulesDir: Path.join(PROD_DIR, "modules"),
     checkUserBabelRc: utils.checkUserBabelRc,
-    devArchetypeName: "@xarc/app-dev"
+    devArchetypeName: "@xarc/app-dev",
   };
 }
 
@@ -135,21 +135,21 @@ export function getDevArchetypeLegacy() {
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`,
       jest: `${configDir}/jest`,
-      ...userConfig.configPaths
+      ...userConfig.configPaths,
     },
     prodDir: PROD_DIR,
     eTmpDir: ETMP_DIR,
-    AppMode: makeAppMode(PROD_DIR, userConfig.reactLib)
+    AppMode: makeAppMode(PROD_DIR, userConfig.reactLib),
   };
 
   const topConfigSpec = {
-    devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
+    devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false },
   };
 
   const typeScriptOption =
     userConfig.typescript === false
       ? {
-          babel: { enableTypeScript: userConfig.typescript }
+          babel: { enableTypeScript: userConfig.typescript },
         }
       : {};
 
@@ -159,9 +159,7 @@ export function getDevArchetypeLegacy() {
   );
 
   archetypeConfig.babel.hasMultiTargets =
-    Object.keys(archetypeConfig.babel.envTargets)
-      .sort()
-      .join(",") !== "default,node";
+    Object.keys(archetypeConfig.babel.envTargets).sort().join(",") !== "default,node";
 
   let AppMode;
 
@@ -176,7 +174,7 @@ export function getDevArchetypeLegacy() {
       }
 
       return AppMode;
-    }
+    },
   });
 
   return archetypeConfig;

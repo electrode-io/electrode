@@ -5,7 +5,7 @@ import Path from "path";
 import _ from "lodash";
 import redbird from "@jchip/redbird";
 import ck from "chalker";
-import makeOptionalRequire from "optional-require";
+import { makeOptionalRequire } from "optional-require";
 import { devProxy } from "../../config/dev-proxy";
 import { cdnMock } from "./cdn-mock";
 import { isValidPort, formUrl } from "../utils";
@@ -17,7 +17,7 @@ const optionalRequire = makeOptionalRequire(require);
 
 let APP_RULES = [];
 
-const getNotFoundPage = data => {
+const getNotFoundPage = (data) => {
   const { protocol, actualHost, expectedHost, port } = data;
   const adminUrl = formUrl({ protocol, host: expectedHost, port, path: controlPaths.status });
   /* eslint-disable max-len */
@@ -66,7 +66,7 @@ const getLineForTree = (_rotocol, host) => (tree, [envVarName, port], idx, arr) 
   return ck`${tree}  ${boxChar}─<green>${formUrl({
     protocol: "http",
     host,
-    port
+    port,
   })}</> (${portText})\n`;
 };
 
@@ -101,7 +101,7 @@ const onStatusRequest = (_req, res) => {
 <h2>Rules</h2>
 <ul>
 ${APP_RULES.map(
-  x => `<li><pre><a href="${x[0]}">${x[0]}</a> ===&gt; <a href="${x[1]}">${x[1]}</a></pre></li>`
+  (x) => `<li><pre><a href="${x[0]}">${x[0]}</a> ===&gt; <a href="${x[1]}">${x[1]}</a></pre></li>`
 ).join("")}
 </ul>
 </body>
@@ -124,7 +124,7 @@ const registerElectrodeDevRules = ({
   webpackDevPort,
   restart,
   enableCdnMock,
-  noDev
+  noDev,
 }) => {
   const { dev: devPath, admin: adminPath, hmr: hmrPath, appLog, reporter } = controlPaths;
   const logEventsPath = `${devPath}/log-events`;
@@ -151,7 +151,7 @@ const registerElectrodeDevRules = ({
       return [
         formUrl({ host, protocol, port, ...src }),
         formUrl({ host, protocol: "http", ...target }),
-        opts
+        opts,
       ];
     })
     .concat(
@@ -162,15 +162,15 @@ const registerElectrodeDevRules = ({
           formUrl({
             ...target,
             protocol: target.protocol || "http",
-            host: target.host || "127.0.0.1"
+            host: target.host || "127.0.0.1",
           }),
-          opts
+          opts,
         ];
       })
     )
-    .filter(x => x);
+    .filter((x) => x);
 
-  appRules.forEach(x => proxy.register(...x));
+  appRules.forEach((x) => proxy.register(...x));
 
   APP_RULES = APP_RULES.concat(appRules);
 
@@ -178,14 +178,14 @@ const registerElectrodeDevRules = ({
     ssl,
     src: formUrl({ protocol, host, path: controlPaths.exit }),
     target: `http://localhost:29999/skip`,
-    onRequest: onExitRequest
+    onRequest: onExitRequest,
   });
 
   proxy.register({
     ssl,
     src: formUrl({ protocol, host, path: controlPaths.status }),
     target: `http://localhost:29999/skip`,
-    onRequest: onStatusRequest
+    onRequest: onStatusRequest,
   });
 
   proxy.register({
@@ -227,7 +227,7 @@ const registerElectrodeDevRules = ({
       }
 
       return false;
-    }
+    },
   });
 
   // mock-cdn
@@ -242,7 +242,7 @@ const registerElectrodeDevRules = ({
       onRequest(req, res) {
         cdnMock.respondAsset(req, res);
         return false;
-      }
+      },
     });
   }
 };
@@ -253,9 +253,9 @@ const startProxy = (inOptions = {}) => {
     {
       xfwd: false,
       pino: {
-        level: "warn"
+        level: "warn",
       },
-      resolvers: []
+      resolvers: [],
     },
     settings,
     inOptions
@@ -286,7 +286,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       );
 
       const urlsShow = Object.keys(proxyUrls)
-        .map(x => {
+        .map((x) => {
           return ck`<green>${proxyUrls[x]}</>`;
         })
         .join(" or ");
@@ -308,15 +308,17 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       secure: true,
       ssl: {
         port: options.httpsPort,
-        ...proxyCerts
-      }
+        ...proxyCerts,
+      },
     });
   }
 
   let proxy = redbird(proxyOptions);
 
-  const userFiles = ["archetype/config", "src", "test", "config"].map(x => `${x}/dev-proxy-rules`);
-  const userDevProxyFile = userFiles.find(f => optionalRequire.resolve(Path.resolve(f)));
+  const userFiles = ["archetype/config", "src", "test", "config"].map(
+    (x) => `${x}/dev-proxy-rules`
+  );
+  const userDevProxyFile = userFiles.find((f) => optionalRequire.resolve(Path.resolve(f)));
 
   const userDevProxy = userDevProxyFile && require(Path.resolve(userDevProxyFile));
 
@@ -341,7 +343,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
         protocol,
         actualHost: req.headers.host.split(":")[0],
         expectedHost: host,
-        port
+        port,
       })
     );
     res.end();
@@ -360,7 +362,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       port: options.httpPort,
       appPort: options.appPort,
       webpackDevPort: options.webpackDevPort,
-      restart
+      restart,
     } as any);
   }
 
