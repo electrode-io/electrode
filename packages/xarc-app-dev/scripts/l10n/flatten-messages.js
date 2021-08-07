@@ -70,4 +70,3 @@ module.exports = flattenMessagesL10n;
 if (isMain) {
   flattenMessagesL10n();
 }
-//# fynSourceMap=false

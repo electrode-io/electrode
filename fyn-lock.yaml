@@ -2487,12 +2487,12 @@ function-bind:
   $: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
   _: 'https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz'
 fyn:
- _latest: 0.4.33
+ _latest: 0.4.34
  _:
-  ^0.4.33: 0.4.33
- 0.4.33:
-  $: sha512-4P1379bycT8XmdozgTTEbVJPECGWzNSfPZlKGYbPMX+rMotX2i5yQ0b95JGi85i/SNXe/S/9MUW2/Bkug5NoeQ==
-  _: 'https://registry.npmjs.org/fyn/-/fyn-0.4.33.tgz'
+  ^0.4.33: 0.4.34
+ 0.4.34:
+  $: sha512-vQyA2BGan2yyqj9lzIWuAU09YANJpfzLfrQY3Q7I7yIM2euEYkpq4l7le5jvCQxWeiuRsb6LKMBA/Xh8uKj4+g==
+  _: 'https://registry.npmjs.org/fyn/-/fyn-0.4.34.tgz'
 fynpo:
  _latest: 0.4.2
  _:

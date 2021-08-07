@@ -18,4 +18,3 @@ function invoke() {
 }
 
 invoke();
-//# fynSourceMap=false

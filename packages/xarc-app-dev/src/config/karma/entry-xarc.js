@@ -72,4 +72,3 @@ testsReq.keys().map(testsReq);
 if (!window.__karma__) {
   window.mocha.run();
 }
-//# fynSourceMap=false

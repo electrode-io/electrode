@@ -38,5 +38,10 @@
       }
     }
   },
-  "fynpo": true
+  "fynpo": true,
+  "fyn": {
+    "options": {
+      "sourceMaps": false
+    }
+  }
 }

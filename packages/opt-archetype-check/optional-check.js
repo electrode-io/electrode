@@ -122,9 +122,9 @@ function optionalArchetypeCheck() {
 
   if (optParams.onlyOneOf) {
     // first, user's package.json cannot have multiple packages from onlyOneOf list
-    ["dependencies", "devDependencies", "optionalDependencies"].forEach(x => {
+    ["dependencies", "devDependencies", "optionalDependencies"].forEach((x) => {
       if (appPkg[x]) {
-        foundOOO = foundOOO.concat(optParams.onlyOneOf.filter(n => appPkg[x].hasOwnProperty(n)));
+        foundOOO = foundOOO.concat(optParams.onlyOneOf.filter((n) => appPkg[x].hasOwnProperty(n)));
       }
     });
 
@@ -154,7 +154,7 @@ it excludes this package ${myName} - skip installing`
   // check if app's package.json has the package in its dependencies or optionalDependencies
   //
   const appDep = ["dependencies", "devDependencies", "optionalDependencies"].find(
-    x => appPkg[x] && appPkg[x].hasOwnProperty(myName)
+    (x) => appPkg[x] && appPkg[x].hasOwnProperty(myName)
   );
 
   if (appDep) {
@@ -221,4 +221,3 @@ if (require.main === module) {
 }
 
 module.exports.isSameMajorVersion = isSameMajorVersion;
-//# fynSourceMap=false

@@ -37,4 +37,3 @@ module.exports = mergeIsomorphicAssets;
 if (isMain) {
   mergeIsomorphicAssets();
 }
-//# fynSourceMap=false

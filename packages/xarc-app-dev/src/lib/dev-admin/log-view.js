@@ -580,4 +580,3 @@ window.addEventListener("keypress", (event) => {
 lastEntryId = parseEntryId(hashVal.get("entryId") || "0");
 updateLevelCheckboxes();
 // setTimeout(displayLogs, 10);
-//# fynSourceMap=false

@@ -53,4 +53,3 @@ if (isMain) {
 }
 
 module.exports = mapIsomorphicCdn;
-//# fynSourceMap=false

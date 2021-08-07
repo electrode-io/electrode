@@ -87,4 +87,3 @@ module.exports = function(path, options) {
 
   throw new Error("jest.node-resolver failed path resolve");
 };
-//# fynSourceMap=false
