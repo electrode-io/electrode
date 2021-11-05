@@ -194,13 +194,13 @@ export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitP
 
       const addScriptNonce = (text: string) => {
         return !scriptNonceAttr
-          ? text
+          ? text && text.replace(/{{SCRIPT_NONCE}}/g, "")
           : text && text.replace(/{{SCRIPT_NONCE}}/g, context.user.scriptNonceAttr);
       };
 
       const addStyleNonce = (text: string) => {
         return !styleNonceAttr
-          ? text
+          ? text && text.replace(/{{STYLE_NONCE}}/g, "")
           : text && text.replace(/{{STYLE_NONCE}}/g, context.user.styleNonceAttr);
       };
 

@@ -91,8 +91,12 @@ export function generateNonce(
   if (nonce) {
     if (nonce[tag] === false) {
       return { attr: "" };
+    } else if (nonce.tokens || nonce.generator) {
+      nonceToken = nonce.tokens[tag] || nonce.tokens.all || nonce.generator(tag);
+    } else {
+      nonceToken = nonceGenerator(tag);
+      nonce = { tokens: { all: nonceToken, [tag]: nonceToken } };
     }
-    nonceToken = nonce.tokens[tag] || nonce.tokens.all || nonce.generator(tag);
   } else {
     nonceToken = nonceGenerator(tag);
     nonce = { tokens: { all: nonceToken, [tag]: nonceToken } };
