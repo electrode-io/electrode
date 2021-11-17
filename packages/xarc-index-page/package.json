@@ -87,7 +87,7 @@
     "check-coverage": true,
     "statements": 29.59,
     "branches": 8.33,
-    "functions": 12.2,
+    "functions": 12.1,
     "lines": 30,
     "cache": false
   },
