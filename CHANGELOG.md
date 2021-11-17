@@ -1,3 +1,120 @@
+# 11/17/2021
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@10.0.12` `(10.0.10 => 10.0.12)`
+- `@xarc/app-dev@10.0.12` `(10.0.11 => 10.0.12)`
+- `@xarc/create-app@6.1.2` `(6.1.1 => 6.1.2)`
+- `@xarc/index-page@1.0.10` `(1.0.9 => 1.0.10)`
+- `@xarc/jsx-renderer@1.0.10` `(1.0.9 => 1.0.10)`
+- `@xarc/react-query@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/render-context@1.0.7` `(1.0.6 => 1.0.7)`
+- `@xarc/subapp@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/webpack@11.0.9` `(11.0.8 => 11.0.9)`
+- `electrode-archetype-webpack-dll@2.0.3` `(2.0.2 => 2.0.3)`
+- `electrode-archetype-webpack-dll-dev@2.0.3` `(2.0.2 => 2.0.3)`
+- `electrode-redux-router-engine@5.0.1` `(5.0.0 => 5.0.1)`
+- `subapp-react@0.0.43` `(0.0.42 => 0.0.43)`
+- `subapp-redux@1.0.51` `(1.0.50 => 1.0.51)`
+- `subapp-server@1.3.16` `(1.3.15 => 1.3.16)`
+- `subapp-util@1.1.3` `(1.1.2 => 1.1.3)`
+- `subapp-web@1.0.51` `(1.0.50 => 1.0.51)`
+
+### Lerna Updated
+
+- `@xarc/react@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-recoil@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/react-redux@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/react-redux-observable@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/react-redux-saga@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/react-router@0.3.2` `(0.3.1 => 0.3.2)`
+- `@xarc/tag-renderer@1.0.9` `(1.0.8 => 1.0.9)`
+- `subapp-pbundle@0.0.45` `(0.0.44 => 0.0.45)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/xarc-app-dev`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+  - update setup-dev message ([#1858](https://github.com/electrode-io/electrode/pull/1858)) [commit](http://github.com/electrode-io/electrode/commit/9a5e8c1c0197f373d9fb27c7a36190d20ee69386)
+
+- `packages/xarc-create-app`
+
+  - chore: add a display component to demo app [commit](http://github.com/electrode-io/electrode/commit/b7cda75a25acd7ca81d5ec2a013e8a6eb65ab711)
+
+- `packages/xarc-index-page`
+
+  - lock fyn to older version ([#1863](https://github.com/electrode-io/electrode/pull/1863)) [commit](http://github.com/electrode-io/electrode/commit/9b37640c5aa487ca7ec3bef1dc34bbd7d95fcf56)
+
+- `packages/xarc-jsx-renderer`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/xarc-react-query`
+
+  - lock fyn to older version ([#1863](https://github.com/electrode-io/electrode/pull/1863)) [commit](http://github.com/electrode-io/electrode/commit/9b37640c5aa487ca7ec3bef1dc34bbd7d95fcf56)
+
+- `packages/xarc-render-context`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+  - chore: fix types [commit](http://github.com/electrode-io/electrode/commit/258190821dc945f3b6407ee33d29657715f62684)
+
+- `packages/xarc-subapp`
+
+  - [fix] disable nonce for script,style or both ([#1861](https://github.com/electrode-io/electrode/pull/1861)) [commit](http://github.com/electrode-io/electrode/commit/0cd7eb7b9d6af82a4921d3b4cc395e0f4ccc8612)
+
+- `packages/xarc-webpack`
+
+  - [fix]lock webpack-cli version to 4.8.0 to avoid breaking changes in 4.9.0 ([#1862](https://github.com/electrode-io/electrode/pull/1862)) [commit](http://github.com/electrode-io/electrode/commit/803c5479edd2cedb6da3dcf5db651ccdc821beaf)
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/electrode-archetype-webpack-dll`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/electrode-archetype-webpack-dll-dev`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/electrode-redux-router-engine`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/subapp-react`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/subapp-redux`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/subapp-server`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+  - fix: subappV1 handle each route with its own template instance ([#1857](https://github.com/electrode-io/electrode/pull/1857)) [commit](http://github.com/electrode-io/electrode/commit/7da59d87e2eb39532cbd3e02b74637136266d459)
+
+- `packages/subapp-util`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `packages/subapp-web`
+
+  - chore: dep optional-require@1.1.6 [commit](http://github.com/electrode-io/electrode/commit/e8cf15da07292657d6bc143253e652b37e1568dc)
+
+- `.github`
+
+  - lock fyn to older version ([#1863](https://github.com/electrode-io/electrode/pull/1863)) [commit](http://github.com/electrode-io/electrode/commit/9b37640c5aa487ca7ec3bef1dc34bbd7d95fcf56)
+
+- `MISC`
+
+  - chore: update fynpo [commit](http://github.com/electrode-io/electrode/commit/22959ef060adcbd0e9ed79a0a27c559259a171a3)
+
 # 7/12/2021
 
 ## Packages
