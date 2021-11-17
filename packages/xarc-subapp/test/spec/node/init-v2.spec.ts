@@ -100,8 +100,8 @@ describe("Test init-v2", () => {
       }
     };
     const result = initializer.process(context);
-    expect(result).contains(`<script{{SCRIPT_NONCE}}`);
-    expect(result).contains(`<link{{STYLE_NONCE}}`);
+    expect(result).to.not.contain(`<script{{SCRIPT_NONCE}}`);
+    expect(result).to.not.contain(`<link{{STYLE_NONCE}}`);
   });
 
   it("test initSubApp without CDN Map", () => {

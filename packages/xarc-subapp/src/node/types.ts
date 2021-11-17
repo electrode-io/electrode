@@ -11,7 +11,7 @@ export type NonceInfo = {
   style?: boolean;
 
   /** nonce tokens */
-  tokens: {
+  tokens?: {
     all?: string;
     script?: string;
     style?: string;
