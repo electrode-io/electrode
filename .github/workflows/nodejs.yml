@@ -23,6 +23,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i -g @xarc/run-cli xclap-cli fyn
+      - run: npm i -g @xarc/run-cli xclap-cli fyn@0.4.37
       - run: fyn --pg none install
       - run: npm test

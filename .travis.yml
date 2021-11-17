@@ -11,4 +11,4 @@ notifications:
 install: fyn --pg none install
 script: npm test
 before_install:
-  - npm install -g @xarc/run-cli xclap-cli fyn
+  - npm install -g @xarc/run-cli xclap-cli fyn@0.4.37
