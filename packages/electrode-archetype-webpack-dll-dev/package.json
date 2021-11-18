@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-webpack-dll-dev",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Electrode Archetype to build webpack DLLs",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "electrode-archetype-njs-module-dev": "^3.0.3"
   },
   "peerDependencies": {
-    "electrode-archetype-webpack-dll": "1.1.0"
+    "electrode-archetype-webpack-dll": "2.0.3"
   },
   "nyc": {
     "all": true,
