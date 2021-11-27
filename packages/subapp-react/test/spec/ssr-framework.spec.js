@@ -2,6 +2,7 @@
 
 const url = require("url");
 const React = require("react"); // eslint-disable-line
+const ReactDOMServer = require("react-dom/server");
 const lib = require("../../lib");
 const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
@@ -188,7 +189,6 @@ describe("SSR React framework", function () {
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
   });
-
 
   it("should render Component from subapp with initial props from server's prepare while using attachInitialState", async () => {
     const framework = new lib.FrameworkLib({
@@ -421,5 +421,30 @@ describe("SSR React framework", function () {
     });
     const res = await framework.handleSSR();
     expect(res).contains("Hello test path<");
+  });
+
+  it("should render subapp with custom renderer e.g. css in js solution", async () => {
+    const Component = () => {
+      return <div>Hello test path</div>;
+    };
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component
+      },
+      subAppServer: {
+        renderer: (element, options) => {
+          return "<h1>Rendered via Custom renderer</h1>";
+        }
+      },
+      options: { serverSideRendering: true },
+      context: {
+        user: {
+          request: { url: url.parse("http://localhost/test") }
+        }
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Rendered via Custom renderer");
   });
 });
