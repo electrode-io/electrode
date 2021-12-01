@@ -59,6 +59,12 @@ class FrameworkLib {
   }
 
   renderTo(element, options) {
+    const { subAppServer } = this.ref;
+
+    if (typeof subAppServer.renderer === "function") {
+      return subAppServer.renderer(element, options);
+    }
+
     if (options.useStream) {
       assert(!options.suspenseSsr, "useStream and suspense SSR together are not supported");
       if (options.hydrateServerData) {
