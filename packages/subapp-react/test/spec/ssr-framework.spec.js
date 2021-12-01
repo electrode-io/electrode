@@ -2,7 +2,6 @@
 
 const url = require("url");
 const React = require("react"); // eslint-disable-line
-const ReactDOMServer = require("react-dom/server");
 const lib = require("../../lib");
 const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
@@ -433,7 +432,7 @@ describe("SSR React framework", function () {
         Component
       },
       subAppServer: {
-        renderer: (element, options) => {
+        renderer: () => {
           return "<h1>Rendered via Custom renderer</h1>";
         }
       },
