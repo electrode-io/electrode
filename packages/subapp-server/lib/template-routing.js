@@ -125,7 +125,7 @@ function makeRouteTemplateSelector(routeOptions) {
 
     assert(!defaultSelection.htmlFile, `subapp-server doesn't support htmlFile templates`);
 
-    const asyncTemplate = initializeTemplate(defaultSelection, routeOptions);
+    const asyncTemplate = initializeTemplate(defaultSelection, routeOptions, options.request);
     return asyncTemplate.render(options);
   };
 }
