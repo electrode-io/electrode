@@ -1,6 +1,6 @@
 {
   "name": "subapp-react",
-  "version": "0.0.43",
+  "version": "0.1.0",
   "description": "Electrode subapp support for React/Redux/React Router",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
