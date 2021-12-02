@@ -1,3 +1,21 @@
+# 12/1/2021
+
+## Packages
+
+- `subapp-react@0.1.0` `(0.0.43 => 0.1.0)`
+- `subapp-server@1.3.17` `(1.3.16 => 1.3.17)`
+
+## Commits
+
+- `packages/subapp-react`
+
+  - [minor][feat] add custom renderer support for SSR. \n ([#1865](https://github.com/electrode-io/electrode/pull/1865)) [commit](http://github.com/electrode-io/electrode/commit/31dcc0dd59867e0196575ba8edb3a8a812a70691)
+  - fix: tests in subapp-react package ([#1866](https://github.com/electrode-io/electrode/pull/1866)) [commit](http://github.com/electrode-io/electrode/commit/471baba682415db48c18b8a72ccd3901eea1132a)
+
+- `packages/subapp-server`
+
+  - fix: template routing for hapi ([#1864](https://github.com/electrode-io/electrode/pull/1864)) [commit](http://github.com/electrode-io/electrode/commit/fe6bf39c8a38a51637a56d54238854cc00c65342)
+
 # 11/17/2021
 
 ## Packages
