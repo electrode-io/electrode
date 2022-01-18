@@ -110,9 +110,10 @@ module.exports = function() {
     const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 
     return {
-      context: Path.resolve(xarcCwd, "src"),
-      modules: true,
-      localIdentName
+      modules: {
+        localIdentName,
+        localIdentContext: Path.resolve(xarcCwd, "src")
+      }
     };
   };
 
@@ -120,7 +121,7 @@ module.exports = function() {
     return [
       isModule
         ? { loader: cssLoader, options: getCSSModuleOptions() }
-        : { loader: cssLoader, options: { minimize: true, modules: false } },
+        : { loader: cssLoader, options: { modules: false, esModule: false } },
       getPostCssQuery()
     ].filter(x => x);
   };

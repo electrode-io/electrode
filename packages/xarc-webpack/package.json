@@ -39,7 +39,7 @@
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",
     "chalker": "^1.2.0",
-    "css-loader": "^1.0.1",
+    "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^1.2.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-node-resolver": "^2.0.2",
