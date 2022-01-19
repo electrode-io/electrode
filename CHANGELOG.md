@@ -1,3 +1,22 @@
+# 1/19/2022
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/webpack@11.1.0` `(11.0.9 => 11.1.0)`
+
+### Lerna Updated
+
+- `@xarc/app-dev@10.1.0` `(10.0.12 => 10.1.0)`
+- `@xarc/app-dev@10.1.0` `(10.0.12 => 10.1.0)`
+
+## Commits
+
+- `packages/xarc-webpack`
+
+  - [minor]: Update css-loader to v6 for webpack 5 compatbility. Current v1 is not compatible ([#1867](https://github.com/electrode-io/electrode/pull/1867)) [commit](http://github.com/electrode-io/electrode/commit/a812765a44696883b42e671421ff6935d2f3299f)
+
 # 12/1/2021
 
 ## Packages
