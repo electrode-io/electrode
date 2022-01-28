@@ -1,7 +1,7 @@
 {
   "name": "poc-subapp-redux",
   "version": "0.0.1",
-  "description": "SubApp POC",
+  "description": "SubApp Redux POC",
   "homepage": "http://test",
   "author": {
     "name": "Joel Chen",
@@ -49,6 +49,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "subapp-react": "^0.0.21",
     "subapp-redux": "^1.0.30",
     "subapp-server": "^1.2.4",

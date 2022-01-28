@@ -7,7 +7,7 @@ module.exports = {
   prepare: async ({ request, context }) => {
     return Promise.delay(50 + Math.random() * 1000)
       .return({
-        number: { value: 999 },
+        number: 100,
         items: [
           {
             heading: "BLACK FRIDAY DEAL",

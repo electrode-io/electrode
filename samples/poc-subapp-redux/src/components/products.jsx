@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
-// temp
-import { render } from "react-dom";
+import {decNumber, incNumber} from "../02.main-body/reducers";
 
 const DealItem = props => {
   const { item } = props;
@@ -35,20 +34,8 @@ const DealRow = props => {
   return <div className="row">{elements}</div>;
 };
 
-const incNumber = () => {
-  return {
-    type: "INC_NUMBER"
-  };
-};
-
-const decNumber = () => {
-  return {
-    type: "DEC_NUMBER"
-  };
-};
-
 const Products = props => {
-  const { items, value, dispatch } = props;
+  const { items, dispatch } = props;
   const rows = [];
   for (let i = 0; i < items.length; i += 3) {
     rows.push(<DealRow key={i} items={items} index={i} />);
@@ -59,7 +46,7 @@ const Products = props => {
       <p>Products</p>
       <div>
         Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        &nbsp;{props.value}&nbsp;
+        &nbsp;{props.number}&nbsp;
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
       {rows}
@@ -73,7 +60,7 @@ Products.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { items: state.items, value: state.number.value };
+  return { items: state.items, number: state.number };
 };
 
 const ReduxProducts = connect(

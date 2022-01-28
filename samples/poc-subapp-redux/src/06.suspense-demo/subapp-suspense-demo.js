@@ -33,7 +33,6 @@ class SuspenseDemo extends React.Component {
         {({ isSsr, ssr, subApp }) => {
           return (
             <div>
-              <div>SubApp name: {subApp ? subApp.name : "Not Available from context"}</div>
               <div>
                 IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
               </div>
