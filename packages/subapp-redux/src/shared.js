@@ -95,11 +95,11 @@ function createSharedStore(initialState, info, storeContainer) {
       replaceReducer(info.reduxReducers, info, storeContainer);
     } else {
       reducerContainer = newReducerContainer();
-      if (info.enhancer && info.enhancer instanceof Function) {
+      if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
         store = createStore(
           combineSharedReducers(info, reducerContainer, info.reduxReducers),
           initialState,
-          info.enhancer()
+          info.reduxEnhancer()
         );
       } else {
         store = createStore(
@@ -145,8 +145,8 @@ function createSharedStore(initialState, info, storeContainer) {
     reducer = x => x;
   }
 
-  if (info.enhancer && info.enhancer instanceof Function) {
-    return createStore(reducer, initialState, info.enhancer());
+  if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
+    return createStore(reducer, initialState, info.reduxEnhancer());
   }
   return createStore(reducer, initialState);
 }

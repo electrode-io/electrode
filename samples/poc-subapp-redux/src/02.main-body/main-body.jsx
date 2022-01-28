@@ -61,7 +61,7 @@ export default reduxLoadSubApp({
   name: "MainBody",
   Component,
   useReactRouter: true,
-  enhancer: () => applyMiddleware(logger),
+  reduxEnhancer: () => applyMiddleware(logger),
   StartComponent: props => {
     return (
       <Router history={getBrowserHistory()}>
