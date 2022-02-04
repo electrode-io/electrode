@@ -1,0 +1,80 @@
+{
+  "name": "poc-subapp-redux",
+  "version": "0.0.1",
+  "description": "SubApp Redux POC",
+  "homepage": "http://test",
+  "author": {
+    "name": "Joel Chen",
+    "email": "joel123@gmail.com",
+    "url": "https://github.com/jchip"
+  },
+  "contributors": [],
+  "files": [
+    "server",
+    "src",
+    "lib",
+    "dist"
+  ],
+  "main": "lib/server/index.js",
+  "keywords": [
+    "test",
+    "electrode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "test/test-app"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "scripts": {
+    "dev": "clap -q dev",
+    "test": "clap check",
+    "build": "clap build"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@module-federation/concat-runtime": "^0.0.1",
+    "@xarc/app": "^8.1.6",
+    "@xarc/fastify-server": "^2.0.0",
+    "electrode-confippet": "^1.5.0",
+    "history": "^4.10.1",
+    "html-webpack-plugin": "^5.3.1",
+    "react": "^16.13.1",
+    "react-async-ssr": "^0.7.2",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "subapp-react": "^0.0.21",
+    "subapp-redux": "^1.0.30",
+    "subapp-server": "^1.2.4",
+    "subapp-web": "^1.0.47"
+  },
+  "devDependencies": {
+    "@xarc/app-dev": "^8.1.6",
+    "@xarc/opt-eslint": "^1.0.0"
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/app": "../../packages/xarc-app",
+      "subapp-react": "../../packages/subapp-react",
+      "subapp-redux": "../../packages/subapp-redux",
+      "subapp-server": "../../packages/subapp-server",
+      "subapp-web": "../../packages/subapp-web"
+    },
+    "devDependencies": {
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
+  }
+}

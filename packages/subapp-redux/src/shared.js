@@ -95,10 +95,18 @@ function createSharedStore(initialState, info, storeContainer) {
       replaceReducer(info.reduxReducers, info, storeContainer);
     } else {
       reducerContainer = newReducerContainer();
-      store = createStore(
-        combineSharedReducers(info, reducerContainer, info.reduxReducers),
-        initialState
-      );
+      if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
+        store = createStore(
+          combineSharedReducers(info, reducerContainer, info.reduxReducers),
+          initialState,
+          info.reduxEnhancer()
+        );
+      } else {
+        store = createStore(
+          combineSharedReducers(info, reducerContainer, info.reduxReducers),
+          initialState
+        );
+      }
       store[originalReplaceReducerSym] = store.replaceReducer;
       //
       // TODO: better handling of a replaceReducer that takes extra params
@@ -135,6 +143,10 @@ function createSharedStore(initialState, info, storeContainer) {
     reducer = combineReducers(info.reduxReducers);
   } else {
     reducer = x => x;
+  }
+
+  if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
+    return createStore(reducer, initialState, info.reduxEnhancer());
   }
   return createStore(reducer, initialState);
 }
