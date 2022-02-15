@@ -44,7 +44,7 @@
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-node-resolver": "^2.0.2",
     "file-loader": "^6.2.0",
-    "filter-scan-dir": "^1.0.9",
+    "filter-scan-dir": "1.1.1",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^1.3.9",
     "mkdirp": "^1.0.3",
