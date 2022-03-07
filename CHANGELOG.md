@@ -1,3 +1,64 @@
+# 3/7/2022
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@10.0.13` `(10.0.12 => 10.0.13)`
+- `@xarc/app-dev@10.1.1` `(10.1.0 => 10.1.1)`
+- `@xarc/jsx-renderer@1.0.11` `(1.0.10 => 1.0.11)`
+- `@xarc/render-context@1.0.8` `(1.0.7 => 1.0.8)`
+- `@xarc/webpack@11.1.1` `(11.1.0 => 11.1.1)`
+- `subapp-redux@1.0.52` `(1.0.51 => 1.0.52)`
+- `subapp-server@1.3.18` `(1.3.17 => 1.3.18)`
+- `subapp-util@1.1.4` `(1.1.3 => 1.1.4)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.11` `(1.0.10 => 1.0.11)`
+- `@xarc/react@0.3.4` `(0.3.3 => 0.3.4)`
+- `@xarc/react-query@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-recoil@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-redux@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-redux-observable@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-redux-saga@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/react-router@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/subapp@0.3.3` `(0.3.2 => 0.3.3)`
+- `@xarc/tag-renderer@1.0.10` `(1.0.9 => 1.0.10)`
+- `subapp-pbundle@0.0.46` `(0.0.45 => 0.0.46)`
+- `subapp-react@0.1.1` `(0.1.0 => 0.1.1)`
+- `subapp-web@1.0.52` `(1.0.51 => 1.0.52)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - temporary fix for filter-scan-dir ([#1871](https://github.com/electrode-io/electrode/pull/1871)) [commit](http://github.com/electrode-io/electrode/commit/635599087e16d67124f8b252017caa313ff14574)
+
+- `packages/xarc-jsx-renderer`
+
+  - Fix xaa version to avoid breaking change ([#1873](https://github.com/electrode-io/electrode/pull/1873)) [commit](http://github.com/electrode-io/electrode/commit/f8a456efb8ee16bd167a8efb9824b07d0cea00a0)
+
+- `packages/xarc-render-context`
+
+  - Fix xaa version to avoid breaking change ([#1873](https://github.com/electrode-io/electrode/pull/1873)) [commit](http://github.com/electrode-io/electrode/commit/f8a456efb8ee16bd167a8efb9824b07d0cea00a0)
+
+- `packages/xarc-webpack`
+
+  - Fix: Lock filter-scan-dir version to avoid breaking changes and fix tests ([#1872](https://github.com/electrode-io/electrode/pull/1872)) [commit](http://github.com/electrode-io/electrode/commit/0823751d3e4511c99a5224690aa14bb8a6245369)
+
+- `packages/subapp-redux`
+
+  - Enable redux enhancer ([#1870](https://github.com/electrode-io/electrode/pull/1870)) [commit](http://github.com/electrode-io/electrode/commit/6a4da64f6568cf598ce43917cd08d0c7663c5ad0)
+
+- `packages/subapp-server`
+
+  - Fix: Lock filter-scan-dir version to avoid breaking changes and fix tests ([#1872](https://github.com/electrode-io/electrode/pull/1872)) [commit](http://github.com/electrode-io/electrode/commit/0823751d3e4511c99a5224690aa14bb8a6245369)
+
+- `packages/subapp-util`
+
+  - Fix: Lock filter-scan-dir version to avoid breaking changes and fix tests ([#1872](https://github.com/electrode-io/electrode/pull/1872)) [commit](http://github.com/electrode-io/electrode/commit/0823751d3e4511c99a5224690aa14bb8a6245369)
+
 # 1/19/2022
 
 ## Packages
