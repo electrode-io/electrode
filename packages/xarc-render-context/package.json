@@ -61,7 +61,7 @@
     "munchy": "^1.0.9",
     "optional-require": "^1.1.6",
     "require-at": "^1.0.6",
-    "xaa": "^1.5.0"
+    "xaa": "1.7.1"
   },
   "nyc": {
     "extends": [
