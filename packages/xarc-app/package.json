@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "10.0.12",
+  "version": "10.0.13",
   "description": "Electrode X application runtime support",
   "main": "dist/index.js",
   "homepage": "http://www.electrode.io",
@@ -35,7 +35,7 @@
     "@babel/runtime": "^7.12.5",
     "isomorphic-loader": "^4.5.0",
     "optional-require": "^1.1.6",
-    "subapp-util": "^1.1.3",
+    "subapp-util": "^1.1.4",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
