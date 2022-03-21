@@ -1,5 +1,5 @@
 import React from "react";
-import { render, hydrate } from "react-dom";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { loadSubApp } from "subapp-web";
 import { setStoreContainer, getReduxCreateStore } from "./shared";
@@ -17,18 +17,16 @@ export function reduxRenderStart(options) {
   const { Component } = options;
 
   if (options.serverSideRendering) {
-    hydrate(
+    hydrateRoot(options.element,
       <Provider store={store}>
         <Component />
-      </Provider>,
-      options.element
+      </Provider>
     );
   } else {
-    render(
+    createRoot(options.element).render(
       <Provider store={store}>
         <Component />
-      </Provider>,
-      options.element
+      </Provider>
     );
   }
 
