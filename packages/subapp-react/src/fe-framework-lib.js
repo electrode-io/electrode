@@ -15,7 +15,7 @@ class FrameworkLib {
       if (options.serverSideRendering) {
           hydrateRoot(element, <Component {...props} />);
       } else {
-         // TODO: Broken. createRoot from react@18.0.0-rc.2 does not render element.innerHtml as expected.
+         // TODO: Broken. createRoot from react@18.0.0 does not render element.innerHtml as expected.
          // Still work in this area. See https://github.com/facebook/react/pull/24110
         createRoot(element).render(<Component {...props} />);
       }
