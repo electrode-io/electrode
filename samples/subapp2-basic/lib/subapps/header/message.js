@@ -1,0 +1,7 @@
+"use strict";
+
+exports.__esModule = true;
+exports.message = void 0;
+const message = "Welcome to xarc React Application";
+exports.message = message;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtZXNzYWdlIl0sInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL3N1YmFwcHMvaGVhZGVyL21lc3NhZ2UudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IG1lc3NhZ2UgPSBcIldlbGNvbWUgdG8geGFyYyBSZWFjdCBBcHBsaWNhdGlvblwiO1xuIl0sIm1hcHBpbmdzIjoiOzs7O0FBQU8sTUFBTUEsT0FBTyxHQUFHLG1DQUFoQiJ9
