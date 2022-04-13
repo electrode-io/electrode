@@ -1,0 +1,26 @@
+"use strict";
+
+exports.__esModule = true;
+exports.reduxReducers = void 0;
+
+const number = (store = {
+  value: 0
+}, action) => {
+  if (action.type === "INC_NUMBER") {
+    return {
+      value: store.value + 1
+    };
+  } else if (action.type === "DEC_NUMBER") {
+    return {
+      value: store.value - 1
+    };
+  }
+
+  return store;
+};
+
+const reduxReducers = {
+  number
+};
+exports.reduxReducers = reduxReducers;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJudW1iZXIiLCJzdG9yZSIsInZhbHVlIiwiYWN0aW9uIiwidHlwZSIsInJlZHV4UmVkdWNlcnMiXSwic291cmNlcyI6WyIuLi8uLi9zcmMvZGVtbzIvcmVkdWNlcnMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbnVtYmVyID0gKHN0b3JlID0geyB2YWx1ZTogMCB9LCBhY3Rpb24pID0+IHtcbiAgaWYgKGFjdGlvbi50eXBlID09PSBcIklOQ19OVU1CRVJcIikge1xuICAgIHJldHVybiB7XG4gICAgICB2YWx1ZTogc3RvcmUudmFsdWUgKyAxLFxuICAgIH07XG4gIH0gZWxzZSBpZiAoYWN0aW9uLnR5cGUgPT09IFwiREVDX05VTUJFUlwiKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIHZhbHVlOiBzdG9yZS52YWx1ZSAtIDEsXG4gICAgfTtcbiAgfVxuXG4gIHJldHVybiBzdG9yZTtcbn07XG5cbmV4cG9ydCBjb25zdCByZWR1eFJlZHVjZXJzID0ge1xuICBudW1iZXIsXG59O1xuIl0sIm1hcHBpbmdzIjoiOzs7OztBQUFBLE1BQU1BLE1BQU0sR0FBRyxDQUFDQyxLQUFLLEdBQUc7RUFBRUMsS0FBSyxFQUFFO0FBQVQsQ0FBVCxFQUF1QkMsTUFBdkIsS0FBa0M7RUFDL0MsSUFBSUEsTUFBTSxDQUFDQyxJQUFQLEtBQWdCLFlBQXBCLEVBQWtDO0lBQ2hDLE9BQU87TUFDTEYsS0FBSyxFQUFFRCxLQUFLLENBQUNDLEtBQU4sR0FBYztJQURoQixDQUFQO0VBR0QsQ0FKRCxNQUlPLElBQUlDLE1BQU0sQ0FBQ0MsSUFBUCxLQUFnQixZQUFwQixFQUFrQztJQUN2QyxPQUFPO01BQ0xGLEtBQUssRUFBRUQsS0FBSyxDQUFDQyxLQUFOLEdBQWM7SUFEaEIsQ0FBUDtFQUdEOztFQUVELE9BQU9ELEtBQVA7QUFDRCxDQVpEOztBQWNPLE1BQU1JLGFBQWEsR0FBRztFQUMzQkw7QUFEMkIsQ0FBdEIifQ==
