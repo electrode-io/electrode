@@ -1,5 +1,5 @@
 "use strict";
-
+const ReactDOMServer = require("react-dom/server");
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
@@ -8,8 +8,30 @@ const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
+const { Stream } = require("stream");
 
 describe("SSR React framework", function () {
+  function getTestWritable() {
+    const writable = new Stream.PassThrough();
+    writable.setEncoding("utf8");
+    const output = { result: "", error: undefined };
+    writable.on("data", chunk => {
+      output.result += chunk;
+    });
+    writable.on("error", error => {
+      output.error = error;
+    });
+    const completed = new Promise(resolve => {
+      writable.on("finish", () => {
+        resolve();
+      });
+      writable.on("error", () => {
+        resolve();
+      });
+    });
+    return { writable, completed, output };
+  }
+
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
     expect(lib.AppContext).to.be.ok;
@@ -92,7 +114,9 @@ describe("SSR React framework", function () {
     expect(res).contains("Hello foo bar");
   });
 
-  it("should render Component with stream if enabled", () => {
+  it("should render Component with stream if enabled", async () => {
+    const { writable, output, completed } = getTestWritable();
+
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -106,16 +130,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    return asyncVerify(
-      () => framework.handleSSR(),
-      (stream, next) => {
-        let res = "";
-        stream.on("data", data => (res += data.toString()));
-        stream.on("end", () => next(null, res));
-        stream.on("error", next);
-      },
-      res => expect(res).contains("Hello foo bar")
-    );
+    const { pipe } = await framework.handleSSR();
+    pipe(writable);
+    await completed;
+    expect(output.result).contains("Hello foo bar");
   });
 
   it("should hydrate render Component with stream if enabled", () => {
