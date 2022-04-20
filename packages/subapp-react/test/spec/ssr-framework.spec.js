@@ -113,11 +113,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
-<<<<<<< HEAD
-=======
-    const { writable, output, completed } = getTestWritable();
-
->>>>>>> 7fd4892b (test(CEECORE-2980): refactor test to work with renderToPipeableNodeStream)
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -131,17 +126,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    expect(output.result).contains("Hello foo bar");
->>>>>>> 7fd4892b (test(CEECORE-2980): refactor test to work with renderToPipeableNodeStream)
   });
 
   it("should hydrate render Component with stream if enabled", async () => {
