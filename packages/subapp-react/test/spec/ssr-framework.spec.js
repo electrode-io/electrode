@@ -1,8 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-=======
-const ReactDOMServer = require("react-dom/server");
->>>>>>> 7fd4892b (test(CEECORE-2980): refactor test to work with renderToPipeableNodeStream)
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
@@ -10,30 +6,8 @@ const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 const Redux = require("redux");
 const { connect } = require("react-redux");
-const { Stream } = require("stream");
 
 describe("SSR React framework", function () {
-  function getTestWritable() {
-    const writable = new Stream.PassThrough();
-    writable.setEncoding("utf8");
-    const output = { result: "", error: undefined };
-    writable.on("data", chunk => {
-      output.result += chunk;
-    });
-    writable.on("error", error => {
-      output.error = error;
-    });
-    const completed = new Promise(resolve => {
-      writable.on("finish", () => {
-        resolve();
-      });
-      writable.on("error", () => {
-        resolve();
-      });
-    });
-    return { writable, completed, output };
-  }
-
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
     expect(lib.AppContext).to.be.ok;
