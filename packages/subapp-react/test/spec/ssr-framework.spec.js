@@ -323,7 +323,7 @@ describe("SSR React framework", function () {
     expect(framework.initialStateStr).equals(`{}`);
   });
 
-  it("should hydrate render Component with suspense using react-async-ssr", async () => {
+  it("should hydrate render Component with suspense", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -349,7 +349,7 @@ describe("SSR React framework", function () {
     expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
-  it("should render Component with suspense using react-async-ssr", async () => {
+  it("should render Component with suspense", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
