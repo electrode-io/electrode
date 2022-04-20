@@ -1,11 +1,9 @@
 "use strict";
-const ReactDOMServer = require("react-dom/server");
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
 const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
-const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
 const { Stream } = require("stream");
@@ -31,6 +29,7 @@ describe("SSR React framework", function () {
     });
     return { writable, completed, output };
   }
+  const { writable, output, completed } = getTestWritable();
 
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
@@ -115,8 +114,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
-    const { writable, output, completed } = getTestWritable();
-
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -133,10 +130,11 @@ describe("SSR React framework", function () {
     const { pipe } = await framework.handleSSR();
     pipe(writable);
     await completed;
-    expect(output.result).contains("Hello foo bar");
+    // all non static render methods add <!-- --> to text props
+    expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
-  it("should hydrate render Component with stream if enabled", () => {
+  it("should hydrate render Component with stream if enabled", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -150,16 +148,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    return asyncVerify(
-      () => framework.handleSSR(),
-      (stream, next) => {
-        let res = "";
-        stream.on("data", data => (res += data.toString()));
-        stream.on("end", () => next(null, res));
-        stream.on("error", next);
-      },
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
-    );
+    const { pipe } = await framework.handleSSR();
+    pipe(writable);
+    await completed;
+    // all non static render methods add <!-- --> to text props
+    expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component from subapp with hydration info", async () => {
@@ -181,11 +174,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    // data-reactroot isn't getting created due to Context.Provider
-    // see https://github.com/facebook/react/issues/15012
-    const res = await framework.handleSSR();
-    // but the non-static renderToString adds a <!-- --> for some reason
-    expect(res).contains("Hello <!-- -->foo bar");
+    const { pipe } = await framework.handleSSR();
+    pipe(writable);
+    await completed;
+    // all non static render methods add <!-- --> to text props
+    expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component from subapp with initial props from server's prepare", async () => {
@@ -349,9 +342,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    // react-async-ssr includes data-reactroot
-    expect(res).contains(`<div data-reactroot="">Hello <!-- -->foo bar</div>`);
+    const { pipe } = await framework.handleSSR();
+    pipe(writable);
+    await completed;
+    // all non static render methods add <!-- --> to text props
+    expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component with suspense using react-async-ssr", async () => {
@@ -373,8 +368,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    const { pipe } = await framework.handleSSR();
+    pipe(writable);
+    await completed;
+    // all non static render methods add <!-- --> to text props
+    expect(output.result).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component with react context containing request", async () => {
