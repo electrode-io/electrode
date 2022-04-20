@@ -113,7 +113,10 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1d7189ed (refactor(CEECORE-2932): replace depricated render methods and unnecessary dependecies in frameworkLib)
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
