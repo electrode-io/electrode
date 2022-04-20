@@ -29,6 +29,7 @@ describe("SSR React framework", function () {
     });
     return { writable, completed, output };
   }
+  const { writable, output, completed } = getTestWritable();
 
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
