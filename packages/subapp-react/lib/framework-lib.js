@@ -6,7 +6,6 @@ const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
-const AsyncReactDOMServer = optionalRequire("react-async-ssr");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
@@ -65,29 +64,8 @@ class FrameworkLib {
       return subAppServer.renderer(element, options);
     }
 
-    if (options.useStream) {
-      assert(!options.suspenseSsr, "useStream and suspense SSR together are not supported");
-      if (options.hydrateServerData) {
-        // TODO: Deprecated in React 18 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-server-rendering-apis
-        // FIXME: use renderToPipeableStream
-        // React 18 info: It will work in 18, including the new Suspense features described below, but it will buffer the entire content until the end of the stream. In other words, it will no longer do streaming.
-        return ReactDOMServer.renderToNodeStream(element);
-      } else {
-        // TODO: Deprecated (with full Suspense support, but without streaming) in React 18.
-        // FIXME: 18 Unhandled Breaking Change: It adds trailing comment nodes to any text node. https://github.com/facebook/react/pull/23359
-        return ReactDOMServer.renderToPipeableStream(element);
-      }
-    }
-    if (options.suspenseSsr) {
-      assert(AsyncReactDOMServer, "You must install react-async-ssr for suspense SSR support");
-      if (options.hydrateServerData) {
-        return AsyncReactDOMServer.renderToStringAsync(element);
-      } else {
-        return AsyncReactDOMServer.renderToStaticMarkupAsync(element);
-      }
-    }
-    if (options.hydrateServerData) {
-      return ReactDOMServer.renderToString(element);
+    if (options.suspenseSsr || options.useStream || options.hydrateServerData) {
+      return ReactDOMServer.renderToPipeableStream(element);
     } else {
       return ReactDOMServer.renderToStaticMarkup(element);
     }
