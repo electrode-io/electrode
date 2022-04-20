@@ -91,6 +91,7 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
+    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -111,6 +112,7 @@ describe("SSR React framework", function () {
   });
 
   it("should hydrate render Component with stream if enabled", async () => {
+    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -131,6 +133,7 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component from subapp with hydration info", async () => {
+    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({
@@ -298,6 +301,7 @@ describe("SSR React framework", function () {
   });
 
   it("should hydrate render Component with suspense", async () => {
+    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -323,6 +327,7 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with suspense", async () => {
+    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
