@@ -79,8 +79,6 @@ const Template = (
         </div>
 
         <Require _id="subapp-web/lib/start" />
-
-        {/* <Require _id="subapp-web/lib/more-data" _concurrent name="MainBody" /> */}
       </body>
       <Token _id="BODY_CLOSED" />
     </html>
