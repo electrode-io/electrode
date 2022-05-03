@@ -31,14 +31,18 @@ const Template = (
           <p>Please enable JavaScript in your browser and reload the page.</p>
         </noscript>
 
-        <div style="background: cyan">
+        <h1 style="text-align: center; background: #143F6B; margin:0;color: white; padding: 20px;">
+          React v18 based SubApp Version 1
+        </h1>
+
+        <div style="background: #F55353; padding: 10px">
           <Require
             _id="subapp-web/lib/load"
             name="Header"
             _concurrent
             timestamp
             startOnLoad
-            elementId="subapp-header01"
+            elementId="subapp-header"
             serverSideRendering
             hydrateServerData={false}
             clientSideRendering={false}
@@ -46,7 +50,7 @@ const Template = (
           />
         </div>
 
-        <div style="background: green">
+        <div style="background: #FEB139; padding: 10px">
           <Require
             _id="subapp-web/lib/load"
             _concurrent
@@ -60,63 +64,19 @@ const Template = (
           />
         </div>
 
-        {/* <Require
-          _id="subapp-web/lib/load"
-          _concurrent
-          timestamp
-          elementId="subapp-bottom"
-          name="Bottom"
-          useStream
-          hydrateServerData
-          async
-          serverSideRendering
-        />
-
-        <div style="background: #e8b487; padding: 10px">
+        <div style="background: #F6F54D; padding: 10px">
           <Require
             _id="subapp-web/lib/load"
             _concurrent
             timestamp
-            elementId="subapp-extras"
-            name="Extras"
-            async
-          />
-        </div>
-
-        <div style="background: #f0a360; padding: 10px">
-          <Require
-            _id="subapp-web/lib/load"
-            _concurrent
-            timestamp
-            elementId="subapp-suspense-demo"
-            name="SuspenseDemo"
-            async
-          />
-        </div>
-
-        <div style="background: #e88f41; padding: 10px">
-          <Require
-            _id="subapp-web/lib/load"
-            _concurrent
-            timestamp
-            elementId="subapp-suspense-demo-ssr"
-            name="SuspenseDemo"
+            elementId="subapp-footer"
+            name="Footer"
             hydrateServerData
             async
             serverSideRendering
             suspenseSsr
           />
         </div>
-
-        <Require
-          _id="subapp-web/lib/load"
-          _concurrent
-          timestamp
-          elementId="subapp-footer"
-          name="Footer"
-          async
-          serverSideRendering
-        /> */}
 
         <Require _id="subapp-web/lib/start" />
 

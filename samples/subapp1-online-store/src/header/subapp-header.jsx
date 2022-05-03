@@ -4,8 +4,8 @@ import { loadSubApp, React } from "subapp-react";
 const Header = () => {
   return (
     <div className="text-center">
-      <h1>Online Store</h1>
-      <p>Mission, Vision & Values</p>
+      <h2>SubApp Header</h2>
+      <h3>Hello World</h3>
     </div>
   );
 };

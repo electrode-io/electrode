@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  path: ["/", "/products", "/deals"],
+  path: ["/", { "/home": ["post"] }],
   pageTitle: "Online Store Home",
   // Specify the HTML index generation template
   // since using JSX template, don't include the extension
