@@ -35,23 +35,23 @@
     "build": "clap build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
+    "@babel/runtime": "^7.17.9",
     "@module-federation/concat-runtime": "^0.0.1",
-    "@xarc/fastify-server": "^2.0.0",
-    "electrode-confippet": "^1.5.0",
-    "history": "^4.10.1",
-    "html-webpack-plugin": "^5.3.1",
+    "@xarc/fastify-server": "^3.3.0",
+    "electrode-confippet": "^1.7.1",
+    "history": "^5.3.0",
+    "html-webpack-plugin": "^5.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-redux": "^7.2.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5",
+    "react-redux": "^8.0.1",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0",
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^8.1.6",
-    "@xarc/opt-eslint": "^1.0.0"
+    "@xarc/app-dev": "^10.1.1",
+    "@xarc/opt-eslint": "^2.0.1"
   },
   "fyn": {
     "dependencies": {
