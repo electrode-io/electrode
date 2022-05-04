@@ -6,7 +6,7 @@ let data;
 
 const Data1 = () => {
   if (!data) {
-    throw new Promise(resolve => {
+    throw new Promise((resolve) => {
       setTimeout(() => {
         data = "demo data received from async call";
         resolve(data);
@@ -30,5 +30,5 @@ const Footer = () => {
 
 export default loadSubApp({
   name: "Footer",
-  Component: Footer
+  Component: Footer,
 });

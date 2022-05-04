@@ -44,8 +44,6 @@ const Template = (
             startOnLoad
             elementId="subapp-header"
             serverSideRendering
-            hydrateServerData={false}
-            clientSideRendering={false}
             inlineScript
           />
         </div>
@@ -57,9 +55,7 @@ const Template = (
             name="MainBody"
             timestamp
             elementId="subapp-mainbody"
-            useStream
             async
-            hydrateServerData
             serverSideRendering
           />
         </div>
@@ -71,10 +67,8 @@ const Template = (
             timestamp
             elementId="subapp-footer"
             name="Footer"
-            hydrateServerData
             async
             serverSideRendering
-            suspenseSsr
           />
         </div>
 

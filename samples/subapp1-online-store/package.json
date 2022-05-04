@@ -5,7 +5,7 @@
   "homepage": "http://test",
   "author": {
     "name": "Mateja Ristic",
-    "email": "",
+    "email": "mateja.ristic@gmail.com",
     "url": "https://github.com/mristic505"
   },
   "contributors": [],
@@ -67,8 +67,6 @@
     }
   },
   "prettier": {
-    "printWidth": 100,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
+    "printWidth": 100
   }
 }
