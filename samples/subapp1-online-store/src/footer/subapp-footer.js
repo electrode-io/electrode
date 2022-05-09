@@ -1,20 +1,7 @@
-/* eslint-disable no-magic-numbers */
-
 import { React, loadSubApp } from "subapp-react";
+import { lazy } from "react";
 
-let data;
-
-const Data1 = () => {
-  if (!data) {
-    throw new Promise((resolve) => {
-      setTimeout(() => {
-        data = "demo data received from async call";
-        resolve(data);
-      }, 2500);
-    });
-  }
-  return <div>{data}</div>;
-};
+const SuspendedComponent = lazy(() => import("./SuspendedComponent"));
 
 const Footer = () => {
   return (
@@ -22,7 +9,7 @@ const Footer = () => {
       <h2>SubApp Footer</h2>
       <React.Suspense fallback={<div>suspense demo waiting for data...</div>}>
         Suspense Demo Received Data
-        <Data1 />
+        <SuspendedComponent />
       </React.Suspense>
     </div>
   );
