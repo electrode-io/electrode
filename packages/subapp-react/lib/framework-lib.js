@@ -9,7 +9,7 @@ const ReactDOMServer = require("react-dom/server");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
-const ReactRouterDom = optionalRequire("react-router-dom");
+const { StaticRouter } = require("react-router-dom/server");
 const { Stream } = require("stream");
 class FrameworkLib {
   constructor(ref) {
@@ -85,15 +85,11 @@ class FrameworkLib {
       return subAppServer.renderer(element, options);
     }
 
-    if (options.suspenseSsr || options.useStream || options.hydrateServerData) {
-      const { writable, output, completed } = this.getStreamWritable();
-      const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
-      pipe(writable);
-      await completed;
-      return output.result;
-    } else {
-      return ReactDOMServer.renderToStaticMarkup(element);
-    }
+    const { writable, output, completed } = this.getStreamWritable();
+    const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
+    pipe(writable);
+    await completed;
+    return output.result;
   }
 
   createTopComponent(initialProps) {
@@ -208,17 +204,13 @@ class FrameworkLib {
   }
 
   wrapReactRouter() {
-    assert(
-      ReactRouterDom && ReactRouterDom.StaticRouter,
-      `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
-and can't generate it because module react-router-dom with StaticRouter is not found`
-    );
-    return props2 =>
-      React.createElement(
-        ReactRouterDom.StaticRouter,
-        props2,
+    return props => {
+      return React.createElement(
+        StaticRouter,
+        props,
         React.createElement(this.ref.subApp.Component)
       );
+    };
   }
 }
 
