@@ -2,10 +2,28 @@
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
-const { withRouter } = require("react-router");
-const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
+// const { withRouter } = require("react-router");
+const { Routes, Route } = require("react-router-dom");
+// const { Route, Switch } = require("react-router");
 const Redux = require("redux");
 const { connect } = require("react-redux");
+
+// safely handles circular references
+JSON.safeStringify = (obj, indent = 2) => {
+  let cache = [];
+  const retVal = JSON.stringify(
+    obj,
+    (key, value) =>
+      typeof value === "object" && value !== null
+        ? cache.includes(value)
+          ? undefined // Duplicate reference found, discard key
+          : cache.push(value) && value // Store value in our collection
+        : value,
+    indent
+  );
+  cache = null;
+  return retVal;
+};
 
 describe("SSR React framework", function () {
   it("should setup React framework", () => {
@@ -67,7 +85,7 @@ describe("SSR React framework", function () {
       }
     });
     const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    expect(res).contains("Hello <!-- -->foo bar");
   });
 
   it("should allow preparing data before SSR", async () => {
@@ -87,7 +105,7 @@ describe("SSR React framework", function () {
     await framework.handlePrepare();
     expect(framework._initialProps).to.be.ok;
     const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    expect(res).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component with stream if enabled", async () => {
@@ -171,7 +189,7 @@ describe("SSR React framework", function () {
       }
     });
     const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    expect(res).contains("Hello <!-- -->foo bar");
   });
 
   it("should render Component from subapp with initial props from server's prepare while using attachInitialState", async () => {
@@ -191,7 +209,7 @@ describe("SSR React framework", function () {
       }
     });
     const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    expect(res).contains("Hello <!-- -->foo bar");
   });
 
   it("should init redux store in context and render Component", async () => {
@@ -223,7 +241,7 @@ describe("SSR React framework", function () {
         context
       });
       const res = await framework.handleSSR();
-      expect(res).contains("Hello foo bar");
+      expect(res).contains("Hello <!-- -->foo bar");
       expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
       expect(context.user).to.have.property("storeContainer");
       expect(storeReady).equal(true);
@@ -252,7 +270,7 @@ describe("SSR React framework", function () {
       }
     });
     const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
+    expect(res).contains("Hello <!-- -->foo bar");
     expect(framework.initialStateStr).equals(undefined);
   });
 
@@ -375,7 +393,9 @@ describe("SSR React framework", function () {
       }
     });
     const res = await framework.handleSSR();
-    expect(res).contains(`<div>IS_SSR: true HAS_REQUEST: yes</div>`);
+    expect(res).contains(
+      `<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes<!-- --></div>`
+    );
     expect(request.foo).equals("bar");
   });
 

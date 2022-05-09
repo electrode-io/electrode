@@ -85,15 +85,11 @@ class FrameworkLib {
       return subAppServer.renderer(element, options);
     }
 
-    if (options.suspenseSsr || options.useStream || options.hydrateServerData) {
-      const { writable, output, completed } = this.getStreamWritable();
-      const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
-      pipe(writable);
-      await completed;
-      return output.result;
-    } else {
-      return ReactDOMServer.renderToStaticMarkup(element);
-    }
+    const { writable, output, completed } = this.getStreamWritable();
+    const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
+    pipe(writable);
+    await completed;
+    return output.result;
   }
 
   createTopComponent(initialProps) {
