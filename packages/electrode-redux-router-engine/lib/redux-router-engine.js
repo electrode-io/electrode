@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable  max-statements, prefer-spread, global-require, complexity */
+/* eslint-disable  max-statements, prefer-spread, global-require, complexity, comma-dangle */
 
 const Path = require("path");
 const assert = require("assert");
@@ -15,16 +15,17 @@ const { combineReducers, createStore } = require("redux");
 const pkg = require("../package.json");
 const util = require("./util");
 const ServerContext = require("./server-context");
+const { Stream } = require("stream");
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
   "<": "\\u003C",
   "\u2028": "\\u2028",
-  "\u2029": "\\u2029"
+  "\u2029": "\\u2029",
 };
 
 function escapeBadChars(sourceString) {
-  return sourceString.replace(BAD_CHARS_REGEXP, match => REPLACEMENTS_FOR_BAD_CHARS[match]);
+  return sourceString.replace(BAD_CHARS_REGEXP, (match) => REPLACEMENTS_FOR_BAD_CHARS[match]);
 }
 
 const ROUTE_HANDLER = Symbol("route handler");
@@ -32,17 +33,16 @@ const ROUTE_HANDLER = Symbol("route handler");
 class ReduxRouterEngine {
   constructor(options) {
     assert(options.routes, "Must provide react-router routes for redux-router-engine");
-
     this.options = Object.assign({ webappPrefix: "", basename: "" }, options);
     this.options.withIds = Boolean(options.withIds);
 
     // generate __PRELOADED_STATE__ or __<prefix>_PRELOADED_STATE__
     const preloadedStateName = ["_", this.options.webappPrefix, "PRELOADED_STATE__"]
-      .filter(x => x)
+      .filter((x) => x)
       .join("_");
 
     if (!options.stringifyPreloadedState) {
-      this.options.stringifyPreloadedState = state =>
+      this.options.stringifyPreloadedState = (state) =>
         `window.${preloadedStateName} = ${escapeBadChars(JSON.stringify(state))};`;
     }
 
@@ -72,6 +72,27 @@ class ReduxRouterEngine {
     this._envTargets = util.getEnvTargets();
   }
 
+  getStreamWritable() {
+    const writable = new Stream.PassThrough();
+    writable.setEncoding("utf8");
+    const output = { result: "", error: undefined };
+    writable.on("data", (chunk) => {
+      output.result += chunk;
+    });
+    writable.on("error", (error) => {
+      output.error = error;
+    });
+    const completed = new Promise((resolve) => {
+      writable.on("finish", () => {
+        resolve();
+      });
+      writable.on("error", () => {
+        resolve();
+      });
+    });
+    return { writable, completed, output };
+  }
+
   startMatch(req, options = {}) {
     // hapi@18 compatibility: use "origin" to determine (WHATWG has origin, Url.parse does not)
     // https://github.com/hapijs/hapi/issues/3871
@@ -93,7 +114,7 @@ class ReduxRouterEngine {
     if (match.length === 0) {
       return {
         status: 404,
-        message: `${pkg.name}: Path ${location.path} not found`
+        message: `${pkg.name}: Path ${location.path} not found`,
       };
     }
 
@@ -114,7 +135,6 @@ class ReduxRouterEngine {
       const earlyOut = this.checkMatch(options);
       if (earlyOut) return earlyOut;
       await this.prepReduxStore(options);
-
       return await this._handleRender(options);
     } catch (err) {
       this.options.logError.call(this, req, err);
@@ -122,7 +142,7 @@ class ReduxRouterEngine {
         status: err.status || 500, // eslint-disable-line
         message: err.message,
         path: err.path || options.location.path,
-        _err: err
+        _err: err,
       };
     }
   }
@@ -160,7 +180,7 @@ class ReduxRouterEngine {
             location: options.location,
             match: options.match,
             route,
-            inits
+            inits,
           })
         );
       }
@@ -184,7 +204,7 @@ class ReduxRouterEngine {
         match,
         route: match[0].route,
         inits,
-        awaitInits
+        awaitInits,
       });
     }
 
@@ -205,7 +225,7 @@ class ReduxRouterEngine {
       if (topInit.initialState || inits.length > 0) {
         initialState = Object.assign.apply(
           null,
-          [{}, topInit.initialState].concat(inits.map(x => x.initialState))
+          [{}, topInit.initialState].concat(inits.map((x) => x.initialState))
         );
       } else {
         // no route provided any initialState
@@ -219,13 +239,13 @@ class ReduxRouterEngine {
         // top route only provide its own reducer and initialState
         const allReducers = Object.assign.apply(
           null,
-          [{}, topInit.reducer].concat(inits.map(x => x.reducer))
+          [{}, topInit.reducer].concat(inits.map((x) => x.reducer))
         );
 
         reducer = combineReducers(allReducers);
       } else {
         // no route provided any reducer
-        reducer = x => x;
+        reducer = (x) => x;
       }
 
       options.store = createStore(reducer, initialState);
@@ -253,45 +273,37 @@ class ReduxRouterEngine {
     }
   }
 
-  _renderToString({ req, location, store, routeContext, withIds }) {
+  async _renderToString({ req, location, store, routeContext, withIds }) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {
       assert(React, `${pkg.name}: can't do SSR because react not found`);
       assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
 
-      let ssrApi;
-      if (this._streaming) {
-        ssrApi = withIds
-          // TODO: Deprecated in React 18 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-server-rendering-apis
-           // FIXME: use renderToPipeableStream
-           // React 18 info: It will work in 18, including the new Suspense features described below, but it will buffer the entire content until the end of the stream. In other words, it will no longer do streaming.
-          ? ReactDomServer.renderToNodeStream
-          // TODO: Deprecated (with full Suspense support, but without streaming) in React 18.
-          // FIXME: 18 Unhandled Breaking Change: It adds trailing comment nodes to any text node. https://github.com/facebook/react/pull/23359
-          : ReactDomServer.renderToStaticNodeStream;
-      } else {
-        ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
-      }
-
-      return ssrApi(
+      const element = React.createElement(
+        // server side context to provide request
+        ServerContext,
+        { request: req },
+        // redux provider
         React.createElement(
-          // server side context to provide request
-          ServerContext,
-          { request: req },
-          // redux provider
+          Provider,
+          { store },
+          // user route component
           React.createElement(
-            Provider,
-            { store },
-            // user route component
-            React.createElement(
-              StaticRouter,
-              { location, context: routeContext, basename: this.options.basename },
-              this._routesComponent
-            )
+            StaticRouter,
+            { location, context: routeContext, basename: this.options.basename },
+            this._routesComponent
           )
         )
       );
+
+      if (!this._streaming) return ReactDomServer.renderToString(element);
+
+      const { writable, output, completed } = this.getStreamWritable();
+      const { pipe } = await ReactDomServer.renderToPipeableStream(element);
+      pipe(writable);
+      await completed;
+      return output.result;
     }
   }
 

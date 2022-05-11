@@ -4,19 +4,18 @@ const ReduxRouterEngine = require("../..");
 const expect = require("chai").expect;
 const electrodeServer = require("electrode-server");
 const { runFinally, asyncVerify } = require("run-verify");
-const streamToArray = require("stream-to-array");
 
 require("babel-register");
 
 const routes = require("../routes.jsx").default;
 
-describe("electrode server (Hapi) integration", function() {
+describe("electrode server (Hapi) integration", function () {
   const setupServer = async (streaming, withIds) => {
     let engine;
 
     const server = await electrodeServer({
       electrode: { logLevel: "none" },
-      connections: { default: { port: 0 } }
+      connections: { default: { port: 0 } },
     });
 
     server.route({
@@ -25,25 +24,17 @@ describe("electrode server (Hapi) integration", function() {
       handler: async (request, reply) => {
         if (!engine) engine = new ReduxRouterEngine({ routes, streaming, withIds });
         const result = await engine.render(request);
-        if (streaming) {
-          result.resultType = result.html.constructor.name;
-          streamToArray(result.html, (err, arr) => {
-            result.html = arr.join("");
-            reply(result);
-          });
-        } else {
-          reply(result);
-        }
-      }
+        reply(result);
+      },
     });
 
     return server;
   };
 
-  const closeServer = server => {
+  const closeServer = (server) => {
     return (
       server &&
-      new Promise(resolve => {
+      new Promise((resolve) => {
         server.stop(resolve);
       })
     );
@@ -53,13 +44,13 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(),
-      s => {
+      (s) => {
         server = s;
-        return server.inject("/test").then(resp => {
+        return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: "<div>Page<div>Home</div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};"
+            prefetch: "window.__PRELOADED_STATE__ = {};",
           });
         });
       },
@@ -71,13 +62,13 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(),
-      s => {
+      (s) => {
         server = s;
-        return server.inject("/test?foo=bar").then(resp => {
+        return server.inject("/test?foo=bar").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
-            html: "<div>Page<div>Home - Query: ?foo=bar</div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};"
+            html: "<div>Page<div>Home<!-- --> - Query: ?foo=bar</div></div>",
+            prefetch: "window.__PRELOADED_STATE__ = {};",
           });
         });
       },
@@ -89,14 +80,13 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(true),
-      s => {
+      (s) => {
         server = s;
-        return server.inject("/test").then(resp => {
+        return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
-            html: "<div>Page<div>Home</div></div>",
+            html: "<div>Page<!-- --><div>Home<!-- --></div></div>",
             prefetch: "window.__PRELOADED_STATE__ = {};",
-            resultType: "ReactMarkupReadableStream"
           });
         });
       },
@@ -108,14 +98,13 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(true, true),
-      s => {
+      (s) => {
         server = s;
-        return server.inject("/test").then(resp => {
+        return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
-            html: `<div>Page<div>Home</div></div>`,
+            html: `<div>Page<!-- --><div>Home<!-- --></div></div>`,
             prefetch: "window.__PRELOADED_STATE__ = {};",
-            resultType: "ReactMarkupReadableStream"
           });
         });
       },
