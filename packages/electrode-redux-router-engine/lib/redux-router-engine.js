@@ -20,11 +20,11 @@ const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
   "<": "\\u003C",
   "\u2028": "\\u2028",
-  "\u2029": "\\u2029"
+  "\u2029": "\\u2029",
 };
 
 function escapeBadChars(sourceString) {
-  return sourceString.replace(BAD_CHARS_REGEXP, match => REPLACEMENTS_FOR_BAD_CHARS[match]);
+  return sourceString.replace(BAD_CHARS_REGEXP, (match) => REPLACEMENTS_FOR_BAD_CHARS[match]);
 }
 
 const ROUTE_HANDLER = Symbol("route handler");
@@ -38,11 +38,11 @@ class ReduxRouterEngine {
 
     // generate __PRELOADED_STATE__ or __<prefix>_PRELOADED_STATE__
     const preloadedStateName = ["_", this.options.webappPrefix, "PRELOADED_STATE__"]
-      .filter(x => x)
+      .filter((x) => x)
       .join("_");
 
     if (!options.stringifyPreloadedState) {
-      this.options.stringifyPreloadedState = state =>
+      this.options.stringifyPreloadedState = (state) =>
         `window.${preloadedStateName} = ${escapeBadChars(JSON.stringify(state))};`;
     }
 
@@ -93,7 +93,7 @@ class ReduxRouterEngine {
     if (match.length === 0) {
       return {
         status: 404,
-        message: `${pkg.name}: Path ${location.path} not found`
+        message: `${pkg.name}: Path ${location.path} not found`,
       };
     }
 
@@ -122,7 +122,7 @@ class ReduxRouterEngine {
         status: err.status || 500, // eslint-disable-line
         message: err.message,
         path: err.path || options.location.path,
-        _err: err
+        _err: err,
       };
     }
   }
@@ -160,7 +160,7 @@ class ReduxRouterEngine {
             location: options.location,
             match: options.match,
             route,
-            inits
+            inits,
           })
         );
       }
@@ -184,7 +184,7 @@ class ReduxRouterEngine {
         match,
         route: match[0].route,
         inits,
-        awaitInits
+        awaitInits,
       });
     }
 
@@ -205,7 +205,7 @@ class ReduxRouterEngine {
       if (topInit.initialState || inits.length > 0) {
         initialState = Object.assign.apply(
           null,
-          [{}, topInit.initialState].concat(inits.map(x => x.initialState))
+          [{}, topInit.initialState].concat(inits.map((x) => x.initialState))
         );
       } else {
         // no route provided any initialState
@@ -219,13 +219,13 @@ class ReduxRouterEngine {
         // top route only provide its own reducer and initialState
         const allReducers = Object.assign.apply(
           null,
-          [{}, topInit.reducer].concat(inits.map(x => x.reducer))
+          [{}, topInit.reducer].concat(inits.map((x) => x.reducer))
         );
 
         reducer = combineReducers(allReducers);
       } else {
         // no route provided any reducer
-        reducer = x => x;
+        reducer = (x) => x;
       }
 
       options.store = createStore(reducer, initialState);
@@ -263,13 +263,13 @@ class ReduxRouterEngine {
       let ssrApi;
       if (this._streaming) {
         ssrApi = withIds
-          // TODO: Deprecated in React 18 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-server-rendering-apis
-           // FIXME: use renderToPipeableStream
-           // React 18 info: It will work in 18, including the new Suspense features described below, but it will buffer the entire content until the end of the stream. In other words, it will no longer do streaming.
-          ? ReactDomServer.renderToNodeStream
-          // TODO: Deprecated (with full Suspense support, but without streaming) in React 18.
-          // FIXME: 18 Unhandled Breaking Change: It adds trailing comment nodes to any text node. https://github.com/facebook/react/pull/23359
-          : ReactDomServer.renderToStaticNodeStream;
+          ? // TODO: Deprecated in React 18 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-server-rendering-apis
+            // FIXME: use renderToPipeableStream
+            // React 18 info: It will work in 18, including the new Suspense features described below, but it will buffer the entire content until the end of the stream. In other words, it will no longer do streaming.
+            ReactDomServer.renderToNodeStream
+          : // TODO: Deprecated (with full Suspense support, but without streaming) in React 18.
+            // FIXME: 18 Unhandled Breaking Change: It adds trailing comment nodes to any text node. https://github.com/facebook/react/pull/23359
+            ReactDomServer.renderToStaticNodeStream;
       } else {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }

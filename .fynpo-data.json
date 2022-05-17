@@ -1,0 +1,119 @@
+{
+  "indirects": {
+    "samples/subapp2-basic": [
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/app",
+          "version": "10.0.13",
+          "path": "packages/xarc-app"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/react",
+          "version": "0.3.4",
+          "path": "packages/xarc-react"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/react-query",
+          "version": "0.3.3",
+          "path": "packages/xarc-react-query"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/react-redux",
+          "version": "0.3.3",
+          "path": "packages/xarc-react-redux"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/app-dev",
+          "version": "10.1.1",
+          "path": "packages/xarc-app-dev"
+        },
+        "depSection": "dev",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/opt-postcss",
+          "version": "1.0.1",
+          "path": "packages/xarc-opt-postcss"
+        },
+        "depSection": "dev",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "my-x-app",
+          "version": "0.0.1",
+          "path": "samples/subapp2-basic"
+        },
+        "onPkg": {
+          "name": "@xarc/opt-stylus",
+          "version": "1.0.1",
+          "path": "packages/xarc-opt-stylus"
+        },
+        "depSection": "dev",
+        "indirectSteps": [
+          "my-x-app@0.0.1(pkg)"
+        ]
+      }
+    ]
+  },
+  "__timestamp": 1652798068126
+}

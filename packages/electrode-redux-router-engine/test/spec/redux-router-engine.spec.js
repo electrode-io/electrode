@@ -11,14 +11,14 @@ require("babel-register");
 
 const routes = require("../routes.jsx").default;
 
-describe("redux-router-engine", function() {
+describe("redux-router-engine", function () {
   let testReq;
 
   beforeEach(() => {
     testReq = {
       method: "get",
       log: () => {},
-      app: {}
+      app: {},
     };
   });
 
@@ -26,7 +26,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/oop/blah");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(404);
     });
   });
@@ -36,7 +36,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/test/init-not-found");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result.message).includes("Cannot find module");
@@ -48,7 +48,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: Path.join(__dirname, "..") });
     testReq.url = Url.parse("/throw-error");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err.message).includes("failed error");
@@ -59,11 +59,11 @@ describe("redux-router-engine", function() {
     const testHtml = "test promise result from RTS";
     const engine = new ReduxRouterEngine({
       routes,
-      renderToString: () => Promise.resolve(testHtml)
+      renderToString: () => Promise.resolve(testHtml),
     });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.html).to.equal(testHtml);
     });
   });
@@ -72,7 +72,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Home</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
@@ -83,7 +83,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
     testReq.path = "/test?foo=bar";
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Home - Query: ?foo=bar</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
@@ -94,7 +94,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
     testReq.url = Url.parse("/test?foo=bar");
 
-    return engine.render(testReq, { location: Url.parse("/test?a=1") }).then(result => {
+    return engine.render(testReq, { location: Url.parse("/test?a=1") }).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Home - Query: ?a=1</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
@@ -105,7 +105,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
     testReq.url = Url.parse("/test-init-nm");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Home</div></div>");
       expect(result.prefetch).to.equal(`window.__PRELOADED_STATE__ = {"Page":["test-init-nm"]};`);
@@ -115,11 +115,11 @@ describe("redux-router-engine", function() {
   it("should use top reducer exclusively if it's a function", () => {
     const engine = new ReduxRouterEngine({
       routes: Path.resolve(__dirname, "../routes"),
-      routesHandlerPath: "./test"
+      routesHandlerPath: "./test",
     });
     testReq.url = Url.parse("/top-reducer/init");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Test</div></div>");
       expect(result.prefetch).to.equal(
@@ -132,7 +132,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes: "./test/routes" });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Home</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
@@ -144,7 +144,7 @@ describe("redux-router-engine", function() {
     testReq.url = Url.parse("/test");
     testReq.app.disableSSR = true;
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.html).to.equal("<!-- SSR disabled by request -->");
     });
   });
@@ -153,7 +153,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: Path.join(__dirname, "..") });
     testReq.url = Url.parse("/escape-chars");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.prefetch).to.contain(
         "window.__PRELOADED_STATE__ = " +
           `{"scriptTag":"\\u003C/script>\\u003Cscript>console.log(\\"Welcome to an XSS attack!\\")` +
@@ -166,7 +166,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, componentRedirect: true });
     testReq.url = Url.parse("/test/component-redirect");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(302);
       expect(result.html).to.equal("<div>Page<div><div>Test</div></div></div>");
       expect(result.path).to.equal("/redirect-target");
@@ -177,7 +177,7 @@ describe("redux-router-engine", function() {
     const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes, production: true });
     testReq.url = Url.parse("/invalid-component");
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err.message).to.contain("Nothing was returned from render");
@@ -189,7 +189,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/error-component");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(404);
       expect(result._err).to.be.ok;
@@ -200,7 +200,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       // At one time, this would generate react-id and reactroot, but no longer
       expect(result.html).to.equal("<div>Page<div>Home</div></div>");
     });
@@ -210,7 +210,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
     testReq.url = Url.parse("/wrong-base/test/basename");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(404);
     });
   });
@@ -219,7 +219,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/test/basename");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal(`<div>Page<a href="/to-target">Test</a></div>`);
     });
@@ -229,7 +229,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
     testReq.url = Url.parse("/my-base/test/basename");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal(`<div>Page<a href="/my-base/to-target">Test</a></div>`);
     });
@@ -239,7 +239,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.html).to.not.contain("data-reactroot");
     });
   });
@@ -248,11 +248,11 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({
       routes,
       stringifyPreloadedState: () => `window.__TEST_STATE__`,
-      renderToString: () => "test"
+      renderToString: () => "test",
     });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq).then(result => {
+    return engine.render(testReq).then((result) => {
       expect(result.prefetch).to.equal(`window.__TEST_STATE__`);
     });
   });
@@ -265,10 +265,10 @@ describe("redux-router-engine", function() {
       routes,
       logError: (req, err) => {
         error = err;
-      }
+      },
     })
       .render(testReq)
-      .then(result => {
+      .then((result) => {
         expect(result.status).to.equal(500);
         expect(error).to.not.equal(undefined);
       });
@@ -278,7 +278,7 @@ describe("redux-router-engine", function() {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
     testReq.url = Url.parse("/test");
 
-    return engine.render(testReq, { withIds: false }).then(result => {
+    return engine.render(testReq, { withIds: false }).then((result) => {
       // At one time, this would generate react-id and reactroot, but no longer
       expect(result.html).to.equal("<div>Page<div>Home</div></div>");
     });
@@ -291,12 +291,12 @@ describe("redux-router-engine", function() {
       method: "post",
       log: () => {},
       app: {},
-      url: Url.parse("/not-post")
+      url: Url.parse("/not-post"),
     };
 
     const engine = new ReduxRouterEngine({ routes });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result.message).to.include(`doesn't allow request method post`);
@@ -310,12 +310,12 @@ describe("redux-router-engine", function() {
       method: "head",
       log: () => {},
       app: {},
-      url: Url.parse("/head-only")
+      url: Url.parse("/head-only"),
     };
 
     const engine = new ReduxRouterEngine({ routes });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(200);
     });
@@ -327,15 +327,15 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test/init")
+      url: Url.parse("/test/init"),
     };
 
     const engine = new ReduxRouterEngine({
       routes,
-      routesHandlerPath: Path.join(__dirname, "..")
+      routesHandlerPath: Path.join(__dirname, ".."),
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.prefetch).include("test-init");
     });
@@ -347,15 +347,15 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/top-wait/init")
+      url: Url.parse("/top-wait/init"),
     };
 
     const engine = new ReduxRouterEngine({
       routes: Path.join(__dirname, "../routes"),
-      routesHandlerPath: "./test"
+      routesHandlerPath: "./test",
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.html).to.equal("<div>Page<div>Test</div><div>Test Redux</div></div>");
       //
@@ -379,15 +379,15 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test-init2")
+      url: Url.parse("/test-init2"),
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test"
+      routesHandlerPath: "./test",
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.prefetch).include("test-init2");
     });
@@ -399,15 +399,15 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: "/test-init2"
+      url: "/test-init2",
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test"
+      routesHandlerPath: "./test",
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.prefetch).include("test-init2");
     });
@@ -431,16 +431,16 @@ describe("redux-router-engine", function() {
         pathname: "/test-init2",
         search: "",
         searchParams: {},
-        hash: ""
-      }
+        hash: "",
+      },
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test"
+      routesHandlerPath: "./test",
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.status).to.equal(200);
       expect(result.prefetch).include("test-init2");
     });
@@ -453,15 +453,15 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test/redux")
+      url: Url.parse("/test/redux"),
     };
 
     const engine = new ReduxRouterEngine({
       routes,
-      routesHandlerPath: Path.join(__dirname, "..")
+      routesHandlerPath: Path.join(__dirname, ".."),
     });
 
-    return engine.render(req).then(result => {
+    return engine.render(req).then((result) => {
       expect(result.prefetch).include("52");
     });
   });

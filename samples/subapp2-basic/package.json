@@ -1,6 +1,6 @@
 {
-  "name": "subapp2-basic",
-  "version": "2.0.1",
+  "name": "my-x-app",
+  "version": "0.0.1",
   "description": "Web application using Electrode X",
   "homepage": "",
   "scripts": {
@@ -10,8 +10,9 @@
     "start": "node lib/server"
   },
   "author": {
-    "name": "Mateja Ristic",
-    "email": "mateja.ristic@gmail.com"
+    "name": "",
+    "email": "",
+    "url": ""
   },
   "contributors": [],
   "main": "lib/server/index.js",
@@ -34,7 +35,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@xarc/app": "../../packages/xarc-app",
-    "@xarc/fastify-server": "^3.2.3",
+    "@xarc/fastify-server": "^3.3.0",
     "@xarc/react": "../../packages/xarc-react",
     "@xarc/react-query": "../../packages/xarc-react-query",
     "@xarc/react-redux": "../../packages/xarc-react-redux"
@@ -50,8 +51,8 @@
     "@xarc/opt-jest": "../../packages/xarc-opt-jest",
     "@xarc/opt-karma": "../../packages/xarc-opt-karma",
     "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
-    "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "prettier": "^2.6.2",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
   }
 }
