@@ -91,7 +91,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
-
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
