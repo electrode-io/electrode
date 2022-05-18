@@ -1,18 +1,23 @@
 import { declareSubApp, xarcV2 } from "@xarc/react";
 
-export const home = declareSubApp({
+export const Header = declareSubApp({
+  name: "header",
+  getModule: () => import("./subapps/header"),
+});
+
+export const Home = declareSubApp({
   name: "home",
-  getModule: () => import("./home"),
+  getModule: () => import("./subapps/home"),
 });
 
-export const Demo2 = declareSubApp({
-  name: "demo2",
-  getModule: () => import("./demo2"),
+export const Products = declareSubApp({
+  name: "products",
+  getModule: () => import("./subapps/products"),
 });
 
-export const Demo3 = declareSubApp({
-  name: "demo3",
-  getModule: () => import("./demo3"),
+export const Footer = declareSubApp({
+  name: "footer",
+  getModule: () => import("./subapps/footer"),
 });
 
 xarcV2.debug("app.tsx");

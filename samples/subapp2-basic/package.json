@@ -1,6 +1,6 @@
 {
-  "name": "my-x-app",
-  "version": "0.0.1",
+  "name": "subapp2-basic",
+  "version": "2.0.2",
   "description": "Web application using Electrode X",
   "homepage": "",
   "scripts": {
@@ -10,9 +10,8 @@
     "start": "node lib/server"
   },
   "author": {
-    "name": "",
-    "email": "",
-    "url": ""
+    "name": "Mateja Ristic",
+    "email": "mateja.ristic@gmail.com"
   },
   "contributors": [],
   "main": "lib/server/index.js",
@@ -38,7 +37,8 @@
     "@xarc/fastify-server": "^3.3.0",
     "@xarc/react": "../../packages/xarc-react",
     "@xarc/react-query": "../../packages/xarc-react-query",
-    "@xarc/react-redux": "../../packages/xarc-react-redux"
+    "@xarc/react-redux": "../../packages/xarc-react-redux",
+    "@xarc/react-router": "../../packages/xarc-react-router"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",

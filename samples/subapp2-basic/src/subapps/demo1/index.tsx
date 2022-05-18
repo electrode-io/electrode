@@ -1,5 +1,4 @@
 import { React, ReactSubApp } from "@xarc/react";
-import { docsLink } from "../info";
 
 const Demo1 = (props) => {
   return (
@@ -7,9 +6,6 @@ const Demo1 = (props) => {
       <p>subapp demo1</p>
       <p>.css module demo blue color</p>
       props: {JSON.stringify(props)}
-      <p>
-        <a href={docsLink}>Electrode Docs</a>
-      </p>
     </div>
   );
 };

@@ -22,7 +22,7 @@ const decNumber = () => {
   };
 };
 
-const Demo2 = (props) => {
+const Home = (props) => {
   const { value, dispatch } = props;
 
   return (
@@ -34,10 +34,11 @@ const Demo2 = (props) => {
           border: "solid",
           marginLeft: "15%",
           marginRight: "15%",
+          textAlign: "center",
         }}
       >
-        <h2>subapp demo2 with Redux</h2>
-        Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
+        <h2>Body subApp with Redux State Demo</h2>
+        <button onClick={() => dispatch(decNumber())}>&#8810;</button>
         &nbsp;{value}&nbsp;
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
@@ -50,7 +51,7 @@ const mapStateToProps = (state) => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: connect(mapStateToProps, (dispatch) => ({ dispatch }))(Demo2),
+  Component: connect(mapStateToProps, (dispatch) => ({ dispatch }))(Home),
   wantFeatures: [
     reduxFeature({
       React,

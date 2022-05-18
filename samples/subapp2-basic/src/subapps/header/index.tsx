@@ -1,6 +1,7 @@
 import { React, ReactSubApp, createDynamicComponent, staticPropsFeature } from "@xarc/react";
-import electrodePng from "../../static/electrode.png";
+import electrodePng from "../../../static/electrode.png";
 import { message } from "./message";
+import { StaticRouter } from "react-router-dom/server";
 
 export const Demo1 = createDynamicComponent(
   {
@@ -10,9 +11,17 @@ export const Demo1 = createDynamicComponent(
   { ssr: true }
 );
 
-const Home = (props) => {
+const Header = (props) => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div
+      style={{
+        padding: "5px",
+        border: "solid",
+        marginLeft: "15%",
+        marginRight: "15%",
+        textAlign: "center",
+      }}
+    >
       <h1>
         <a href="https://www.electrode.io">
           Electrode <img src={electrodePng} />
@@ -27,7 +36,7 @@ const Home = (props) => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: Home,
+  Component: Header,
   wantFeatures: [
     staticPropsFeature({
       serverModule: require.resolve("./static-props"),

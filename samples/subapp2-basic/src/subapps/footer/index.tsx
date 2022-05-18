@@ -9,10 +9,9 @@
 import { React, ReactSubApp } from "@xarc/react";
 import { reactQueryFeature, useQuery } from "@xarc/react-query";
 import { demo3QueryFn } from "./react-query-fetch";
-import { copyRightMessage } from "../info";
 import { DisplayInfo } from "./display-info";
 
-const Demo3 = () => {
+const Footer = () => {
   const { data } = useQuery("demo3", demo3QueryFn, { staleTime: 2000 });
 
   return (
@@ -24,19 +23,19 @@ const Demo3 = () => {
           border: "solid",
           marginLeft: "15%",
           marginRight: "15%",
+          textAlign: "center",
         }}
       >
-        <h2>subapp demo3 with react-query</h2>
+        <h2>Footer subApp with react-query</h2>
         data: <pre>{JSON.stringify(data)}</pre>
         <DisplayInfo />
       </div>
-      <p style={{ textAlign: "center" }}>{copyRightMessage}</p>
     </div>
   );
 };
 
 export const subapp: ReactSubApp = {
-  Component: Demo3,
+  Component: Footer,
   wantFeatures: [
     reactQueryFeature({
       React,

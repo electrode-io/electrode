@@ -1,4 +1,4 @@
-import { Demo2, Demo3, home } from "../app";
+import { Home, Products, Footer, Header } from "../app";
 import { PageRenderer } from "@xarc/react";
 import { ElectrodeFastifyInstance } from "@xarc/fastify-server";
 /**
@@ -7,17 +7,24 @@ import { ElectrodeFastifyInstance } from "@xarc/fastify-server";
  * @param server - fastify server, should not have started yet
  * @returns nothing
  */
+
 export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
   const homeRenderer: PageRenderer = new PageRenderer({
-    pageTitle: "xarc React App demo",
+    pageTitle: "Xarc React 18 - Home",
     subApps: [
-      { name: home.name, ssr: true },
-      { name: Demo2.name, ssr: true },
-      { name: Demo3.name, ssr: true },
+      { name: Header.name, ssr: true },
+      { name: Home.name, ssr: true },
+      { name: Footer.name, ssr: true },
     ],
-    prodAssetData: {
-      cdnMap: "config/assets.json",
-    },
+  });
+
+  const productsRenderer: PageRenderer = new PageRenderer({
+    pageTitle: "Xarc React 18 - Products",
+    subApps: [
+      { name: Header.name, ssr: true },
+      { name: Products.name, ssr: true },
+      { name: Footer.name, ssr: true },
+    ],
   });
 
   server.route({
@@ -26,6 +33,25 @@ export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
     async handler(request, reply) {
       try {
         const context = await homeRenderer.render({ request });
+        reply.type("text/html");
+
+        if (context.user.cspHeader) {
+          reply.header(`content-security-policy`, context.user.cspHeader);
+        }
+
+        reply.send(context.result);
+      } catch (error) {
+        reply.send(error.stack);
+      }
+    },
+  });
+
+  server.route({
+    method: "GET",
+    url: "/products",
+    async handler(request, reply) {
+      try {
+        const context = await productsRenderer.render({ request });
         reply.type("text/html");
 
         if (context.user.cspHeader) {
