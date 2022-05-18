@@ -6,7 +6,6 @@ const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 const Redux = require("redux");
 const { connect } = require("react-redux");
-const { Stream } = require("stream");
 
 describe("SSR React framework", function () {
   it("should setup React framework", () => {
