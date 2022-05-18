@@ -10,11 +10,32 @@ const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
 const ReactRouterDom = optionalRequire("react-router-dom");
-
+const { Stream } = require("stream");
 class FrameworkLib {
   constructor(ref) {
     this.ref = ref;
     this._prepared = false;
+  }
+
+  getStreamWritable() {
+    const writable = new Stream.PassThrough();
+    writable.setEncoding("utf8");
+    const output = { result: "", error: undefined };
+    writable.on("data", chunk => {
+      output.result += chunk;
+    });
+    writable.on("error", error => {
+      output.error = error;
+    });
+    const completed = new Promise(resolve => {
+      writable.on("finish", () => {
+        resolve();
+      });
+      writable.on("error", () => {
+        resolve();
+      });
+    });
+    return { writable, completed, output };
   }
 
   async handlePrepare() {
@@ -57,18 +78,18 @@ class FrameworkLib {
     return "";
   }
 
-  renderTo(element, options) {
+  async renderTo(element, options) {
     const { subAppServer } = this.ref;
 
     if (typeof subAppServer.renderer === "function") {
       return subAppServer.renderer(element, options);
     }
 
-    if (options.suspenseSsr || options.useStream || options.hydrateServerData) {
-      return ReactDOMServer.renderToPipeableStream(element);
-    } else {
-      return ReactDOMServer.renderToStaticMarkup(element);
-    }
+    const { writable, output, completed } = this.getStreamWritable();
+    const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
+    pipe(writable);
+    await completed;
+    return output.result;
   }
 
   createTopComponent(initialProps) {
