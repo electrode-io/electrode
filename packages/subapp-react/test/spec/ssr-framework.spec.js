@@ -6,30 +6,8 @@ const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 const Redux = require("redux");
 const { connect } = require("react-redux");
-const { Stream } = require("stream");
 
 describe("SSR React framework", function () {
-  const getTestWritable = () => {
-    const writable = new Stream.PassThrough();
-    writable.setEncoding("utf8");
-    const output = { result: "", error: undefined };
-    writable.on("data", chunk => {
-      output.result += chunk;
-    });
-    writable.on("error", error => {
-      output.error = error;
-    });
-    const completed = new Promise(resolve => {
-      writable.on("finish", () => {
-        resolve();
-      });
-      writable.on("error", () => {
-        resolve();
-      });
-    });
-    return { writable, completed, output };
-  };
-
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
     expect(lib.AppContext).to.be.ok;
@@ -113,7 +91,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with stream if enabled", async () => {
-    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -134,7 +111,6 @@ describe("SSR React framework", function () {
   });
 
   it("should hydrate render Component with stream if enabled", async () => {
-    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -155,7 +131,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component from subapp with hydration info", async () => {
-    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({
@@ -323,7 +298,6 @@ describe("SSR React framework", function () {
   });
 
   it("should hydrate render Component with suspense", async () => {
-    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -349,7 +323,6 @@ describe("SSR React framework", function () {
   });
 
   it("should render Component with suspense", async () => {
-    const { writable, output, completed } = getTestWritable();
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
