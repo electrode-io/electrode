@@ -1,7 +1,7 @@
 {
   "name": "subapp2-basic",
   "version": "2.0.2",
-  "description": "Web application using Electrode X",
+  "description": "Web application using Electrode X with React v18",
   "homepage": "",
   "scripts": {
     "dev": "xrun -q electrode/dev",

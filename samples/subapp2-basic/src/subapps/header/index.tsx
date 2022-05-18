@@ -1,7 +1,6 @@
 import { React, ReactSubApp, createDynamicComponent, staticPropsFeature } from "@xarc/react";
 import electrodePng from "../../../static/electrode.png";
 import { message } from "./message";
-import { StaticRouter } from "react-router-dom/server";
 
 export const Demo1 = createDynamicComponent(
   {
