@@ -9,7 +9,6 @@ const { connect } = require("react-redux");
 const { Stream } = require("stream");
 
 describe("SSR React framework", function () {
-
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
     expect(lib.AppContext).to.be.ok;
@@ -107,18 +106,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    // all non static render methods add <!-- --> to text props
-    expect(output.result).contains("Hello <!-- -->foo bar");
->>>>>>> 8dfdb45f (test(CEECORE-2932): update ssr-framework test to work with renderToPipeableNodeStream)
   });
 
   it("should hydrate render Component with stream if enabled", async () => {
@@ -136,22 +127,13 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    // all non static render methods add <!-- --> to text props
-    expect(output.result).contains("Hello <!-- -->foo bar");
->>>>>>> 8dfdb45f (test(CEECORE-2932): update ssr-framework test to work with renderToPipeableNodeStream)
   });
 
-  it("should render Component from subapp with hydration info", async () => {
-    const { writable, output, completed } = getTestWritable();
+  it("should render Component from subapp with hydration info", async () => {   
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({
@@ -170,18 +152,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    // all non static render methods add <!-- --> to text props
-    expect(output.result).contains("Hello <!-- -->foo bar");
->>>>>>> 8dfdb45f (test(CEECORE-2932): update ssr-framework test to work with renderToPipeableNodeStream)
   });
 
   it("should render Component from subapp with initial props from server's prepare", async () => {
@@ -346,18 +320,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    // all non static render methods add <!-- --> to text props
-    expect(output.result).contains("Hello <!-- -->foo bar");
->>>>>>> 8dfdb45f (test(CEECORE-2932): update ssr-framework test to work with renderToPipeableNodeStream)
   });
 
   it("should render Component with suspense", async () => {
@@ -380,18 +346,10 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-<<<<<<< HEAD
     const resp = await framework.handleSSR();
 
     // all non static render methods add <!-- --> to text props
     expect(resp).contains("Hello <!-- -->foo bar");
-=======
-    const { pipe } = await framework.handleSSR();
-    pipe(writable);
-    await completed;
-    // all non static render methods add <!-- --> to text props
-    expect(output.result).contains("Hello <!-- -->foo bar");
->>>>>>> 8dfdb45f (test(CEECORE-2932): update ssr-framework test to work with renderToPipeableNodeStream)
   });
 
   it("should render Component with react context containing request", async () => {
