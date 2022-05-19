@@ -1,9 +1,0 @@
-"use strict";
-
-exports.__esModule = true;
-exports.docsLink = exports.copyRightMessage = void 0;
-const copyRightMessage = `© ${new Date().getFullYear()} Your (Company) name here`;
-exports.copyRightMessage = copyRightMessage;
-const docsLink = `https://www.electrode.io/electrode/`;
-exports.docsLink = docsLink;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3B5UmlnaHRNZXNzYWdlIiwiRGF0ZSIsImdldEZ1bGxZZWFyIiwiZG9jc0xpbmsiXSwic291cmNlcyI6WyIuLi9zcmMvaW5mby50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgY29weVJpZ2h0TWVzc2FnZSA9IGDCqSAke25ldyBEYXRlKCkuZ2V0RnVsbFllYXIoKX0gWW91ciAoQ29tcGFueSkgbmFtZSBoZXJlYDtcblxuZXhwb3J0IGNvbnN0IGRvY3NMaW5rID0gYGh0dHBzOi8vd3d3LmVsZWN0cm9kZS5pby9lbGVjdHJvZGUvYDtcbiJdLCJtYXBwaW5ncyI6Ijs7OztBQUFPLE1BQU1BLGdCQUFnQixHQUFJLEtBQUksSUFBSUMsSUFBSixHQUFXQyxXQUFYLEVBQXlCLDJCQUF2RDs7QUFFQSxNQUFNQyxRQUFRLEdBQUkscUNBQWxCIn0=
