@@ -1,5 +1,5 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
 
 /**
@@ -22,13 +22,11 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         subId,
         execute({ input, ssrData }) {
           const Component = input.Component || subapp._getExport()?.Component;
-          const routerContext = {};
-          ssrData.context.user.routerContext = routerContext;
-
+          
           return {
             Component: () => {
               return (
-                <StaticRouter location={ssrData.path} context={routerContext}>
+                <StaticRouter location={ssrData.path}>
                   <Component />
                 </StaticRouter>
               );

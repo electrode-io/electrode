@@ -46,7 +46,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
           return {
             Component: (props: any) => {
               return (
-                <TheRouter history={history}>
+                <TheRouter location={history}>
                   <Component {...props} />
                 </TheRouter>
               );
