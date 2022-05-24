@@ -136,10 +136,10 @@
 										<p>A custom browser history object and control which Router to use.</p>
 									</div>
 									<ul>
-										<li>If it&#39;s <code>true</code>, or not specified, then <code>Router</code> is used with history from <code>createBrowserHistory</code>
+										<li>If it&#39;s <code>true</code>, or not specified, then <code>HistoryRouter</code> is used with history from <code>createBrowserHistory</code>
 											from <a href="https://www.npmjs.com/package/history">https://www.npmjs.com/package/history</a> and the same history object will be shared
 										among all subapps</li>
-										<li>If it&#39;s a valid object, then it&#39;s assumed to be a history object and used with <code>Router</code></li>
+										<li>If it&#39;s a valid object, then it&#39;s assumed to be a history object and used with <code>HistoryRouter</code></li>
 										<li>Finally fallback to use <code>BrowserRouter</code>, which internally uses its own history object that&#39;s not
 										shared with other subapps.</li>
 									</ul>
