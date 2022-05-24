@@ -10,7 +10,6 @@ import { ReactRouterFeatureOptions, _id, _subId } from "../common";
  */
 export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line
-
   const id = _id;
   const subId = _subId;
   return {
@@ -22,7 +21,6 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         subId,
         execute({ input, ssrData }) {
           const Component = input.Component || subapp._getExport()?.Component;
-          
           return {
             Component: () => {
               return (
