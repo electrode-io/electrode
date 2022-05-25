@@ -13,11 +13,11 @@ const Header = () => {
         textAlign: "center",
       }}
     >
-      <h1>
+      <h2>
         <a href="https://www.electrode.io">
-          Electrode <img src={electrodePng} />
+          Electrode <img src={electrodePng} /> - Subapp Version 2 <span style={{fontSize: "15px"}}>(with React 18)</span>
         </a>
-      </h1>
+      </h2>
       <Navigation />
     </div>
   );
