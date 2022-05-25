@@ -5,14 +5,9 @@ export const Header = declareSubApp({
   getModule: () => import("./subapps/header"),
 });
 
-export const Home = declareSubApp({
-  name: "home",
-  getModule: () => import("./subapps/home"),
-});
-
-export const Products = declareSubApp({
-  name: "products",
-  getModule: () => import("./subapps/products"),
+export const MainBody = declareSubApp({
+  name: "main-body",
+  getModule: () => import("./subapps/main-body"),
 });
 
 export const Footer = declareSubApp({

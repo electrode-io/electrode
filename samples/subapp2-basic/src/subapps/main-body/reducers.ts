@@ -12,6 +12,4 @@ const number = (store = { value: 0 }, action) => {
   return store;
 };
 
-export const reduxReducers = {
-  number,
-};
+export const reduxReducers = { number };
