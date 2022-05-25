@@ -1,4 +1,4 @@
-import { MainBody, Products, Footer, Header } from "../app";
+import { MainBody, Footer, Header } from "../app";
 import { PageRenderer } from "@xarc/react";
 import { ElectrodeFastifyInstance } from "@xarc/fastify-server";
 /**
@@ -14,40 +14,22 @@ const subApps = [
   { name: Footer.name, ssr: true },
 ];
 
-const pages = [ 
-  { pageTitle: "Home", url: "/", subApps }, 
-  { pageTitle: "Products", url: "/products", subApps } 
-];
+const renderRoute = async (request, reply, routeRenderer) => {
+  try {
+    const context = await routeRenderer.render({ request });
+    reply.type("text/html");
+
+    if (context.user.cspHeader) {
+      reply.header(`content-security-policy`, context.user.cspHeader);
+    }
+
+    reply.send(context.result);
+  } catch (error) {
+    reply.send(error.stack);
+  }
+}
 
 export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
-
-  // const createRoutes = (page) => {
-  //   const { pageTitle, url, subApps } = page;
-  //   const appRenderer: PageRenderer = new PageRenderer({
-  //     pageTitle,
-  //     subApps
-  //   });
-  //   server.route({
-  //     method: "GET",
-  //     url,
-  //     async handler(request, reply) {
-  //       try {
-  //         const context = await appRenderer.render({ request });
-  //         reply.type("text/html");
-
-  //         if (context.user.cspHeader) {
-  //           reply.header(`content-security-policy`, context.user.cspHeader);
-  //         }
-
-  //         reply.send(context.result);
-  //       } catch (error) {
-  //         reply.send(error.stack);
-  //       }
-  //     },
-  //   });
-  // }
-
-  // return pages.forEach(page => createRoutes(pages));
 
   const homeRenderer: PageRenderer = new PageRenderer({
     pageTitle: "Xarc React 18 - Home",
@@ -64,18 +46,7 @@ export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
     method: "GET",
     url: "/",
     async handler(request, reply) {
-      try {
-        const context = await homeRenderer.render({ request });
-        reply.type("text/html");
-
-        if (context.user.cspHeader) {
-          reply.header(`content-security-policy`, context.user.cspHeader);
-        }
-
-        reply.send(context.result);
-      } catch (error) {
-        reply.send(error.stack);
-      }
+      await renderRoute(request, reply, homeRenderer)
     },
   });
 
@@ -83,18 +54,7 @@ export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
     method: "GET",
     url: "/products",
     async handler(request, reply) {
-      try {
-        const context = await productRenderer.render({ request });
-        reply.type("text/html");
-
-        if (context.user.cspHeader) {
-          reply.header(`content-security-policy`, context.user.cspHeader);
-        }
-
-        reply.send(context.result);
-      } catch (error) {
-        reply.send(error.stack);
-      }
+      await renderRoute(request, reply, productRenderer)
     },
   });
 }

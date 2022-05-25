@@ -6,5 +6,3 @@ export const Product = ({ heading, imageUrl }) => (
     <img src={imageUrl} alt={heading} />
   </div>
 );
-
-
