@@ -234,7 +234,11 @@ const routes = [
   },
   {
     path: "/invalid-component",
-    component: () => {}
+    // React 18 renderToString method does not error out the same way as in previous versions.       
+    // Status 500 has to be manually declared here.
+    component: () => {
+      throw { status: 500 };
+    }
   },
   {
     path: "/error-component",

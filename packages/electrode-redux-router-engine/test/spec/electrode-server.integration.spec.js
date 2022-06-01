@@ -15,7 +15,7 @@ describe("electrode server (Hapi) integration", function () {
 
     const server = await electrodeServer({
       electrode: { logLevel: "none" },
-      connections: { default: { port: 0 } },
+      connections: { default: { port: 0 } }
     });
 
     server.route({
@@ -25,7 +25,7 @@ describe("electrode server (Hapi) integration", function () {
         if (!engine) engine = new ReduxRouterEngine({ routes, streaming, withIds });
         const result = await engine.render(request);
         reply(result);
-      },
+      }
     });
 
     return server;
@@ -50,7 +50,7 @@ describe("electrode server (Hapi) integration", function () {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: "<div>Page<div>Home</div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};",
+            prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });
       },
@@ -68,7 +68,7 @@ describe("electrode server (Hapi) integration", function () {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: "<div>Page<div>Home<!-- --> - Query: ?foo=bar</div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};",
+            prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });
       },
@@ -86,7 +86,7 @@ describe("electrode server (Hapi) integration", function () {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: "<div>Page<!-- --><div>Home<!-- --></div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};",
+            prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });
       },
@@ -104,7 +104,7 @@ describe("electrode server (Hapi) integration", function () {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: `<div>Page<!-- --><div>Home<!-- --></div></div>`,
-            prefetch: "window.__PRELOADED_STATE__ = {};",
+            prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });
       },

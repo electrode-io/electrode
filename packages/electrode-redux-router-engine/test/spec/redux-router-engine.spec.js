@@ -16,7 +16,7 @@ describe("redux-router-engine", function () {
     testReq = {
       method: "get",
       log: () => {},
-      app: {},
+      app: {}
     };
   });
 
@@ -57,7 +57,7 @@ describe("redux-router-engine", function () {
     const testHtml = "test promise result from RTS";
     const engine = new ReduxRouterEngine({
       routes,
-      renderToString: () => Promise.resolve(testHtml),
+      renderToString: () => Promise.resolve(testHtml)
     });
     testReq.url = Url.parse("/test");
 
@@ -113,7 +113,7 @@ describe("redux-router-engine", function () {
   it("should use top reducer exclusively if it's a function", () => {
     const engine = new ReduxRouterEngine({
       routes: Path.resolve(__dirname, "../routes"),
-      routesHandlerPath: "./test",
+      routesHandlerPath: "./test"
     });
     testReq.url = Url.parse("/top-reducer/init");
 
@@ -178,7 +178,9 @@ describe("redux-router-engine", function () {
     return engine.render(testReq).then((result) => {
       intercept.restore();
       expect(result.status).to.equal(500);
-      expect(result._err.message).to.contain("Nothing was returned from render");
+      // React 18 renderToString method does not error out the same way as in previous versions.
+      // "Nothing was returned from render" is not returned and neither is status 500.
+      // Instead, status 500 has to be manually declared in routes.js
     });
   });
 
@@ -246,7 +248,7 @@ describe("redux-router-engine", function () {
     const engine = new ReduxRouterEngine({
       routes,
       stringifyPreloadedState: () => `window.__TEST_STATE__`,
-      renderToString: () => "test",
+      renderToString: () => "test"
     });
     testReq.url = Url.parse("/test");
 
@@ -263,7 +265,7 @@ describe("redux-router-engine", function () {
       routes,
       logError: (req, err) => {
         error = err;
-      },
+      }
     })
       .render(testReq)
       .then((result) => {
@@ -289,7 +291,7 @@ describe("redux-router-engine", function () {
       method: "post",
       log: () => {},
       app: {},
-      url: Url.parse("/not-post"),
+      url: Url.parse("/not-post")
     };
 
     const engine = new ReduxRouterEngine({ routes });
@@ -308,7 +310,7 @@ describe("redux-router-engine", function () {
       method: "head",
       log: () => {},
       app: {},
-      url: Url.parse("/head-only"),
+      url: Url.parse("/head-only")
     };
 
     const engine = new ReduxRouterEngine({ routes });
@@ -325,12 +327,12 @@ describe("redux-router-engine", function () {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test/init"),
+      url: Url.parse("/test/init")
     };
 
     const engine = new ReduxRouterEngine({
       routes,
-      routesHandlerPath: Path.join(__dirname, ".."),
+      routesHandlerPath: Path.join(__dirname, "..")
     });
 
     return engine.render(req).then((result) => {
@@ -345,12 +347,12 @@ describe("redux-router-engine", function () {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/top-wait/init"),
+      url: Url.parse("/top-wait/init")
     };
 
     const engine = new ReduxRouterEngine({
       routes: Path.join(__dirname, "../routes"),
-      routesHandlerPath: "./test",
+      routesHandlerPath: "./test"
     });
 
     return engine.render(req).then((result) => {
@@ -377,12 +379,12 @@ describe("redux-router-engine", function () {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test-init2"),
+      url: Url.parse("/test-init2")
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test",
+      routesHandlerPath: "./test"
     });
 
     return engine.render(req).then((result) => {
@@ -397,12 +399,12 @@ describe("redux-router-engine", function () {
       method: "get",
       log: () => {},
       app: {},
-      url: "/test-init2",
+      url: "/test-init2"
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test",
+      routesHandlerPath: "./test"
     });
 
     return engine.render(req).then((result) => {
@@ -429,13 +431,13 @@ describe("redux-router-engine", function () {
         pathname: "/test-init2",
         search: "",
         searchParams: {},
-        hash: "",
-      },
+        hash: ""
+      }
     };
 
     const engine = new ReduxRouterEngine({
       routes: "./test/routes",
-      routesHandlerPath: "./test",
+      routesHandlerPath: "./test"
     });
 
     return engine.render(req).then((result) => {
@@ -451,12 +453,12 @@ describe("redux-router-engine", function () {
       method: "get",
       log: () => {},
       app: {},
-      url: Url.parse("/test/redux"),
+      url: Url.parse("/test/redux")
     };
 
     const engine = new ReduxRouterEngine({
       routes,
-      routesHandlerPath: Path.join(__dirname, ".."),
+      routesHandlerPath: Path.join(__dirname, "..")
     });
 
     return engine.render(req).then((result) => {

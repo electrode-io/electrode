@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable  max-statements, prefer-spread, global-require, complexity, comma-dangle */
+/* eslint-disable  max-statements, prefer-spread, global-require, complexity */
 
 const Path = require("path");
 const assert = require("assert");
@@ -21,7 +21,7 @@ const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
   "<": "\\u003C",
   "\u2028": "\\u2028",
-  "\u2029": "\\u2029",
+  "\u2029": "\\u2029"
 };
 
 function escapeBadChars(sourceString) {
@@ -75,18 +75,12 @@ class ReduxRouterEngine {
   getStreamWritable() {
     const writable = new Stream.PassThrough();
     writable.setEncoding("utf8");
-    const output = { result: "", error: undefined };
+    const output = { result: "" };
     writable.on("data", (chunk) => {
       output.result += chunk;
     });
-    writable.on("error", (error) => {
-      output.error = error;
-    });
     const completed = new Promise((resolve) => {
       writable.on("finish", () => {
-        resolve();
-      });
-      writable.on("error", () => {
         resolve();
       });
     });
@@ -114,7 +108,7 @@ class ReduxRouterEngine {
     if (match.length === 0) {
       return {
         status: 404,
-        message: `${pkg.name}: Path ${location.path} not found`,
+        message: `${pkg.name}: Path ${location.path} not found`
       };
     }
 
@@ -142,7 +136,7 @@ class ReduxRouterEngine {
         status: err.status || 500, // eslint-disable-line
         message: err.message,
         path: err.path || options.location.path,
-        _err: err,
+        _err: err
       };
     }
   }
@@ -180,7 +174,7 @@ class ReduxRouterEngine {
             location: options.location,
             match: options.match,
             route,
-            inits,
+            inits
           })
         );
       }
@@ -204,7 +198,7 @@ class ReduxRouterEngine {
         match,
         route: match[0].route,
         inits,
-        awaitInits,
+        awaitInits
       });
     }
 
@@ -273,13 +267,10 @@ class ReduxRouterEngine {
     }
   }
 
-  async _renderToString({ req, location, store, routeContext, withIds }) {
+  async _renderToString({ req, location, store, routeContext }) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {
-      assert(React, `${pkg.name}: can't do SSR because react not found`);
-      assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
-
       const element = React.createElement(
         // server side context to provide request
         ServerContext,
