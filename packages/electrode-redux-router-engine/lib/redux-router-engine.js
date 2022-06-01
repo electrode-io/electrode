@@ -25,7 +25,7 @@ const REPLACEMENTS_FOR_BAD_CHARS = {
 };
 
 function escapeBadChars(sourceString) {
-  return sourceString.replace(BAD_CHARS_REGEXP, (match) => REPLACEMENTS_FOR_BAD_CHARS[match]);
+  return sourceString.replace(BAD_CHARS_REGEXP, match => REPLACEMENTS_FOR_BAD_CHARS[match]);
 }
 
 const ROUTE_HANDLER = Symbol("route handler");
@@ -38,11 +38,11 @@ class ReduxRouterEngine {
 
     // generate __PRELOADED_STATE__ or __<prefix>_PRELOADED_STATE__
     const preloadedStateName = ["_", this.options.webappPrefix, "PRELOADED_STATE__"]
-      .filter((x) => x)
+      .filter(x => x)
       .join("_");
 
     if (!options.stringifyPreloadedState) {
-      this.options.stringifyPreloadedState = (state) =>
+      this.options.stringifyPreloadedState = state =>
         `window.${preloadedStateName} = ${escapeBadChars(JSON.stringify(state))};`;
     }
 
@@ -219,7 +219,7 @@ class ReduxRouterEngine {
       if (topInit.initialState || inits.length > 0) {
         initialState = Object.assign.apply(
           null,
-          [{}, topInit.initialState].concat(inits.map((x) => x.initialState))
+          [{}, topInit.initialState].concat(inits.map(x => x.initialState))
         );
       } else {
         // no route provided any initialState
@@ -233,13 +233,13 @@ class ReduxRouterEngine {
         // top route only provide its own reducer and initialState
         const allReducers = Object.assign.apply(
           null,
-          [{}, topInit.reducer].concat(inits.map((x) => x.reducer))
+          [{}, topInit.reducer].concat(inits.map(x => x.reducer))
         );
 
         reducer = combineReducers(allReducers);
       } else {
         // no route provided any reducer
-        reducer = (x) => x;
+        reducer = x => x;
       }
 
       options.store = createStore(reducer, initialState);
