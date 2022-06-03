@@ -9,7 +9,7 @@ const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
 
-function getStreamWritable(stream, next) {
+const getStreamWritable = (stream, next) => {
     let res = "";
     stream.on("data", data => (res += data.toString()));
     stream.on("end", () => next(null, res));
@@ -61,6 +61,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- --></div>`)      
     );
   });
@@ -82,6 +83,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)      
     );
   });
@@ -105,6 +107,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
     );
   });
@@ -126,53 +129,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
-    );
-  });
-
-  it("should hydrate render Component with stream if enabled", () => {
-    const framework = new lib.FrameworkLib({
-      subApp: {
-        prepare: () => ({ test: "foo bar" }),
-        Component: props => {
-          return <div>Hello {props.test}</div>;
-        }
-      },
-      subAppServer: {},
-      options: { serverSideRendering: true, useStream: true, hydrateServerData: true },
-      context: {
-        user: {}
-      }
-    });
-    return asyncVerify(
-      () => framework.handleSSR(),
-      (stream, next) => getStreamWritable(stream, next),
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)      
-    );
-  });
-
-  it("should render Component from subapp with hydration info", () => {
-    const framework = new lib.FrameworkLib({
-      subApp: {
-        prepare: () => ({
-          test: "foo bar"
-        }),
-        Component: props => {
-          return <div>Hello {props.test}</div>;
-        }
-      },
-      subAppServer: {},
-      options: {
-        serverSideRendering: true,
-        hydrateServerData: true
-      },
-      context: {
-        user: {}
-      }
-    });
-    return asyncVerify(
-      () => framework.handleSSR(),
-      (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
     );
   });
@@ -195,6 +152,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
     );
   });
@@ -218,6 +176,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
     );
   });
@@ -294,6 +253,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => {
+        // renderToPipeableSrteam adds a <!-- --> before and after props
         expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
         expect(framework.initialStateStr).equals(undefined);
       }
@@ -346,32 +306,6 @@ describe("SSR React framework", function () {
     );
   });
 
-  it("should hydrate render Component with suspense using react-async-ssr", () => {
-    const framework = new lib.FrameworkLib({
-      subApp: {
-        Component: props => {
-          return (
-            <React.Suspense fallback={<h1>Loading...</h1>}>
-              <div>Hello {props.test}</div>
-            </React.Suspense>
-          );
-        }
-      },
-      subAppServer: {
-        prepare: () => ({ test: "foo bar" })
-      },
-      options: { serverSideRendering: true, suspenseSsr: true, hydrateServerData: true },
-      context: {
-        user: {}
-      }
-    });
-    return asyncVerify(
-      () => framework.handleSSR(),
-      (stream, next) => getStreamWritable(stream, next),
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
-    );    
-  });
-
   it("should render Component with suspense using react-async-ssr", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
@@ -394,6 +328,7 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
+      // renderToPipeableSrteam adds a <!-- --> before and after props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
     );    
   });
@@ -429,6 +364,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => {        
+        // renderToPipeableSrteam adds a <!-- --> before and after props
         expect(res).contains(`<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes<!-- --></div>`);
         expect(request.foo).equals("bar");
       }
