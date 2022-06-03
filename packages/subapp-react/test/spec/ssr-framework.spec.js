@@ -1,11 +1,21 @@
 "use strict";
+
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
-const { withRouter } = require("react-router");
+const { withRouter, Routes } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
+const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
+
+function getStreamWritable(stream, next) {
+    let res = "";
+    stream.on("data", data => (res += data.toString()));
+    stream.on("end", () => next(null, res));
+    stream.on("error", next);
+    return res;
+}
 
 describe("SSR React framework", function () {
   it("should setup React framework", () => {
@@ -21,7 +31,7 @@ describe("SSR React framework", function () {
       subAppServer: {},
       options: {}
     });
-    const res = await framework.handleSSR();
+    const res = await framework.handleSSR();    
     expect(res).contains("has no StartComponent");
   });
 
@@ -35,7 +45,7 @@ describe("SSR React framework", function () {
     expect(res).equals("");
   });
 
-  it("should render subapp with w/o initial props if no prepare provided", async () => {
+  it("should render subapp with w/o initial props if no prepare provided", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -48,11 +58,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- --></div>`)      
+    );
   });
 
-  it("should render Component from subapp with initial props from prepare", async () => {
+  it("should render Component from subapp with initial props from prepare", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -66,8 +79,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)      
+    );
   });
 
   it("should allow preparing data before SSR", async () => {
@@ -86,11 +102,14 @@ describe("SSR React framework", function () {
     });
     await framework.handlePrepare();
     expect(framework._initialProps).to.be.ok;
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );
   });
 
-  it("should render Component with stream if enabled", async () => {
+  it("should render Component with stream if enabled", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -104,13 +123,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const resp = await framework.handleSSR();
-
-    // all non static render methods add <!-- --> to text props
-    expect(resp).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );
   });
 
-  it("should hydrate render Component with stream if enabled", async () => {
+  it("should hydrate render Component with stream if enabled", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -124,13 +144,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const resp = await framework.handleSSR();
-
-    // all non static render methods add <!-- --> to text props
-    expect(resp).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)      
+    );
   });
 
-  it("should render Component from subapp with hydration info", async () => {
+  it("should render Component from subapp with hydration info", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({
@@ -149,13 +170,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const resp = await framework.handleSSR();
-
-    // all non static render methods add <!-- --> to text props
-    expect(resp).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );
   });
 
-  it("should render Component from subapp with initial props from server's prepare", async () => {
+  it("should render Component from subapp with initial props from server's prepare", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -170,11 +192,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );
   });
 
-  it("should render Component from subapp with initial props from server's prepare while using attachInitialState", async () => {
+  it("should render Component from subapp with initial props from server's prepare while using attachInitialState", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -190,8 +215,11 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );
   });
 
   it("should init redux store in context and render Component", async () => {
@@ -222,11 +250,22 @@ describe("SSR React framework", function () {
         options: { serverSideRendering: true },
         context
       });
-      const res = await framework.handleSSR();
-      expect(res).contains("Hello <!-- -->foo bar");
-      expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
-      expect(context.user).to.have.property("storeContainer");
-      expect(storeReady).equal(true);
+      
+      return asyncVerify(
+        () => framework.handleSSR(),
+        (stream, next) => {
+          let res = "";
+          stream.on("data", data => (res += data.toString()));
+          stream.on("end", () => next(null, res));
+          stream.on("error", next);
+        },
+        res => {            
+          expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`);
+          expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
+          expect(context.user).to.have.property("storeContainer");
+          expect(storeReady).equal(true);
+        }
+      );
     };
     await verify();
     const store = context.user.storeContainer.store;
@@ -235,7 +274,7 @@ describe("SSR React framework", function () {
     expect(store).to.equal(context.user.storeContainer.store);
   });
 
-  it("should init redux store and render Component but doesn't attach initial state", async () => {
+  it("should init redux store and render Component but doesn't attach initial state", () => {
     const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
 
     const framework = new lib.FrameworkLib({
@@ -251,9 +290,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <!-- -->foo bar");
-    expect(framework.initialStateStr).equals(undefined);
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => {
+        expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+        expect(framework.initialStateStr).equals(undefined);
+      }
+    );    
   });
 
   it("should init redux store but doesn't render Component if serverSideRendering is not true", async () => {
@@ -277,7 +321,7 @@ describe("SSR React framework", function () {
     expect(framework.initialStateStr).equals(undefined);
   });
 
-  it("should init redux store with empty state without prepare and render Component", async () => {
+  it("should init redux store with empty state without prepare and render Component", () => {
     const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
 
     const framework = new lib.FrameworkLib({
@@ -292,12 +336,17 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello <");
-    expect(framework.initialStateStr).equals(`{}`);
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => {
+        expect(res).contains("Hello <"); 
+        expect(framework.initialStateStr).equals(`{}`);
+      }
+    );
   });
 
-  it("should hydrate render Component with suspense", async () => {
+  it("should hydrate render Component with suspense using react-async-ssr", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -316,13 +365,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const resp = await framework.handleSSR();
-
-    // all non static render methods add <!-- --> to text props
-    expect(resp).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );    
   });
 
-  it("should render Component with suspense", async () => {
+  it("should render Component with suspense using react-async-ssr", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {
@@ -341,13 +391,14 @@ describe("SSR React framework", function () {
         user: {}
       }
     });
-    const resp = await framework.handleSSR();
-
-    // all non static render methods add <!-- --> to text props
-    expect(resp).contains("Hello <!-- -->foo bar");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+    );    
   });
 
-  it("should render Component with react context containing request", async () => {
+  it("should render Component with react context containing request", () => {
     const request = {};
     const framework = new lib.FrameworkLib({
       subApp: {
@@ -374,14 +425,18 @@ describe("SSR React framework", function () {
         user: { request }
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains(
-      `<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes<!-- --></div>`
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => {        
+        expect(res).contains(`<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes<!-- --></div>`);
+        expect(request.foo).equals("bar");
+      }
     );
-    expect(request.foo).equals("bar");
+    
   });
 
-  it("should render subapp with react-router StaticRouter", async () => {
+  it("should render subapp with react-router StaticRouter", () => {
     const TestComponent = () => {
       return <div>Hello test path</div>;
     };
@@ -408,15 +463,17 @@ describe("SSR React framework", function () {
         }
       }
     });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello test path<");
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => getStreamWritable(stream, next),
+      res => expect(res).contains("Hello test path<")
+    );    
   });
 
   it("should render subapp with custom renderer e.g. css in js solution", async () => {
     const Component = () => {
       return <div>Hello test path</div>;
     };
-
     const framework = new lib.FrameworkLib({
       subApp: {
         Component
