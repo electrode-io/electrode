@@ -9,53 +9,52 @@ const ReactDOMServer = require("react-dom/server");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
-const { StaticRouter } = require("react-router-dom/server");
+const ReactRouterDom = optionalRequire("react-router-dom");
 const { Stream } = require("stream");
-
-// Helper function to get an AsyncIterable (via PassThrough)
-// from the renderToPipeableStream() onShellReady event
-function onShellReady (element) {
-  const passThrough = new Stream.PassThrough()
-  return new Promise((resolve, reject) => {
-    try {
-      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-        onShellReady () {
-          resolve(pipeable.pipe(passThrough))
-        },
-        onShellError (error) {
-          reject(error)
-        },
-      })
-    } catch (error) {
-      resolve(error)
-    }
-  })
-}
-
-// Helper function to get an AsyncIterable (via PassThrough)
-// from the renderToPipeableStream() onAllReady event
-function onAllReady (element) {
-  const passThrough = new Stream.PassThrough()
-  return new Promise((resolve, reject) => {
-    try {
-      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-        onAllReady () {
-          resolve(pipeable.pipe(passThrough))
-        },
-        onError (error) {
-          reject(error)
-        },
-      })
-    } catch (error) {
-      resolve(error)
-    }
-  })
-}
-
 class FrameworkLib {
   constructor(ref) {
     this.ref = ref;
     this._prepared = false;
+  }
+
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onShellReady event
+  onShellReady(element) {
+    const passThrough = new Stream.PassThrough()
+    return new Promise((resolve, reject) => {
+      try {
+        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+          onShellReady () {
+            resolve(pipeable.pipe(passThrough))
+          },
+          onShellError (error) {
+            reject(error)
+          },
+        })
+      } catch (error) {
+        resolve(error)
+      }
+    })
+  }
+
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onAllReady event
+  onAllReady(element) {
+    const passThrough = new Stream.PassThrough()
+    return new Promise((resolve, reject) => {
+      try {
+        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+          onAllReady () {
+            resolve(pipeable.pipe(passThrough))
+          },
+          onError (error) {
+            reject(error)
+          },
+        })
+      } catch (error) {
+        resolve(error)
+      }
+    })
   }
 
   async handlePrepare() {
@@ -97,7 +96,6 @@ class FrameworkLib {
 
     return "";
   }
-  
 
   renderTo(element, options) {
     const { subAppServer } = this.ref;
@@ -107,9 +105,10 @@ class FrameworkLib {
     }
 
     if(options.useStream) {
-      return onShellReady(element);
+      return this.onShellReady(element);
     }
-    return onAllReady(element);
+
+    return this.onAllReady(element);
   }
 
   createTopComponent(initialProps) {
@@ -166,11 +165,11 @@ class FrameworkLib {
     const { request } = context.user;
     // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
-    // redux data model. prepare initial state and store to render it.
+    // redux data model.  prepare initial state and store to render it.
     let reduxData;
 
     // see if app has a prepare callback, on the server side first, and then the
-    // app itself, and call it. assume the object it returns would contain the
+    // app itself, and call it.  assume the object it returns would contain the
     // initial redux state data.
     const prepare = subAppServer.prepare || subApp.prepare;
     if (prepare) {
@@ -224,13 +223,17 @@ class FrameworkLib {
   }
 
   wrapReactRouter() {
-    return props => {
-      return React.createElement(
-        StaticRouter,
-        props,
+    assert(
+      ReactRouterDom && ReactRouterDom.StaticRouter,
+      `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
+and can't generate it because module react-router-dom with StaticRouter is not found`
+    );
+    return props2 =>
+      React.createElement(
+        ReactRouterDom.StaticRouter,
+        props2,
         React.createElement(this.ref.subApp.Component)
       );
-    };
   }
 }
 
