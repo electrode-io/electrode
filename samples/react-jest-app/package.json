@@ -65,7 +65,8 @@
     "@xarc/opt-less": "^1.0.2",
     "@xarc/opt-mocha": "^1.0.0",
     "@xarc/opt-postcss": "^1.0.4",
-    "@xarc/opt-stylus": "^1.0.2"
+    "@xarc/opt-stylus": "^1.0.2",
+    "cheerio": "=1.0.0-rc.10"
   },
   "fyn": {
     "dependencies": {
