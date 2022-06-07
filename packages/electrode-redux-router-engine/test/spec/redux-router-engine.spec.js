@@ -4,9 +4,7 @@ const Path = require("path");
 const ReduxRouterEngine = require("../..");
 const xstdout = require("xstdout");
 const Url = require("url");
-
 const expect = require("chai").expect;
-
 require("babel-register");
 
 const routes = require("../routes.jsx").default;
@@ -85,7 +83,7 @@ describe("redux-router-engine", function() {
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
-      expect(result.html).to.equal("<div>Page<div>Home - Query: ?foo=bar</div></div>");
+      expect(result.html).to.equal("<div>Page<div>Home<!-- --> - Query: ?foo=bar</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
     });
   });
@@ -96,7 +94,7 @@ describe("redux-router-engine", function() {
 
     return engine.render(testReq, { location: Url.parse("/test?a=1") }).then(result => {
       expect(result.status).to.equal(200);
-      expect(result.html).to.equal("<div>Page<div>Home - Query: ?a=1</div></div>");
+      expect(result.html).to.equal("<div>Page<div>Home<!-- --> - Query: ?a=1</div></div>");
       expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
     });
   });
@@ -180,7 +178,9 @@ describe("redux-router-engine", function() {
     return engine.render(testReq).then(result => {
       intercept.restore();
       expect(result.status).to.equal(500);
-      expect(result._err.message).to.contain("Nothing was returned from render");
+      // React 18 renderToString method does not error out the same way as in previous versions.
+      // "Nothing was returned from render" is not returned and neither is status 500.
+      // Instead, status 500 has to be manually declared in routes.js
     });
   });
 
