@@ -17,25 +17,44 @@ class FrameworkLib {
     this._prepared = false;
   }
 
-  getStreamWritable() {
-    const writable = new Stream.PassThrough();
-    writable.setEncoding("utf8");
-    const output = { result: "", error: undefined };
-    writable.on("data", chunk => {
-      output.result += chunk;
-    });
-    writable.on("error", error => {
-      output.error = error;
-    });
-    const completed = new Promise(resolve => {
-      writable.on("finish", () => {
-        resolve();
-      });
-      writable.on("error", () => {
-        resolve();
-      });
-    });
-    return { writable, completed, output };
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onShellReady event
+  onShellReady(element) {
+    const passThrough = new Stream.PassThrough()
+    return new Promise((resolve, reject) => {
+      try {
+        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+          onShellReady () {
+            resolve(pipeable.pipe(passThrough))
+          },
+          onShellError (error) {
+            reject(error)
+          },
+        })
+      } catch (error) {
+        resolve(error)
+      }
+    })
+  }
+
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onAllReady event
+  onAllReady(element) {
+    const passThrough = new Stream.PassThrough()
+    return new Promise((resolve, reject) => {
+      try {
+        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+          onAllReady () {
+            resolve(pipeable.pipe(passThrough))
+          },
+          onError (error) {
+            reject(error)
+          },
+        })
+      } catch (error) {
+        resolve(error)
+      }
+    })
   }
 
   async handlePrepare() {
@@ -78,18 +97,18 @@ class FrameworkLib {
     return "";
   }
 
-  async renderTo(element, options) {
+  renderTo(element, options) {
     const { subAppServer } = this.ref;
 
     if (typeof subAppServer.renderer === "function") {
       return subAppServer.renderer(element, options);
     }
 
-    const { writable, output, completed } = this.getStreamWritable();
-    const { pipe } = await ReactDOMServer.renderToPipeableStream(element);
-    pipe(writable);
-    await completed;
-    return output.result;
+    if(options.useStream) {
+      return this.onShellReady(element);
+    }
+
+    return this.onAllReady(element);
   }
 
   createTopComponent(initialProps) {
