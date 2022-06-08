@@ -1,4 +1,4 @@
-const number = (number = 1000, action = {}) => {
+const number = (number = 100, action = {}) => {
   if (action.type === "INC_NUMBER") {
     return number + 1;
   }

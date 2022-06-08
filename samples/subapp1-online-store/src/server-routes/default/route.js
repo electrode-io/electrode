@@ -1,8 +1,13 @@
 "use strict";
 
 module.exports = {
-  path: ["/", { "/home": ["post"] }, "/products"],
-  pageTitle: "Online Store",
+  path: [
+    "/",
+    { "/home": ["post"] },
+    "/products",
+    "/deals"
+  ],
+  pageTitle: "Online Store Home",
   // Specify the HTML index generation template
   // since using JSX template, don't include the extension
   // because babel transpiled it to .js in prod mode

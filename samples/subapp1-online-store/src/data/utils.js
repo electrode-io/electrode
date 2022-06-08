@@ -1,4 +1,4 @@
-const fetchFakeData = (fakeData) => {
+const fetchFakeData = (fakeData, delay) => {
   let status = "pending"
   let result;
   let suspender = new Promise((resolve, reject) => {
@@ -6,7 +6,7 @@ const fetchFakeData = (fakeData) => {
       status = "success";
       result = fakeData;
       resolve();
-    }, 2500);
+    }, delay);
   });
 
   return {
@@ -14,7 +14,9 @@ const fetchFakeData = (fakeData) => {
       if (status === "pending") {
         throw suspender;
       }
-      return result;
+      if (status === "success") {
+        return result;
+      }      
     },
   };
 };
