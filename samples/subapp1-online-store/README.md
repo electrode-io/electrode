@@ -135,9 +135,7 @@ You can also control how your subapp works from server side to client side for e
 
 Some of the attributes supported:
 
-- `hydrate` - Enable client side hydration of initial state from server. ie: Use `React.hydrate` API.
-- `useStream` - Use the stream SSR APIs. ie: `ReactDomServer.renderToNodeStream`.
-- `suspenseSsr` - Support suspense in SSR. No stream support.
+- `useStream` - Use the stream SSR APIs. ie: `ReactDomServer.renderToPipeableStream`.
 
 ## React Router and SPA
 
@@ -151,29 +149,26 @@ Example:
 import React from "react";
 import { loadSubApp } from "subapp-web";
 import { Router, Route, Switch } from "react-router-dom";
-import { withRouter } from "react-router";
 
 const Home = () => {
   return (
     <div>
       <Navigation />
-      <Switch>
+      <Routes>
         <Route path="/" exact component={Main} {...props} />
         <Route path="/products" component={About} {...props} />
         <Route path="/contact" component={Contact} {...props} />
-      </Switch>
+      </Routes>
     </div>
   );
 };
 
 export default loadSubApp({
   name: "Home",
-  Component: withRouter(Home),
-  useReactRouter: true
+  Component: Home,
+  useReactRouter: true,
 });
 ```
-
-Electrode will automatically ensure your subapp is integrated with `StaticRouter` when doing SSR and `DynamicRouter` with `history` when running in the browser.
 
 **SPA** Further, you can have other subapps on the same page, and those will stay persistent while your subapp that is enabled with [react-router] will change. When loading each of the [react-router] routes, your page will be properly server side rendered.
 
@@ -201,6 +196,16 @@ export default reduxLoadSubApp({
   }
 });
 ```
+
+## Features
+
+This app's goal is to demonstrate the following feautres:
+- **ServerSide rendering**
+- **Streaming** - Based on new React 18 `renderToPipeableStream()` method
+- **Redux implementation**
+- **Suspense** - Supported over SSR in React 18
+- **Transatition** - New React 18 feature
+
 
 ## License
 

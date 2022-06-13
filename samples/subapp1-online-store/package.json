@@ -2,7 +2,6 @@
   "name": "subapp1-online-store",
   "version": "0.2.1",
   "description": "SubApp Redux POC",
-  "homepage": "http://test",
   "author": {
     "name": "Mateja Ristic",
     "email": "mateja.ristic@gmail.com",
@@ -26,8 +25,8 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+    "node": ">= 12",
+    "npm": ">= 6"
   },
   "scripts": {
     "dev": "clap -q dev",
