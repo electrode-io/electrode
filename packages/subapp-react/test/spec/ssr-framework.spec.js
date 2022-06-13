@@ -3,8 +3,7 @@
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
-const { withRouter, Routes } = require("react-router");
-const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
+const { Routes, Route } = require("react-router-dom"); // eslint-disable-line
 const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
@@ -372,18 +371,17 @@ describe("SSR React framework", function () {
     
   });
 
-  it("should render subapp with react-router StaticRouter", () => {
-    const TestComponent = () => {
-      return <div>Hello test path</div>;
-    };
-    const Component = withRouter(props => {
-      return (
-        <Switch>
-          <Route path="/test" component={TestComponent} {...props} />
-          <Route path="/foo" component={() => "bar"} {...props} />
-        </Switch>
-      );
-    });
+  it("should render subapp with react-router StaticRouter", async () => {
+    const TestComponent = () => <div>Hello test path</div>;
+    const FooBar = () => <div>foo</div>;
+
+    const Component = (props) => (
+      <Routes>
+        <Route path="/test" element={<TestComponent {...props} />} />
+        <Route path="/foo" element={<FooBar {...props} />} />
+      </Routes>
+    );
+    
     const framework = new lib.FrameworkLib({
       subApp: {
         useReactRouter: true,

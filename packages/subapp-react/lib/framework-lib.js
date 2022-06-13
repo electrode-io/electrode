@@ -227,11 +227,6 @@ class FrameworkLib {
   }
 
   wrapReactRouter() {
-    assert(
-      ReactRouterDom && ReactRouterDom.StaticRouter,
-      `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
-and can't generate it because module react-router-dom with StaticRouter is not found`
-    );
     return props2 =>
       React.createElement(
         StaticRouter,
