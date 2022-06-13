@@ -1,23 +1,21 @@
-import {reduxLoadSubApp} from "subapp-redux";
-import {getBrowserHistory, React} from "subapp-react";
-import {connect} from "react-redux";
-import {withRouter} from "react-router";
-import {Route, Router, Switch} from "react-router-dom";
-import logger from 'redux-logger';
-import {applyMiddleware} from 'redux';
+import { reduxLoadSubApp } from "subapp-redux";
+import { getBrowserHistory, React } from "subapp-react";
+import { connect } from "react-redux";
+import { Route, unstable_HistoryRouter as HistoryRouter, Routes } from "react-router-dom";
+import logger from "redux-logger";
+import { applyMiddleware } from "redux";
+import { Products } from "../components/Products";
+import { Navigation } from "../components/Navigation";
+import reduxReducers, { decNumber, incNumber } from "./reducers";
 
-import {Products} from "../components/Products";
-import {Navigation} from "../components/Navigation";
-import reduxReducers, {decNumber, incNumber} from "./reducers";
-
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => state;
 
 const HomeComp = (props) => {
   return (
     <div className="container-fluid text-center">
       <h2>Home Page Content</h2>
-      <br/>
-      <h4>Redux State Demo</h4>      
+      <br />
+      <h4>Redux State Demo</h4>
       <button onClick={() => props.dispatch(decNumber())}>&#8810;</button>
       <span style={{ color: "black", fontWeight: "bold", padding: "0 1rem 0 1rem" }}>
         {props.number}
@@ -27,36 +25,34 @@ const HomeComp = (props) => {
   );
 };
 
-
-const MainBody = props => {
+const MainBody = () => {
   return (
     <div>
       <Navigation />
-      <Switch>
-        <Route path="/" exact component={Home} {...props} />
-        <Route path="/products" component={Products} {...props} />        
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="products" element={<Products />} />
+      </Routes>
     </div>
   );
 };
 
-
-const Home = connect(mapStateToProps, dispatch => ({ dispatch }))(HomeComp)
-const Component = withRouter(connect(mapStateToProps, dispatch => ({ dispatch }))(MainBody));
+const Home = connect(mapStateToProps, (dispatch) => ({ dispatch }))(HomeComp);
+const Component = connect(mapStateToProps, (dispatch) => ({ dispatch }))(MainBody);
 
 export default reduxLoadSubApp({
   name: "MainBody",
   Component,
   useReactRouter: true,
   reduxEnhancer: () => applyMiddleware(logger),
-  StartComponent: props => {
+  StartComponent: (props) => {
     return (
-      <Router history={getBrowserHistory()}>
+      <HistoryRouter history={getBrowserHistory()}>
         <Component {...props} />
-      </Router>
+      </HistoryRouter>
     );
   },
   prepare: async () => {},
   reduxShareStore: true,
-  reduxReducers
+  reduxReducers,
 });

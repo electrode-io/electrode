@@ -1,7 +1,8 @@
 import React from "react";
 import subApp from "./main-body";
 import Promise from "bluebird";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
+import {unstable_HistoryRouter as HistoryRouter, Routes, Router, BrowserRouter, Link} from "react-router-dom";
 
 module.exports = {
   prepare: async ({ request, context }) => {
