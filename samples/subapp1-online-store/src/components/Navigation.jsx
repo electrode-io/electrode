@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import electrodePng from "../../static/electrode.png";
 
-const NavItem = (props) => {
-  const { to, children } = props;
+const navRoutes = [
+  { path: "/", label: "Home" },
+  { path: "/products", label: "Products" },
+];
+
+const NavItem = ({ to, children }) => {
   return (
     <li className="nav-item">
-      <Link className="nav-link" to={to}>
-        {children}
-      </Link>
+      <Link className="nav-link" to={to}>{children}</Link>
     </li>
   );
 };
@@ -25,8 +27,9 @@ export const Navigation = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/products">Products</NavItem>
+            {navRoutes.map((navRoute, i) => (
+              <NavItem key={i} to={navRoute.path}>{navRoute.label}</NavItem>
+            ))}
           </ul>
         </div>
       </div>

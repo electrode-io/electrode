@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="text-center">
       <h1>
-        React v18 based SubApp Version 1 with React v18
+        SubApp Version 1 with React v18
       </h1>
     </div>
   );

@@ -1,7 +1,7 @@
 import { reduxLoadSubApp } from "subapp-redux";
-import { getBrowserHistory, React } from "subapp-react";
+import { React } from "subapp-react";
 import { connect } from "react-redux";
-import { Route, unstable_HistoryRouter as HistoryRouter, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import { Products } from "../components/Products";
@@ -47,9 +47,9 @@ export default reduxLoadSubApp({
   reduxEnhancer: () => applyMiddleware(logger),
   StartComponent: (props) => {
     return (
-      <HistoryRouter history={getBrowserHistory()}>
+      <BrowserRouter>
         <Component {...props} />
-      </HistoryRouter>
+      </BrowserRouter>
     );
   },
   prepare: async () => {},
