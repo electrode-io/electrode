@@ -9,7 +9,7 @@ const ReactDOMServer = require("react-dom/server");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
-const ReactRouterDom = optionalRequire("react-router-dom");
+const { StaticRouter } = require("react-router-dom/server");
 const { Stream } = require("stream");
 class FrameworkLib {
   constructor(ref) {
@@ -103,11 +103,15 @@ class FrameworkLib {
     if (typeof subAppServer.renderer === "function") {
       return subAppServer.renderer(element, options);
     }
-
+    
+    // When the content above all Suspense boundaries is ready.
+    // This is used when we are streaming content 
     if(options.useStream) {
       return this.onShellReady(element);
     }
-
+    // If we don't want streaming
+    // This will fire after the entire page content is ready.
+    // You can use this for crawlers or static generation.
     return this.onAllReady(element);
   }
 
@@ -223,14 +227,9 @@ class FrameworkLib {
   }
 
   wrapReactRouter() {
-    assert(
-      ReactRouterDom && ReactRouterDom.StaticRouter,
-      `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
-and can't generate it because module react-router-dom with StaticRouter is not found`
-    );
     return props2 =>
       React.createElement(
-        ReactRouterDom.StaticRouter,
+        StaticRouter,
         props2,
         React.createElement(this.ref.subApp.Component)
       );
