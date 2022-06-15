@@ -60,8 +60,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- --></div>`)      
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello </div>`)      
     );
   });
 
@@ -82,8 +82,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)      
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)      
     );
   });
 
@@ -106,8 +106,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );
   });
 
@@ -128,8 +128,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );
   });
 
@@ -151,8 +151,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );
   });
 
@@ -175,8 +175,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );
   });
 
@@ -218,7 +218,7 @@ describe("SSR React framework", function () {
           stream.on("error", next);
         },
         res => {            
-          expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`);
+          expect(res).contains(`<div>Hello <!-- -->foo bar</div>`);
           expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
           expect(context.user).to.have.property("storeContainer");
           expect(storeReady).equal(true);
@@ -252,8 +252,8 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => {
-        // renderToPipeableSrteam adds a <!-- --> before and after props
-        expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+        // renderToPipeableSrteam adds a <!-- --> before props
+        expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
         expect(framework.initialStateStr).equals(undefined);
       }
     );    
@@ -327,8 +327,8 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      // renderToPipeableSrteam adds a <!-- --> before and after props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar<!-- --></div>`)
+      // renderToPipeableSrteam adds a <!-- --> before props
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );    
   });
 
@@ -363,8 +363,8 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => {        
-        // renderToPipeableSrteam adds a <!-- --> before and after props
-        expect(res).contains(`<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes<!-- --></div>`);
+        // renderToPipeableSrteam adds a <!-- --> before props
+        expect(res).contains(`<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes</div>`);
         expect(request.foo).equals("bar");
       }
     );
