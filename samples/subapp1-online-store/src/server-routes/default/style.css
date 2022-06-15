@@ -1,0 +1,70 @@
+/* Remove the navbar's default rounded borders and increase the bottom margin */
+
+.navbar {
+  margin-bottom: 50px;
+  border-radius: 0;
+}
+
+/* Remove the jumbotron's default bottom margin */
+
+.jumbotron {
+  margin-bottom: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+
+#loading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(94, 94, 94, 0.085);
+  border-radius: 50%;
+  border-top-color: rgb(76, 76, 76);
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+#comment-box, #user-box {
+  border: 1px solid #000;
+  display: inline-block;
+  padding: 20px 40px 20px;
+  margin: 20px;
+  text-align: left;
+}
+.comment, .user {
+  font-size: 18px;
+}
+.navbar {
+  margin: 0 auto 20px;
+}
+.navbar .container-fluid {
+  max-width: 900px;
+}
+#subapp-header01, #subapp-mainbody, #subapp-bottom,
+#subapp-suspense-demo, #subapp-footer {
+  overflow: auto;
+  padding: 20px;
+}
+#subapp-header01 {
+  background: #143F6B;
+  color: #fff;
+}
+#subapp-mainbody {
+  background: #F55353;
+  padding: 0 0 20px;
+}
+#subapp-footer {
+  background: #FEB139;
+}
+#subapp-suspense-demo {
+  background: #F6F54D;
+}
+footer form {
+  max-width: 500px;
+  margin: auto;
+}
