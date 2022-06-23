@@ -132,7 +132,7 @@
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "source-map-support": "^0.5.21",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.7.0",
     "typedoc": "^0.22.15",
     "typescript": "^4.6.4"
   },
