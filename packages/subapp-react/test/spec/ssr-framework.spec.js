@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use strict";
 
 const url = require("url");
@@ -379,8 +380,8 @@ describe("SSR React framework", function () {
 
     const Component = (props) => (
       <Routes>
-        <Route path="/test" element={<TestComponent {...props} />} />
-        <Route path="/foo" element={<FooBar {...props} />} />
+        <Route path="/test" element={<TestComponent />} />
+        <Route path="/foo" element={<FooBar />} />
       </Routes>
     );
 

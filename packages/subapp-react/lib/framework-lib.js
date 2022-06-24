@@ -21,19 +21,12 @@ class FrameworkLib {
   // from the renderToPipeableStream() onShellReady event
   onShellReady(element) {
     const passThrough = new Stream.PassThrough();
-    return new Promise((resolve, reject) => {
-      try {
-        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-          onShellReady () {
-            resolve(pipeable.pipe(passThrough));
-          },
-          onShellError (error) {
-            reject(error);
-          }
-        });
-      } catch (error) {
-        resolve(error);
-      }
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onShellReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
     });
   }
 
@@ -41,19 +34,12 @@ class FrameworkLib {
   // from the renderToPipeableStream() onAllReady event
   onAllReady(element) {
     const passThrough = new Stream.PassThrough();
-    return new Promise((resolve, reject) => {
-      try {
-        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-          onAllReady () {
-            resolve(pipeable.pipe(passThrough));
-          },
-          onError (error) {
-            reject(error);
-          }
-        });
-      } catch (error) {
-        resolve(error);
-      }
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onAllReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
     });
   }
 
