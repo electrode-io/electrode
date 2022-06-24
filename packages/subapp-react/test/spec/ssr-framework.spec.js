@@ -373,10 +373,12 @@ describe("SSR React framework", function () {
   });
 
   it("should render subapp with react-router StaticRouter", async () => {
+    /* eslint-disable no-unused-vars */
     const TestComponent = () => <div>Hello test path</div>;
     const FooBar = () => <div>foo</div>;
+    /* eslint-enable no-unused-vars */
 
-    const Component = () => (
+    const Component = (props) => (
       <Routes>
         <Route path="/test" element={<TestComponent />} />
         <Route path="/foo" element={<FooBar />} />
