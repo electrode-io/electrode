@@ -378,7 +378,7 @@ describe("SSR React framework", function () {
     const FooBar = () => <div>foo</div>;
     /* eslint-enable no-unused-vars */
 
-    const Component = (props) => (
+    const Component = () => (
       <Routes>
         <Route path="/test" element={<TestComponent />} />
         <Route path="/foo" element={<FooBar />} />
