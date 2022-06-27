@@ -81,7 +81,7 @@ describe("fastify-plugin", function () {
           url: `http://localhost:${server.server.address().port}/api/demo3/testsetup`
         });
         expect(result.statusCode).to.equal(200);
-        expect(result.json()).to.deep.equal({ msg: "Route set by subappServer" });
+        expect(result.json().msg).to.equal("Route set by subappServer");
       },
       runFinally(async () => {
         server.close();
