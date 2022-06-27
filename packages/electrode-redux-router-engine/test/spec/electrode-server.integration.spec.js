@@ -85,7 +85,7 @@ describe("electrode server (Hapi) integration", function() {
         return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
-            html: "<div>Page<!-- --><div>Home<!-- --></div></div>",
+            html: "<div>Page<div>Home</div></div>",
             prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });
@@ -103,7 +103,7 @@ describe("electrode server (Hapi) integration", function() {
         return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
             status: 200,
-            html: `<div>Page<!-- --><div>Home<!-- --></div></div>`,
+            html: `<div>Page<div>Home</div></div>`,
             prefetch: "window.__PRELOADED_STATE__ = {};"
           });
         });

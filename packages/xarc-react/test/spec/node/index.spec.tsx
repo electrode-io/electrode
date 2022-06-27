@@ -21,12 +21,12 @@ describe("createDynamicComponent", function () {
 
     const html = renderToString(<Component />);
     expect(html).to.equal(
-      `<div data-reactroot="">subapp <!-- -->test<!-- --> component loading... </div>`
+      `<div>subapp <!-- -->test<!-- --> component loading... </div>`
     );
 
     await container.get("test")._getModule();
 
     const html2 = renderToString(<Component />);
-    expect(html2).to.equal(`<div data-reactroot="">hello</div>`);
+    expect(html2).to.equal(`<div>hello</div>`);
   });
 });

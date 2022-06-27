@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers, no-use-before-define, no-unused-vars */
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
-/* global window, document, EventSource, fetch */
+/* global window, document, EventSource */
 
 //  c is from json-formatter-js.js, keep it loaded ahead of log-view.js
 /* eslint-disable no-undef */

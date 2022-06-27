@@ -20,41 +20,27 @@ class FrameworkLib {
   // Helper function to get an AsyncIterable (via PassThrough)
   // from the renderToPipeableStream() onShellReady event
   onShellReady(element) {
-    const passThrough = new Stream.PassThrough()
-    return new Promise((resolve, reject) => {
-      try {
-        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-          onShellReady () {
-            resolve(pipeable.pipe(passThrough))
-          },
-          onShellError (error) {
-            reject(error)
-          },
-        })
-      } catch (error) {
-        resolve(error)
-      }
-    })
+    const passThrough = new Stream.PassThrough();
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onShellReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
+    });
   }
 
   // Helper function to get an AsyncIterable (via PassThrough)
   // from the renderToPipeableStream() onAllReady event
   onAllReady(element) {
-    const passThrough = new Stream.PassThrough()
-    return new Promise((resolve, reject) => {
-      try {
-        const pipeable = ReactDOMServer.renderToPipeableStream(element, {
-          onAllReady () {
-            resolve(pipeable.pipe(passThrough))
-          },
-          onError (error) {
-            reject(error)
-          },
-        })
-      } catch (error) {
-        resolve(error)
-      }
-    })
+    const passThrough = new Stream.PassThrough();
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onAllReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
+    });
   }
 
   async handlePrepare() {
@@ -103,10 +89,10 @@ class FrameworkLib {
     if (typeof subAppServer.renderer === "function") {
       return subAppServer.renderer(element, options);
     }
-    
+
     // When the content above all Suspense boundaries is ready.
-    // This is used when we are streaming content 
-    if(options.useStream) {
+    // This is used when we are streaming content
+    if (options.useStream) {
       return this.onShellReady(element);
     }
     // If we don't want streaming

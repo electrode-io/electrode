@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use strict";
 
 const url = require("url");
@@ -9,12 +10,12 @@ const Redux = require("redux");
 const { connect } = require("react-redux");
 
 const getStreamWritable = (stream, next) => {
-    let res = "";
-    stream.on("data", data => (res += data.toString()));
-    stream.on("end", () => next(null, res));
-    stream.on("error", next);
-    return res;
-}
+  let res = "";
+  stream.on("data", data => (res += data.toString()));
+  stream.on("end", () => next(null, res));
+  stream.on("error", next);
+  return res;
+};
 
 describe("SSR React framework", function () {
   it("should setup React framework", () => {
@@ -30,7 +31,7 @@ describe("SSR React framework", function () {
       subAppServer: {},
       options: {}
     });
-    const res = await framework.handleSSR();    
+    const res = await framework.handleSSR();
     expect(res).contains("has no StartComponent");
   });
 
@@ -61,7 +62,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       // renderToPipeableSrteam adds a <!-- --> before props
-      res => expect(res).contains(`<div>Hello </div>`)      
+      res => expect(res).contains(`<div>Hello </div>`)
     );
   });
 
@@ -83,7 +84,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       // renderToPipeableSrteam adds a <!-- --> before props
-      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)      
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
     );
   });
 
@@ -208,7 +209,7 @@ describe("SSR React framework", function () {
         options: { serverSideRendering: true },
         context
       });
-      
+
       return asyncVerify(
         () => framework.handleSSR(),
         (stream, next) => {
@@ -217,7 +218,7 @@ describe("SSR React framework", function () {
           stream.on("end", () => next(null, res));
           stream.on("error", next);
         },
-        res => {            
+        res => {
           expect(res).contains(`<div>Hello <!-- -->foo bar</div>`);
           expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
           expect(context.user).to.have.property("storeContainer");
@@ -253,10 +254,10 @@ describe("SSR React framework", function () {
       (stream, next) => getStreamWritable(stream, next),
       res => {
         // renderToPipeableSrteam adds a <!-- --> before props
-        expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
+        expect(res).contains(`<div>Hello <!-- -->foo bar</div>`);
         expect(framework.initialStateStr).equals(undefined);
       }
-    );    
+    );
   });
 
   it("should init redux store but doesn't render Component if serverSideRendering is not true", async () => {
@@ -299,7 +300,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => {
-        expect(res).contains("Hello <"); 
+        expect(res).contains("Hello <");
         expect(framework.initialStateStr).equals(`{}`);
       }
     );
@@ -329,7 +330,7 @@ describe("SSR React framework", function () {
       (stream, next) => getStreamWritable(stream, next),
       // renderToPipeableSrteam adds a <!-- --> before props
       res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
-    );    
+    );
   });
 
   it("should render Component with react context containing request", () => {
@@ -362,26 +363,28 @@ describe("SSR React framework", function () {
     return asyncVerify(
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
-      res => {        
+      res => {
         // renderToPipeableSrteam adds a <!-- --> before props
         expect(res).contains(`<div>IS_SSR: <!-- -->true<!-- --> HAS_REQUEST: <!-- -->yes</div>`);
         expect(request.foo).equals("bar");
       }
     );
-    
+
   });
 
   it("should render subapp with react-router StaticRouter", async () => {
+    /* eslint-disable no-unused-vars */
     const TestComponent = () => <div>Hello test path</div>;
     const FooBar = () => <div>foo</div>;
+    /* eslint-enable no-unused-vars */
 
-    const Component = (props) => (
+    const Component = () => (
       <Routes>
-        <Route path="/test" element={<TestComponent {...props} />} />
-        <Route path="/foo" element={<FooBar {...props} />} />
+        <Route path="/test" element={<TestComponent />} />
+        <Route path="/foo" element={<FooBar />} />
       </Routes>
     );
-    
+
     const framework = new lib.FrameworkLib({
       subApp: {
         useReactRouter: true,
@@ -401,7 +404,7 @@ describe("SSR React framework", function () {
       () => framework.handleSSR(),
       (stream, next) => getStreamWritable(stream, next),
       res => expect(res).contains("Hello test path<")
-    );    
+    );
   });
 
   it("should render subapp with custom renderer e.g. css in js solution", async () => {
