@@ -30,8 +30,8 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "less": "^4.1.2",
-    "less-loader": "^10.2.0"
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",

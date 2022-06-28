@@ -30,13 +30,13 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "@types/mocha": "9.1.1",
+    "@types/mocha": "5.2.7",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^1.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "mocha": "^10.0.0"
+    "mocha": "^4.0.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",

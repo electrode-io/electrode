@@ -30,10 +30,10 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "@types/jest": "^27.5.1",
-    "babel-jest": "^28.1.0",
-    "eslint-plugin-jest": "^26.2.2",
-    "jest": "^28.1.0"
+    "@types/jest": "^26.0.4",
+    "babel-jest": "^26.1.0",
+    "eslint-plugin-jest": "^23.18.0",
+    "jest": "^26.1.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",
