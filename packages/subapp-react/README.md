@@ -73,12 +73,6 @@ import { React, loadSubApp } from "subapp-react";
 export default loadSubApp({ name: "MySubapp", Component, useReactRouter: true });
 ```
 
-## Support for SSR with Suspense
-
-async server side rendering with React suspense is enabled with [react-async-ssr]
-
-- First, you have to install [react-async-ssr] with `npm i react-async-ssr`
-
 ## License
 
 Copyright (c) 2016-present, WalmartLabs
@@ -88,4 +82,3 @@ Licensed under the [Apache License, Version 2.0].
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [react-router]: https://www.npmjs.com/package/react-router
 [react-router-dom]: https://www.npmjs.com/package/react-router-dom
-[react-async-ssr]: https://www.npmjs.com/package/react-async-ssr

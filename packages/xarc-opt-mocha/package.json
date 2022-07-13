@@ -31,16 +31,16 @@
   },
   "dependencies": {
     "@types/mocha": "5.2.7",
-    "chai": "^4.0.0",
+    "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^1.0.0",
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "mocha": "^4.0.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",
-    "shx": "^0.3.2"
+    "shx": "^0.3.4"
   },
   "xarcOptCheck": {
     "optionalTagName": "mocha",

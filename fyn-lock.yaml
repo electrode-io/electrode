@@ -1,5 +1,6 @@
 $fyn:
  layout: normal
+ flattenTop: true
 $pkg:
  dev:
   '@xarc/module-dev': ^4.0.0

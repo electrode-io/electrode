@@ -1,6 +1,6 @@
 /* eslint-disable max-params, @typescript-eslint/no-unused-vars, max-statements, @typescript-eslint/ban-ts-comment */
 
-import { render, hydrate } from "react-dom";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { createElement, Component } from "react"; // eslint-disable-line
 import { SubAppFeatureResult, xarcV2, ClientFrameworkLib, envHooks } from "@xarc/subapp";
 import { SubAppCSRData } from "@xarc/subapp";
@@ -50,7 +50,7 @@ export class BrowserReactLib implements ClientFrameworkLib {
     const featIds = ["state-provider", "router-provider", "app-context-provider"];
 
     for (const featId of featIds) {
-      const featName = featNames.find(x => subapp._features[x].id === featId);
+      const featName = featNames.find((x) => subapp._features[x].id === featId);
       if (featName) {
         const feat = subapp._features[featName];
         xarcV2.debug("executing subapp feature", featName, "id", featId, "subId", feat.subId);
@@ -79,9 +79,9 @@ export class BrowserReactLib implements ClientFrameworkLib {
   async startSubApp(csrData: SubAppCSRData, pipeline: ReactClientRenderPipeline, reload?: boolean) {
     const result = await this.prepareCSR(csrData, pipeline, reload);
     if (!reload && csrData.ssr) {
-      hydrate(<result.Component />, csrData.element);
+      hydrateRoot(csrData.element, <result.Component />);
     } else {
-      render(<result.Component />, csrData.element);
+      createRoot(csrData.element).render(<result.Component />);
     }
   }
 
@@ -95,9 +95,9 @@ export class BrowserReactLib implements ClientFrameworkLib {
     const prepResult = pipeline.getPrepResult();
 
     if (!reload && csrData.ssr) {
-      hydrate(<prepResult.Component />, csrData.element);
+      hydrateRoot(csrData.element, <prepResult.Component />);
     } else {
-      render(<prepResult.Component />, csrData.element);
+      createRoot(csrData.element).render(<prepResult.Component />);
     }
   }
 }

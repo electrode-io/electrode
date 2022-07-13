@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",
-    "shx": "^0.3.2"
+    "shx": "^0.3.4"
   },
   "xarcOptCheck": {
     "optionalTagName": "postcss",

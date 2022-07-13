@@ -15,6 +15,7 @@ const { combineReducers, createStore } = require("redux");
 const pkg = require("../package.json");
 const util = require("./util");
 const ServerContext = require("./server-context");
+const { Stream } = require("stream");
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
@@ -32,7 +33,6 @@ const ROUTE_HANDLER = Symbol("route handler");
 class ReduxRouterEngine {
   constructor(options) {
     assert(options.routes, "Must provide react-router routes for redux-router-engine");
-
     this.options = Object.assign({ webappPrefix: "", basename: "" }, options);
     this.options.withIds = Boolean(options.withIds);
 
@@ -70,6 +70,21 @@ class ReduxRouterEngine {
 
     this._routesComponent = renderRoutes(this._routes);
     this._envTargets = util.getEnvTargets();
+  }
+
+  getStreamWritable() {
+    const writable = new Stream.PassThrough();
+    writable.setEncoding("utf8");
+    const output = { result: "" };
+    writable.on("data", (chunk) => {
+      output.result += chunk;
+    });
+    const completed = new Promise((resolve) => {
+      writable.on("finish", () => {
+        resolve();
+      });
+    });
+    return { writable, completed, output };
   }
 
   startMatch(req, options = {}) {
@@ -114,7 +129,6 @@ class ReduxRouterEngine {
       const earlyOut = this.checkMatch(options);
       if (earlyOut) return earlyOut;
       await this.prepReduxStore(options);
-
       return await this._handleRender(options);
     } catch (err) {
       this.options.logError.call(this, req, err);
@@ -253,40 +267,34 @@ class ReduxRouterEngine {
     }
   }
 
-  _renderToString({ req, location, store, routeContext, withIds }) {
+  async _renderToString({ req, location, store, routeContext }) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {
-      assert(React, `${pkg.name}: can't do SSR because react not found`);
-      assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
-
-      let ssrApi;
-      if (this._streaming) {
-        ssrApi = withIds
-          ? ReactDomServer.renderToNodeStream
-          : ReactDomServer.renderToStaticNodeStream;
-      } else {
-        ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
-      }
-
-      return ssrApi(
+      const element = React.createElement(
+        // server side context to provide request
+        ServerContext,
+        { request: req },
+        // redux provider
         React.createElement(
-          // server side context to provide request
-          ServerContext,
-          { request: req },
-          // redux provider
+          Provider,
+          { store },
+          // user route component
           React.createElement(
-            Provider,
-            { store },
-            // user route component
-            React.createElement(
-              StaticRouter,
-              { location, context: routeContext, basename: this.options.basename },
-              this._routesComponent
-            )
+            StaticRouter,
+            { location, context: routeContext, basename: this.options.basename },
+            this._routesComponent
           )
         )
       );
+
+      if (!this._streaming) return ReactDomServer.renderToString(element);
+
+      const { writable, output, completed } = this.getStreamWritable();
+      const { pipe } = await ReactDomServer.renderToPipeableStream(element);
+      pipe(writable);
+      await completed;
+      return output.result;
     }
   }
 

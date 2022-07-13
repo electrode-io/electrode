@@ -1,6 +1,7 @@
 "use strict";
 
 const React = require("react"); // eslint-disable-line
+const { act } = require("react-dom/test-utils");
 const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
 
@@ -26,7 +27,9 @@ describe("FE React framework", function() {
       element,
       options: { props: { foo: "bar" } }
     });
-    framework.renderStart();
+
+    act(() => framework.renderStart());
+
     expect(element.innerHTML).equals(`<p>hello bar</p>`);
   });
 

@@ -34,8 +34,8 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "react": ">= 16",
-    "react-dom": ">= 16"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",

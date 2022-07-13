@@ -6,16 +6,41 @@ const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
-const AsyncReactDOMServer = optionalRequire("react-async-ssr");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
-const ReactRouterDom = optionalRequire("react-router-dom");
-
+const { StaticRouter } = require("react-router-dom/server");
+const { Stream } = require("stream");
 class FrameworkLib {
   constructor(ref) {
     this.ref = ref;
     this._prepared = false;
+  }
+
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onShellReady event
+  onShellReady(element) {
+    const passThrough = new Stream.PassThrough();
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onShellReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
+    });
+  }
+
+  // Helper function to get an AsyncIterable (via PassThrough)
+  // from the renderToPipeableStream() onAllReady event
+  onAllReady(element) {
+    const passThrough = new Stream.PassThrough();
+    return new Promise((resolve) => {
+      const pipeable = ReactDOMServer.renderToPipeableStream(element, {
+        onAllReady () {
+          resolve(pipeable.pipe(passThrough));
+        }
+      });
+    });
   }
 
   async handlePrepare() {
@@ -65,27 +90,15 @@ class FrameworkLib {
       return subAppServer.renderer(element, options);
     }
 
+    // When the content above all Suspense boundaries is ready.
+    // This is used when we are streaming content
     if (options.useStream) {
-      assert(!options.suspenseSsr, "useStream and suspense SSR together are not supported");
-      if (options.hydrateServerData) {
-        return ReactDOMServer.renderToNodeStream(element);
-      } else {
-        return ReactDOMServer.renderToStaticNodeStream(element);
-      }
+      return this.onShellReady(element);
     }
-    if (options.suspenseSsr) {
-      assert(AsyncReactDOMServer, "You must install react-async-ssr for suspense SSR support");
-      if (options.hydrateServerData) {
-        return AsyncReactDOMServer.renderToStringAsync(element);
-      } else {
-        return AsyncReactDOMServer.renderToStaticMarkupAsync(element);
-      }
-    }
-    if (options.hydrateServerData) {
-      return ReactDOMServer.renderToString(element);
-    } else {
-      return ReactDOMServer.renderToStaticMarkup(element);
-    }
+    // If we don't want streaming
+    // This will fire after the entire page content is ready.
+    // You can use this for crawlers or static generation.
+    return this.onAllReady(element);
   }
 
   createTopComponent(initialProps) {
@@ -200,14 +213,9 @@ class FrameworkLib {
   }
 
   wrapReactRouter() {
-    assert(
-      ReactRouterDom && ReactRouterDom.StaticRouter,
-      `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
-and can't generate it because module react-router-dom with StaticRouter is not found`
-    );
     return props2 =>
       React.createElement(
-        ReactRouterDom.StaticRouter,
+        StaticRouter,
         props2,
         React.createElement(this.ref.subApp.Component)
       );

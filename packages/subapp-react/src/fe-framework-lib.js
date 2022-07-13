@@ -1,5 +1,5 @@
 import React from "react";
-import { render, hydrate } from "react-dom";
+import {  createRoot, hydrateRoot } from 'react-dom/client';
 
 class FrameworkLib {
   constructor(ref) {
@@ -10,12 +10,12 @@ class FrameworkLib {
     const { subApp, element, options } = this.ref;
 
     const props = { ...options._prepared, ...options.props };
-    const Component = subApp.info.StartComponent || subApp.info.Component;
+     const Component = subApp.info.StartComponent || subApp.info.Component;
     if (element) {
       if (options.serverSideRendering) {
-        hydrate(<Component {...props} />, element);
+          hydrateRoot(element, <Component {...props} />);
       } else {
-        render(<Component {...props} />, element);
+        createRoot(element).render(<Component {...props} />);
       }
     } else {
       // no DOM element to render into, just return subapp as a component
