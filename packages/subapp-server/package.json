@@ -28,7 +28,7 @@
     "template.js"
   ],
   "dependencies": {
-    "@hapi/boom": "^10.0.0",
+    "@hapi/boom": "^9.1.4",
     "@xarc/index-page": "^1.0.11",
     "@xarc/jsx-renderer": "^1.0.11",
     "@xarc/tag-renderer": "^1.0.10",
