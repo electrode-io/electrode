@@ -1,3 +1,154 @@
+# 7/14/2022
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@11.0.0` `(10.0.13 => 11.0.0)`
+- `@xarc/app-dev@11.0.0` `(10.1.1 => 11.0.0)`
+- `@xarc/opt-eslint@3.0.0` `(2.0.1 => 3.0.0)`
+- `@xarc/opt-jest@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/opt-karma@3.0.0` `(2.0.2 => 3.0.0)`
+- `@xarc/opt-less@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/opt-mocha@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/opt-postcss@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/opt-react@3.0.0` `(2.0.1 => 3.0.0)`
+- `@xarc/opt-sass@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/opt-stylus@2.0.0` `(1.0.1 => 2.0.0)`
+- `@xarc/react@1.0.0` `(0.3.4 => 1.0.0)`
+- `@xarc/react-query@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/react-recoil@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/react-redux@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/react-router@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/subapp@0.3.4` `(0.3.3 => 0.3.4)`
+- `electrode-react-webapp@5.0.0` `(4.0.4 => 5.0.0)`
+- `electrode-redux-router-engine@6.0.0` `(5.0.1 => 6.0.0)`
+- `subapp-react@1.0.0` `(0.1.1 => 1.0.0)`
+- `subapp-redux@2.0.0` `(1.0.52 => 2.0.0)`
+- `subapp-server@2.0.0` `(1.3.18 => 2.0.0)`
+- `subapp-web@2.0.0` `(1.0.52 => 2.0.0)`
+- `webpack-config-composer@1.1.6` `(1.1.5 => 1.1.6)`
+
+### Lerna Updated
+
+- `@xarc/react-redux-observable@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/react-redux-saga@1.0.0` `(0.3.3 => 1.0.0)`
+- `@xarc/webpack@11.1.2` `(11.1.1 => 11.1.2)`
+- `electrode-archetype-webpack-dll@2.0.4` `(2.0.3 => 2.0.4)`
+- `electrode-archetype-webpack-dll-dev@2.0.4` `(2.0.3 => 2.0.4)`
+- `subapp-pbundle@1.0.0` `(0.0.46 => 1.0.0)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-app-dev`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: update dependencies to resolve build issues ([#1888](https://github.com/electrode-io/electrode/pull/1888)) [commit](http://github.com/electrode-io/electrode/commit/60e173d9aefec3e2c8843507bea3d33158c89262)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-opt-eslint`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-jest`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-karma`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-less`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-mocha`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-postcss`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-react`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-sass`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-opt-stylus`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/xarc-react`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: update dependencies to resolve build issues ([#1888](https://github.com/electrode-io/electrode/pull/1888)) [commit](http://github.com/electrode-io/electrode/commit/60e173d9aefec3e2c8843507bea3d33158c89262)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-react-query`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-react-recoil`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-react-redux`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-react-router`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/xarc-subapp`
+
+  - fix: update dependencies to resolve build issues ([#1888](https://github.com/electrode-io/electrode/pull/1888)) [commit](http://github.com/electrode-io/electrode/commit/60e173d9aefec3e2c8843507bea3d33158c89262)
+  - fix: updated typescript version and added entryPointStrategy in tsconfig to resolve publish issue ([#1899](https://github.com/electrode-io/electrode/pull/1899)) [commit](http://github.com/electrode-io/electrode/commit/bd608525bf03fb790f2bf5baeef7cf2599d30431)
+
+- `packages/electrode-react-webapp`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/electrode-redux-router-engine`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/subapp-react`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/subapp-redux`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/subapp-server`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/subapp-web`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
+- `packages/webpack-config-composer`
+
+  - fix: update dependencies to resolve build issues ([#1888](https://github.com/electrode-io/electrode/pull/1888)) [commit](http://github.com/electrode-io/electrode/commit/60e173d9aefec3e2c8843507bea3d33158c89262)
+
+- `docusaurus`
+
+  - [major] upgrade to React 18 ([#1875](https://github.com/electrode-io/electrode/pull/1875)) [commit](http://github.com/electrode-io/electrode/commit/c2268698774d896e41f44947f6e33f134b94daa5)
+
 # 3/7/2022
 
 ## Packages
