@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "1.0.52",
+  "version": "2.0.0",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -41,7 +41,7 @@
     "xaa": "^1.7.3"
   },
   "peerDependencies": {
-    "@xarc/app": "^10.0.13"
+    "@xarc/app": "^11.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
@@ -50,11 +50,11 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.7.7",
-    "@xarc/app": "^10.0.13",
+    "@xarc/app": "^11.0.0",
     "babel-preset-minify": "^0.5.1",
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
-    "electrode-react-webapp": "^4.0.4",
+    "electrode-react-webapp": "^5.0.0",
     "jsdom": "^19.0.0",
     "mock-require": "^3.0.3",
     "run-verify": "^1.2.6",

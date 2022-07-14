@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-query",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "description": "xarc React.js application react-query support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -28,7 +28,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.3.3",
+    "@xarc/subapp": "^0.3.4",
     "react-query": "~3.39.0",
     "tslib": "^2.4.0"
   },
