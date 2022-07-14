@@ -18,5 +18,8 @@
     "jsxFactory": "createElement",
     "moduleResolution": "Node"
   },
+  "typedocOptions": {
+    "entryPointStrategy": "expand"
+  },
   "include": ["src/node", "src/common"]
 }
