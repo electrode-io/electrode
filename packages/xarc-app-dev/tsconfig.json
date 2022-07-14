@@ -16,6 +16,9 @@
     "allowJs": true,
     "importHelpers": true
   },
+  "typedocOptions": {
+    "entryPointStrategy": "expand"
+  },
   "include": ["src"],
   "exclude": ["node_modules", "lib", "config", "dist", "src/**/*.js"]
 }
