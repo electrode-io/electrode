@@ -51,7 +51,7 @@
     "optional-require": "^1.1.6",
     "require-at": "^1.0.6",
     "url-loader": "^4.1.0",
-    "webpack": "^5.33.2",
+    "webpack": "^5.74.0",
     "webpack-cli": "4.8.0",
     "webpack-config-composer": "^1.1.6",
     "webpack-stats-plugin": "^1.0.3",
