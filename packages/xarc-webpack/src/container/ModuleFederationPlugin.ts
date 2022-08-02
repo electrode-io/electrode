@@ -40,12 +40,9 @@ export class ModuleFederationPlugin {
 			(options.library && isValidExternalsType(options.library.type)
 				? /** @type {ExternalsType} */ (options.library.type)
 				: "script");
-		if (
-			library &&
-			!compiler.options.output.enabledLibraryTypes.includes(library.type)
-		) {
-			compiler.options.output.enabledLibraryTypes.push(library.type);
-		}
+		if (library && !compiler.options.output.enabledLibraryTypes.includes(library.type)) {
+      compiler.options.output.enabledLibraryTypes.push(library.type);
+    }
 		compiler.hooks.afterPlugins.tap("ModuleFederationPlugin", () => {
 			if (
 				options.exposes &&
