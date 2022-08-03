@@ -5,7 +5,7 @@
 /* eslint-disable */
 
 // const { validate } = require("schema-utils");
-const schema = require("webpack/schemas/plugins/container/ModuleFederationPlugin.json");
+const isValidExternalsType = require("webpack/schemas/plugins/container/ExternalsType.check.js");
 const SharePlugin = require("webpack/lib/sharing/SharePlugin");
 const ContainerReferencePlugin = require("webpack/lib/container/ContainerReferencePlugin");
 
@@ -22,8 +22,6 @@ export class ModuleFederationPlugin {
    * @param {ModuleFederationPluginOptions} options options
    */
   constructor(options) {
-    // validate(schema, options, { name: "Module Federation Plugin" });
-
     this._options = options;
   }
 
@@ -38,30 +36,29 @@ export class ModuleFederationPlugin {
     const library = options.library || { type: "var", name: options.name };
 
     const remoteType =
-      options.remoteType ||
-      (options.library && schema.definitions.ExternalsType.enum.includes(options.library.type)
-        ? /** @type {ExternalsType} */ options.library.type
-        : "script");
-
-    if (library && !compiler.options.output.enabledLibraryTypes.includes(library.type)) {
+			options.remoteType ||
+			(options.library && isValidExternalsType(options.library.type)
+				? /** @type {ExternalsType} */ (options.library.type)
+				: "script");
+		if (library && !compiler.options.output.enabledLibraryTypes.includes(library.type)) {
       compiler.options.output.enabledLibraryTypes.push(library.type);
     }
-
-    compiler.hooks.afterPlugins.tap("ModuleFederationPlugin", () => {
-      if (
-        options.exposes &&
-        (Array.isArray(options.exposes)
-          ? options.exposes.length > 0
-          : Object.keys(options.exposes).length > 0)
-      ) {
-        new ContainerPlugin({
-          name: options.name,
-          entry: options.entry,
-          library,
-          filename: options.filename,
-          exposes: options.exposes
-        }).apply(compiler);
-      }
+		compiler.hooks.afterPlugins.tap("ModuleFederationPlugin", () => {
+			if (
+				options.exposes &&
+				(Array.isArray(options.exposes)
+					? options.exposes.length > 0
+					: Object.keys(options.exposes).length > 0)
+			) {
+				new ContainerPlugin({
+					name: options.name,
+					library,
+					filename: options.filename,
+					runtime: options.runtime,
+					shareScope: options.shareScope,
+					exposes: options.exposes
+				}).apply(compiler);
+			}
       if (
         options.remotes &&
         (Array.isArray(options.remotes)
@@ -70,6 +67,7 @@ export class ModuleFederationPlugin {
       ) {
         new ContainerReferencePlugin({
           remoteType,
+          shareScope: options.shareScope,
           remotes: options.remotes
         }).apply(compiler);
       }
