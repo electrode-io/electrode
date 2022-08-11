@@ -1,3 +1,15 @@
+# 8/11/2022
+
+## Packages
+
+- `@xarc/create-app@7.0.0` `(6.1.2 => 7.0.0)`
+
+## Commits
+
+- `packages/xarc-create-app`
+
+  - [major] upgrade xarc-create-app package dependencies to refer react 18 ([#1903](https://github.com/electrode-io/electrode/pull/1903)) [commit](http://github.com/electrode-io/electrode/commit/e60e43882fb70540e0dca35809b2335e125f65d2)
+
 # 7/14/2022
 
 ## Packages
