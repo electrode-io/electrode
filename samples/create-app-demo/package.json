@@ -34,17 +34,17 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@xarc/app": "^10.0.9",
+    "@xarc/app": "^11.0.0",
     "@xarc/fastify-server": "^3.2.3",
-    "@xarc/react": "^0.3.1",
-    "@xarc/react-query": "^0.3.0",
-    "@xarc/react-redux": "^0.3.0"
+    "@xarc/react": "^1.0.0",
+    "@xarc/react-query": "^1.0.0",
+    "@xarc/react-redux": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
-    "@xarc/app-dev": "^10.0.9",
-    "@xarc/opt-postcss": "^1.0.0",
-    "@xarc/opt-stylus": "^1.0.0",
+    "@xarc/app-dev": "^11.0.0",
+    "@xarc/opt-postcss": "^2.0.0",
+    "@xarc/opt-stylus": "^2.0.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
