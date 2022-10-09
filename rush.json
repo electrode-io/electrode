@@ -68,7 +68,7 @@
    * version. In those cases, you will need to add an entry to the "allowedAlternativeVersions"
    * section of the common-versions.json.
    */
-  // "ensureConsistentVersions": true,
+   //"ensureConsistentVersions": true,
 
   /**
    * Large monorepos can become intimidating for newcomers if project folder paths don't follow
@@ -421,5 +421,37 @@
     //   "reviewCategory": "tools",
     //   "tags": [ "tools" ]
     // }
+    {
+      "packageName": "@xarc/webpack",
+      "projectFolder": "packages/xarc-webpack"
+    },
+    {
+      "packageName": "@xarc/app",
+      "projectFolder": "packages/xarc-app"
+    },
+    {
+      "packageName": "@xarc/app-dev",
+      "projectFolder": "packages/xarc-app-dev"
+    },
+    {
+      "packageName": "@xarc/react",
+      "projectFolder": "packages/xarc-react"
+    },
+    {
+      "packageName": "subapp-react",
+      "projectFolder": "packages/subapp-react"
+    },
+    {
+      "packageName": "subapp-web",
+      "projectFolder": "packages/subapp-web"
+    },
+    {
+      "packageName": "subapp-server",
+      "projectFolder": "packages/subapp-server"
+    },
+  {
+    "packageName": "subapp-pkg-util",
+    "projectFolder": "packages/subapp-pkg-util"
+  }
   ]
 }
