@@ -67,6 +67,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
+    "@xarc/run": "^1.1.1",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",

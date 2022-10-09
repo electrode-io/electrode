@@ -11,6 +11,24 @@
    * "rush my-global-command --help".
    */
   "commands": [
+    {
+      "commandKind": "bulk",
+      "name": "test",
+      "summary": "Run tests in each packages",
+      "description": "Run tests in each packages. Runs `npm run test` for each package. Each package can have its own definition of `npm run test`",
+      "allowWarningsInSuccessfulBuild": true,
+      "ignoreMissingScript": true,
+      "enableParallelism": false
+    },
+    {
+      "commandKind": "bulk",
+      "name": "lint",
+      "summary": "Run lint in each packages",
+      "description": "Run lint in each packages. Runs `npm run lint` for each package if present.",
+      "allowWarningsInSuccessfulBuild": true,
+      "ignoreMissingScript": true,
+      "enableParallelism": true
+    }
     // {
     //   /**
     //    * (Required) Determines the type of custom command.

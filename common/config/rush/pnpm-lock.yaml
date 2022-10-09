@@ -8805,6 +8805,24 @@ packages:
       - supports-color
     dev: false
 
+  /eslint-plugin-jsdoc/30.7.13_eslint@6.8.0:
+    resolution: {integrity: sha512-YM4WIsmurrp0rHX6XiXQppqKB8Ne5ATiZLJe2+/fkp9l9ExXFr43BbAbjZaVrpCT+tuPYOZ8k1MICARHnURUNQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0
+    dependencies:
+      comment-parser: 0.7.6
+      debug: 4.3.4
+      eslint: 6.8.0
+      jsdoctypeparser: 9.0.0
+      lodash: 4.17.21
+      regextras: 0.7.1
+      semver: 7.3.8
+      spdx-expression-parse: 3.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /eslint-plugin-jsdoc/30.7.13_eslint@7.32.0:
     resolution: {integrity: sha512-YM4WIsmurrp0rHX6XiXQppqKB8Ne5ATiZLJe2+/fkp9l9ExXFr43BbAbjZaVrpCT+tuPYOZ8k1MICARHnURUNQ==}
     engines: {node: '>=10'}
@@ -21133,7 +21151,7 @@ packages:
     dev: false
 
   file:projects/dev-base.tgz:
-    resolution: {integrity: sha512-GHo2HNqzuEbp6B/n4QzlcySCqxtEDSgg/1BSfcpLqw72OKYnX43NErgU08wdhcezrcDxEGcIjs5mznaP3OgBDA==, tarball: file:projects/dev-base.tgz}
+    resolution: {integrity: sha512-6oU9fUQi1CSm1gwpB6WoSo8lT8AbN71cImujOx4d3NKoKDWiDFeGt7OqfXdIJgqJNCE7HQ4IyOTw3LglhCILIA==, tarball: file:projects/dev-base.tgz}
     name: '@rush-temp/dev-base'
     version: 0.0.0
     dependencies:
@@ -21142,6 +21160,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 4.33.0_5717ef02ba985de55f36ee939304b942
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.8.4
       '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
       babel-eslint: 10.1.0_eslint@7.32.0
       eslint: 7.32.0
       eslint-config-walmart: 2.2.1
@@ -21231,7 +21250,7 @@ packages:
     dev: false
 
   file:projects/electrode-react-webapp.tgz:
-    resolution: {integrity: sha512-XsPdi3lXH+4haJNCk/GzSI7N7Gol0DtKl8nEE4zAraH7RrXXKWhQvfUzAyIjsQpW4FDvmzGiIzKgeOVXYtj63Q==, tarball: file:projects/electrode-react-webapp.tgz}
+    resolution: {integrity: sha512-hBpL4wwQY6wLZLt72wTK5pt4T3MHV6iMdSeiU2r8OT2HZcgfc2tYTj064lgC/JGg9FZ8GeWAGHSPaMeQGhFYcQ==, tarball: file:projects/electrode-react-webapp.tgz}
     name: '@rush-temp/electrode-react-webapp'
     version: 0.0.0
     dependencies:
@@ -21240,6 +21259,7 @@ packages:
       '@babel/preset-env': 7.19.3_@babel+core@7.19.3
       '@babel/preset-react': 7.18.6_@babel+core@7.19.3
       '@babel/register': 7.18.9_@babel+core@7.19.3
+      '@xarc/run': 1.1.1
       benchmark: 2.1.4
       electrode-archetype-njs-module-dev: 3.0.3
       electrode-hapi-compat: 1.3.3
@@ -21270,10 +21290,11 @@ packages:
     dev: false
 
   file:projects/electrode-redux-router-engine.tgz:
-    resolution: {integrity: sha512-+xeTy2/2Ub9bJEv/B13ddhdoLSphBmqOti9eGoldxqVkSa+mfPSbKnEwHEANEoPFMtWbxQAdeqDyJbLy/ENs2A==, tarball: file:projects/electrode-redux-router-engine.tgz}
+    resolution: {integrity: sha512-ENS3su/mFKqOBk3piVyXS2MD4SHMxYggdNNEGyqdI1Hbz8YfCLUDd9aG8yX/BJuEqPlIQLzP0VmYpvSGYdFKow==, tarball: file:projects/electrode-redux-router-engine.tgz}
     name: '@rush-temp/electrode-redux-router-engine'
     version: 0.0.0
     dependencies:
+      '@xarc/run': 1.1.1
       babel-cli: 6.26.0
       babel-preset-env: 1.7.0
       babel-preset-es2015: 6.24.1
@@ -21296,10 +21317,11 @@ packages:
     dev: false
 
   file:projects/electrode-ui-config.tgz:
-    resolution: {integrity: sha512-y4c+grZw3whDFZhrwfwijrUQzYGQ4r6NV8fXuw4lykgDHikIS+QThf3sHcxTZ29t7uK4LxoVLFhERnkXjElpUQ==, tarball: file:projects/electrode-ui-config.tgz}
+    resolution: {integrity: sha512-IDTEuf5oFXojVzl80GSw0KE1JwDYNs/AzleU7TqZnJhYv7wE2VMwPPzv9B7mZqf9nPzaYWnbF7rn5FQhyecTuQ==, tarball: file:projects/electrode-ui-config.tgz}
     name: '@rush-temp/electrode-ui-config'
     version: 0.0.0
     dependencies:
+      '@xarc/run': 1.1.1
       babel-cli: 6.26.0
       babel-preset-es2015: 6.24.1
       bluebird: 2.11.0
@@ -21309,10 +21331,11 @@ packages:
     dev: false
 
   file:projects/electrode-ui-logger.tgz:
-    resolution: {integrity: sha512-xL9OsQ+ALLAoCKMgFB5wrUJ57sUq1Fhj3DcLnCauiiKf1/O44ekfQp7bHv8BqaSphcE97T9zM1J19BnKd0lv/w==, tarball: file:projects/electrode-ui-logger.tgz}
+    resolution: {integrity: sha512-HK7F5gIUpsxxCrncnd4L0zoTJmKmm/vU4SXJyhB6QYhud/JVYnMXnWNBXefX9BTS/qO9Q9uulvVyRnmegRrWSQ==, tarball: file:projects/electrode-ui-logger.tgz}
     name: '@rush-temp/electrode-ui-logger'
     version: 0.0.0
     dependencies:
+      '@xarc/run': 1.1.1
       electrode-archetype-njs-module-dev: 2.3.2
       json-stringify-safe: 5.0.1
       lodash.keys: 4.2.0
@@ -21321,7 +21344,7 @@ packages:
     dev: false
 
   file:projects/index-page.tgz:
-    resolution: {integrity: sha512-6jMNg8zwrp3llXVy44nLpZGPMR5UpAxiwcdKTg0OBhrXPW8Xl5FQa3HYtD6GqfqKhniPIVHrvFa7th+K88tFlQ==, tarball: file:projects/index-page.tgz}
+    resolution: {integrity: sha512-MaCQNNAm7o6WOgAqT2aHdL5tAF5mc26QCSquw8B7ApIXACeuNSWmN1BRdEHPKxOHi/3VSaZN5BbtCzXbZ9zNCQ==, tarball: file:projects/index-page.tgz}
     name: '@rush-temp/index-page'
     version: 0.0.0
     dependencies:
@@ -21334,12 +21357,13 @@ packages:
       '@typescript-eslint/eslint-plugin': 2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.10
       '@xarc/module-dev': 2.2.5
+      '@xarc/run': 1.1.1
       babel-eslint: 10.1.0_eslint@6.8.0
       chai: 4.3.6
       eslint: 6.8.0
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@6.8.0
-      eslint-plugin-jsdoc: 21.0.0_eslint@6.8.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@6.8.0
       lodash: 4.17.21
       mocha: 7.2.0
       nyc: 15.1.0
@@ -22044,7 +22068,7 @@ packages:
     dev: false
 
   file:projects/subapp-server.tgz:
-    resolution: {integrity: sha512-cR8XVnE03FccOh30Bnp2CYXybunFTImKNJzaataz30uLf4g2ZUQg2i2E5DVxdkdyp/pNxqnmhnlNNPplbsM8Lw==, tarball: file:projects/subapp-server.tgz}
+    resolution: {integrity: sha512-gSc6HeQ0OFCiQE3/qd42tBw3CCb7vislQVSmXNnyBS34BFKoVBZzUgcwOo/mmV8VWVz9VcyqNklenXspfe0vow==, tarball: file:projects/subapp-server.tgz}
     name: '@rush-temp/subapp-server'
     version: 0.0.0
     dependencies:
@@ -22057,6 +22081,7 @@ packages:
       '@xarc/fastify-server': 3.3.0
       '@xarc/index-page': 1.0.11
       '@xarc/jsx-renderer': 1.0.11
+      '@xarc/run': 1.1.1
       '@xarc/tag-renderer': 1.0.10
       electrode-archetype-njs-module-dev: 3.0.3
       electrode-server: 3.3.0
@@ -22071,10 +22096,11 @@ packages:
     dev: false
 
   file:projects/subapp-util.tgz:
-    resolution: {integrity: sha512-m3ewMKE1pY7CJL1T8zmAwa5C7knx0RcFJPUOVyVLA1imJ+kC8321h66sNzr+x2+gY3pBWVHH+U99J1WmDCfqwg==, tarball: file:projects/subapp-util.tgz}
+    resolution: {integrity: sha512-MpkfjGGQ1f15muehq4so7cC3ZjHc9qFGNSMMgMFvmMPSjXAUguHQq1l201oxH69A+i6PU2ycrHmjiG4S3X58Xw==, tarball: file:projects/subapp-util.tgz}
     name: '@rush-temp/subapp-util'
     version: 0.0.0
     dependencies:
+      '@xarc/run': 1.1.1
       electrode-archetype-njs-module-dev: 3.0.3
       filter-scan-dir: 1.1.1
       optional-require: 1.1.8
@@ -22202,7 +22228,7 @@ packages:
     dev: false
 
   file:projects/webpack-config-composer.tgz:
-    resolution: {integrity: sha512-htQ5Kcdq7cm+IAWTpsua7yOihkiLAWY1yUZW0vnC26K4LLfW3U8a0sFocmduPWz45VSbYP01wAPAmJgr+E+zJg==, tarball: file:projects/webpack-config-composer.tgz}
+    resolution: {integrity: sha512-vnB5oC1JxzqdkmXK4iBi54a2yEYztN/3cvsdn0z6D1orI8Y/dqTmQ9u4LyoMkHJE9WVUvNEnhDEjjxunilj6qg==, tarball: file:projects/webpack-config-composer.tgz}
     name: '@rush-temp/webpack-config-composer'
     version: 0.0.0
     dependencies:
@@ -22215,6 +22241,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 4.33.0_5717ef02ba985de55f36ee939304b942
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.8.4
       '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
       babel-eslint: 10.1.0_eslint@7.32.0
       chai: 4.3.6
       eslint: 7.32.0

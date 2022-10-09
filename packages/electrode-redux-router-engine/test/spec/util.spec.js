@@ -32,7 +32,7 @@ describe("util", function () {
   });
 
   it("getEnvTargets should get an array of all babel env targets", () => {
-    const stubbed = sinon.stub(require("fs"), "readdirSync", () => ["dist", "dist-es6", "a", "b"]);
+    const stubbed = sinon.stub(require("fs"), "readdirSync").callsFake(() => ["dist", "dist-es6", "a", "b"]);
     expect(util.getEnvTargets()).to.include("default").to.include("es6");
     stubbed.restore();
   });
