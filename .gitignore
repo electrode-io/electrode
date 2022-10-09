@@ -518,3 +518,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .fynpo
+
+# Rush temporary files
+common/deploy/
+common/temp/
+common/autoinstallers/*/.npmrc
+**/.rush/temp/
+
+# Heft temporary files
+.heft
