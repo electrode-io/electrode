@@ -4,6 +4,7 @@
   "description": "common code for electrode optional archetype checking",
   "main": "optional-check.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "node test/test1.js"
   },
   "keywords": [],

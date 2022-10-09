@@ -4,6 +4,7 @@
   "description": "Webpack CDN file loader",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

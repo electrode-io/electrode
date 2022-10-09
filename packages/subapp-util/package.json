@@ -4,6 +4,7 @@
   "description": "Util for Electrode SubApp",
   "main": "lib/index.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "clap check",
     "coverage": "clap coverage",
     "check": "clap check"

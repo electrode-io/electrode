@@ -9,6 +9,7 @@
     "test": "test"
   },
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "clap test-only",
     "coverage": "clap test-cov",
     "check": "clap check",

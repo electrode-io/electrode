@@ -4,6 +4,7 @@
   "description": "Electrode Archetype to build webpack DLLs",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "echo $npm_config_cache"
   },
   "keywords": [],

@@ -25,7 +25,9 @@
   "dependencies": {
     "@xarc/jsx-renderer": "^1.0.11",
     "@xarc/render-context": "^1.0.8",
-    "@xarc/tag-renderer": "^1.0.10"
+    "@xarc/tag-renderer": "^1.0.10",
+    "lodash": "^4.17.21",
+    "require-at": "^1.0.6"
   },
   "author": "Walmart GTP.js",
   "license": "ISC",
