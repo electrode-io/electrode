@@ -6,6 +6,7 @@ import { toggleCheck, incNumber, decNumber } from "../actions";
 class DemoStates extends React.Component {
   render() {
     const { checked, value, dispatch } = this.props;
+    /*eslint-disable */
     return (
       <div>
         <h6 className="docs-header">Demo Managing States with Redux</h6>
@@ -29,6 +30,7 @@ class DemoStates extends React.Component {
         </div>
       </div>
     );
+    /*eslint-enable */
   }
 }
 

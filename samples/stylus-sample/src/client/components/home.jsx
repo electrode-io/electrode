@@ -22,7 +22,7 @@ import { DemoButtons } from "./demo-buttons";
 
 /**/
 
-export default () => (
+const Home = () => (
   <div className="container">
     {/**/}
 
@@ -48,3 +48,7 @@ export default () => (
     </div>
   </div>
 );
+
+Home.displayName = "Home";
+
+export default Home;

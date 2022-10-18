@@ -10,6 +10,7 @@ import { toggleCheck, incNumber, decNumber } from "../actions";
 
 const DemoPureStates = props => {
   const { checked, value, dispatch } = props;
+  /*eslint-disable */
   return (
     <div>
       <h6 className="docs-header">Demo Managing States in Pure Functional Component</h6>
@@ -33,6 +34,7 @@ const DemoPureStates = props => {
       </div>
     </div>
   );
+  /*eslint-enable */
 };
 
 DemoPureStates.propTypes = {
