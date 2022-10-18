@@ -26,7 +26,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  /*eslint-disable */
   render() {
     return (
       <div styleName="custom.container">
@@ -46,6 +46,7 @@ class Home extends React.Component {
       </div>
     );
   }
+  /*eslint-enable */
 }
 
 Home.propTypes = {};
