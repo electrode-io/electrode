@@ -472,7 +472,7 @@ export function jsonToHtml(obj, useColors, anchors) {
       }
       newline();
       buf.push("    ");
-      buf.push(this.jsonToHtml(child, useColors, anchors).replace(/\n/g, "\n    "));
+      buf.push(jsonToHtml(child, useColors, anchors).replace(/\n/g, "\n    "));
       newline();
     });
   }
