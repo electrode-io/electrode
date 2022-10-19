@@ -5,6 +5,7 @@ import Path from "path";
 import _ from "lodash";
 import redbird from "@jchip/redbird";
 import ck from "chalker";
+import open from "open";
 import { makeOptionalRequire } from "optional-require";
 import { devProxy } from "../../config/dev-proxy";
 import { cdnMock } from "./cdn-mock";
@@ -292,6 +293,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
         .join(" or ");
 
       console.log(ck`You can access your app at ${urlsShow}`);
+      open(proxyUrls.https || proxyUrls.http);
     }, 100).unref();
   };
 
