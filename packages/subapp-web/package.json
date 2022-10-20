@@ -51,6 +51,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.7.7",
     "@xarc/app": "^11.0.0",
+    "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
@@ -58,7 +59,7 @@
     "jsdom": "^19.0.0",
     "mock-require": "^3.0.3",
     "run-verify": "^1.2.6",
-    "subapp-pkg-util": "../subapp-pkg-util"
+    "subapp-pkg-util": "0.0.1"
   },
   "nyc": {
     "all": true,

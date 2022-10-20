@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "browser": "lib/csindex.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "clap test-only",
     "coverage": "clap test-cov",
     "check": "clap check",

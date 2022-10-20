@@ -33,6 +33,7 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/react": "^13.2.0",
+    "@xarc/run": "^1.1.1",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.11.9",

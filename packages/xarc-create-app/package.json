@@ -4,6 +4,7 @@
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "dist/index.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "prepublishOnly": "webpack",
     "test": "mocha",
     "coverage": "nyc npm test",
