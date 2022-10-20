@@ -101,7 +101,8 @@
     "winston": "^3.7.2",
     "xaa": "^1.7.3",
     "xenv-config": "^1.3.1",
-    "xsh": "^0.4.5"
+    "xsh": "^0.4.5",
+    "webpack": "~5.74.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
@@ -117,7 +118,6 @@
     "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
-    "e1": "./e1",
     "electrode-server": "^3.3.0",
     "eslint": "^7.16.0",
     "eslint-config-walmart": "^2.2.1",

@@ -6,7 +6,7 @@ const moduleName = "../../src/lib/index";
 import { asyncVerify, runFinally } from "run-verify";
 import { expect } from "chai";
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
-const electrodeServer = require("e1");
+const electrodeServer = require("../../e1");
 
 describe("dev-hapi 16", function () {
   this.timeout(10000);

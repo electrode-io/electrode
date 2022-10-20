@@ -22,6 +22,7 @@
   "author": "Electrode <https://github.com/electrode-io/electrode>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@xarc/run": "^1.1.1",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
