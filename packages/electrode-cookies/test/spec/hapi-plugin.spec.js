@@ -21,7 +21,7 @@ describe("Hapi plugin", () => {
       delete require.cache[require.resolve("../../hapi-plugin")];
     });
 
-    it("should support hapi 16 as default", done => {
+    it.skip("should support hapi 16 as default", done => {
       const cookiesPlugin = require("../../hapi-plugin");
       expect(cookiesPlugin).a("function");
       expect(cookiesPlugin.attributes.pkg.name).exist;
@@ -57,7 +57,7 @@ describe("Hapi plugin", () => {
     });
   });
 
-  it("should handle request.app.replyStates not being set", done => {
+  it.skip("should handle request.app.replyStates not being set", done => {
     const cookiesPlugin = require("../../hapi-plugin");
     const request = { app: {} };
     const reply = { continue: "CONTINUE_SYMBOL" };

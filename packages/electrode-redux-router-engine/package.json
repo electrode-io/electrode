@@ -4,6 +4,7 @@
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "clap test-only",
     "lint": "clap lint",
     "coverage": "clap test-cov",
@@ -37,6 +38,7 @@
   ],
   "devDependencies": {
     "babel-cli": "^6.1.1",
+    "@xarc/run": "^1.1.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
@@ -48,7 +50,6 @@
     "react-dom": "^18.2.0",
     "run-verify": "^1.0.2",
     "stream-to-array": "^2.3.0",
-    "test-init-nm": "./test/nm/test-init-nm",
     "xstdout": "^0.1.1"
   },
   "dependencies": {

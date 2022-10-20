@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "optional-require": "^1.1.6",
+    "optional-require": "^1.1.8",
     "subapp-util": "^1.1.4",
     "subapp-web": "^2.0.0"
   },
@@ -45,6 +45,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.17.7",
     "@xarc/app": "^11.0.0",
+    "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "jsdom": "^19.0.0",
@@ -55,7 +56,7 @@
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
     "run-verify": "^1.2.6",
-    "subapp-pkg-util": "../subapp-pkg-util"
+    "subapp-pkg-util": "0.0.1"
   },
   "peerDependencies": {
     "react": "*",

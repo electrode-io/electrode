@@ -48,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "@xarc/module-dev": "^4.1.0",
+    "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
     "chalk": "^5.0.1",

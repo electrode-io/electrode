@@ -28,6 +28,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "echo OK",
     "coverage": "echo OK",
     "preinstall": "node xarc-opt-check.js",
@@ -38,7 +39,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "opt-archetype-check": "../opt-archetype-check",
+    "opt-archetype-check": "1.0.0",
     "shx": "^0.3.2"
   },
   "xarcOptCheck": {

@@ -4,7 +4,7 @@
 
 const Fs = require("fs");
 const assign = require("object-assign");
-const electrodeServer = require("electrode-server2");
+const electrodeServer = require("../../electrode-server2");
 const Path = require("path");
 const xstdout = require("xstdout");
 const { expect } = require("chai");
