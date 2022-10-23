@@ -1,13 +1,16 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
 name: Node.js CI
 
 on:
   push:
-    branches: [master, next-webpack-5]
+    branches: [ "master", "next-webpack-5", "rush-pnpm-migration" ]
   pull_request:
-    branches: [master, next-webpack-5]
+    branches: [ "master", "next-webpack-5", "rush-pnpm-migration"  ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,10 +21,56 @@ jobs:
         node-version: [12.x, 14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
       - run: node common/scripts/install-run-rush.js install
       - run: node common/scripts/install-run-rush.js rebuild --verbose
+
+  publish-npm:
+    # This needs to be done only when merge to master happens
+    # TODO: Remove rush-pnpm-migration after testing and merging to master
+    if: ${{ github.ref == 'refs/heads/rush-pnpm-migration' || github.ref == 'refs/heads/rush-pnpm-migration' }}
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # TODO: confirm node version and update
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+
+      # The "rush install" command installs package dependencies for all your
+      # projects, based on the shrinkwrap file that is created/updated using "rush
+      # update". 
+      - name: Run 'rush install'
+        run: node common/scripts/install-run-rush.js install --max-install-attempts 2
+
+      - name: Run 'rush rebuild'
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+      
+      - name: Git config user
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      
+      - name: Run 'rush version --bump'
+        run: node common/scripts/install-run-rush.js version --bump
+
+      - name: Run 'rush publish'
+        run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          
