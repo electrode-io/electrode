@@ -43,6 +43,7 @@ specifiers:
   '@rush-temp/react-redux-saga': file:./projects/react-redux-saga.tgz
   '@rush-temp/react-router': file:./projects/react-router.tgz
   '@rush-temp/render-context': file:./projects/render-context.tgz
+  '@rush-temp/rush-package-test': file:./projects/rush-package-test.tgz
   '@rush-temp/subapp': file:./projects/subapp.tgz
   '@rush-temp/subapp-pbundle': file:./projects/subapp-pbundle.tgz
   '@rush-temp/subapp-pkg-util': file:./projects/subapp-pkg-util.tgz
@@ -220,6 +221,7 @@ dependencies:
   '@rush-temp/react-redux-saga': file:projects/react-redux-saga.tgz
   '@rush-temp/react-router': file:projects/react-router.tgz
   '@rush-temp/render-context': file:projects/render-context.tgz
+  '@rush-temp/rush-package-test': file:projects/rush-package-test.tgz
   '@rush-temp/subapp': file:projects/subapp.tgz
   '@rush-temp/subapp-pbundle': file:projects/subapp-pbundle.tgz
   '@rush-temp/subapp-pkg-util': file:projects/subapp-pkg-util.tgz
@@ -21751,6 +21753,12 @@ packages:
       xsh: 0.4.5
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  file:projects/rush-package-test.tgz:
+    resolution: {integrity: sha512-R164kFDsoPaRTKbptA280jqsZFMBM+iu2NBMwE8an0R8ZgES+w5RhPxls6ipDaDJ3y30IqmccQLobKsGYJlzRQ==, tarball: file:projects/rush-package-test.tgz}
+    name: '@rush-temp/rush-package-test'
+    version: 0.0.0
     dev: false
 
   file:projects/subapp-pbundle.tgz:
