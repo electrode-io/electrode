@@ -1,1 +1,1 @@
-console.log('rush test my controls repo - change 6!')
+console.log('This is a package to test automated package publish on PR merge')

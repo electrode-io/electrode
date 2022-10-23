@@ -1,6 +1,6 @@
 {
   "name": "rush-package-test",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "src/index.js",
   "files": [
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:arunvishnun/rush-test.git"
+    "url": "git@github.com:electrode-io/electrode.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
