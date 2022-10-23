@@ -599,6 +599,11 @@
     {
       "packageName": "@xarc/webpack",
       "projectFolder": "packages/xarc-webpack"
+    },
+    {
+      "packageName": "rush-package-test",
+      "projectFolder": "packages/rush-package-test",
+      "shouldPublish": true
     }
   ]
 }
