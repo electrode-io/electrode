@@ -3214,7 +3214,7 @@ packages:
     resolution: {integrity: sha512-d4ImIQbT/rKMG8+AXpmcan5T2/PNeSjrYhvkwet6z0p8kzYtfgA32xzOBlbU0yqJfq+/0Ml805iFoODO0LP5/g==}
     dependencies:
       '@types/chai': 4.3.3
-      '@types/sinon': 10.0.13
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.13:
