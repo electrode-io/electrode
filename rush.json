@@ -417,193 +417,238 @@
     // }
     {
       "packageName": "electrode-archetype-webpack-dll",
-      "projectFolder": "packages/electrode-archetype-webpack-dll"
+      "projectFolder": "packages/electrode-archetype-webpack-dll",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-archetype-webpack-dll-dev",
-      "projectFolder": "packages/electrode-archetype-webpack-dll-dev"
+      "projectFolder": "packages/electrode-archetype-webpack-dll-dev",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-cdn-file-loader",
-      "projectFolder": "packages/electrode-cdn-file-loader"
+      "projectFolder": "packages/electrode-cdn-file-loader",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-cookies",
-      "projectFolder": "packages/electrode-cookies"
+      "projectFolder": "packages/electrode-cookies",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-node-resolver",
-      "projectFolder": "packages/electrode-node-resolver"
+      "projectFolder": "packages/electrode-node-resolver",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-react-webapp",
-      "projectFolder": "packages/electrode-react-webapp"
+      "projectFolder": "packages/electrode-react-webapp",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-redux-router-engine",
-      "projectFolder": "packages/electrode-redux-router-engine"
+      "projectFolder": "packages/electrode-redux-router-engine",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-ui-config",
-      "projectFolder": "packages/electrode-ui-config"
+      "projectFolder": "packages/electrode-ui-config",
+      "skipRushCheck": true
     },
     {
       "packageName": "electrode-ui-logger",
-      "projectFolder": "packages/electrode-ui-logger"
+      "projectFolder": "packages/electrode-ui-logger",
+      "skipRushCheck": true
     },
     {
       "packageName": "opt-archetype-check",
-      "projectFolder": "packages/opt-archetype-check"
+      "projectFolder": "packages/opt-archetype-check",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-pbundle",
-      "projectFolder": "packages/subapp-pbundle"
+      "projectFolder": "packages/subapp-pbundle",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-redux",
-      "projectFolder": "packages/subapp-redux"
+      "projectFolder": "packages/subapp-redux",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-react",
-      "projectFolder": "packages/subapp-react"
+      "projectFolder": "packages/subapp-react",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-web",
-      "projectFolder": "packages/subapp-web"
+      "projectFolder": "packages/subapp-web",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-util",
-      "projectFolder": "packages/subapp-util"
+      "projectFolder": "packages/subapp-util",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-server",
-      "projectFolder": "packages/subapp-server"
+      "projectFolder": "packages/subapp-server",
+      "skipRushCheck": true
     },
     {
       "packageName": "subapp-pkg-util",
-      "projectFolder": "packages/subapp-pkg-util"
+      "projectFolder": "packages/subapp-pkg-util",
+      "skipRushCheck": true
     },
     {
       "packageName": "webpack-config-composer",
-      "projectFolder": "packages/webpack-config-composer"
+      "projectFolder": "packages/webpack-config-composer",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/app",
-      "projectFolder": "packages/xarc-app"
+      "projectFolder": "packages/xarc-app",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/app-dev",
-      "projectFolder": "packages/xarc-app-dev"
+      "projectFolder": "packages/xarc-app-dev",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/create-app",
-      "projectFolder": "packages/xarc-create-app"
+      "projectFolder": "packages/xarc-create-app",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/dev-base",
-      "projectFolder": "packages/xarc-dev-base"
+      "projectFolder": "packages/xarc-dev-base",
+      "skipRushCheck": true
     },
 
     {
       "packageName": "@xarc/index-page",
-      "projectFolder": "packages/xarc-index-page"
+      "projectFolder": "packages/xarc-index-page",
+      "skipRushCheck": true
     },
 
     {
       "packageName": "@xarc/jsx-renderer",
-      "projectFolder": "packages/xarc-jsx-renderer"
+      "projectFolder": "packages/xarc-jsx-renderer",
+      "skipRushCheck": true
     },
     
     {
       "packageName": "@xarc/opt-eslint",
-      "projectFolder": "packages/xarc-opt-eslint"
+      "projectFolder": "packages/xarc-opt-eslint",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-sass",
-      "projectFolder": "packages/xarc-opt-sass"
+      "projectFolder": "packages/xarc-opt-sass",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-react",
-      "projectFolder": "packages/xarc-opt-react"
+      "projectFolder": "packages/xarc-opt-react",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-preact",
-      "projectFolder": "packages/xarc-opt-preact"
+      "projectFolder": "packages/xarc-opt-preact",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-postcss",
-      "projectFolder": "packages/xarc-opt-postcss"
+      "projectFolder": "packages/xarc-opt-postcss",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-mocha",
-      "projectFolder": "packages/xarc-opt-mocha"
+      "projectFolder": "packages/xarc-opt-mocha",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-less",
-      "projectFolder": "packages/xarc-opt-less"
+      "projectFolder": "packages/xarc-opt-less",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-karma",
-      "projectFolder": "packages/xarc-opt-karma"
+      "projectFolder": "packages/xarc-opt-karma",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-jest",
-      "projectFolder": "packages/xarc-opt-jest"
+      "projectFolder": "packages/xarc-opt-jest",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/opt-stylus",
-      "projectFolder": "packages/xarc-opt-stylus"
+      "projectFolder": "packages/xarc-opt-stylus",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/render-context",
-      "projectFolder": "packages/xarc-render-context"
+      "projectFolder": "packages/xarc-render-context",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-router",
-      "projectFolder": "packages/xarc-react-router"
+      "projectFolder": "packages/xarc-react-router",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-redux-saga",
-      "projectFolder": "packages/xarc-react-redux-saga"
+      "projectFolder": "packages/xarc-react-redux-saga",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-redux-observable",
-      "projectFolder": "packages/xarc-react-redux-observable"
+      "projectFolder": "packages/xarc-react-redux-observable",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-redux",
-      "projectFolder": "packages/xarc-react-redux"
+      "projectFolder": "packages/xarc-react-redux",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-recoil",
-      "projectFolder": "packages/xarc-react-recoil"
+      "projectFolder": "packages/xarc-react-recoil",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/react-query",
-      "projectFolder": "packages/xarc-react-query"
+      "projectFolder": "packages/xarc-react-query",
+      "skipRushCheck": true
     },
 
     {
       "packageName": "@xarc/tag-renderer",
-      "projectFolder": "packages/xarc-tag-renderer"
+      "projectFolder": "packages/xarc-tag-renderer",
+      "skipRushCheck": true
     },
 
     {
       "packageName": "@xarc/react",
-      "projectFolder": "packages/xarc-react"
+      "projectFolder": "packages/xarc-react",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/subapp",
-      "projectFolder": "packages/xarc-subapp"
+      "projectFolder": "packages/xarc-subapp",
+      "skipRushCheck": true
     },
     {
       "packageName": "@xarc/webpack",
-      "projectFolder": "packages/xarc-webpack"
+      "projectFolder": "packages/xarc-webpack",
+      "skipRushCheck": true
     },
     {
       "packageName": "rush-package-test",
-      "projectFolder": "packages/rush-package-test",
-      "shouldPublish": true
+      "shouldPublish": true,
+      "projectFolder": "packages/rush-package-test"
     }
   ]
 }
