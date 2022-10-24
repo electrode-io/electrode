@@ -43,7 +43,7 @@ jobs:
     strategy:
       matrix:
         # TODO: confirm node version and update
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v3
