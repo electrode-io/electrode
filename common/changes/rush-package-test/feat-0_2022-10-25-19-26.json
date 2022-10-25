@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "rush-package-test",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "rush-package-test"
+}
