@@ -2,6 +2,12 @@
   "name": "rush-package-test",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "rush-package-test_v1.0.0",
+      "date": "Tue, 25 Oct 2022 23:25:37 GMT",
+      "comments": {}
+    },
+    {
       "version": "1.2.0",
       "tag": "rush-package-test_v1.2.0",
       "date": "Tue, 25 Oct 2022 18:13:46 GMT",
