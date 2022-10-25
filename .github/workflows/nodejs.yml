@@ -67,10 +67,13 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
       
+      - run: cat $NPM_CONFIG_USERCONFIG
+      
       - name: Run 'rush version --bump'
         run: node common/scripts/install-run-rush.js version --bump
 
       - name: Run 'rush publish'
         run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
         env:
+          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
