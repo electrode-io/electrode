@@ -1,0 +1,17 @@
+{
+  "name": "rush-package-test",
+  "entries": [
+    {
+      "version": "1.2.0",
+      "tag": "rush-package-test_v1.2.0",
+      "date": "Tue, 25 Oct 2022 18:13:46 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added changes to build and publish script. Included a test package to verify publish to npm. Updated github action releases package when a pr is merged to pre-defined branch."
+          }
+        ]
+      }
+    }
+  ]
+}
