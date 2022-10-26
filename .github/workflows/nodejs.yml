@@ -74,7 +74,6 @@ jobs:
         run: node common/scripts/install-run-rush.js version --bump
 
       - name: Run 'rush publish'
-        env:
-          run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
+        run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
