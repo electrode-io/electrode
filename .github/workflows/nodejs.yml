@@ -77,4 +77,4 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-        run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
+        run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public --registry https://registry.npmjs.org/ --npm-auth-token ${{secrets.NPM_AUTH_TOKEN}}
