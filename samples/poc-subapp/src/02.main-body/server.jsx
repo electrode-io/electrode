@@ -1,7 +1,7 @@
 import React from "react";
 import subApp from "./main-body";
 import Promise from "bluebird";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
 
 module.exports = {
   prepare: async ({ request, context }) => {

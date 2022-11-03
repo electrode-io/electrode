@@ -1,6 +1,6 @@
 import React from "react";
 import subApp from "./bottom";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
 import Promise from "bluebird";
 import Fs from "fs";
 
