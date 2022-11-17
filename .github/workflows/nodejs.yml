@@ -33,3 +33,46 @@ jobs:
       - run: node common/scripts/install-run-rush.js install
       - run: node common/scripts/install-run-rush.js rebuild --verbose
 
+  publish-npm:
+    # TODO: Remove rush-pnpm-migration after testing and merging to master
+    if: ${{ github.ref == 'master' || github.ref == 'refs/heads/rush-pnpm-migration' }}
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # TODO: confirm node version and update
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+
+      # The "rush install" command installs package dependencies for all your
+      # projects, based on the shrinkwrap file that is created/updated using "rush
+      # update". 
+      - name: Run 'rush install'
+        run: node common/scripts/install-run-rush.js install --max-install-attempts 2
+
+      - name: Run 'rush rebuild'
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+      
+      - name: Git config user
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      
+      - run: cat $NPM_CONFIG_USERCONFIG
+      
+      - name: Run 'rush version --bump'
+        run: node common/scripts/install-run-rush.js version --bump
+
+      - name: Run 'rush publish'
+        run: node common/scripts/install-run-rush.js publish --apply --publish --include-all --set-access-level=public
+        env:
+          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

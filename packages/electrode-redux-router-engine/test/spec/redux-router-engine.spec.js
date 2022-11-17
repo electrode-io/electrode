@@ -99,10 +99,7 @@ describe("redux-router-engine", function() {
     });
   });
 
-  // TODO: Needs fix. 
-  // With fyn this used to take package under test/nm/
-  // With rush, this wont' get added in node_modules.
-  it.skip("should load init without leading . from node_modules", () => {
+  it("should load init without leading . from node_modules", () => {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
     testReq.url = Url.parse("/test-init-nm");
 

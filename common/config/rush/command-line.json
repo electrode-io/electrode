@@ -17,7 +17,6 @@
       "summary": "Run tests in each packages",
       "description": "Run tests in each packages. Runs `npm run test` for each package. Each package can have its own definition of `npm run test`",
       "allowWarningsInSuccessfulBuild": true,
-      "ignoreDependencyOrder": false,
       "ignoreMissingScript": true,
       "enableParallelism": false
     },
@@ -28,7 +27,7 @@
       "description": "Run lint in each packages. Runs `npm run lint` for each package if present.",
       "allowWarningsInSuccessfulBuild": true,
       "ignoreMissingScript": true,
-      "enableParallelism": false
+      "enableParallelism": true
     }
     // {
     //   /**

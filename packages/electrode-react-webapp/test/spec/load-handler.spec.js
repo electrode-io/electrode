@@ -1,7 +1,6 @@
 "use strict";
 
 const loadHandler = require("../../lib/load-handler");
-const expect = require("chai").expect;
 
 describe("token module load handler", function() {
   it("should handle ES6 module default", () => {

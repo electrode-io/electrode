@@ -1,10 +1,9 @@
 {
-  "presets": [ 
-    ["env",
-      {
-      "targets": {
-        "node": "8"
-      }
-    }],
-    "stage-0", "react"]
+  "presets": [ ["env",
+    {
+    "targets": {
+      "node": "8"
+    }
+  }],
+  "stage-0", "react"]
 }

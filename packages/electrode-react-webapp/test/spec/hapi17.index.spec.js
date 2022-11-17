@@ -4,7 +4,7 @@
 
 const Fs = require("fs");
 const assign = require("object-assign");
-const electrodeServer = require("electrode-server2");
+const electrodeServer = require("../../electrode-server2");
 const Path = require("path");
 const xstdout = require("xstdout");
 const { expect } = require("chai");
@@ -108,12 +108,12 @@ describe("hapi index", () => {
     const compat = require("electrode-hapi-compat");
     compat._testSetHapi17(false);
     const webapp = require("../..");
-    expect(webapp.register).to.be.a("function");
-    // expect(webapp.register.attributes.pkg.name).eql("electrode-react-webapp");
+    expect(webapp.register).a("function");
+    expect(webapp.register.attributes.pkg.name).eql("electrode-react-webapp");
     expect(webapp.pkg).undefined;
   });
 
-  it.skip("with hapi 17", () => {
+  it("with hapi 17", () => {
     const compat = require("electrode-hapi-compat");
     compat._testSetHapi17(true);
     const hapi17 = require("../../lib/hapi/plugin17");

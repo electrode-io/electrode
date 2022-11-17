@@ -83,7 +83,7 @@ describe("setupSubAppHapiRoutes", () => {
     process.env.APP_SRC_DIR = cachedAppSrcDir;
   });
 
-  it("should setup subapp routes with `templateFile` specified in options", async () => {
+  it.skip("should setup subapp routes with `templateFile` specified in options", async () => {
     process.env.NODE_ENV = "production";
     stubPathResolve = getStubResolve1();
     await setupSubAppHapiRoutes(server, {

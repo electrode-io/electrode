@@ -6,8 +6,7 @@ const moduleName = "../../src/lib/index";
 import { asyncVerify, runFinally } from "run-verify";
 import { expect } from "chai";
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
-
-const electrodeServer = require("electrode-server1");
+const electrodeServer = require("../../e1");
 
 describe("dev-hapi 16", function () {
   this.timeout(10000);
@@ -42,19 +41,11 @@ describe("dev-hapi 16", function () {
     return data;
   };
 
-  const testPlugin16 = async options => {
+  const testPlugin16 = options => {
     let server;
     let data;
-    const config = {
-      connections: {
-        default: {
-          port: 9001
-        }
-      },
-      ...options,
-    };
     return asyncVerify(
-      () => electrodeServer(config),
+      () => electrodeServer(options),
       s => {
         server = s;
         data = captureRequest(server);
@@ -62,7 +53,6 @@ describe("dev-hapi 16", function () {
         return server.inject("/test");
       },
       resp => {
-        debugger;
         expect(resp.statusCode).to.equal(200);
         expect(data.request.app).to.have.key("webpackDev").that.is.an("object");
       },

@@ -2,7 +2,6 @@
 
 const Path = require("path");
 const reactWebapp = require("../../lib/react-webapp");
-const expect = require("chai").expect;
 const xstdout = require("xstdout");
 
 describe("react-webapp", function() {

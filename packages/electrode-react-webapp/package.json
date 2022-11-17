@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "echo \"Nothing to build. Just a placeholder\"",
-    "lint": "xrun xarc/lint",
+    "lint": "clap lint",
     "pre-test": "clap compile",
     "prepare": "clap compile",
-    "test": "babel src-template -D -d template && mocha --extension ts,js,tsx,jsx,cjs,mjs -c --require @babel/register test/spec",
+    "test": "clap test-only",
     "coverage": "clap test-cov",
-    "check": "babel src-template -D -d template && xrun xarc/check",
+    "check": "clap check",
     "prepublishOnly": "clap check",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
@@ -63,26 +63,19 @@
     "munchy": "^1.0.9",
     "require-at": "^1.0.6",
     "string-array": "^1.0.0",
-    "xaa": "^1.6.0",
-    "eslint": "^7.32.0",
-    "eslint-config-walmart": "^2.2.1",
-    "eslint-plugin-filenames": "^1.1.0",
-    "eslint-plugin-jsdoc": "^30.7.9"
+    "xaa": "^1.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
+    "@babel/cli": "^7.4.4",
     "@xarc/run": "^1.1.1",
-    "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/register": "^7.18.9",
-    "babel-eslint": "^10.1.0",
-    "chai": "4.3.6",
-    "@xarc/module-dev": "^4.1.0",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "benchmark": "^2.1.4",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-redux-router-engine": "6.0.0",
     "electrode-server": "^1.8.0",
-    "electrode-server2": "npm:electrode-server@^2.0.0",
     "express": "^4.15.4",
     "koa": "^2.3.0",
     "koa-router": "^7.4.0",
@@ -96,13 +89,7 @@
     "superagent": "^1.8.5",
     "uglify-js": "^2.6.2",
     "xclap": "^0.2.0",
-    "xstdout": "^0.1.1",
-    "mocha": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-walmart": "^2.2.1",
-    "eslint-plugin-filenames": "^1.1.0",
-    "eslint-plugin-jsdoc": "^30.7.9",
-    "nyc": "^15.1.0"
+    "xstdout": "^0.1.1"
   },
   "nyc": {
     "all": true,
@@ -131,20 +118,6 @@
     ],
     "require": [
       "@babel/register"
-    ]
-  },
-  "@xarc/module-dev": {
-    "srcDir": [
-      "src",
-      "test",
-      "scripts"
-    ],
-    "features": [
-      "eslint",
-      "eslintTS",
-      "mocha",
-      "typedoc",
-      "typescript"
     ]
   },
   "prettier": {
