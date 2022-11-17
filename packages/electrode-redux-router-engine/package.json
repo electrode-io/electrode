@@ -39,6 +39,7 @@
   "devDependencies": {
     "babel-cli": "^6.1.1",
     "@xarc/run": "^1.1.1",
+    "babel-core": "^6.0.15",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
@@ -50,7 +51,8 @@
     "react-dom": "^18.2.0",
     "run-verify": "^1.0.2",
     "stream-to-array": "^2.3.0",
-    "xstdout": "^0.1.1"
+    "xstdout": "^0.1.1",
+    "xclap": "^0.2.0"
   },
   "dependencies": {
     "optional-require": "^1.1.6",

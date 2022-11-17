@@ -4,7 +4,7 @@
 
 const Fs = require("fs");
 const assign = require("object-assign");
-const electrodeServer = require("../../electrode-server2");
+const electrodeServer = require("electrode-server2");
 const Path = require("path");
 const { expect } = require("chai");
 const ReactDOMServer = require("react-dom/server");
@@ -94,7 +94,7 @@ const getConfig = () => {
   };
 };
 
-describe.only("hapi 17 electrode-react-webapp with jsx template", () => {
+describe("hapi 17 electrode-react-webapp with jsx template", () => {
   let config;
   let configOptions;
   let mainRoutePathOptions;
@@ -154,7 +154,7 @@ describe.only("hapi 17 electrode-react-webapp with jsx template", () => {
     }
   });
 
-  it.only("should successfully render with enterHead scripts", () => {
+  it("should successfully render with enterHead scripts", () => {
     configOptions.unbundledJS = {
       enterHead: ["test-static-markup script", { src: "blah-123" }]
     };
