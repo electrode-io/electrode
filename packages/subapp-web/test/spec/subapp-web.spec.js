@@ -3,7 +3,6 @@
 /* eslint-disable max-len */
 
 const { asyncVerify } = require("run-verify");
-const { describe, it, before, after } = require("mocha");
 const { expect } = require("chai");
 const { JSDOM } = require("jsdom");
 const { delay } = require("xaa");
