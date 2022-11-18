@@ -1,12 +1,11 @@
 import React from "react";
 import subApp from "./main-body";
-import Promise from "bluebird";
 import { StaticRouter } from "react-router-dom/server";
 
 module.exports = {
   prepare: async ({ request, context }) => {
-    return Promise.delay(50 + Math.random() * 1000)
-      .return({
+    return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 1000))
+      .then({
         number: { value: 999 },
         items: [
           {
