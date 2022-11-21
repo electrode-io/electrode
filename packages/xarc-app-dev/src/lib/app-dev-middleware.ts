@@ -54,7 +54,10 @@ export class AppDevMiddleware {
       const { refreshed, failed } = data.refreshModules.reduce(
         (agg, moduleName) => {
           moduleName = moduleName.split("|")[0];
-          if (!moduleName.startsWith("webpack/runtime")) {
+          if (
+            !moduleName.startsWith("webpack/runtime") &&
+            !moduleName.startsWith("container entry (default)")
+          ) {
             try {
               const xarcOptions = loadXarcOptions();
               const xarcCwd = xarcOptions.cwd;
@@ -85,8 +88,6 @@ export class AppDevMiddleware {
       }
     }
 
-    initialLoad = false;
-
     // activate extend require for isomorphic assets
     getXRequire().activate();
 
@@ -106,6 +107,8 @@ export class AppDevMiddleware {
           break;
         case WEBPACK_EVENT_ISOMORPHIC_CONFIG:
           getXRequire().initialize(data.config);
+          // Only mark initial load to be completed when isomorphic init is done.
+          initialLoad = false;
           break;
         case WEBPACK_EVENT_STATS:
           break;
