@@ -385,7 +385,7 @@ describe("composer", () => {
         }
       );
 
-      expect(composer[PARTIALS].bar).to.deep.equal(new Partial("bar", { plugins: ["barTest"] }));
+      expect(composer[PARTIALS].bar).to.deep.equal(new Partial("bar", { config: { plugins: ["barTest"] } }));
     });
 
     it("should addPartial when given name does not exist but options having replace method", () => {
