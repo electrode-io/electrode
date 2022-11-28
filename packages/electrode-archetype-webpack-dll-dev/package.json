@@ -21,10 +21,10 @@
     "require-at": "^1.0.6",
     "source-map-explorer": "^1.6.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.1.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.8.0",
     "webpack-config-composer": "^1.1.6",
-    "webpack-stats-plugin": "^0.2.1",
+    "webpack-stats-plugin": "^1.1.1",
     "xclap": "^0.2.53",
     "xsh": "^0.4.4"
   },
