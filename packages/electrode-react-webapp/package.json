@@ -72,6 +72,7 @@
     "@babel/register": "^7.4.4",
     "benchmark": "^2.1.4",
     "electrode-archetype-njs-module-dev": "^3.0.3",
+    "chai": "4.3.6",
     "electrode-redux-router-engine": "../electrode-redux-router-engine",
     "electrode-server": "^1.8.0",
     "electrode-server2": "./electrode-server2",
