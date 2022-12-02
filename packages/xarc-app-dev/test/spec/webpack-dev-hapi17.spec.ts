@@ -43,8 +43,16 @@ describe("dev-hapi 17", function () {
   const testPlugin17 = options => {
     let server;
     let data;
+    const config = {
+      connections: {
+        default: {
+          port: 9002
+        }
+      },
+      ...options,
+    };
     return asyncVerify(
-      () => electrodeServer(options),
+      () => electrodeServer(config),
       s => {
         server = s;
         data = captureRequest(server);

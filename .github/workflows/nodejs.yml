@@ -1,13 +1,18 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node.
+# It then publish a packages to npm registry when PR against a given target branch is merged.
+# For more information on github actions see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# For more information on publishing packages see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
 name: Node.js CI
 
 on:
   push:
-    branches: [master, next-webpack-5]
+    branches: [ "master", "next-webpack-5", "rush-pnpm-migration" ]
   pull_request:
-    branches: [master, next-webpack-5]
+    branches: [ "master", "next-webpack-5", "rush-pnpm-migration"  ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -18,10 +23,13 @@ jobs:
         node-version: [12.x, 14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
       - run: node common/scripts/install-run-rush.js install
       - run: node common/scripts/install-run-rush.js rebuild --verbose
+

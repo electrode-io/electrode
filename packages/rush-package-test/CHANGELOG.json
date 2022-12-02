@@ -1,0 +1,52 @@
+{
+  "name": "rush-package-test",
+  "entries": [
+    {
+      "version": "1.1.0",
+      "tag": "rush-package-test_v1.1.0",
+      "date": "Wed, 26 Oct 2022 23:00:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "test publish"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "test release"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.1",
+      "tag": "rush-package-test_v1.0.1",
+      "date": "Wed, 26 Oct 2022 22:30:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update log message"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "tag": "rush-package-test_v1.0.0",
+      "date": "Wed, 26 Oct 2022 22:27:55 GMT",
+      "comments": {}
+    },
+    {
+      "version": "1.2.0",
+      "tag": "rush-package-test_v1.2.0",
+      "date": "Tue, 25 Oct 2022 18:13:46 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added changes to build and publish script. Included a test package to verify publish to npm. Updated github action releases package when a pr is merged to pre-defined branch."
+          }
+        ]
+      }
+    }
+  ]
+}
