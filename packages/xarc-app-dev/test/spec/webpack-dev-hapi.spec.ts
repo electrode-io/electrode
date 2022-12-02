@@ -6,7 +6,8 @@ const moduleName = "../../src/lib/index";
 import { asyncVerify, runFinally } from "run-verify";
 import { expect } from "chai";
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
-const electrodeServer = require("../../e1");
+
+const electrodeServer = require("electrode-server1");
 
 describe("dev-hapi 16", function () {
   this.timeout(10000);
@@ -44,8 +45,16 @@ describe("dev-hapi 16", function () {
   const testPlugin16 = options => {
     let server;
     let data;
+    const config = {
+      connections: {
+        default: {
+          port: 9001
+        }
+      },
+      ...options,
+    };
     return asyncVerify(
-      () => electrodeServer(options),
+      () => electrodeServer(config),
       s => {
         server = s;
         data = captureRequest(server);

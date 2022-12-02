@@ -35,7 +35,7 @@
     "@testing-library/react": "^13.2.0",
     "@xarc/run": "^1.1.1",
     "@types/chai": "^4.3.1",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
@@ -62,9 +62,9 @@
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "source-map-support": "^0.5.21",
-    "ts-node": "^10.8.0",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.22.15",
-    "typescript": "^4.7.2"
+    "typescript": "^4.9.3" 
   },
   "resolutions": {
     "@types/react": "^18.0.9"

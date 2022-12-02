@@ -95,7 +95,6 @@ describe("async-template", function() {
       `\ntoken process module critical-css not found\n`
     );
     criticalCssToken.custom = undefined;
-
     expect(asyncTemplate.tokens).to.deep.equal(expected);
   });
 
