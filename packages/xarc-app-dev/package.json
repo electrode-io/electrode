@@ -118,6 +118,7 @@
     "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
     "electrode-server": "^3.3.0",
+    "electrode-server1": "npm:electrode-server@^1.0.0",
     "eslint": "^7.16.0",
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.3.2",
