@@ -77,7 +77,7 @@ module.exports = function() {
       filename: `${nsTag}[name].bundle.dev.js`,
       chunkFilename: `${nsTag}[name].bundle.dev.js`
     },
-    devtool: "inline-source-map",
+    devtool: xarcOptions.webpack.devtool || false,
     // TODO: why is this here and duplicates what's in extract-style partial?  This is causing
     // duplicate CSS bundles to be generated in dev mode.
     // Comment out for now

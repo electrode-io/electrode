@@ -1,7 +1,6 @@
-import { React, getBrowserHistory } from "subapp-react";
+import { React } from "subapp-react";
 import { reduxLoadSubApp } from "subapp-redux";
-import { withRouter } from "react-router";
-import { Router, Route, Switch } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -49,19 +48,17 @@ const MoreDeals = () => {
 
 const Bottom = props => {
   return (
-    <Switch>
-      <Route path="/products" component={() => <MoreProducts {...props} imagesData={[]} />} />
-      <Route path="/deals" component={MoreDeals} />
-    </Switch>
+    <Routes>
+      <Route path="/products" element={<MoreProducts {...props} imagesData={[]} />} />
+      <Route path="/deals" element={<MoreDeals />} />
+    </Routes>
   );
 };
 
-const Component = withRouter(
-  connect(
-    state => state,
-    dispatch => ({ dispatch })
-  )(Bottom)
-);
+const Component = connect(
+  state => state,
+  dispatch => ({ dispatch })
+)(Bottom);
 
 export default reduxLoadSubApp({
   name: "Bottom",
@@ -69,9 +66,9 @@ export default reduxLoadSubApp({
   Component,
   StartComponent: props => {
     return (
-      <Router history={getBrowserHistory()}>
+      <BrowserRouter>
         <Component {...props} />
-      </Router>
+      </BrowserRouter>
     );
   },
   reduxCreateStore: initialState => {

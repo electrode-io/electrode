@@ -53,6 +53,7 @@ module.exports = function(opts) {
       const dir = xarcOptions.webpack.devArtifactsPath || xarcOptions.eTmpDir;
       mkdirp.sync(dir);
       const str = JSON.stringify(data, null, INDENT);
+      debugger;
       Fs.writeFileSync(Path.resolve(dir, "stats.json"), str);
       return str;
     };

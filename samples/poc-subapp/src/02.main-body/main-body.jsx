@@ -1,9 +1,8 @@
 import { reduxLoadSubApp } from "subapp-redux";
-import { React, getBrowserHistory } from "subapp-react";
+import { React } from "subapp-react";
 import { AppContext } from "subapp-react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
-import { Router, Route, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { Products } from "../components/products";
 import { Navigation } from "../components/navigation";
 import { Deals } from "../components/deals";
@@ -16,7 +15,6 @@ const Home = () => {
         return (
           <div className="container-fluid text-center">
             <p>HOME</p>
-
             <div>SubApp name: {subApp ? subApp.name : "Not Available from context"}</div>
             <div>
               IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
@@ -35,20 +33,20 @@ const MainBody = props => {
   return (
     <div>
       <Navigation />
-      <Switch>
-        <Route path="/" exact component={Home} {...props} />
-        <Route path="/products" component={Products} {...props} />
-        <Route path="/deals" component={Deals} {...props} />
-        <Route path="/stores" component={Stores} {...props} />
-        <Route path="/contact" component={Contact} {...props} />
-      </Switch>
+      <Routes>
+        <Route path="/" exact element={<Home />} {...props} />
+        <Route path="/products" element={<Products />} {...props} />
+        <Route path="/deals" element={<Deals />} {...props} />
+        <Route path="/stores" element={<Stores />} {...props} />
+        <Route path="/contact" element={<Contact />} {...props} />
+      </Routes>
     </div>
   );
 };
 
 const mapStateToProps = state => state;
 
-const Component = withRouter(connect(mapStateToProps, dispatch => ({ dispatch }))(MainBody));
+const Component = connect(mapStateToProps, dispatch => ({ dispatch }))(MainBody);
 
 export default reduxLoadSubApp({
   name: "MainBody",
@@ -57,9 +55,9 @@ export default reduxLoadSubApp({
 
   StartComponent: props => {
     return (
-      <Router history={getBrowserHistory()}>
+      <BrowserRouter>
         <Component {...props} />
-      </Router>
+      </BrowserRouter>
     );
   },
 

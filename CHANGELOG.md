@@ -1,3 +1,22 @@
+# 10/21/2022
+
+## Packages
+
+- `@xarc/app@11.0.1` `(11.0.0 => 11.0.1)`
+- `@xarc/app-dev@11.0.1` `(11.0.0 => 11.0.1)`
+- `@xarc/webpack@11.1.3` `(11.1.2 => 11.1.3)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - feature: open browser when proxy is ready ([#1905](https://github.com/electrode-io/electrode/pull/1905)) [commit](http://github.com/electrode-io/electrode/commit/3ec56443279de2549f94d34510cebc93391cb951)
+  - Fix broken reporter link ([#1908](https://github.com/electrode-io/electrode/pull/1908)) [commit](http://github.com/electrode-io/electrode/commit/e83cb48dea2577b2a544cd3f92723ff485d65fca)
+
+- `packages/xarc-webpack`
+
+  - add two options for improving webpack performance ([#1904](https://github.com/electrode-io/electrode/pull/1904)) [commit](http://github.com/electrode-io/electrode/commit/b35a1b4fd412bcc85563dcab37f19c2fa662a208)
+
 # 8/11/2022
 
 ## Packages
