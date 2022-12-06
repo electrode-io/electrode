@@ -58,9 +58,9 @@
     "shcmd": "^0.8.4",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
-    "webpack": "^4.41.0",
+    "webpack": "~5.74.0",
     "webpack-bundle-analyzer": "^3.5.2",
-    "webpack-cli": "^3.3.9",
+    "webpack-cli": "4.8.0",
     "xclap": "^0.2.51"
   },
   "prettier": {

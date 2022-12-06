@@ -689,7 +689,7 @@
       "projectFolder": "packages/xarc-webpack",
       "shouldPublish": true,
       "skipRushCheck": true
-    },
+    },   
 
     // Sample apps
     {

@@ -73,6 +73,7 @@
     "fast-async": "^7.0.5",
     "filter-scan-dir": "1.5.5",
     "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "^2.0.0",
     "lodash": "^4.17.21",
