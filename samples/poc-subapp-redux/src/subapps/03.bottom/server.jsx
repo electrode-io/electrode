@@ -1,8 +1,8 @@
 import React from "react";
 import subApp from "./bottom";
-import { StaticRouter } from "react-router-dom";
 import Promise from "bluebird";
 import Fs from "fs";
+import { StaticRouter } from "react-router-dom/server";
 
 let filterImages;
 

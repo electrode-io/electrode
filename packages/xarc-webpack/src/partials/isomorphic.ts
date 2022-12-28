@@ -5,6 +5,9 @@ import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function(opts) {
   const xarcOptions = loadXarcOptions();
+  if (xarcOptions.webpack.disableSsr) {
+      return {};
+  }
 
   const { IsomorphicLoaderPlugin } = xAppRequire("isomorphic-loader");
 
