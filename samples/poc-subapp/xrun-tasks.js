@@ -15,7 +15,7 @@ const deps = require("./package.json").dependencies;
 loadDevTasks(xrun, {
   webpackOptions: {
     minify: true,
-    devtool: "inline-source-map",
+    devtool: "eval-cheap-module-source-map",
     v1RemoteSubApps: {
       name: "poc-subapp",
       subAppsToExpose: ["Deal", "Extras"],
