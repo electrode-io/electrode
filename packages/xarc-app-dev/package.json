@@ -58,7 +58,11 @@
     "@xarc/dev-base": "^0.1.0",
     "@xarc/run": "^1.0.5",
     "@xarc/subapp": "^0.3.4",
+<<<<<<< HEAD
     "@xarc/webpack": "^11.1.4",
+=======
+    "@xarc/webpack": "^11.1.3",
+>>>>>>> ae5a6cea (feat: merge changes from master and fix poc-subapp (#1919))
     "ansi-to-html": "^0.7.2",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-minify-dead-code-elimination": "^0.5.2",
@@ -73,6 +77,7 @@
     "fast-async": "^7.0.5",
     "filter-scan-dir": "1.5.5",
     "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "^2.0.0",
     "lodash": "^4.17.21",
