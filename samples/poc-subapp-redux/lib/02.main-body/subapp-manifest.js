@@ -1,9 +1,0 @@
-"use strict";
-
-module.exports = {
-  type: "app",
-  name: "MainBody",
-  entry: "main-body",
-  serverEntry: "./server"
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtb2R1bGUiLCJleHBvcnRzIiwidHlwZSIsIm5hbWUiLCJlbnRyeSIsInNlcnZlckVudHJ5Il0sInNvdXJjZXMiOlsiLi4vLi4vc3JjLzAyLm1haW4tYm9keS9zdWJhcHAtbWFuaWZlc3QuanMiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSB7XG4gIHR5cGU6IFwiYXBwXCIsXG4gIG5hbWU6IFwiTWFpbkJvZHlcIixcbiAgZW50cnk6IFwibWFpbi1ib2R5XCIsXG4gIHNlcnZlckVudHJ5OiBcIi4vc2VydmVyXCJcbn07XG4iXSwibWFwcGluZ3MiOiI7O0FBQUFBLE1BQU0sQ0FBQ0MsT0FBTyxHQUFHO0VBQ2ZDLElBQUksRUFBRSxLQUFLO0VBQ1hDLElBQUksRUFBRSxVQUFVO0VBQ2hCQyxLQUFLLEVBQUUsV0FBVztFQUNsQkMsV0FBVyxFQUFFO0FBQ2YsQ0FBQyJ9

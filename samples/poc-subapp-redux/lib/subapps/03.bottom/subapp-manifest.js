@@ -1,9 +1,0 @@
-"use strict";
-
-module.exports = {
-  type: "app",
-  name: "Bottom",
-  entry: "bottom",
-  serverEntry: "./server"
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtb2R1bGUiLCJleHBvcnRzIiwidHlwZSIsIm5hbWUiLCJlbnRyeSIsInNlcnZlckVudHJ5Il0sInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL3N1YmFwcHMvMDMuYm90dG9tL3N1YmFwcC1tYW5pZmVzdC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHtcbiAgdHlwZTogXCJhcHBcIixcbiAgbmFtZTogXCJCb3R0b21cIixcbiAgZW50cnk6IFwiYm90dG9tXCIsXG4gIHNlcnZlckVudHJ5OiBcIi4vc2VydmVyXCJcbn07XG4iXSwibWFwcGluZ3MiOiI7O0FBQUFBLE1BQU0sQ0FBQ0MsT0FBTyxHQUFHO0VBQ2ZDLElBQUksRUFBRSxLQUFLO0VBQ1hDLElBQUksRUFBRSxRQUFRO0VBQ2RDLEtBQUssRUFBRSxRQUFRO0VBQ2ZDLFdBQVcsRUFBRTtBQUNmLENBQUMifQ==
