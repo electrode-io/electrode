@@ -37,6 +37,7 @@ specifiers:
   '@rush-temp/opt-sass': file:./projects/opt-sass.tgz
   '@rush-temp/opt-stylus': file:./projects/opt-stylus.tgz
   '@rush-temp/poc-subapp': file:./projects/poc-subapp.tgz
+  '@rush-temp/poc-subapp-redux': file:./projects/poc-subapp-redux.tgz
   '@rush-temp/react': file:./projects/react.tgz
   '@rush-temp/react-query': file:./projects/react-query.tgz
   '@rush-temp/react-recoil': file:./projects/react-recoil.tgz
@@ -83,7 +84,6 @@ specifiers:
   chokidar: ^3.5.3
   css-loader: ^6.5.1
   css-minimizer-webpack-plugin: ^1.2.0
-  electrode-confippet: ^1.5.0
   electrode-server1: npm:electrode-server@^1.0.0
   electrode-server2: npm:electrode-server@^2.0.0
   enzyme: ^3.11.0
@@ -99,7 +99,6 @@ specifiers:
   file-loader: ^6.2.0
   fs-extra: ^10.1.0
   history: ^5.3.0
-  html-webpack-plugin: ^5.3.1
   identity-obj-proxy: ^3.0.0
   in-publish: ^2.0.0
   is-ci: ^2.0.0
@@ -155,6 +154,7 @@ specifiers:
   recoil: ^0.7.5
   redux-bundler: ^26.0.0
   redux-bundler-preact: ^2.0.1
+  redux-logger: ^3.0.6
   redux-observable: ^1.2.0
   redux-saga: ^1.1.3
   regenerator-runtime: ^0.13.9
@@ -222,6 +222,7 @@ dependencies:
   '@rush-temp/opt-sass': file:projects/opt-sass.tgz_webpack@5.74.0
   '@rush-temp/opt-stylus': file:projects/opt-stylus.tgz
   '@rush-temp/poc-subapp': file:projects/poc-subapp.tgz_webpack@5.74.0
+  '@rush-temp/poc-subapp-redux': file:projects/poc-subapp-redux.tgz_webpack@5.74.0
   '@rush-temp/react': file:projects/react.tgz
   '@rush-temp/react-query': file:projects/react-query.tgz
   '@rush-temp/react-recoil': file:projects/react-recoil.tgz
@@ -268,7 +269,6 @@ dependencies:
   chokidar: 3.5.3
   css-loader: 6.7.2_webpack@5.74.0
   css-minimizer-webpack-plugin: 1.3.0_webpack@5.74.0
-  electrode-confippet: 1.7.1
   electrode-server1: /electrode-server/1.9.0
   electrode-server2: /electrode-server/2.5.0
   enzyme: 3.11.0
@@ -284,7 +284,6 @@ dependencies:
   file-loader: 6.2.0_webpack@5.74.0
   fs-extra: 10.1.0
   history: 5.3.0
-  html-webpack-plugin: 5.5.0_webpack@5.74.0
   identity-obj-proxy: 3.0.0
   in-publish: 2.0.1
   is-ci: 2.0.0
@@ -306,7 +305,7 @@ dependencies:
   karma-sourcemap-loader: 0.3.8
   karma-spec-reporter: 0.0.34_karma@3.1.4
   karma-webpack: 5.0.0_webpack@5.74.0
-  koa: 2.13.4
+  koa: 2.14.0
   koa-router: 7.4.0
   less: 3.13.1
   less-loader: 4.1.0_less@3.13.1+webpack@5.74.0
@@ -340,6 +339,7 @@ dependencies:
   recoil: 0.7.6
   redux-bundler: 26.1.0
   redux-bundler-preact: 2.0.1
+  redux-logger: 3.0.6
   redux-observable: 1.2.0_rxjs@6.6.7
   redux-saga: 1.2.1
   regenerator-runtime: 0.13.11
@@ -7827,6 +7827,10 @@ packages:
     engines: {node: '>=0.10'}
     dev: false
 
+  /deep-diff/0.3.8:
+    resolution: {integrity: sha512-yVn6RZmHiGnxRKR9sJb3iVV2XTF1Ghh2DiWRZ3dMnGc43yUdWWF/kX6lQyk3+P84iprfWKU/8zFTrlkvtFm1ug==}
+    dev: false
+
   /deep-eql/0.1.3:
     resolution: {integrity: sha512-6sEotTRGBFiNcqVoeHwnfopbSpi5NbH1VWJmYCVkmxMmaVTT0bUTrNaGyBwhgP4MZL012W/mkzIn3Da+iDYweg==}
     dependencies:
@@ -12922,8 +12926,8 @@ packages:
       urijs: 1.19.11
     dev: false
 
-  /koa/2.13.4:
-    resolution: {integrity: sha512-43zkIKubNbnrULWlHdN5h1g3SEKXOEzoAlRsHOTFpnlDu8JlAOZSMJBLULusuXRequboiwJcj5vtYXKB3k7+2g==}
+  /koa/2.14.0:
+    resolution: {integrity: sha512-VQ03/Qc98oV/ddvsFZGJ0YZgQy/aoUJpBYDUXe5i2C8UmHE5qt/n+zbxaNTZMpGe1CC5L4Xd0vCgyFRu9byb9g==}
     engines: {node: ^4.8.4 || ^6.10.1 || ^7.10.1 || >= 8.1.4}
     dependencies:
       accepts: 1.3.8
@@ -16647,6 +16651,12 @@ packages:
 
   /redux-bundler/26.1.0:
     resolution: {integrity: sha512-xZBKst80CCQqzmBSxI+8+ywS4cez6vOIlCgSW48dp0U6jdb1Pq/e4FtYxuavy2fvFc4+IGAYqUIDynC+JBYYPQ==}
+    dev: false
+
+  /redux-logger/3.0.6:
+    resolution: {integrity: sha512-JoCIok7bg/XpqA1JqCqXFypuqBbQzGQySrhFzewB7ThcnysTO30l4VCst86AuB9T9tuT03MAA56Jw2PNhRSNCg==}
+    dependencies:
+      deep-diff: 0.3.8
     dev: false
 
   /redux-observable/1.2.0_rxjs@6.6.7:
@@ -20793,7 +20803,7 @@ packages:
       express: 4.18.2
       http-status-codes: 1.4.0
       in-publish: 2.0.1
-      koa: 2.13.4
+      koa: 2.14.0
       koa-router: 7.4.0
       lodash: 4.17.21
       mocha: 10.1.0
@@ -21135,6 +21145,36 @@ packages:
       stylus-relative-loader: 4.0.0_stylus@0.57.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  file:projects/poc-subapp-redux.tgz_webpack@5.74.0:
+    resolution: {integrity: sha512-f99tw2RGLKkIu00JnORTHpScXcX9ILd4FhoKWdA0JYDX9lQ/rVQ+G9OS5eM+/XN5xAU/vWMr+YIDKssLq5o3AQ==, tarball: file:projects/poc-subapp-redux.tgz}
+    id: file:projects/poc-subapp-redux.tgz
+    name: '@rush-temp/poc-subapp-redux'
+    version: 0.0.0
+    dependencies:
+      '@babel/runtime': 7.20.6
+      '@module-federation/concat-runtime': 0.0.1
+      '@xarc/fastify-server': 3.3.0
+      '@xarc/run': 1.1.1
+      electrode-confippet: 1.7.1
+      history: 5.3.0
+      html-webpack-plugin: 5.5.0_webpack@5.74.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-redux: 8.0.5_273446b12c8078862370da010d46240b
+      react-router: 6.4.4_react@18.2.0
+      react-router-dom: 6.4.4_react-dom@18.2.0+react@18.2.0
+      redux: 4.2.0
+      redux-logger: 3.0.6
+      webpack-hot-middleware: 2.25.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - react-native
+      - supports-color
+      - webpack
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.74.0:

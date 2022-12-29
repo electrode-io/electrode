@@ -1,0 +1,15 @@
+"use strict";
+
+module.exports = {
+  path: ["/", {
+    "/home": ["post"]
+  }, "/products", "/deals", "/stores", "/contact", "/account", "/cart"],
+  pageTitle: "Online Store Home",
+  // Specify the HTML index generation template
+  // since using JSX template, don't include the extension
+  // because babel transpiled it to .js in prod mode
+  // but in dev mode we still need to be able to load the
+  // .jsx version directly through @babel/register.
+  templateFile: "index"
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtb2R1bGUiLCJleHBvcnRzIiwicGF0aCIsInBhZ2VUaXRsZSIsInRlbXBsYXRlRmlsZSJdLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9zZXJ2ZXItcm91dGVzL2RlZmF1bHQvcm91dGUuanMiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbm1vZHVsZS5leHBvcnRzID0ge1xuICBwYXRoOiBbXG4gICAgXCIvXCIsXG4gICAgeyBcIi9ob21lXCI6IFtcInBvc3RcIl0gfSxcbiAgICBcIi9wcm9kdWN0c1wiLFxuICAgIFwiL2RlYWxzXCIsXG4gICAgXCIvc3RvcmVzXCIsXG4gICAgXCIvY29udGFjdFwiLFxuICAgIFwiL2FjY291bnRcIixcbiAgICBcIi9jYXJ0XCJcbiAgXSxcbiAgcGFnZVRpdGxlOiBcIk9ubGluZSBTdG9yZSBIb21lXCIsXG4gIC8vIFNwZWNpZnkgdGhlIEhUTUwgaW5kZXggZ2VuZXJhdGlvbiB0ZW1wbGF0ZVxuICAvLyBzaW5jZSB1c2luZyBKU1ggdGVtcGxhdGUsIGRvbid0IGluY2x1ZGUgdGhlIGV4dGVuc2lvblxuICAvLyBiZWNhdXNlIGJhYmVsIHRyYW5zcGlsZWQgaXQgdG8gLmpzIGluIHByb2QgbW9kZVxuICAvLyBidXQgaW4gZGV2IG1vZGUgd2Ugc3RpbGwgbmVlZCB0byBiZSBhYmxlIHRvIGxvYWQgdGhlXG4gIC8vIC5qc3ggdmVyc2lvbiBkaXJlY3RseSB0aHJvdWdoIEBiYWJlbC9yZWdpc3Rlci5cbiAgdGVtcGxhdGVGaWxlOiBcImluZGV4XCJcbn07XG4iXSwibWFwcGluZ3MiOiJBQUFBLFlBQVk7O0FBRVpBLE1BQU0sQ0FBQ0MsT0FBTyxHQUFHO0VBQ2ZDLElBQUksRUFBRSxDQUNKLEdBQUcsRUFDSDtJQUFFLE9BQU8sRUFBRSxDQUFDLE1BQU07RUFBRSxDQUFDLEVBQ3JCLFdBQVcsRUFDWCxRQUFRLEVBQ1IsU0FBUyxFQUNULFVBQVUsRUFDVixVQUFVLEVBQ1YsT0FBTyxDQUNSO0VBQ0RDLFNBQVMsRUFBRSxtQkFBbUI7RUFDOUI7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBQyxZQUFZLEVBQUU7QUFDaEIsQ0FBQyJ9

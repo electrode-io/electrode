@@ -15,6 +15,7 @@ const HomeComp = (props) => {
   return (
     <div className="container-fluid text-center">
       <p>HOME</p>
+      
       <div>
         <span style={{color: "orange", fontSize: "large"}}>
           Redux State Demo
