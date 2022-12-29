@@ -697,6 +697,12 @@
       "projectFolder": "samples/poc-subapp",
       "shouldPublish": false,
       "skipRushCheck": true
+    },
+    {
+      "packageName": "poc-subapp-redux",
+      "projectFolder": "samples/poc-subapp-redux",
+      "shouldPublish": false,
+      "skipRushCheck": true
     }
   ]
 }
