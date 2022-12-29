@@ -6,7 +6,7 @@ import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import { Products } from "../components/Products";
 import { Deals } from "../components/deals";
-import { Navigation } from "../components/Navigation";
+import { Navigation } from "../components/navigation";
 import reduxReducers, { decNumber, incNumber } from "./reducers";
 
 const mapStateToProps = (state) => state;

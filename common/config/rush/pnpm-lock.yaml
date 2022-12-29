@@ -1949,7 +1949,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.3.3_@babel+core@7.20.7
       babel-plugin-polyfill-corejs3: 0.6.0_@babel+core@7.20.7
       babel-plugin-polyfill-regenerator: 0.4.1_@babel+core@7.20.7
-      core-js-compat: 3.27.0
+      core-js-compat: 3.27.1
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -2028,7 +2028,7 @@ packages:
     resolution: {integrity: sha512-jr9lCZ4RbRQmCR28Q8U8Fu49zvFqLxTY9AMOUz+iyMohMoAgpEcVxY+wJNay99oXOpOcCTODkk70NDN2aaJEeg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      core-js-pure: 3.27.0
+      core-js-pure: 3.27.1
       regenerator-runtime: 0.13.11
     dev: false
 
@@ -5359,7 +5359,7 @@ packages:
     dependencies:
       '@babel/core': 7.20.7
       '@babel/helper-define-polyfill-provider': 0.3.3_@babel+core@7.20.7
-      core-js-compat: 3.27.0
+      core-js-compat: 3.27.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7320,14 +7320,14 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /core-js-compat/3.27.0:
-    resolution: {integrity: sha512-spN2H4E/wocMML7XtbKuqttHHM+zbF3bAdl9mT4/iyFaF33bowQGjxiWNWyvUJGH9F+hTgnhWziiLtwu3oC/Qg==}
+  /core-js-compat/3.27.1:
+    resolution: {integrity: sha512-Dg91JFeCDA17FKnneN7oCMz4BkQ4TcffkgHP4OWwp9yx3pi7ubqMDXXSacfNak1PQqjc95skyt+YBLHQJnkJwA==}
     dependencies:
       browserslist: 4.21.4
     dev: false
 
-  /core-js-pure/3.27.0:
-    resolution: {integrity: sha512-fJml7FM6v1HI3Gkg5/Ifc/7Y2qXcJxaDwSROeZGAZfNykSTvUk94WT55TYzJ2lFHK0voSr/d4nOVChLuNCWNpA==}
+  /core-js-pure/3.27.1:
+    resolution: {integrity: sha512-BS2NHgwwUppfeoqOXqi08mUqS5FiZpuRuJJpKsaME7kJz0xxuk0xkhDdfMIlP/zLa80krBqss1LtD7f889heAw==}
     requiresBuild: true
     dev: false
 
@@ -7337,8 +7337,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /core-js/3.27.0:
-    resolution: {integrity: sha512-wY6cKosevs430KRkHUIsvepDXHGjlXOZO3hYXNyqpD6JvB0X28aXyv0t1Y1vZMwE7SoKmtfa6IASHCPN52FwBQ==}
+  /core-js/3.27.1:
+    resolution: {integrity: sha512-GutwJLBChfGCpwwhbYoqfv03LAfmiz7e7D/BNxzeMxwQf10GRSzqiOjx7AmtEk+heiD/JWmBuyBPgFtx0Sg1ww==}
     requiresBuild: true
     dev: false
 
@@ -20543,7 +20543,7 @@ packages:
       chai: 4.3.7
       chalker: 1.2.0
       chokidar: 3.5.3
-      core-js: 3.27.0
+      core-js: 3.27.1
       electrode-server: 3.3.0
       electrode-server1: /electrode-server/1.9.0
       eslint: 7.32.0
@@ -21041,7 +21041,7 @@ packages:
       chai: 4.3.7
       chai-as-promised: 7.1.1_chai@4.3.7
       chai-shallowly: 1.0.0
-      core-js: 3.27.0
+      core-js: 3.27.1
       enzyme: 3.11.0
       enzyme-adapter-react-16: 1.15.7_enzyme@3.11.0
       karma: 3.1.4
