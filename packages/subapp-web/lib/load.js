@@ -111,7 +111,7 @@ Response: ${err || body}`
         // if we have to inline the subapp's JS bundle, we load it for production mode
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
         const ext = Path.extname(bundleAsset.name);
-        if (ext === ".js") {
+        if (ext === ".js" && !src.endsWith(".hot-update.js")) {
           inlineSubAppJs = `<script>/*${name}*/${src}</script>`;
         } else if (ext === ".css") {
           inlineSubAppJs = `<style id="${name}">${src}</style>`;
@@ -156,11 +156,11 @@ Response: ${err || body}`
               .concat(cdnJsBundles[ep])
               .reduce((a, jsBundle) => {
                 const ext = Path.extname(jsBundle);
-                if (ext === ".js") {
+                if (ext === ".js" && !jsBundle.endsWith(".hot-update.js")) {
                   if (context.user.headEntries) {
                     headSplits.push(`<link rel="preload" href="${jsBundle}" as="script">`);
                   }
-                  a.push(`<script src="${jsBundle}" async></script>`);
+                  a.push(`<script src="${jsBundle}" async crossorigin="anonymous"></script>`);
                 } else if (ext === ".css") {
                   if (context.user.headEntries) {
                     headSplits.push(`<link rel="stylesheet" href="${jsBundle}">`);
