@@ -65,9 +65,7 @@ function makeTasks() {
     "webpack-build": mkCmd(
       "~$webpack",
       "--config",
-      quote(webpackConfig("webpack.config.dev.js")),
-      `--colors`
-    ),
+     quote(webpackConfig("webpack.config.dev.js"))),
 
     ".clean-pack-tmp": () => shell.rm("-rf", ".pack-tmp"),
     ".mk-pack-tmp": () => shell.mkdir(".pack-tmp"),

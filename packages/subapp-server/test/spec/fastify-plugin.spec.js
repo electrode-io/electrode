@@ -52,7 +52,7 @@ describe("fastify-plugin", function () {
   it("invokes subappServer's setup if it exists", async () => {
     const server = await require("@xarc/fastify-server")({
       deferStart: true,
-      connection: { port: 0, host: "localhost" }
+      connection: { port: 3005, host: "localhost" }
     });
 
     const srcDir = Path.join(__dirname, "../data/fastify-plugin-test");
