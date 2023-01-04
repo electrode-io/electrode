@@ -415,6 +415,16 @@
     //   "reviewCategory": "tools",
     //   "tags": [ "tools" ]
     // }
+    
+    // Docs
+    {
+      "packageName": "electrode-docs",
+      "projectFolder": "docusaurus",
+      "shouldPublish": false,
+      "skipRushCheck": true
+    },
+
+    // Packages
     {
       "packageName": "electrode-archetype-webpack-dll",
       "projectFolder": "packages/electrode-archetype-webpack-dll",

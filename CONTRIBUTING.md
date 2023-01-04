@@ -6,25 +6,21 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 ## Getting Started
 
-This repo uses a custom [Lerna] mono-repo setup with [fyn] as package manager to install and local linking node modules.
+This repo uses [rushjs] for mono-repo management.
 
 ### Setup
 
-This is a mono-repo and we use [fyn] to install and local linking packages when doing development. You can use `npm run`, but never use `npm install` in our repo else things will break. Below, `fun` is an alias for `npm run` that [fyn] provides.
+This is a mono-repo and we use [rushjs] to install and local linking packages when doing development. We use rushjs with pnpm. Read more [here]
 
-Install some CLI tools globally for convenience:
-
-```bash
-$ npm install -g xclap-cli @xarc/run-cli fyn
-```
 
 Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
 ```bash
 $ git clone https://github.com/<your-github-id>/electrode.git
 $ cd electrode
-$ fyn # install node_modules
-$ fun bootstrap # run npm script bootstrap
+$ npm install -g @microsoft/rush # install rush
+$ rush install # installs package dependencies for all packages, based on the shrinkwrap file (pnpm-lock) that got created/updated using rush update.
+$ rush build # Run build command on all projects whose source files have changed since the last successful build
 ```
 
 ### Try a sample
@@ -33,8 +29,7 @@ Now you can go to the `samples` folder and try the `create-app-demo` sample app,
 
 ```bash
 $ cd samples/create-app-demo
-$ fyn
-$ fun dev
+$ rushx dev
 ```
 
 You should see some output in the console with `[DEV ADMIN]`. You can press `M` for the dev menu.
@@ -43,19 +38,19 @@ And when you open the browser at `http://localhost:3000`, you should see the dem
 
 ### **Useful** Notes
 
-- You should bootstrap the entire repo at the top dir at least once with `fun bootstrap`
-- After you make changes to any module under packages, if you want to test them in one of the samples, just run [fyn] in that sample and it will ensure all changed local packages are properly rebuilt and installed.
+- You should bootstrap the entire repo at the top dir at least once with `rush install`
+- After you make changes to any module under packages, if you want to test them in one of the samples, just run `` rushx <command>`` in that sample and it will ensure all changed local packages are properly rebuilt and installed.
 
 #### Test with `@xarc/create-app`
 
 You can quickly use the `xarc-create-app` package to create an app for testing.
 
 ```bash
-$ cd samples
-$ node ../packages/xarc-create-app/src my-test-app
-$ cd my-test-app
-$ fyn
-$ fun dev
+$ cd samples && node ../packages/xarc-create-app/src my-test-app
+$ cd ../ && rush update
+$ cd samples/my-test-app
+$ 
+$ rushx dev
 ```
 
 ## Contributing Guidelines
@@ -102,31 +97,22 @@ Our docs use [docusaurus]. The source is in the directory `/docusaurus`. It's ge
 To edit the docs:
 
 ```bash
+$ rush update
 $ cd docusaurus
-$ fyn
-$ fun start
+$ rushx start
 ```
 
 And open your browser to `http://localhost:4000` to view the docs locally.
 
 ## Releasing
 
-The versioning of modules in the this repo are all automatically controlled by the commit message.
+The versioning of modules in the this repo are done using `rush change`. Read more about [best practices]
 
-It's important that commits are isolated for the package they affected only and contains the version tags `[major]`, `[minor]`, or `[patch]`. `[patch]` is the default if tag is not found in commit message.
-
-To release, follow these steps:
-
-1. Use `xrun update-changelog` to detect packages that changed and their version bumps.
-1. Verify and check the file `CHANGELOG.md`, add a summary of key changes under the date.
-1. Amend the commit for `CHANGELOG.md` with summary changes.
-1. Run `npx fynpo prepare --no-tag` to prepare packages for release.
-1. Run `git tag -a rel-v<#>-<date>` where `<#>` is the major archetype version, and `<date>` as `YYYYMMDD`. (ie: `rel-v9-20210301`)
-1. Publish the packages that has version bumps.
-1. Push the release commits.
 
 [prettier]: https://www.npmjs.com/package/prettier
-[lerna]: https://lernajs.io/
+
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
-[fyn]: https://www.npmjs.com/package/fyn
 [docusaurus]: https://docusaurus.io/
+[rushjs]: https://rushjs.io/pages/intro/welcome/
+[here]: https://rushjs.io/pages/maintainer/package_managers/
+[best practices]:  https://rushjs.io/pages/best_practices/change_logs/#recommended-practices
