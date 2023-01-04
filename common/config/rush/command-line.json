@@ -29,7 +29,16 @@
       "allowWarningsInSuccessfulBuild": true,
       "ignoreMissingScript": true,
       "enableParallelism": false
+    },
+    {
+      "name": "commitlint",
+      "commandKind": "global",
+      "summary": "Used by the pre-commit Git hook. This command invokes commitlint to ensure that the commit messages meet the conventional commit format",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "commitlint",
+      "shellCommand": "commitlint"
     }
+    
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
@@ -192,6 +201,15 @@
    * For example, you might define a "--production" parameter for the "rush build" command.
    */
   "parameters": [
+    {
+      "parameterKind": "string",
+      "argumentName": "MESSAGE",
+      "longName": "--edit",
+      "description": "Command for commitlint",
+      "associatedCommands": [
+        "commitlint"
+      ]
+    }
     // {
     //   /**
     //    * (Required) Determines the type of custom parameter.
