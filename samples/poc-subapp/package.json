@@ -30,13 +30,13 @@
     "npm": ">= 5"
   },
   "scripts": {
-    "dev": "clap -q dev",
-    "test": "clap check",
-    "build": "clap build"
+    "dev": "xrun electrode/dev",
+    "test": "xrun electrode/check",
+    "build": "xrun electrode/build"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@module-federation/concat-runtime": "^0.0.1",    
+    "@module-federation/concat-runtime": "^0.0.1",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
     "history": "^5.3.0",
@@ -46,23 +46,16 @@
     "react-redux": "^8.0.4",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "@xarc/app": "11.0.1",
+    "subapp-react": "1.0.0",
+    "subapp-redux": "2.0.0",
+    "subapp-server": "2.0.0",
+    "subapp-web": "2.0.0"
   },
-  "devDependencies": {    
-    "@xarc/opt-eslint": "^1.0.0"
-  },
-  "fyn": {
-    "dependencies": {
-      "@xarc/app": "../../packages/xarc-app",
-      "subapp-react": "../../packages/subapp-react",
-      "subapp-redux": "../../packages/subapp-redux",
-      "subapp-server": "../../packages/subapp-server",
-      "subapp-web": "../../packages/subapp-web"
-    },
-    "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint"
-    }
+  "devDependencies": {
+    "@xarc/opt-eslint": "^3.0.0",
+    "@xarc/app-dev": "11.0.1"
   },
   "prettier": {
     "printWidth": 100,

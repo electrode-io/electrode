@@ -1,6 +1,5 @@
 import React from "react";
 import subApp from "./bottom";
-import Promise from "bluebird";
 import Fs from "fs";
 import { StaticRouter } from "react-router-dom/server";
 
@@ -26,7 +25,8 @@ export default {
       imagesData: filterImages
     };
     const store = subApp.reduxCreateStore(initialState);
-    return Promise.delay(50 + Math.random() * 500).return({
+    
+    return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 500)).then({
       initialState,
       store
     });

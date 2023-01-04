@@ -77,7 +77,7 @@ module.exports = function() {
       filename: `${nsTag}[name].bundle.dev.js`,
       chunkFilename: `${nsTag}[name].bundle.dev.js`
     },
-    devtool: xarcOptions.webpack.devtool || false,
+    devtool: xarcOptions.webpack.devtool || "eval-cheap-module-source-map",
     // TODO: why is this here and duplicates what's in extract-style partial?  This is causing
     // duplicate CSS bundles to be generated in dev mode.
     // Comment out for now

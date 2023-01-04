@@ -1,5 +1,4 @@
 import { Component } from "./subapp-footer";
-import Promise from "bluebird";
 
 module.exports = {
   initialize: () => {
@@ -7,7 +6,7 @@ module.exports = {
   },
   prepare: () => {
     // console.log("subapp footer server prepare");
-    return Promise.delay(50 + Math.random() * 1000).return({
+    return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 1000)).then({
       title: "Your Online Store Copyright"
     });
   },
