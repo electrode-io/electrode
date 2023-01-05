@@ -6,12 +6,10 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 ## Getting Started
 
-This repo uses [rushjs] for mono-repo management.
+This is a mono-repo and we use [rushjs] for mono-repo management. Also, we use [pnpm] as the package manager along with [rushjs].
+To read more about [rushjs with pnpm]
 
 ### Setup
-
-This is a mono-repo and we use [rushjs] to install and local linking packages when doing development. We use rushjs with pnpm. Read more [here]
-
 
 Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
@@ -94,15 +92,22 @@ If you need help or found an issue, please [submit a github issue](https://githu
 
 Our docs use [docusaurus]. The source is in the directory `/docusaurus`. It's generated to `/docs` and published as github docs at <https://www.electrode.io/electrode>.
 
-To edit the docs:
+### To run the docs locally:
 
 ```bash
-$ rush update
 $ cd docusaurus
-$ rushx start
+$ pnpm install
+$ pnpm start
 ```
 
 And open your browser to `http://localhost:4000` to view the docs locally.
+
+### To generate documentations to `/docs`:
+
+```bash
+$ cd docusaurus
+$ pnpm run deploy
+```
 
 ## Releasing
 
@@ -114,5 +119,6 @@ The versioning of modules in the this repo are done using `rush change`. Read mo
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [docusaurus]: https://docusaurus.io/
 [rushjs]: https://rushjs.io/pages/intro/welcome/
-[here]: https://rushjs.io/pages/maintainer/package_managers/
+[rushjs with pnpm]: https://rushjs.io/pages/maintainer/package_managers/
 [best practices]:  https://rushjs.io/pages/best_practices/change_logs/#recommended-practices
+[pnpm]: https://pnpm.io/

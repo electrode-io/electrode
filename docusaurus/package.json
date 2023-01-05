@@ -5,7 +5,7 @@
   "homepage": "http://www.electrode.io",
   "scripts": {
     "build": "docusaurus build",
-    "start": "rushx build && docusaurus start",
+    "start": "pnpm build && docusaurus start --port 4000",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus build && touch build/.nojekyll && rm -rf ../docs && cp -r build ../docs"
   },
