@@ -111,12 +111,14 @@ $ pnpm run deploy
 
 ## Releasing
 
-The versioning of modules in the this repo are done using `rush change`. Read more about [best practices]
-
-
 - Run `rush change` for any PRs with changes that needs to get released
-  This will provide an interactive screen to add Change-log message. Please provide details here about the changes you are making thorugh this PR
+  This will provide an interactive screen to add Change description. Please provide details here about the changes you are making thorugh this PR
+  This will generate a change files in JSON format which are later used to generate changelogs
+- Commit the generated change files (JSON).
 
+> NOTE: Rush by default does NOT support conventional commits and developers needs to decide on the version bump (major/minor/patch). 
+
+Read more about [best practices]
 ### To publish
 - https://rushjs.io/pages/maintainer/publishing/#dry-run-mode
 
