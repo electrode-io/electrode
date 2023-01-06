@@ -1,6 +1,6 @@
 import { config } from "./config";
 import { loadRuntimeSupport } from "@xarc/app";
-import electrodeServer from "@xarc/fastify-server";
+import { electrodeServer } from "@xarc/fastify-server";
 
 async function start() {
   await loadRuntimeSupport({

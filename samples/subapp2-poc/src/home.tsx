@@ -8,7 +8,7 @@ import {
   subAppInlineComponent
 } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
-import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
+import { reactRouterFeature, Route, Routes } from "@xarc/react-router";
 import { Demo2 } from "./demo2";
 import { message } from "./message";
 import electrodePng from "../static/electrode.png";
@@ -56,22 +56,19 @@ const decNumber = () => {
 };
 
 const Home = props => {
-  // TODO: Problem with typescript only.  Need this dummy var assign to reference custom
-  // import else something drops it.
-  const y = custom; // eslint-disable-line
   const { dispatch } = props;
   return (
-    <div styleName="custom.container">
+    <div className={custom.container}>
       <h1 style={{ textAlign: "center" }}>
         Hello from{" "}
         <a href="https://www.electrode.io">
           Electrode <img src={electrodePng} />
         </a>
       </h1>
-      PROPS (Different between server and client): {JSON.stringify(props)}
+      PROPS (Difference between server and client): {JSON.stringify(props)}
       <p>
         Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        <input style={{ textAlign: "center" }} readOnly size="6" value={props.value} />
+        <input style={{ textAlign: "center" }} readOnly value={props.value} />
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </p>
       <p>message: {message}</p>
@@ -111,10 +108,10 @@ const ReduxHome = connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
 
 const HomeRouter = () => {
   return (
-    <Switch>
-      <Route path="/" exact component={ReduxHome} />
-      <Route path="/mix" component={ReduxHome} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<ReduxHome />} />
+      <Route path="/mix" element={<ReduxHome />} />
+    </Routes>
   );
 };
 
