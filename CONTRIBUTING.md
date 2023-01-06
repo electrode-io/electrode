@@ -114,6 +114,14 @@ $ pnpm run deploy
 The versioning of modules in the this repo are done using `rush change`. Read more about [best practices]
 
 
+- Run `rush change` for any PRs with changes that needs to get released
+  This will provide an interactive screen to add Change-log message. Please provide details here about the changes you are making thorugh this PR
+
+### To publish
+- https://rushjs.io/pages/maintainer/publishing/#dry-run-mode
+
+
+
 [prettier]: https://www.npmjs.com/package/prettier
 
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
