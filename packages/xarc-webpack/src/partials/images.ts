@@ -24,7 +24,7 @@ function getCdnLoader(optLoader) {
   return (loader && require.resolve(loader)) || "file-loader";
 }
 
-module.exports = function(options) {
+module.exports = function (options) {
   return {
     module: {
       rules: [

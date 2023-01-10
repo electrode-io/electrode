@@ -1,9 +1,6 @@
 {
   "assetsByChunkName": {
-    "loadable": [
-      "cf383be19d849af1cb78.loadable.js",
-      "../map/cf383be19d849af1cb78.loadable.js.map"
-    ],
+    "loadable": ["cf383be19d849af1cb78.loadable.js", "../map/cf383be19d849af1cb78.loadable.js.map"],
     "main": [
       "main.bundle.cf383be19d849af1cb78.js",
       "main.style.cf383be19d849af1cb78.css",
@@ -18,34 +15,22 @@
     {
       "name": "../map/cf383be19d849af1cb78.loadable.js.map",
       "size": 2017,
-      "chunks": [
-        0
-      ],
-      "chunkNames": [
-        "loadable"
-      ],
+      "chunks": [0],
+      "chunkNames": ["loadable"],
       "emitted": false
     },
     {
       "name": "../map/cf383be19d849af1cb78.sw-registration.js.map",
       "size": 3200,
-      "chunks": [
-        2
-      ],
-      "chunkNames": [
-        "sw-registration"
-      ],
+      "chunks": [2],
+      "chunkNames": ["sw-registration"],
       "emitted": false
     },
     {
       "name": "../map/main.bundle.cf383be19d849af1cb78.js.map",
       "size": 904375,
-      "chunks": [
-        1
-      ],
-      "chunkNames": [
-        "main"
-      ],
+      "chunks": [1],
+      "chunkNames": ["main"],
       "emitted": false
     },
     {
@@ -65,23 +50,15 @@
     {
       "name": "cf383be19d849af1cb78.loadable.js",
       "size": 2484,
-      "chunks": [
-        0
-      ],
-      "chunkNames": [
-        "loadable"
-      ],
+      "chunks": [0],
+      "chunkNames": ["loadable"],
       "emitted": false
     },
     {
       "name": "cf383be19d849af1cb78.sw-registration.js",
       "size": 1007,
-      "chunks": [
-        2
-      ],
-      "chunkNames": [
-        "sw-registration"
-      ],
+      "chunks": [2],
+      "chunkNames": ["sw-registration"],
       "emitted": false
     },
     {
@@ -367,23 +344,15 @@
     {
       "name": "main.bundle.cf383be19d849af1cb78.js",
       "size": 282779,
-      "chunks": [
-        1
-      ],
-      "chunkNames": [
-        "main"
-      ],
+      "chunks": [1],
+      "chunkNames": ["main"],
       "emitted": false
     },
     {
       "name": "main.style.cf383be19d849af1cb78.css",
       "size": 15782,
-      "chunks": [
-        1
-      ],
-      "chunkNames": [
-        "main"
-      ],
+      "chunks": [1],
+      "chunkNames": ["main"],
       "emitted": false
     }
   ]

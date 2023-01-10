@@ -17,7 +17,7 @@ function TodoApp() {
   let todos = [];
 
   if (data) {
-    todos = data.todos.filter(e => {
+    todos = data.todos.filter((e) => {
       if (data.filter === VISIBILITY_FILTERS.ALL) {
         return true;
       } else if (data.filter === VISIBILITY_FILTERS.COMPLETED) {

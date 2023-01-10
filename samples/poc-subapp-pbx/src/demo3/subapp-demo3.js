@@ -6,10 +6,7 @@ class Demo3 extends Component {
   constructor(props) {
     super(props);
     this.state = { num: 0 };
-    this.interval = setInterval(
-      this.autoIncrement.bind(this),
-      1000
-    );
+    this.interval = setInterval(this.autoIncrement.bind(this), 1000);
   }
 
   autoIncrement() {
@@ -27,10 +24,7 @@ class Demo3 extends Component {
     const { num } = this.state;
     return (
       <div>
-        <h1>
-          Demo3 Page auto increment: &nbsp;
-          &nbsp;{num}&nbsp;
-        </h1>
+        <h1>Demo3 Page auto increment: &nbsp; &nbsp;{num}&nbsp;</h1>
       </div>
     );
   }

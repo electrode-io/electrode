@@ -17,7 +17,7 @@ export function generateBabelLoaderCacheId(cwd: string): string {
    */
   // @babel/core's version
   // babel-loader's version
-  const pkgVersions = ["@babel/core", "babel-loader"].map(pkg => {
+  const pkgVersions = ["@babel/core", "babel-loader"].map((pkg) => {
     return require(`${pkg}/package.json`).version; // eslint-disable-line
   });
 
@@ -46,6 +46,6 @@ export function generateBabelLoaderCacheId(cwd: string): string {
       browsersListRc,
       process.env.BROWSERSLIST_ENV
     )
-    .filter(x => x)
+    .filter((x) => x)
     .join("\n");
 }

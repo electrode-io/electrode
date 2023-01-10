@@ -32,14 +32,14 @@ class Demo1 extends Component {
                 placeholder="Electrode User"
                 id="nameField"
                 value={this.props.username}
-                onChange={event => {
+                onChange={(event) => {
                   dispatch(inputName(event.target.value));
                 }}
               />
               <label htmlFor="ageRangeField">Experience with Electrode</label>
               <select
                 id="ageRangeField"
-                onChange={event => {
+                onChange={(event) => {
                   dispatch(selectOption(event.target.value));
                 }}
                 value={this.props.selectedOption}
@@ -54,7 +54,7 @@ class Demo1 extends Component {
                 placeholder="Leave feedback for electrode..."
                 id="commentField"
                 value={this.props.textarea}
-                onChange={event => dispatch(inputTextarea(event.target.value))}
+                onChange={(event) => dispatch(inputTextarea(event.target.value))}
               />
               <input type="submit" value="Send" />
             </fieldset>
@@ -72,7 +72,7 @@ Demo1.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     username: state.username.value,
     textarea: state.textarea.value,
@@ -80,4 +80,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, dispatch => ({ dispatch }))(Demo1);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Demo1);

@@ -17,7 +17,7 @@ export function getEnvProxy(): any {
       ],
       default: -1,
       envMap: { true: 443, false: -1 },
-      post: x => (isValidPort(x) ? x : -1)
+      post: (x) => (isValidPort(x) ? x : -1)
     },
     adminLogLevel: {
       env: [

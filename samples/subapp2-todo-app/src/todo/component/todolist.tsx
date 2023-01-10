@@ -8,7 +8,7 @@ const TodoList = ({ todos, dispatch }) => {
   return (
     <ul className={custom["list-group"]}>
       {todos && todos.length ? (
-        todos.map(todo => {
+        todos.map((todo) => {
           return <Todo key={`todo-${todo.id}`} todo={todo} dispatch={dispatch} />;
         })
       ) : (
@@ -18,7 +18,7 @@ const TodoList = ({ todos, dispatch }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { visibilityFilter } = state;
   const todos = getTodosByVisibilityFilter(state, visibilityFilter);
 
@@ -27,5 +27,5 @@ const mapStateToProps = state => {
 
 // export default connect(mapStateToProps)(TodoList);
 export const subapp: ReactSubApp = {
-  Component: connect(mapStateToProps, dispatch => ({ dispatch }))(TodoList)
+  Component: connect(mapStateToProps, (dispatch) => ({ dispatch }))(TodoList)
 };

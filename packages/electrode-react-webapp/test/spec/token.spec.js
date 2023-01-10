@@ -5,7 +5,7 @@ const expect = require("chai").expect;
 const xstdout = require("xstdout");
 const { TOKEN_HANDLER } = require("../../lib/symbols");
 
-describe("token", function() {
+describe("token", function () {
   it("should create token as internal", () => {
     const tk = new Token("test", 50);
     expect(tk.id).to.equal("test");

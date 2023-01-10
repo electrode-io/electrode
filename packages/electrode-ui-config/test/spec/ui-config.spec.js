@@ -6,8 +6,8 @@ const uiConfig = require("../../dist/ui-config");
 const chai = require("chai");
 const expect = chai.expect;
 
-describe("uiConfig", function() {
-  it("should create fullPath w/o trailing / for empty basePath", function() {
+describe("uiConfig", function () {
+  it("should create fullPath w/o trailing / for empty basePath", function () {
     // [ basePath, path ]
     // [ "", undefined ] => ""
     // [ "", "" ] => ""
@@ -31,7 +31,7 @@ describe("uiConfig", function() {
     expect(config.fullPath("abc6/bar")).to.equal("abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /", function() {
+  it("should create fullPath w/o trailing / for basePath /", function () {
     // [ basePath, path ]
     // [ "/", undefined ] => ""
     // [ "/", "" ] => ""
@@ -55,7 +55,7 @@ describe("uiConfig", function() {
     expect(config.fullPath("abc6/bar")).to.equal("/abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /test", function() {
+  it("should create fullPath w/o trailing / for basePath /test", function () {
     // [ basePath, path ]
     // [ "/test/", undefined ] => "/test"
     // [ "/test/", "" ] => "/test"
@@ -79,7 +79,7 @@ describe("uiConfig", function() {
     expect(config.fullPath("abc6/bar")).to.equal("/test/abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /test/", function() {
+  it("should create fullPath w/o trailing / for basePath /test/", function () {
     // [ basePath, path ]
     // [ "/test/", undefined ] => "/test"
     // [ "/test/", "" ] => "/test"
@@ -103,7 +103,7 @@ describe("uiConfig", function() {
     expect(config.fullPath("abc6/bar")).to.equal("/test/abc6/bar");
   });
 
-  it("should remove trailing / from fullApiPath to create fullApiPath", function() {
+  it("should remove trailing / from fullApiPath to create fullApiPath", function () {
     const config = uiConfig({ ui: { basePath: "/test/", apiPath: "/testApi" } });
 
     expect(config.fullApiPath()).to.equal("/test/testApi");
@@ -117,7 +117,7 @@ describe("uiConfig", function() {
     expect(config.fullApiPath("abc/bar")).to.equal("/test/testApi/abc/bar");
   });
 
-  it("should handle missing apiPath", function() {
+  it("should handle missing apiPath", function () {
     const config = uiConfig({ ui: { basePath: "/" } });
 
     expect(config.fullApiPath()).to.equal("/api");
@@ -131,7 +131,7 @@ describe("uiConfig", function() {
     expect(config.fullApiPath("abc/bar")).to.equal("/api/abc/bar");
   });
 
-  it("should guard against empty config", function() {
+  it("should guard against empty config", function () {
     expect(uiConfig, undefined).to.not.throw();
   });
 });

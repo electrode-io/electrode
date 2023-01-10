@@ -4,7 +4,7 @@ const { parse } = require("../../../src/lib/dev-admin/log-parser");
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
-describe("log-parser", function() {
+describe("log-parser", function () {
   it("should return correct level and message for a simple error", () => {
     const raw = "error: Something unexpected happened";
     const { level, message } = parse(raw);

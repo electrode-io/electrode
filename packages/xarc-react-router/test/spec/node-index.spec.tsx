@@ -53,27 +53,29 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: props => (
-          <div>
-            test <p>{JSON.stringify(props)}</p>
-          </div>
-        )
-      },
-      ssrData: {
-        context: {
-          user: {
-            routerContext: "test-context"
-          }
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: (props) => (
+            <div>
+              test <p>{JSON.stringify(props)}</p>
+            </div>
+          )
         },
-        subapp: def,
-        options: {
-          name: "test-subapp-def-option"
-        },
-        path: "test-path-1"
-      }
-    }) as SubAppFeatureResult).Component;
+        ssrData: {
+          context: {
+            user: {
+              routerContext: "test-context"
+            }
+          },
+          subapp: def,
+          options: {
+            name: "test-subapp-def-option"
+          },
+          path: "test-path-1"
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="don't expect it be rendered" />);
 
@@ -94,7 +96,7 @@ describe("reactRouterFeature browser", () => {
       _features: {},
       _getExport: () => {
         return {
-          Component: props => (
+          Component: (props) => (
             <div>
               test <p>{JSON.stringify(props)}</p>
             </div>
@@ -106,21 +108,23 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: { Component: undefined },
-      ssrData: {
-        context: {
-          user: {
-            routerContext: "test-context"
-          }
-        },
-        subapp: def,
-        options: {
-          name: "test-subapp-def-option"
-        },
-        path: "test-path-2"
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: { Component: undefined },
+        ssrData: {
+          context: {
+            user: {
+              routerContext: "test-context"
+            }
+          },
+          subapp: def,
+          options: {
+            name: "test-subapp-def-option"
+          },
+          path: "test-path-2"
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="don't expect it be rendered" />);
 

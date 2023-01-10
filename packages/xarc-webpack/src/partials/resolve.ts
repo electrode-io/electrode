@@ -42,7 +42,9 @@ module.exports = () => {
     modules: [Path.resolve(AppMode.src.dir), process.cwd(), "node_modules"]
       .concat(xarcOptions.webpack.modulesDirectories)
       .filter(identity),
-    extensions: [".js", ".jsx", ".json"].concat(enableTypeScript && [".ts", ".tsx"]).filter(x => x)
+    extensions: [".js", ".jsx", ".json"]
+      .concat(enableTypeScript && [".ts", ".tsx"])
+      .filter((x) => x)
   };
 
   //

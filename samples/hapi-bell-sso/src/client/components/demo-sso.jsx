@@ -36,7 +36,4 @@ const mapStateToProps = () => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(DemoSSO);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(DemoSSO);

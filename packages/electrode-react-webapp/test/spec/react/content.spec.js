@@ -3,7 +3,7 @@
 const Path = require("path");
 const content = require("../../../lib/react/content");
 
-describe("content", function() {
+describe("content", function () {
   let saveEnv;
   const cwd = process.cwd();
 
@@ -23,7 +23,7 @@ describe("content", function() {
     process.chdir(cwd);
   });
 
-  describe("loadElectrodeDllAssets", function() {
+  describe("loadElectrodeDllAssets", function () {
     it("should return empty if unable to load asset data", () => {
       expect(content.loadElectrodeDllAssets()).to.deep.equal({});
       expect(content.loadElectrodeDllAssets({})).to.deep.equal({});
@@ -51,7 +51,7 @@ describe("content", function() {
     });
   });
 
-  describe("makeElectrodeDllScripts", function() {
+  describe("makeElectrodeDllScripts", function () {
     it("should return empty string for empty asset", () => {
       expect(content.makeElectrodeDllScripts({})).to.equal("");
     });

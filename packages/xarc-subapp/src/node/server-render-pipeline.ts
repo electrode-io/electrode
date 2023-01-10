@@ -6,7 +6,7 @@ import {
   SubAppSSRData,
   SubAppFeatureResult,
   LoadSubAppOptions,
-  SubAppMountInfo,
+  SubAppMountInfo
 } from "../subapp/types";
 import { ServerFrameworkLib } from "./types";
 import { safeStringifyJson } from "./utils";

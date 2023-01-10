@@ -28,7 +28,7 @@ const Footer = (props) => {
   return (
     <footer className="text-center">
       <form>
-        <h4>Redux State Change Demo</h4>        
+        <h4>Redux State Change Demo</h4>
         <input
           type="email"
           id="email"

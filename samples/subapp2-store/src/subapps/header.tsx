@@ -1,7 +1,7 @@
 import { React, ReactSubApp } from "@xarc/react";
 import custom from "../styles/bootstrap.css";
 
-const Header = props => {
+const Header = (props) => {
   return (
     <div className={custom["text-center"]} style={{ backgroundColor: "cyan" }}>
       <h1>Online Store</h1>

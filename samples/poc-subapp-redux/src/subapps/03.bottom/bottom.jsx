@@ -5,8 +5,7 @@ import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-
-const MoreProducts = props => {
+const MoreProducts = (props) => {
   return (
     <div className="container">
       <h1 className="display-4">More Products</h1>
@@ -15,7 +14,7 @@ const MoreProducts = props => {
 };
 
 MoreProducts.propTypes = {
-  imagesData: PropTypes.array.isRequired
+  imagesData: PropTypes.array.isRequired,
 };
 
 const MoreDeals = () => {
@@ -36,7 +35,7 @@ const MoreDeals = () => {
   );
 };
 
-const Bottom = props => {
+const Bottom = (props) => {
   return (
     <Routes>
       <Route path="/products" element={<MoreProducts {...props} imagesData={[]} />} />
@@ -46,22 +45,22 @@ const Bottom = props => {
 };
 
 const Component = connect(
-  state => state,
-  dispatch => ({ dispatch })
+  (state) => state,
+  (dispatch) => ({ dispatch })
 )(Bottom);
 
 export default reduxLoadSubApp({
   name: "Bottom",
   useReactRouter: true,
   Component,
-  StartComponent: props => {
+  StartComponent: (props) => {
     return (
       <BrowserRouter>
         <Component {...props} />
       </BrowserRouter>
     );
   },
-  reduxCreateStore: initialState => {
-    return createStore(s => s, initialState);
-  }
+  reduxCreateStore: (initialState) => {
+    return createStore((s) => s, initialState);
+  },
 });

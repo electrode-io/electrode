@@ -18,7 +18,7 @@ function Large(props) {
   return (
     <div style={{ padding: "1px", border: `solid 8px rgb(${rlvl}, ${level}, ${level})` }}>
       <span style={{ fontSize: "8pt" }}>{`hello ${depth}:${breadth}; `}</span>
-      {range(breadth, i => (
+      {range(breadth, (i) => (
         <div style={{ display: "inline", border: "solid 1px" }} key={`b_${depth}_${i}`}>
           <span style={{ fontSize: "8pt" }}>{`${depth}-${i}; `}</span>
           {i < 3 && depth > 0 && (
@@ -26,7 +26,7 @@ function Large(props) {
           )}
         </div>
       ))}
-      {range(8, i => (
+      {range(8, (i) => (
         <span key={i} style={{ fontSize: "8pt" }}>{`${i}.`}</span>
       ))}
     </div>

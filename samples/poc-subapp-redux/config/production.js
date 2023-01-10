@@ -3,8 +3,8 @@ module.exports = {
     "subapp-server": {
       options: {
         insertTokenIds: false,
-        cdn: { enable: true }
-      }
-    }
-  }
+        cdn: { enable: true },
+      },
+    },
+  },
 };

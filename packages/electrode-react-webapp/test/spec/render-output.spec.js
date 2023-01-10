@@ -6,7 +6,7 @@ const streamToArray = require("stream-to-array");
 
 const expect = require("chai").expect;
 
-describe("render-output", function() {
+describe("render-output", function () {
   it("should flush simple string", () => {
     let text;
     const context = {

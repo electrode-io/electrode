@@ -30,7 +30,6 @@ describe("Client/helpers", () => {
     });
 
     describe("event type is fetch", () => {
-
       describe("when `extras` attribute exists", () => {
         beforeEach(() => {
           evt = {

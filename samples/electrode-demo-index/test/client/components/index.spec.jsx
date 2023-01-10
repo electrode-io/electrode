@@ -25,9 +25,7 @@ describe("index", () => {
 
   it("should render component-documentation", () => {
     component = mount(<ElectrodeDemoIndex scope={{}} />, container);
-    expect(component.html()).to.equal(
-      "<div class=\"component-documentation\"></div>"
-    );
+    expect(component.html()).to.equal('<div class="component-documentation"></div>');
   });
 
   it("should render component-documentation with components", () => {
@@ -45,8 +43,8 @@ describe("index", () => {
       container
     );
     expect(component.html()).to.equal(
-      "<div class=\"component-documentation\"><div>" +
-        "<h3 id=\"electrode-demo-index\">" +
+      '<div class="component-documentation"><div>' +
+        '<h3 id="electrode-demo-index">' +
         "electrode-demo-index</h3></div></div>"
     );
   });

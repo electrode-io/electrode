@@ -12,7 +12,7 @@ function fakeTopData() {
   );
 }
 
-export default async function({ awaitInits }) {
+export default async function ({ awaitInits }) {
   //
   // kick off own async action first before awaiting for async child
   // routes

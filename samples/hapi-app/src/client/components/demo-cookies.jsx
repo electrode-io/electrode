@@ -67,15 +67,11 @@ class DemoCookies extends React.Component {
         <button
           styleName="milligram.button-outline"
           type="submit"
-          onClick={x => this._setCookie(x)}
+          onClick={(x) => this._setCookie(x)}
         >
           Update Cookie
         </button>
-        <button
-          styleName="milligram.button-outline"
-          type="submit"
-          onClick={() => this._refresh()}
-        >
+        <button styleName="milligram.button-outline" type="submit" onClick={() => this._refresh()}>
           Refresh Cookie
         </button>
         <button styleName="milligram.button-outline" onClick={() => this._expireCookie()}>

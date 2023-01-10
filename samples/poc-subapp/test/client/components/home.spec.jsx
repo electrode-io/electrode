@@ -25,7 +25,12 @@ describe("Home", () => {
 
     const store = createStore(rootReducer, initialState);
 
-    component = ReactDOM.render(<Provider store={store}><Home /></Provider>, container);
+    component = ReactDOM.render(
+      <Provider store={store}>
+        <Home />
+      </Provider>,
+      container
+    );
 
     expect(component).to.not.be.false;
   });

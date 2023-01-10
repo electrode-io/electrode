@@ -13,7 +13,7 @@ import Template3 from "../../jsx-templates/test3";
 
 import Template4 from "../../jsx-templates/test4";
 
-describe("Component", function() {
+describe("Component", function () {
   it("should have isComponent and render method", () => {
     const x = new Component();
     expect(x.isComponent()).to.equal(true);
@@ -21,14 +21,14 @@ describe("Component", function() {
   });
 });
 
-describe("IndexPage", function() {
+describe("IndexPage", function () {
   it("should have static memoize", () => {
     expect(IndexPage.memoize({})).equal(`<!DOCTYPE html>`);
     expect(IndexPage.memoize({ DOCTYPE: "blah" })).equal(`<!DOCTYPE blah>`);
   });
 });
 
-describe("Jsx Renderer", function() {
+describe("Jsx Renderer", function () {
   it("getTokenInst should return undefined if no token instance", () => {
     const renderer = new JsxRenderer({
       insertTokenIds: true,

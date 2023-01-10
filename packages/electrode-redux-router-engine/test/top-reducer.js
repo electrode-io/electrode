@@ -2,7 +2,7 @@
 
 const { combineReducers } = require("redux");
 
-module.exports = async function(options) {
+module.exports = async function (options) {
   const name = options.route.name || "top";
 
   await options.awaitInits();
@@ -17,7 +17,7 @@ module.exports = async function(options) {
       {
         [name]: () => "top-reducer"
       }
-    ].concat(options.inits.map(x => x.reducer))
+    ].concat(options.inits.map((x) => x.reducer))
   );
 
   //

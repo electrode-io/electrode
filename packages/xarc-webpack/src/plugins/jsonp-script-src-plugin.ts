@@ -67,7 +67,7 @@ function jsonpScriptSrc(chunkId) {
   }
 
   apply(compiler) {
-    compiler.hooks.thisCompilation.tap(pluginName, compilation => {
+    compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
       this._applyMainTemplate(compilation.mainTemplate);
     });
   }

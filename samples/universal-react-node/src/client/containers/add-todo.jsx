@@ -11,7 +11,7 @@ let AddTodo = ({ dispatch }) => {
   return (
     <div>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           if (!input || !input.value.trim()) {
             return;
@@ -21,7 +21,7 @@ let AddTodo = ({ dispatch }) => {
         }}
       >
         <input
-          ref={node => {
+          ref={(node) => {
             input = node;
           }}
         />

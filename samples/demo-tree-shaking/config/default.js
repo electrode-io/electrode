@@ -16,12 +16,12 @@ module.exports = {
         reporters: {
           myConsoleReporter: [
             {
-              module: "good-console",
+              module: "good-console"
             },
-            "stdout",
-          ],
-        },
-      },
+            "stdout"
+          ]
+        }
+      }
     },
     "webpack-dev": {
       module: "@xarc/app-dev/lib/webpack-dev-hapi",
@@ -35,21 +35,21 @@ module.exports = {
             // to it with chrome://inspect, and then enable this debugger statement
             // so chrome stop here every time webpack middleware finish compiling
             // debugger
-          },
-        },
-      },
+          }
+        }
+      }
     },
     inert: {
-      enable: true,
+      enable: true
     },
     electrodeStaticPaths: {
       enable: true,
       options: {
-        pathPrefix: "dist",
-      },
+        pathPrefix: "dist"
+      }
     }, //
     "server/plugins/pwa": {
-      module: "./{{env.APP_SRC_DIR}}/server/plugins/pwa",
+      module: "./{{env.APP_SRC_DIR}}/server/plugins/pwa"
     }, //
     "electrode-auto-ssr": {}, //
     webapp: {
@@ -60,13 +60,13 @@ module.exports = {
         paths: {
           "/{args*}": {
             content: {
-              module: "./{{env.APP_SRC_DIR}}/server/views/index-view",
-            },
-          },
-        },
-      },
+              module: "./{{env.APP_SRC_DIR}}/server/views/index-view"
+            }
+          }
+        }
+      }
     }, //
-    "electrode-cookies/hapi-plugin": {},
+    "electrode-cookies/hapi-plugin": {}
     //
   },
   connections: {
@@ -75,11 +75,11 @@ module.exports = {
       address: process.env.HOST_IP || "0.0.0.0",
       port: portFromEnv(),
       routes: {
-        cors: false,
+        cors: false
       },
       state: {
-        ignoreErrors: true,
-      },
-    },
-  },
+        ignoreErrors: true
+      }
+    }
+  }
 };

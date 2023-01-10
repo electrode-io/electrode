@@ -12,12 +12,12 @@ const serveStaticFiles = () => {
 };
 
 module.exports = {
-  "plugins": {
-    "inert": {
-      "enable": serveStaticFiles()
+  plugins: {
+    inert: {
+      enable: serveStaticFiles()
     },
-    "electrodeStaticPaths": {
-      "enable": serveStaticFiles()
+    electrodeStaticPaths: {
+      enable: serveStaticFiles()
     }
   }
 };

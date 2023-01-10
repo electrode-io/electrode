@@ -11,7 +11,7 @@ class Data1 extends React.Component {
 
   render() {
     if (!data) {
-      throw new Promise(resolve => {
+      throw new Promise((resolve) => {
         setTimeout(() => {
           data = "demo data received from async call";
           resolve(data);
@@ -52,5 +52,5 @@ class SuspenseDemo extends React.Component {
 
 export default loadSubApp({
   name: "SuspenseDemo",
-  Component: SuspenseDemo
+  Component: SuspenseDemo,
 });

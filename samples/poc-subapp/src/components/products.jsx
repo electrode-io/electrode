@@ -76,9 +76,6 @@ const mapStateToProps = state => {
   return { items: state.items, value: state.number.value };
 };
 
-const ReduxProducts = connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Products);
+const ReduxProducts = connect(mapStateToProps, dispatch => ({ dispatch }))(Products);
 
 export { ReduxProducts as Products };

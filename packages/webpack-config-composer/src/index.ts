@@ -38,8 +38,8 @@ class WebpackConfigComposer {
     // eslint-disable-next-line prefer-rest-params
     profiles = Array.isArray(profiles) ? profiles : Array.prototype.slice.call(arguments);
 
-    profiles.forEach(a => {
-      Object.keys(a).forEach(k => this.addProfile(k, a[k].partials));
+    profiles.forEach((a) => {
+      Object.keys(a).forEach((k) => this.addProfile(k, a[k].partials));
     });
   }
 
@@ -83,8 +83,8 @@ class WebpackConfigComposer {
     // eslint-disable-next-line prefer-rest-params
     partials = Array.isArray(partials) ? partials : Array.prototype.slice.call(arguments);
 
-    partials.forEach(a => {
-      Object.keys(a).forEach(k => {
+    partials.forEach((a) => {
+      Object.keys(a).forEach((k) => {
         this._addPartial(k, a[k], a[k].addOptions);
       });
     });
@@ -129,9 +129,9 @@ class WebpackConfigComposer {
   compose(options, ...profiles) {
     const allProfiles = _.flatten(profiles);
 
-    const profileNames = allProfiles.map(p => (_.isString(p) ? p : p.name));
+    const profileNames = allProfiles.map((p) => (_.isString(p) ? p : p.name));
 
-    let profPartials = allProfiles.map(p => {
+    let profPartials = allProfiles.map((p) => {
       if (_.isString(p)) {
         const prof = this.getProfile(p);
         assert(prof, `Profile ${p} doesn't exist in the composer`);
@@ -141,35 +141,31 @@ class WebpackConfigComposer {
       return p.partials || {};
     });
 
-
     profPartials = _.merge({}, ...profPartials);
 
-    const num = x => {
+    const num = (x) => {
       return _.isString(x) ? parseInt(x, 10) : x;
     };
 
-    const checkNaN = x => {
+    const checkNaN = (x) => {
       return isNaN(x) ? Infinity : x;
     };
 
-    const isEnable = p => profPartials[p].enable !== false;
+    const isEnable = (p) => profPartials[p].enable !== false;
 
-    const partialOrder = p => checkNaN(num(profPartials[p].order));
-    const sortedKeys = _(Object.keys(profPartials))
-      .filter(isEnable)
-      .sortBy(partialOrder)
-      .value();
+    const partialOrder = (p) => checkNaN(num(profPartials[p].order));
+    const sortedKeys = _(Object.keys(profPartials)).filter(isEnable).sortBy(partialOrder).value();
 
     const currentConfig = options.currentConfig || {};
 
     const concat = getConcatMethod(options.concatArray, null);
 
-    sortedKeys.forEach(partialName => {
+    sortedKeys.forEach((partialName) => {
       const partial = this.getPartial(partialName);
       assert(partial, `Partial ${partialName} doesn't exist or has not been added`);
 
       const composeOptions = Object.assign({}, profPartials[partialName].options, {
-        currentConfig
+        currentConfig,
       });
 
       const ret = partial.compose(composeOptions);
@@ -180,7 +176,7 @@ class WebpackConfigComposer {
     });
 
     if (!options.skipNamePlugins && currentConfig.plugins) {
-      currentConfig.plugins = currentConfig.plugins.map(x => {
+      currentConfig.plugins = currentConfig.plugins.map((x) => {
         x.__name = x.constructor.name;
         return x;
       });

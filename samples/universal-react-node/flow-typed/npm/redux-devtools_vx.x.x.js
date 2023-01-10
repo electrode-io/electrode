@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'redux-devtools' {
+declare module "redux-devtools" {
   declare module.exports: any;
 }
 
@@ -22,46 +22,46 @@ declare module 'redux-devtools' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'redux-devtools/lib/createDevTools' {
+declare module "redux-devtools/lib/createDevTools" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools/lib/index' {
+declare module "redux-devtools/lib/index" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools/lib/persistState' {
+declare module "redux-devtools/lib/persistState" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools/src/createDevTools' {
+declare module "redux-devtools/src/createDevTools" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools/src/index' {
+declare module "redux-devtools/src/index" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools/src/persistState' {
+declare module "redux-devtools/src/persistState" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'redux-devtools/lib/createDevTools.js' {
-  declare module.exports: $Exports<'redux-devtools/lib/createDevTools'>;
+declare module "redux-devtools/lib/createDevTools.js" {
+  declare module.exports: $Exports<"redux-devtools/lib/createDevTools">;
 }
-declare module 'redux-devtools/lib/index.js' {
-  declare module.exports: $Exports<'redux-devtools/lib/index'>;
+declare module "redux-devtools/lib/index.js" {
+  declare module.exports: $Exports<"redux-devtools/lib/index">;
 }
-declare module 'redux-devtools/lib/persistState.js' {
-  declare module.exports: $Exports<'redux-devtools/lib/persistState'>;
+declare module "redux-devtools/lib/persistState.js" {
+  declare module.exports: $Exports<"redux-devtools/lib/persistState">;
 }
-declare module 'redux-devtools/src/createDevTools.js' {
-  declare module.exports: $Exports<'redux-devtools/src/createDevTools'>;
+declare module "redux-devtools/src/createDevTools.js" {
+  declare module.exports: $Exports<"redux-devtools/src/createDevTools">;
 }
-declare module 'redux-devtools/src/index.js' {
-  declare module.exports: $Exports<'redux-devtools/src/index'>;
+declare module "redux-devtools/src/index.js" {
+  declare module.exports: $Exports<"redux-devtools/src/index">;
 }
-declare module 'redux-devtools/src/persistState.js' {
-  declare module.exports: $Exports<'redux-devtools/src/persistState'>;
+declare module "redux-devtools/src/persistState.js" {
+  declare module.exports: $Exports<"redux-devtools/src/persistState">;
 }

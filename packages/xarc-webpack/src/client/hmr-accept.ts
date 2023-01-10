@@ -42,7 +42,7 @@ export function hmrSetup(w: any, hot: any, reload?: ReloadFunction) {
     };
   }
 
-  const accepter = outdated => {
+  const accepter = (outdated) => {
     console.debug("xarc subapp2 HMR accept outdated modules:", outdated);
     for (const modName of outdated) {
       reload(modName, subAppModules[modName]);

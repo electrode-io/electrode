@@ -9,7 +9,7 @@ import { expect } from "chai";
 const moduleName = "@xarc/webpack/lib/util/generate-config";
 
 // TODO: should move to xarc-webpack
-describe.skip("generate-config", function() {
+describe.skip("generate-config", function () {
   this.timeout(10000);
 
   before(() => {});

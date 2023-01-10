@@ -11,7 +11,7 @@ function Component1(props) {
 }
 
 function AsyncChildren(props) {
-  return new Promise((resolve) =>
+  return new Promise(resolve =>
     setTimeout(() => {
       resolve(
         <div>

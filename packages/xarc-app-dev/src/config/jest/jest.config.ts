@@ -28,7 +28,7 @@ const rootDir = xarcCwd;
 const jestDefaultConfig = {
   rootDir,
   resolver: require.resolve("electrode-node-resolver/lib/jest"),
-  moduleFileExtensions: ["js", "jsx"].concat(enableTypeScript && ["ts", "tsx"]).filter(x => x),
+  moduleFileExtensions: ["js", "jsx"].concat(enableTypeScript && ["ts", "tsx"]).filter((x) => x),
   transform: enableTypeScript
     ? {
         "^.+\\.tsx?$": "babel-jest",
@@ -54,7 +54,7 @@ const jestSetupFilesConfig =
 
 export = _.merge(
   {},
-  _.pickBy(jestDefaultConfig, x => x !== undefined),
+  _.pickBy(jestDefaultConfig, (x) => x !== undefined),
   jestSetupFilesConfig,
   xarcOptions.jest
 );

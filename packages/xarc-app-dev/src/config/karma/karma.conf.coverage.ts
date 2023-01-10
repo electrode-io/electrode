@@ -18,7 +18,7 @@ const customCheck = require("@xarc/webpack/lib/util/custom-check"); // eslint-di
  * @param config base config
  * @returns {void} void
  */
-export = function(config): any {
+export = function (config): any {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = process.env.XARC_CWD || xarcOptions.cwd;
   const webpackConfigFile = customCheck.getWebpackStartConfig(

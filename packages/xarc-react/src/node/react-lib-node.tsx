@@ -4,7 +4,7 @@ import {
   SubAppSSRData,
   SubAppSSRResult,
   SubAppFeatureResult,
-  envHooks,
+  envHooks
 } from "@xarc/subapp";
 // import { render } from "react-dom";
 import { createElement, Component } from "react";
@@ -72,7 +72,7 @@ export class SSRReactLib implements ServerFrameworkLib {
     if (!subapp._module) {
       return {
         content: `<h3>SubApp ${subapp.name} can't SSR sync because its module not yet loaded</h3>`,
-        props: undefined,
+        props: undefined
       };
     }
 
@@ -80,7 +80,7 @@ export class SSRReactLib implements ServerFrameworkLib {
 
     return {
       content,
-      props: prepResult.props,
+      props: prepResult.props
     };
   }
 }

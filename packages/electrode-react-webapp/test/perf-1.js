@@ -31,7 +31,7 @@ function test1() {
       defer: true,
       fn: render
     })
-    .on("complete", function() {
+    .on("complete", function () {
       console.log(this[0].times, 1 / this[0].times.period);
     })
     .run();

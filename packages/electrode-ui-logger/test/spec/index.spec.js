@@ -15,13 +15,13 @@ describe("server-side logger", function () {
   });
 
   it("should log entries", function () {
-    Log.info("test info", {request: request});
-    Log.warn("test warn", {request: request});
-    Log.fatal("test fatal", {request: request});
-    Log.error("test error", {request: request});
-    Log.debug("test debug", {request: request});
-    Log.trace("test trace", {request: request});
-    Log.log(["log"], "test log", {request: request});
+    Log.info("test info", { request: request });
+    Log.warn("test warn", { request: request });
+    Log.fatal("test fatal", { request: request });
+    Log.error("test error", { request: request });
+    Log.debug("test debug", { request: request });
+    Log.trace("test trace", { request: request });
+    Log.log(["log"], "test log", { request: request });
     expect(callCount).to.equal(7);
   });
 

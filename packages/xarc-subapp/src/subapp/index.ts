@@ -64,7 +64,7 @@ async function _getModule(): Promise<any> {
       const mod = {
         loadError: err,
         captureErr: new Error(`load subapp ${this.name} module failed`),
-        warned: false,
+        warned: false
       };
       const subappB = container.get(this.name);
       subappB._module = mod;
@@ -119,7 +119,7 @@ export function __declareSubApp(opts: SubAppOptions, override?: Partial<SubAppDe
       _mount: noop,
       _unmount: noop,
       _renderPipelines: [],
-      _getExport,
+      _getExport
     },
     override,
     opts

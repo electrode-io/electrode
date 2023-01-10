@@ -29,7 +29,7 @@ class SubApp extends React.Component {
       const onLoad = () => this.setState({ ready: true });
       dynamicLoadSubApp({
         name: "Deal",
-        onLoad
+        onLoad,
       });
 
       // if not, return loadingComponent
@@ -38,7 +38,7 @@ class SubApp extends React.Component {
   }
 }
 
-const DealSubApp = props => {
+const DealSubApp = (props) => {
   const { id } = props;
 
   dynamicLoadSubApp({ name: "Deal", id });
@@ -56,17 +56,17 @@ const DealSubApp = props => {
 
 const incNumber = () => {
   return {
-    type: "INC_NUMBER"
+    type: "INC_NUMBER",
   };
 };
 
 const decNumber = () => {
   return {
-    type: "DEC_NUMBER"
+    type: "DEC_NUMBER",
   };
 };
 
-const Deals = props => {
+const Deals = (props) => {
   const { value, dispatch } = props;
 
   return (
@@ -90,13 +90,13 @@ const Deals = props => {
 };
 
 Deals.propTypes = {
-  value: PropTypes.number
+  value: PropTypes.number,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { value: state.number.value };
 };
 
-const ReduxDeals = connect(mapStateToProps, dispatch => ({ dispatch }))(Deals);
+const ReduxDeals = connect(mapStateToProps, (dispatch) => ({ dispatch }))(Deals);
 
 export { ReduxDeals as Deals };

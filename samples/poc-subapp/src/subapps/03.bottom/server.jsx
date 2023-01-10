@@ -25,7 +25,7 @@ export default {
       imagesData: filterImages
     };
     const store = subApp.reduxCreateStore(initialState);
-    
+
     return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 500)).then({
       initialState,
       store

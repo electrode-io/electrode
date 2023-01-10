@@ -12,7 +12,7 @@ const plugin = {
   }
 };
 
-plugin.register = function(server) {
+plugin.register = function (server) {
   server.auth.strategy("twitter", "bell", {
     provider: "twitter",
     password: "cookie_encryption_password_secure",

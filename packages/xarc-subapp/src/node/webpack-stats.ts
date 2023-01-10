@@ -55,6 +55,6 @@ export class WebpackStats {
       return [];
     }
 
-    return [].concat(chunk).filter(x => Path.extname(x) === ext);
+    return [].concat(chunk).filter((x) => Path.extname(x) === ext);
   }
 }

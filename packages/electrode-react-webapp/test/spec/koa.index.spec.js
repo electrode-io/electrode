@@ -9,7 +9,7 @@ const registerRoutes = require("../../lib/koa");
 const request = require("superagent");
 const expect = require("chai").expect;
 
-describe("koa electrode-react-webapp", function() {
+describe("koa electrode-react-webapp", function () {
   const webappOptions = responseForBadStatus => {
     return {
       pageTitle: "Electrode App",

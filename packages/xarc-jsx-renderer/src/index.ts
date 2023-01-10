@@ -14,7 +14,16 @@ import { RegisterTokenIds } from "./tags/RegisterTokenIds";
 import { xarcJsxElement } from "./symbols";
 
 /** @ignore */
-export { Component, Token, IndexPage, Require, Literal, JsxRenderer, RegisterTokenIds, xarcJsxElement };
+export {
+  Component,
+  Token,
+  IndexPage,
+  Require,
+  Literal,
+  JsxRenderer,
+  RegisterTokenIds,
+  xarcJsxElement
+};
 
 let ELEMENT_ID = 0;
 

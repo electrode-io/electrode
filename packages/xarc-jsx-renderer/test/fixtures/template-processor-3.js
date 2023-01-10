@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  oops: function() {
+  oops: function () {
     return "template-processor-3";
   }
 };

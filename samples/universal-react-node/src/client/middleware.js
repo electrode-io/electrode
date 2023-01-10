@@ -8,7 +8,7 @@ const updateStorage = (store: Object) => (next: (value: string) => void) => (act
   const result = next(action);
   const completeState = store.getState();
   fetch("/1", { credentials: "same-origin" })
-    .then(resp => {
+    .then((resp) => {
       if (resp.status === HTTP_OK) {
         token = resp.headers.get("x-csrf-jwt");
       } else {
@@ -24,7 +24,7 @@ const updateStorage = (store: Object) => (next: (value: string) => void) => (act
         },
         body: JSON.stringify(completeState)
       })
-        .then(response => {
+        .then((response) => {
           if (response.status >= HTTP_BAD_REQUEST) {
             throw new Error("Bad response from server");
           }

@@ -26,7 +26,7 @@ const DEFAULT_LOAD_THRESHOLD = 4;
 const DEFAULT_MEM_THRESHOLD = 0.8;
 
 /* eslint no-magic-numbers: [2, {"ignore": [-1, 0, 1]}] */
-module.exports = _opts => {
+module.exports = (_opts) => {
   return function machineLoadCondition(request, reply) {
     // Check server load, disable if too high
     const numCpus = machine.numCpus();
@@ -38,9 +38,9 @@ module.exports = _opts => {
     // 1min and 5min load average is over threshold
     // when factoring in number of CPUs
     if (
-      (loadAvgs[0] / numCpus) > THRESHOLD_LOAD && //eslint-disable-line
-      (loadAvgs[1] / numCpus) > THRESHOLD_LOAD || //eslint-disable-line
-      (request.server.load.rss / machine.totalMem()) > THRESHOLD_MEM //eslint-disable-line
+      (loadAvgs[0] / numCpus > THRESHOLD_LOAD && //eslint-disable-line
+        loadAvgs[1] / numCpus > THRESHOLD_LOAD) || //eslint-disable-line
+      request.server.load.rss / machine.totalMem() > THRESHOLD_MEM //eslint-disable-line
       // Memory usage is over threshold % of total mem
     ) {
       request.app.disableSSR = true;

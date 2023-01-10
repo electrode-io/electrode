@@ -15,7 +15,7 @@ const decNumber = () => {
   };
 };
 
-const Demo2 = props => {
+const Demo2 = (props) => {
   const { value, dispatch } = props;
 
   return (
@@ -39,10 +39,10 @@ const Demo2 = props => {
   );
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => state;
 
 export default reduxLoadSubApp({
-  Component: connect(mapStateToProps, dispatch => ({ dispatch }))(Demo2),
+  Component: connect(mapStateToProps, (dispatch) => ({ dispatch }))(Demo2),
   name: "Demo2",
   reduxReducers,
   prepare: ({ context, request }) => {

@@ -55,7 +55,7 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
 
   handlerContext.user.routeData = routeData;
 
-  const Initialize = context => {
+  const Initialize = (context) => {
     const options = context.options;
     const request = options.request;
     const mode = options.mode;
@@ -102,7 +102,7 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
 
     [tokens.META_TAGS]: iconStats,
 
-    [tokens.CRITICAL_CSS]: context => {
+    [tokens.CRITICAL_CSS]: (context) => {
       return criticalCSS ? `<style${context.user.styleNonce}>${criticalCSS}</style>` : "";
     },
 

@@ -3,7 +3,7 @@
 const loadHandler = require("../../lib/load-handler");
 const expect = require("chai").expect;
 
-describe("token module load handler", function() {
+describe("token module load handler", function () {
   it("should handle ES6 module default", () => {
     const x = loadHandler("../fixtures/token-mod-es6-default", __dirname);
     expect(x.toString()).contains("function es6Default");

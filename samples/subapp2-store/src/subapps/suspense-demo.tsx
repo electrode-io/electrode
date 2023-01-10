@@ -11,7 +11,7 @@ class Data1 extends React.Component {
 
   render() {
     if (!data) {
-      throw new Promise(resolve => {
+      throw new Promise((resolve) => {
         setTimeout(() => {
           data = "demo data received from async call";
           resolve(data);

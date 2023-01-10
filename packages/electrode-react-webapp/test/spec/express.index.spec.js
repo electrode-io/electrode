@@ -6,7 +6,7 @@ const registerRoutes = require("../../lib/express");
 const request = require("superagent");
 const expect = require("chai").expect;
 
-describe("express electrode-react-webapp", function() {
+describe("express electrode-react-webapp", function () {
   const webappOptions = responseForBadStatus => {
     return {
       pageTitle: "Electrode App",

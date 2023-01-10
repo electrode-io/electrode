@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'good-console' {
+declare module "good-console" {
   declare module.exports: any;
 }
 
@@ -22,25 +22,25 @@ declare module 'good-console' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'good-console/lib/index' {
+declare module "good-console/lib/index" {
   declare module.exports: any;
 }
 
-declare module 'good-console/test/fixture/streams' {
+declare module "good-console/test/fixture/streams" {
   declare module.exports: any;
 }
 
-declare module 'good-console/test/index' {
+declare module "good-console/test/index" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'good-console/lib/index.js' {
-  declare module.exports: $Exports<'good-console/lib/index'>;
+declare module "good-console/lib/index.js" {
+  declare module.exports: $Exports<"good-console/lib/index">;
 }
-declare module 'good-console/test/fixture/streams.js' {
-  declare module.exports: $Exports<'good-console/test/fixture/streams'>;
+declare module "good-console/test/fixture/streams.js" {
+  declare module.exports: $Exports<"good-console/test/fixture/streams">;
 }
-declare module 'good-console/test/index.js' {
-  declare module.exports: $Exports<'good-console/test/index'>;
+declare module "good-console/test/index.js" {
+  declare module.exports: $Exports<"good-console/test/index">;
 }

@@ -15,7 +15,7 @@ import { renderRoutes } from "react-router-config";
 
 require.ensure(
   ["./sw-registration"],
-  require => {
+  (require) => {
     require("./sw-registration")(notify);
   },
   "sw-registration"

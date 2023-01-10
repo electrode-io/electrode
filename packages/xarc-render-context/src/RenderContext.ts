@@ -50,8 +50,8 @@ export class RenderContext {
     this.output = new RenderOutput(this);
     this.asyncTemplate = asyncTemplate;
     this._handlersMap = asyncTemplate.handlersMap;
-    this.handleError = err => !this.stop && this.voidStop(err);
-    this.transform = x => x;
+    this.handleError = (err) => !this.stop && this.voidStop(err);
+    this.transform = (x) => x;
     this._stop = 0;
   }
 
@@ -78,7 +78,7 @@ export class RenderContext {
   // set a callback to take the output result and transform it
   // Note: cannot be used with setOutputSend
   setOutputTransform(transform) {
-    this.transform = result => transform(result, this);
+    this.transform = (result) => transform(result, this);
   }
 
   get stop() {
@@ -148,7 +148,7 @@ export class RenderContext {
   // Note: If it's async, then the result from the Promise is not checked because
   //       we don't know how token handler wants to deal with it.
   handleTokenResult(id, result, cb) {
-    const addToOutput = res => {
+    const addToOutput = (res) => {
       // if it's a string, buffer, or stream, then add to output
       if (typeof res === "string" || Buffer.isBuffer(res) || isReadableStream(res)) {
         this.output.add(res);

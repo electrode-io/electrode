@@ -11,7 +11,7 @@ import {
   startSubApp,
   isSubAppReady,
   subAppReady,
-  InitProps,
+  InitProps
 } from "./index";
 
 /**
@@ -57,7 +57,7 @@ export class PageRenderer {
       nonce,
       prodAssetData,
       devAssetData,
-      templateInserts: { head = {}, body = {} } = {},
+      templateInserts: { head = {}, body = {} } = {}
     } = options;
 
     const { charSet = "UTF-8" } = options;

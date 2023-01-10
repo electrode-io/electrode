@@ -26,7 +26,7 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("complete", (data, next) => next());
 }
 
-const startServer = config => {
+const startServer = (config) => {
   if (!config.listener) config.listener = setupElectrodeServerEvents;
   return electrodeServer(config, []);
 };
@@ -36,7 +36,7 @@ const startServer = config => {
 module.exports = () =>
   loadRuntimeSupport().then(() => {
     const config = electrodeConfippet.config;
-    return startServer(config).catch(e => {
+    return startServer(config).catch((e) => {
       console.log("start server failed -", e.message); // eslint-disable-line
       process.exit(1);
     });

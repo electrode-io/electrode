@@ -25,11 +25,11 @@ class RecordStore extends Component<string, TypeState> {
 
   componentDidMount() {
     fetch("/records")
-      .then(response => {
+      .then((response) => {
         if (response.status >= HTTP_BAD_REQUEST) {
           throw new Error("Bad response from server");
         }
-        response.json().then(records => {
+        response.json().then((records) => {
           this.setState({ records });
         });
       })

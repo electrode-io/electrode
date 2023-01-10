@@ -32,9 +32,9 @@ describe("sever-render-pipeline", () => {
         ...options,
         _frameworkFactory: () => {
           return {
-            prepareSSR: data1 => {
+            prepareSSR: (data1) => {
               return {
-                then: cb => cb(data1)
+                then: (cb) => cb(data1)
               };
             }
           };

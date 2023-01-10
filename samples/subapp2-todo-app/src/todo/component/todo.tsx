@@ -2,7 +2,7 @@ import { React } from "@xarc/react";
 import { toggleTodo } from "../redux/action";
 const custom = require("../styles/bootstrap.css");
 
-export const Todo = props => {
+export const Todo = (props) => {
   const { todo, dispatch } = props;
 
   return (

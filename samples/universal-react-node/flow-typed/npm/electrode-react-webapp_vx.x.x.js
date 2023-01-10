@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'electrode-react-webapp' {
+declare module "electrode-react-webapp" {
   declare module.exports: any;
 }
 
@@ -22,108 +22,108 @@ declare module 'electrode-react-webapp' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'electrode-react-webapp/lib/async-template' {
+declare module "electrode-react-webapp/lib/async-template" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/express/index' {
+declare module "electrode-react-webapp/lib/express/index" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/group-scripts' {
+declare module "electrode-react-webapp/lib/group-scripts" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/hapi/index' {
+declare module "electrode-react-webapp/lib/hapi/index" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/http-status' {
+declare module "electrode-react-webapp/lib/http-status" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/koa/index' {
+declare module "electrode-react-webapp/lib/koa/index" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/load-handler' {
+declare module "electrode-react-webapp/lib/load-handler" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/react-webapp' {
+declare module "electrode-react-webapp/lib/react-webapp" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/react/token-handlers' {
+declare module "electrode-react-webapp/lib/react/token-handlers" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/render-context' {
+declare module "electrode-react-webapp/lib/render-context" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/render-output' {
+declare module "electrode-react-webapp/lib/render-output" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/renderer' {
+declare module "electrode-react-webapp/lib/renderer" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/token' {
+declare module "electrode-react-webapp/lib/token" {
   declare module.exports: any;
 }
 
-declare module 'electrode-react-webapp/lib/utils' {
+declare module "electrode-react-webapp/lib/utils" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'electrode-react-webapp/index' {
-  declare module.exports: $Exports<'electrode-react-webapp'>;
+declare module "electrode-react-webapp/index" {
+  declare module.exports: $Exports<"electrode-react-webapp">;
 }
-declare module 'electrode-react-webapp/index.js' {
-  declare module.exports: $Exports<'electrode-react-webapp'>;
+declare module "electrode-react-webapp/index.js" {
+  declare module.exports: $Exports<"electrode-react-webapp">;
 }
-declare module 'electrode-react-webapp/lib/async-template.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/async-template'>;
+declare module "electrode-react-webapp/lib/async-template.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/async-template">;
 }
-declare module 'electrode-react-webapp/lib/express/index.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/express/index'>;
+declare module "electrode-react-webapp/lib/express/index.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/express/index">;
 }
-declare module 'electrode-react-webapp/lib/group-scripts.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/group-scripts'>;
+declare module "electrode-react-webapp/lib/group-scripts.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/group-scripts">;
 }
-declare module 'electrode-react-webapp/lib/hapi/index.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/hapi/index'>;
+declare module "electrode-react-webapp/lib/hapi/index.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/hapi/index">;
 }
-declare module 'electrode-react-webapp/lib/http-status.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/http-status'>;
+declare module "electrode-react-webapp/lib/http-status.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/http-status">;
 }
-declare module 'electrode-react-webapp/lib/koa/index.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/koa/index'>;
+declare module "electrode-react-webapp/lib/koa/index.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/koa/index">;
 }
-declare module 'electrode-react-webapp/lib/load-handler.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/load-handler'>;
+declare module "electrode-react-webapp/lib/load-handler.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/load-handler">;
 }
-declare module 'electrode-react-webapp/lib/react-webapp.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/react-webapp'>;
+declare module "electrode-react-webapp/lib/react-webapp.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/react-webapp">;
 }
-declare module 'electrode-react-webapp/lib/react/token-handlers.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/react/token-handlers'>;
+declare module "electrode-react-webapp/lib/react/token-handlers.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/react/token-handlers">;
 }
-declare module 'electrode-react-webapp/lib/render-context.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/render-context'>;
+declare module "electrode-react-webapp/lib/render-context.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/render-context">;
 }
-declare module 'electrode-react-webapp/lib/render-output.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/render-output'>;
+declare module "electrode-react-webapp/lib/render-output.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/render-output">;
 }
-declare module 'electrode-react-webapp/lib/renderer.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/renderer'>;
+declare module "electrode-react-webapp/lib/renderer.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/renderer">;
 }
-declare module 'electrode-react-webapp/lib/token.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/token'>;
+declare module "electrode-react-webapp/lib/token.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/token">;
 }
-declare module 'electrode-react-webapp/lib/utils.js' {
-  declare module.exports: $Exports<'electrode-react-webapp/lib/utils'>;
+declare module "electrode-react-webapp/lib/utils.js" {
+  declare module.exports: $Exports<"electrode-react-webapp/lib/utils">;
 }

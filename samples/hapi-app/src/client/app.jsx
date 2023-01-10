@@ -25,7 +25,7 @@ import { notify } from "react-notify-toast";
 // DOM is created.
 require.ensure(
   ["./sw-registration"],
-  require => {
+  (require) => {
     require("./sw-registration")(notify);
   },
   "sw-registration"
@@ -35,7 +35,7 @@ require.ensure(
 //
 // Redux configure store with Hot Module Reload
 //
-const configureStore = initialState => {
+const configureStore = (initialState) => {
   const store = createStore(rootReducer, initialState);
 
   if (module.hot) {
@@ -52,7 +52,7 @@ const initialState = window.__hapiSample_PRELOADED_STATE__;
 
 const store = configureStore(initialState);
 
-const start = App => {
+const start = (App) => {
   const jsContent = document.querySelector(".js-content");
   const reactStart = initialState && jsContent.innerHTML ? hydrate : render;
 

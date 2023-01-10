@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'electrode-static-paths' {
+declare module "electrode-static-paths" {
   declare module.exports: any;
 }
 
@@ -22,39 +22,39 @@ declare module 'electrode-static-paths' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'electrode-static-paths/gulpfile' {
+declare module "electrode-static-paths/gulpfile" {
   declare module.exports: any;
 }
 
-declare module 'electrode-static-paths/lib/decor-static-paths' {
+declare module "electrode-static-paths/lib/decor-static-paths" {
   declare module.exports: any;
 }
 
-declare module 'electrode-static-paths/lib/plugin-static-paths' {
+declare module "electrode-static-paths/lib/plugin-static-paths" {
   declare module.exports: any;
 }
 
-declare module 'electrode-static-paths/test/dist/js/hello' {
+declare module "electrode-static-paths/test/dist/js/hello" {
   declare module.exports: any;
 }
 
-declare module 'electrode-static-paths/test/spec/static-paths.spec' {
+declare module "electrode-static-paths/test/spec/static-paths.spec" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'electrode-static-paths/gulpfile.js' {
-  declare module.exports: $Exports<'electrode-static-paths/gulpfile'>;
+declare module "electrode-static-paths/gulpfile.js" {
+  declare module.exports: $Exports<"electrode-static-paths/gulpfile">;
 }
-declare module 'electrode-static-paths/lib/decor-static-paths.js' {
-  declare module.exports: $Exports<'electrode-static-paths/lib/decor-static-paths'>;
+declare module "electrode-static-paths/lib/decor-static-paths.js" {
+  declare module.exports: $Exports<"electrode-static-paths/lib/decor-static-paths">;
 }
-declare module 'electrode-static-paths/lib/plugin-static-paths.js' {
-  declare module.exports: $Exports<'electrode-static-paths/lib/plugin-static-paths'>;
+declare module "electrode-static-paths/lib/plugin-static-paths.js" {
+  declare module.exports: $Exports<"electrode-static-paths/lib/plugin-static-paths">;
 }
-declare module 'electrode-static-paths/test/dist/js/hello.js' {
-  declare module.exports: $Exports<'electrode-static-paths/test/dist/js/hello'>;
+declare module "electrode-static-paths/test/dist/js/hello.js" {
+  declare module.exports: $Exports<"electrode-static-paths/test/dist/js/hello">;
 }
-declare module 'electrode-static-paths/test/spec/static-paths.spec.js' {
-  declare module.exports: $Exports<'electrode-static-paths/test/spec/static-paths.spec'>;
+declare module "electrode-static-paths/test/spec/static-paths.spec.js" {
+  declare module.exports: $Exports<"electrode-static-paths/test/spec/static-paths.spec">;
 }

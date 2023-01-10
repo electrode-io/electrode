@@ -72,7 +72,7 @@ export class Home extends Component<HomeProps> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   data: state && state.data
 });
 

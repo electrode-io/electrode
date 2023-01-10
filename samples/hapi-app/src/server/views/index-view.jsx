@@ -19,7 +19,7 @@ let routesEngine;
 
 import { subAppReady } from "@xarc/react";
 
-module.exports = async req => {
+module.exports = async (req) => {
   if (!routesEngine) {
     routesEngine = new ReduxRouterEngine({
       routes,

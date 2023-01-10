@@ -10,7 +10,7 @@ let lastMsg;
 let noChangeCount = 0;
 
 /* eslint-disable max-statements */
-module.exports = function() {
+module.exports = function () {
   return {
     plugins: [
       new webpack.ProgressPlugin((pct, msg) => {

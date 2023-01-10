@@ -24,7 +24,4 @@ const mapStateToProps = () => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(DemoSignin);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(DemoSignin);

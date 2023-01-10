@@ -28,7 +28,7 @@ function setupElectrodeServerEvents(emitter) {
 }
 //
 
-const startServer = config => {
+const startServer = (config) => {
   //
   const decor = staticPathsDecor();
   if (!config.listener) config.listener = setupElectrodeServerEvents;

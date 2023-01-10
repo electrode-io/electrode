@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggleCheck, incNumber, decNumber } from "../actions";
 
-const DemoPureStates = props => {
+const DemoPureStates = (props) => {
   const { checked, value, dispatch } = props;
   /*eslint-disable */
   return (
@@ -27,9 +27,7 @@ const DemoPureStates = props => {
       </div>
       <div>
         <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        <div style={{ width: "6rem", display: "inline-block", textAlign: "center" }}>
-          {value}
-        </div>
+        <div style={{ width: "6rem", display: "inline-block", textAlign: "center" }}>{value}</div>
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
     </div>
@@ -43,11 +41,11 @@ DemoPureStates.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     checked: state.checkBox.checked,
     value: state.number.value
   };
 };
 
-export default connect(mapStateToProps, dispatch => ({ dispatch }))(DemoPureStates);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(DemoPureStates);

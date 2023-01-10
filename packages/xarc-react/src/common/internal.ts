@@ -39,7 +39,7 @@ export function __addFeature(
   id: string,
   featureProvider: () => SubAppFeatureFactory
 ) {
-  return options.wantFeatures && options.wantFeatures.find(x => x.id === id)
+  return options.wantFeatures && options.wantFeatures.find((x) => x.id === id)
     ? options
     : {
         ...options,

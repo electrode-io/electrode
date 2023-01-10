@@ -15,22 +15,23 @@ const HomeComp = (props) => {
   return (
     <div className="container-fluid text-center">
       <p>HOME</p>
-      
+
       <div>
-        <span style={{color: "orange", fontSize: "large"}}>
+        <span style={{ color: "orange", fontSize: "large" }}>
           Redux State Demo
-          <br/>
+          <br />
           Check out the number below and footer's submit.
-          <br/>
+          <br />
           You can do the same on other tabs too, if available.
-          <br/>
+          <br />
           <button onClick={() => props.dispatch(decNumber())}>&#8810;</button>
-          <span style={{color: "black", fontWeight: "bold", padding: "0 1rem 0 1rem"}}>{props.number}</span>
-          <button onClick={() => props.dispatch(incNumber())}>&#8811;</button>
+          <span style={{ color: "black", fontWeight: "bold", padding: "0 1rem 0 1rem" }}>
+            {props.number}
           </span>
+          <button onClick={() => props.dispatch(incNumber())}>&#8811;</button>
+        </span>
       </div>
     </div>
-
   );
 };
 

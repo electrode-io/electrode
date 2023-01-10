@@ -14,7 +14,7 @@ import { loadUserConfig } from "./util/load-user-config";
  * @param config
  * @returns {void} karma config
  */
-export = function(config) {
+export = function (config) {
   dev(config);
   const settings = {
     crossOriginAttribute: false,
@@ -23,7 +23,7 @@ export = function(config) {
       "http://127.0.0.1:3001/assets/bundle.js" as any
       // Watch these files but do not add them to the bundle.
     ].concat(
-      ["src/client/**", "test/**"].map(pattern => {
+      ["src/client/**", "test/**"].map((pattern) => {
         return {
           pattern,
           included: false,

@@ -22,9 +22,7 @@ describe("createDynamicComponent", function () {
     // data-reactroot isn't getting created due to Context.Provider
     // see https://github.com/facebook/react/issues/15012
     const html = renderToString(<Component />);
-    expect(html).to.equal(
-      `<div>subapp <!-- -->test<!-- --> component loading... </div>`
-    );
+    expect(html).to.equal(`<div>subapp <!-- -->test<!-- --> component loading... </div>`);
 
     await container.get("test")._getModule();
 

@@ -3,7 +3,7 @@
 const config = require("../../");
 const plugin = require("../../hapi-plugin");
 
-describe("hapi-plugin", function() {
+describe("hapi-plugin", function () {
   it("should register server and set its app.config", () => {
     const server = {
       app: {

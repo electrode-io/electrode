@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'electrode-server' {
+declare module "electrode-server" {
   declare module.exports: any;
 }
 
@@ -22,53 +22,53 @@ declare module 'electrode-server' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'electrode-server/lib/check-node-env' {
+declare module "electrode-server/lib/check-node-env" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/config/default' {
+declare module "electrode-server/lib/config/default" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/config/production' {
+declare module "electrode-server/lib/config/production" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/electrode-server' {
+declare module "electrode-server/lib/electrode-server" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/error-common' {
+declare module "electrode-server/lib/error-common" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/logger' {
+declare module "electrode-server/lib/logger" {
   declare module.exports: any;
 }
 
-declare module 'electrode-server/lib/start-failed' {
+declare module "electrode-server/lib/start-failed" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'electrode-server/lib/check-node-env.js' {
-  declare module.exports: $Exports<'electrode-server/lib/check-node-env'>;
+declare module "electrode-server/lib/check-node-env.js" {
+  declare module.exports: $Exports<"electrode-server/lib/check-node-env">;
 }
-declare module 'electrode-server/lib/config/default.js' {
-  declare module.exports: $Exports<'electrode-server/lib/config/default'>;
+declare module "electrode-server/lib/config/default.js" {
+  declare module.exports: $Exports<"electrode-server/lib/config/default">;
 }
-declare module 'electrode-server/lib/config/production.js' {
-  declare module.exports: $Exports<'electrode-server/lib/config/production'>;
+declare module "electrode-server/lib/config/production.js" {
+  declare module.exports: $Exports<"electrode-server/lib/config/production">;
 }
-declare module 'electrode-server/lib/electrode-server.js' {
-  declare module.exports: $Exports<'electrode-server/lib/electrode-server'>;
+declare module "electrode-server/lib/electrode-server.js" {
+  declare module.exports: $Exports<"electrode-server/lib/electrode-server">;
 }
-declare module 'electrode-server/lib/error-common.js' {
-  declare module.exports: $Exports<'electrode-server/lib/error-common'>;
+declare module "electrode-server/lib/error-common.js" {
+  declare module.exports: $Exports<"electrode-server/lib/error-common">;
 }
-declare module 'electrode-server/lib/logger.js' {
-  declare module.exports: $Exports<'electrode-server/lib/logger'>;
+declare module "electrode-server/lib/logger.js" {
+  declare module.exports: $Exports<"electrode-server/lib/logger">;
 }
-declare module 'electrode-server/lib/start-failed.js' {
-  declare module.exports: $Exports<'electrode-server/lib/start-failed'>;
+declare module "electrode-server/lib/start-failed.js" {
+  declare module.exports: $Exports<"electrode-server/lib/start-failed">;
 }

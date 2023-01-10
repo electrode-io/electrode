@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = options => {
+module.exports = (options) => {
   const name = options.route.name;
   return {
     reducer: {

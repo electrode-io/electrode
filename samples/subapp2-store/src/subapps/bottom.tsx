@@ -8,7 +8,7 @@ import custom from "../styles/bootstrap.css";
 
 const { withRouter } = ReactRouter;
 
-const MoreProducts = props => {
+const MoreProducts = (props) => {
   return (
     <div className={custom.container}>
       <h1 className={custom["display-4"]}>More Products</h1>
@@ -46,7 +46,7 @@ const MoreDeals = () => {
   );
 };
 
-const Bottom = props => {
+const Bottom = (props) => {
   return (
     <Switch>
       <Route path="/products" component={() => <MoreProducts {...props} imagesData={[]} />} />
@@ -57,8 +57,8 @@ const Bottom = props => {
 
 const Component = withRouter(
   connect(
-    state => state,
-    dispatch => ({ dispatch })
+    (state) => state,
+    (dispatch) => ({ dispatch })
   )(Bottom)
 );
 
@@ -70,7 +70,7 @@ export const subapp: ReactSubApp = {
       shareStore: true,
       reducers: true,
       // provider({ Component, props }) {}
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Bottom (bottom.tsx) subapp redux prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };

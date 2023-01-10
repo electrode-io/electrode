@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 
 const Products = (props) => {
   const { items } = props;
-  
-    return (
-      <div className="container text-center">
-        <h2>Products</h2>
-        <div className="row">
+
+  return (
+    <div className="container text-center">
+      <h2>Products</h2>
+      <div className="row">
         <React.Suspense fallback={<div>Spinner...</div>}>
           {items.map((item, i) => (
             <div key={i} className="col-sm-4 card">
@@ -18,10 +18,10 @@ const Products = (props) => {
               </div>
             </div>
           ))}
-          </React.Suspense>
-        </div>
+        </React.Suspense>
       </div>
-    )
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {

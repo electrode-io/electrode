@@ -11,9 +11,12 @@ const Users = () => {
     <ul id="user-box">
       {users.map((user, i) => (
         <li className="user" key={i}>
-          ID: {user.id}<br/>
-          Name: {user.name}<br/>
-          Email: {user.email}<br/>
+          ID: {user.id}
+          <br />
+          Name: {user.name}
+          <br />
+          Email: {user.email}
+          <br />
           <hr />
         </li>
       ))}

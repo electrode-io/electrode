@@ -38,13 +38,9 @@ describe("Home", () => {
       "MongoDB Example"
     ];
 
-    for (let x = 0; x < 8; x++) { // eslint-disable-line no-magic-numbers
-      expect(
-        component
-          .find("li")
-          .at(x)
-          .text()
-      ).toEqual(items[x]);
+    for (let x = 0; x < 8; x++) {
+      // eslint-disable-line no-magic-numbers
+      expect(component.find("li").at(x).text()).toEqual(items[x]);
     }
   });
 });

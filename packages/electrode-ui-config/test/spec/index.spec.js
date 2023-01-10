@@ -6,7 +6,7 @@ const chai = require("chai");
 const expect = chai.expect;
 const uiConfig = require("../../lib");
 
-describe("config", function() {
+describe("config", function () {
   beforeEach(() => {
     uiConfig.config = {
       ui: {
@@ -20,7 +20,7 @@ describe("config", function() {
     expect(uiConfig.ui.basePath).to.equal("/test");
   });
 
-  describe("fullPath", function() {
+  describe("fullPath", function () {
     it("should return '/test' for undefined or empty ''", () => {
       expect(uiConfig.fullPath()).to.equal("/test");
       expect(uiConfig.fullPath("")).to.equal("/test");

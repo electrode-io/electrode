@@ -11,8 +11,8 @@ export const create = async ({ content }) => {
   mockTodos.todos.push({ id: id++, content, completed: false });
 };
 
-export const update = async id => {
-  mockTodos.todos = mockTodos.todos.map(element => {
+export const update = async (id) => {
+  mockTodos.todos = mockTodos.todos.map((element) => {
     if (element.id === id) {
       return { ...element, completed: !element.completed };
     }
@@ -21,7 +21,7 @@ export const update = async id => {
   });
 };
 
-export const changeFilter = async filter => {
+export const changeFilter = async (filter) => {
   mockTodos.filter = filter;
 };
 

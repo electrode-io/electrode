@@ -106,7 +106,7 @@ ${s}
       templateInserts: {
         head: {
           begin: cTT`<!-- begin head inserts -->`,
-          contextReady: cTT`${context => {
+          contextReady: cTT`${(context) => {
             return `<link${context.user.styleNonceAttr} href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">`;
           }}`
         },

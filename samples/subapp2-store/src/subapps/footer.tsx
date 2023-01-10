@@ -42,9 +42,9 @@ export const subapp: ReactSubApp = {
     reduxFeature({
       React,
       shareStore: true,
-      reducers: x => x,
+      reducers: (x) => x,
       prepare: () => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             resolve({
               initialState: { title: "Online Store Copyright" }

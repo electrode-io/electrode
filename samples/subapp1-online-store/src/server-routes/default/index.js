@@ -42,7 +42,7 @@ const Template = (
             serverSideRendering
             inlineScript
           />
-      
+
           <Require
             _id="subapp-web/lib/load"
             _concurrent
@@ -54,31 +54,31 @@ const Template = (
             async
             hydrateServerData
             serverSideRendering
-          />    
+          />
 
-        <Require
-          _id="subapp-web/lib/load"
-          _concurrent
-          timestamp
-          elementId="subapp-footer"
-          name="Footer"
-          async
-          serverSideRendering
-        />
+          <Require
+            _id="subapp-web/lib/load"
+            _concurrent
+            timestamp
+            elementId="subapp-footer"
+            name="Footer"
+            async
+            serverSideRendering
+          />
 
-        <Require
-          _id="subapp-web/lib/load"
-          _concurrent
-          timestamp
-          elementId="subapp-suspense-demo"
-          name="SuspenseDemo"            
-          async
-          useStream
-          serverSideRendering            
-        />
+          <Require
+            _id="subapp-web/lib/load"
+            _concurrent
+            timestamp
+            elementId="subapp-suspense-demo"
+            name="SuspenseDemo"
+            async
+            useStream
+            serverSideRendering
+          />
         </div>
 
-        <Require _id="subapp-web/lib/start" />        
+        <Require _id="subapp-web/lib/start" />
       </body>
       <Token _id="BODY_CLOSED" />
     </html>

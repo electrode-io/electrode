@@ -22,7 +22,7 @@ export const subapp: ReactSubApp = {
       React,
       shareStore: true,
       reducers: true, // true => read the reduxReducers export from this file
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         if (initialState) {
           return { initialState };
         } else {

@@ -14,7 +14,7 @@ const VisibilityFilters = () => {
         style={{ width: "600px" }}
         className={classNames(custom["center-block"], custom["btn-group"])}
       >
-        {Object.keys(VISIBILITY_FILTERS).map(filterKey => {
+        {Object.keys(VISIBILITY_FILTERS).map((filterKey) => {
           const currentFilter = VISIBILITY_FILTERS[filterKey];
           return (
             <button

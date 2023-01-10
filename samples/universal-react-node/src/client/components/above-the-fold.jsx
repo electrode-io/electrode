@@ -127,6 +127,6 @@ AboveFold.propTypes = {
   skip: PropTypes.bool
 };
 
-export default connect(state => {
+export default connect((state) => {
   return { skip: state.skip };
 })(AboveFold);

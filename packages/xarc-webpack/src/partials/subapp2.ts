@@ -4,7 +4,7 @@
 
 import { SubAppWebpackPlugin } from "../plugins/subapp-plugin-webpack5";
 
-module.exports = function(opts) {
+module.exports = function (opts) {
   return {
     optimization: {
       // TODO: always generating runtime chunk could break apps that doesn't

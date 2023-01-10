@@ -36,7 +36,7 @@ export function reduxRenderStart({ store, Component, element }) {
 // info - the subapp's information
 //
 export function reduxBundlerLoadSubApp(info) {
-  const renderStart = function(instance, element) {
+  const renderStart = function (instance, element) {
     const Component = this.info.StartComponent || this.info.Component;
 
     const { component } = reduxRenderStart({
@@ -49,7 +49,7 @@ export function reduxBundlerLoadSubApp(info) {
     return component;
   };
 
-  const preRender = function(instance) {
+  const preRender = function (instance) {
     const initialState = instance._prepared || instance.initialState;
     const reduxCreateStore = instance.reduxCreateStore || this.info.reduxCreateStore;
     instance._store = instance._store || reduxCreateStore(initialState);
@@ -57,7 +57,7 @@ export function reduxBundlerLoadSubApp(info) {
     return instance;
   };
 
-  const signalReady = function(instance) {
+  const signalReady = function (instance) {
     const store = instance._store;
 
     if (store.realize) {

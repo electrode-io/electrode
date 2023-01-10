@@ -20,12 +20,17 @@ describe("Home", () => {
   it("has expected content with deep render", () => {
     const initialState = {
       checkBox: { checked: false },
-      number: { value: 999 }
+      number: { value: 999 },
     };
 
     const store = createStore(rootReducer, initialState);
 
-    component = ReactDOM.render(<Provider store={store}><Home /></Provider>, container);
+    component = ReactDOM.render(
+      <Provider store={store}>
+        <Home />
+      </Provider>,
+      container
+    );
 
     expect(component).to.not.be.false;
   });

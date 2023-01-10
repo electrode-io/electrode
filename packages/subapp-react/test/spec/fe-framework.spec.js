@@ -5,7 +5,7 @@ const { act } = require("react-dom/test-utils");
 const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
 
-describe("FE React framework", function() {
+describe("FE React framework", function () {
   //
   it("should setup FrameworkLib", () => {
     expect(feLib.React).to.be.ok;

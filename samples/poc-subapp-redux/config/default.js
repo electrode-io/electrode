@@ -11,9 +11,9 @@ const portFromEnv = () => {
 module.exports = {
   plugins: {
     "@xarc/app-dev": {
-      enable: process.env.WEBPACK_DEV === "true"
+      enable: process.env.WEBPACK_DEV === "true",
     },
-    "subapp-server": { options: { insertTokenIds: true } }
+    "subapp-server": { options: { insertTokenIds: true } },
   },
   connections: {
     default: {
@@ -21,11 +21,11 @@ module.exports = {
       address: process.env.HOST_IP || "0.0.0.0",
       port: portFromEnv(),
       routes: {
-        cors: false
+        cors: false,
       },
       state: {
-        ignoreErrors: true
-      }
-    }
-  }
+        ignoreErrors: true,
+      },
+    },
+  },
 };

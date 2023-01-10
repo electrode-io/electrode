@@ -1006,7 +1006,7 @@ describe("hapi 16 electrode-react-webapp", () => {
   });
 
   it("should add a nonce value as provided by a function in the config", () => {
-    configOptions.cspNonceValue = function(request, type) {
+    configOptions.cspNonceValue = function (request, type) {
       return `==${type}`;
     };
 
@@ -1099,7 +1099,7 @@ describe("hapi 16 electrode-react-webapp", () => {
 
   it("should inject critical css with a nonce value provided by a function", () => {
     configOptions.criticalCSS = "test/data/critical.css";
-    configOptions.cspNonceValue = function(request, type) {
+    configOptions.cspNonceValue = function (request, type) {
       return `==${type}`;
     };
 
@@ -1564,7 +1564,7 @@ describe("hapi 16 electrode-react-webapp", () => {
       });
   });
 
-  describe("with webpackDev", function() {
+  describe("with webpackDev", function () {
     it("should skip if webpack dev is not valid", () => {
       return electrodeServer(config).then(server => {
         server.ext({

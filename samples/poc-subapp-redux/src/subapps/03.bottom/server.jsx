@@ -9,33 +9,33 @@ export default {
   initialize: () => {
     if (!filterImages) {
       const natureImages = JSON.parse(Fs.readFileSync("static/nature-images.json"));
-      filterImages = natureImages.value.map(x => {
+      filterImages = natureImages.value.map((x) => {
         return {
           contentUrl: x.contentUrl,
           featured: x.featured,
           thumbnail: x.thumbnail,
           thumbnailUrl: x.thumbnailUrl,
-          name: x.name
+          name: x.name,
         };
       });
     }
   },
   prepare: (request, context) => {
     const initialState = {
-      imagesData: filterImages
+      imagesData: filterImages,
     };
     const store = subApp.reduxCreateStore(initialState);
-    
-    return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 500)).then({
+
+    return new Promise((resolve) => setTimeout(resolve, 50 + Math.random() * 500)).then({
       initialState,
-      store
+      store,
     });
   },
-  StartComponent: props => {
+  StartComponent: (props) => {
     return (
       <StaticRouter {...props}>
         <subApp.Component />
       </StaticRouter>
     );
-  }
+  },
 };

@@ -28,7 +28,7 @@ function webpackConfig(file) {
   return Path.join(config.webpack, file);
 }
 
-const showExpl = dev => {
+const showExpl = (dev) => {
   const { entry } = require(Path.resolve("."));
   const dllName = _.first(Object.keys(entry));
   dev = dev ? "dev." : "";
@@ -107,7 +107,7 @@ function makeTasks() {
     //
     "save-cdn-map": {
       desc: "Process and save a CDN mapping JSON to dist",
-      task: function() {
+      task: function () {
         let jsonFname = this.argv.length > 1 && _.last(this.argv);
 
         if (jsonFname && jsonFname.startsWith("--")) {
@@ -123,7 +123,7 @@ function makeTasks() {
         const cdnMapping = JSON.parse(Fs.readFileSync(Path.resolve(jsonFname)));
         const distMapping = {};
 
-        Object.keys(cdnMapping).forEach(fname => {
+        Object.keys(cdnMapping).forEach((fname) => {
           const posixFname = fname.replace(/\\/g, "/"); // posixify path
           const parts = posixFname.split("/");
           const distFile = _.last(parts);
@@ -158,7 +158,7 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
-module.exports = function(xclap) {
+module.exports = function (xclap) {
   setupPath();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {

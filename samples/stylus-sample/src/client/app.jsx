@@ -17,7 +17,7 @@ import "milligram-stylus";
 //
 // Redux configure store with Hot Module Reload
 //
-const configureStore = initialState => {
+const configureStore = (initialState) => {
   const store = createStore(rootReducer, initialState);
 
   if (module.hot) {
@@ -32,7 +32,7 @@ const configureStore = initialState => {
 
 const store = configureStore(window.__PRELOADED_STATE__);
 
-const start = App => {
+const start = (App) => {
   const jsContent = document.querySelector(".js-content");
   const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
 

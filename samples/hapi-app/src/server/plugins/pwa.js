@@ -9,7 +9,7 @@ const plugin = {
   }
 };
 
-plugin.register = function(server) {
+plugin.register = function (server) {
   server.route({
     method: "GET",
     path: "/sw.js",

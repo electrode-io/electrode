@@ -9,16 +9,12 @@ import { connect } from "react-redux";
 import { toggleCheck, incNumber, decNumber } from "../actions";
 import "../styles/custom.css";
 
-const DemoPureStates = props => {
+const DemoPureStates = (props) => {
   const { checked, value, dispatch } = props;
   return (
     <div>
       <h6 styleName="docs-header">Demo Managing States in Pure Functional Component</h6>
-      <label
-        styleName="checkbox-label"
-        onChange={() => dispatch(toggleCheck())}
-        checked={checked}
-      >
+      <label styleName="checkbox-label" onChange={() => dispatch(toggleCheck())} checked={checked}>
         <input type="checkbox" checked={checked} onChange={() => null} />
         <span> checkbox </span>
       </label>
@@ -38,14 +34,11 @@ DemoPureStates.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     checked: state.checkBox.checked,
     value: state.number.value
   };
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(DemoPureStates);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(DemoPureStates);

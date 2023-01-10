@@ -4,15 +4,15 @@
  *
  * This is free and unencumbered software released into the public domain.
  */
-(function(global, undefined) {
+(function (global, undefined) {
   "use strict";
 
-  var factory = function(window) {
+  var factory = function (window) {
     if (typeof window.document !== "object") {
       throw new Error("Cookies.js requires a `window` with a `document` object");
     }
 
-    var Cookies = function(key, value, options) {
+    var Cookies = function (key, value, options) {
       return arguments.length === 1 ? Cookies.get(key) : Cookies.set(key, value, options);
     };
 
@@ -30,7 +30,7 @@
       secure: false
     };
 
-    Cookies.get = function(key) {
+    Cookies.get = function (key) {
       if (Cookies._cachedDocumentCookie !== Cookies._document.cookie) {
         Cookies._renewCache();
       }
@@ -40,7 +40,7 @@
       return value === undefined ? undefined : decodeURIComponent(value);
     };
 
-    Cookies.set = function(key, value, options) {
+    Cookies.set = function (key, value, options) {
       options = Cookies._getExtendedOptions(options);
       options.expires = Cookies._getExpiresDate(value === undefined ? -1 : options.expires);
 
@@ -49,11 +49,11 @@
       return Cookies;
     };
 
-    Cookies.expire = function(key, options) {
+    Cookies.expire = function (key, options) {
       return Cookies.set(key, undefined, options);
     };
 
-    Cookies._getExtendedOptions = function(options) {
+    Cookies._getExtendedOptions = function (options) {
       return {
         path: (options && options.path) || Cookies.defaults.path,
         domain: (options && options.domain) || Cookies.defaults.domain,
@@ -63,11 +63,11 @@
       };
     };
 
-    Cookies._isValidDate = function(date) {
+    Cookies._isValidDate = function (date) {
       return Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date.getTime());
     };
 
-    Cookies._getExpiresDate = function(expires, now) {
+    Cookies._getExpiresDate = function (expires, now) {
       now = now || new Date();
 
       if (typeof expires === "number") {
@@ -84,7 +84,7 @@
       return expires;
     };
 
-    Cookies._generateCookieString = function(key, value, options) {
+    Cookies._generateCookieString = function (key, value, options) {
       options = options || {};
 
       if (!options.skipEncoding) {
@@ -103,7 +103,7 @@
       return cookieString;
     };
 
-    Cookies._getCacheFromString = function(documentCookie) {
+    Cookies._getCacheFromString = function (documentCookie) {
       var cookieCache = {};
       var cookiesArray = documentCookie ? documentCookie.split("; ") : [];
 
@@ -118,7 +118,7 @@
       return cookieCache;
     };
 
-    Cookies._getKeyValuePairFromCookieString = function(cookieString) {
+    Cookies._getKeyValuePairFromCookieString = function (cookieString) {
       // "=" is a valid character in a cookie value according to RFC6265, so cannot `split('=')`
       var separatorIndex = cookieString.indexOf("=");
 
@@ -141,12 +141,12 @@
       };
     };
 
-    Cookies._renewCache = function() {
+    Cookies._renewCache = function () {
       Cookies._cache = Cookies._getCacheFromString(Cookies._document.cookie);
       Cookies._cachedDocumentCookie = Cookies._document.cookie;
     };
 
-    Cookies._areEnabled = function() {
+    Cookies._areEnabled = function () {
       var testKey = "cookies.js";
       var areEnabled = Cookies.set(testKey, 1).get(testKey) === "1";
       Cookies.expire(testKey);
@@ -162,7 +162,7 @@
 
   // AMD support
   if (typeof define === "function" && define.amd) {
-    define(function() {
+    define(function () {
       return cookiesExport;
     });
     // CommonJS/Node.js support

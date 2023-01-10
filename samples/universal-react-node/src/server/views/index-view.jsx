@@ -11,7 +11,7 @@ import routes from "../../client/rr4-routes";
 //
 //
 
-module.exports = req => {
+module.exports = (req) => {
   const app = (req.server && req.server.app) || req.app;
   if (!app.routesEngine) {
     //

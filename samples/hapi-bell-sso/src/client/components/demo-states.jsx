@@ -35,14 +35,11 @@ DemoStates.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     checked: state.checkBox.checked,
     value: state.number.value
   };
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(DemoStates);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(DemoStates);

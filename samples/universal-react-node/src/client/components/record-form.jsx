@@ -33,7 +33,7 @@ class RecordForm extends Component<TypeRecordForm, { name: string, artist: strin
   }
   handleSubmit(event: SyntheticEvent<>) {
     fetch("/1", { credentials: "same-origin" })
-      .then(resp => {
+      .then((resp) => {
         if (resp.status === HTTP_OK) {
           token = resp.headers.get("x-csrf-jwt");
         } else {
@@ -52,7 +52,7 @@ class RecordForm extends Component<TypeRecordForm, { name: string, artist: strin
             artist: this.state.artist
           })
         })
-          .then(response => {
+          .then((response) => {
             if (response.status >= HTTP_BAD_REQUEST) {
               throw new Error("Bad response from server");
             }

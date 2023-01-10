@@ -61,7 +61,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   }, newEntry);
 }
 
-module.exports = function(options) {
+module.exports = function (options) {
   const xarcOptions = loadXarcOptions();
   const AppMode = xarcOptions.AppMode;
 
@@ -111,7 +111,7 @@ module.exports = function(options) {
   );
 
   if (cacheConfig.runtimeCaching) {
-    cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(runtimeCache => {
+    cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map((runtimeCache) => {
       return {
         handler: runtimeCache.handler,
         urlPattern: new RegExp(runtimeCache.urlPattern)

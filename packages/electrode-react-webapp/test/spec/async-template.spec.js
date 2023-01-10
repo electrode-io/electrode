@@ -8,7 +8,7 @@ const xstdout = require("xstdout");
 
 const silentIntercept = true;
 
-describe("async-template", function() {
+describe("async-template", function () {
   let intercept;
 
   afterEach(() => {
@@ -364,7 +364,7 @@ describe("async-template", function() {
     ).to.throw(`at line 4 col 3 - 'ssr-content foo='bar' has malformed prop: mismatch quote ';`);
   });
 
-  describe("addTokens", function() {
+  describe("addTokens", function () {
     const insertTokens = [
       { token: "a" },
       { token: "b", props: { foo: 1 } },
@@ -639,7 +639,7 @@ describe("async-template", function() {
     });
   });
 
-  describe("removeTokens", function() {
+  describe("removeTokens", function () {
     const testRemove1 = (options = {}) => {
       const htmlFile = Path.join(__dirname, "../data/template2.html");
       intercept = xstdout.intercept(silentIntercept);
@@ -890,7 +890,7 @@ describe("async-template", function() {
     });
   });
 
-  describe("_findTokenIndex", function() {
+  describe("_findTokenIndex", function () {
     it("should validate and return index", () => {
       const htmlFile = Path.join(__dirname, "../data/template2.html");
       const asyncTemplate = new AsyncTemplate({
@@ -972,7 +972,7 @@ describe("async-template", function() {
     });
   });
 
-  describe("findTokenByStr", function() {
+  describe("findTokenByStr", function () {
     it("should find tokens by str and return result", () => {
       const htmlFile = Path.join(__dirname, "../data/template2.html");
       const asyncTemplate = new AsyncTemplate({

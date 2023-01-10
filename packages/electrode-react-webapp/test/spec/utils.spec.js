@@ -6,7 +6,7 @@ const utils = require("../../lib/utils");
 const Path = require("path");
 const sinon = require("sinon");
 
-describe("utils", function() {
+describe("utils", function () {
   it("getIconStats should return stats w/o html as is", () => {
     const x = utils.getIconStats("test/data/icon-stats-empty.json");
     expect(x).to.deep.equal({ empty: true });
@@ -21,7 +21,7 @@ describe("utils", function() {
     delete process.env.WEBPACK_DEV;
   });
 
-  describe("htmlifyError", function() {
+  describe("htmlifyError", function () {
     let save;
     beforeEach(() => {
       if (process.env.hasOwnProperty("NODE_ENV")) {
@@ -350,7 +350,7 @@ describe("utils", function() {
     });
   });
 
-  describe("getProdBundles", function() {
+  describe("getProdBundles", function () {
     it("should return empty object if no route data or assets", () => {
       expect(utils.getProdBundles()).to.deep.equal({});
       expect(utils.getProdBundles("", {})).to.deep.equal({});

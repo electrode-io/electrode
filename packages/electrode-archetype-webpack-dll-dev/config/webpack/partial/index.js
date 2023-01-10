@@ -20,8 +20,8 @@ const orders = [
 ];
 
 const files = Fs.readdirSync(__dirname)
-  .filter(x => x !== "index.js")
-  .map(x => x.substr(0, x.length - 3));
+  .filter((x) => x !== "index.js")
+  .map((x) => x.substr(0, x.length - 3));
 
 module.exports = {
   orders,

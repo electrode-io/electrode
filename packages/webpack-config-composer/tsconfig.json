@@ -8,19 +8,11 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": [
-      "node",
-      "mocha",
-      "chai",
-      "sinon",
-      "sinon-chai"
-    ],
+    "types": ["node", "mocha", "chai", "sinon", "sinon-chai"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

@@ -26,7 +26,7 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("complete", (data, next) => next());
 }
 
-const startServer = config => {
+const startServer = (config) => {
   if (!config.listener) {
     config.listener = setupElectrodeServerEvents;
   }

@@ -57,7 +57,7 @@ export function xarcCdnMap(
     update: xv2.cdnUpdate
   };
 
-  xv2.cdnInit = data => {
+  xv2.cdnInit = (data) => {
     w._wml.cdn.md = xv2.rt.md = data.md;
   };
 

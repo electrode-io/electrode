@@ -6,7 +6,7 @@ import Navigation from "../../components/Navigation";
 const Header = () => {
   return (
     <div
-      style={{        
+      style={{
         border: "solid",
         marginLeft: "15%",
         marginRight: "15%",
@@ -15,7 +15,8 @@ const Header = () => {
     >
       <h2>
         <a href="https://www.electrode.io">
-          Electrode <img src={electrodePng} /> - Subapp Version 2 <span style={{fontSize: "15px"}}>(with React 18)</span>
+          Electrode <img src={electrodePng} /> - Subapp Version 2{" "}
+          <span style={{ fontSize: "15px" }}>(with React 18)</span>
         </a>
       </h2>
       <Navigation />
@@ -25,7 +26,5 @@ const Header = () => {
 
 export const subapp: ReactSubApp = {
   Component: Header,
-  wantFeatures: [
-    reactRouterFeature({ React })
-  ],
+  wantFeatures: [reactRouterFeature({ React })],
 };

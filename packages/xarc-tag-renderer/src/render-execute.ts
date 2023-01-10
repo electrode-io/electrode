@@ -28,7 +28,7 @@ function handleSubTemplate(tkId: string, step, result: any, xt: any, cb: Functio
     return cb();
   }
 
-  const handle = res => {
+  const handle = (res) => {
     if (res[TAG_TYPE] && res[TAG_TYPE] === "template") {
       const step2 = xt.template.handleSubTemplate(step, res);
       return executeTagTemplate(step2.template, step2.tk, xt.context, true).then(cb, cb);
@@ -56,11 +56,11 @@ export function renderNext(err: Error, xt: any) {
     context.handleError(err);
   }
 
-  const insertTokenId = tk => {
+  const insertTokenId = (tk) => {
     context.output.add(`<!-- BEGIN ${tk.id} props: ${JSON.stringify(tk.props)} -->\n`);
   };
 
-  const insertTokenIdEnd = tk => {
+  const insertTokenIdEnd = (tk) => {
     context.output.add(`<!-- ${tk.id} END -->\n`);
   };
 
@@ -132,7 +132,7 @@ export function executeTagTemplate(
   context,
   subTemplate = false
 ) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const xt = { stepIndex: 0, template, tagTokens, context, resolve, subTemplate };
     return renderNext(null, xt);
   });

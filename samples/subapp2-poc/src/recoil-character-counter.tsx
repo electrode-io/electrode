@@ -3,7 +3,7 @@ import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
 import { recoilFeature, Recoil } from "@xarc/react-recoil";
 
 const selectorsMap = new Map();
-const charCountState = store => {
+const charCountState = (store) => {
   if (selectorsMap.get("charCountState") === undefined) {
     const selector = Recoil.selector({
       key: "charCountState", // unique ID (with respect to other atoms/selectors)
@@ -38,7 +38,7 @@ function TextInput(props) {
   const { store } = props;
   const [text, setText] = Recoil.useRecoilState(store.get("textState"));
 
-  const onChange = event => {
+  const onChange = (event) => {
     setText(event.target.value);
   };
 
@@ -51,7 +51,7 @@ function TextInput(props) {
   );
 }
 
-const CharacterCounterApp = props => {
+const CharacterCounterApp = (props) => {
   return (
     <AppContext.Consumer>
       {({ isSsr, ssr }) => {
@@ -82,7 +82,7 @@ export const subapp: ReactSubApp = {
   wantFeatures: [
     recoilFeature({
       React,
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Recoil subapp recoil prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };

@@ -14,21 +14,21 @@ export const makeWinstonLogger = (winston, handlers = true, options: any = {}): 
     exceptionHandlers: handlers && [
       new winston.transports.Console({
         colorize: true,
-        prettyPrint: true
+        prettyPrint: true,
       }),
       new winston.transports.File({
         json: false,
         maxsize: 5 * 1024 * 1024, // 5 MB
         maxFiles: 1,
-        filename: "archetype-exceptions.log"
-      })
+        filename: "archetype-exceptions.log",
+      }),
     ],
     transports: [
       options.noConsole ||
         new winston.transports.Console({
           level: "info",
           colorize: true,
-          prettyPrint: true
+          prettyPrint: true,
         }),
       new winston.transports.File({
         json: true,
@@ -36,8 +36,8 @@ export const makeWinstonLogger = (winston, handlers = true, options: any = {}): 
         maxFiles: 1,
         name: "archetype-debug-file",
         filename: options.debugFilename || "archetype-debug.log",
-        level: "debug"
-      })
-    ].filter(x => x)
+        level: "debug",
+      }),
+    ].filter((x) => x),
   });
 };

@@ -26,7 +26,7 @@ let gitClean = false;
 
 const versionLocking = [
   ["@xarc/app", "@xarc/app-dev"],
-  ["electrode-archetype-webpack-dll", "electrode-archetype-webpack-dll-dev"],
+  ["electrode-archetype-webpack-dll", "electrode-archetype-webpack-dll-dev"]
 ];
 
 const versionLockMap = versionLocking.reduce((mapping, locks) => {
@@ -177,7 +177,7 @@ const collateCommitsPackages = ({ commits, updated }) => {
     samples: {},
     others: {},
     files: {},
-    updated,
+    updated
   };
 
   return Promise.map(

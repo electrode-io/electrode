@@ -2,7 +2,7 @@
 
 const xsh = require("xsh");
 
-describe("config webpack", function() {
+describe("config webpack", function () {
   afterEach(() => {
     try {
       xsh.$.popd();

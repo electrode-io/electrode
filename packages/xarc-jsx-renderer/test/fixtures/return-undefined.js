@@ -2,6 +2,6 @@
 
 module.exports = () => {
   return {
-    process: function() {}
+    process: function () {}
   };
 };

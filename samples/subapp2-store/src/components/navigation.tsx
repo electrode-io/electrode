@@ -3,7 +3,7 @@ import { Route, Link } from "react-router-dom";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
 
-const NavItem = props => {
+const NavItem = (props) => {
   const { to, exact, strict, children } = props;
   return (
     <Route

@@ -23,7 +23,7 @@ describe("client-render-pipeline", () => {
       return {
         prepareCSR: (data, that) => {
           return {
-            then: cb => {
+            then: (cb) => {
               spy1();
               cb(data);
             }

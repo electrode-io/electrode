@@ -130,7 +130,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     };
     redux.Provider = Provider;
     redux.createStore = (reducer, initialState) => {
-      return createStore(reducer || (x => x), initialState);
+      return createStore(reducer || ((x) => x), initialState);
     };
     redux.prepare = options.prepare;
 
@@ -177,7 +177,10 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
 
         if (!redux._store) {
-          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+          redux._store = createStore(
+            (reducers as Reducer<unknown, any>) || ((x) => x),
+            initialState
+          );
         }
       }
 

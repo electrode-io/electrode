@@ -14,7 +14,7 @@ const TodoList = ({ status, todos, error }) => {
   return (
     <ul className={custom["list-group"]}>
       {todos && todos.length ? (
-        todos.map(todo => {
+        todos.map((todo) => {
           return <Todo key={`todo-${todo.id}`} todo={todo} />;
         })
       ) : (

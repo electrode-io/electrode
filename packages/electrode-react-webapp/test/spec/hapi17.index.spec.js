@@ -1664,7 +1664,6 @@ describe("hapi 17 electrode-react-webapp", () => {
           .inject({
             method: "GET",
             url: "/"
-
           })
           .then(() => {
             stdoutIntercept.restore();
@@ -1685,7 +1684,7 @@ describe("hapi 17 electrode-react-webapp", () => {
           .then(res => {
             expect(res.result).includes(
               `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
-              `<title data-react-helmet="true">Nested Title</title>`
+                `<title data-react-helmet="true">Nested Title</title>`
             );
             expect(res.result)
               .includes(`window._config.ui = {"webappPrefix":""};\n</script><script>test-1 script;</script>

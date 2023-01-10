@@ -23,7 +23,7 @@ const dllUtil = require("../util/dll-util");
 const _ = require("lodash");
 import { loadXarcOptions } from "../util/load-xarc-options";
 
-module.exports = function() {
+module.exports = function () {
   const dll = dllUtil.loadAssets();
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
@@ -40,7 +40,7 @@ module.exports = function() {
 
   return {
     plugins: dll.info
-      .map(info => {
+      .map((info) => {
         return new webpack.DllReferencePlugin({
           context: xarcCwd,
           manifest: dllUtil.loadJson(info.manifest)

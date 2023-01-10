@@ -15,7 +15,7 @@ export default () => {
   //
 
   return {
-    store: createStore(state => state, {
+    store: createStore((state) => state, {
       scriptTag: '</script><script>console.log("Welcome to an XSS attack!")</script>',
       troublesomeEndings: "LineSeparator: \u2028 ParagraphSeprator: \u2029"
     })

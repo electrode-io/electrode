@@ -1,5 +1,5 @@
 /* eslint-env serviceworker */
-self.addEventListener("push", event => {
+self.addEventListener("push", (event) => {
   const title = "It worked!";
   const options = {
     body: "Great job sending that push notification!",

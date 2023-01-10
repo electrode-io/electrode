@@ -55,7 +55,7 @@ const decNumber = () => {
   };
 };
 
-const Home = props => {
+const Home = (props) => {
   // TODO: Problem with typescript only.  Need this dummy var assign to reference custom
   // import else something drops it.
   const y = custom; // eslint-disable-line
@@ -91,7 +91,7 @@ Home.propTypes = {
   dispatch: PropTypes.func
 };
 
-export const reload = msg => {
+export const reload = (msg) => {
   console.log("reload", msg, message); // eslint-disable-line
 };
 
@@ -99,11 +99,11 @@ export const reload = msg => {
 // REDUX
 //
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { value: state.number.value };
 };
 
-const ReduxHome = connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
+const ReduxHome = connect(mapStateToProps, (dispatch) => ({ dispatch }))(Home);
 
 //
 // ROUTING
@@ -126,7 +126,7 @@ export const subapp: ReactSubApp = {
       shareStore: true,
       reducers: true,
       // provider({ Component, props }) {}
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };
