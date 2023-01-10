@@ -50,13 +50,13 @@ function loadAssetsFromStats(statsPath) {
     return {};
   }
   const assets: Asset = {};
-  const manifestAsset = _.find(stats.assets, asset => {
+  const manifestAsset = _.find(stats.assets, (asset) => {
     return asset.name.endsWith("manifest.json");
   });
-  const jsAssets = stats.assets.filter(asset => {
+  const jsAssets = stats.assets.filter((asset) => {
     return asset.name.endsWith(".js");
   });
-  const cssAssets = stats.assets.filter(asset => {
+  const cssAssets = stats.assets.filter((asset) => {
     return asset.name.endsWith(".css");
   });
 
@@ -149,10 +149,10 @@ ${errMsg()}
  */
 const htmlifyScripts = (scripts, scriptNonce) => {
   return scripts
-    .map(x =>
+    .map((x) =>
       typeof x === "string"
         ? `<script${scriptNonce || ""}>${x}</script>\n`
-        : x.map(n => `<script src="${n.src}"></script>`).join("\n")
+        : x.map((n) => `<script src="${n.src}"></script>`).join("\n")
     )
     .join("\n");
 };
@@ -165,7 +165,7 @@ function getDevCssBundle(chunkNames, routeData) {
   const devBundleBase = routeData.devBundleBase;
   if (chunkNames.css) {
     const cssChunks = Array.isArray(chunkNames.css) ? chunkNames.css : [chunkNames.css];
-    return _.map(cssChunks, chunkName => `${devBundleBase}${chunkName}.style.css`);
+    return _.map(cssChunks, (chunkName) => `${devBundleBase}${chunkName}.style.css`);
   } else {
     return [`${devBundleBase}style.css`];
   }
@@ -195,10 +195,10 @@ function getProdBundles(chunkNames, routeData) {
   const { assets } = routeData;
 
   return {
-    jsChunk: _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js)),
+    jsChunk: _.find(assets.js, (asset) => _.includes(asset.chunkNames, chunkNames.js)),
 
-    cssChunk: _.filter(assets.css, asset =>
-      _.some(asset.chunkNames, assetChunkName => _.includes(chunkNames.css, assetChunkName))
+    cssChunk: _.filter(assets.css, (asset) =>
+      _.some(asset.chunkNames, (assetChunkName) => _.includes(chunkNames.css, assetChunkName))
     )
   };
 }
@@ -245,7 +245,7 @@ function getCspNonce(request, cspNonceValue) {
   return { scriptNonce, styleNonce };
 }
 
-const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
+const resolvePath = (path) => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
 /**
  * @param request
@@ -293,7 +293,7 @@ function getOtherStats() {
   const otherStats = {};
   if (fs.existsSync("dist/server")) {
     fs.readdirSync("dist/server")
-      .filter(x => x.endsWith("-stats.json"))
+      .filter((x) => x.endsWith("-stats.json"))
       .reduce((prev, x) => {
         const k = Path.basename(x).split("-")[0];
         prev[k] = `dist/server/${x}`;
@@ -325,9 +325,9 @@ function getBundleJsNameByQuery(data, otherAssets) {
   }
   return name;
 }
-const isReadableStream = x => Boolean(x && x.pipe && x.on && x._readableState);
+const isReadableStream = (x) => Boolean(x && x.pipe && x.on && x._readableState);
 
-const munchyHandleStreamError = err => {
+const munchyHandleStreamError = (err) => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
 
   if (process.cwd().length > 3) {
@@ -343,7 +343,7 @@ ${errMsg}
   };
 };
 
-const makeDevBundleBase = devServer => {
+const makeDevBundleBase = (devServer) => {
   const cdnProtocol = process.env.WEBPACK_DEV_CDN_PROTOCOL;
   const cdnHostname = process.env.WEBPACK_DEV_CDN_HOSTNAME;
   const cdnPort = process.env.WEBPACK_DEV_CDN_PORT;

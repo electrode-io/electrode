@@ -37,8 +37,8 @@ export class TagRenderer {
     this._tokenHandlers = [];
     []
       .concat(this._options.tokenHandlers)
-      .filter(x => x)
-      .forEach(handler => this.addTokenIds("", handler));
+      .filter((x) => x)
+      .forEach((handler) => this.addTokenIds("", handler));
 
     this._handlersMap = {};
     this._tokenIdLookupMap = {};
@@ -116,7 +116,7 @@ export class TagRenderer {
    */
   addTokenIds(name: string, handler: Function, priority = 0) {
     // remove same handler that's been registered so it goes to the end of the array
-    this._tokenHandlers = this._tokenHandlers.filter(h => h.handler !== handler);
+    this._tokenHandlers = this._tokenHandlers.filter((h) => h.handler !== handler);
     this._tokenHandlers.push({ name, handler, priority });
   }
 
@@ -157,7 +157,7 @@ export class TagRenderer {
       return h.loaded;
     });
 
-    const tokenIds = loaded.sort((a, b) => a.priority - b.priority).map(l => l.tokens);
+    const tokenIds = loaded.sort((a, b) => a.priority - b.priority).map((l) => l.tokens);
 
     // combine all token IDs into a single object for lookup.
     // the last registered handler wins

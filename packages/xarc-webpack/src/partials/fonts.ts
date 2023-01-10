@@ -3,7 +3,7 @@
 import { loadXarcOptions } from "../util/load-xarc-options";
 import { xAppRequire } from "@xarc/app";
 
-module.exports = function() {
+module.exports = function () {
   const xarcOptions = loadXarcOptions();
   const urlLoader = require.resolve("url-loader");
   const fileLoader = require.resolve("file-loader");

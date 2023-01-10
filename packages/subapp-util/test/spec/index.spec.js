@@ -15,7 +15,7 @@ const Path = require("path");
 const Fs = require("fs");
 const sinon = require("sinon");
 
-describe("subapp-util", function() {
+describe("subapp-util", function () {
   describe("es6Require", () => {
     it("should import module", () => {
       const fs = es6Require("fs");

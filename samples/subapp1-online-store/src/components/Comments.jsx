@@ -2,7 +2,6 @@ import { React } from "subapp-react";
 import commentsData from "../data/commentsData";
 import fetchFakeData from "../data/utils";
 
-
 const resource = fetchFakeData(commentsData, 2500);
 
 export default function Comments() {

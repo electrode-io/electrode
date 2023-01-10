@@ -15,7 +15,7 @@ import uiConfig from "electrode-ui-config";
 // DOM is created.
 //
 
-const start = App => {
+const start = (App) => {
   const jsContent = document.querySelector(".js-content");
   const reactStart = render;
 

@@ -2,7 +2,7 @@
 
 const handler = require("../../../../lib/react/handlers/prefetch-bundles");
 
-describe("prefetch bundles handler", function() {
+describe("prefetch bundles handler", function () {
   it("should return empty string if no prefetch in content", () => {
     expect(handler({ user: { content: {} } })).to.equal("");
   });

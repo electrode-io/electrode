@@ -36,7 +36,6 @@ process.env.ENABLE_SHORTEN_CSS_NAMES = true;
 
 const { loadDevTasks, xrun } = require("@xarc/app-dev");
 
-
 loadDevTasks(xrun);
 
 //

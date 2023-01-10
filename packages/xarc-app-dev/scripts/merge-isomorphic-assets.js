@@ -13,7 +13,7 @@ function mergeIsomorphicAssets() {
     dir: process.cwd(),
     includeRoot: true,
     filterDir: (dir) => ["dist", "dll"].indexOf(dir) >= 0,
-    filter: (f, p, e) => e.noExt === "isomorphic-assets",
+    filter: (f, p, e) => e.noExt === "isomorphic-assets"
   });
 
   if (filenames.length > 1) {

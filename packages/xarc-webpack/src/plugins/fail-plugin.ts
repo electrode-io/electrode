@@ -23,7 +23,7 @@ module.exports = class FailPlugin {
       this.fail();
     });
 
-    compiler.hooks.done.tap("FailPlugin", stats => {
+    compiler.hooks.done.tap("FailPlugin", (stats) => {
       const errors = stats.compilation.errors;
       if (errors && errors.length) {
         this.fail();

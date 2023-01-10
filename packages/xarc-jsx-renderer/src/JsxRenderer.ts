@@ -193,9 +193,9 @@ export class JsxRenderer {
         context.output.add(`<${element.tag}${expandProps(element.props, context)}/>`);
       }
     } else if (!element.type) {
-        return handleElementResult(
-          element(element.props, context, { element, depth, output: context.output })
-        );
+      return handleElementResult(
+        element(element.props, context, { element, depth, output: context.output })
+      );
     } else if (element.Construct) {
       const inst = new element.Construct(element.props, context);
       return handleElementResult(

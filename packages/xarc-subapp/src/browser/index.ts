@@ -50,7 +50,7 @@ const clientOverrideMethods: Partial<SubAppDef> = {
   _start({ csrData }) {
     xarcV2.debug("subapp _start - creating pipeline and calling start", this.name);
     if (csrData.inlineId) {
-      const ix = this._renderPipelines.findIndex(p => p.csrData.inlineId === csrData.inlineId);
+      const ix = this._renderPipelines.findIndex((p) => p.csrData.inlineId === csrData.inlineId);
       if (ix >= 0) {
         xarcV2.debug("subapp _start - removing existing inline pipeline", this.name);
         this._renderPipelines.slice(ix, 1);
@@ -149,11 +149,11 @@ export function declareSubApp(options: SubAppOptions): SubAppDef {
         ._getModule()
         .then(() => {
           const pipelines = this._renderPipelines;
-          const promises = pipelines.map(pipeline => pipeline._reload(subAppName, _modName));
+          const promises = pipelines.map((pipeline) => pipeline._reload(subAppName, _modName));
           return Promise.all(promises);
         })
         .then(() => {
-          _dynamics.forEach(dyn => {
+          _dynamics.forEach((dyn) => {
             if (dyn.subapp.name === subAppName) {
               dyn.component.reload(def._module);
             }

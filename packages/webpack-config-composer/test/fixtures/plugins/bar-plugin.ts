@@ -1,5 +1,3 @@
-
-
 export class BarPlugin {
   test: string;
 

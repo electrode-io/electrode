@@ -16,12 +16,8 @@
     {
       "name": "ae56dc06d35e1170d047.shared~b693f2883ab8399ba2fc15357aa4819a.js",
       "size": 101325,
-      "chunks": [
-        "shared~b693f2883ab8399ba2fc15357aa4819a"
-      ],
-      "chunkNames": [
-        "shared~b693f2883ab8399ba2fc15357aa4819a"
-      ],
+      "chunks": ["shared~b693f2883ab8399ba2fc15357aa4819a"],
+      "chunkNames": ["shared~b693f2883ab8399ba2fc15357aa4819a"],
       "info": {
         "immutable": true
       },
@@ -30,12 +26,8 @@
     {
       "name": "ae56dc06d35e1170d047.vendors~280289005828299c685d173f73011e79.js",
       "size": 3129154,
-      "chunks": [
-        "vendors~280289005828299c685d173f73011e79"
-      ],
-      "chunkNames": [
-        "vendors~280289005828299c685d173f73011e79"
-      ],
+      "chunks": ["vendors~280289005828299c685d173f73011e79"],
+      "chunkNames": ["vendors~280289005828299c685d173f73011e79"],
       "info": {
         "immutable": true
       },
@@ -44,12 +36,8 @@
     {
       "name": "ae56dc06d35e1170d047.vendors~8ece5fb369ca00b2559ec286199adadd.js",
       "size": 158007,
-      "chunks": [
-        "vendors~8ece5fb369ca00b2559ec286199adadd"
-      ],
-      "chunkNames": [
-        "vendors~8ece5fb369ca00b2559ec286199adadd"
-      ],
+      "chunks": ["vendors~8ece5fb369ca00b2559ec286199adadd"],
+      "chunkNames": ["vendors~8ece5fb369ca00b2559ec286199adadd"],
       "info": {
         "immutable": true
       },
@@ -58,12 +46,8 @@
     {
       "name": "ae56dc06d35e1170d047.vendors~df46bbfde33def881518e43ea8cff946.js",
       "size": 277783,
-      "chunks": [
-        "vendors~df46bbfde33def881518e43ea8cff946"
-      ],
-      "chunkNames": [
-        "vendors~df46bbfde33def881518e43ea8cff946"
-      ],
+      "chunks": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "chunkNames": ["vendors~df46bbfde33def881518e43ea8cff946"],
       "info": {
         "immutable": true
       },
@@ -72,84 +56,56 @@
     {
       "name": "bottom.bundle.dev.js",
       "size": 94323,
-      "chunks": [
-        "bottom"
-      ],
-      "chunkNames": [
-        "bottom"
-      ],
+      "chunks": ["bottom"],
+      "chunkNames": ["bottom"],
       "info": {},
       "emitted": true
     },
     {
       "name": "deal.bundle.dev.js",
       "size": 79552,
-      "chunks": [
-        "deal"
-      ],
-      "chunkNames": [
-        "deal"
-      ],
+      "chunks": ["deal"],
+      "chunkNames": ["deal"],
       "info": {},
       "emitted": true
     },
     {
       "name": "extras.bundle.dev.js",
       "size": 82086,
-      "chunks": [
-        "extras"
-      ],
-      "chunkNames": [
-        "extras"
-      ],
+      "chunks": ["extras"],
+      "chunkNames": ["extras"],
       "info": {},
       "emitted": true
     },
     {
       "name": "footer.bundle.dev.js",
       "size": 82883,
-      "chunks": [
-        "footer"
-      ],
-      "chunkNames": [
-        "footer"
-      ],
+      "chunks": ["footer"],
+      "chunkNames": ["footer"],
       "info": {},
       "emitted": true
     },
     {
       "name": "header.bundle.dev.js",
       "size": 80039,
-      "chunks": [
-        "header"
-      ],
-      "chunkNames": [
-        "header"
-      ],
+      "chunks": ["header"],
+      "chunkNames": ["header"],
       "info": {},
       "emitted": true
     },
     {
       "name": "mainbody.bundle.dev.js",
       "size": 77107,
-      "chunks": [
-        "mainbody"
-      ],
-      "chunkNames": [
-        "mainbody"
-      ],
+      "chunks": ["mainbody"],
+      "chunkNames": ["mainbody"],
       "info": {},
       "emitted": true
     },
     {
       "name": "suspensedemo.bundle.dev.js",
       "size": 85176,
-      "chunks": [
-        "suspensedemo"
-      ],
-      "chunkNames": [
-        "suspensedemo"
-      ],
+      "chunks": ["suspensedemo"],
+      "chunkNames": ["suspensedemo"],
       "info": {},
       "emitted": true
     }
@@ -168,10 +124,7 @@
       "vendors~8ece5fb369ca00b2559ec286199adadd",
       "bottom"
     ],
-    "header": [
-      "vendors~280289005828299c685d173f73011e79",
-      "header"
-    ],
+    "header": ["vendors~280289005828299c685d173f73011e79", "header"],
     "footer": [
       "vendors~280289005828299c685d173f73011e79",
       "vendors~df46bbfde33def881518e43ea8cff946",
@@ -182,22 +135,14 @@
       "vendors~df46bbfde33def881518e43ea8cff946",
       "extras"
     ],
-    "suspensedemo": [
-      "vendors~280289005828299c685d173f73011e79",
-      "suspensedemo"
-    ],
-    "deal": [
-      "vendors~280289005828299c685d173f73011e79",
-      "deal"
-    ]
+    "suspensedemo": ["vendors~280289005828299c685d173f73011e79", "suspensedemo"],
+    "deal": ["vendors~280289005828299c685d173f73011e79", "deal"]
   },
   "chunks": [
     {
       "id": "bottom",
       "hash": "1fc606cc338b36db53da",
-      "names": [
-        "bottom"
-      ],
+      "names": ["bottom"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -205,9 +150,7 @@
     {
       "id": "deal",
       "hash": "dc06def2c532cdfb61d5",
-      "names": [
-        "deal"
-      ],
+      "names": ["deal"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -215,9 +158,7 @@
     {
       "id": "extras",
       "hash": "4e84b2d5763ad45954d1",
-      "names": [
-        "extras"
-      ],
+      "names": ["extras"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -225,9 +166,7 @@
     {
       "id": "footer",
       "hash": "7cc086f7a017aed0f23f",
-      "names": [
-        "footer"
-      ],
+      "names": ["footer"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -235,9 +174,7 @@
     {
       "id": "header",
       "hash": "6afd3b24397984313776",
-      "names": [
-        "header"
-      ],
+      "names": ["header"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -245,9 +182,7 @@
     {
       "id": "mainbody",
       "hash": "42ee0f5b1888bc966418",
-      "names": [
-        "mainbody"
-      ],
+      "names": ["mainbody"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -255,9 +190,7 @@
     {
       "id": "shared~b693f2883ab8399ba2fc15357aa4819a",
       "hash": "fb354d9edf9a9f950886",
-      "names": [
-        "shared~b693f2883ab8399ba2fc15357aa4819a"
-      ],
+      "names": ["shared~b693f2883ab8399ba2fc15357aa4819a"],
       "entry": false,
       "initial": true,
       "rendered": false,
@@ -266,9 +199,7 @@
     {
       "id": "suspensedemo",
       "hash": "0b1f712ee2901635a9a4",
-      "names": [
-        "suspensedemo"
-      ],
+      "names": ["suspensedemo"],
       "entry": true,
       "initial": true,
       "rendered": false
@@ -276,9 +207,7 @@
     {
       "id": "vendors~280289005828299c685d173f73011e79",
       "hash": "d02b2095feea03242c64",
-      "names": [
-        "vendors~280289005828299c685d173f73011e79"
-      ],
+      "names": ["vendors~280289005828299c685d173f73011e79"],
       "entry": false,
       "initial": true,
       "rendered": false,
@@ -287,9 +216,7 @@
     {
       "id": "vendors~8ece5fb369ca00b2559ec286199adadd",
       "hash": "89243963e684c009d18f",
-      "names": [
-        "vendors~8ece5fb369ca00b2559ec286199adadd"
-      ],
+      "names": ["vendors~8ece5fb369ca00b2559ec286199adadd"],
       "entry": false,
       "initial": true,
       "rendered": false,
@@ -298,9 +225,7 @@
     {
       "id": "vendors~df46bbfde33def881518e43ea8cff946",
       "hash": "5027d4664c49684b5312",
-      "names": [
-        "vendors~df46bbfde33def881518e43ea8cff946"
-      ],
+      "names": ["vendors~df46bbfde33def881518e43ea8cff946"],
       "entry": false,
       "initial": true,
       "rendered": false,

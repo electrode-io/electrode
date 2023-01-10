@@ -3,7 +3,7 @@
 const Path = require("path");
 const webpackConfig = require("./webpack.config");
 
-module.exports = function(config) {
+module.exports = function (config) {
   const settings = {
     files: [
       // only specify one entry point

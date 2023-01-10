@@ -24,7 +24,7 @@ export class CSRF extends Component<{}, { testResult: string }> {
       },
       body: JSON.stringify({ message: "hello" })
     })
-      .then(resp => {
+      .then((resp) => {
         if (resp.status === HTTP_OK) {
           this.setState({
             testResult: `POST SUCCEEDED with status ${resp.status}`
@@ -35,7 +35,7 @@ export class CSRF extends Component<{}, { testResult: string }> {
           });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         this.setState({ testResult: `POST FAILED: ${e.toString()}` });
       });
   }
@@ -43,7 +43,7 @@ export class CSRF extends Component<{}, { testResult: string }> {
   handleTestValid() {
     this.setState({ testResult: "valid" });
     fetch("/1", { credentials: "same-origin" }) // eslint-disable-line
-      .then(resp => {
+      .then((resp) => {
         if (resp.status === HTTP_OK) {
           const token = resp.headers.get("x-csrf-jwt");
           if (token !== "") {
@@ -58,7 +58,7 @@ export class CSRF extends Component<{}, { testResult: string }> {
           this.setState({ testResult: `GET request returned ${resp.status}` });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         this.setState({ testResult: e.toString() });
       });
   }

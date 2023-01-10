@@ -7,7 +7,7 @@ import { ModuleFederationPlugin } from "../container/ModuleFederationPlugin";
 const splitMap = {};
 
 function hashChunks(mod, chunks, key) {
-  const chunkNames = chunks.map(c => c.name).sort();
+  const chunkNames = chunks.map((c) => c.name).sort();
   const id = `${key}~${chunkNames.join("~")}`;
   let digest = splitMap[id];
   if (!digest) {
@@ -35,11 +35,11 @@ function makeConfig(options) {
   if (webpack.v1RemoteSubApps) {
     let exposeRemote = 0;
     const cdnMapping = _.get(webpack, "cdn.enable", false) && _.get(webpack, "cdn.mapping", false);
-    const modFedPlugins = [].concat(webpack.v1RemoteSubApps).map(remote => {
+    const modFedPlugins = [].concat(webpack.v1RemoteSubApps).map((remote) => {
       const missing = [];
       const subAppsToExpose = []
         .concat(remote.subAppsToExpose)
-        .filter(x => x)
+        .filter((x) => x)
         .reduce((exp, x) => {
           if (!AppMode.subApps[x]) {
             missing.push(x);
@@ -75,7 +75,7 @@ function makeConfig(options) {
         remotes: remote.remotes
       } as any);
     });
-    config.plugins = [].concat(config.plugins, modFedPlugins).filter(x => x);
+    config.plugins = [].concat(config.plugins, modFedPlugins).filter((x) => x);
 
     // if app is exposing modules for remote loading, then we must set following
     if (exposeRemote > 0) {

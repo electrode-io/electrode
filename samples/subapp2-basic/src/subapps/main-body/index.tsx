@@ -56,7 +56,7 @@ const MainBody = (props) => {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
         </Routes>
-      </div>      
+      </div>
     </div>
   );
 };
@@ -75,6 +75,7 @@ export const subapp: ReactSubApp = {
       prepare: async (initialState) => {
         return { initialState: initialState || { number: { value: 999 } } };
       },
-    }), reactRouterFeature({ React })
+    }),
+    reactRouterFeature({ React }),
   ],
 };

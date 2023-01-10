@@ -1,5 +1,5 @@
 import React from "react";
-import {  createRoot, hydrateRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from "react-dom/client";
 
 class FrameworkLib {
   constructor(ref) {
@@ -10,10 +10,10 @@ class FrameworkLib {
     const { subApp, element, options } = this.ref;
 
     const props = { ...options._prepared, ...options.props };
-     const Component = subApp.info.StartComponent || subApp.info.Component;
+    const Component = subApp.info.StartComponent || subApp.info.Component;
     if (element) {
       if (options.serverSideRendering) {
-          hydrateRoot(element, <Component {...props} />);
+        hydrateRoot(element, <Component {...props} />);
       } else {
         createRoot(element).render(<Component {...props} />);
       }

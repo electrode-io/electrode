@@ -5,9 +5,9 @@ import { Product } from "./product";
 const Products = () => {
   const [products, setProducts] = React.useState([]);
   React.useEffect(() => {
-    setProducts(data)
+    setProducts(data);
   }, []);
-  
+
   if (products) {
     return (
       <div
@@ -30,6 +30,5 @@ const Products = () => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: Products
+  Component: Products,
 };
-

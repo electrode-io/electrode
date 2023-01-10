@@ -9,7 +9,7 @@ const archetype = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
   options: userConfig.options,
-  addArchetypeConfig: config => Object.assign(archetype, config)
+  addArchetypeConfig: (config) => Object.assign(archetype, config)
 };
 
 module.exports = archetype;

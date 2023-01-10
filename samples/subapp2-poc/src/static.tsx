@@ -7,7 +7,7 @@ import custom from "./styles/custom.module.css"; // eslint-disable-line no-unuse
 const Demo1 = createDynamicComponent(demo1, { ssr: true });
 
 xarcV2.debug("static.tsx");
-const StaticHome = props => {
+const StaticHome = (props) => {
   // TODO: Problem with typescript only.  Need this dummy var assign to reference custom
   // import else something drops it.
   const y = custom; // eslint-disable-line

@@ -18,7 +18,7 @@ const SubAppSSR = (props: PropsType) => {
     <AppContext.Consumer>
       {({ ssr }) => {
         const pipelines: SubAppServerRenderPipeline[] = ssr.request[SSR_PIPELINES];
-        const pipeline = pipelines.find(p => p.ssrData.subapp.name === props.subapp.name);
+        const pipeline = pipelines.find((p) => p.ssrData.subapp.name === props.subapp.name);
 
         if (!pipeline) {
           const msg = `Unable to find data for server side rendering subapp '${props.subapp.name}'.

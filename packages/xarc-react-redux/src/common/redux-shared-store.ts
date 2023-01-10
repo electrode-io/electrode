@@ -215,7 +215,7 @@ export function createSharedStore(initialState: any, info: any, storeContainer?:
   } else if (reducerType === "object") {
     reducer = combineReducers(info.reduxReducers);
   } else {
-    reducer = x => x;
+    reducer = (x) => x;
   }
   return createStore(reducer, initialState);
 }

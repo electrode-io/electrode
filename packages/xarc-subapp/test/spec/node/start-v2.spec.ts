@@ -26,10 +26,10 @@ describe("start-v2", () => {
               isPrepared: () => false,
               getPrepResult: () => {},
               executeRender: sinon.spy(),
-              start: reload => new Promise((resolve, reject) => {}),
+              start: (reload) => new Promise((resolve, reject) => {}),
               _reload: () => new Promise((resolve, reject) => {}),
-              _mount: info => {},
-              _unmount: info => {}
+              _mount: (info) => {},
+              _unmount: (info) => {}
               /* eslint-enable */
             }
           ]

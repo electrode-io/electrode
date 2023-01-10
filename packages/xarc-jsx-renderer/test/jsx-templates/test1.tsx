@@ -1,6 +1,14 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Token, Require, Literal, Component, xarcJsxElement } from "../../src";
+import {
+  IndexPage,
+  createElement,
+  Token,
+  Require,
+  Literal,
+  Component,
+  xarcJsxElement
+} from "../../src";
 
 const getBogelFontUrl = () => {
   return "bogel";

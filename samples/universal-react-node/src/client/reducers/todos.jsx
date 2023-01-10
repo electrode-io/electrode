@@ -17,7 +17,7 @@ export default (state: Array<Object> = [], action: Object) => {
         newTodo(todos.length > 0 ? todos[todos.length - 1].id + 1 : action.id, action.text, false)
       ];
     case "TOGGLE_TODO": {
-      const x = todos.findIndex(t => t.id === action.id);
+      const x = todos.findIndex((t) => t.id === action.id);
       if (x >= 0) {
         const toggled: Array<Object> = todos.slice();
         const o = toggled[x];

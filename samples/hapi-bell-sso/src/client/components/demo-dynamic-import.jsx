@@ -18,11 +18,11 @@ let Demo = loadable(() => import("./demo-loadable"), {
 });
 
 const timeout = 1000;
-const load = dispatch => {
+const load = (dispatch) => {
   dispatch(setShowFakeComp(false));
   Promise.try(() => loadable(() => import(/* webpackChunkName: "loadable" */ "./demo-loadable")))
     .delay(timeout)
-    .then(x => (Demo = x))
+    .then((x) => (Demo = x))
     .then(() => {
       dispatch(setShowFakeComp(true));
     });
@@ -37,9 +37,7 @@ const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
           Loadable Components
         </a>
       </h6>
-      <div styleName="custom.dynamic-demo-box">
-        {showFakeComp.value ? <Demo /> : <Fallback />}
-      </div>
+      <div styleName="custom.dynamic-demo-box">{showFakeComp.value ? <Demo /> : <Fallback />}</div>
       <div>
         <button onClick={() => load(dispatch)}>Refresh Comp</button>
       </div>
@@ -51,6 +49,6 @@ DynamicImportDemo.propTypes = {
   dispatch: PropTypes.func
 };
 export default connect(
-  state => state,
-  dispatch => ({ dispatch })
+  (state) => state,
+  (dispatch) => ({ dispatch })
 )(DynamicImportDemo);

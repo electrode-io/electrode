@@ -10,7 +10,7 @@ const MAX_CALL_DEPTH = 15;
  *
  * @returns boolean - indicate if subapps are ready
  */
-export function isSubAppReady():boolean {
+export function isSubAppReady(): boolean {
   return envHooks.getContainer().isReady();
 }
 
@@ -62,13 +62,13 @@ export function subAppReady(
   }
 
   return Promise.all(subappModules)
-    .then(results => {
+    .then((results) => {
       // if loading a subapp module triggered more subapps to be declared, then
       // need to ensure those are ready also.
       if (toWait.length !== container.declareCount) {
         if (callDepth < MAX_CALL_DEPTH) {
           // just load all new subapps but ignore what's just loaded
-          return subAppReady(true, toWait, callDepth + 1).then(res2 => results.concat(res2));
+          return subAppReady(true, toWait, callDepth + 1).then((res2) => results.concat(res2));
         } else {
           console.error("subapp ready call nesting too deep", callDepth); // eslint-disable-line no-console
         }
@@ -76,7 +76,7 @@ export function subAppReady(
 
       return results;
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("get subapp module failure", err); // eslint-disable-line no-console
       return [];
     });

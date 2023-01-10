@@ -2,7 +2,7 @@
 
 module.exports = () => {
   return {
-    process: function() {
+    process: function () {
       return "\nfrom string only module";
     }
   };

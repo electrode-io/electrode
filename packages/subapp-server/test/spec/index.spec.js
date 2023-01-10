@@ -2,7 +2,7 @@
 
 const subAppServer = require("../..");
 
-describe("subapp-server", function() {
+describe("subapp-server", function () {
   it("test", () => {
     expect(subAppServer).to.exist;
   });

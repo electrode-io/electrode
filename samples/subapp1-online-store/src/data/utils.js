@@ -1,5 +1,5 @@
 const fetchFakeData = (fakeData, delay) => {
-  let status = "pending"
+  let status = "pending";
   let result;
   let suspender = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -16,7 +16,7 @@ const fetchFakeData = (fakeData, delay) => {
       }
       if (status === "success") {
         return result;
-      }      
+      }
     },
   };
 };

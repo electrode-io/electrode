@@ -168,7 +168,7 @@ ABC<!-- ABC END -->`
 
     renderer.registerTokenIds("test", Symbol("test"), () => {
       return {
-        "webapp-body-bundles": context => {
+        "webapp-body-bundles": (context) => {
           context.voidStop("oops - stop");
         }
       };

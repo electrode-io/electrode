@@ -54,15 +54,17 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: props => (
-          <div>
-            test <p>{JSON.stringify(props)}</p>
-          </div>
-        )
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: (props) => (
+            <div>
+              test <p>{JSON.stringify(props)}</p>
+            </div>
+          )
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="test" />);
 
@@ -83,7 +85,7 @@ describe("reactRouterFeature browser", () => {
       _features: {},
       _getExport: () => {
         return {
-          Component: props => (
+          Component: (props) => (
             <div>
               test <p>{JSON.stringify(props)}</p>
             </div>
@@ -95,11 +97,13 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: undefined
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: undefined
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="test" />);
 
@@ -123,15 +127,17 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: props => (
-          <div>
-            test <p>{JSON.stringify(props)}</p>
-          </div>
-        )
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: (props) => (
+            <div>
+              test <p>{JSON.stringify(props)}</p>
+            </div>
+          )
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="test-2" />);
 
@@ -155,15 +161,17 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: props => (
-          <div>
-            test <p>{JSON.stringify(props)}</p>
-          </div>
-        )
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: (props) => (
+            <div>
+              test <p>{JSON.stringify(props)}</p>
+            </div>
+          )
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="test-3" />);
 
@@ -187,15 +195,17 @@ describe("reactRouterFeature browser", () => {
 
     factory.add(def);
 
-    const Component = (def._features.reactRouter.execute({
-      input: {
-        Component: props => (
-          <div>
-            test <p>{JSON.stringify(props)}</p>
-          </div>
-        )
-      }
-    }) as SubAppFeatureResult).Component;
+    const Component = (
+      def._features.reactRouter.execute({
+        input: {
+          Component: (props) => (
+            <div>
+              test <p>{JSON.stringify(props)}</p>
+            </div>
+          )
+        }
+      }) as SubAppFeatureResult
+    ).Component;
 
     render(<Component data="test-4" />);
 

@@ -18,4 +18,4 @@ ${errMsg}
   };
 };
 
-export const isReadableStream = x => Boolean(x && x.pipe && x.on && x._readableState);
+export const isReadableStream = (x) => Boolean(x && x.pipe && x.on && x._readableState);

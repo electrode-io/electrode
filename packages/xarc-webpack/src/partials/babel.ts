@@ -9,7 +9,7 @@ import { generateBabelLoaderCacheId } from "../util/generate-babel-loader-cache-
 
 import { loadXarcOptions } from "../util/load-xarc-options";
 
-module.exports = function(options) {
+module.exports = function (options) {
   const xarcOptions = loadXarcOptions();
 
   const test = xarcOptions.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;

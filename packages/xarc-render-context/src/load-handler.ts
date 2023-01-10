@@ -10,21 +10,21 @@ import { makeOptionalRequire } from "optional-require";
 const failLoadTokenModule = (msg: string, err: Error) => {
   console.error(`error: @xarc/render-context failed to load token process module ${msg}`, err);
   return () => ({
-    process: () => `\n@xarc/render-context: token process module ${msg} failed to load\n`,
+    process: () => `\n@xarc/render-context: token process module ${msg} failed to load\n`
   });
 };
 
 const notFoundLoadTokenModule = (msg: string, err: Error) => {
   console.error(`error: @xarc/render-context can't find token process module ${msg}`, err);
   return () => ({
-    process: () => `\n@xarc/render-context: token process module ${msg} not found\n`,
+    process: () => `\n@xarc/render-context: token process module ${msg} not found\n`
   });
 };
 
 export const loadTokenModuleHandler = (path: string, templateDir?: string, customCall?: string) => {
   const tokenMod: any = makeOptionalRequire(requireAt(Path.resolve(templateDir || "")))(path, {
     fail: (e: Error) => failLoadTokenModule(path, e),
-    notFound: (e: Error) => notFoundLoadTokenModule(path, e),
+    notFound: (e: Error) => notFoundLoadTokenModule(path, e)
   });
   if (typeof tokenMod === "function") {
     return tokenMod;

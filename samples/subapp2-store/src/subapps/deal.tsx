@@ -1,7 +1,7 @@
 import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 
-const Deal = props => {
+const Deal = (props) => {
   return (
     <AppContext.Consumer>
       {({ isSsr, ssr }) => {
@@ -11,11 +11,11 @@ const Deal = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { deals: state.deals.value };
 };
 
-const ReduxDeals = connect(mapStateToProps, dispatch => ({ dispatch }))(Deal);
+const ReduxDeals = connect(mapStateToProps, (dispatch) => ({ dispatch }))(Deal);
 
 export { ReduxDeals as Component };
 
@@ -26,7 +26,7 @@ export const subapp: ReactSubApp = {
       React,
       shareStore: true,
       reducers: true,
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Deal (deal.tsx) subapp redux prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };

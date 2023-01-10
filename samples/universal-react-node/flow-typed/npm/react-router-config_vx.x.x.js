@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'react-router-config' {
+declare module "react-router-config" {
   declare module.exports: any;
 }
 
@@ -22,59 +22,59 @@ declare module 'react-router-config' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'react-router-config/es/index' {
+declare module "react-router-config/es/index" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/es/matchRoutes' {
+declare module "react-router-config/es/matchRoutes" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/es/renderRoutes' {
+declare module "react-router-config/es/renderRoutes" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/matchRoutes' {
+declare module "react-router-config/matchRoutes" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/renderRoutes' {
+declare module "react-router-config/renderRoutes" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/umd/react-router-config' {
+declare module "react-router-config/umd/react-router-config" {
   declare module.exports: any;
 }
 
-declare module 'react-router-config/umd/react-router-config.min' {
+declare module "react-router-config/umd/react-router-config.min" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'react-router-config/es/index.js' {
-  declare module.exports: $Exports<'react-router-config/es/index'>;
+declare module "react-router-config/es/index.js" {
+  declare module.exports: $Exports<"react-router-config/es/index">;
 }
-declare module 'react-router-config/es/matchRoutes.js' {
-  declare module.exports: $Exports<'react-router-config/es/matchRoutes'>;
+declare module "react-router-config/es/matchRoutes.js" {
+  declare module.exports: $Exports<"react-router-config/es/matchRoutes">;
 }
-declare module 'react-router-config/es/renderRoutes.js' {
-  declare module.exports: $Exports<'react-router-config/es/renderRoutes'>;
+declare module "react-router-config/es/renderRoutes.js" {
+  declare module.exports: $Exports<"react-router-config/es/renderRoutes">;
 }
-declare module 'react-router-config/index' {
-  declare module.exports: $Exports<'react-router-config'>;
+declare module "react-router-config/index" {
+  declare module.exports: $Exports<"react-router-config">;
 }
-declare module 'react-router-config/index.js' {
-  declare module.exports: $Exports<'react-router-config'>;
+declare module "react-router-config/index.js" {
+  declare module.exports: $Exports<"react-router-config">;
 }
-declare module 'react-router-config/matchRoutes.js' {
-  declare module.exports: $Exports<'react-router-config/matchRoutes'>;
+declare module "react-router-config/matchRoutes.js" {
+  declare module.exports: $Exports<"react-router-config/matchRoutes">;
 }
-declare module 'react-router-config/renderRoutes.js' {
-  declare module.exports: $Exports<'react-router-config/renderRoutes'>;
+declare module "react-router-config/renderRoutes.js" {
+  declare module.exports: $Exports<"react-router-config/renderRoutes">;
 }
-declare module 'react-router-config/umd/react-router-config.js' {
-  declare module.exports: $Exports<'react-router-config/umd/react-router-config'>;
+declare module "react-router-config/umd/react-router-config.js" {
+  declare module.exports: $Exports<"react-router-config/umd/react-router-config">;
 }
-declare module 'react-router-config/umd/react-router-config.min.js' {
-  declare module.exports: $Exports<'react-router-config/umd/react-router-config.min'>;
+declare module "react-router-config/umd/react-router-config.min.js" {
+  declare module.exports: $Exports<"react-router-config/umd/react-router-config.min">;
 }

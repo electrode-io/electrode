@@ -9,12 +9,12 @@ export = () => {
   try {
     const dll = dllUtil.loadAssets();
     const dllAssets = dll.assets;
-    Object.keys(dllAssets).forEach(m => {
+    Object.keys(dllAssets).forEach((m) => {
       const dllMod = dllAssets[m];
-      Object.keys(dllMod).forEach(modName => {
+      Object.keys(dllMod).forEach((modName) => {
         if (modName === "cdnMapping") return;
         const assets = dllMod[modName].assets;
-        assets.forEach(a => {
+        assets.forEach((a) => {
           if (a.endsWith(`${tag}.js`)) {
             dllPaths.push(`${m}/dist/${a}`);
           }

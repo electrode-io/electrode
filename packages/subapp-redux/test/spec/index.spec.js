@@ -6,7 +6,7 @@ const { getSubAppContainer } = require("subapp-util");
 
 const SimpleReducer = (x = true) => x;
 
-describe("subapp-redux", function() {
+describe("subapp-redux", function () {
   afterEach(() => {
     clearSharedStore();
   });
@@ -92,7 +92,7 @@ describe("subapp-redux", function() {
   it("should not allow functional reducers in a shared store", () => {
     expect(() => {
       getReduxCreateStore({
-        reduxReducers: x => x,
+        reduxReducers: (x) => x,
         reduxShareStore: true
       })({});
     }).to.throw();

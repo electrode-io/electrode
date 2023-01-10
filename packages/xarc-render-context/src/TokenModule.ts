@@ -86,7 +86,7 @@ export class TokenModule {
     // if process function takes more than one params, then it should take a
     // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;
-    this.setHandler(context => this.custom.process(context, this));
+    this.setHandler((context) => this.custom.process(context, this));
   }
 
   setHandler(func) {

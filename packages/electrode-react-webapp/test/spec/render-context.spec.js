@@ -8,7 +8,7 @@ const xstdout = require("xstdout");
 
 const expect = require("chai").expect;
 
-describe("render-context", function() {
+describe("render-context", function () {
   it("should handle setting all stop modes", () => {
     const context = new RenderContext({}, {});
     context.stop = RenderContext.FULL_STOP;

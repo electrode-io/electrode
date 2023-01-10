@@ -49,7 +49,7 @@ describe("subapp-ready", () => {
 
       sinon.stub(envHooks, "getContainer").returns({
         ...subappCon,
-        get: str => subappDef, //  eslint-disable-line
+        get: (str) => subappDef, //  eslint-disable-line
         declare: (str, def) => subappDef, //  eslint-disable-line
         isReady: () => false,
         updateReady: () => {}, //  eslint-disable-line
@@ -76,7 +76,7 @@ describe("subapp-ready", () => {
       sinon.stub(envHooks, "getContainer").returns({
         ...subappCon,
         declareCount: 1,
-        get: str => subappDef, //  eslint-disable-line
+        get: (str) => subappDef, //  eslint-disable-line
         declare: (str, def) => subappDef, //  eslint-disable-line
         isReady: () => false,
         updateReady: () => {}, //  eslint-disable-line

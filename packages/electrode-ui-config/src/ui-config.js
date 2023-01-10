@@ -3,7 +3,7 @@
 /* eslint-disable no-invalid-this */
 
 function join(paths) {
-  const x = paths.filter(p => p).join("/");
+  const x = paths.filter((p) => p).join("/");
 
   if (paths[0] === "/" && x === "/") {
     // returning "" for [ "/", "", "", ... ]
@@ -21,11 +21,11 @@ function reload(data) {
   const basePath = ui.basePath || "";
   const apiPath = ui.apiPath || "/api";
   this.ui = ui;
-  this.fullPath = path => join([basePath, path]);
-  this.fullApiPath = path => join([basePath, apiPath, path]);
+  this.fullPath = (path) => join([basePath, path]);
+  this.fullApiPath = (path) => join([basePath, apiPath, path]);
 }
 
-module.exports = function(data) {
+module.exports = function (data) {
   const config = {};
   config.reload = reload;
   config.reload(data);

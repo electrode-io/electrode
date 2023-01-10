@@ -14,7 +14,7 @@ function _inject(entry: any, inserts: string | string[]) {
     }
     return entry;
   } else {
-    return [].concat(inserts, entry).filter(x => x);
+    return [].concat(inserts, entry).filter((x) => x);
   }
 }
 

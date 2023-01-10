@@ -2,7 +2,7 @@
 
 import { loadXarcOptions } from "../util/load-xarc-options";
 
-module.exports = function() {
+module.exports = function () {
   const xarcOptions = loadXarcOptions();
 
   return {

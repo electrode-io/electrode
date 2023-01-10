@@ -142,7 +142,7 @@ function createSharedStore(initialState, info, storeContainer) {
   } else if (reducerType === "object") {
     reducer = combineReducers(info.reduxReducers);
   } else {
-    reducer = x => x;
+    reducer = (x) => x;
   }
 
   if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {

@@ -4,15 +4,15 @@ import { addTodo } from "../redux/action";
 import classNames from "classnames";
 const custom = require("../styles/bootstrap.css");
 
-const TodoInput = props => {
+const TodoInput = (props) => {
   const [input, setInput] = React.useState("");
   const { dispatch } = props;
   return (
     <div className={custom["input-group"]}>
       <input
         className={classNames(custom["form-control"])}
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={e => {
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
           if (e.key === "Enter" && input) {
             dispatch(addTodo(input));
             setInput("");
@@ -38,5 +38,5 @@ const TodoInput = props => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: connect(null, dispatch => ({ dispatch }))(TodoInput)
+  Component: connect(null, (dispatch) => ({ dispatch }))(TodoInput)
 };

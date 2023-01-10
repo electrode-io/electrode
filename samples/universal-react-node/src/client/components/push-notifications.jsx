@@ -42,11 +42,11 @@ export default class PushNotifications extends Component<
   componentDidMount() {
     if (navigator.serviceWorker) {
       navigator.serviceWorker.ready
-        .then(registration => {
+        .then((registration) => {
           // Check for any existing subscriptions
           registration.pushManager
             .getSubscription()
-            .then(subscription => {
+            .then((subscription) => {
               // No current subscription, let the user subscribe
               if (!subscription) {
                 this.setState({
@@ -63,14 +63,14 @@ export default class PushNotifications extends Component<
                 });
               }
             })
-            .catch(error => {
+            .catch((error) => {
               this.setState({
                 loading: false,
                 error
               });
             });
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({
             loading: false,
             error
@@ -87,16 +87,16 @@ export default class PushNotifications extends Component<
 
   handleSubscribe() {
     if (navigator.serviceWorker) {
-      navigator.serviceWorker.ready.then(registration => {
+      navigator.serviceWorker.ready.then((registration) => {
         registration.pushManager
           .subscribe({ userVisibleOnly: true })
-          .then(subscription => {
+          .then((subscription) => {
             this.setState({
               subscription,
               subscribed: true
             });
           })
-          .catch(error => {
+          .catch((error) => {
             this.setState({ error });
           });
       });
@@ -113,7 +113,7 @@ export default class PushNotifications extends Component<
     const { title, body } = this.state;
     const options = { body, icon, badge };
     if (navigator.serviceWorker) {
-      navigator.serviceWorker.ready.then(registration => {
+      navigator.serviceWorker.ready.then((registration) => {
         registration.showNotification(title, options);
       });
     }

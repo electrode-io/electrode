@@ -27,13 +27,13 @@ function makeConfig() {
   };
 }
 
-describe("cookies", function() {
+describe("cookies", function () {
   this.timeout(5000);
 
   let currentServer;
 
-  const startServer = config => {
-    return electrodeServer(config).tap(server => {
+  const startServer = (config) => {
+    return electrodeServer(config).tap((server) => {
       currentServer = server;
     });
   };
@@ -54,7 +54,7 @@ describe("cookies", function() {
   });
 
   it.skip("should set cookie", () => {
-    const handler = async request => {
+    const handler = async (request) => {
       Cookies.set("test", "bar", {
         path: "/",
         expires: 0,
@@ -113,7 +113,7 @@ describe("cookies", function() {
     const serverConfig = makeConfig();
 
     return startServer(serverConfig)
-      .then(server => {
+      .then((server) => {
         server.route({
           method: "get",
           path: "/test",
@@ -128,16 +128,14 @@ describe("cookies", function() {
             });
         });
       })
-      .then(response => {
+      .then((response) => {
         expect(response.body).to.have.keys(["test1", "now"]);
-        expect(response.headers["set-cookie"])
-          .to.be.an("array")
-          .with.length(11);
+        expect(response.headers["set-cookie"]).to.be.an("array").with.length(11);
 
         const cookies = CookieParser.parse(response.headers["set-cookie"]);
 
-        const verifyCookie = data => {
-          const c = _.find(cookies, x => x.name === data.name);
+        const verifyCookie = (data) => {
+          const c = _.find(cookies, (x) => x.name === data.name);
           expect(c, `No cookie found with name "${data.name}"`).to.exist;
           if (data.hasOwnProperty("maxAge")) {
             const expires = data.maxAge > 0 ? response.body.now + data.maxAge * 1000 : 0;
@@ -244,7 +242,7 @@ describe("cookies", function() {
 
     const serverConfig = makeConfig();
 
-    return startServer(serverConfig).then(server => {
+    return startServer(serverConfig).then((server) => {
       server.route({
         method: "get",
         path: "/test",
@@ -257,7 +255,7 @@ describe("cookies", function() {
             "cookie",
             'com.wm.reflector="wmlspartner:abcd@lastupd:456@reflectorid:qwerty";AID=wmlspartner%3Dwmtlabs%3Areflectorid%3D0085370%3Alastupd%3D146984;test=bar;test2=bar2;test3=bar3;test4=bar4;test5=;%28$%3Benc%3A%29=(i%24xx%3Ax%3B);----={%22test%22%3A%2212345%22%2C%22flag%22%3Atrue};'
           ) // eslint-disable-line
-          .end(err => {
+          .end((err) => {
             return err ? reject(err) : resolve();
           });
       });
@@ -298,7 +296,7 @@ describe("cookies", function() {
 
     const serverConfig = makeConfig();
 
-    return startServer(serverConfig).then(server => {
+    return startServer(serverConfig).then((server) => {
       server.route({
         method: "get",
         path: "/test",
@@ -311,7 +309,7 @@ describe("cookies", function() {
             "cookie",
             'com.wm.reflector="wmlspartner:abcd@lastupd:456@reflectorid:qwerty";AID=wmlspartner%3Dwmtlabs%3Areflectorid%3D0085370%3Alastupd%3D146984;test=bar;test2=bar2;test3=bar3;test4=bar4;test5=;!$key=(i%24xx%3Ax%3B);----={%22test%22%3A%2212345%22%2C%22flag%22%3Atrue};%25!$foo-key=%%%%'
           ) // eslint-disable-line
-          .end(err => {
+          .end((err) => {
             return err ? reject(err) : resolve();
           });
       });

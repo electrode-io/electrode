@@ -10,7 +10,7 @@ const mkdirp = require("mkdirp");
 const INDENT = 2;
 import { loadXarcOptions } from "../util/load-xarc-options";
 
-module.exports = function(opts) {
+module.exports = function (opts) {
   const xarcOptions = loadXarcOptions();
 
   const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
@@ -25,11 +25,11 @@ module.exports = function(opts) {
     statsOptions.fields = null;
   }
 
-  const cleanupChunks = stats => {
+  const cleanupChunks = (stats) => {
     // cleanup chunks with only essential info if it's requested
     // otherwise it's included a huge amount of data like modules etc
     if (stats.chunks) {
-      stats.chunks = stats.chunks.map(c => {
+      stats.chunks = stats.chunks.map((c) => {
         return _.pick(c, ["id", "hash", "names", "entry", "initial", "rendered", "reason"]);
       });
     }
@@ -48,7 +48,7 @@ module.exports = function(opts) {
     // save a physical version of stats to .etmp/stats.json
     // in webpack dev server mode.
     //
-    statsOptions.transform = data => {
+    statsOptions.transform = (data) => {
       cleanupChunks(data);
       const dir = xarcOptions.webpack.devArtifactsPath || xarcOptions.eTmpDir;
       mkdirp.sync(dir);
@@ -57,7 +57,7 @@ module.exports = function(opts) {
       return str;
     };
   } else {
-    statsOptions.transform = stats => {
+    statsOptions.transform = (stats) => {
       cleanupChunks(stats);
       return JSON.stringify(stats, null, INDENT);
     };

@@ -4,7 +4,7 @@ export const SET_FILTER = "SET_FILTER";
 
 let todoId = 0;
 
-export const addTodo = content => ({
+export const addTodo = (content) => ({
   type: ADD_TODO,
   payload: {
     id: todoId++,
@@ -13,11 +13,11 @@ export const addTodo = content => ({
   }
 });
 
-export const toggleTodo = id => {
+export const toggleTodo = (id) => {
   return {
     type: TOGGLE_TODO,
     payload: { id }
   };
 };
 
-export const setFilter = filter => ({ type: SET_FILTER, payload: { filter } });
+export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } });

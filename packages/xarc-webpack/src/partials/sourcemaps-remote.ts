@@ -2,7 +2,7 @@
 
 const SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 
-module.exports = function() {
+module.exports = function () {
   return {
     plugins: [
       new SourceMapDevToolPlugin({

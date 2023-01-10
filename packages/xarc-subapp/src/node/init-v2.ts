@@ -138,13 +138,13 @@ function initializeStaticAssets(props: InitProps) {
   //
   const allCssLinks = wrapStringFragment(
     stats.allChunkNames
-      .map(chunkName => {
-        const links = stats.getChunkAssetFilename(chunkName, ".css").map(cssFile => {
+      .map((chunkName) => {
+        const links = stats.getChunkAssetFilename(chunkName, ".css").map((cssFile) => {
           return `<link{{STYLE_NONCE}} rel="stylesheet" href="${getFileAssetPath(cssFile)}" />`;
         });
         return wrapStringFragment(links.join(""), `<!-- CSS for chunk ${chunkName} -->`);
       })
-      .filter(x => x)
+      .filter((x) => x)
       .join("\n"),
     "",
     "\n<!-- End of CSS loading -->\n"
@@ -172,14 +172,8 @@ function initializeStaticAssets(props: InitProps) {
  */
 export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitProps }>) {
   const staticAssets = initializeStaticAssets(setupToken.props);
-  const {
-    allCssLinks,
-    xarcV2Js,
-    cdnMapScripts,
-    webpack4JsonpJs,
-    runtimeJsScripts,
-    mainJsScripts
-  } = staticAssets;
+  const { allCssLinks, xarcV2Js, cdnMapScripts, webpack4JsonpJs, runtimeJsScripts, mainJsScripts } =
+    staticAssets;
 
   return {
     process(context) {

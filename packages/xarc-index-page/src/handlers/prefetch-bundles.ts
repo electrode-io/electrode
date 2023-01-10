@@ -1,4 +1,4 @@
-export default context => {
+export default (context) => {
   const content = context.user.content;
   if (!content || !content.prefetch) return "";
 

@@ -103,6 +103,6 @@ class Home extends React.Component {
 
 Home.propTypes = {};
 
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
+export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Home);

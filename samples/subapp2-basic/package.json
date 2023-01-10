@@ -32,7 +32,7 @@
     "printWidth": 100
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",    
+    "@babel/runtime": "^7.12.5",
     "@xarc/fastify-server": "^3.3.0"
   },
   "devDependencies": {

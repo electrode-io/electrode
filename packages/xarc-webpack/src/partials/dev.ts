@@ -7,7 +7,7 @@ import { loadXarcOptions } from "../util/load-xarc-options";
 
 const HTTP_PORT = 80;
 
-module.exports = function() {
+module.exports = function () {
   const xarcOptions = loadXarcOptions();
 
   const devProtocol = xarcOptions.webpack.https ? "https://" : "http://";

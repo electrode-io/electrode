@@ -11,7 +11,7 @@ const originalModuleCompile = Module.prototype._compile;
 	Author Tobias Koppers @sokra
 */
 
-(function() {
+(function () {
   const webpackCliPkg = require("webpack-cli/package.json");
 
   if (!webpackCliPkg.version.startsWith("4.")) {

@@ -1,7 +1,7 @@
 /* eslint-env browser */
 /* eslint-disable no-console */
 
-module.exports = notify => {
+module.exports = (notify) => {
   // Exit early if the navigator isn't available
   if (typeof navigator === "undefined") {
     return;
@@ -11,15 +11,15 @@ module.exports = notify => {
     navigator.serviceWorker
       .register("sw.js", { scope: "./" })
       // Service worker registration was successful
-      .then(registration => {
+      .then((registration) => {
         // The updatefound event is dispatched when the installing
         // worker changes. This new worker will potentially become
         // the active worker if the install process completes.
-        registration.onupdatefound = function() {
+        registration.onupdatefound = function () {
           const installingWorker = registration.installing;
           // Listen for state changes on the installing worker so
           // we know when it has completed.
-          installingWorker.onstatechange = function() {
+          installingWorker.onstatechange = function () {
             switch (installingWorker.state) {
               case "installing":
                 console.log("Installing a new service worker...");
@@ -50,7 +50,7 @@ module.exports = notify => {
         };
       })
       // Service worker registration failed
-      .catch(err => {
+      .catch((err) => {
         console.log("Service worker registration failed: ", err);
       });
   }

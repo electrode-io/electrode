@@ -26,7 +26,7 @@ describe("dev-hapi 17", function () {
     //
   });
 
-  const captureRequest = server => {
+  const captureRequest = (server) => {
     const data: any = {};
     server.route({
       method: "GET",
@@ -40,7 +40,7 @@ describe("dev-hapi 17", function () {
     return data;
   };
 
-  const testPlugin17 = options => {
+  const testPlugin17 = (options) => {
     let server;
     let data;
     const config = {
@@ -49,17 +49,17 @@ describe("dev-hapi 17", function () {
           port: 9002
         }
       },
-      ...options,
+      ...options
     };
     return asyncVerify(
       () => electrodeServer(config),
-      s => {
+      (s) => {
         server = s;
         data = captureRequest(server);
 
         return server.inject("/test");
       },
-      resp => {
+      (resp) => {
         expect(resp.statusCode).to.equal(200);
         expect(data.request.app).to.have.key("webpackDev").that.is.an("object");
       },

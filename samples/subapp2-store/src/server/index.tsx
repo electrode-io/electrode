@@ -80,15 +80,23 @@ async function start() {
     }
   };
 
-  ["/", "/home", "/products", "/deals", "/stores", "/contact", "/account", "/cart", "/recoil"].forEach(
-    path => {
-      server.route({
-        method: "GET",
-        path,
-        handler
-      });
-    }
-  );
+  [
+    "/",
+    "/home",
+    "/products",
+    "/deals",
+    "/stores",
+    "/contact",
+    "/account",
+    "/cart",
+    "/recoil"
+  ].forEach((path) => {
+    server.route({
+      method: "GET",
+      path,
+      handler
+    });
+  });
 
   await server.start();
 }

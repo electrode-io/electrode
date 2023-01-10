@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  templateProcessor: function() {
+  templateProcessor: function () {
     return "template-processor-2";
   }
 };

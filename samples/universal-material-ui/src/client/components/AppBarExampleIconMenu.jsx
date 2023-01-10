@@ -9,14 +9,20 @@ import NavigationClose from "material-ui/svg-icons/navigation/close";
 const AppBarExampleIconMenu = () => (
   <AppBar
     title="Electrode React Sample App with material-ui"
-    iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+    iconElementLeft={
+      <IconButton>
+        <NavigationClose />
+      </IconButton>
+    }
     iconElementRight={
       <IconMenu
         iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
         }
-        targetOrigin={{horizontal: "right", vertical: "top"}}
-        anchorOrigin={{horizontal: "right", vertical: "top"}}
+        targetOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "top" }}
       >
         <MenuItem primaryText="Refresh" />
         <MenuItem primaryText="Help" />

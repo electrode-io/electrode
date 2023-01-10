@@ -9,7 +9,7 @@ require("babel-register");
 
 const routes = require("../routes.jsx").default;
 
-describe("electrode server (Hapi) integration", function() {
+describe("electrode server (Hapi) integration", function () {
   const setupServer = async (streaming, withIds) => {
     let engine;
 
@@ -31,10 +31,10 @@ describe("electrode server (Hapi) integration", function() {
     return server;
   };
 
-  const closeServer = server => {
+  const closeServer = (server) => {
     return (
       server &&
-      new Promise(resolve => {
+      new Promise((resolve) => {
         server.stop(resolve);
       })
     );
@@ -44,7 +44,7 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(),
-      s => {
+      (s) => {
         server = s;
         return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
@@ -62,7 +62,7 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(),
-      s => {
+      (s) => {
         server = s;
         return server.inject("/test?foo=bar").then((resp) => {
           expect(resp.result).to.deep.equal({
@@ -80,7 +80,7 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(true),
-      s => {
+      (s) => {
         server = s;
         return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({
@@ -98,7 +98,7 @@ describe("electrode server (Hapi) integration", function() {
     let server;
     return asyncVerify(
       () => setupServer(true, true),
-      s => {
+      (s) => {
         server = s;
         return server.inject("/test").then((resp) => {
           expect(resp.result).to.deep.equal({

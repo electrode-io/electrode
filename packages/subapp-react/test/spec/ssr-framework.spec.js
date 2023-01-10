@@ -369,7 +369,6 @@ describe("SSR React framework", function () {
         expect(request.foo).equals("bar");
       }
     );
-
   });
 
   it("should render subapp with react-router StaticRouter", async () => {

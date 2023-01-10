@@ -11,7 +11,7 @@
 // inspect your production bundle.
 //
 
-module.exports = function() {
+module.exports = function () {
   return {
     optimization: {
       nodeEnv: "production"

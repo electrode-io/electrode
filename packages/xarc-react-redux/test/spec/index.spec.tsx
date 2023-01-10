@@ -11,7 +11,7 @@ import { createStore, reduxFeature, ReduxFeature } from "../../src/browser/index
 
 const { createElement } = React; // eslint-disable-line
 
-const mockPrepare = async initialState => {
+const mockPrepare = async (initialState) => {
   return { initialState: "init-state-" + initialState };
 };
 
@@ -88,7 +88,7 @@ describe("reactReduxFeature", function () {
     render(
       redux.wrap({
         Component: MockComponent,
-        store: createStore(state => state)
+        store: createStore((state) => state)
       })
     );
 
@@ -121,7 +121,7 @@ describe("reactReduxFeature", function () {
       .stub(require("redux"), "createStore") // eslint-disable-line
       .callsFake((reducer, initalState) => reducer(initalState));
 
-    const mockFn = x => x + "-----withMockFn";
+    const mockFn = (x) => x + "-----withMockFn";
 
     expect((redux.createStore as any)(mockFn, "test")).equal("test-----withMockFn");
 
@@ -148,8 +148,8 @@ describe("reactReduxFeature", function () {
 
     factory.add(def);
 
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     const res = await def._features.redux.execute({
       input: {
@@ -188,8 +188,8 @@ describe("reactReduxFeature", function () {
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: { a: (x) => x || "1", b: (x) => x || "2" } };
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
         Component: MockComponent
@@ -237,7 +237,7 @@ describe("reactReduxFeature", function () {
 
     factory.add(def);
 
-    (def._features.redux as any)._store = createStore(x => x);
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
         Component: undefined
@@ -298,8 +298,8 @@ describe("reactReduxFeature", function () {
 
     factory.add(def);
 
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     await def._features.redux.execute({
       input: {
@@ -323,7 +323,7 @@ describe("reactReduxFeature", function () {
 
     const reduxFeatureOptions = {
       ...options,
-      reducers: x => x || "1"
+      reducers: (x) => x || "1"
     };
     const factory = reduxFeature(reduxFeatureOptions);
 
@@ -339,7 +339,7 @@ describe("reactReduxFeature", function () {
 
     factory.add(def);
 
-    const stub1 = sinon.stub(def._features.redux as any, "wrap").callsFake(obj => obj);
+    const stub1 = sinon.stub(def._features.redux as any, "wrap").callsFake((obj) => obj);
 
     const res = await def._features.redux.execute({
       input: {
@@ -376,8 +376,8 @@ describe("reactReduxFeature", function () {
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     const res = await def._features.redux.execute({
       input: {
@@ -416,8 +416,8 @@ describe("reactReduxFeature", function () {
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: { a: (x) => x || "1", b: (x) => x || "2" } };
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
         Component: MockComponent
@@ -465,7 +465,7 @@ describe("reactReduxFeature", function () {
 
     factory.add(def);
 
-    (def._features.redux as any)._store = createStore(x => x);
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
         Component: undefined

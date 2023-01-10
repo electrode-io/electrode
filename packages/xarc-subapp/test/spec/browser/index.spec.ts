@@ -58,7 +58,7 @@ describe("browser index", () => {
         { csrData: { inlineId: "test1" } } as any,
         { csrData: { inlineId: "test2" } } as any
       ];
-      subapp._pipelineFactory = (obj => {
+      subapp._pipelineFactory = ((obj) => {
         return {
           start: stub
         };

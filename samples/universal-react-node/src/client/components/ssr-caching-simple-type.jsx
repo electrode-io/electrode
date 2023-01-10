@@ -44,7 +44,7 @@ SSRCachingSimpleType.propTypes = {
   navEntry: PropTypes.string
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   count: state.count
 });
 

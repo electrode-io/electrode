@@ -3,7 +3,7 @@
 const { expectError, asyncVerify } = require("run-verify");
 const xaa = require("xaa");
 
-describe("async map", function() {
+describe("async map", function () {
   let xarcV1;
   before(() => {
     const xarc = "../../src/subapp-web.js";

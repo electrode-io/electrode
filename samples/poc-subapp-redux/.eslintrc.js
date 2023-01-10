@@ -7,5 +7,5 @@ function dotify(p) {
 }
 
 module.exports = {
-  extends: dotify(path.relative(__dirname, archetypeEslint))
+  extends: dotify(path.relative(__dirname, archetypeEslint)),
 };

@@ -6,11 +6,11 @@ module.exports = () => {
       return "<div>user-token-1</div>";
     },
 
-    "user-token-2": context => {
+    "user-token-2": (context) => {
       context.output.add("<div>user-token-2</div>");
     },
 
-    "user-spot-token": context => {
+    "user-spot-token": (context) => {
       const spot = context.output.reserve();
       process.nextTick(() => {
         spot.add("<div>user-spot-1;");
@@ -20,7 +20,7 @@ module.exports = () => {
       });
     },
 
-    "user-promise-token": context => {
+    "user-promise-token": (context) => {
       context.output.add("<div>user-promise-token</div>");
     },
 

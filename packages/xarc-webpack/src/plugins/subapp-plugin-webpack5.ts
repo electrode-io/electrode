@@ -92,7 +92,7 @@ const where = (source, loc) => {
   return `${source}:${loc.start.line}:${loc.start.column + 1}`;
 };
 
-const noCwd = x => x.replace(process.cwd(), ".");
+const noCwd = (x) => x.replace(process.cwd(), ".");
 
 /**
  * subapp hot accept template, this will insert HMR code from ../client/hmr-accept.ts
@@ -189,9 +189,8 @@ export class SubAppWebpackPlugin {
     this._subApps = {};
     this._webpackMajorVersion = webpackVersion;
 
-    const { makeIdentifierBEE, tapAssets, hasHmr } = this[
-      `initWebpackVer${this._webpackMajorVersion}`
-    ]();
+    const { makeIdentifierBEE, tapAssets, hasHmr } =
+      this[`initWebpackVer${this._webpackMajorVersion}`]();
 
     this._makeIdentifierBEE = makeIdentifierBEE;
     this._tapAssets = tapAssets;
@@ -204,15 +203,15 @@ export class SubAppWebpackPlugin {
     const BEE = require("webpack/lib/javascript/BasicEvaluatedExpression");
     return {
       BasicEvaluatedExpression: BEE,
-      makeIdentifierBEE: expr => {
+      makeIdentifierBEE: (expr) => {
         return new BEE()
           .setIdentifier(expr.name, {}, () => [])
           .setRange(expr.range)
           .setExpression(expr);
       },
-      tapAssets: compiler => {
-        compiler.hooks.compilation.tap(pluginName, compilation => {
-          compilation.hooks.processAssets.tap(pluginName, assets => this.updateAssets(assets));
+      tapAssets: (compiler) => {
+        compiler.hooks.compilation.tap(pluginName, (compilation) => {
+          compilation.hooks.processAssets.tap(pluginName, (assets) => this.updateAssets(assets));
         });
       },
       // TODO: detect HMR from compilation
@@ -301,15 +300,15 @@ export class SubAppWebpackPlugin {
   apply(compiler) {
     this._tapAssets(compiler);
 
-    const findGetModule = props => {
-      const prop = props.find(p => p.key.name === "getModule");
+    const findGetModule = (props) => {
+      const prop = props.find((p) => p.key.name === "getModule");
       const funcBody = prop.value.body;
       return funcBody;
     };
 
     this._applyHmrInject(compiler);
 
-    compiler.hooks.normalModuleFactory.tap(pluginName, factory => {
+    compiler.hooks.normalModuleFactory.tap(pluginName, (factory) => {
       factory.hooks.parser.for("javascript/auto").tap(pluginName, (parser, options) => {
         parser[SHIM_parseCommentOptions] = parser.parseCommentOptions;
 
@@ -324,7 +323,7 @@ export class SubAppWebpackPlugin {
           `webpack parser.parseCommentOptions takes ${xl} arguments - but expecting 1 so not compatible with this plugin`
         );
 
-        parser.parseCommentOptions = range => {
+        parser.parseCommentOptions = (range) => {
           for (const k in this._subApps) {
             const subapp = this._subApps[k];
             const gmod = subapp.getModule;
@@ -350,7 +349,7 @@ export class SubAppWebpackPlugin {
 
           assert(props, () => `${cw()}: you must pass an Object literal as argument to ${apiName}`);
 
-          const nameProp = props.find(p => p.key.name === "name");
+          const nameProp = props.find((p) => p.key.name === "name");
           assert(nameProp, () => `${cw()}: argument for ${apiName} doesn't have a name property`);
 
           const nameVal = nameProp.value.value;
@@ -399,13 +398,13 @@ export class SubAppWebpackPlugin {
 
         const apiNames = [].concat(this._declareApiNames);
 
-        [].concat(apiNames).forEach(apiName => {
-          parser.hooks.call.for(apiName).tap(pluginName, expr => parseForSubApp(expr, apiName));
+        [].concat(apiNames).forEach((apiName) => {
+          parser.hooks.call.for(apiName).tap(pluginName, (expr) => parseForSubApp(expr, apiName));
         });
 
         parser.hooks.evaluate
           .for("CallExpression")
-          .tap({ name: pluginName, before: "Parser" }, expression => {
+          .tap({ name: pluginName, before: "Parser" }, (expression) => {
             const calleeName = _.get(expression, "callee.property.name");
             if (apiNames.includes(calleeName)) {
               return parseForSubApp(expression, calleeName);
@@ -416,7 +415,7 @@ export class SubAppWebpackPlugin {
 
         parser.hooks.evaluate
           .for("Identifier")
-          .tap({ name: pluginName, before: "Parser" }, expression => {
+          .tap({ name: pluginName, before: "Parser" }, (expression) => {
             if (apiNames.includes(expression.name)) {
               return this._makeIdentifierBEE(expression);
             }

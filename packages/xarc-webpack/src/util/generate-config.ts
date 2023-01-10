@@ -45,7 +45,7 @@ function searchUserCustomConfig(options) {
     }
   ];
 
-  const foundLocation = customLocations.find(d => {
+  const foundLocation = customLocations.find((d) => {
     customConfig = optionalRequire(Path.join(d.dir, d.file));
     return !!customConfig;
   });
@@ -54,7 +54,7 @@ function searchUserCustomConfig(options) {
     const dir = xsh.pathCwd.replace(foundLocation.dir);
     logger.info(`Custom webpack config ${foundLocation.file} loaded from ${dir}`);
   } else {
-    const dirs = [cwd, archPath].map(d => xsh.pathCwd.replace(d)).join("; ");
+    const dirs = [cwd, archPath].map((d) => xsh.pathCwd.replace(d)).join("; ");
     // logger.info(`No custom webpack config ${configFilename} found in dirs ${dirs}`);
   }
 

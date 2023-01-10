@@ -5,8 +5,8 @@ const reactWebapp = require("../../lib/react-webapp");
 const expect = require("chai").expect;
 const xstdout = require("xstdout");
 
-describe("react-webapp", function() {
-  describe("resolveContent", function() {
+describe("react-webapp", function () {
+  describe("resolveContent", function () {
     it("should require module with relative path", () => {
       const f = "./test/data/foo.js";
       expect(reactWebapp.resolveContent({ module: f }).content).to.equal("hello");
@@ -133,7 +133,7 @@ from async ok module`;
     });
   });
 
-  describe("setupOptions", function() {
+  describe("setupOptions", function () {
     it("should enable https if ENV is set", () => {
       process.env.WEBPACK_DEV_HTTPS = "true";
       const opt = reactWebapp.setupOptions({});

@@ -563,7 +563,7 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },
-    
+
     {
       "packageName": "@xarc/opt-eslint",
       "projectFolder": "packages/xarc-opt-eslint",
@@ -691,7 +691,7 @@
       "projectFolder": "packages/xarc-webpack",
       "shouldPublish": true,
       "skipRushCheck": true
-    },   
+    },
 
     // Sample apps
     {

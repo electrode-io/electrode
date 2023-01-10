@@ -75,7 +75,7 @@ function getPaths(xarcCwd) {
 
   PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
-  const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
+  const DLL_PATHS = loadElectrodeDll().map((x) => require.resolve(x));
 
   return { MAIN_PATH, PREPROCESSORS, DLL_PATHS };
 }

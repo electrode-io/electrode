@@ -32,7 +32,7 @@ export function reduxSagaDecor(options: ReduxSagaOption): ReduxFeatureDecorator 
     decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
       const sagaMiddleware = createSagaMiddleware();
       const store = createStore(
-        (params.reducers as Reducer<unknown, any>) || (x => x),
+        (params.reducers as Reducer<unknown, any>) || ((x) => x),
         params.initialState,
         applyMiddleware(sagaMiddleware)
       );

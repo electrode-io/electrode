@@ -69,7 +69,7 @@ function loadPostCss() {
 
 /* eslint-disable complexity */
 
-module.exports = function() {
+module.exports = function () {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
   const isProduction = process.env.NODE_ENV === "production";
@@ -93,7 +93,7 @@ module.exports = function() {
       loader: postcssLoader,
       options: {
         ident: "postcss",
-        plugins: loader => [
+        plugins: (loader) => [
           autoprefixer(),
           atImport({ root: loader.resourcePath }),
           postcssPresetEnv()
@@ -123,7 +123,7 @@ module.exports = function() {
         ? { loader: cssLoader, options: getCSSModuleOptions() }
         : { loader: cssLoader, options: { modules: false, esModule: false } },
       getPostCssQuery()
-    ].filter(x => x);
+    ].filter((x) => x);
   };
 
   /*
@@ -252,7 +252,7 @@ module.exports = function() {
       : `${nsTag}[name].style.[contenthash].css`;
 
   return {
-    module: { rules: rules.filter(x => x) },
+    module: { rules: rules.filter((x) => x) },
     plugins: [
       new MiniCssExtractPlugin({ filename: styleBundleFilename }),
       isProduction && new CssMinimizerPlugin(xarcOptions.webpack.optimizeCssOptions),
@@ -260,6 +260,6 @@ module.exports = function() {
         minimize: true,
         options: { context: Path.resolve(xarcCwd, "src") }
       })
-    ].filter(x => !!x)
+    ].filter((x) => !!x)
   };
 };

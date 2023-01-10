@@ -120,9 +120,9 @@ function xarcOptCheck() {
   //
   if (!appPkg.workspaces && optParams.onlyOneOf) {
     // first, user's package.json cannot have multiple packages from onlyOneOf list
-    ["dependencies", "devDependencies", "optionalDependencies"].forEach(x => {
+    ["dependencies", "devDependencies", "optionalDependencies"].forEach((x) => {
       if (appPkg[x]) {
-        foundOOO = foundOOO.concat(optParams.onlyOneOf.filter(n => appPkg[x].hasOwnProperty(n)));
+        foundOOO = foundOOO.concat(optParams.onlyOneOf.filter((n) => appPkg[x].hasOwnProperty(n)));
       }
     });
 

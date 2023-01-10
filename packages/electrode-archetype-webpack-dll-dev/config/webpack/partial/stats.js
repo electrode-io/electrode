@@ -8,8 +8,8 @@ module.exports = {
     new StatsWriterPlugin({
       filename: `./stats${tag}.json`,
       fields: null,
-      transform: data => {
-        data.modules.forEach(m => {
+      transform: (data) => {
+        data.modules.forEach((m) => {
           delete m.source;
         });
         delete data.children;

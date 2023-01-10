@@ -16,7 +16,7 @@ import { unmountComponentAtNode } from "preact/compat";
 import "tachyons-sass/tachyons.scss";
 
 // ssr inline subapp
-const SSRSubApp = props => {
+const SSRSubApp = (props) => {
   return (
     <AppContext.Consumer>
       {({ ssr }) => {

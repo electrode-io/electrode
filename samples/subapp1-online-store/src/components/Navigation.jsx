@@ -10,7 +10,9 @@ const navRoutes = [
 const NavItem = ({ to, children }) => {
   return (
     <li className="nav-item">
-      <Link className="nav-link" to={to}>{children}</Link>
+      <Link className="nav-link" to={to}>
+        {children}
+      </Link>
     </li>
   );
 };
@@ -28,7 +30,9 @@ export const Navigation = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             {navRoutes.map((navRoute, i) => (
-              <NavItem key={i} to={navRoute.path}>{navRoute.label}</NavItem>
+              <NavItem key={i} to={navRoute.path}>
+                {navRoute.label}
+              </NavItem>
             ))}
           </ul>
         </div>

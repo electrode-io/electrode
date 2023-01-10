@@ -58,7 +58,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
               // conditional history props. BrowserRouter does not support history props in v6.
               const historyProps = history ? { history } : {};
               return (
-                <TheRouter {...historyProps} >
+                <TheRouter {...historyProps}>
                   <Component {...props} />
                 </TheRouter>
               );

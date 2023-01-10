@@ -10,7 +10,7 @@ const wConfig = xarcWebpack.compose(options);
 if (env === "development") {
   const webpackHook = new WebpackHookPlugin({
     onBuildStart: ['echo "Webpack Build starts"'],
-    onBuildEnd: ['echo "Webpack Build ends"'],
+    onBuildEnd: ['echo "Webpack Build ends"']
   });
 
   wConfig.plugins.push(webpackHook);

@@ -9,7 +9,7 @@ const renderFlatRoutes = (routes, extraProps = {}) =>
           path={route.path}
           exact={route.exact}
           strict={route.strict}
-          render={props =>
+          render={(props) =>
             route.render ? (
               route.render({ ...props, ...extraProps, route: route })
             ) : (

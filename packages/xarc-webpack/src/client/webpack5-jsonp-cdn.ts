@@ -22,12 +22,12 @@ function setup(w: any) {
     xarc.cdnUpdate({ md: __remoteCdnMapping });
   }
 
-  const getCdnMapSrc = originalSrc => {
+  const getCdnMapSrc = (originalSrc) => {
     const src = xarc && xarc.cdnMap(originalSrc);
     return src && src !== originalSrc ? src : null;
   };
 
-  __webpack_chunk_load__ = id => {
+  __webpack_chunk_load__ = (id) => {
     __webpack_get_script_filename__ = () => {
       const originalSrc = originalGet(id);
       return getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
@@ -39,7 +39,7 @@ function setup(w: any) {
 
   const originalMiniCssF = __webpack_require__.miniCssF;
   if (originalMiniCssF) {
-    __webpack_require__.miniCssF = id => {
+    __webpack_require__.miniCssF = (id) => {
       const originalSrc = originalMiniCssF(id);
       return getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
     };

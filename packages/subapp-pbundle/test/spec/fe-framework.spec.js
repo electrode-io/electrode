@@ -6,7 +6,7 @@ const { h } = require("preact"); // eslint-disable-line
 const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
 
-describe("FE Preact framework", function() {
+describe("FE Preact framework", function () {
   afterEach(() => {
     delete global.window;
     delete global.document;

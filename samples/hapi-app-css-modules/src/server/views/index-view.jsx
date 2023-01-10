@@ -17,7 +17,7 @@ import { routes } from "../../client/routes";
 
 let routesEngine;
 
-module.exports = async req => {
+module.exports = async (req) => {
   if (!routesEngine) {
     routesEngine = new ReduxRouterEngine({
       routes,

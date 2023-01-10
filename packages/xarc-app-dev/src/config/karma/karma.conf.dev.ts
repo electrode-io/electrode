@@ -13,7 +13,7 @@ const Path = require("path");
 const browserSettings = require("./browser-settings");
 import { loadXarcOptions } from "../../lib/utils";
 
-export = function(config) {
+export = function (config) {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
   const settings = {

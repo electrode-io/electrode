@@ -296,7 +296,7 @@ export function applyPartials(
   const composer = new WebpackComposer({ partials: parts });
   composer.addProfile("apply", {});
   let id = 1;
-  parts.forEach(p => {
+  parts.forEach((p) => {
     if (p instanceof ConfigPartial) {
       composer.addPartialToProfile(p._name, "apply", p.config, p.options);
     } else {

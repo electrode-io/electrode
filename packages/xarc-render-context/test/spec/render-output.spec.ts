@@ -15,7 +15,7 @@ describe("render-output", function () {
   it("should flush simple string", () => {
     let text;
     const context = {
-      send: x => (text = x)
+      send: (x) => (text = x)
     };
     const ro = new RenderOutput(context);
     ro.add("hello world");
@@ -28,7 +28,7 @@ describe("render-output", function () {
   it("should flush multiple strings", () => {
     let text;
     const context = {
-      send: x => (text = x)
+      send: (x) => (text = x)
     };
 
     const ro = new RenderOutput(context);
@@ -56,7 +56,7 @@ describe("render-output", function () {
     const context: any = {
       text: undefined
     };
-    context.send = x => (context.text = x);
+    context.send = (x) => (context.text = x);
     const ro = new RenderOutput(context);
     testFlushPending(ro, context);
   });
@@ -65,7 +65,7 @@ describe("render-output", function () {
     const context: any = {
       text: undefined
     };
-    context.send = x => (context.text = x);
+    context.send = (x) => (context.text = x);
     const ro = new RenderOutput(context);
     testFlushPending(ro, context);
     context.text = undefined;
@@ -75,7 +75,7 @@ describe("render-output", function () {
   it("should handle multiple spots", () => {
     let text = "";
     const context: any = {
-      send: x => (text += x)
+      send: (x) => (text += x)
     };
     const ro = new RenderOutput(context);
     ro.add("hello world");
@@ -101,16 +101,16 @@ describe("render-output", function () {
     );
   });
 
-  it("should handle multiple buffer and stream data", done => {
+  it("should handle multiple buffer and stream data", (done) => {
     const context: any = {
       munchy: new Munchy(),
-      transform: a => a
+      transform: (a) => a
     };
 
     streamToArray(context.munchy, (err, arr) => {
       if (err) return done(err);
       try {
-        expect(arr.map(x => x.toString())).to.deep.equal([
+        expect(arr.map((x) => x.toString())).to.deep.equal([
           "hello world",
           "foo bar",
           "spot1 123",
@@ -170,14 +170,14 @@ describe("render-output", function () {
     spot1.add("789");
     ro.add("closing");
     spot1.close();
-    return ro.close().then(result => {
+    return ro.close().then((result) => {
       expect(result).to.equal(
         "hello worldfoo barspot1 123spot1 abc789after spot1baz1spot2 123456closing"
       );
     });
   });
 
-  it("should not munch if no items", done => {
+  it("should not munch if no items", (done) => {
     const ro = new RenderOutput();
     ro._output.sendToMunchy(null, done);
   });
@@ -219,7 +219,7 @@ describe("render-output", function () {
         setTimeout(() => ro2._finish(), 1);
         return ro2._defer.promise;
       }),
-      err => expect(err.message).to.equal("new Error"),
+      (err) => expect(err.message).to.equal("new Error"),
       () => {
         ro2._defer = null;
         ro2._context.munchy = {
@@ -231,7 +231,7 @@ describe("render-output", function () {
       expectError(() => {
         return ro2._finish();
       }),
-      err => {
+      (err) => {
         expect(err.message).to.equal("new error2");
       }
     );

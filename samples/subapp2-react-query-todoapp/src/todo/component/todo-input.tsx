@@ -8,7 +8,7 @@ const TodoInput = () => {
   const [input, setInput] = React.useState("");
 
   const mutation: any = useMutation("test", {
-    onMutate: variables => {
+    onMutate: (variables) => {
       create(variables as any);
       return mockTodos.todos;
     },
@@ -27,12 +27,12 @@ const TodoInput = () => {
     <div className={custom["input-group"]}>
       <input
         className={classNames(custom["form-control"])}
-        onChange={e => {
+        onChange={(e) => {
           e.preventDefault();
           setInput((e.target as any).value);
         }}
         value={input}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           if (e.key === "Enter" && input) {
             mutation.mutate({ content: input });
             setInput("");

@@ -59,7 +59,13 @@ We appreciate any help you can offer. Please follow the guidelines on styling an
 
 #### Styling
 
-We are using [prettier] to format all our code with only one custom setting: `--print-width 100`. We are switching to version 2.
+We are using [prettier] to format all our code with below simple configuration. We are using version 2 for prettier.
+```js
+module.exports = {
+  printWidth: 100,
+  trailingComma: "none"
+};
+```
 
 > If you are making changes to a file that has not been updated yet, please commit the format first before making your changes.
 

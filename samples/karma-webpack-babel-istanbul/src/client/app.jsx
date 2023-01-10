@@ -1,6 +1,6 @@
 import React from "react";
 import Hello from "./hello";
 
-export default props => {
+export default (props) => {
   return <Hello />;
 };

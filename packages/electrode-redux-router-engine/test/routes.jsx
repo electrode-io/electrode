@@ -54,10 +54,9 @@ function TestRedux({ inc }) {
   return <div>Test Redux</div>;
 }
 
-const ConnectedTestRedux = connect(
-  null,
-  dispatch => ({ inc: () => dispatch({ type: "INC_NUMBER" }) })
-)(TestRedux);
+const ConnectedTestRedux = connect(null, (dispatch) => ({
+  inc: () => dispatch({ type: "INC_NUMBER" })
+}))(TestRedux);
 
 //
 // Similar React Router 3 routes
@@ -99,7 +98,7 @@ const ConnectedTestRedux = connect(
 // init should return:
 
 const init1 = {
-  reducer: { foo: function() {} },
+  reducer: { foo: function () {} },
   initialState: { foo: {} }
 };
 
@@ -114,7 +113,7 @@ const init1 = {
 //    redux store and to skip the combineReducers behavior
 
 const init2 = {
-  reducer: function() {},
+  reducer: function () {},
   initialState: {}
 };
 
@@ -225,7 +224,7 @@ const routes = [
     ]
   },
   {
-    path: "/not-post",
+    path: "/not-post"
   },
   {
     path: "/head-only",
@@ -234,7 +233,7 @@ const routes = [
   },
   {
     path: "/invalid-component",
-    // React 18 renderToString method does not error out the same way as in previous versions.       
+    // React 18 renderToString method does not error out the same way as in previous versions.
     // Status 500 has to be manually declared here.
     component: () => {
       throw { status: 500 };

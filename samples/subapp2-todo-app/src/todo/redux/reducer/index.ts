@@ -18,7 +18,7 @@ export const reduxReducers = {
       case TOGGLE_TODO: {
         const { id } = action.payload;
 
-        const todos = state.todos.map(curElement => {
+        const todos = state.todos.map((curElement) => {
           if (curElement.id === id) {
             return {
               ...curElement,

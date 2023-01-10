@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'redux-devtools-dock-monitor' {
+declare module "redux-devtools-dock-monitor" {
   declare module.exports: any;
 }
 
@@ -22,74 +22,74 @@ declare module 'redux-devtools-dock-monitor' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'redux-devtools-dock-monitor/lib/actions' {
+declare module "redux-devtools-dock-monitor/lib/actions" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/lib/constants' {
+declare module "redux-devtools-dock-monitor/lib/constants" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/lib/DockMonitor' {
+declare module "redux-devtools-dock-monitor/lib/DockMonitor" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/lib/index' {
+declare module "redux-devtools-dock-monitor/lib/index" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/lib/reducers' {
+declare module "redux-devtools-dock-monitor/lib/reducers" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/src/actions' {
+declare module "redux-devtools-dock-monitor/src/actions" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/src/constants' {
+declare module "redux-devtools-dock-monitor/src/constants" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/src/DockMonitor' {
+declare module "redux-devtools-dock-monitor/src/DockMonitor" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/src/index' {
+declare module "redux-devtools-dock-monitor/src/index" {
   declare module.exports: any;
 }
 
-declare module 'redux-devtools-dock-monitor/src/reducers' {
+declare module "redux-devtools-dock-monitor/src/reducers" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'redux-devtools-dock-monitor/lib/actions.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/lib/actions'>;
+declare module "redux-devtools-dock-monitor/lib/actions.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/lib/actions">;
 }
-declare module 'redux-devtools-dock-monitor/lib/constants.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/lib/constants'>;
+declare module "redux-devtools-dock-monitor/lib/constants.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/lib/constants">;
 }
-declare module 'redux-devtools-dock-monitor/lib/DockMonitor.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/lib/DockMonitor'>;
+declare module "redux-devtools-dock-monitor/lib/DockMonitor.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/lib/DockMonitor">;
 }
-declare module 'redux-devtools-dock-monitor/lib/index.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/lib/index'>;
+declare module "redux-devtools-dock-monitor/lib/index.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/lib/index">;
 }
-declare module 'redux-devtools-dock-monitor/lib/reducers.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/lib/reducers'>;
+declare module "redux-devtools-dock-monitor/lib/reducers.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/lib/reducers">;
 }
-declare module 'redux-devtools-dock-monitor/src/actions.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/src/actions'>;
+declare module "redux-devtools-dock-monitor/src/actions.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/src/actions">;
 }
-declare module 'redux-devtools-dock-monitor/src/constants.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/src/constants'>;
+declare module "redux-devtools-dock-monitor/src/constants.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/src/constants">;
 }
-declare module 'redux-devtools-dock-monitor/src/DockMonitor.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/src/DockMonitor'>;
+declare module "redux-devtools-dock-monitor/src/DockMonitor.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/src/DockMonitor">;
 }
-declare module 'redux-devtools-dock-monitor/src/index.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/src/index'>;
+declare module "redux-devtools-dock-monitor/src/index.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/src/index">;
 }
-declare module 'redux-devtools-dock-monitor/src/reducers.js' {
-  declare module.exports: $Exports<'redux-devtools-dock-monitor/src/reducers'>;
+declare module "redux-devtools-dock-monitor/src/reducers.js" {
+  declare module.exports: $Exports<"redux-devtools-dock-monitor/src/reducers">;
 }

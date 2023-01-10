@@ -90,7 +90,7 @@ describe("shareStore", () => {
     const storeContainer = {
       namedStores: {
         _: {
-          store: { [reducerNamesSym]: x => x, [originalReplaceReducerSym]: spy },
+          store: { [reducerNamesSym]: (x) => x, [originalReplaceReducerSym]: spy },
           reducerContainer: {
             [reducerNamesSym]: ["test1", "test2"],
             test1: { a: "a", b: "b" },
@@ -101,7 +101,7 @@ describe("shareStore", () => {
       }
     };
 
-    const mockReducers = { t1: x => x, t2: y => y + 1 };
+    const mockReducers = { t1: (x) => x, t2: (y) => y + 1 };
     replaceReducer(mockReducers, info, storeContainer);
 
     expect(spy.called).to.equal(true);
@@ -117,7 +117,7 @@ describe("shareStore", () => {
       const info = {
         reduxShareStore: true,
         _genReduxCreateStore: undefined,
-        reduxCreateStore: x => x
+        reduxCreateStore: (x) => x
       };
 
       try {
@@ -137,13 +137,16 @@ describe("shareStore", () => {
       const info = {
         name: "reducers",
         reduxShareStore: true,
-        reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" }
+        reduxReducers: { t1: (x) => x || "1", t2: (y) => y + 1 || "2" }
       };
 
       const storeContainer = {
         namedStores: {
           _: {
-            store: { [reducerNamesSym]: x => x || "1", [originalReplaceReducerSym]: y => y || "2" },
+            store: {
+              [reducerNamesSym]: (x) => x || "1",
+              [originalReplaceReducerSym]: (y) => y || "2"
+            },
             reducerContainer: {
               [reducerNamesSym]: ["test1", "test2"],
               test1: { a: "a", b: "b" },
@@ -166,7 +169,7 @@ describe("shareStore", () => {
       const info = {
         name: "reducers",
         reduxShareStore: true,
-        reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" }
+        reduxReducers: { t1: (x) => x || "1", t2: (y) => y + 1 || "2" }
       };
 
       const storeContainer = {
@@ -196,7 +199,7 @@ describe("shareStore", () => {
       const storeContainer2 = {
         namedStores: {
           _: {
-            store: { [reducerNamesSym]: x => x, [originalReplaceReducerSym]: spy },
+            store: { [reducerNamesSym]: (x) => x, [originalReplaceReducerSym]: spy },
             reducerContainer: {
               [reducerNamesSym]: ["test1", "test2"],
               test1: { a: "a", b: "b" },
@@ -207,7 +210,7 @@ describe("shareStore", () => {
         }
       };
 
-      const mockReducers = { t1: x => x, t2: y => y + 1 };
+      const mockReducers = { t1: (x) => x, t2: (y) => y + 1 };
       store.replaceReducer(mockReducers, info2, storeContainer2);
 
       expect(spy.called).to.equal(true);
@@ -220,7 +223,7 @@ describe("shareStore", () => {
       const info = {
         name: "reducers",
         reduxShareStore: false,
-        reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" },
+        reduxReducers: { t1: (x) => x || "1", t2: (y) => y + 1 || "2" },
         reduxCreateStore: spy,
         _genReduxCreateStore: undefined
       };
@@ -250,7 +253,7 @@ describe("shareStore", () => {
       const info = {
         name: "reducers",
         reduxShareStore: false,
-        reduxReducers: x => x || "1",
+        reduxReducers: (x) => x || "1",
         reduxCreateStore: undefined,
         _genReduxCreateStore: true
       };
@@ -278,7 +281,7 @@ describe("shareStore", () => {
       const info = {
         name: "reducers",
         reduxShareStore: false,
-        reduxReducers: { a: x => x || "1", b: y => y || "2" },
+        reduxReducers: { a: (x) => x || "1", b: (y) => y || "2" },
         reduxCreateStore: undefined,
         _genReduxCreateStore: true
       };

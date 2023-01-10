@@ -32,7 +32,7 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
 
   startPrepare(): any {
     xarcV2.debug(this.constructor.name, "pipeline startPrepare for subapp", this.subAppName);
-    this.preparePromise = this.framework.prepareCSR(this.csrData, this).then(result => {
+    this.preparePromise = this.framework.prepareCSR(this.csrData, this).then((result) => {
       return (this.prepResult = result);
     });
   }

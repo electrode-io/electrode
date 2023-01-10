@@ -14,7 +14,7 @@ const filterScanDir = require("filter-scan-dir");
 import { loadXarcOptions } from "../util/load-xarc-options";
 import { logger } from "@xarc/dev-base";
 
-module.exports = function(options) {
+module.exports = function (options) {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
 
@@ -36,7 +36,7 @@ module.exports = function(options) {
     if (exists && filenames.length) {
       return {
         plugins: filenames.map(
-          filename =>
+          (filename) =>
             new webpack.DllReferencePlugin({
               context: config.context,
               manifest: require(filename) // eslint-disable-line global-require

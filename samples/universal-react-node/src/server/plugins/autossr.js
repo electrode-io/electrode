@@ -7,9 +7,12 @@ const responseTimeCondition = require("../conditions/response-time");
 const ElectrodeSSRFlag = {};
 
 ElectrodeSSRFlag.register = function (server, options, next) {
-  const _opts = Object.assign({
-    disabled: {}
-  }, options);
+  const _opts = Object.assign(
+    {
+      disabled: {}
+    },
+    options
+  );
 
   if (!_opts.disabled.serverLoadCondition) {
     const serverLoadHandler = serverLoadCondition(_opts);

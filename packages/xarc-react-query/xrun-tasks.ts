@@ -12,7 +12,7 @@ xrun.load("user", {
         "tsconfig.node.esm.json",
         "tsconfig.browser.es5.cjs.json",
         "tsconfig.browser.es2x.esm.json"
-      ].map(config => exec(`tsc --build ${config} --pretty`))
+      ].map((config) => exec(`tsc --build ${config} --pretty`))
     );
   }
 });

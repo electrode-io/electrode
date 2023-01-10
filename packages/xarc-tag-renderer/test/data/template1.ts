@@ -50,7 +50,7 @@ export const templateTags = createTemplateTags`<html>
   ${false}
   ${TokenInvoke(custom1)}
   ${undefined}
-  ${context => {
+  ${(context) => {
     return `hello world from function: ${Object.keys(context)}\n`;
   }}
   ${null}

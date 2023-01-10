@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'react-notify-toast' {
+declare module "react-notify-toast" {
   declare module.exports: any;
 }
 
@@ -22,74 +22,74 @@ declare module 'react-notify-toast' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'react-notify-toast/bin/components/Container' {
+declare module "react-notify-toast/bin/components/Container" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/bin/components/Toast' {
+declare module "react-notify-toast/bin/components/Toast" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/bin/defaults' {
+declare module "react-notify-toast/bin/defaults" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/bin/notify' {
+declare module "react-notify-toast/bin/notify" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/bin/stylesheet' {
+declare module "react-notify-toast/bin/stylesheet" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/src/components/Container' {
+declare module "react-notify-toast/src/components/Container" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/src/components/Toast' {
+declare module "react-notify-toast/src/components/Toast" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/src/defaults' {
+declare module "react-notify-toast/src/defaults" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/src/notify' {
+declare module "react-notify-toast/src/notify" {
   declare module.exports: any;
 }
 
-declare module 'react-notify-toast/src/stylesheet' {
+declare module "react-notify-toast/src/stylesheet" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'react-notify-toast/bin/components/Container.js' {
-  declare module.exports: $Exports<'react-notify-toast/bin/components/Container'>;
+declare module "react-notify-toast/bin/components/Container.js" {
+  declare module.exports: $Exports<"react-notify-toast/bin/components/Container">;
 }
-declare module 'react-notify-toast/bin/components/Toast.js' {
-  declare module.exports: $Exports<'react-notify-toast/bin/components/Toast'>;
+declare module "react-notify-toast/bin/components/Toast.js" {
+  declare module.exports: $Exports<"react-notify-toast/bin/components/Toast">;
 }
-declare module 'react-notify-toast/bin/defaults.js' {
-  declare module.exports: $Exports<'react-notify-toast/bin/defaults'>;
+declare module "react-notify-toast/bin/defaults.js" {
+  declare module.exports: $Exports<"react-notify-toast/bin/defaults">;
 }
-declare module 'react-notify-toast/bin/notify.js' {
-  declare module.exports: $Exports<'react-notify-toast/bin/notify'>;
+declare module "react-notify-toast/bin/notify.js" {
+  declare module.exports: $Exports<"react-notify-toast/bin/notify">;
 }
-declare module 'react-notify-toast/bin/stylesheet.js' {
-  declare module.exports: $Exports<'react-notify-toast/bin/stylesheet'>;
+declare module "react-notify-toast/bin/stylesheet.js" {
+  declare module.exports: $Exports<"react-notify-toast/bin/stylesheet">;
 }
-declare module 'react-notify-toast/src/components/Container.js' {
-  declare module.exports: $Exports<'react-notify-toast/src/components/Container'>;
+declare module "react-notify-toast/src/components/Container.js" {
+  declare module.exports: $Exports<"react-notify-toast/src/components/Container">;
 }
-declare module 'react-notify-toast/src/components/Toast.js' {
-  declare module.exports: $Exports<'react-notify-toast/src/components/Toast'>;
+declare module "react-notify-toast/src/components/Toast.js" {
+  declare module.exports: $Exports<"react-notify-toast/src/components/Toast">;
 }
-declare module 'react-notify-toast/src/defaults.js' {
-  declare module.exports: $Exports<'react-notify-toast/src/defaults'>;
+declare module "react-notify-toast/src/defaults.js" {
+  declare module.exports: $Exports<"react-notify-toast/src/defaults">;
 }
-declare module 'react-notify-toast/src/notify.js' {
-  declare module.exports: $Exports<'react-notify-toast/src/notify'>;
+declare module "react-notify-toast/src/notify.js" {
+  declare module.exports: $Exports<"react-notify-toast/src/notify">;
 }
-declare module 'react-notify-toast/src/stylesheet.js' {
-  declare module.exports: $Exports<'react-notify-toast/src/stylesheet'>;
+declare module "react-notify-toast/src/stylesheet.js" {
+  declare module.exports: $Exports<"react-notify-toast/src/stylesheet">;
 }

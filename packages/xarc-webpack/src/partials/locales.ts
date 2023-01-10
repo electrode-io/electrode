@@ -14,7 +14,7 @@ export {};
 const LOCALES = ["en"];
 const LOCALES_REGEX = new RegExp(`^\./(${LOCALES.join("|")})$`);
 
-module.exports = function() {
+module.exports = function () {
   return {
     plugins: [new ContextReplacementPlugin(/moment[\\\/]locale$/, LOCALES_REGEX)]
   };

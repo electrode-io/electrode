@@ -116,11 +116,11 @@ export function generateNonce(
 export function urlJoin(baseUrl: string, ...pathParts: string[]) {
   const url = Url.parse(baseUrl);
   let onlyPaths = pathParts;
-  const lastPathIx = pathParts.findIndex(x => x[0] === "?" || x[0] === "&");
+  const lastPathIx = pathParts.findIndex((x) => x[0] === "?" || x[0] === "&");
   if (lastPathIx >= 0) {
     onlyPaths = pathParts.slice(0, lastPathIx);
     const queries = pathParts.slice(lastPathIx);
-    const search = queries.map(x => (x[0] === "?" || x[0] === "&" ? x.substr(1) : x)).join("&");
+    const search = queries.map((x) => (x[0] === "?" || x[0] === "&" ? x.substr(1) : x)).join("&");
     url.search = url.search ? `${url.search}&${search}` : `?${search}`;
   }
   if (onlyPaths.length > 0) {

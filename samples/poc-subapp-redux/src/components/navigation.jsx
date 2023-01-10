@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavItem = props => {
+const NavItem = (props) => {
   const { to, children } = props;
   return (
     <li>

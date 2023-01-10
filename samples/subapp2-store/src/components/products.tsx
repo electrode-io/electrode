@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import custom from "../styles/bootstrap.css";
 
-const DealItem = props => {
+const DealItem = (props) => {
   const { item } = props;
   const panelClass = custom[`panel panel-${item.type || "primary"}`];
   return (
@@ -24,7 +24,7 @@ const DealItem = props => {
   );
 };
 
-const DealRow = props => {
+const DealRow = (props) => {
   const { items, index } = props;
   const elements = [];
   for (let i = 0; i < 3 && index + i < items.length; i++) {
@@ -45,7 +45,7 @@ const decNumber = () => {
   };
 };
 
-const Products = props => {
+const Products = (props) => {
   const { items, value, dispatch } = props;
   const rows = [];
   for (let i = 0; i < items.length; i += 3) {
@@ -70,10 +70,10 @@ Products.propTypes = {
   value: PropTypes.number
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { items: state.items, value: state.number.value };
 };
 
-const ReduxProducts = connect(mapStateToProps, dispatch => ({ dispatch }))(Products);
+const ReduxProducts = connect(mapStateToProps, (dispatch) => ({ dispatch }))(Products);
 
 export { ReduxProducts as Products };

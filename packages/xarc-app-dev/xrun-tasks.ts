@@ -18,13 +18,13 @@ xrun.load("user", {
       ignoreExt: [".ts"]
     });
 
-    _.uniq(scanned.map(f => Path.dirname(f).replace("src", "dist"))).forEach(d =>
+    _.uniq(scanned.map((f) => Path.dirname(f).replace("src", "dist"))).forEach((d) =>
       // @ts-ignore
       xsh.$.mkdir("-p", d)
     );
 
     // @ts-ignore
-    scanned.forEach(f => xsh.$.cp(f, f.replace("src", "dist")));
+    scanned.forEach((f) => xsh.$.cp(f, f.replace("src", "dist")));
 
     const scanMaps = scanDir.sync({
       dir: "dist",
@@ -32,10 +32,10 @@ xrun.load("user", {
       filterExt: [".map"]
     });
 
-    scanMaps.forEach(f => {
+    scanMaps.forEach((f) => {
       const fname = Path.resolve(f);
       const mapData = JSON.parse(Fs.readFileSync(fname).toString());
-      mapData.sources = mapData.sources.map(s => Path.relative("..", s));
+      mapData.sources = mapData.sources.map((s) => Path.relative("..", s));
       Fs.writeFileSync(fname, JSON.stringify(mapData) + "\n");
     });
 

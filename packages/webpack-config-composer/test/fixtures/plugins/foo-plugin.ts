@@ -1,5 +1,3 @@
-
-
 export class FooPlugin {
   test: string;
 

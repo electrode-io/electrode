@@ -18,14 +18,14 @@ function generateConfig(options) {
   let customConfig;
   const customDirs = [process.cwd(), Path.resolve("archetype/config/webpack")];
 
-  const foundDir = customDirs.find(d => {
+  const foundDir = customDirs.find((d) => {
     customConfig = optionalRequire(Path.join(d, options.configFilename));
     return !!customConfig;
   });
   if (foundDir) {
     const dir = xsh.pathCwd.replace(foundDir);
   } else {
-    const dirs = customDirs.map(d => xsh.pathCwd.replace(d)).join("; ");
+    const dirs = customDirs.map((d) => xsh.pathCwd.replace(d)).join("; ");
   }
 
   if (options.profileNames.indexOf("user") < 0) {
@@ -34,10 +34,7 @@ function generateConfig(options) {
 
   const keepCustomProps = options.keepCustomProps;
   const compose = () => {
-    return composer.compose(
-      { keepCustomProps },
-      options.profileNames
-    );
+    return composer.compose({ keepCustomProps }, options.profileNames);
   };
 
   let config;

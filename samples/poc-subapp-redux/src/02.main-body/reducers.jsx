@@ -9,23 +9,23 @@ const number = (number = 1000, action = {}) => {
   return number;
 };
 
-const items = s => {
+const items = (s) => {
   return s || { items: [] };
 };
 
 export default {
   number,
-  items
+  items,
 };
 
 // Action function for easy of use.
 export const incNumber = () => {
   return {
-    type: "INC_NUMBER"
+    type: "INC_NUMBER",
   };
 };
 export const decNumber = () => {
   return {
-    type: "DEC_NUMBER"
+    type: "DEC_NUMBER",
   };
 };

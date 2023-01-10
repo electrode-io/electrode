@@ -3,7 +3,7 @@ import { recoilFeature, Recoil } from "@xarc/react-recoil";
 
 const selectorsMap = new Map();
 
-const filteredTodoListState = store => {
+const filteredTodoListState = (store) => {
   if (selectorsMap.get("filteredTodoListState") === undefined) {
     const selector = Recoil.selector({
       key: "filteredTodoListState",
@@ -13,9 +13,9 @@ const filteredTodoListState = store => {
 
         switch (filter) {
           case "Show Completed":
-            return list.filter(item => item.isComplete);
+            return list.filter((item) => item.isComplete);
           case "Show Uncompleted":
-            return list.filter(item => !item.isComplete);
+            return list.filter((item) => !item.isComplete);
           default:
             return list;
         }
@@ -29,14 +29,14 @@ const filteredTodoListState = store => {
   };
 };
 
-const todoListStatsState = store => {
+const todoListStatsState = (store) => {
   if (selectorsMap.get("todoListStatsState") === undefined) {
     const selector = Recoil.selector({
       key: "todoListStatsState",
       get: ({ get }) => {
         const todoList = get(store.get("todoListState"));
         const totalNum = todoList.length;
-        const totalCompletedNum = todoList.filter(item => item.isComplete).length;
+        const totalCompletedNum = todoList.filter((item) => item.isComplete).length;
         const totalUncompletedNum = totalNum - totalCompletedNum;
         const percentCompleted = totalNum === 0 ? 0 : (totalCompletedNum / totalNum) * 100;
 
@@ -61,7 +61,7 @@ function TodoItemCreator(props) {
   const setTodoList = Recoil.useSetRecoilState(store.get("todoListState"));
 
   const addItem = () => {
-    setTodoList(oldTodoList => [
+    setTodoList((oldTodoList) => [
       ...oldTodoList,
       {
         id: getId(),
@@ -93,7 +93,7 @@ function getId() {
 function TodoItem(props) {
   const { item, store } = props;
   const [todoList, setTodoList] = Recoil.useRecoilState(store.get("todoListState"));
-  const index = todoList.findIndex(listItem => listItem === item);
+  const index = todoList.findIndex((listItem) => listItem === item);
 
   const editItemText = ({ target: { value } }) => {
     const newList = replaceItemAtIndex(todoList, index, {
@@ -158,12 +158,8 @@ function TodoListFilters(props) {
 
 function TodoListStats(props) {
   const { store } = props;
-  const {
-    totalNum,
-    totalCompletedNum,
-    totalUncompletedNum,
-    percentCompleted
-  } = Recoil.useRecoilValue(todoListStatsState(store)());
+  const { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted } =
+    Recoil.useRecoilValue(todoListStatsState(store)());
 
   const formattedPercentCompleted = Math.round(percentCompleted);
 
@@ -183,7 +179,7 @@ function TodoItems(props) {
   const todoList = Recoil.useRecoilValue(filteredTodoListState(store)());
   return (
     <div>
-      {todoList.map(todoItem => (
+      {todoList.map((todoItem) => (
         <TodoItem item={todoItem} key={todoItem.id} store={store} />
       ))}
     </div>
@@ -206,7 +202,7 @@ const TodoListApp = (props: any) => {
   return <TodoList {...props} />;
 };
 
-const RecoilTodoApp = props => {
+const RecoilTodoApp = (props) => {
   const { store } = props;
   return (
     <AppContext.Consumer>
@@ -238,7 +234,7 @@ export const subapp: ReactSubApp = {
   wantFeatures: [
     recoilFeature({
       React,
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Recoil subapp recoil prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };

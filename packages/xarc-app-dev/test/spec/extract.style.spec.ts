@@ -11,7 +11,7 @@ import { expect } from "chai";
 const archetype = getDevOptions();
 
 // TODO: should move to xarc-webpack
-describe.skip("@xarc/app-dev extract-styles", function() {
+describe.skip("@xarc/app-dev extract-styles", function () {
   this.timeout(10000);
 
   archetype.options.sass = true;
@@ -65,7 +65,7 @@ describe.skip("@xarc/app-dev extract-styles", function() {
       };
       archetype.webpack.cssModuleSupport = false;
       const moduleConfig = require(moduleName)().module;
-      const hasSass = moduleConfig.rules[1].use.find(x => x.loader.indexOf("sass-loader") > 0);
+      const hasSass = moduleConfig.rules[1].use.find((x) => x.loader.indexOf("sass-loader") > 0);
       expect(hasSass).to.not.exist;
     });
 

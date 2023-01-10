@@ -8,11 +8,11 @@ module.exports = () => {
       return "<div>user-token-1</div>";
     },
 
-    "user-token-2": context => {
+    "user-token-2": (context) => {
       context.output.add("<div>user-token-2</div>");
     },
 
-    "user-spot-token": context => {
+    "user-spot-token": (context) => {
       const spot = context.output.reserve();
       spot.add("<div>user-spot-1;");
       setTimeout(() => {
@@ -24,8 +24,8 @@ module.exports = () => {
       }, 10);
     },
 
-    "user-promise-token": context => {
-      return new Promise(resolve => {
+    "user-promise-token": (context) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           context.output.add("<div>user-promise-token</div>");
           resolve();
@@ -33,7 +33,7 @@ module.exports = () => {
       });
     },
 
-    "user-header-token": context => {
+    "user-header-token": (context) => {
       context.user.response.headers = {
         "x-foo-bar": "hello-world"
       };

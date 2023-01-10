@@ -11,7 +11,7 @@ describe("webpack4JsonP", () => {
 
   it("should __webpack_get_script_src__ return original src when CDN is enabled", () => {
     mockWindow.xarcV2 = {
-      cdnMap: src => "cdnMap" + src
+      cdnMap: (src) => "cdnMap" + src
     };
 
     expect(mockWindow.__webpack_get_script_src__("chunkId", "publicPath", "/test/src")).equal(
@@ -21,7 +21,7 @@ describe("webpack4JsonP", () => {
 
   it("should __webpack_get_script_src__ return original src when CDN is disabled", () => {
     mockWindow.xarcV2 = {
-      cdnMap: str => undefined //  eslint-disable-line
+      cdnMap: (str) => undefined //  eslint-disable-line
     };
 
     expect(mockWindow.__webpack_get_script_src__("chunkId", "publicPath", "/test/src")).equal(

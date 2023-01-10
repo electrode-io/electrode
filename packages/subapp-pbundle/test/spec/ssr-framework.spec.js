@@ -9,7 +9,7 @@ const { composeBundles } = require("redux-bundler");
 
 const { expectErrorHas, asyncVerify } = require("run-verify");
 
-describe("SSR Preact framework", function() {
+describe("SSR Preact framework", function () {
   it("should setup React framework", () => {
     expect(lib.preact).to.be.ok;
     expect(lib.AppContext).to.be.ok;
@@ -169,9 +169,11 @@ describe("SSR Preact framework", function() {
       }
       return state;
     },
-    doUpdateState: (newState) => ({ dispatch }) => {
-      dispatch({ type: "UPDATE_STATE", newState });
-    },
+    doUpdateState:
+      newState =>
+      ({ dispatch }) => {
+        dispatch({ type: "UPDATE_STATE", newState });
+      },
     selectHello(state) {
       return state.hello;
     }
@@ -365,7 +367,7 @@ describe("SSR Preact framework", function() {
     const framework = new lib.FrameworkLib({
       subApp: {
         __redux: true,
-        packReduxData: (store) => store.getState(),
+        packReduxData: store => store.getState(),
         reduxStoreReady: ({ store }) => {
           store.doUpdateState("universe");
         },

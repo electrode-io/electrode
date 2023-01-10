@@ -24,19 +24,25 @@
   -webkit-animation: spin 1s ease-in-out infinite;
 }
 @keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @-webkit-keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
-#comment-box, #user-box {
+#comment-box,
+#user-box {
   border: 1px solid #000;
   display: inline-block;
   padding: 20px 40px 20px;
   margin: 20px;
   text-align: left;
 }
-.comment, .user {
+.comment,
+.user {
   font-size: 18px;
 }
 .navbar {
@@ -45,24 +51,27 @@
 .navbar .container-fluid {
   max-width: 900px;
 }
-#subapp-header01, #subapp-mainbody, #subapp-bottom,
-#subapp-suspense-demo, #subapp-footer {
+#subapp-header01,
+#subapp-mainbody,
+#subapp-bottom,
+#subapp-suspense-demo,
+#subapp-footer {
   overflow: auto;
   padding: 20px;
 }
 #subapp-header01 {
-  background: #143F6B;
+  background: #143f6b;
   color: #fff;
 }
 #subapp-mainbody {
-  background: #F55353;
+  background: #f55353;
   padding: 0 0 20px;
 }
 #subapp-footer {
-  background: #FEB139;
+  background: #feb139;
 }
 #subapp-suspense-demo {
-  background: #F6F54D;
+  background: #f6f54d;
 }
 footer form {
   max-width: 500px;

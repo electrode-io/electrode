@@ -123,7 +123,7 @@ export const TokenInvoke = (handler: Function, props = {}) => {
  */
 export const RegisterTokenIds = (handler: Function, name?: string) => {
   const uniqSym = Symbol("register-token-${name}");
-  const register = context => {
+  const register = (context) => {
     context.asyncTemplate.registerTokenIds(name, uniqSym, handler);
   };
   register[TAG_TYPE] = "register-token-ids";
@@ -267,9 +267,9 @@ export class TagTemplate {
     let match;
 
     if (typeof matcher === "string") {
-      match = str => str.indexOf(matcher) >= 0;
+      match = (str) => str.indexOf(matcher) >= 0;
     } else if (matcher && matcher.constructor.name === "RegExp") {
-      match = str => str.match(matcher);
+      match = (str) => str.match(matcher);
     } else {
       throw new Error("TagRenderer.findTokensByStr: matcher must be a string or RegExp");
     }

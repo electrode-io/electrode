@@ -17,7 +17,8 @@ export function reduxRenderStart(options) {
   const { Component } = options;
 
   if (options.serverSideRendering) {
-    hydrateRoot(options.element,
+    hydrateRoot(
+      options.element,
       <Provider store={store}>
         <Component />
       </Provider>
@@ -39,7 +40,7 @@ export function reduxRenderStart(options) {
 // onLoadStartElement - the HTML element to render into upon loaded by the browser
 //
 export function reduxLoadSubApp(info) {
-  const renderStart = function(instance, element) {
+  const renderStart = function (instance, element) {
     const initialState = instance._prepared || instance.initialState;
     const reduxCreateStore = instance.reduxCreateStore || this.info.reduxCreateStore;
     const Component = this.info.StartComponent || this.info.Component;

@@ -1,4 +1,4 @@
-export default function(info) {
+export default function (info) {
   if (!info.name) {
     throw new Error(`subapp info missing name`);
   }

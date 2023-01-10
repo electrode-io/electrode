@@ -11,7 +11,7 @@ describe("client-side logger", function () {
     fetchPayload = payload;
   }
 
-  before(function() {
+  before(function () {
     global.window = {
       _wml: {
         config: {
@@ -53,19 +53,16 @@ describe("client-side logger", function () {
     Log._flush();
 
     expect(fetchUrl).to.equal("/api/logger");
-    expect(fetchPayload).to.deep.equal(
-      {
-        "credentials": "include",
-        "disableAnalytics": true,
-        "method": "POST",
-        "headers": {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        "body": `[{"tags":["info"],"data":"test info"},{"tags":["warn"],"data":"test warn"},{"tags":["fatal"],"data":"test fatal"},{"tags":["error"],"data":"test error"},{"tags":["debug"],"data":"test debug"},{"tags":["trace"],"data":"test trace"},{"tags":["log"],"data":"test log"}]` // eslint-disable-line
-      }
-    );
-
+    expect(fetchPayload).to.deep.equal({
+      credentials: "include",
+      disableAnalytics: true,
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: `[{"tags":["info"],"data":"test info"},{"tags":["warn"],"data":"test warn"},{"tags":["fatal"],"data":"test fatal"},{"tags":["error"],"data":"test error"},{"tags":["debug"],"data":"test debug"},{"tags":["trace"],"data":"test trace"},{"tags":["log"],"data":"test log"}]` // eslint-disable-line
+    });
   });
 
   it("should combine and log entries", function (done) {
@@ -79,18 +76,16 @@ describe("client-side logger", function () {
 
     setTimeout(() => {
       expect(fetchUrl).to.equal("/api/logger");
-      expect(fetchPayload).to.deep.equal(
-        {
-          "credentials": "include",
-          "disableAnalytics": true,
-          "method": "POST",
-          "headers": {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-          },
-          "body": `[{"tags":["info"],"data":"test info"},{"tags":["warn"],"data":"test warn"},{"tags":["fatal"],"data":"test fatal"},{"tags":["error"],"data":"test error"},{"tags":["debug"],"data":"test debug"},{"tags":["trace"],"data":"test trace"},{"tags":["log"],"data":"test log"}]` // eslint-disable-line
-        }
-      );
+      expect(fetchPayload).to.deep.equal({
+        credentials: "include",
+        disableAnalytics: true,
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: `[{"tags":["info"],"data":"test info"},{"tags":["warn"],"data":"test warn"},{"tags":["fatal"],"data":"test fatal"},{"tags":["error"],"data":"test error"},{"tags":["debug"],"data":"test debug"},{"tags":["trace"],"data":"test trace"},{"tags":["log"],"data":"test log"}]` // eslint-disable-line
+      });
 
       done();
     }, 200);

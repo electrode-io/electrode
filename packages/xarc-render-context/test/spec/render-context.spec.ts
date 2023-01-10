@@ -42,7 +42,7 @@ describe("munchy output", function () {
     context.setMunchyOutput();
     const munchyoutput = new PassThrough();
     context.munchy.pipe(munchyoutput);
-    munchyoutput.on("data", data => {
+    munchyoutput.on("data", (data) => {
       expect(data.toString()).to.equal("foo");
     });
 
@@ -55,7 +55,7 @@ describe("munchy output", function () {
     process.env.NODE_ENV = "production";
     const context = new RenderContext(
       {
-        transform: a => a
+        transform: (a) => a
       },
       {
         handlersMap: {
@@ -78,7 +78,7 @@ describe("token handler in render context", function () {
   it("should transform output based on transform function", function () {
     const context = new RenderContext({}, {});
 
-    context.setOutputTransform(output => {
+    context.setOutputTransform((output) => {
       return output.replace("\n", "<br>");
     });
     expect(context.transform("\n new line ")).to.equal("<br> new line ");
@@ -96,7 +96,7 @@ describe("token handler in render context", function () {
       const context = new RenderContext({}, {});
 
       context.intercept({
-        responseHandler: resp => resp
+        responseHandler: (resp) => resp
       });
     } catch (e) {
       expect(e.message).to.equal("@xarc/render-context: user intercepted response");
@@ -105,7 +105,7 @@ describe("token handler in render context", function () {
 
   it("should send result to OutputSend function", function () {
     let receivedResult = "";
-    const send = x => {
+    const send = (x) => {
       receivedResult += x;
     };
     const context = new RenderContext({}, {});
@@ -121,9 +121,9 @@ describe("token handler in render context", function () {
   it("should handle token result with string", function () {
     const context = new RenderContext({}, {});
     let x;
-    context.send = _x => (x = _x);
+    context.send = (_x) => (x = _x);
 
-    context.handleTokenResult(1, "stringOutput", err => {
+    context.handleTokenResult(1, "stringOutput", (err) => {
       expect(err).to.be.undefined;
     });
     context.output.flush();
@@ -135,9 +135,9 @@ describe("token handler in render context", function () {
     const context = new RenderContext({}, {});
 
     context.output = {
-      add: buf => (received += buf.toString("utf8"))
+      add: (buf) => (received += buf.toString("utf8"))
     };
-    context.handleTokenResult(1, Buffer.from("hello world", "utf8"), err => {
+    context.handleTokenResult(1, Buffer.from("hello world", "utf8"), (err) => {
       expect(err).to.be.undefined;
     });
     expect(received).to.equal("hello world");
@@ -149,13 +149,13 @@ describe("token handler in render context", function () {
     const context = new RenderContext({}, {});
 
     context.output = {
-      add: rstream => {
-        rstream.on("data", data => {
+      add: (rstream) => {
+        rstream.on("data", (data) => {
           expect(data.toString("ascii")).to.equal("hello");
         });
       }
     };
-    context.handleTokenResult(1, readableStream, err => {
+    context.handleTokenResult(1, readableStream, (err) => {
       expect(err).to.be.undefined;
     });
     // readableStream.setEncoding("utf-8");
@@ -169,11 +169,11 @@ describe("token handler in render context", function () {
 
     // const done = () => defer && defer.resolve("foo");
     context.output = {
-      add: outcome => {
+      add: (outcome) => {
         expect(outcome).to.equal("foo");
       }
     };
-    context.handleTokenResult(1, defer.promise, err => {
+    context.handleTokenResult(1, defer.promise, (err) => {
       expect(err).to.be.undefined;
     });
     await defer.done(null, "foo");
@@ -181,7 +181,7 @@ describe("token handler in render context", function () {
   it("should ignore other types", function () {
     const context = new RenderContext({}, {});
 
-    context.handleTokenResult(1, false, err => {
+    context.handleTokenResult(1, false, (err) => {
       expect(err).to.be.undefined;
     });
   });

@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'good' {
+declare module "good" {
   declare module.exports: any;
 }
 
@@ -22,32 +22,32 @@ declare module 'good' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'good/lib/index' {
+declare module "good/lib/index" {
   declare module.exports: any;
 }
 
-declare module 'good/lib/monitor' {
+declare module "good/lib/monitor" {
   declare module.exports: any;
 }
 
-declare module 'good/lib/schema' {
+declare module "good/lib/schema" {
   declare module.exports: any;
 }
 
-declare module 'good/lib/utils' {
+declare module "good/lib/utils" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'good/lib/index.js' {
-  declare module.exports: $Exports<'good/lib/index'>;
+declare module "good/lib/index.js" {
+  declare module.exports: $Exports<"good/lib/index">;
 }
-declare module 'good/lib/monitor.js' {
-  declare module.exports: $Exports<'good/lib/monitor'>;
+declare module "good/lib/monitor.js" {
+  declare module.exports: $Exports<"good/lib/monitor">;
 }
-declare module 'good/lib/schema.js' {
-  declare module.exports: $Exports<'good/lib/schema'>;
+declare module "good/lib/schema.js" {
+  declare module.exports: $Exports<"good/lib/schema">;
 }
-declare module 'good/lib/utils.js' {
-  declare module.exports: $Exports<'good/lib/utils'>;
+declare module "good/lib/utils.js" {
+  declare module.exports: $Exports<"good/lib/utils">;
 }

@@ -28,7 +28,7 @@ export = {
     ],
     enableTypeScript && "@babel/preset-typescript",
     "@babel/preset-react"
-  ].filter(x => x),
+  ].filter((x) => x),
   plugins: [
     addFlowPlugin && [
       "@babel/plugin-transform-flow-strip-types",
@@ -39,5 +39,5 @@ export = {
       { loose: looseClassProps }
     ],
     enableTypeScript && "@babel/proposal-object-rest-spread"
-  ].filter(x => x)
+  ].filter((x) => x)
 };

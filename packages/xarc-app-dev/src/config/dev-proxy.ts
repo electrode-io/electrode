@@ -29,7 +29,7 @@ function searchSSLCertsModule(xarcCwd): any {
 
   try {
     const appPkg = JSON.parse(Fs.readFileSync(Path.resolve(xarcCwd, "package.json"), "utf-8"));
-    const matchModName = n => n.match(/(@[^\/]+\/|)ssl-certs.*/);
+    const matchModName = (n) => n.match(/(@[^\/]+\/|)ssl-certs.*/);
     sslCertsMod =
       Object.keys(appPkg.dependencies || {}).find(matchModName) ||
       Object.keys(appPkg.devDependencies || {}).find(matchModName);

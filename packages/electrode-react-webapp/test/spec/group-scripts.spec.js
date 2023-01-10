@@ -28,7 +28,7 @@ const data = [
 const groupScripts = require("../../lib/group-scripts");
 const chai = require("chai");
 
-describe("group-scripts", function() {
+describe("group-scripts", function () {
   it("should group scripts", () => {
     const expected = [
       "a;\n\nb;\n\nc;",

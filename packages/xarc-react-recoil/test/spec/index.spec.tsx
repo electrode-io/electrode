@@ -10,7 +10,7 @@ import { recoilFeature, RecoilFeature } from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
 
-const mockPrepare = async initialState => {
+const mockPrepare = async (initialState) => {
   return {
     initialState: {
       state: {

@@ -13,7 +13,7 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'electrode-redux-router-engine' {
+declare module "electrode-redux-router-engine" {
   declare module.exports: any;
 }
 
@@ -22,11 +22,11 @@ declare module 'electrode-redux-router-engine' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'electrode-redux-router-engine/lib/redux-router-engine' {
+declare module "electrode-redux-router-engine/lib/redux-router-engine" {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'electrode-redux-router-engine/lib/redux-router-engine.js' {
-  declare module.exports: $Exports<'electrode-redux-router-engine/lib/redux-router-engine'>;
+declare module "electrode-redux-router-engine/lib/redux-router-engine.js" {
+  declare module.exports: $Exports<"electrode-redux-router-engine/lib/redux-router-engine">;
 }

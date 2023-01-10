@@ -50,8 +50,10 @@ const orders = [
 ];
 
 const files = Fs.readdirSync(__dirname)
-  .filter(x => x !== "index.js" && !x.endsWith(".d.ts") && !x.endsWith(".map") && x !== "index.ts")
-  .map(x => x.substr(0, x.length - 3));
+  .filter(
+    (x) => x !== "index.js" && !x.endsWith(".d.ts") && !x.endsWith(".map") && x !== "index.ts"
+  )
+  .map((x) => x.substr(0, x.length - 3));
 
 const partials = files.reduce((a, p) => {
   const k = `_${p}`;

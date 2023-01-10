@@ -40,7 +40,7 @@ function makeEntryPartial() {
     const entryPath = Path.join(partial.context, "entry.config.js");
 
     const entry = optionalRequire(entryPath, {
-      fail: err => {
+      fail: (err) => {
         logger.error(`Loading ${entryPath} failed`, err);
         process.exit(1);
       },
@@ -143,7 +143,7 @@ if (module.hot) {
 
     partial.context = Path.resolve(xarcCwd, AppMode.src.dir);
     const entry = {};
-    _.each(subApps, ma => {
+    _.each(subApps, (ma) => {
       const entryName = `${ma.name.toLowerCase()}`;
       const x1 = `${chalk.magenta("subapp")} ${chalk.blue(ma.name)}`;
       entry[entryName] = genSubAppHmrEntry(hmrDir, isDev, ma);
@@ -170,13 +170,13 @@ if (module.hot) {
 
     // finally look for src/client/app.js or src/client/app.jsx or src/client/app.tsx
     const entries = ["./app.js", "./app.jsx", "./app.tsx"];
-    let entry = entries.find(f => Fs.existsSync(Path.join(partial.context, f)));
+    let entry = entries.find((f) => Fs.existsSync(Path.join(partial.context, f)));
     //
     // no entry found, maybe there's no src/client
     // look under src instead
     //
     if (!entry) {
-      entry = entries.find(f => Fs.existsSync(Path.join(AppMode.src.dir, f)));
+      entry = entries.find((f) => Fs.existsSync(Path.join(AppMode.src.dir, f)));
       if (entry) {
         logger.info(
           `Found your app entry as ${entry} under dir ${AppMode.src.dir} - setting webpack context to it.`
@@ -201,9 +201,7 @@ if (module.hot) {
   function shouldPolyfill() {
     if (xarcOptions.webpack.enableBabelPolyfill) {
       const hasMultipleTarget =
-        Object.keys(xarcOptions.babel.envTargets)
-          .sort()
-          .join(",") !== "default,node";
+        Object.keys(xarcOptions.babel.envTargets).sort().join(",") !== "default,node";
       if (hasMultipleTarget) {
         return xarcOptions.babel.target === "default";
         // for all other targets, disable polyfill

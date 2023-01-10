@@ -16,7 +16,7 @@ function getWebpackStartConfig(defaultFile: string, relativeToCwd = true) {
   let customFilePath;
 
   if (_.get(xarcOptions, "webpack.useAppWebpackConfig") !== false) {
-    ["webpack.config.js", "webpack.config.ts"].find(f => {
+    ["webpack.config.js", "webpack.config.ts"].find((f) => {
       const ff = Path.resolve(f);
 
       if (Fs.existsSync(ff)) {

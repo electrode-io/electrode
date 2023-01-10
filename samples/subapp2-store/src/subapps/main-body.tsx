@@ -8,7 +8,7 @@ import { combineEpics } from "redux-observable";
 import { filter, delay, mapTo } from "rxjs/operators";
 import { reduxObservableDecor } from "@xarc/react-redux-observable";
 
-const pingEpic = action$ =>
+const pingEpic = (action$) =>
   action$.pipe(
     filter((action: any) => action.type === "PING"),
     delay(1000), // Asynchronously wait 1000ms then continue
@@ -35,7 +35,7 @@ export const recoilTodoApp = declareSubApp({
 const Deals = createDynamicComponent(deals, { ssr: true });
 const RecoilApp = createDynamicComponent(recoilTodoApp, { ssr: true });
 
-const MainBody = props => {
+const MainBody = (props) => {
   return <div>Home</div>;
 };
 
@@ -48,11 +48,11 @@ MainBody.propTypes = {
 // REDUX
 //
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { value: state.number.value, items: state.items };
 };
 
-const ReduxHome = connect(mapStateToProps, dispatch => ({ dispatch }))(MainBody);
+const ReduxHome = connect(mapStateToProps, (dispatch) => ({ dispatch }))(MainBody);
 
 //
 // ROUTING
@@ -94,7 +94,7 @@ export const subapp: ReactSubApp = {
       shareStore: false,
       reducers: true,
       // provider({ Component, props }) {}
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };
@@ -176,10 +176,10 @@ export const reduxReducers = {
 
     return store || { value: 999 };
   },
-  items: s => {
+  items: (s) => {
     return s || { items: [] };
   },
-  deals: s => {
+  deals: (s) => {
     return s || { value: "my deals" };
   }
 };

@@ -8,7 +8,7 @@ import {
   clearSharedStore
 } from "../../src/shared";
 
-describe("shared redux store", function() {
+describe("shared redux store", function () {
   afterEach(() => {
     delete global.window;
     delete global.document;

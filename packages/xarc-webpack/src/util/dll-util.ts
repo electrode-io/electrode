@@ -38,7 +38,7 @@ const loadJson = (name, defaultVal) => {
 
 const getEnvTag = () => (process.env.NODE_ENV === "production" ? "" : ".dev");
 
-const findDllManifests = name => {
+const findDllManifests = (name) => {
   try {
     const modulePath = require.resolve(Path.join(name, "package.json"));
     const moduleDir = Path.dirname(modulePath);
@@ -46,7 +46,7 @@ const findDllManifests = name => {
     const statsFile = Path.join(moduleDir, "dist", `stats${dev}.json`);
     const stats = JSON.parse(Fs.readFileSync(statsFile).toString());
     const dllNames = Object.keys(stats.assetsByChunkName);
-    const dllInfo = dllNames.map(n => {
+    const dllInfo = dllNames.map((n) => {
       return {
         name: n,
         moduleName: name,
@@ -63,9 +63,9 @@ const findDllManifests = name => {
   }
 };
 
-const verifyVersions = info => {
+const verifyVersions = (info) => {
   const versions = JSON.parse(Fs.readFileSync(info.versions).toString());
-  Object.keys(versions).forEach(pkgDir => {
+  Object.keys(versions).forEach((pkgDir) => {
     const pkgInfo = versions[pkgDir];
     const modName = pkgInfo.name;
     const pkgNmDir = Path.dirname(require.resolve(`${modName}/package.json`));
@@ -118,19 +118,19 @@ const verifyVersions = info => {
 
 const electrodeDllDevBasePath = "__electrode_dev/dll";
 
-const updateDllAssetsForDev = dllAssets => {
+const updateDllAssetsForDev = (dllAssets) => {
   const archetype = loadXarcOptions();
 
   const baseUrl = devServerBaseUrl(archetype.webpack);
 
   const tag = getEnvTag();
 
-  Object.keys(dllAssets).forEach(modName => {
+  Object.keys(dllAssets).forEach((modName) => {
     const encModName = encodeURIComponent(modName);
     const cdnMapping = (dllAssets[modName].cdnMapping = {});
-    Object.keys(dllAssets[modName]).forEach(dll => {
+    Object.keys(dllAssets[modName]).forEach((dll) => {
       if (dll === "cdnMapping") return;
-      const bundle = dllAssets[modName][dll].assets.find(n => n.endsWith(`${tag}.js`));
+      const bundle = dllAssets[modName][dll].assets.find((n) => n.endsWith(`${tag}.js`));
       cdnMapping[bundle] = `${baseUrl}/${electrodeDllDevBasePath}/${encModName}/${bundle}`;
     });
   });
@@ -144,7 +144,9 @@ module.exports = {
 
     const loadDlls = archetype.webpack.loadDlls;
 
-    const dllMods = Object.keys(loadDlls).filter(x => loadDlls[x] && loadDlls[x].enable !== false);
+    const dllMods = Object.keys(loadDlls).filter(
+      (x) => loadDlls[x] && loadDlls[x].enable !== false
+    );
 
     let dllInfo = [];
     let dllAssets = {};
@@ -157,7 +159,7 @@ module.exports = {
       if (_.isEmpty(dllInfo)) {
         logger.warn("Electrode DLL found no manifests to load");
       } else {
-        logger.verbose("Electrode DLL manifests", dllInfo.map(x => x.manifest).join(", "));
+        logger.verbose("Electrode DLL manifests", dllInfo.map((x) => x.manifest).join(", "));
         dllInfo.forEach(verifyVersions);
 
         dllAssets = dllInfo.reduce((a, x) => {
@@ -175,7 +177,7 @@ module.exports = {
     return { info: dllInfo, assets: dllAssets };
   },
 
-  saveDllAssets: dllAssets => {
+  saveDllAssets: (dllAssets) => {
     const tag = getEnvTag();
     mkdirp.sync(Path.resolve("dist"));
     Fs.writeFileSync(

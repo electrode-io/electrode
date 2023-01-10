@@ -36,11 +36,11 @@ export class ContainerPlugin {
       filename: options.filename || undefined,
       exposes: parseOptions(
         options.exposes,
-        item => ({
+        (item) => ({
           import: Array.isArray(item) ? item : [item],
           name: undefined
         }),
-        item => ({
+        (item) => ({
           import: Array.isArray(item.import) ? item.import : [item.import],
           name: item.name || undefined
         })
@@ -59,7 +59,7 @@ export class ContainerPlugin {
     compiler.options.output.enabledLibraryTypes.push(library.type);
 
     if (entry) {
-      compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+      compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
         const EntryPlugin = require("webpack/lib/EntryPlugin");
         for (const ent of [].concat(entry)) {
           new EntryPlugin(compilation.options.context, ent, {
@@ -83,7 +83,7 @@ export class ContainerPlugin {
           filename,
           library
         },
-        error => {
+        (error) => {
           if (error) return callback(error);
           callback();
         }

@@ -2,7 +2,7 @@
 
 const { reduxBundlerLoadSubApp } = require("../../lib/redux-bundler");
 
-describe("redux-bundler load subapp", function() {
+describe("redux-bundler load subapp", function () {
   it("should initialize reduxCreateStore if it's not provided", () => {
     const subapp = reduxBundlerLoadSubApp({
       name: `test-${Date.now()}-1`

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
 
-const Extras = props => {
+const Extras = (props) => {
   const { message } = props;
   return (
     <div>
@@ -23,8 +23,8 @@ Extras.propTypes = {
 };
 
 const Component = connect(
-  state => state,
-  dispatch => ({ dispatch })
+  (state) => state,
+  (dispatch) => ({ dispatch })
 )(Extras);
 
 export const subapp: ReactSubApp = {
@@ -33,9 +33,9 @@ export const subapp: ReactSubApp = {
     reduxFeature({
       React,
       shareStore: true,
-      reducers: x => x,
+      reducers: (x) => x,
       prepare: () => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             resolve({
               initialState: {

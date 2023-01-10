@@ -13,7 +13,7 @@ const { loadRuntimeSupport } = require("@xarc/app");
 const staticPathsDecor = require("electrode-static-paths");
 const electrodeServer = require("electrode-server");
 
-const startServer = config => {
+const startServer = (config) => {
   //
   const decor = staticPathsDecor();
   return electrodeServer(config, [decor]);

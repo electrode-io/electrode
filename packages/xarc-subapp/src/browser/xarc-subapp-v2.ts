@@ -61,146 +61,147 @@ export function xarcV2Client(
 
   let xv2: XarcSubAppClientV2;
 
-  return (w.xarcV2 = xv2 = {
-    IS_BROWSER: true,
-    HAS_WINDOW: typeof window !== "undefined",
+  return (w.xarcV2 = xv2 =
+    {
+      IS_BROWSER: true,
+      HAS_WINDOW: typeof window !== "undefined",
 
-    version,
+      version,
 
-    rt: runtimeInfo,
+      rt: runtimeInfo,
 
-    //
-    // empty place holders for CDN mapping
-    //
-    //  eslint-disable-next-line
-    cdnInit(_: any) {
       //
-    },
-    //  eslint-disable-next-line
-    cdnUpdate(_: any) {
+      // empty place holders for CDN mapping
       //
-    },
-    cdnMap(x) {
-      return x;
-    },
+      //  eslint-disable-next-line
+      cdnInit(_: any) {
+        //
+      },
+      //  eslint-disable-next-line
+      cdnUpdate(_: any) {
+        //
+      },
+      cdnMap(x) {
+        return x;
+      },
 
-    getOnLoadStart(name) {
-      if (!runtimeInfo.onLoadStart[name]) runtimeInfo.onLoadStart[name] = [];
-      return runtimeInfo.onLoadStart[name];
-    },
+      getOnLoadStart(name) {
+        if (!runtimeInfo.onLoadStart[name]) runtimeInfo.onLoadStart[name] = [];
+        return runtimeInfo.onLoadStart[name];
+      },
 
-    addOnLoadStart(name, load) {
-      xv2.getOnLoadStart(name).push(load);
-    },
+      addOnLoadStart(name, load) {
+        xv2.getOnLoadStart(name).push(load);
+      },
 
-    //
-    // When there are subapps that need to load and start up front, SSR could
-    // be tricky if any of them is inlined within other components, because when
-    // UI render the component tree, any kind of async op (such as data prep)
-    // can't occur in the middle of the render and must return a fallback while
-    // async is loading, and that would cause SSR content to be replaced with the
-    // fallback, producing a flash, nullifying the SSR.
-    // To remedy this, a single data prep action would be waiting for subapps
-    // to load, all subapp that's starting onLoad will have to wait for the data prep
-    // action.
-    //
-    // watchSubAppOnLoad(immediate) {},
+      //
+      // When there are subapps that need to load and start up front, SSR could
+      // be tricky if any of them is inlined within other components, because when
+      // UI render the component tree, any kind of async op (such as data prep)
+      // can't occur in the middle of the render and must return a fallback while
+      // async is loading, and that would cause SSR content to be replaced with the
+      // fallback, producing a flash, nullifying the SSR.
+      // To remedy this, a single data prep action would be waiting for subapps
+      // to load, all subapp that's starting onLoad will have to wait for the data prep
+      // action.
+      //
+      // watchSubAppOnLoad(immediate) {},
 
-    startSubAppOnLoad(options: LoadSubAppOptions, data: any) {
-      const { name } = options;
-      const ols = runtimeInfo.onLoadStart;
+      startSubAppOnLoad(options: LoadSubAppOptions, data: any) {
+        const { name } = options;
+        const ols = runtimeInfo.onLoadStart;
 
-      if (!ols[name]) {
-        ols[name] = [];
-      }
-
-      ols[name].push(Object.assign({}, options, data));
-    },
-
-    _start(ignore: string[], callDepth) {
-      runtimeInfo.started = true;
-      const promises = [];
-      const onLoadStart = runtimeInfo.onLoadStart;
-      const subapps = w._subapps;
-      const subappsBeforeLoad = subapps.getNames();
-
-      const beginTs = Date.now();
-      for (const name in onLoadStart) {
-        const subapp = subapps.get(name);
-        if (!subapp) {
-          console.debug("onload start subapp not yet registered:", name);
-        } else if (!subapp._module) {
-          promises.push(subapp._getModule());
+        if (!ols[name]) {
+          ols[name] = [];
         }
-      }
 
-      if (ignore.length > 0) {
-        // some previously loaded subapps (in ignore) cause more subapps to be declared
-        for (const name of subapps.getNames()) {
+        ols[name].push(Object.assign({}, options, data));
+      },
+
+      _start(ignore: string[], callDepth) {
+        runtimeInfo.started = true;
+        const promises = [];
+        const onLoadStart = runtimeInfo.onLoadStart;
+        const subapps = w._subapps;
+        const subappsBeforeLoad = subapps.getNames();
+
+        const beginTs = Date.now();
+        for (const name in onLoadStart) {
           const subapp = subapps.get(name);
-          if (ignore.indexOf(name) < 0 && !subapp._module && subapp._ssr) {
-            console.debug(" -> loading module of new SSR subapp declared", name, subapp._ssr);
+          if (!subapp) {
+            console.debug("onload start subapp not yet registered:", name);
+          } else if (!subapp._module) {
             promises.push(subapp._getModule());
           }
         }
-      }
 
-      return Promise.all(promises)
-        .catch(err => {
-          console.error(
-            "subapp onStart load modules failed. Continue anyways, but things may be broken.",
-            err
-          );
-        })
-        .then(mods => {
-          console.debug("subapp onStart loaded modules. msec taken:", Date.now() - beginTs, mods);
-          // Some modules declared more subapps, load them first, but ignore what we just loaded.
-          if (subapps.declareCount > subappsBeforeLoad.length) {
-            if (callDepth < MAX_CALL_DEPTH) {
-              console.debug("new subapps declared => loading them");
-              return this._start(subappsBeforeLoad, callDepth + 1);
-            } else {
-              console.error("subapp _start callDepth too deep, giving up:", callDepth);
+        if (ignore.length > 0) {
+          // some previously loaded subapps (in ignore) cause more subapps to be declared
+          for (const name of subapps.getNames()) {
+            const subapp = subapps.get(name);
+            if (ignore.indexOf(name) < 0 && !subapp._module && subapp._ssr) {
+              console.debug(" -> loading module of new SSR subapp declared", name, subapp._ssr);
+              promises.push(subapp._getModule());
             }
           }
-          const doc: Document = w.document;
-          for (const name in onLoadStart) {
-            onLoadStart[name].forEach((startOpts: SubAppCSRData) => {
-              const element = doc.getElementById(startOpts.elementId);
-              console.debug(name, "starting subapp into", element);
-              subapps.get(name)._start({ csrData: Object.assign({}, startOpts, { element }) });
-            });
-          }
-          return mods;
-        });
-    },
-
-    start() {
-      if (!w._subapps) {
-        console.error("No subapps registered, nothing to start.");
-        return Promise.resolve();
-      }
-      return this._start([], 0);
-    },
-
-    dyn(id) {
-      const msg = "ERROR: fail retrieve dynamic data from element";
-      const element = document.getElementById(id);
-      if (!element) {
-        console.error(msg, id, "- get");
-        return {};
-      } else {
-        try {
-          return JSON.parse(element.innerHTML.replace(/&lt;(\/?)script>/g, "<$1script>"));
-        } catch (err) {
-          console.error(msg, id, "- parse");
-          return {};
         }
-      }
-    },
 
-    get debug() {
-      return debugLog;
-    }
-  });
+        return Promise.all(promises)
+          .catch((err) => {
+            console.error(
+              "subapp onStart load modules failed. Continue anyways, but things may be broken.",
+              err
+            );
+          })
+          .then((mods) => {
+            console.debug("subapp onStart loaded modules. msec taken:", Date.now() - beginTs, mods);
+            // Some modules declared more subapps, load them first, but ignore what we just loaded.
+            if (subapps.declareCount > subappsBeforeLoad.length) {
+              if (callDepth < MAX_CALL_DEPTH) {
+                console.debug("new subapps declared => loading them");
+                return this._start(subappsBeforeLoad, callDepth + 1);
+              } else {
+                console.error("subapp _start callDepth too deep, giving up:", callDepth);
+              }
+            }
+            const doc: Document = w.document;
+            for (const name in onLoadStart) {
+              onLoadStart[name].forEach((startOpts: SubAppCSRData) => {
+                const element = doc.getElementById(startOpts.elementId);
+                console.debug(name, "starting subapp into", element);
+                subapps.get(name)._start({ csrData: Object.assign({}, startOpts, { element }) });
+              });
+            }
+            return mods;
+          });
+      },
+
+      start() {
+        if (!w._subapps) {
+          console.error("No subapps registered, nothing to start.");
+          return Promise.resolve();
+        }
+        return this._start([], 0);
+      },
+
+      dyn(id) {
+        const msg = "ERROR: fail retrieve dynamic data from element";
+        const element = document.getElementById(id);
+        if (!element) {
+          console.error(msg, id, "- get");
+          return {};
+        } else {
+          try {
+            return JSON.parse(element.innerHTML.replace(/&lt;(\/?)script>/g, "<$1script>"));
+          } catch (err) {
+            console.error(msg, id, "- parse");
+            return {};
+          }
+        }
+      },
+
+      get debug() {
+        return debugLog;
+      }
+    });
 }

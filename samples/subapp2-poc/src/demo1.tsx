@@ -1,7 +1,7 @@
 import { React, ReactSubApp, AppContext } from "@xarc/react";
 import { message } from "./message";
 
-const Demo1 = props => {
+const Demo1 = (props) => {
   return (
     <AppContext.Consumer>
       {({ isSsr, ssr }) => {
