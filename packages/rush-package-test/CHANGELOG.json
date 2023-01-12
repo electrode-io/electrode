@@ -2,6 +2,18 @@
   "name": "rush-package-test",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "rush-package-test_v1.1.1",
+      "date": "Thu, 12 Jan 2023 23:37:58 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Test changes made to log message"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "rush-package-test_v1.1.0",
       "date": "Wed, 26 Oct 2022 23:00:19 GMT",
