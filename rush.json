@@ -193,6 +193,8 @@
      * If no commit message is set it will default to 'Rush change'
      */
     // "changefilesCommitMessage": "Rush change"
+    "versionBumpCommitMessage": "chore: bump versions [skip ci]",
+    "changeLogUpdateCommitMessage": "chore: update changelogs [skip ci]"
   },
 
   "repository": {
@@ -692,6 +694,12 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },   
+    {
+      "packageName": "rush-package-test",
+      "projectFolder": "packages/rush-package-test",
+      "shouldPublish": true,
+      "skipRushCheck": true
+    },
 
     // Sample apps
     {
