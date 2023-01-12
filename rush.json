@@ -695,8 +695,8 @@
       "skipRushCheck": true
     },   
     {
-      "packageName": "sample-package-rush",
-      "projectFolder": "packages/sample-package-rush",
+      "packageName": "rush-package-test",
+      "projectFolder": "packages/rush-package-test",
       "shouldPublish": true,
       "skipRushCheck": true
     },
