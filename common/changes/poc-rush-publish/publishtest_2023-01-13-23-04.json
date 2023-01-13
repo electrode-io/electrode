@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "poc-rush-publish",
+      "comment": "New package to test rush publish",
+      "type": "major"
+    }
+  ],
+  "packageName": "poc-rush-publish"
+}
