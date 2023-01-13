@@ -1,0 +1,1 @@
+console.log('Test publish with rush')
