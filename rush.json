@@ -693,12 +693,6 @@
       "projectFolder": "packages/xarc-webpack",
       "shouldPublish": true,
       "skipRushCheck": true
-    },   
-    {
-      "packageName": "rush-package-test",
-      "projectFolder": "packages/rush-package-test",
-      "shouldPublish": true,
-      "skipRushCheck": true
     },
 
     // Sample apps
