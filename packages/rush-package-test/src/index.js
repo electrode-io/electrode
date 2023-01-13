@@ -1,1 +1,1 @@
-console.log('This is a package to test automated package publish on PR merge...! - v7')
+console.log('This is a package to test automated package publish on PR merge...! - v8')
