@@ -36,7 +36,6 @@ specifiers:
   '@rush-temp/opt-react': file:./projects/opt-react.tgz
   '@rush-temp/opt-sass': file:./projects/opt-sass.tgz
   '@rush-temp/opt-stylus': file:./projects/opt-stylus.tgz
-  '@rush-temp/poc-rush-publish': file:./projects/poc-rush-publish.tgz
   '@rush-temp/poc-subapp': file:./projects/poc-subapp.tgz
   '@rush-temp/poc-subapp-redux': file:./projects/poc-subapp-redux.tgz
   '@rush-temp/react': file:./projects/react.tgz
@@ -222,7 +221,6 @@ dependencies:
   '@rush-temp/opt-react': file:projects/opt-react.tgz
   '@rush-temp/opt-sass': file:projects/opt-sass.tgz_webpack@5.74.0
   '@rush-temp/opt-stylus': file:projects/opt-stylus.tgz
-  '@rush-temp/poc-rush-publish': file:projects/poc-rush-publish.tgz
   '@rush-temp/poc-subapp': file:projects/poc-subapp.tgz_webpack@5.74.0
   '@rush-temp/poc-subapp-redux': file:projects/poc-subapp-redux.tgz_webpack@5.74.0
   '@rush-temp/react': file:projects/react.tgz
@@ -21220,12 +21218,6 @@ packages:
       stylus-relative-loader: 4.0.0_stylus@0.57.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  file:projects/poc-rush-publish.tgz:
-    resolution: {integrity: sha512-CKTStCqFt8/ULt9B/vAd0VW6uPXE5oQ+rRFoHv3Vy/XSKC1MosePEcp33O4NK7f5hvxB+eyo4lmIQzW48sv3Sg==, tarball: file:projects/poc-rush-publish.tgz}
-    name: '@rush-temp/poc-rush-publish'
-    version: 0.0.0
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.74.0:
