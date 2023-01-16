@@ -72,6 +72,7 @@
     "@typescript-eslint/parser": "^2.21.0",
     "@xarc/app": "^11.0.1",
     "@xarc/module-dev": "^2.2.5",
+    "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
