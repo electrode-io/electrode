@@ -65,15 +65,9 @@ We are using [prettier] to format all our code with only one custom setting: `--
 
 #### PR and Commit messages
 
-Since we use independent lerna mode, to help keep the changelog clear, please format all your commit message with the following guideline:
+Since we use commitlint, keep the changelog clear, please format all your commit message with the following guideline:
 
-`[<semver>][feat|bug|chore] <message>`
-
-- `<semver>` can be:
-  - `major` - `maj` or `major`
-  - `minor` - `min` or `minor`
-  - `patch` - `pat` or `patch`
-- Only include `[feat|bug|chore]` if it's applicable.
+- Only include `feat|bug|chore` if it's applicable.
 - Please format your PR's title with the same format.
 
 > **_Please do everything you can to keep commits for a PR to a single package in `packages`._**
@@ -81,8 +75,10 @@ Since we use independent lerna mode, to help keep the changelog clear, please fo
 A sample commit and PR message should look like:
 
 ```text
-[minor][feat] implement support for react-query
+feat: implement support for react-query
 ```
+
+Read more about commitlint - https://github.com/conventional-changelog/commitlint/#what-is-commitlint
 
 ### Filing Issues
 
