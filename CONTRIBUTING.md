@@ -109,19 +109,31 @@ $ cd docusaurus
 $ pnpm run deploy
 ```
 
-## Releasing
+## Process to publish packages
 
-- Run `rush change` for any PRs with changes that needs to get released
-  This will provide an interactive screen to add Change description. Please provide details here about the changes you are making thorugh this PR
-  This will generate a change files in JSON format which are later used to generate changelogs
-- Commit the generated change files (JSON).
+### Developer flow
+- Developers commit all code changes.
+- Run `rush change --target-branch <targetBranchWhichIsUsualyMaster>` 
+  - This generates *change files*
+- Commit *change files*
+- Push the PR and get it reviewd and merged
 
-> NOTE: Rush by default does NOT support conventional commits and developers needs to decide on the version bump (major/minor/patch). 
+### Publish flow
+When its time to publish packages (as per release schedule)
+- Pull latest from `master` branch
+- Run `rush publish —apply`
+    - This is [dry run mode]. 
+    - Changes are added to the changelog files for each package.
+    - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
+    - Review the CHANGELOG.md updates at this point
+- Run `rush publish --apply --target-branch main --publish --add-commit-details`
+    - This will create a branch with `publish-*`
+    - Publish the packages
+    - And finally checkout back to *target branch* (`master` in this case)
+- Checkout to publish branch that got created above 
+- Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
 
-Read more about [best practices]
-### To publish
-- https://rushjs.io/pages/maintainer/publishing/#dry-run-mode
-
+Read more about [rush publishing] and [best practices]
 
 
 [prettier]: https://www.npmjs.com/package/prettier
@@ -132,3 +144,4 @@ Read more about [best practices]
 [rushjs with pnpm]: https://rushjs.io/pages/maintainer/package_managers/
 [best practices]:  https://rushjs.io/pages/best_practices/change_logs/#recommended-practices
 [pnpm]: https://pnpm.io/
+[rush publishing]: https://rushjs.io/pages/maintainer/publishing/#dry-run-mode
