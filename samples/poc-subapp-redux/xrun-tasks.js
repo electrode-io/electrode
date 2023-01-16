@@ -14,6 +14,7 @@ const deps = require("./package.json").dependencies;
 
 loadDevTasks(xrun, {
   webpackOptions: {
-    minify: true
+    minify: true,
+    devtool: 'inline-source-map'
   }
 });

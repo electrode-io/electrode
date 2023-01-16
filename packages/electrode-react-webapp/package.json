@@ -80,6 +80,7 @@
     "chai": "4.3.6",
     "@xarc/module-dev": "^4.1.0",
     "benchmark": "^2.1.4",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-redux-router-engine": "6.0.0",
     "electrode-server": "^1.8.0",
     "electrode-server2": "npm:electrode-server@^2.0.0",

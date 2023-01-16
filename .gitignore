@@ -527,3 +527,6 @@ common/autoinstallers/*/.npmrc
 
 # Heft temporary files
 .heft
+# Sample apps
+samples/**/dist
+samples/**/lib

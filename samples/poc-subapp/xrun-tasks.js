@@ -21,6 +21,7 @@ loadDevTasks(xrun, {
       subAppsToExpose: ["Deal", "Extras"],
       shared: {
         react: {
+          eager: true,
           requiredVersion: deps.react,
           import: "react",
           shareKey: "react",
@@ -28,18 +29,22 @@ loadDevTasks(xrun, {
           singleton: true
         },
         "react-dom": {
+          eager: true,
           requiredVersion: deps["react-dom"],
           singleton: true
         },
         history: {
+          eager: true,
           requiredVersion: deps["history"],
           singleton: true
         },
         "subapp-web": {
+          eager: true,
           requiredVersion: deps["subapp-web"],
           singleton: true
         },
         "@babel/runtime": {
+          eager: true,
           requiredVersion: deps["@babel/runtime"],
           singleton: true
         }
