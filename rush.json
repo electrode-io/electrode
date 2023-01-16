@@ -694,7 +694,6 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },
-
     // Sample apps
     {
       "packageName": "poc-subapp",
