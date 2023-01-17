@@ -54,4 +54,5 @@ function generateConfig(options) {
 
   return config;
 }
+
 module.exports = generateConfig;
