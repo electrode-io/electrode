@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "11.0.1",
+  "version": "11.0.2",
   "description": "Electrode X application development support",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -58,7 +58,7 @@
     "@xarc/dev-base": "^0.1.0",
     "@xarc/run": "^1.0.5",
     "@xarc/subapp": "^0.3.4",
-    "@xarc/webpack": "^11.1.3",
+    "@xarc/webpack": "^11.1.4",
     "ansi-to-html": "^0.7.2",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-minify-dead-code-elimination": "^0.5.2",
