@@ -1,3 +1,75 @@
+# 1/17/2023
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/react@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/react-redux@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/react-router@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/webpack@11.1.4` `(11.1.3 => 11.1.4)`
+- `electrode-archetype-webpack-dll@3.0.0` `(2.0.4 => 3.0.0)`
+- `electrode-archetype-webpack-dll-dev@3.0.0` `(2.0.4 => 3.0.0)`
+- `electrode-react-webapp@5.0.1` `(5.0.0 => 5.0.1)`
+- `subapp-server@2.0.1` `(2.0.0 => 2.0.1)`
+- `webpack-config-composer@1.1.7` `(1.1.6 => 1.1.7)`
+
+### Lerna Updated
+
+- `@xarc/app-dev@11.0.2` `(11.0.1 => 11.0.2)`
+- `@xarc/app-dev@11.0.2` `(11.0.1 => 11.0.2)`
+- `@xarc/react-redux-observable@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/react-redux-saga@1.0.1` `(1.0.0 => 1.0.1)`
+
+## Commits
+
+- `packages/xarc-react`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/xarc-react-redux`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/xarc-react-router`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/xarc-webpack`
+
+  - [patch][bug] fix source map load issue ([#1914](https://github.com/electrode-io/electrode/pull/1914)) [commit](http://github.com/electrode-io/electrode/commit/e515e9a53c9239fb3fd7bb7ec6a668dfe654624e)
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/electrode-archetype-webpack-dll`
+
+  - feat: commit to bump up webpack versions ([#1938](https://github.com/electrode-io/electrode/pull/1938)) [commit](http://github.com/electrode-io/electrode/commit/17aa45e73ca042ad4f485d5f7778f6ab4663fbe9)
+  - major: commit to bump up webpack versions ([#1937](https://github.com/electrode-io/electrode/pull/1937)) [commit](http://github.com/electrode-io/electrode/commit/21f0c6eb9c29d77e76337a3060ba1d8d9d7f01e9)
+  - upgrade to dll archetype to use webpack5 ([#1917](https://github.com/electrode-io/electrode/pull/1917)) [commit](http://github.com/electrode-io/electrode/commit/90d18b8f288dc6008122b4ca1de9b196b203afe5)
+  - [major] small commit to bump up dll packages major versions due to webpack version upgrades in previous commits ([#1939](https://github.com/electrode-io/electrode/pull/1939)) [commit](http://github.com/electrode-io/electrode/commit/8c688d2c11bfa0dc491a0db01681abfb724f0442)
+
+- `packages/electrode-archetype-webpack-dll-dev`
+
+  - feat: commit to bump up webpack versions ([#1938](https://github.com/electrode-io/electrode/pull/1938)) [commit](http://github.com/electrode-io/electrode/commit/17aa45e73ca042ad4f485d5f7778f6ab4663fbe9)
+  - major: commit to bump up webpack versions ([#1937](https://github.com/electrode-io/electrode/pull/1937)) [commit](http://github.com/electrode-io/electrode/commit/21f0c6eb9c29d77e76337a3060ba1d8d9d7f01e9)
+  - upgrade to dll archetype to use webpack5 ([#1917](https://github.com/electrode-io/electrode/pull/1917)) [commit](http://github.com/electrode-io/electrode/commit/90d18b8f288dc6008122b4ca1de9b196b203afe5)
+  - [major] small commit to bump up dll packages major versions due to webpack version upgrades in previous commits ([#1939](https://github.com/electrode-io/electrode/pull/1939)) [commit](http://github.com/electrode-io/electrode/commit/8c688d2c11bfa0dc491a0db01681abfb724f0442)
+
+- `packages/electrode-react-webapp`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/subapp-server`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `packages/webpack-config-composer`
+
+  - fix types issues in multiple packages ([#1918](https://github.com/electrode-io/electrode/pull/1918)) [commit](http://github.com/electrode-io/electrode/commit/ce8d69497b3af15502d2c49f36e6878ea74f76a2)
+
+- `MISC`
+
+  - fix: sample applications ([#1923](https://github.com/electrode-io/electrode/pull/1923)) [commit](http://github.com/electrode-io/electrode/commit/1e48af1a71c351c4b3cb90d25d80bf9a9b2cb615)
+
 # 10/21/2022
 
 ## Packages
