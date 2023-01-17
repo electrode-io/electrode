@@ -56,5 +56,4 @@ function saveModuleVersions() {
 
   manifests.forEach(saveVersionsOf);
 }
-
 module.exports = { saveModuleVersions };
