@@ -30,6 +30,7 @@ function checkTopDevArchetype() {
 // Try to set dev settings, if the dev archetype is available.
 // It may have been removed for production deployment.
 //
+
 function loadDev() {
   const devArchetype = checkTopDevArchetype();
   if (devArchetype) {
