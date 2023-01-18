@@ -20,7 +20,8 @@
   },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
-    "Joel Chen <xchen@walmartlabs.com>"
+    "Joel Chen <xchen@walmartlabs.com>",
+    "Shubham Sharma <shubham.sharma3@walmart.com>"
   ],
   "license": "Apache-2.0",
   "scripts": {
