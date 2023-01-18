@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-webpack-dll",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "Electrode Archetype to build webpack DLLs",
   "main": "arch-clap-tasks.js",
   "scripts": {},
