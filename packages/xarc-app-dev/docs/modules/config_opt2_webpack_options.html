@@ -1,528 +1,204 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>config/opt2/webpack-options | @xarc/app-dev</title>
-	<meta name="description" content="Documentation for @xarc/app-dev">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../assets/css/main.css">
-	<script async src="../assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="../index.html" class="title">@xarc/app-dev</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="../modules.html">@xarc/app-dev</a>
-				</li>
-				<li>
-					<a href="config_opt2_webpack_options.html">config/opt2/webpack-options</a>
-				</li>
-			</ul>
-			<h1>Module config/opt2/webpack-options</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#webpackcdnoptions" class="tsd-kind-icon">Webpack<wbr>Cdn<wbr>Options</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#webpackoptions" class="tsd-kind-icon">Webpack<wbr>Options</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="webpackcdnoptions" class="tsd-anchor"></a>
-					<h3>Webpack<wbr>Cdn<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Webpack<wbr>Cdn<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>enable<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>mapping<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>publicPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71e4f8c/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L9">src/config/opt2/webpack-options.ts:9</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Options for CDN server.</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Enable the use of a CDN server for serving assets.</p>
-									</div>
-									<ul>
-										<li>Setting this <code>true</code> will force <code>publicPath</code> default to <code>&quot;auto&quot;</code> for production mode <strong>unless</strong>
-										mapping is also set to <code>true</code>.</li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> mapping<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Enable URL mapping if CDN server gives a different URL for each asset</p>
-									</div>
-									<ul>
-										<li>If <code>mapping</code> is <code>false</code>, then <code>publicPath</code> must be <code>&quot;auto&quot;</code> for assets to work.</li>
-										<li>If <code>mapping</code> is <code>true</code>, then post processing is required to provide the mapping data
-										for the app.</li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> public<wbr>Path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>If you don&#39;t need CDN mapping, but <code>&quot;auto&quot;</code> <code>publicPath</code> doesn&#39;t work, and you know
-										ahead of time what it should be, then you can set it here.</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="webpackoptions" class="tsd-anchor"></a>
-					<h3>Webpack<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Webpack<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cdn<span class="tsd-signature-symbol">?: </span><a href="config_opt2_webpack_options.html#webpackcdnoptions" class="tsd-signature-type" data-tsd-kind="Type alias">WebpackCdnOptions</a><span class="tsd-signature-symbol">; </span>cdnHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cdnPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>cdnProtocol<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cssModuleSupport<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;byModExt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cssOnly&quot;</span><span class="tsd-signature-symbol">; </span>devArtifactsPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>enableBabelPolyfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableHotModuleReload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableNodeSourcePlugin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableShortenCSSNames<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableWarningsOverlay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>loadDlls<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>minify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>minimizeSubappChunks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>optimizeCssOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>preserveSymlinks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>useAppWebpackConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>v1RemoteSubApps<span class="tsd-signature-symbol">?: </span><a href="config_opt2_remote_federation.html#remotesubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">RemoteSubAppOptions</a><span class="tsd-signature-symbol">; </span>webpackDev<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>woffFontInlineLimit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71e4f8c/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L37">src/config/opt2/webpack-options.ts:37</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>User configurable options that are related to Webpack</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<span class="tsd-signature-symbol">?: </span><a href="config_opt2_webpack_options.html#webpackcdnoptions" class="tsd-signature-type" data-tsd-kind="Type alias">WebpackCdnOptions</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Options for if you need to serve your assets from a CDN server</p>
-									</div>
-									<p><strong>When should you use this:</strong></p>
-									<ul>
-										<li>You need to serve your assets from a CDN server that gives URLs that are:</li>
-									</ul>
-									<blockquote>
-										<ol>
-											<li>Changes original asset filenames</li>
-											<li>Gives a different URL for each asset file</li>
-										</ol>
-									</blockquote>
-									<ul>
-										<li><p>or if you need to set a <code>publicPath</code> other than <code>&quot;auto&quot;</code>.  Normally, webpack can auto detect
-												the correct base URL, but if that doesn&#39;t work and you know ahead of time what it can be, you
-											can set it.</p>
-										</li>
-										<li><p>If <code>&quot;auto&quot;</code> doesn&#39;t work and you don&#39;t know ahead of time what <code>publicPath</code> should be, then
-											you would need CDN mapping.</p>
-										</li>
-									</ul>
-									<p><strong>About how CDN and mapping affects <code>publicPath</code></strong></p>
-									<ul>
-										<li>Without CDN mapping, for module federation remote assets to work, it must set
-										<code>publicPath</code> to <code>&quot;auto&quot;</code>.</li>
-										<li>In development mode, webpack dev server serves the assets and CDN options
-											will have no effect, and <code>publicPath</code> is forced to be the following:<blockquote>
-												<ul>
-													<li>module federation remote assets - <code>&quot;auto&quot;</code></li>
-													<li>normal assets - <code>&quot;/js&quot;</code></li>
-												</ul>
-											</blockquote>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr>Hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Host name to use for CDN simulation, see option <code>cdnProtocol</code> for more info.</p>
-									</div>
-									<ul>
-										<li>If not set, then check env <code>WEBPACK_DEV_CDN_HOST</code></li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Host name to use for CDN simulation, see option <code>cdnProtocol</code> for more info.</p>
-									</div>
-									<ul>
-										<li>If not set, then check env <code>WEBPACK_DEV_CDN_PORT</code></li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr>Protocol<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Using a built-in reverse proxy, the webpack dev assets are served from the
-											same host and port as the app.  In that case, the URLs to assets are relative
-										without protocol, host, port.</p>
-									</div>
-									<p>However, user can simulate CDN server with the proxy and have assets URLs
-										specifying different host/port from the app.  To do that, the following
-									should be defined.</p>
-									<ul>
-										<li>If not set, then check env <code>WEBPACK_DEV_CDN_PROTOCOL</code></li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> css<wbr>Module<wbr>Support<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;byModExt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cssOnly&quot;</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Configure CSS module support.</p>
-									</div>
-									<p>Settings:</p>
-									<ol>
-										<li><code>true</code> or &quot;cssOnly&quot; (<strong>default</strong>): CSS module for any file with <code>.css</code> extension</li>
-										<li>RegExp: CSS module for any file that matches the custom RegExp</li>
-										<li><code>&quot;all&quot;</code>: CSS module for all style files (<code>css</code>, <code>styl</code>, <code>sass</code>, <code>scss</code>)</li>
-										<li><code>&quot;byModExt&quot;</code>: Use the preset RegExp that matches any file ending with <code>.mod.{ext}</code> or <code>.module.{ext}</code>
-										ie: <code>/\.(mod|module)\.(css|styl|sass|scss)$/i</code></li>
-										<li><code>false</code>: Disable CSS module completely</li>
-									</ol>
-									<ul>
-										<li>Legacy: You can also set this option with env <code>CSS_MODULE_SUPPORT</code>.</li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr>Artifacts<wbr>Path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>in dev mode, all webpack output are saved to memory only, but some files like
-											stats.json are needed by different uses and the stats partial saves a copy to
-										disk.  It will use this as the path to save the file.</p>
-										<ul>
-											<li><strong>Default: <code>.etmp</code></strong></li>
-											<li>If not set, then check env <code>WEBPACK_DEV_ARTIFACTS_PATH</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr>Hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Host name to use for webpack dev URL.  <strong>Default: <code>localhost</code></strong></p>
-										<ul>
-											<li>If not set, then check env <code>WEBPACK_HOST</code>, then <code>WEBPACK_DEV_HOST</code>, and finally <code>HOST</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>In dev mode, this sets the proxy forward port for the webpack dev server.
-										If it&#39;s not defined or <code>0</code>, then a randomly available port is picked every time.</p>
-									</div>
-									<ul>
-										<li><p><strong>Default: <code>0</code></strong> - pick a random port</p>
-										</li>
-										<li><p>If not set, then check env <code>WEBPACK_DEV_PORT</code></p>
-										</li>
-									</ul>
-									<p>.</p>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Babel<wbr>Polyfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Enable loading <code>@babel/polyfill</code> for application</p>
-										<ul>
-											<li><strong>Default: <code>false</code></strong></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Hot<wbr>Module<wbr>Reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Support hot module reload for your web app code</p>
-										<ul>
-											<li><strong>Default: <code>true</code></strong></li>
-											<li>if not set, then we check env <code>WEBPACK_HOT_MODULE_RELOAD</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Node<wbr>Source<wbr>Plugin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Enable webpack&#39;s NodeSourcePlugin to simulate node.js libs in browser</p>
-										<ul>
-											<li><strong>Default: <code>false</code></strong></li>
-											<li>If not set, then check env <code>ENABLE_NODESOURCE_PLUGIN</code></li>
-										</ul>
-									</div>
-									<p>&quot;@remarks&quot;
-									This will bundle 100K+ of JavaScript to simulate node.js env</p>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>ShortenCSSNames<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>If CSS module is used, then use a shorten class name for CSS in production mode</p>
-										<ul>
-											<li><strong>Default: <code>true</code></strong></li>
-											<li>if not set, then we check env <code>ENABLE_SHORTEN_CSS_NAMES</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Warnings<wbr>Overlay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>If hot module reload is enabled, then if you make a change that has error,
-										then an overlay on top of the browser page will show the error.</p>
-										<ul>
-											<li><strong>Default: <code>true</code></strong></li>
-											<li>if not set, then we check env <code>WEBPACK_DEV_WARNINGS_OVERLAY</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> load<wbr>Dlls<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Custom object with list of webpack DLLs to load</p>
-										<ul>
-											<li><strong>Default: <code>{}</code></strong></li>
-											<li>if not set, then we check env: <code>ELECTRODE_LOAD_DLLS</code> (which should be a JSON string)</li>
-											<li>TBD: define type for it</li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> minify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Should webpack minify code output in production mode?</p>
-										<ul>
-											<li><strong>Default: <code>true</code></strong></li>
-											<li>Useful if you want to build production without minifying for debugging</li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> minimize<wbr>Subapp<wbr>Chunks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Code splitting should optimize to minimize the number of JS chunks are generated.</p>
-									</div>
-									<p><strong>Default: <code>false</code></strong></p>
-									<ul>
-										<li>if not set, then we check env: <code>MINIMIZE_SUBAPP_CHUNKS</code></li>
-									</ul>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> optimize<wbr>Css<wbr>Options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Custom options for optimizing critical CSS</p>
-										<ul>
-											<li>if not set, then we check env: <code>OPTIMIZE_CSS_OPTIONS</code> (which should be a JSON string)</li>
-											<li>TBD: define type for it</li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> preserve<wbr>Symlinks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p><a href="https://webpack.js.org/configuration/resolve/#resolve-symlinks">https://webpack.js.org/configuration/resolve/#resolve-symlinks</a></p>
-										<ul>
-											<li><strong>Default: <code>false</code></strong></li>
-											<li>if not set, then we check env <code>WEBPACK_PRESERVE_SYMLINKS</code>, then <code>NODE_PRESERVE_SYMLINKS</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> use<wbr>App<wbr>Webpack<wbr>Config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Use this flag to control how we load your <code>webpack.config.js|ts</code>.</p>
-									</div>
-									<p>When you create your own <code>webpack.config.js|ts</code> to customize webpack config, we start webpack
-									with your config, which is responsible for loading xarc&#39;s internal config.</p>
-									<p>If you want to turn off this behavior so we start with xarc&#39;s internal webpack config
-									and then load yours, then set this to false.</p>
-									<p>If you use <code>.ts</code> (typescript) for your config file, then we will try to load <code>ts-node/register</code>.
-									You need to install ts-node package and have your tsconfig setup for your typescript.</p>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> v1<wbr>Remote<wbr>Sub<wbr>Apps<span class="tsd-signature-symbol">?: </span><a href="config_opt2_remote_federation.html#remotesubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">RemoteSubAppOptions</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Specify Module Federation options to expose or consume remote V1 subapps through webpack5&#39;s
-										ModuleFederationPlugin.  See docs at <a href="https://webpack.js.org/concepts/module-federation/">https://webpack.js.org/concepts/module-federation/</a></p>
-									</div>
-									<p>TODO: Exposing SubApps remotely has these limitations:</p>
-									<ol>
-										<li><code>publicPath</code> must be <code>&quot;auto&quot;</code> to expose subapps remotely.</li>
-										<li>Due to 1, cannot use CDN for assets.</li>
-										<li>Cannot use <code>&quot;single&quot;</code> shared webpack <code>runtimeChunk</code> optimization.</li>
-									</ol>
-									<dl class="tsd-comment-tags">
-										<dt>remark</dt>
-										<dd><p>this is only for subappV1</p>
-										</dd>
-									</dl>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> webpack<wbr>Dev<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Enable webpack dev mode.  <strong>Default: <code>false</code></strong></p>
-										<ul>
-											<li>If not set, then will check env <code>WEBPACK_DEV</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> woff<wbr>Font<wbr>Inline<wbr>Limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<div class="lead">
-										<p>Size limit to prevent inlining woff fonts data</p>
-										<ul>
-											<li><strong>Default: <code>1000</code></strong></li>
-											<li>if not set, then we check env <code>WOFF_FONT_INLINE_LIMIT</code></li>
-										</ul>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</section>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="../modules.html">Exports</a>
-					</li>
-					<li class="current tsd-kind-module">
-						<a href="config_opt2_webpack_options.html">config/opt2/webpack-<wbr>options</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="config_opt2_webpack_options.html#webpackcdnoptions" class="tsd-kind-icon">Webpack<wbr>Cdn<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="config_opt2_webpack_options.html#webpackoptions" class="tsd-kind-icon">Webpack<wbr>Options</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="../assets/js/main.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>config/opt2/webpack-options | @xarc/app-dev</title><meta name="description" content="Documentation for @xarc/app-dev"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">@xarc/app-dev</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><ul class="tsd-breadcrumb"><li><a href="../modules.html">@xarc/app-dev</a></li><li><a href="config_opt2_webpack_options.html">config/opt2/webpack-options</a></li></ul><h1>Module config/opt2/webpack-options </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><section class="tsd-panel-group tsd-index-group"><h2>Index</h2><section class="tsd-panel tsd-index-panel"><div class="tsd-index-content"><section class="tsd-index-section "><h3>Type Aliases</h3><ul class="tsd-index-list"><li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#WebpackCdnOptions" class="tsd-kind-icon">Webpack<wbr/>Cdn<wbr/>Options</a></li><li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#WebpackOptions" class="tsd-kind-icon">Webpack<wbr/>Options</a></li></ul></section></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Type Aliases</h2><section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module"><a id="WebpackCdnOptions" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Webpack<wbr/>Cdn<wbr/>Options<a href="#WebpackCdnOptions" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">Webpack<wbr/>Cdn<wbr/>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>enable<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>mapping<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>publicPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/e83cb48d/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L9">src/config/opt2/webpack-options.ts:9</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Options for CDN server.</p>
+</div></div><div class="tsd-type-declaration"><h4>Type declaration</h4><ul class="tsd-parameters"><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Enable the use of a CDN server for serving assets.</p>
+</div><div><ul>
+<li>Setting this <code>true</code> will force <code>publicPath</code> default to <code>&quot;auto&quot;</code> for production mode <strong>unless</strong>
+mapping is also set to <code>true</code>.</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> mapping<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Enable URL mapping if CDN server gives a different URL for each asset</p>
+</div><div><ul>
+<li>If <code>mapping</code> is <code>false</code>, then <code>publicPath</code> must be <code>&quot;auto&quot;</code> for assets to work.</li>
+<li>If <code>mapping</code> is <code>true</code>, then post processing is required to provide the mapping data
+for the app.</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> public<wbr/>Path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If you don&#39;t need CDN mapping, but <code>&quot;auto&quot;</code> <code>publicPath</code> doesn&#39;t work, and you know
+ahead of time what it should be, then you can set it here.</p>
+</div></div></li></ul></div></section><section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module"><a id="WebpackOptions" class="tsd-anchor"></a><h3 class="tsd-anchor-link">Webpack<wbr/>Options<a href="#WebpackOptions" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">Webpack<wbr/>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cdn<span class="tsd-signature-symbol">?: </span><a href="config_opt2_webpack_options.html#WebpackCdnOptions" class="tsd-signature-type" data-tsd-kind="Type alias">WebpackCdnOptions</a><span class="tsd-signature-symbol">; </span>cdnHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cdnPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>cdnProtocol<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cssModuleSupport<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;byModExt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cssOnly&quot;</span><span class="tsd-signature-symbol">; </span>devArtifactsPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>enableBabelPolyfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableHotModuleReload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableNodeSourcePlugin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableShortenCSSNames<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableWarningsOverlay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>loadDlls<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>minify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>minimizeSubappChunks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>optimizeCssOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>preserveSymlinks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>useAppWebpackConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>v1RemoteSubApps<span class="tsd-signature-symbol">?: </span><a href="config_opt2_remote_federation.html#RemoteSubAppOptions" class="tsd-signature-type" data-tsd-kind="Type alias">RemoteSubAppOptions</a><span class="tsd-signature-symbol">; </span>webpackDev<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>woffFontInlineLimit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/e83cb48d/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L37">src/config/opt2/webpack-options.ts:37</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>User configurable options that are related to Webpack</p>
+</div></div><div class="tsd-type-declaration"><h4>Type declaration</h4><ul class="tsd-parameters"><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<span class="tsd-signature-symbol">?: </span><a href="config_opt2_webpack_options.html#WebpackCdnOptions" class="tsd-signature-type" data-tsd-kind="Type alias">WebpackCdnOptions</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Options for if you need to serve your assets from a CDN server</p>
+</div><div><p><strong>When should you use this:</strong></p>
+<ul>
+<li>You need to serve your assets from a CDN server that gives URLs that are:</li>
+</ul>
+<blockquote>
+<ol>
+<li>Changes original asset filenames</li>
+<li>Gives a different URL for each asset file</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>or if you need to set a <code>publicPath</code> other than <code>&quot;auto&quot;</code>.  Normally, webpack can auto detect
+the correct base URL, but if that doesn&#39;t work and you know ahead of time what it can be, you
+can set it.</p>
+</li>
+<li><p>If <code>&quot;auto&quot;</code> doesn&#39;t work and you don&#39;t know ahead of time what <code>publicPath</code> should be, then
+you would need CDN mapping.</p>
+</li>
+</ul>
+<p><strong>About how CDN and mapping affects <code>publicPath</code></strong></p>
+<ul>
+<li>Without CDN mapping, for module federation remote assets to work, it must set
+<code>publicPath</code> to <code>&quot;auto&quot;</code>.</li>
+<li>In development mode, webpack dev server serves the assets and CDN options
+will have no effect, and <code>publicPath</code> is forced to be the following:<blockquote>
+<ul>
+<li>module federation remote assets - <code>&quot;auto&quot;</code></li>
+<li>normal assets - <code>&quot;/js&quot;</code></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr/>Hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Host name to use for CDN simulation, see option <code>cdnProtocol</code> for more info.</p>
+</div><div><ul>
+<li>If not set, then check env <code>WEBPACK_DEV_CDN_HOST</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr/>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Host name to use for CDN simulation, see option <code>cdnProtocol</code> for more info.</p>
+</div><div><ul>
+<li>If not set, then check env <code>WEBPACK_DEV_CDN_PORT</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> cdn<wbr/>Protocol<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Using a built-in reverse proxy, the webpack dev assets are served from the
+same host and port as the app.  In that case, the URLs to assets are relative
+without protocol, host, port.</p>
+</div><div><p>However, user can simulate CDN server with the proxy and have assets URLs
+specifying different host/port from the app.  To do that, the following
+should be defined.</p>
+<ul>
+<li>If not set, then check env <code>WEBPACK_DEV_CDN_PROTOCOL</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> css<wbr/>Module<wbr/>Support<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;byModExt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cssOnly&quot;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Configure CSS module support.</p>
+</div><div><p>Settings:</p>
+<ol>
+<li><code>true</code> or &quot;cssOnly&quot; (<strong>default</strong>): CSS module for any file with <code>.css</code> extension</li>
+<li>RegExp: CSS module for any file that matches the custom RegExp</li>
+<li><code>&quot;all&quot;</code>: CSS module for all style files (<code>css</code>, <code>styl</code>, <code>sass</code>, <code>scss</code>)</li>
+<li><code>&quot;byModExt&quot;</code>: Use the preset RegExp that matches any file ending with <code>.mod.{ext}</code> or <code>.module.{ext}</code>
+ie: <code>/\.(mod|module)\.(css|styl|sass|scss)$/i</code></li>
+<li><code>false</code>: Disable CSS module completely</li>
+</ol>
+<ul>
+<li>Legacy: You can also set this option with env <code>CSS_MODULE_SUPPORT</code>.</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr/>Artifacts<wbr/>Path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>in dev mode, all webpack output are saved to memory only, but some files like
+stats.json are needed by different uses and the stats partial saves a copy to
+disk.  It will use this as the path to save the file.</p>
+<ul>
+<li><strong>Default: <code>.etmp</code></strong></li>
+<li>If not set, then check env <code>WEBPACK_DEV_ARTIFACTS_PATH</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr/>Hostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Host name to use for webpack dev URL.  <strong>Default: <code>localhost</code></strong></p>
+<ul>
+<li>If not set, then check env <code>WEBPACK_HOST</code>, then <code>WEBPACK_DEV_HOST</code>, and finally <code>HOST</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr/>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>In dev mode, this sets the proxy forward port for the webpack dev server.
+If it&#39;s not defined or <code>0</code>, then a randomly available port is picked every time.</p>
+</div><div><ul>
+<li><p><strong>Default: <code>0</code></strong> - pick a random port</p>
+</li>
+<li><p>If not set, then check env <code>WEBPACK_DEV_PORT</code></p>
+</li>
+</ul>
+<p>.</p>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr/>Babel<wbr/>Polyfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Enable loading <code>@babel/polyfill</code> for application</p>
+<ul>
+<li><strong>Default: <code>false</code></strong></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr/>Hot<wbr/>Module<wbr/>Reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Support hot module reload for your web app code</p>
+<ul>
+<li><strong>Default: <code>true</code></strong></li>
+<li>if not set, then we check env <code>WEBPACK_HOT_MODULE_RELOAD</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr/>Node<wbr/>Source<wbr/>Plugin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Enable webpack&#39;s NodeSourcePlugin to simulate node.js libs in browser</p>
+<ul>
+<li><strong>Default: <code>false</code></strong></li>
+<li>If not set, then check env <code>ENABLE_NODESOURCE_PLUGIN</code></li>
+</ul>
+</div><div><p>&quot;@remarks&quot;
+ This will bundle 100K+ of JavaScript to simulate node.js env</p>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr/>ShortenCSSNames<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If CSS module is used, then use a shorten class name for CSS in production mode</p>
+<ul>
+<li><strong>Default: <code>true</code></strong></li>
+<li>if not set, then we check env <code>ENABLE_SHORTEN_CSS_NAMES</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr/>Warnings<wbr/>Overlay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If hot module reload is enabled, then if you make a change that has error,
+then an overlay on top of the browser page will show the error.</p>
+<ul>
+<li><strong>Default: <code>true</code></strong></li>
+<li>if not set, then we check env <code>WEBPACK_DEV_WARNINGS_OVERLAY</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> load<wbr/>Dlls<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Custom object with list of webpack DLLs to load</p>
+<ul>
+<li><strong>Default: <code>{}</code></strong></li>
+<li>if not set, then we check env: <code>ELECTRODE_LOAD_DLLS</code> (which should be a JSON string)</li>
+<li>TBD: define type for it</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> minify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Should webpack minify code output in production mode?</p>
+<ul>
+<li><strong>Default: <code>true</code></strong></li>
+<li>Useful if you want to build production without minifying for debugging</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> minimize<wbr/>Subapp<wbr/>Chunks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Code splitting should optimize to minimize the number of JS chunks are generated.</p>
+</div><div><p><strong>Default: <code>false</code></strong></p>
+<ul>
+<li>if not set, then we check env: <code>MINIMIZE_SUBAPP_CHUNKS</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> optimize<wbr/>Css<wbr/>Options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Custom options for optimizing critical CSS</p>
+<ul>
+<li>if not set, then we check env: <code>OPTIMIZE_CSS_OPTIONS</code> (which should be a JSON string)</li>
+<li>TBD: define type for it</li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> preserve<wbr/>Symlinks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p><a href="https://webpack.js.org/configuration/resolve/#resolve-symlinks">https://webpack.js.org/configuration/resolve/#resolve-symlinks</a></p>
+<ul>
+<li><strong>Default: <code>false</code></strong></li>
+<li>if not set, then we check env <code>WEBPACK_PRESERVE_SYMLINKS</code>, then <code>NODE_PRESERVE_SYMLINKS</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> use<wbr/>App<wbr/>Webpack<wbr/>Config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Use this flag to control how we load your <code>webpack.config.js|ts</code>.</p>
+</div><div><p>When you create your own <code>webpack.config.js|ts</code> to customize webpack config, we start webpack
+with your config, which is responsible for loading xarc&#39;s internal config.</p>
+<p>If you want to turn off this behavior so we start with xarc&#39;s internal webpack config
+and then load yours, then set this to false.</p>
+<p>If you use <code>.ts</code> (typescript) for your config file, then we will try to load <code>ts-node/register</code>.
+You need to install ts-node package and have your tsconfig setup for your typescript.</p>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> v1<wbr/>Remote<wbr/>Sub<wbr/>Apps<span class="tsd-signature-symbol">?: </span><a href="config_opt2_remote_federation.html#RemoteSubAppOptions" class="tsd-signature-type" data-tsd-kind="Type alias">RemoteSubAppOptions</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Specify Module Federation options to expose or consume remote V1 subapps through webpack5&#39;s
+ModuleFederationPlugin.  See docs at <a href="https://webpack.js.org/concepts/module-federation/">https://webpack.js.org/concepts/module-federation/</a></p>
+</div><div><p>TODO: Exposing SubApps remotely has these limitations:</p>
+<ol>
+<li><code>publicPath</code> must be <code>&quot;auto&quot;</code> to expose subapps remotely.</li>
+<li>Due to 1, cannot use CDN for assets.</li>
+<li>Cannot use <code>&quot;single&quot;</code> shared webpack <code>runtimeChunk</code> optimization.</li>
+</ol>
+</div><dl class="tsd-comment-tags"><dt>remark</dt><dd><p>this is only for subappV1</p>
+</dd></dl></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> webpack<wbr/>Dev<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Enable webpack dev mode.  <strong>Default: <code>false</code></strong></p>
+<ul>
+<li>If not set, then will check env <code>WEBPACK_DEV</code></li>
+</ul>
+</div></div></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> woff<wbr/>Font<wbr/>Inline<wbr/>Limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Size limit to prevent inlining woff fonts data</p>
+<ul>
+<li><strong>Default: <code>1000</code></strong></li>
+<li>if not set, then we check env <code>WOFF_FONT_INLINE_LIMIT</code></li>
+</ul>
+</div></div></li></ul></div></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="config_archetype.html">config/archetype</a></li><li class=" tsd-kind-module"><a href="config_babel_babelrc.html">config/babel/babelrc</a></li><li class=" tsd-kind-module"><a href="config_babel_babelrc_client.html">config/babel/babelrc-<wbr/>client</a></li><li class=" tsd-kind-module"><a href="config_babel_babelrc_server.html">config/babel/babelrc-<wbr/>server</a></li><li class=" tsd-kind-module"><a href="config_babel_common.html">config/babel/common</a></li><li class=" tsd-kind-module"><a href="config_babel_preset.html">config/babel/preset</a></li><li class=" tsd-kind-module"><a href="config_constants.html">config/constants</a></li><li class=" tsd-kind-module"><a href="config_dev_proxy.html">config/dev-<wbr/>proxy</a></li><li class=" tsd-kind-module"><a href="config_env_app.html">config/env-<wbr/>app</a></li><li class=" tsd-kind-module"><a href="config_env_babel.html">config/env-<wbr/>babel</a></li><li class=" tsd-kind-module"><a href="config_env_karma.html">config/env-<wbr/>karma</a></li><li class=" tsd-kind-module"><a href="config_env_proxy.html">config/env-<wbr/>proxy</a></li><li class=" tsd-kind-module"><a href="config_env_webpack.html">config/env-<wbr/>webpack</a></li><li class=" tsd-kind-module"><a href="config_get_dev_proxy.html">config/get-<wbr/>dev-<wbr/>proxy</a></li><li class=" tsd-kind-module"><a href="config_jest___mocks___file_mock.html">config/jest/__mocks__/file-<wbr/>mock</a></li><li class=" tsd-kind-module"><a href="config_jest_jest_config.html">config/jest/jest.config</a></li><li class=" tsd-kind-module"><a href="config_karma_browser_settings.html">config/karma/browser-<wbr/>settings</a></li><li class=" tsd-kind-module"><a href="config_karma_karma_conf.html">config/karma/karma.conf</a></li><li class=" tsd-kind-module"><a href="config_karma_karma_conf_coverage.html">config/karma/karma.conf.coverage</a></li><li class=" tsd-kind-module"><a href="config_karma_karma_conf_dev.html">config/karma/karma.conf.dev</a></li><li class=" tsd-kind-module"><a href="config_karma_karma_conf_watch.html">config/karma/karma.conf.watch</a></li><li class=" tsd-kind-module"><a href="config_karma_util_load_electrode_dll.html">config/karma/util/load-<wbr/>electrode-<wbr/>dll</a></li><li class=" tsd-kind-module"><a href="config_karma_util_load_user_config.html">config/karma/util/load-<wbr/>user-<wbr/>config</a></li><li class=" tsd-kind-module"><a href="config_opt2_add_on_features.html">config/opt2/add-<wbr/>on-<wbr/>features</a></li><li class=" tsd-kind-module"><a href="config_opt2_babel_options.html">config/opt2/babel-<wbr/>options</a></li><li class=" tsd-kind-module"><a href="config_opt2_karma_options.html">config/opt2/karma-<wbr/>options</a></li><li class=" tsd-kind-module"><a href="config_opt2_remote_federation.html">config/opt2/remote-<wbr/>federation</a></li><li class="current tsd-kind-module"><a href="config_opt2_webpack_options.html">config/opt2/webpack-<wbr/>options</a></li><li class=" tsd-kind-module"><a href="config_opt2_xarc_options.html">config/opt2/xarc-<wbr/>options</a></li><li class=" tsd-kind-module"><a href="config_options.html">config/options</a></li><li class=" tsd-kind-module"><a href="config_user_config.html">config/user-<wbr/>config</a></li><li class=" tsd-kind-module"><a href="config_webpack.html">config/webpack</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config.html">config/webpack/webpack.config</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_browsercoverage.html">config/webpack/webpack.config.browsercoverage</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_coverage.html">config/webpack/webpack.config.coverage</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_dev.html">config/webpack/webpack.config.dev</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_dev_static.html">config/webpack/webpack.config.dev.static</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_dll.html">config/webpack/webpack.config.dll</a></li><li class=" tsd-kind-module"><a href="config_webpack_webpack_config_test.html">config/webpack/webpack.config.test</a></li><li class=" tsd-kind-module"><a href="lib.html">lib</a></li><li class=" tsd-kind-module"><a href="lib_app_dev_middleware.html">lib/app-<wbr/>dev-<wbr/>middleware</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_admin_http.html">lib/dev-<wbr/>admin/admin-<wbr/>http</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_admin_server.html">lib/dev-<wbr/>admin/admin-<wbr/>server</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_automation_io.html">lib/dev-<wbr/>admin/automation-<wbr/>io</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_cdn_mock.html">lib/dev-<wbr/>admin/cdn-<wbr/>mock</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_cleanup.html">lib/dev-<wbr/>admin/cleanup</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_console_io.html">lib/dev-<wbr/>admin/console-<wbr/>io</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_dev_http.html">lib/dev-<wbr/>admin/dev-<wbr/>http</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_dev_server_start.html">lib/dev-<wbr/>admin/dev-<wbr/>server-<wbr/>start</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_log_parser.html">lib/dev-<wbr/>admin/log-<wbr/>parser</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_middleware.html">lib/dev-<wbr/>admin/middleware</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_redbird_proxy.html">lib/dev-<wbr/>admin/redbird-<wbr/>proxy</a></li><li class=" tsd-kind-module"><a href="lib_dev_admin_webpack_dev_relay.html">lib/dev-<wbr/>admin/webpack-<wbr/>dev-<wbr/>relay</a></li><li class=" tsd-kind-module"><a href="lib_dev_tasks.html">lib/dev-<wbr/>tasks</a></li><li class=" tsd-kind-module"><a href="lib_fake_res.html">lib/fake-<wbr/>res</a></li><li class=" tsd-kind-module"><a href="lib_logger.html">lib/logger</a></li><li class=" tsd-kind-module"><a href="lib_module_processor.html">lib/module-<wbr/>processor</a></li><li class=" tsd-kind-module"><a href="lib_stats_mapper.html">lib/stats-<wbr/>mapper</a></li><li class=" tsd-kind-module"><a href="lib_stats_utils.html">lib/stats-<wbr/>utils</a></li><li class=" tsd-kind-module"><a href="lib_tasks_constants.html">lib/tasks/constants</a></li><li class=" tsd-kind-module"><a href="lib_tasks_eslint.html">lib/tasks/eslint</a></li><li class=" tsd-kind-module"><a href="lib_tasks_package_json.html">lib/tasks/package-<wbr/>json</a></li><li class=" tsd-kind-module"><a href="lib_utils.html">lib/utils</a></li><li class=" tsd-kind-module"><a href="lib_webpack_dev_express.html">lib/webpack-<wbr/>dev-<wbr/>express</a></li><li class=" tsd-kind-module"><a href="lib_webpack_dev_fastify.html">lib/webpack-<wbr/>dev-<wbr/>fastify</a></li><li class=" tsd-kind-module"><a href="lib_webpack_dev_hapi.html">lib/webpack-<wbr/>dev-<wbr/>hapi</a></li><li class=" tsd-kind-module"><a href="lib_webpack_dev_hapi17.html">lib/webpack-<wbr/>dev-<wbr/>hapi17</a></li><li class=" tsd-kind-module"><a href="lib_webpack_dev_koa.html">lib/webpack-<wbr/>dev-<wbr/>koa</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#WebpackCdnOptions" class="tsd-kind-icon">Webpack<wbr/>Cdn<wbr/>Options</a></li><li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="config_opt2_webpack_options.html#WebpackOptions" class="tsd-kind-icon">Webpack<wbr/>Options</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="../assets/main.js"></script></body></html>
