@@ -1,3 +1,18 @@
+# 1/19/2023
+
+## Packages
+
+- `@xarc/opt-sass@4.0.0` `(3.0.0 => 4.0.0)`
+
+## Commits
+
+- `packages/xarc-opt-sass`
+
+  - feat: changelog for xarc-opt-sass upgrade ([#1943](https://github.com/electrode-io/electrode/pull/1943)) [commit](http://github.com/electrode-io/electrode/commit/482e1f2ea4435cd1f9a67722e8de2964fdf7bba8)
+  - [major] node-sass upgrade for node v16 and above ([#1942](https://github.com/electrode-io/electrode/pull/1942)) [commit](http://github.com/electrode-io/electrode/commit/a70f15d058db541887897ce8221f01a922bedf20)
+  - feat(node-sass): update node-sass and sass-loader to support node v16 ([#1936](https://github.com/electrode-io/electrode/pull/1936)) [commit](http://github.com/electrode-io/electrode/commit/38748d84511a97fd352f27458d9bf397a845f502)
+  - [minor] fix sass-loader and node-sass ([#1944](https://github.com/electrode-io/electrode/pull/1944)) [commit](http://github.com/electrode-io/electrode/commit/b3d2bee31d86f6183c0193bbfaad90ff189e1dbd)
+
 # 1/18/2023
 
 ## Packages
