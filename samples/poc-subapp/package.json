@@ -49,10 +49,6 @@
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "redux": "^4.2.0",
-<<<<<<< HEAD
-    "@xarc/app": "11.0.1",
-=======
->>>>>>> ae5a6cea (feat: merge changes from master and fix poc-subapp (#1919))
     "subapp-react": "1.0.0",
     "subapp-redux": "2.0.0",
     "subapp-server": "2.0.0",
@@ -60,12 +56,8 @@
   },
   "devDependencies": {
     "@xarc/opt-eslint": "^3.0.0",
-<<<<<<< HEAD
-    "@xarc/app-dev": "11.0.1"
-=======
     "@xarc/app-dev": "11.0.1",
     "webpack-hot-middleware": "^2.25.3"
->>>>>>> ae5a6cea (feat: merge changes from master and fix poc-subapp (#1919))
   },
   "prettier": {
     "printWidth": 100,

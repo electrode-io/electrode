@@ -519,11 +519,9 @@ yarn-debug.log*
 yarn-error.log*
 .fynpo
 
-<<<<<<< HEAD
 # Sample apps
 samples/**/dist
 samples/**/lib
-=======
 # Rush temporary files
 common/deploy/
 common/temp/
@@ -532,4 +530,3 @@ common/autoinstallers/*/.npmrc
 
 # Heft temporary files
 .heft
->>>>>>> 1f5b1f5f ([WIP] Use rush + pnpm for managing monorepo (#1907))
