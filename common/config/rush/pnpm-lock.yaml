@@ -3294,7 +3294,7 @@ packages:
     resolution: {integrity: sha512-/19t63pFYU0ikrdbXKBWj9PCdnKyTd0Qkz0X91Ta081cYsq90OxYdcWwK/dwEoDa6dtXgj2HJfmzgq+QZTHdmQ==}
     dependencies:
       '@types/chai': 4.3.4
-      '@types/sinon': 10.0.13
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.13:
@@ -22247,7 +22247,7 @@ packages:
     dev: false
 
   file:projects/electrode-ui-config.tgz:
-    resolution: {integrity: sha512-IDTEuf5oFXojVzl80GSw0KE1JwDYNs/AzleU7TqZnJhYv7wE2VMwPPzv9B7mZqf9nPzaYWnbF7rn5FQhyecTuQ==, tarball: file:projects/electrode-ui-config.tgz}
+    resolution: {integrity: sha512-Ly59LPUuHrrwRkw0CIatx9alnv0+Z6HgCFTz85tTsVQ8K4kpIrwDijwfMbF+2RuLFLLpsoSaiPgJfL1HGKYQQg==, tarball: file:projects/electrode-ui-config.tgz}
     name: '@rush-temp/electrode-ui-config'
     version: 0.0.0
     dependencies:
@@ -22258,6 +22258,9 @@ packages:
       electrode-archetype-njs-module-dev: 3.0.3
       electrode-hapi-compat: 1.3.3
       lodash: 4.17.21
+      nyc: 15.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   file:projects/electrode-ui-logger.tgz:

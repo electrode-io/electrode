@@ -39,7 +39,7 @@ export const loadTokenModuleHandler = (path: string, templateDir?: string, custo
   if (customCall && tokenMod[customCall]) {
     return tokenMod;
   }
-  console.log("going to throw");
+
   throw new Error(
     "@xarc/render-context: token module invalid - should export a function directly or as 'default' or 'tokenHandler'"
   );
