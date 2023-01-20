@@ -10,7 +10,7 @@ import { expect } from "chai";
 
 describe("index.tsc", function () {
   it("should export RenderContext, BaseOutput, MainOutput, SpotOutput etc ", function () {
-    // expect(RenderContext).to.exist;
+    expect(RenderContext).to.exist;
     expect(BaseOutput).to.exist;
     expect(MainOutput).to.exist;
     expect(SpotOutput).to.exist;
