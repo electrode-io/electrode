@@ -10,9 +10,9 @@ xrun.load("user", {
     return concurrent(
       ...[
         "tsconfig.node.cjs.json",
-        // "tsconfig.node.esm.json",
-        // "tsconfig.browser.es5.cjs.json",
-        // "tsconfig.browser.es2x.esm.json"
+        "tsconfig.node.esm.json",
+        "tsconfig.browser.es5.cjs.json",
+        "tsconfig.browser.es2x.esm.json"
       ].map(config => exec(`tsc --build ${config} --pretty`))
     );
   }
