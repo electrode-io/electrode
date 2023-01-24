@@ -3294,7 +3294,7 @@ packages:
     resolution: {integrity: sha512-/19t63pFYU0ikrdbXKBWj9PCdnKyTd0Qkz0X91Ta081cYsq90OxYdcWwK/dwEoDa6dtXgj2HJfmzgq+QZTHdmQ==}
     dependencies:
       '@types/chai': 4.3.4
-      '@types/sinon': 9.0.11
+      '@types/sinon': 10.0.13
     dev: false
 
   /@types/sinon/10.0.13:
@@ -15346,7 +15346,7 @@ packages:
       find-up: 4.1.0
       foreground-child: 2.0.0
       get-package-type: 0.1.0
-      glob: 7.1.6
+      glob: 7.2.3
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-hook: 3.0.0
       istanbul-lib-instrument: 4.0.3

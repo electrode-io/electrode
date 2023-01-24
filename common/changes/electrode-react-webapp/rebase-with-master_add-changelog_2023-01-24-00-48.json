@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-react-webapp",
+      "comment": "`bable/*` minor version upgrades",
+      "type": "minor"
+    }
+  ],
+  "packageName": "electrode-react-webapp"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-web",
+      "comment": "Dev dependencies added and test updates",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-web"
+}

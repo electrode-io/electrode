@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app",
+      "comment": "Add `@xarc/run` to dev dependency",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/app"
+}

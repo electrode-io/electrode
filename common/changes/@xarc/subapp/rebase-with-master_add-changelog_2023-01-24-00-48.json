@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/subapp",
+      "comment": "Add `@xarc/run` to dev dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/subapp"
+}

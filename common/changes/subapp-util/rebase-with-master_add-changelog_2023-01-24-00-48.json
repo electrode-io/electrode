@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-util",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "subapp-util"
+}

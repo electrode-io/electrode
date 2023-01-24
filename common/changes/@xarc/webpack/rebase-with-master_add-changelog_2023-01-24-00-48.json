@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "`webpack `minimum minor version upgrade from `^5.74` to `^5.75`, dev dependency upgrade for `@types/chai` and  `@types/mocha`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}

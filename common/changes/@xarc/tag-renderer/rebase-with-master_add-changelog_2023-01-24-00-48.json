@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Adds phantom dependencies `loadash`",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}
