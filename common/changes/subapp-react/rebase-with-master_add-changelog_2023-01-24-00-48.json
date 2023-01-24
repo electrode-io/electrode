@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "Patch upgrade for `optional-require` dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-react"
+}

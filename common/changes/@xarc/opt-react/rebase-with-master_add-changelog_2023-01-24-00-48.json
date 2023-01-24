@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-react",
+      "comment": "Update dev dependency - `opt-archetype-check`",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/opt-react"
+}

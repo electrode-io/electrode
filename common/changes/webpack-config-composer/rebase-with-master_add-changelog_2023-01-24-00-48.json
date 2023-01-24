@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "webpack-config-composer",
+      "comment": "`typescript` minor version upgrade",
+      "type": "minor"
+    }
+  ],
+  "packageName": "webpack-config-composer"
+}

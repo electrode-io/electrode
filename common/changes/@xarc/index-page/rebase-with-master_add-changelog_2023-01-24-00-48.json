@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/index-page",
+      "comment": "Adds phantom dependencies `loadash` and `require-at`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/index-page"
+}

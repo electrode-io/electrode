@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-ui-logger",
+      "comment": "Add `@xarc/run` to dev dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "electrode-ui-logger"
+}
