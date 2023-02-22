@@ -21,7 +21,8 @@
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>",
-    "Shubham Sharma <shubham.sharma3@walmart.com>"
+    "Shubham Sharma <shubham.sharma3@walmart.com>",
+    "Rahul Kumar <rahul.kumar1@walmart.com>"
   ],
   "license": "Apache-2.0",
   "scripts": {
@@ -31,7 +32,7 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "node-sass": "^8.0.0",
+    "sass": "^1.58.0",
     "sass-loader": "^13.2.0"
   },
   "devDependencies": {
