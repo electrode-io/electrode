@@ -1,5 +1,4 @@
-/* eslint-disable no-magic-numbers */
-
+/* eslint-disable no-magic-numbers, no-unused-vars */
 import { React, loadSubApp, AppContext } from "subapp-react";
 
 let data;

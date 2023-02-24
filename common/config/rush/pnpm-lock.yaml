@@ -60,7 +60,6 @@ specifiers:
   '@types/chai-as-promised': ^7.1.3
   '@types/jest': ^26.0.4
   '@types/webpack': 5.28.0
-  '@xarc/app-dev': 11.0.1
   ansi-to-html: ^0.7.2
   autoprefixer: ^9.6.0
   babel-core: ^6.0.15
@@ -224,7 +223,7 @@ dependencies:
   '@rush-temp/opt-react': file:projects/opt-react.tgz
   '@rush-temp/opt-sass': file:projects/opt-sass.tgz_webpack@5.75.0
   '@rush-temp/opt-stylus': file:projects/opt-stylus.tgz
-  '@rush-temp/poc-subapp': file:projects/poc-subapp.tgz_88306754a2448abb6a156efb6fe7abe5
+  '@rush-temp/poc-subapp': file:projects/poc-subapp.tgz_webpack@5.75.0
   '@rush-temp/poc-subapp-redux': file:projects/poc-subapp-redux.tgz_webpack@5.75.0
   '@rush-temp/react': file:projects/react.tgz
   '@rush-temp/react-query': file:projects/react-query.tgz
@@ -248,7 +247,6 @@ dependencies:
   '@types/chai-as-promised': 7.1.5
   '@types/jest': 26.0.24
   '@types/webpack': 5.28.0_uglify-js@2.8.29
-  '@xarc/app-dev': 11.0.1_88306754a2448abb6a156efb6fe7abe5
   ansi-to-html: 0.7.2
   autoprefixer: 9.8.8
   babel-core: 6.26.3
@@ -3301,7 +3299,7 @@ packages:
     resolution: {integrity: sha512-/19t63pFYU0ikrdbXKBWj9PCdnKyTd0Qkz0X91Ta081cYsq90OxYdcWwK/dwEoDa6dtXgj2HJfmzgq+QZTHdmQ==}
     dependencies:
       '@types/chai': 4.3.4
-      '@types/sinon': 10.0.13
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.13:
@@ -4176,93 +4174,6 @@ packages:
       webpack-cli: 4.8.0_e49db0e436eafdfc096b8d63cf9c45a9
     dev: false
 
-  /@xarc/app-dev/11.0.1_88306754a2448abb6a156efb6fe7abe5:
-    resolution: {integrity: sha512-SH77EBtZsBv1viCVZNR7mlWObSZ2Kfl2WlrAspra/bk+2hb9qq8OeXpNLitSIskPeY7tPKuKds/ZnpAb7XQajg==}
-    engines: {node: '>= 12', npm: '>= 6'}
-    hasBin: true
-    peerDependencies:
-      '@xarc/app': ^11.0.1
-    dependencies:
-      '@babel/cli': 7.21.0_@babel+core@7.21.0
-      '@babel/core': 7.21.0
-      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.21.0
-      '@babel/plugin-proposal-decorators': 7.21.0_@babel+core@7.21.0
-      '@babel/plugin-proposal-object-rest-spread': 7.20.7_@babel+core@7.21.0
-      '@babel/plugin-transform-react-constant-elements': 7.20.2_@babel+core@7.21.0
-      '@babel/plugin-transform-react-inline-elements': 7.21.0_@babel+core@7.21.0
-      '@babel/plugin-transform-runtime': 7.21.0_@babel+core@7.21.0
-      '@babel/preset-env': 7.20.2_@babel+core@7.21.0
-      '@babel/preset-react': 7.18.6_@babel+core@7.21.0
-      '@babel/preset-typescript': 7.21.0_@babel+core@7.21.0
-      '@babel/register': 7.21.0_@babel+core@7.21.0
-      '@jchip/redbird': 1.3.0
-      '@xarc/dev-base': 0.1.0
-      '@xarc/run': 1.1.1
-      '@xarc/subapp': 0.3.4
-      '@xarc/webpack': 11.1.4_ce1509660d81123f5980a94dd50f865f
-      ansi-to-html: 0.7.2
-      babel-plugin-lodash: 3.3.4
-      babel-plugin-minify-dead-code-elimination: 0.5.2
-      babel-plugin-react-css-modules: 5.2.6_@babel+core@7.21.0
-      babel-plugin-transform-node-env-inline: 0.4.3
-      babel-plugin-transform-react-remove-prop-types: 0.4.24
-      boxen: 5.1.2
-      chalker: 1.2.0
-      chokidar: 3.5.3
-      core-js: 3.28.0
-      electrode-node-resolver: 2.0.2
-      fast-async: 7.0.6
-      filter-scan-dir: 1.5.5
-      fs-extra: 10.1.0
-      identity-obj-proxy: 3.0.0
-      is-ci: 2.0.0
-      lodash: 4.17.21
-      log-update: 5.0.1
-      mime: 3.0.0
-      mkdirp: 1.0.4
-      nix-clap: 1.3.13
-      nyc: 15.1.0
-      open: 8.4.2
-      optional-require: 1.1.8
-      pkg-up: 3.1.0
-      prompts: 2.4.2
-      ps-get: 1.1.0
-      read-pkg-up: 7.0.1
-      regenerator-runtime: 0.13.11
-      request: 2.88.2
-      require-at: 1.0.6
-      semver: 7.3.8
-      serve-index-fs: 1.10.1
-      subapp-util: 1.1.4
-      sudo-prompt: 9.2.1
-      tslib: 2.5.0
-      visual-logger: 1.1.3
-      webpack-dev-middleware: 4.3.0_webpack@5.75.0
-      webpack-hot-middleware: 2.25.3
-      winston: 3.8.2
-      xaa: 1.7.3
-      xenv-config: 1.3.1
-      xsh: 0.4.5
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@webpack-cli/generators'
-      - '@webpack-cli/migrate'
-      - debug
-      - esbuild
-      - supports-color
-      - uglify-js
-      - webpack
-      - webpack-bundle-analyzer
-      - webpack-dev-server
-    dev: false
-
-  /@xarc/dev-base/0.1.0:
-    resolution: {integrity: sha512-i69MXIIUybyNLKLKTEw1Pcj1JwYPcncvVANkeMg6UBsIpSqR1WhZUkGHU5lJWbfZWhqbU2Hl+X119L1fxLu0iQ==}
-    dependencies:
-      tslib: 2.5.0
-      winston: 2.4.7
-    dev: false
-
   /@xarc/fastify-server/2.2.0:
     resolution: {integrity: sha512-VqA16vmqf+3egL66a4mGZc6cpq75ACb7BdJypQXal9tVk2M2IpIigmZMWy3UaT0SP6jzB4xoWYHbSfiY/LFJcw==}
     engines: {node: '>= 10.0.0'}
@@ -4382,63 +4293,10 @@ packages:
       xsh: 0.4.5
     dev: false
 
-  /@xarc/subapp/0.3.4:
-    resolution: {integrity: sha512-3R/j7ljoz+Reqzxc/zulgeIyYmSSU5b004qOmncIVN9mHFw6KO1tEUBQetj66iHoxwGJC3cwil0mb0/jwScZjQ==}
-    peerDependencies:
-      '@xarc/app': '*'
-    dependencies:
-      '@xarc/render-context': 1.0.8
-      '@xarc/tag-renderer': 1.0.10
-      lodash: 4.17.21
-      tslib: 2.5.0
-    dev: false
-
   /@xarc/tag-renderer/1.0.10:
     resolution: {integrity: sha512-QiZc/jztyW+lIqXgd64Zaxt0nwrR8YYDE8JANMhCDvd4GdaFs7P30R8KEAogck2zcQx87aIirN1MAsLAljIdPg==}
     dependencies:
       '@xarc/render-context': 1.0.8
-    dev: false
-
-  /@xarc/webpack/11.1.4_ce1509660d81123f5980a94dd50f865f:
-    resolution: {integrity: sha512-1p0CLbPtCkR1ufiVnqT/iWzm1LnzuliUnD6DjX7CodZnV9k1IxU4hn1oXB3cx8VBqaQHTfvRqMDEShxSI2M7Xw==}
-    engines: {node: '>= 12', npm: '>= 6'}
-    hasBin: true
-    peerDependencies:
-      '@xarc/app': ^11.0.1
-      '@xarc/app-dev': ^11.0.2
-    dependencies:
-      '@xarc/app-dev': 11.0.1_88306754a2448abb6a156efb6fe7abe5
-      '@xarc/dev-base': 0.1.0
-      autoprefixer: 9.8.8
-      babel-loader: 8.3.0_838179c1027e53d7ee8199eddddc0583
-      chalk: 4.1.2
-      chalker: 1.2.0
-      css-loader: 6.7.3_webpack@5.75.0
-      css-minimizer-webpack-plugin: 1.3.0_webpack@5.75.0
-      electrode-cdn-file-loader: 1.1.2
-      electrode-node-resolver: 2.0.2
-      file-loader: 6.2.0_webpack@5.75.0
-      filter-scan-dir: 1.1.1
-      lodash: 4.17.21
-      mini-css-extract-plugin: 1.6.2_webpack@5.75.0
-      mkdirp: 1.0.4
-      optional-require: 1.1.8
-      require-at: 1.0.6
-      url-loader: 4.1.1_file-loader@6.2.0+webpack@5.75.0
-      webpack: 5.75.0_f52b93474dd2fb1e4f90db635f9d54a8
-      webpack-cli: 4.8.0_e49db0e436eafdfc096b8d63cf9c45a9
-      webpack-config-composer: 1.1.7
-      webpack-stats-plugin: 1.1.1
-      xsh: 0.4.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@swc/core'
-      - '@webpack-cli/generators'
-      - '@webpack-cli/migrate'
-      - esbuild
-      - uglify-js
-      - webpack-bundle-analyzer
-      - webpack-dev-server
     dev: false
 
   /@xtuc/ieee754/1.2.0:
@@ -6847,7 +6705,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001457
-      electron-to-chromium: 1.4.308
+      electron-to-chromium: 1.4.311
     dev: false
 
   /browserslist/4.21.5:
@@ -6856,7 +6714,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001457
-      electron-to-chromium: 1.4.308
+      electron-to-chromium: 1.4.311
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: false
@@ -8864,12 +8722,6 @@ packages:
       - webpack-command
     dev: false
 
-  /electrode-cdn-file-loader/1.1.2:
-    resolution: {integrity: sha512-PFQRErh2t7V4DMb/BLwz5qU7lLYHpagohO5u4r62EoedECdQW8+cL8ioIXmzk1APS/Q2B+6PtcbRJn1krTAmOg==}
-    dependencies:
-      loader-utils: 1.4.2
-    dev: false
-
   /electrode-confippet/1.7.1:
     resolution: {integrity: sha512-7zdZ7DAiqu5r2ng/Ze4FaDzoY4ca//WJJk3Z8gg7Wa2o85PifGU8sIkc7K8kVKO+6A31RMaAQkZmuny9udkl1A==}
     engines: {node: '>= 4.2.2'}
@@ -8881,13 +8733,6 @@ packages:
 
   /electrode-hapi-compat/1.3.3:
     resolution: {integrity: sha512-cvpUs0csNP5NI4V3w6wbApUTRDlFb2gV11pjTmuDHc86QKQJb6YOhYHb9wT2Cp4+5bJost7p1jtCgz7m4TY1LA==}
-    dev: false
-
-  /electrode-node-resolver/2.0.2:
-    resolution: {integrity: sha512-g0Getrc6JV6KsTCBPRWNi/f4Y1/Btk7Dev01O2ENIhfnHyMRmL+OTf7/iUZuCEEpDyeP5MfjHObVQVdBiB58Gw==}
-    engines: {node: '>= 8', npm: '>= 5'}
-    dependencies:
-      require-at: 1.0.6
     dev: false
 
   /electrode-server/1.9.0:
@@ -8929,8 +8774,8 @@ packages:
       xaa: 1.7.3
     dev: false
 
-  /electron-to-chromium/1.4.308:
-    resolution: {integrity: sha512-qyTx2aDFjEni4UnRWEME9ubd2Xc9c0zerTUl/ZinvD4QPsF0S7kJTV/Es/lPCTkNX6smyYar+z/n8Cl6pFr8yQ==}
+  /electron-to-chromium/1.4.311:
+    resolution: {integrity: sha512-RoDlZufvrtr2Nx3Yx5MB8jX3aHIxm8nRWPJm3yVvyHmyKaRvn90RjzB6hNnt0AkhS3IInJdyRfQb4mWhPvUjVw==}
     dev: false
 
   /elliptic/6.5.4:
@@ -14734,8 +14579,8 @@ packages:
       yallist: 4.0.0
     dev: false
 
-  /minipass/4.2.0:
-    resolution: {integrity: sha512-ExlilAIS7zJ2EWUMaVXi14H+FnZ18kr17kFkGemMqBx6jW0m8P6XfqwYVPEG53ENlgsED+alVP9ZxC3JzkK23Q==}
+  /minipass/4.2.1:
+    resolution: {integrity: sha512-KS4CHIsDfOZetnT+u6fwxyFADXLamtkPxkGScmmtTW//MlRrImV+LtbmbJpLQ86Hw7km/utbfEfndhGBrfwvlA==}
     engines: {node: '>=8'}
     dev: false
 
@@ -16886,17 +16731,17 @@ packages:
       pretty-format: 3.8.0
     dev: false
 
-  /preact-render-to-string/5.2.6_preact@10.12.1:
+  /preact-render-to-string/5.2.6_preact@10.13.0:
     resolution: {integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==}
     peerDependencies:
       preact: '>=10'
     dependencies:
-      preact: 10.12.1
+      preact: 10.13.0
       pretty-format: 3.8.0
     dev: false
 
-  /preact/10.12.1:
-    resolution: {integrity: sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==}
+  /preact/10.13.0:
+    resolution: {integrity: sha512-ERdIdUpR6doqdaSIh80hvzebHB7O6JxycOhyzAeLEchqOq/4yueslQbfnPwXaNhAYacFTyCclhwkEbOumT0tHw==}
     dev: false
 
   /prelude-ls/1.1.2:
@@ -17669,12 +17514,12 @@ packages:
       preact: '>=10.0.0'
     dev: false
 
-  /redux-bundler-preact/2.0.1_preact@10.12.1:
+  /redux-bundler-preact/2.0.1_preact@10.13.0:
     resolution: {integrity: sha512-x6Oklhv7aV1o7K9NU97TFnZa72cm3KRbtIZsHAJ35Vrx8b1gh5cXgDCCf+ajmpO7il834z5XIaHJstK2/dnyqw==}
     peerDependencies:
       preact: '>=10.0.0'
     dependencies:
-      preact: 10.12.1
+      preact: 10.13.0
     dev: false
 
   /redux-bundler/26.1.0:
@@ -19715,7 +19560,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 4.2.0
+      minipass: 4.2.1
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
@@ -22564,7 +22409,7 @@ packages:
     name: '@rush-temp/opt-preact'
     version: 0.0.0
     dependencies:
-      preact: 10.12.1
+      preact: 10.13.0
       shx: 0.3.4
     dev: false
 
@@ -22608,7 +22453,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.75.0:
-    resolution: {integrity: sha512-Yb1WgaOSO71naexvU8fMYX6Na5ghlfvU5iCgl1NWuhN3ME3JS6+koIRUbI7KLGJZ8poR4EoLlPONcxZFsckqqg==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-VGI0louzU0RcFPNaQsMkmv2MxhnSP0Dbh4Q/SzyOedWao8JWZXyg5UFT3Rm+C1KP1aFc3rTpHw7jwBRhY1kj1Q==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -22638,16 +22483,16 @@ packages:
       - webpack
     dev: false
 
-  file:projects/poc-subapp.tgz_88306754a2448abb6a156efb6fe7abe5:
-    resolution: {integrity: sha512-lgAc30cPbxcBG0PZDIzdplhdfQiG9cQ7BRn1XAGPT3Tt5jxu2K9pfkIMQ/GQmXxmeEUM+72Vtb0DsEVRAJSAVg==, tarball: file:projects/poc-subapp.tgz}
+  file:projects/poc-subapp.tgz_webpack@5.75.0:
+    resolution: {integrity: sha512-A+SMMw+XeaE/+XGi9LCBsR+9+ITuknTuepLziz3FBsgNrzN60FSlLZU/7P4wjfLhD5/nf/21TXj1LyNajhJkHg==, tarball: file:projects/poc-subapp.tgz}
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.21.0
       '@module-federation/concat-runtime': 0.0.1
-      '@xarc/app-dev': 11.0.1_88306754a2448abb6a156efb6fe7abe5
       '@xarc/fastify-server': 2.2.0
+      '@xarc/run': 1.1.1
       electrode-confippet: 1.7.1
       history: 5.3.0
       html-webpack-plugin: 5.5.0_webpack@5.75.0
@@ -22661,20 +22506,11 @@ packages:
       subapp-server: 2.0.0
       webpack-hot-middleware: 2.25.3
     transitivePeerDependencies:
-      - '@swc/core'
       - '@types/react'
       - '@types/react-dom'
-      - '@webpack-cli/generators'
-      - '@webpack-cli/migrate'
-      - '@xarc/app'
-      - debug
-      - esbuild
       - react-native
       - supports-color
-      - uglify-js
       - webpack
-      - webpack-bundle-analyzer
-      - webpack-dev-server
     dev: false
 
   file:projects/react-query.tgz:
@@ -23053,10 +22889,10 @@ packages:
       babel-preset-minify: 0.5.2
       electrode-archetype-njs-module-dev: 3.0.3
       jsdom: 15.2.1
-      preact: 10.12.1
-      preact-render-to-string: 5.2.6_preact@10.12.1
+      preact: 10.13.0
+      preact-render-to-string: 5.2.6_preact@10.13.0
       redux-bundler: 26.1.0
-      redux-bundler-preact: 2.0.1_preact@10.12.1
+      redux-bundler-preact: 2.0.1_preact@10.13.0
       run-verify: 1.2.6
     transitivePeerDependencies:
       - bufferutil

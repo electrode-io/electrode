@@ -1,3 +1,4 @@
+// eslint-disable no-unused-vars, no-unused-expressions, no-undef
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "client/components/home";
