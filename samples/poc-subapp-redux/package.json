@@ -35,9 +35,9 @@
     "build": "xrun electrode/build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.1",
+    "@babel/runtime": "^7.21.0",
     "@module-federation/concat-runtime": "^0.0.1",
-    "@xarc/app": "11.0.1",
+    "@xarc/app": "^11.0.1",
     "@xarc/fastify-server": "^3.3.0",
     "electrode-confippet": "^1.7.1",
     "history": "^5.3.0",

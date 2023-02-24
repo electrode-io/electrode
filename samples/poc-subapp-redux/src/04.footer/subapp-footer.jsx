@@ -3,7 +3,7 @@ import { reduxLoadSubApp } from "subapp-redux";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const email = (email = '', action = {}) => {
+const email = (email = "", action = {}) => {
   if (action.type === "EMAIL") {
     return action.payload;
   }
@@ -12,7 +12,7 @@ const email = (email = '', action = {}) => {
 
 const setEmail = (value) => {
   return {
-    type: 'EMAIL',
+    type: "EMAIL",
     payload: value
   };
 };
