@@ -42,12 +42,12 @@
       "commandKind": "bulk",
       "name": "build",
       "summary": "Build all projects that haven't been built, or have changed since they were last built",
-      "description": "This command is similar to \"rush rebuild\", except that \"rush build\" performs...",
+      "description": "This command is similar to \"rush rebuild\", except that \"rush build\" performs an incremental build",
       "safeForSimultaneousRushProcesses": false,
       "enableParallelism": true,
       "ignoreDependencyOrder": false,
       "ignoreMissingScript": false,
-      "allowWarningsInSuccessfulBuild": false
+      "allowWarningsInSuccessfulBuild": true
     }
     
     // {
