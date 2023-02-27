@@ -2,14 +2,14 @@
 
 const { fastifyPlugin } = require("../../lib/fastify-plugin");
 const Path = require("path");
-const { runFinally, asyncVerify, runTimeout } = require("run-verify");
+const { runFinally, runVerify, runTimeout } = require("run-verify");
 const http = require("http");
 
 describe("fastify-plugin", function () {
   it("loads server from file system", async () => {
     const server = await require("@xarc/fastify-server")({
       deferStart: true,
-      connection: { port: 0, host: "localhost" }
+      connection: { port: 3011, host: "localhost" }
     });
 
     const srcDir = Path.join(__dirname, "../data/fastify-plugin-test");
@@ -28,7 +28,7 @@ describe("fastify-plugin", function () {
       stats: Path.join(__dirname, "../data/fastify-plugin-test/stats.json")
     };
 
-    return asyncVerify(
+    return runVerify(
       runTimeout(4500),
       () => fastifyPlugin(server, opt),
       () => server.start(),
@@ -71,7 +71,7 @@ describe("fastify-plugin", function () {
       stats: Path.join(__dirname, "../data/fastify-plugin-test/stats.json")
     };
 
-    return asyncVerify(
+    return runVerify(
       runTimeout(4500),
       () => fastifyPlugin(server, opt),
       () => server.start(),
@@ -108,20 +108,30 @@ describe("fastify-plugin", function () {
       }
     });
 
-    asyncVerify(
+    return runVerify(
       () => fastifyPlugin(server, {}),
       () => server.start(),
-      () => {
-        http.get("http://localhost:3002/", res => {
-          expect(res.statusCode).to.equal(200);
-          let data = "";
-          res.on("data", chunk => (data += chunk));
-          res.on("done", () => {
-            expect(data.to.contain("Hello World"));
+      async () => {
+        const res = await server.inject({
+          method: "GET",
+          url: `http://localhost:3002/`
+        });
+        expect(res.statusCode).to.equal(200);
+        let data = "";
+        res.on("data", chunk => (data += chunk));
+        res.on("done", () => {
+          expect(data.to.contain("Hello World"));
+        });
+        http.get("http://localhost:3002/", response => {
+          expect(response.statusCode).to.equal(200);
+          let d = "";
+          response.on("data", chunk => (d += chunk));
+          response.on("done", () => {
+            expect(d.to.contain("Hello World"));
           });
         });
       },
       runFinally(() => server.close())
     );
-  });
+  }).timeout(5000);
 });
