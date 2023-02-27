@@ -1,6 +1,9 @@
-var path = require("path");
-var archetype = require("@xarc/app-dev/config/archetype");
-var archetypeEslint = path.join(archetype.getDevOptions()?.config?.eslint, ".eslintrc-react");
+const path = require("path");
+const archetype = require("@xarc/app-dev/config/archetype");
+const { config = {} } = archetype.getDevOptions();
+const { eslint = {} } = config;
+
+const archetypeEslint = path.join(eslint, ".eslintrc-react");
 
 function dotify(p) {
   return path.isAbsolute(p) ? p : "." + path.sep + p;
