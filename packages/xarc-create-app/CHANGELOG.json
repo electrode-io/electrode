@@ -1,0 +1,20 @@
+{
+  "name": "@xarc/create-app",
+  "entries": [
+    {
+      "version": "7.0.0",
+      "tag": "@xarc/create-app_v7.0.0",
+      "date": "Wed, 01 Mar 2023 05:59:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.0 to ^11.0.3."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.0 to ^11.0.3."
+          }
+        ]
+      }
+    }
+  ]
+}

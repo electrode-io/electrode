@@ -1,0 +1,17 @@
+{
+  "name": "subapp-react",
+  "entries": [
+    {
+      "version": "1.0.0",
+      "tag": "subapp-react_v1.0.0",
+      "date": "Wed, 01 Mar 2023 05:59:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.0 to ^11.0.3."
+          }
+        ]
+      }
+    }
+  ]
+}

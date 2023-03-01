@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "11.0.1",
+  "version": "11.0.3",
   "description": "Electrode X application development support",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -38,7 +38,7 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "peerDependencies": {
-    "@xarc/app": "^11.0.1"
+    "@xarc/app": "^11.0.3"
   },
   "dependencies": {
     "@babel/cli": "^7.17.10",
@@ -113,7 +113,7 @@
     "@types/sinon-chai": "^3.2.8",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
-    "@xarc/app": "^11.0.1",
+    "@xarc/app": "^11.0.3",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",

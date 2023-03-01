@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
-    "@xarc/app": "^11.0.0",
+    "@xarc/app": "^11.0.3",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
