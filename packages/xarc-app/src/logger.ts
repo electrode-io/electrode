@@ -16,6 +16,7 @@ export const logger = {
   },
 
   info(...args) {
+    console.log('test')
     return this.doLog("info", ...args);
   },
 

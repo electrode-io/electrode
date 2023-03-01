@@ -99,4 +99,17 @@
   // 
   //   // "includeEmailInChangeFile": true
   // }
+  {
+    "definitionName": "lockStepVersion",
+    "policyName": "xarcAppVersionPolicy",
+    "version": "11.0.2",
+    /**
+     * (Required) The type of bump that will be performed when publishing the next release.
+     * When creating a release branch in Git, this field should be updated according to the
+     * type of release.
+     *
+     * Valid values are: "prerelease", "release", "minor", "patch", "major"
+     */
+    "nextBump": "patch"
+  }
 ]

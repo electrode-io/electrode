@@ -531,13 +531,15 @@
       "packageName": "@xarc/app",
       "projectFolder": "packages/xarc-app",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "xarcAppVersionPolicy"
     },
     {
       "packageName": "@xarc/app-dev",
       "projectFolder": "packages/xarc-app-dev",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "xarcAppVersionPolicy"
     },
     {
       "packageName": "@xarc/create-app",
