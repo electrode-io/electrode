@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
