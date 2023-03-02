@@ -14,14 +14,14 @@ class SubApp extends React.Component {
     if (typeof window === "undefined") {
       return "";
     }
-    const { name } = this.props;
+    const { name, ...rest } = this.props;
 
     const subapp = xarc.getSubApp(name);
     if (xarc.getBundle(name) && subapp) {
       return (
         <div className="col-sm-4">
           <div className="panel panel-primary">
-            <div className="panel-body">{subapp.start(null, { props: this.props })}</div>
+            <div className="panel-body">{subapp.start(null, { props: rest })}</div>
           </div>
         </div>
       );
@@ -29,7 +29,8 @@ class SubApp extends React.Component {
       const onLoad = () => this.setState({ ready: true });
       dynamicLoadSubApp({
         name: "Deal",
-        onLoad
+        onLoad,
+        props: rest
       });
 
       // if not, return loadingComponent
@@ -39,9 +40,9 @@ class SubApp extends React.Component {
 }
 
 const DealSubApp = props => {
-  const { id } = props;
+  const { id, ...rest } = props;
 
-  dynamicLoadSubApp({ name: "Deal", id });
+  dynamicLoadSubApp({ name: "Deal", id, props: rest });
 
   return (
     <div className="col-sm-4">
@@ -94,7 +95,7 @@ Deals.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { value: state.number.value };
+  return { value: state.number };
 };
 
 const ReduxDeals = connect(mapStateToProps, dispatch => ({ dispatch }))(Deals);

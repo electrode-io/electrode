@@ -91,6 +91,9 @@ export function loadSubApp(info, renderStart, options) {
   subApp.start = (instance, options, info) => {
     instance = instance || subApp.preStart(instance, options, info);
     info = info || subApp.info;
+    if (!instance.props) {
+      instance.props = options.props;
+    }
     // if user provided a start function, then user is expected to
     // have reference to info
     const callStart = () => {
@@ -184,7 +187,7 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback, ns }) {
+export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback, ns, props }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
@@ -194,7 +197,7 @@ export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fal
     } else {
       const element = document.getElementById(id);
       if (element && subApp.start) {
-        return subApp.start(instance, { id });
+        return subApp.start(instance, { id, props });
       }
     }
   };
