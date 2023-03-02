@@ -2,6 +2,18 @@
 
 ## Packages
 
+- `subapp-redux@2.1.0` `(2.0.1 => 2.1.0)`
+
+## Commits
+
+- `packages/subapp-redux`
+
+  - [minor]: fix props passing when redux load subapp is used ([#1953](https://github.com/electrode-io/electrode/pull/1953)) [commit](http://github.com/electrode-io/electrode/commit/f56df3bc68955247511678d9ae5c855457ab3423)
+
+# 3/2/2023
+
+## Packages
+
 ### Directly Updated
 
 - `subapp-pbundle@1.0.1` `(1.0.0 => 1.0.1)`
