@@ -19,13 +19,13 @@ export function reduxRenderStart(options) {
   if (options.serverSideRendering) {
     hydrateRoot(options.element,
       <Provider store={store}>
-        <Component { ...props } />
+        <Component {...props} />
       </Provider>
     );
   } else {
     createRoot(options.element).render(
       <Provider store={store}>
-        <Component { ...props } />
+        <Component {...props} />
       </Provider>
     );
   }
