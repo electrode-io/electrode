@@ -1,3 +1,45 @@
+# 3/2/2023
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/opt-sass@5.0.0` `(4.0.0 => 5.0.0)`
+- `subapp-pbundle@1.0.1` `(1.0.0 => 1.0.1)`
+- `subapp-react@1.0.1` `(1.0.0 => 1.0.1)`
+- `subapp-server@2.0.2` `(2.0.1 => 2.0.2)`
+- `subapp-web@2.0.1` `(2.0.0 => 2.0.1)`
+
+### Lerna Updated
+
+- `subapp-redux@2.0.1` `(2.0.0 => 2.0.1)`
+
+## Commits
+
+- `packages/xarc-opt-sass`
+
+  - chore: changelog update after opt-sass release ([#1945](https://github.com/electrode-io/electrode/pull/1945)) [commit](http://github.com/electrode-io/electrode/commit/aaa214b1e8ce4d62569272979e05ae72c6db09a4)
+  - [minor] fix sass-loader and node-sass ([#1944](https://github.com/electrode-io/electrode/pull/1944)) [commit](http://github.com/electrode-io/electrode/commit/b3d2bee31d86f6183c0193bbfaad90ff189e1dbd)
+  - feat: changelog for xarc-opt-sass upgrade ([#1943](https://github.com/electrode-io/electrode/pull/1943)) [commit](http://github.com/electrode-io/electrode/commit/482e1f2ea4435cd1f9a67722e8de2964fdf7bba8)
+  - [major] node-sass upgrade for node v16 and above ([#1942](https://github.com/electrode-io/electrode/pull/1942)) [commit](http://github.com/electrode-io/electrode/commit/a70f15d058db541887897ce8221f01a922bedf20)
+  - feat(node-sass): update node-sass and sass-loader to support node v16 ([#1936](https://github.com/electrode-io/electrode/pull/1936)) [commit](http://github.com/electrode-io/electrode/commit/38748d84511a97fd352f27458d9bf397a845f502)
+
+- `packages/subapp-pbundle`
+
+  - chore: fix build failure ([#1951](https://github.com/electrode-io/electrode/pull/1951)) [commit](http://github.com/electrode-io/electrode/commit/36d4359ad073b16ad73e67bbc879fd1e42a0add7)
+
+- `packages/subapp-react`
+
+  - chore: fix build failure ([#1951](https://github.com/electrode-io/electrode/pull/1951)) [commit](http://github.com/electrode-io/electrode/commit/36d4359ad073b16ad73e67bbc879fd1e42a0add7)
+
+- `packages/subapp-server`
+
+  - fix: pass props to subapps through lazyloaded subapp ([#1949](https://github.com/electrode-io/electrode/pull/1949)) [commit](http://github.com/electrode-io/electrode/commit/43da5563d32da7f5d0f25254013609db58c03a96)
+
+- `packages/subapp-web`
+
+  - fix: pass props to subapps through lazyloaded subapp ([#1949](https://github.com/electrode-io/electrode/pull/1949)) [commit](http://github.com/electrode-io/electrode/commit/43da5563d32da7f5d0f25254013609db58c03a96)
+
 # 1/19/2023
 
 ## Packages
