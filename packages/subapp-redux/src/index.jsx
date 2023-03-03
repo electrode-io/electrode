@@ -14,18 +14,18 @@ setStoreContainer(window);
 //
 export function reduxRenderStart(options) {
   const store = options._store || options.reduxCreateStore(options.initialState);
-  const { Component } = options;
+  const { Component, props } = options;
 
   if (options.serverSideRendering) {
     hydrateRoot(options.element,
       <Provider store={store}>
-        <Component />
+        <Component {...props} />
       </Provider>
     );
   } else {
     createRoot(options.element).render(
       <Provider store={store}>
-        <Component />
+        <Component {...props} />
       </Provider>
     );
   }
@@ -43,6 +43,7 @@ export function reduxLoadSubApp(info) {
     const initialState = instance._prepared || instance.initialState;
     const reduxCreateStore = instance.reduxCreateStore || this.info.reduxCreateStore;
     const Component = this.info.StartComponent || this.info.Component;
+    const props = instance.props || {}
 
     const store = reduxRenderStart({
       _store: instance._store,
@@ -50,7 +51,8 @@ export function reduxLoadSubApp(info) {
       reduxCreateStore,
       Component,
       serverSideRendering: instance.serverSideRendering,
-      element
+      element,
+      props
     });
 
     instance._store = store;

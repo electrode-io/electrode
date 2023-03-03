@@ -1,3 +1,48 @@
+# 3/3/2023
+
+## Packages
+
+- `subapp-redux@2.1.0` `(2.0.1 => 2.1.0)`
+
+## Commits
+
+- `packages/subapp-redux`
+
+  - [minor]: fix props passing when redux load subapp is used ([#1953](https://github.com/electrode-io/electrode/pull/1953)) [commit](http://github.com/electrode-io/electrode/commit/f56df3bc68955247511678d9ae5c855457ab3423)
+
+# 3/2/2023
+
+## Packages
+
+### Directly Updated
+
+- `subapp-pbundle@1.0.1` `(1.0.0 => 1.0.1)`
+- `subapp-react@1.0.1` `(1.0.0 => 1.0.1)`
+- `subapp-server@2.0.2` `(2.0.1 => 2.0.2)`
+- `subapp-web@2.0.1` `(2.0.0 => 2.0.1)`
+
+### Lerna Updated
+
+- `subapp-redux@2.0.1` `(2.0.0 => 2.0.1)`
+
+## Commits
+
+- `packages/subapp-pbundle`
+
+  - chore: fix build failure ([#1951](https://github.com/electrode-io/electrode/pull/1951)) [commit](http://github.com/electrode-io/electrode/commit/36d4359ad073b16ad73e67bbc879fd1e42a0add7)
+
+- `packages/subapp-react`
+
+  - chore: fix build failure ([#1951](https://github.com/electrode-io/electrode/pull/1951)) [commit](http://github.com/electrode-io/electrode/commit/36d4359ad073b16ad73e67bbc879fd1e42a0add7)
+
+- `packages/subapp-server`
+
+  - fix: pass props to subapps through lazyloaded subapp ([#1949](https://github.com/electrode-io/electrode/pull/1949)) [commit](http://github.com/electrode-io/electrode/commit/43da5563d32da7f5d0f25254013609db58c03a96)
+
+- `packages/subapp-web`
+
+  - fix: pass props to subapps through lazyloaded subapp ([#1949](https://github.com/electrode-io/electrode/pull/1949)) [commit](http://github.com/electrode-io/electrode/commit/43da5563d32da7f5d0f25254013609db58c03a96)
+
 # 1/19/2023
 
 ## Packages
