@@ -2,6 +2,22 @@
 
 ## Packages
 
+- `@xarc/opt-sass@4.1.0` `(4.0.0 => 4.1.0)`
+
+## Commits
+
+- `packages/xarc-opt-sass`
+
+  - [minor] node-sass replaced with sass - rebuild ([#1952](https://github.com/electrode-io/electrode/pull/1952)) [commit](http://github.com/electrode-io/electrode/commit/ec8c47270d28b33ccda9521788a8d268942495db)
+
+- `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/4772d28e837c34a1f7c5bf318492322fd2ac4b7d)
+
+# 3/6/2023
+
+## Packages
+
 - `@xarc/app@11.0.2` `(11.0.1 => 11.0.2)`
 - `@xarc/app-dev@11.0.3` `(11.0.2 => 11.0.3)`
 - `@xarc/opt-sass@5.0.0` `(4.0.0 => 5.0.0)`
