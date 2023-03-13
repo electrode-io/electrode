@@ -16,7 +16,7 @@ export default {
     pageTitle: "Home",
     subApps: [["./products", subAppOptions]],
     templateFile: "./server/templates/products",
-    // cspNonceValue,
+    cspNonceValue,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
   }
