@@ -1,0 +1,217 @@
+{
+  "indirects": {
+    "samples/poc-subapp": [
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "subapp-util",
+          "version": "1.1.4",
+          "path": "packages/subapp-util"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/index-page",
+          "version": "1.0.11",
+          "path": "packages/xarc-index-page"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/jsx-renderer",
+          "version": "1.0.11",
+          "path": "packages/xarc-jsx-renderer"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/tag-renderer",
+          "version": "1.0.10",
+          "path": "packages/xarc-tag-renderer"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/dev-base",
+          "version": "0.1.0",
+          "path": "packages/xarc-dev-base"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/subapp",
+          "version": "0.3.4",
+          "path": "packages/xarc-subapp"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "@xarc/webpack",
+          "version": "11.1.4",
+          "path": "packages/xarc-webpack"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subapp",
+          "version": "0.0.1",
+          "path": "samples/poc-subapp"
+        },
+        "onPkg": {
+          "name": "electrode-node-resolver",
+          "version": "2.0.2",
+          "path": "packages/electrode-node-resolver"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subapp@0.0.1(dev)"
+        ]
+      }
+    ],
+    "samples/poc-subappv1-csp": [
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "subapp-util",
+          "version": "1.1.4",
+          "path": "packages/subapp-util"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/dev-base",
+          "version": "0.1.0",
+          "path": "packages/xarc-dev-base"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/subapp",
+          "version": "0.3.4",
+          "path": "packages/xarc-subapp"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/webpack",
+          "version": "11.1.4",
+          "path": "packages/xarc-webpack"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "electrode-node-resolver",
+          "version": "2.0.2",
+          "path": "packages/electrode-node-resolver"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      }
+    ]
+  },
+  "__timestamp": 1678502284809
+}

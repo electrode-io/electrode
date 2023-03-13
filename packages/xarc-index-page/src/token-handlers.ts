@@ -23,6 +23,14 @@ export const tokens = {
   HTML_CLOSED: "HTML_CLOSED"
 };
 
+const getNonceValue = (routeOptions) => {
+  let nonce = '';
+  if (routeOptions?.cspNonceValue) {
+    nonce = `nonce='${routeOptions.cspNonceValue}'`
+  }
+  return nonce
+}
+
 /**
  * @param handlerContext
  */
@@ -67,7 +75,7 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
     const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
-    const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
+    const nonce = getNonceValue(routeOptions);
 
     const renderJs = RENDER_JS && mode !== "nojs";
 
@@ -81,8 +89,8 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
       mode,
       renderJs,
       renderSs,
-      scriptNonce,
-      styleNonce,
+      scriptNonce: nonce,
+      styleNonce: nonce,
       chunkNames,
       devCSSBundle,
       devJSBundle,
