@@ -405,6 +405,13 @@ ${ignoreMsg}`
     });
 
     return emitter;
+  },
+  getNonceValue(routeOptions) {
+    let nonce = "";
+    if (routeOptions && routeOptions.cspNonceValue) {
+      nonce = ` nonce="${routeOptions.cspNonceValue}"`;
+    }
+    return nonce;
   }
 };
 

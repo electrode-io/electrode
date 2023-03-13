@@ -73,11 +73,11 @@ module.exports = function setup(setupContext) {
   const namespaceScriptJs = namespace ? `window.__default__namespace="${namespace}";` : "";
 
   const scriptId = namespace ? namespace : "bundle";
-
-  const webSubAppJs = `<script id="${scriptId}Assets" type="application/json">
+  const nonce = util.getNonceValue(setupContext.routeOptions);
+  const webSubAppJs = `<script${nonce} id="${scriptId}Assets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
-<script>/*LJ*/${loadJs}/*LJ*/
+<script${nonce}>/*LJ*/${loadJs}/*LJ*/
 ${webpackJsonpJS}
 ${namespaceScriptJs}
 ${clientJs}
