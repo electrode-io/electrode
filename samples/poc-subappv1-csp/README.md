@@ -1,4 +1,4 @@
-# subapp poc sample
+# Sample app demonstrating CSP usage with subappv1
 
 ## The Concept
 
