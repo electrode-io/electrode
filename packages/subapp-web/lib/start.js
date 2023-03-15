@@ -2,7 +2,7 @@
 
 const DEFAULT_CONCURRENCY = 15;
 const xaa = require("xaa");
-const util = require('./util');
+const util = require("./util");
 /*
  * subapp start for SSR
  * Nothing needs to be done to start subapp for SSR

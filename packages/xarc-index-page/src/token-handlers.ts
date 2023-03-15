@@ -7,7 +7,6 @@ import {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
 } from "./utils";
 
 import prefetchBundles from "./handlers/prefetch-bundles";
@@ -24,12 +23,12 @@ export const tokens = {
 };
 
 const getNonceValue = (routeOptions) => {
-  let nonce = '';
+  let nonce = "";
   if (routeOptions?.cspNonceValue) {
-    nonce = `nonce='${routeOptions.cspNonceValue}'`
+    nonce = `nonce="${routeOptions.cspNonceValue}"`;
   }
-  return nonce
-}
+  return nonce;
+};
 
 /**
  * @param handlerContext

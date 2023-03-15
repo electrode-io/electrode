@@ -158,14 +158,22 @@ Response: ${err || body}`
                 const ext = Path.extname(jsBundle);
                 if (ext === ".js") {
                   if (context.user.headEntries) {
-                    headSplits.push(`<link${util.getNonceValue(context.user.routeOptions)} rel="preload" href="${jsBundle}" as="script">`);
+                    headSplits.push(
+                      `<link${util.getNonceValue(context.user.routeOptions)} rel="preload" href="${jsBundle}" as="script">`
+                      );
                   }
-                  a.push(`<script${util.getNonceValue(context.user.routeOptions)} src="${jsBundle}" async></script>`);
+                  a.push(
+                    `<script${util.getNonceValue(context.user.routeOptions)} src="${jsBundle}" async></script>`
+                    );
                 } else if (ext === ".css") {
                   if (context.user.headEntries) {
-                    headSplits.push(`<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`);
+                    headSplits.push(
+                      `<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`
+                      );
                   } else {
-                    a.push(`<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`);
+                    a.push(
+                      `<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`
+                      );
                   }
                 } else {
                   a.push(`<!-- UNKNOWN bundle extension ${jsBundle} -->`);
