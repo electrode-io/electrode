@@ -89,7 +89,9 @@ Response: ${err || body}`
           console.error(msg); // eslint-disable-line
           resolve(makeDevDebugHtml(msg));
         } else {
-          resolve(`<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${body}</script>`);
+          resolve(
+            `<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${body}</script>`
+          );
         }
       });
     });
@@ -112,9 +114,11 @@ Response: ${err || body}`
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
         const ext = Path.extname(bundleAsset.name);
         if (ext === ".js") {
-          inlineSubAppJs = `<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${src}</script>`;
+          inlineSubAppJs =
+            `<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${src}</script>`;
         } else if (ext === ".css") {
-          inlineSubAppJs = `<style${util.getNonceValue(setupContext.routeOptions)} id="${name}">${src}</style>`;
+          inlineSubAppJs =
+            `<style${util.getNonceValue(setupContext.routeOptions)} id="${name}">${src}</style>`;
         } else {
           const msg = makeDevDebugMessage(`Error: UNKNOWN bundle extension ${name}`);
           console.error(msg); // eslint-disable-line
@@ -159,20 +163,29 @@ Response: ${err || body}`
                 if (ext === ".js") {
                   if (context.user.headEntries) {
                     headSplits.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)} rel="preload" href="${jsBundle}" as="script">`
+                      `<link${util.getNonceValue(context.user.routeOptions)} 
+                        rel="preload" 
+                        href="${jsBundle}" 
+                        as="script">`
                       );
                   }
                   a.push(
-                    `<script${util.getNonceValue(context.user.routeOptions)} src="${jsBundle}" async></script>`
+                    `<script${util.getNonceValue(context.user.routeOptions)}
+                      src="${jsBundle}" 
+                      async></script>`
                     );
                 } else if (ext === ".css") {
                   if (context.user.headEntries) {
                     headSplits.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`
+                      `<link${util.getNonceValue(context.user.routeOptions)}
+                        rel="stylesheet"
+                        href="${jsBundle}">`
                       );
                   } else {
                     a.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)} rel="stylesheet" href="${jsBundle}">`
+                      `<link${util.getNonceValue(context.user.routeOptions)}
+                        rel="stylesheet"
+                        href="${jsBundle}">`
                       );
                   }
                 } else {
@@ -277,7 +290,10 @@ Response: ${err || body}`
         } else {
           // embed large initial state as text and parse with JSON.parse instead.
           const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
-          dynInitialState = `<script${util.getNonceValue(context.user.routeOptions)} type="application/json" id="${dataId}">
+          dynInitialState =
+            `<script${util.getNonceValue(context.user.routeOptions)} 
+              type="application/json" 
+              id="${dataId}">
 ${jsesc(JSON.parse(initialStateStr), {
   json: true,
   isScriptContext: true,
@@ -290,8 +306,8 @@ ${jsesc(JSON.parse(initialStateStr), {
 
         const inlineStr = props.inline ? `inline:${props.inline},\n ` : "";
         const groupStr = props.group ? `group:"${props.group}",\n ` : "";
-        outputSpot.add(`
-${dynInitialState}<script${util.getNonceValue(context.user.routeOptions)} >${xarc}.startSubAppOnLoad({
+        outputSpot.add(`${dynInitialState}
+ <script${util.getNonceValue(context.user.routeOptions)} >${xarc}.startSubAppOnLoad({
  name:"${name}",
  ${elementId}serverSideRendering:${Boolean(props.serverSideRendering)},
  ${inlineStr}${groupStr}clientProps:${clientProps},
@@ -345,8 +361,8 @@ ${stack}`,
         const { bundles, scripts, preLoads } = await prepareSubAppSplitBundles(context);
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
-          outputSpot.add(`${scripts}
-<script${util.getNonceValue(context.user.routeOptions)} >${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
+          outputSpot.add(`${scripts}<script${util.getNonceValue(context.user.routeOptions)} >
+${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
             namespace ? ", " + JSON.stringify(namespace) : ""
           });</script>
 `);

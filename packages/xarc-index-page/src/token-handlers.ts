@@ -22,7 +22,7 @@ export const tokens = {
   HTML_CLOSED: "HTML_CLOSED"
 };
 
-const getNonceValue = (routeOptions) => {
+export const getNonceValue = (routeOptions) => {
   let nonce = "";
   if (routeOptions?.cspNonceValue) {
     nonce = `nonce="${routeOptions.cspNonceValue}"`;
