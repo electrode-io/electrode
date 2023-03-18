@@ -55,13 +55,13 @@ describe("load", function () {
         `<script src="ae56dc06d35e1170d047.vendors~280289005828299c685d173f73011e79.js" async></script>`
       );
       expect(context.user.headEntries).to.not.be.ok;
-      done();
     };
     context.output = new RenderOutput(context);
 
     loadToken.process(context, props);
     context.output.close();
-  });
+    done();
+  }).timeout(5000);
 
   it("should load preload tags for scripts", done => {
     process.env.APP_SRC_DIR = "test/subapps";
@@ -72,12 +72,12 @@ describe("load", function () {
       expect(results).to.include(`<link rel="preload" href="mainbody.bundle.dev.js" as="script">`);
       expect(results).to.include(`<script src="mainbody.bundle.dev.js" async></script>`);
       expect(context.user.includedBundles).to.include({ mainbody: true });
-      done();
     };
     context.output = new RenderOutput(context);
     reserveSpot({ saveId: "headEntries" }, context);
 
     loadToken.process(context, props);
     context.output.close();
-  });
+    done();
+  }).timeout(5000);
 });

@@ -40,6 +40,11 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       const data = context.result;
       const status = data.status;
+      if (routeOptions.cspNonceValue) {
+        reply.header(
+          "Content-Security-Policy",
+          `script-src 'nonce-${routeOptions.cspNonceValue}' 'strict-dynamic';`);
+      }
 
       if (data instanceof Error) {
         // rethrow to get default error behavior below with helpful errors in dev mode

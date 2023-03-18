@@ -7,7 +7,6 @@ import {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
 } from "./utils";
 
 import prefetchBundles from "./handlers/prefetch-bundles";
@@ -21,6 +20,14 @@ export const tokens = {
   HEAD_CLOSED: "HEAD_CLOSED",
   BODY_CLOSED: "BODY_CLOSED",
   HTML_CLOSED: "HTML_CLOSED"
+};
+
+export const getNonceValue = (routeOptions) => {
+  let nonce = "";
+  if (routeOptions && routeOptions.cspNonceValue) {
+    nonce = `nonce="${routeOptions.cspNonceValue}"`;
+  }
+  return nonce;
 };
 
 /**
@@ -67,7 +74,7 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
     const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
-    const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
+    const nonce = getNonceValue(routeOptions);
 
     const renderJs = RENDER_JS && mode !== "nojs";
 
@@ -81,8 +88,8 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
       mode,
       renderJs,
       renderSs,
-      scriptNonce,
-      styleNonce,
+      scriptNonce: nonce,
+      styleNonce: nonce,
       chunkNames,
       devCSSBundle,
       devJSBundle,
