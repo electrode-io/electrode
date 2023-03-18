@@ -2,8 +2,8 @@ import { React } from "subapp-react";
 import { useContext } from "react";
 import { useDispatch, useSelector, ReactReduxContext } from "react-redux";
 import { reduxLoadSubApp } from "subapp-redux";
-import { productsReducers } from './reducers'
-import * as styles from './styles.css';
+import { productsReducers } from "./reducers";
+import "./styles.css";
 
 const Products = (props) => {
 
@@ -17,7 +17,7 @@ const Products = (props) => {
 
     return (
         <>
-            <h2 className={styles.header}>Products</h2>
+            <h2 className="header">Products</h2>
         </>
     )
 }
