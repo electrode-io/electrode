@@ -10,6 +10,6 @@ describe("subapp-server token-handler", () => {
     const routeOptions = {
         cspNonceValue: random
     };
-    expect(getNonceValue(routeOptions)).to.equal(`nonce="${random}"`);
+    expect(getNonceValue(routeOptions)).to.equal(` nonce="${random}"`);
   });
 });
