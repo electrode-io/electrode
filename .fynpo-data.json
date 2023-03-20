@@ -1,0 +1,87 @@
+{
+  "indirects": {
+    "samples/poc-subappv1-csp": [
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "subapp-util",
+          "version": "1.1.4",
+          "path": "packages/subapp-util"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dep)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/dev-base",
+          "version": "0.1.0",
+          "path": "packages/xarc-dev-base"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/subapp",
+          "version": "0.3.4",
+          "path": "packages/xarc-subapp"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "@xarc/webpack",
+          "version": "11.1.4",
+          "path": "packages/xarc-webpack"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      },
+      {
+        "fromPkg": {
+          "name": "poc-subappv1-csp",
+          "version": "0.0.1",
+          "path": "samples/poc-subappv1-csp"
+        },
+        "onPkg": {
+          "name": "electrode-node-resolver",
+          "version": "2.0.2",
+          "path": "packages/electrode-node-resolver"
+        },
+        "depSection": "dep",
+        "indirectSteps": [
+          "poc-subappv1-csp@0.0.1(dev)"
+        ]
+      }
+    ]
+  },
+  "__timestamp": 1679115408404
+}

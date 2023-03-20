@@ -1,0 +1,72 @@
+{
+  "name": "poc-subappv1-csp",
+  "version": "0.0.1",
+  "description": "SubApp POC",
+  "homepage": "http://test",
+  "author": {
+    "name": "Joel Chen",
+    "email": "joel123@gmail.com",
+    "url": "https://github.com/jchip"
+  },
+  "contributors": [],
+  "files": [
+    "server",
+    "src",
+    "lib",
+    "dist"
+  ],
+  "main": "lib/server/index.js",
+  "keywords": [
+    "test",
+    "electrode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "test/test-app"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "scripts": {
+    "dev": "xrun electrode/dev",
+    "test": "xrun electrode/check",
+    "build": "xrun electrode/build"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@module-federation/concat-runtime": "^0.0.1",
+    "@xarc/app": "11.0.1",
+    "@xarc/fastify-server": "^2.0.0",
+    "electrode-confippet": "^1.5.0",
+    "history": "^5.3.0",
+    "html-webpack-plugin": "^5.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
+    "react-router": "^6.4.3",
+    "react-router-dom": "^6.4.3",
+    "redux": "^4.2.0",
+    "subapp-react": "1.0.0",
+    "subapp-redux": "2.0.0",
+    "subapp-server": "2.0.0",
+    "subapp-web": "2.0.0",
+    "crypto": "1.0.1"
+  },
+  "devDependencies": {
+    "@xarc/opt-eslint": "^3.0.0",
+    "@xarc/app-dev": "11.0.1"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
+  },
+  "fyn": {
+    "dependencies": {
+      "subapp-web": "../../packages/subapp-web",
+      "subapp-server":"../../packages/subapp-server"
+    }
+  }
+}

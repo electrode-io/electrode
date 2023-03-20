@@ -25,7 +25,7 @@ export const tokens = {
 export const getNonceValue = (routeOptions) => {
   let nonce = "";
   if (routeOptions && routeOptions.cspNonceValue) {
-    nonce = `nonce="${routeOptions.cspNonceValue}"`;
+    nonce = ` nonce="${routeOptions.cspNonceValue}"`;
   }
   return nonce;
 };
