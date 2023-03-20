@@ -1,6 +1,6 @@
 {
   "name": "subapp-server",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@hapi/boom": "^9.1.4",
-    "@xarc/index-page": "^1.0.11",
+    "@xarc/index-page": "^1.1.0",
     "@xarc/jsx-renderer": "^1.0.11",
     "@xarc/tag-renderer": "^1.0.10",
     "filter-scan-dir": "1.5.5",
