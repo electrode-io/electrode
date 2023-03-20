@@ -1,3 +1,37 @@
+# 3/20/2023
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/index-page@1.1.0` `(1.0.11 => 1.1.0)`
+- `subapp-server@2.1.0` `(2.0.2 => 2.1.0)`
+- `subapp-web@2.1.0` `(2.0.1 => 2.1.0)`
+
+### Lerna Updated
+
+- `subapp-pbundle@1.1.0` `(1.0.1 => 1.1.0)`
+- `subapp-react@1.1.0` `(1.0.1 => 1.1.0)`
+- `subapp-redux@2.2.0` `(2.1.0 => 2.2.0)`
+
+## Commits
+
+- `packages/xarc-index-page`
+
+  - [minor] add csp functionality to subappv1 ([#1955](https://github.com/electrode-io/electrode/pull/1955)) [commit](http://github.com/electrode-io/electrode/commit/ebf07fa1782e720bca57733cb95cfb147311137e)
+
+- `packages/subapp-server`
+
+  - [minor] add csp functionality to subappv1 ([#1955](https://github.com/electrode-io/electrode/pull/1955)) [commit](http://github.com/electrode-io/electrode/commit/ebf07fa1782e720bca57733cb95cfb147311137e)
+
+- `packages/subapp-web`
+
+  - [minor] add csp functionality to subappv1 ([#1955](https://github.com/electrode-io/electrode/pull/1955)) [commit](http://github.com/electrode-io/electrode/commit/ebf07fa1782e720bca57733cb95cfb147311137e)
+
+- `MISC`
+
+  - chore: remove incorrect changelog update [commit](http://github.com/electrode-io/electrode/commit/1482e3da970b7d1414dbc0d4087ff5e4a16b06a7)
+
 # 3/6/2023
 
 ## Packages
