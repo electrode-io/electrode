@@ -91,7 +91,7 @@ export function loadSubApp(info, renderStart, options) {
   subApp.start = (instance, options, info) => {
     instance = instance || subApp.preStart(instance, options, info);
     info = info || subApp.info;
-    if (!instance.props) {
+    if (instance && !instance.props) {
       instance.props = options.props;
     }
     // if user provided a start function, then user is expected to
