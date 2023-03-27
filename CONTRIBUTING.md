@@ -128,22 +128,47 @@ $ pnpm run deploy
 - Run `rush change --target-branch <targetBranchWhichIsUsualyMaster>` 
   - This generates *change files*
 - Commit *change files*
-- Push the PR and get it reviewd and merged
+- Push the PR, get it reviewd and merged.
+
 
 ### Publish flow
-When its time to publish packages (as per release schedule)
-- Pull latest from `master` branch
-- Run `rush publish —apply`
-    - This is [dry run mode]. 
-    - Changes are added to the changelog files for each package.
-    - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
-    - Review the CHANGELOG.md updates at this point
-- Run `rush publish --apply --target-branch main --publish --add-commit-details`
-    - This will create a branch with `publish-*`
-    - Publish the packages
-    - And finally checkout back to *target branch* (`master` in this case)
-- Checkout to publish branch that got created above 
+
+#### **Pre-requisites for publishing**
+
+- Make sure you have account created at https://www.npmjs.com/ and setup 2FA
+- Get access to all packages which you need to publish, you can verify it from here: https://www.npmjs.com/settings/{npm-userid}/packages
+- Make sure you have below lines in .npmrc file
+  
+  ```bash
+  registry=https://registry.npmjs.com/
+  strict-ssl=false
+  //registry.npmjs.com/:_authToken={token will be generated}
+  ```
+
+- Use below command to login to npm from commandline
+  - `npm login`
+
+#### **Publishing**
+
+Publishing is a three step process. When its time to publish packages (as per release schedule), make sure above pre-requisites are followed and the latest is pulled from `master` branch
+#### **Increase the package versions**
+- Run `rush version --bump`
+  - This is [dry run mode]. 
+  - Changes are added to the changelog files for each package.
+  - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
+- Review the CHANGELOG.md updates at this point
+
+#### **Publish Packages**
+- Run `rush publish --include-all --publish`
+  - This will publish all the public packages that have version increased.
 - Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
+
+#### **Create Tag**
+- Add release tag, where <#> is the major archetype version, and <date> as YYYYMMDD (ie: rel-v11-20230327)
+  - `git tag -a rel-v<#>-date`
+- Push the tag created
+  - `git push origin rel-v<#>-date`
+
 
 Read more about [rush publishing] and [best practices]
 
