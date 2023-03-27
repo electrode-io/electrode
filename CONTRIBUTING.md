@@ -133,6 +133,8 @@ $ pnpm run deploy
 
 ### Publish flow
 
+Publishing is a three step process. When its time to publish packages (as per release schedule), make sure below pre-requisites are followed and the latest is pulled from `master` branch
+
 #### **Pre-requisites for publishing**
 
 - Make sure you have account created at https://www.npmjs.com/ and setup 2FA
@@ -147,23 +149,19 @@ $ pnpm run deploy
 
 - Use below command to login to npm from commandline
   - `npm login`
-
-#### **Publishing**
-
-Publishing is a three step process. When its time to publish packages (as per release schedule), make sure above pre-requisites are followed and the latest is pulled from `master` branch
-#### **Increase the package versions**
+#### **1. Increase the package versions**
 - Run `rush version --bump`
   - This is [dry run mode]. 
   - Changes are added to the changelog files for each package.
   - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
 - Review the CHANGELOG.md updates at this point
 
-#### **Publish Packages**
+#### **2. Publish Packages**
 - Run `rush publish --include-all --publish`
   - This will publish all the public packages that have version increased.
 - Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
 
-#### **Create Tag**
+#### **3. Create Tag**
 - Add release tag, where <#> is the major archetype version, and <date> as YYYYMMDD (ie: rel-v11-20230327)
   - `git tag -a rel-v<#>-date`
 - Push the tag created
