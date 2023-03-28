@@ -6,26 +6,35 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 ## Getting Started
 
-This repo uses a custom [Lerna] mono-repo setup with [fyn] as package manager to install and local linking node modules.
+This is a mono-repo and we use [rushjs] for mono-repo management. Also, we use [pnpm] as the package manager along with [rushjs].
+To read more about [rushjs with pnpm]
 
 ### Setup
-
-This is a mono-repo and we use [fyn] to install and local linking packages when doing development. You can use `npm run`, but never use `npm install` in our repo else things will break. Below, `fun` is an alias for `npm run` that [fyn] provides.
-
-Install some CLI tools globally for convenience:
-
-```bash
-$ npm install -g xclap-cli @xarc/run-cli fyn
-```
 
 Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
 ```bash
 $ git clone https://github.com/<your-github-id>/electrode.git
 $ cd electrode
-$ fyn # install node_modules
-$ fun bootstrap # run npm script bootstrap
+$ npm install -g @microsoft/rush # install rush
+$ rush install # installs package dependencies for all packages, based on the shrinkwrap file (pnpm-lock) that got created/updated using rush update.
+$ rush build # Run build command on all projects whose source files have changed since the last successful build
 ```
+
+### Useful Commands
+
+`rush install` - Installs package dependencies for all
+packages, based on the shrinkwrap file that is created/updated using "rush update". 
+It is recommended to use this if you do not want to make changes to *lock files. CI jobs use this command for the same reason.
+
+`rush update` - Installs the dependencies described in the package.
+json files, and updates the shrinkwrap file as needed. 
+
+`rush build` - Run this command after install step to perform build on all packages. These are incremental builds. In other words, it only builds projects whose source files have changed since the last successful build.
+
+`rush test` - Runs test on all packages. A `test` script is required in package.json for all packages.
+
+`rushx <command>` - Executes `scripts` mentioned in individual packages. This command should be ran within a package directory.
 
 ### Try a sample
 
@@ -33,8 +42,7 @@ Now you can go to the `samples` folder and try the `create-app-demo` sample app,
 
 ```bash
 $ cd samples/create-app-demo
-$ fyn
-$ fun dev
+$ rushx dev
 ```
 
 You should see some output in the console with `[DEV ADMIN]`. You can press `M` for the dev menu.
@@ -43,19 +51,20 @@ And when you open the browser at `http://localhost:3000`, you should see the dem
 
 ### **Useful** Notes
 
-- You should bootstrap the entire repo at the top dir at least once with `fun bootstrap`
-- After you make changes to any module under packages, if you want to test them in one of the samples, just run [fyn] in that sample and it will ensure all changed local packages are properly rebuilt and installed.
+- You should bootstrap the entire repo at the top dir at least once with `rush install`
+- After you make changes to any module under packages, if you want to test them in one of the samples, just run `` rushx <command>`` in that sample and it will ensure all changed local packages are properly rebuilt and installed.
+
 
 #### Test with `@xarc/create-app`
 
 You can quickly use the `xarc-create-app` package to create an app for testing.
 
 ```bash
-$ cd samples
-$ node ../packages/xarc-create-app/src my-test-app
-$ cd my-test-app
-$ fyn
-$ fun dev
+$ cd samples && node ../packages/xarc-create-app/src my-test-app
+$ cd ../ && rush update
+$ cd samples/my-test-app
+$ 
+$ rushx dev
 ```
 
 ## Contributing Guidelines
@@ -72,15 +81,9 @@ We are using [prettier] to format all our code with only one custom setting: `--
 
 #### PR and Commit messages
 
-Since we use independent lerna mode, to help keep the changelog clear, please format all your commit message with the following guideline:
+Since we use commitlint, keep the changelog clear, please format all your commit message with the following guideline:
 
-`[<semver>][feat|bug|chore] <message>`
-
-- `<semver>` can be:
-  - `major` - `maj` or `major`
-  - `minor` - `min` or `minor`
-  - `patch` - `pat` or `patch`
-- Only include `[feat|bug|chore]` if it's applicable.
+- Only include `feat|bug|chore` if it's applicable.
 - Please format your PR's title with the same format.
 
 > **_Please do everything you can to keep commits for a PR to a single package in `packages`._**
@@ -88,8 +91,10 @@ Since we use independent lerna mode, to help keep the changelog clear, please fo
 A sample commit and PR message should look like:
 
 ```text
-[minor][feat] implement support for react-query
+feat: implement support for react-query
 ```
+
+Read more about commitlint - https://github.com/conventional-changelog/commitlint/#what-is-commitlint
 
 ### Filing Issues
 
@@ -99,34 +104,79 @@ If you need help or found an issue, please [submit a github issue](https://githu
 
 Our docs use [docusaurus]. The source is in the directory `/docusaurus`. It's generated to `/docs` and published as github docs at <https://www.electrode.io/electrode>.
 
-To edit the docs:
+### To run the docs locally:
 
 ```bash
 $ cd docusaurus
-$ fyn
-$ fun start
+$ pnpm install
+$ pnpm start
 ```
 
 And open your browser to `http://localhost:4000` to view the docs locally.
 
-## Releasing
+### To generate documentations to `/docs`:
 
-The versioning of modules in the this repo are all automatically controlled by the commit message.
+```bash
+$ cd docusaurus
+$ pnpm run deploy
+```
 
-It's important that commits are isolated for the package they affected only and contains the version tags `[major]`, `[minor]`, or `[patch]`. `[patch]` is the default if tag is not found in commit message.
+## Process to publish packages
 
-To release, follow these steps:
+### Developer flow
+- Developers commit all code changes.
+- Run `rush change --target-branch <targetBranchWhichIsUsualyMaster>` 
+  - This generates *change files*
+- Commit *change files*
+- Push the PR, get it reviewd and merged.
 
-1. Use `xrun update-changelog` to detect packages that changed and their version bumps.
-1. Verify and check the file `CHANGELOG.md`, add a summary of key changes under the date.
-1. Amend the commit for `CHANGELOG.md` with summary changes.
-1. Run `npx fynpo prepare --no-tag` to prepare packages for release.
-1. Run `git tag -a rel-v<#>-<date>` where `<#>` is the major archetype version, and `<date>` as `YYYYMMDD`. (ie: `rel-v9-20210301`)
-1. Publish the packages that has version bumps.
-1. Push the release commits.
+
+### Publish flow
+
+Publishing is a three step process. When its time to publish packages (as per release schedule), make sure below pre-requisites are followed and the latest is pulled from `master` branch
+
+#### **Pre-requisites for publishing**
+
+- Make sure you have account created at https://www.npmjs.com/ and setup 2FA
+- Get access to all packages which you need to publish, you can verify it from here: https://www.npmjs.com/settings/{npm-userid}/packages
+- Make sure you have below lines in .npmrc file
+  
+  ```bash
+  registry=https://registry.npmjs.com/
+  strict-ssl=false
+  //registry.npmjs.com/:_authToken={token will be generated}
+  ```
+
+- Use below command to login to npm from commandline
+  - `npm login`
+#### **1. Increase the package versions**
+- Run `rush version --bump`
+  - This is [dry run mode]. 
+  - Changes are added to the changelog files for each package.
+  - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
+- Review the CHANGELOG.md updates at this point
+
+#### **2. Publish Packages**
+- Run `rush publish --include-all --publish`
+  - This will publish all the public packages that have version increased.
+- Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
+
+#### **3. Create Tag**
+- Add release tag, where <#> is the major archetype version, and <date> as YYYYMMDD (ie: rel-v11-20230327)
+  - `git tag -a rel-v<#>-date`
+- Push the tag created
+  - `git push origin rel-v<#>-date`
+
+
+Read more about [rush publishing] and [best practices]
+
 
 [prettier]: https://www.npmjs.com/package/prettier
-[lerna]: https://lernajs.io/
+
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
-[fyn]: https://www.npmjs.com/package/fyn
 [docusaurus]: https://docusaurus.io/
+[rushjs]: https://rushjs.io/pages/intro/welcome/
+[rushjs with pnpm]: https://rushjs.io/pages/maintainer/package_managers/
+[best practices]:  https://rushjs.io/pages/best_practices/change_logs/#recommended-practices
+[pnpm]: https://pnpm.io/
+[rush publishing]: https://rushjs.io/pages/maintainer/publishing/#dry-run-mode

@@ -4,6 +4,7 @@
   "description": "Util for Electrode SubApp",
   "main": "lib/index.js",
   "scripts": {
+    "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "clap check",
     "coverage": "clap coverage",
     "check": "clap check"
@@ -26,7 +27,8 @@
     "optional-require": "^1.1.6"
   },
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^3.0.3"
+    "electrode-archetype-njs-module-dev": "^3.0.3",
+    "@xarc/run": "^1.1.1"
   },
   "nyc": {
     "all": true,

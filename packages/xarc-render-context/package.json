@@ -19,6 +19,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@xarc/run": "^1.1.1",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.7.6",

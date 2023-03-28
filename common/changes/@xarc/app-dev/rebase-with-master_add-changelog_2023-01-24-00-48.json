@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "Add `webpack` - this being a phantom dependency, rush does not allow phantom dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}

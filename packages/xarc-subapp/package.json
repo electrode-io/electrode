@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
+    "@xarc/run": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",

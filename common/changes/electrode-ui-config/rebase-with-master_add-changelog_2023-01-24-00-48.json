@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-ui-config",
+      "comment": "Export missing `fastify` config",
+      "type": "minor"
+    }
+  ],
+  "packageName": "electrode-ui-config"
+}

@@ -5,18 +5,9 @@
   "homepage": "http://www.electrode.io",
   "scripts": {
     "build": "docusaurus build",
-    "start": "npm run build && docusaurus start",
+    "start": "pnpm build && docusaurus start --port 4000",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus build && touch build/.nojekyll && rm -rf ../docs && cp -r build ../docs"
-  },
-  "devDependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.56",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.56",
-    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
-    "classnames": "^2.2.6",
-    "docusaurus-lunr-search": "^1.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
@@ -31,5 +22,18 @@
     "printWidth": 100,
     "singleQuote": false,
     "jsxSingleQuote": false
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^2.2.0",
+    "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/theme-live-codeblock": "^2.2.0",
+    "classnames": "^2.3.2",
+    "docusaurus-lunr-search": "^2.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@mdx-js/react": "^1.6.22",
+    "hogan.js": "^3.0.2",
+    "autocomplete.js": "^0.38.1",
+    "lunr": "^2.3.9"
   }
 }

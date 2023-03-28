@@ -25,7 +25,8 @@ module.exports = uiConfigRegister;
 module.exports = universalHapiPlugin(
   {
     hapi16: uiConfigRegister,
-    hapi17: uiConfigRegister
+    hapi17: uiConfigRegister,
+    fastify: uiConfigRegister
   },
   pkg
 );

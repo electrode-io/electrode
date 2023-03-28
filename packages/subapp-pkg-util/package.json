@@ -7,6 +7,9 @@
   "keywords": [],
   "author": "Electrode",
   "license": "Apache-2.0",
+  "scripts": {
+    "build": "echo \"Nothing to do, just a placeholder\""
+  },
   "dependencies": {
     "shcmd": "^0.8.4",
     "xclap": "^0.2.40"

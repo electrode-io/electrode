@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-recoil",
+      "comment": "Upgrade recoil and remove `@types/recoil ` as recoil provides its own type definitions",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/react-recoil"
+}

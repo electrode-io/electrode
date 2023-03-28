@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Add phantom dependency `@xarc/render-context`. Add `@xarc/run` to dev dependency",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-server"
+}

@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import logger from "redux-logger";
 import { applyMiddleware } from "redux";
-import { Products } from "../components/Products";
+import { Products } from "../components/products";
 import { Deals } from "../components/deals";
-import { Navigation } from "../components/Navigation";
+import { Navigation } from "../components/navigation";
 import reduxReducers, { decNumber, incNumber } from "./reducers";
 
 const mapStateToProps = (state) => state;
@@ -15,6 +15,7 @@ const HomeComp = (props) => {
   return (
     <div className="container-fluid text-center">
       <p>HOME</p>
+      
       <div>
         <span style={{color: "orange", fontSize: "large"}}>
           Redux State Demo

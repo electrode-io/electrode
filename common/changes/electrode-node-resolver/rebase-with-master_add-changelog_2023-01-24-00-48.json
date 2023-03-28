@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-node-resolver",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "electrode-node-resolver"
+}

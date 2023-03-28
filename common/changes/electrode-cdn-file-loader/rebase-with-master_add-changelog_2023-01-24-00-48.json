@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-cdn-file-loader",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "electrode-cdn-file-loader"
+}

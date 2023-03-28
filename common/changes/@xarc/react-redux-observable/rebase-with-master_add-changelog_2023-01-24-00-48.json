@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux-observable",
+      "comment": "Upgrade dev dependencies - `@types/reac`t, `@types/react-dom`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/react-redux-observable"
+}

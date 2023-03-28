@@ -3,6 +3,7 @@ import subApp from "./main-body";
 import { StaticRouter } from "react-router-dom/server";
 
 module.exports = {
+  // eslint-disable-next-line
   prepare: async ({ request, context }) => {
     return new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 1000))
       .then({
@@ -59,5 +60,5 @@ module.exports = {
     );
   }
 };
-
+// eslint-disable-next-line
 console.log("hello from main-body server.jsx");

@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-
+// eslint-disable-next-line
 const MoreProducts = props => {
   return (
     <div className="container">

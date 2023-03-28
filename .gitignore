@@ -522,3 +522,11 @@ yarn-error.log*
 # Sample apps
 samples/**/dist
 samples/**/lib
+# Rush temporary files
+common/deploy/
+common/temp/
+common/autoinstallers/*/.npmrc
+**/.rush/temp/
+
+# Heft temporary files
+.heft

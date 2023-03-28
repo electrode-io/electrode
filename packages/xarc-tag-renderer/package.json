@@ -18,10 +18,12 @@
   "author": "Electrode <https://github.com/electrode-io/electrode>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.8"
+    "@xarc/render-context": "^1.0.8",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@xarc/run": "^1.1.1",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.7.6",

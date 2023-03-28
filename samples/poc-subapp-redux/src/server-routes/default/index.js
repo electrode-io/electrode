@@ -1,5 +1,4 @@
 /* @jsx createElement */
-
 import { IndexPage, createElement, Token, Require, Literal } from "subapp-server/template";
 
 const Template = (

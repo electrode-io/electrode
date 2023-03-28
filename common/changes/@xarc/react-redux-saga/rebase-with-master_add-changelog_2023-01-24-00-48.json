@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux-saga",
+      "comment": "Upgrade dev dependencies -` @types/react`, `@types/react-dom`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/react-redux-saga"
+}
