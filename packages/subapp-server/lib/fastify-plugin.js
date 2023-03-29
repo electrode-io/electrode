@@ -20,7 +20,8 @@ const {
   getSrcDir,
   makeErrorStackResponse,
   checkSSRMetricsReporting,
-  updateFullTemplate
+  updateFullTemplate,
+  setCSPHeader
 } = require("./utils");
 
 const routesFromFile = require("./routes-from-file");
@@ -40,12 +41,13 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       const data = context.result;
       const status = data.status;
-      if (routeOptions.cspNonceValue) {
-        reply.header(
-          "Content-Security-Policy",
-          `script-src 'nonce-${routeOptions.cspNonceValue}' 'strict-dynamic';`);
-      }
 
+      const nonce = setCSPHeader({ routeOptions });
+      const unsafeEval = process.env.NODE_ENV !== "production" ? `'unsafe-eval'` : "";
+      if (nonce) {
+        reply.header("Content-Security-Policy", 
+        `script-src 'nonce-${nonce}' 'strict-dynamic' ${unsafeEval};`);
+      }
       if (data instanceof Error) {
         // rethrow to get default error behavior below with helpful errors in dev mode
         throw data;

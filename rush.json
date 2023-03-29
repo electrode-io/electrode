@@ -706,6 +706,13 @@
       "projectFolder": "samples/poc-subapp-redux",
       "shouldPublish": false,
       "skipRushCheck": true
+    },
+    {
+      "packageName": "poc-subappv1-csp",
+      "projectFolder": "samples/poc-subappv1-csp",
+      "shouldPublish": false,
+      "skipRushCheck": true
     }
+   
   ]
 }

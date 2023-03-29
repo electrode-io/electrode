@@ -10,7 +10,7 @@ async function start() {
     const config = electrodeConfippet.config;
     const server = await electrodeServer({ ...config, deferStart: true });
 
-    server.start()
+    server.start();
 }
 
 start();

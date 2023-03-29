@@ -3,7 +3,7 @@
 
 import Path from "path";
 import Fs from "fs";
-import webpack from "webpack";
+import { webpack } from "@xarc/webpack";
 import hotHelpers from "webpack-hot-middleware/helpers";
 import Url from "url";
 import { devProxy } from "../../config/dev-proxy";
