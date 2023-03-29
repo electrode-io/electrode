@@ -45,8 +45,7 @@ function getDefaultRouteOptions() {
     // pass a nonce value frmo app, electrode will set csp header using this nonce
     cspNonceValue: undefined, 
     // if `true`, electrode will generate nonce and add CSP header
-    // A function that returns nonce can be passed as well
-    cspHeader: false, // boolean || function
+    cspHeader: false, 
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
     reporting: { enable: false }
