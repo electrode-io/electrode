@@ -145,9 +145,7 @@ function nonceGenerator(_) {
 /**
  * Sets CSP header and sets nonce value to route options
  * cspNonceValue - a user generated CSP nonce value. 
- * cspHeader - boolean || function. electrode generates nonce and sets CSP header if set to true. 
- * App can pass a custom function in cspHeader. Return value should be a nonce. Electrode will use
- * this nonce to set CSP header
+ * cspHeader - boolean electrode generates nonce and sets CSP header if set to true. 
  * 
  * @param {*} param0 
  * @returns nonce value
@@ -157,17 +155,14 @@ function setCSPHeader({ routeOptions }) {
   if (routeOptions && routeOptions.cspNonceValue) {
     return routeOptions.cspNonceValue;
   }
-  // User can set boolean or pass a function that generates Nonce as `cspHeader`
+  // If cspHeader is true, electrode will generate nonce and sets CSP header.
   else if (routeOptions && routeOptions.cspHeader) {
     switch(typeof routeOptions.cspHeader) {
       case "boolean": {
         routeOptions.cspNonceValue = nonceGenerator();
         break;
       };
-      case "function": {
-        routeOptions.cspNonceValue = routeOptions.cspHeader();
-        break;
-      };
+      // TODO: add new 'case' so that app can pass a nonce generator function.
       default: {
         routeOptions.cspNonceValue = nonceGenerator();
         break;

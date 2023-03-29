@@ -1,5 +1,5 @@
 const path = require("path");
-// const { cspNonceValue, nonceGenerator } = require("./server/utils");
+// const { cspNonceValue } = require("./server/utils");
 
 const subAppOptions = {
   serverSideRendering: false,
@@ -12,15 +12,15 @@ const commonRouteOptions = {
 };
 
 // App can pass a generated cspNonceValue
-// Another option is to set `cspHeader`. This can be a function that generates nonce or a boolean. 
-// In case of boolean, electrode will generate once and set CSP header.
+// Another option is to set `cspHeader`. This would be boolean. By deafault cspHeader flag is 
+// set `false`. Electrode will generate once and set CSP header.
 export default {
   "/*": {
     pageTitle: "Home",
     subApps: [["./products", subAppOptions]],
     templateFile: "./server/templates/products",
     // cspNonceValue,
-    cspHeader: true, // nonceGenerator
+    cspHeader: true,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
   }
