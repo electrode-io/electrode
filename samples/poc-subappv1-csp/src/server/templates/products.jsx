@@ -1,6 +1,6 @@
 /* @jsx createElement */
-import { createElement, Require } from "subapp-server/template"
-import Template from "./template"
+import { createElement, Require } from "subapp-server/template";
+import Template from "./template";
 
 export default (
   <Template>
@@ -12,4 +12,4 @@ export default (
       name="Products"
     />
   </Template>
-)
+);

@@ -6,12 +6,15 @@ const assert = require("assert");
 const _ = require("lodash");
 const Path = require("path");
 const Boom = require("@hapi/boom");
+const Crypto = require("crypto");
 const optionalRequire = require("optional-require")(require);
 const getDevProxy = optionalRequire("@xarc/app-dev/config/get-dev-proxy");
 const HttpStatusCodes = require("http-status-codes");
 const {
   utils: { loadFuncFromModule }
 } = require("@xarc/index-page");
+
+const NONCE_SIZE = 16;
 
 const updateFullTemplate = (baseDir, options) => {
   if (options.templateFile) {
@@ -39,7 +42,10 @@ function getDefaultRouteOptions() {
     buildArtifacts,
     prodBundleBase: "/js",
     devBundleBase: "/js",
-    cspNonceValue: undefined,
+    // pass a nonce value frmo app, electrode will set csp header using this nonce
+    cspNonceValue: undefined, 
+    // if `true`, electrode will generate nonce and add CSP header
+    cspHeader: false, 
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
     reporting: { enable: false }
@@ -130,6 +136,42 @@ function getSrcDir(pluginOpts) {
   );
 }
 
+function nonceGenerator(_) {
+  const token = Crypto.randomBytes(NONCE_SIZE).toString("base64");
+  return token.substring(0, token.length - 1);
+}
+
+/**
+ * Sets CSP header and sets nonce value to route options
+ * cspNonceValue - a user generated CSP nonce value. 
+ * cspHeader - boolean electrode generates nonce and sets CSP header if set to true. 
+ * 
+ * @param {*} param0 
+ * @returns nonce value
+ */
+function setCSPHeader({ routeOptions }) {
+  // If user sets cspNonce value through route options, use the same.
+  if (routeOptions && routeOptions.cspNonceValue) {
+    return routeOptions.cspNonceValue;
+  }
+  // If cspHeader is true, electrode will generate nonce and sets CSP header.
+  else if (routeOptions && routeOptions.cspHeader) {
+    switch(typeof routeOptions.cspHeader) {
+      case "boolean": {
+        routeOptions.cspNonceValue = nonceGenerator();
+        break;
+      };
+      // TODO: add new 'case' so that app can pass a nonce generator function.
+      default: {
+        routeOptions.cspNonceValue = nonceGenerator();
+        break;
+      }
+    }
+  }
+  
+  return routeOptions.cspNonceValue;
+}
+
 module.exports = {
   getSrcDir,
   getDefaultRouteOptions,
@@ -137,5 +179,6 @@ module.exports = {
   errorResponse,
   makeErrorStackResponse,
   checkSSRMetricsReporting,
-  invokeTemplateProcessor
+  invokeTemplateProcessor,
+  setCSPHeader
 };

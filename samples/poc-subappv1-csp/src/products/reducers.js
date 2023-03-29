@@ -5,16 +5,16 @@ export const addProduct = (value) => {
     };
 };
 
-export const products = (state = '', action) => {
+export const products = (state = "", action) => {
     switch (action.type) {
-        case 'ADD_PRODUCT':
+        case "ADD_PRODUCT":
             state.products.push(action.payload);
             return state;
         default:
-            return state
+            return state;
     }
-}
+};
 
 export const productsReducers = {
     products,
-}
+};

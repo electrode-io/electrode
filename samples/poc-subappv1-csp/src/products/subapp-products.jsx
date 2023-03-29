@@ -9,24 +9,24 @@ const Products = (props) => {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state);
-    const { store } = useContext(ReactReduxContext)
+    const { store } = useContext(ReactReduxContext);
     
-    console.log('Store >> ', store)
-    console.log('Store >> State >> ', store.getState())
+    console.log("Store >> ", store);
+    console.log("Store >> State >> ", store.getState());
     console.log("products state", state);
 
     return (
         <>
             <h2 className="header">Products</h2>
         </>
-    )
-}
+    );
+};
 
 export default reduxLoadSubApp({
     name: "Products",
     Component: Products,
     reduxReducers: productsReducers,
-    reduxShareStore: 'productsStore',
+    reduxShareStore: "productsStore",
     prepare: () => {
         // A new store is created, so we can set initial state here.
         // TODO: sample api call to get data and return as initial state
@@ -34,11 +34,11 @@ export default reduxLoadSubApp({
          products: [
           {
             id: `124232213`,
-            name: 'item 1',
-            description: 'sample cart item'
+            name: "item 1",
+            description: "sample cart item"
           }
          ]
-        }
-        return Promise.resolve(initialState)
+        };
+        return Promise.resolve(initialState);
       }
-  })
+  });

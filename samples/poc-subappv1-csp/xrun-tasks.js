@@ -10,11 +10,8 @@ xrun.updateEnv(
   { override: false }
 );
 
-const deps = require("./package.json").dependencies;
-
 loadDevTasks(xrun, {
   webpackOptions: {
-    minify: true,
-    devtool: 'inline-source-map'
+    minify: true
   }
 });

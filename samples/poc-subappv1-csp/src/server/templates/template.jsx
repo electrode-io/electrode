@@ -5,10 +5,10 @@ import {
     Token,
     Require,
     RegisterTokenIds,
-  } from "subapp-server/template"
+  } from "subapp-server/template";
   
-  import { ReserveSpot } from "subapp-web"
-  import { tokenHandler } from "@xarc/index-page"
+  import { ReserveSpot } from "subapp-web";
+  import { tokenHandler } from "@xarc/index-page";
   
   const Template = (props) => (
     <IndexPage DOCTYPE="html">
@@ -40,7 +40,7 @@ import {
       </html>
       <Token _id="HTML_CLOSED" />
     </IndexPage>
-  )
+  );
   
-  export default Template
+  export default Template;
   
