@@ -176,8 +176,8 @@ function setCSPNonce({ routeOptions }) {
     // cspHeader: { style: true } - will enable nonce only for styles
     case "object": {
       routeOptions.cspNonceValue = {
-        styleNonce: !!routeOptions.cspNonce?.style === true ? nonce : "",
-        scriptNonce: !!routeOptions.cspNonce?.script  === true ? nonce : ""
+        styleNonce: routeOptions.cspNonce && !!routeOptions.cspNonce.style === true ? nonce : "",
+        scriptNonce: routeOptions.cspNonce && !!routeOptions.cspNonce.script  === true ? nonce : ""
       };
       break;
     };
@@ -195,6 +195,17 @@ function setCSPNonce({ routeOptions }) {
   return routeOptions.cspNonceValue;
 }
 
+function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
+  const unsafeEval = process.env.NODE_ENV !== "production" ? 
+        `'unsafe-eval'` : "";
+
+  const styleSrc = styleNonce ? `style-src 'nonce-${styleNonce}' 'strict-dynamic';` : "";
+  
+  const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
+
+  return { scriptSrc, styleSrc };
+}
+
 module.exports = {
   getSrcDir,
   getDefaultRouteOptions,
@@ -203,5 +214,6 @@ module.exports = {
   makeErrorStackResponse,
   checkSSRMetricsReporting,
   invokeTemplateProcessor,
-  setCSPNonce
+  setCSPNonce,
+  getCSPHeader
 };

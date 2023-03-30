@@ -21,7 +21,8 @@ const {
   makeErrorStackResponse,
   checkSSRMetricsReporting,
   updateFullTemplate,
-  setCSPNonce
+  setCSPNonce,
+  getCSPHeader
 } = require("./utils");
 
 const routesFromFile = require("./routes-from-file");
@@ -43,18 +44,11 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       const data = context.result;
       const status = data.status;
-      
-      const unsafeEval = process.env.NODE_ENV !== "production" ? 
-        `"unsafe-eval" "unsafe-inline"` : "";
 
-      const styleSrc = styleNonce ? `style-src 'nonce-${styleNonce}' 'strict-dynamic';` : "";
-      const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval};`: "";
+      const { scriptSrc = "", styleSrc = "" } = getCSPHeader({ styleNonce, scriptNonce });
 
-      if (scriptSrc) {
-        reply.header("Content-Security-Policy", scriptSrc);
-      }
-      if (styleSrc) {
-        reply.header("Content-Security-Policy", styleSrc);
+      if (scriptSrc || styleSrc) {
+        reply.header("Content-Security-Policy", `${scriptSrc}${styleSrc}`);
       }
 
       if (data instanceof Error) {

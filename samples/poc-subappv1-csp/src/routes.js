@@ -22,7 +22,7 @@ export default {
     subApps: [["./products", subAppOptions]],
     templateFile: "./server/templates/products",
     // Enable one of these to use CSP header
-    // cspNonce: true,
+    cspNonce: true,
     // cspNonce: { style: true },
     // cspNonce: cspNonceValue,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
