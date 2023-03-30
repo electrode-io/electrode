@@ -80,6 +80,7 @@ module.exports = function setup(setupContext, { props: setupProps }) {
       const routeOptions = setupContext.routeOptions;
       const path = Path.posix.join(bundleBase, bundleAsset.name);
       const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
+      const { scriptNonce } = util.getNonceValue(setupContext.routeOptions);
       retrieveUrl(bundleUrl, (err, resp, body) => {
         if (err || resp.statusCode !== 200) {
           const msg = makeDevDebugMessage(
@@ -90,7 +91,7 @@ Response: ${err || body}`
           resolve(makeDevDebugHtml(msg));
         } else {
           resolve(
-            `<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${body}</script>`
+            `<script${scriptNonce}>/*${name}*/${body}</script>`
           );
         }
       });
@@ -107,7 +108,7 @@ Response: ${err || body}`
 
   const prepareSubAppJsBundle = () => {
     const { webpackDev } = setupContext.routeOptions;
-
+    const { scriptNonce, styleNonce } = util.getNonceValue(setupContext.routeOptions);
     if (setupProps.inlineScript === "always" || (setupProps.inlineScript === true && !webpackDev)) {
       if (!webpackDev) {
         // if we have to inline the subapp's JS bundle, we load it for production mode
@@ -115,10 +116,10 @@ Response: ${err || body}`
         const ext = Path.extname(bundleAsset.name);
         if (ext === ".js") {
           inlineSubAppJs =
-            `<script${util.getNonceValue(setupContext.routeOptions)}>/*${name}*/${src}</script>`;
+            `<script${scriptNonce}>/*${name}*/${src}</script>`;
         } else if (ext === ".css") {
           inlineSubAppJs =
-            `<style${util.getNonceValue(setupContext.routeOptions)} id="${name}">${src}</style>`;
+            `<style${styleNonce} id="${name}">${src}</style>`;
         } else {
           const msg = makeDevDebugMessage(`Error: UNKNOWN bundle extension ${name}`);
           console.error(msg); // eslint-disable-line
@@ -150,6 +151,8 @@ Response: ${err || body}`
 
     const bundles = entryPoints.filter(ep => !includedBundles[ep]);
     const headSplits = [];
+    const { scriptNonce, styleNonce } = util.getNonceValue(context.user.routeOptions);
+
     const splits = bundles
       .map(ep => {
         if (!inlineSubAppJs && !includedBundles[entryName]) {
@@ -163,27 +166,27 @@ Response: ${err || body}`
                 if (ext === ".js") {
                   if (context.user.headEntries) {
                     headSplits.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)} 
+                      `<link${scriptNonce} 
                         rel="preload" 
                         href="${jsBundle}" 
                         as="script">`
                       );
                   }
                   a.push(
-                    `<script${util.getNonceValue(context.user.routeOptions)}
+                    `<script${scriptNonce}
                       src="${jsBundle}" 
                       async></script>`
                     );
                 } else if (ext === ".css") {
                   if (context.user.headEntries) {
                     headSplits.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)}
+                      `<link${styleNonce}
                         rel="stylesheet"
                         href="${jsBundle}">`
                       );
                   } else {
                     a.push(
-                      `<link${util.getNonceValue(context.user.routeOptions)}
+                      `<link${styleNonce}
                         rel="stylesheet"
                         href="${jsBundle}">`
                       );
@@ -283,6 +286,7 @@ Response: ${err || body}`
 
         let dynInitialState = "";
         let initialStateScript;
+        const { scriptNonce = "" } = util.getNonceValue(context.user.routeOptions);
         if (!initialStateStr) {
           initialStateScript = "{}";
         } else if (initialStateStr.length < INITIAL_STATE_SIZE_FOR_JSON) {
@@ -291,7 +295,7 @@ Response: ${err || body}`
           // embed large initial state as text and parse with JSON.parse instead.
           const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
           dynInitialState =
-            `<script${util.getNonceValue(context.user.routeOptions)} 
+            `<script${scriptNonce} 
               type="application/json" 
               id="${dataId}">
 ${jsesc(JSON.parse(initialStateStr), {
@@ -307,7 +311,7 @@ ${jsesc(JSON.parse(initialStateStr), {
         const inlineStr = props.inline ? `inline:${props.inline},\n ` : "";
         const groupStr = props.group ? `group:"${props.group}",\n ` : "";
         outputSpot.add(`${dynInitialState}
- <script${util.getNonceValue(context.user.routeOptions)} >${xarc}.startSubAppOnLoad({
+ <script${scriptNonce} >${xarc}.startSubAppOnLoad({
  name:"${name}",
  ${elementId}serverSideRendering:${Boolean(props.serverSideRendering)},
  ${inlineStr}${groupStr}clientProps:${clientProps},
@@ -356,12 +360,12 @@ ${stack}`,
 
       const processSubapp = async () => {
         const namespace = setupContext.routeOptions.namespace;
-
+        const { scriptNonce } = util.getNonceValue(context.user.routeOptions);
         context.user.numOfSubapps++;
         const { bundles, scripts, preLoads } = await prepareSubAppSplitBundles(context);
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
-          outputSpot.add(`${scripts}<script${util.getNonceValue(context.user.routeOptions)} >
+          outputSpot.add(`${scripts}<script${scriptNonce} >
 ${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
             namespace ? ", " + JSON.stringify(namespace) : ""
           });</script>

@@ -18,6 +18,7 @@ const Products = (props) => {
     return (
         <>
             <h2 className="header">Products</h2>
+            <div id="inline-style">Inline style from token handler applied</div>
         </>
     );
 };

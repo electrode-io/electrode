@@ -2,7 +2,6 @@
 
 const DEFAULT_CONCURRENCY = 15;
 const xaa = require("xaa");
-const util = require("./util");
 /*
  * subapp start for SSR
  * Nothing needs to be done to start subapp for SSR
@@ -10,11 +9,10 @@ const util = require("./util");
 module.exports = function setup() {
   return {
     process: (context, { props: { concurrency } }) => {
-      const { xarcSubappSSR, xarcSSREmitter, routeOptions } = context.user;
-      const nonce = util.getNonceValue(routeOptions);
+      const { xarcSubappSSR, xarcSSREmitter, scriptNonce } = context.user;
       const startMsg = `
 <!-- subapp start -->
-<script${nonce}>window.xarcV1.start();</script>
+<script${scriptNonce}>window.xarcV1.start();</script>
 `;
 
       if (!xarcSubappSSR) {

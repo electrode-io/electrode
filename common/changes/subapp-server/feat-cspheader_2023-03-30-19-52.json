@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Enhancement to set CSP nonce separately for script and styles",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-server"
+}

@@ -407,11 +407,13 @@ ${ignoreMsg}`
     return emitter;
   },
   getNonceValue(routeOptions) {
-    let nonce = "";
-    if (routeOptions && routeOptions.cspNonceValue) {
-      nonce = ` nonce="${routeOptions.cspNonceValue}"`;
-    }
-    return nonce;
+    const scriptNonce = _.get(routeOptions, "cspNonceValue.scriptNonce", "");
+    const styleNonce = _.get(routeOptions, "cspNonceValue.styleNonce", "");
+    
+    return { 
+      scriptNonce: scriptNonce ? ` nonce="${scriptNonce}"` : "", 
+      styleNonce: styleNonce ? ` nonce="${styleNonce}"` : ""
+    };
   }
 };
 

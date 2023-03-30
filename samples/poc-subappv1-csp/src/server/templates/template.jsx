@@ -24,6 +24,7 @@ import {
           <Require _id="subapp-web/lib/init" />
           <Token _id="CUSTOM_TOKEN_HANDLER" />
           <Token _id="CRITICAL_CSS" />
+          <Token _id="INLINE_CSS" />
         </head>
         <Token _id="HEAD_CLOSED" />
         <body>
@@ -31,6 +32,7 @@ import {
             <h4>JavaScript is Disabled</h4>
             <p>Please enable JavaScript in your browser and reload the page.</p>
           </noscript>
+          {/* Add /remove this style to test CSP */}
           <div style="position:relative; min-height: 100vh">
             {props.children}
             <Require _id="subapp-web/lib/start" />
