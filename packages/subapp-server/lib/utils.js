@@ -203,7 +203,7 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
   
   const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
 
-  return { scriptSrc, styleSrc };
+  return `${scriptSrc}${styleSrc}`;
 }
 
 module.exports = {

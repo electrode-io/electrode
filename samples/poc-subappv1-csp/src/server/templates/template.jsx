@@ -32,6 +32,7 @@ import {
             <h4>JavaScript is Disabled</h4>
             <p>Please enable JavaScript in your browser and reload the page.</p>
           </noscript>
+          {/* Add /remove this style to test CSP */}
           <div style="position:relative; min-height: 100vh">
             {props.children}
             <Require _id="subapp-web/lib/start" />

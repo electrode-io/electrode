@@ -45,10 +45,10 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
       const data = context.result;
       const status = data.status;
 
-      const { scriptSrc = "", styleSrc = "" } = getCSPHeader({ styleNonce, scriptNonce });
+      const cspHeader = getCSPHeader({ styleNonce, scriptNonce });
 
-      if (scriptSrc || styleSrc) {
-        reply.header("Content-Security-Policy", `${scriptSrc}${styleSrc}`);
+      if (cspHeader) {
+        reply.header("Content-Security-Policy", cspHeader);
       }
 
       if (data instanceof Error) {
