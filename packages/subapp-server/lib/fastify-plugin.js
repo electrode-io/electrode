@@ -21,7 +21,7 @@ const {
   makeErrorStackResponse,
   checkSSRMetricsReporting,
   updateFullTemplate,
-  setCSPHeader
+  setCSPNonce
 } = require("./utils");
 
 const routesFromFile = require("./routes-from-file");
@@ -33,6 +33,8 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
   return async (request, reply) => {
     try {
+      const { styleNonce = "", scriptNonce = "" } = setCSPNonce({ routeOptions });
+
       const context = await routeRenderer({
         useStream,
         mode: "",
@@ -41,13 +43,20 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       const data = context.result;
       const status = data.status;
+      
+      const unsafeEval = process.env.NODE_ENV !== "production" ? 
+        `"unsafe-eval" "unsafe-inline"` : "";
 
-      const nonce = setCSPHeader({ routeOptions });
-      const unsafeEval = process.env.NODE_ENV !== "production" ? `'unsafe-eval'` : "";
-      if (nonce) {
-        reply.header("Content-Security-Policy", 
-        `script-src 'nonce-${nonce}' 'strict-dynamic' ${unsafeEval};`);
+      const styleSrc = styleNonce ? `style-src 'nonce-${styleNonce}' 'strict-dynamic';` : "";
+      const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval};`: "";
+
+      if (scriptSrc) {
+        reply.header("Content-Security-Policy", scriptSrc);
       }
+      if (styleSrc) {
+        reply.header("Content-Security-Policy", styleSrc);
+      }
+
       if (data instanceof Error) {
         // rethrow to get default error behavior below with helpful errors in dev mode
         throw data;

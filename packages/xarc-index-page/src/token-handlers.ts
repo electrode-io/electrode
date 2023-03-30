@@ -23,11 +23,12 @@ export const tokens = {
 };
 
 export const getNonceValue = (routeOptions) => {
-  let nonce = "";
-  if (routeOptions && routeOptions.cspNonceValue) {
-    nonce = ` nonce="${routeOptions.cspNonceValue}"`;
-  }
-  return nonce;
+  const {scriptNonce: scriptToken = "", styleNonce: styleToken = "" } = routeOptions.cspNonceValue;
+
+  return {
+    scriptNonce: scriptToken ? ` nonce="${scriptToken}"` : "",
+    styleNonce: styleToken ? ` nonce="${styleToken}"` : ""
+  };
 };
 
 /**
@@ -74,7 +75,8 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
     const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
-    const nonce = getNonceValue(routeOptions);
+
+    const { scriptNonce, styleNonce } = getNonceValue(routeOptions);
 
     const renderJs = RENDER_JS && mode !== "nojs";
 
@@ -88,8 +90,8 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
       mode,
       renderJs,
       renderSs,
-      scriptNonce: nonce,
-      styleNonce: nonce,
+      scriptNonce: scriptNonce,
+      styleNonce: styleNonce,
       chunkNames,
       devCSSBundle,
       devJSBundle,

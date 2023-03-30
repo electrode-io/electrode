@@ -8,8 +8,11 @@ describe("subapp-server token-handler", () => {
   describe("getNonceValue", () => {
     const random = "random-text";
     const routeOptions = {
-        cspNonceValue: random
+        cspNonceValue: {
+          scriptNonce: random,
+          styleNonce: random
+        }
     };
-    expect(getNonceValue(routeOptions)).to.equal(` nonce="${random}"`);
+    expect(getNonceValue(routeOptions).scriptNonce).to.equal(` nonce="${random}"`);
   });
 });

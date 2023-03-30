@@ -42,10 +42,9 @@ function getDefaultRouteOptions() {
     buildArtifacts,
     prodBundleBase: "/js",
     devBundleBase: "/js",
-    // pass a nonce value frmo app, electrode will set csp header using this nonce
     cspNonceValue: undefined, 
     // if `true`, electrode will generate nonce and add CSP header
-    cspHeader: false, 
+    cspNonce: false, 
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
     reporting: { enable: false }
@@ -138,34 +137,58 @@ function getSrcDir(pluginOpts) {
 
 function nonceGenerator(_) {
   const token = Crypto.randomBytes(NONCE_SIZE).toString("base64");
-  return token.substring(0, token.length - 1);
+  return token.substring(0, token.length - 2);
 }
 
 /**
- * Sets CSP header and sets nonce value to route options
- * cspNonceValue - a user generated CSP nonce value. 
- * cspHeader - boolean electrode generates nonce and sets CSP header if set to true. 
+ * Sets CSP nonce to routeOptions and returns the nonce value
+ * cspNonce - boolean || object || string
  * 
  * @param {*} param0 
  * @returns nonce value
  */
-function setCSPHeader({ routeOptions }) {
-  // If user sets cspNonce value through route options, use the same.
-  if (routeOptions && routeOptions.cspNonceValue) {
-    return routeOptions.cspNonceValue;
-  }
-  // If cspHeader is true, electrode will generate nonce and sets CSP header.
-  else if (routeOptions && routeOptions.cspHeader) {
-    switch(typeof routeOptions.cspHeader) {
-      case "boolean": {
-        routeOptions.cspNonceValue = nonceGenerator();
-        break;
+function setCSPNonce({ routeOptions }) {
+  let nonce = nonceGenerator();
+  
+  switch(typeof routeOptions.cspNonce) {
+    // if cspNonce is a string, electrode validates it for nonce value and uses the same to set CSP header
+    case "string": {
+      assert(routeOptions.cspNonce.match(/^[A-Za-z0-9+=\/]{22}$/), "Error: unable to set CSP header. Invalid nonce value passed!");
+
+      routeOptions.cspNonceValue = {
+        styleNonce: routeOptions.cspNonce,
+        scriptNonce: routeOptions.cspNonce
       };
-      // TODO: add new 'case' so that app can pass a nonce generator function.
-      default: {
-        routeOptions.cspNonceValue = nonceGenerator();
-        break;
-      }
+      break;
+    };
+
+    // if cspNonce is true, electrode will generate nonce and sets CSP header for both 
+    // styles and script.
+    case "boolean": {
+      nonce = !!routeOptions.cspNonce === true ? nonce : ""
+      routeOptions.cspNonceValue = {
+        styleNonce: nonce,
+        scriptNonce: nonce
+      };
+      break;
+    };
+    // if cspHeader is an object, app should explicitly enable it for script and/or style. 
+    // cspHeader: { style: true } - will enable nonce only for styles
+    case "object": {
+      routeOptions.cspNonceValue = {
+        styleNonce: !!routeOptions.cspNonce?.style === true ? nonce : "",
+        scriptNonce: !!routeOptions.cspNonce?.script  === true ? nonce : ""
+      };
+      break;
+    };
+    // TODO: add 'case' so that app can pass a nonce generator function.
+    
+    default: {
+      routeOptions.cspNonceValue = {
+        styleNonce: "",
+        scriptNonce: ""
+      };
+      break;
     }
   }
   
@@ -180,5 +203,5 @@ module.exports = {
   makeErrorStackResponse,
   checkSSRMetricsReporting,
   invokeTemplateProcessor,
-  setCSPHeader
+  setCSPNonce
 };
