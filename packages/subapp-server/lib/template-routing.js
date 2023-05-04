@@ -26,9 +26,7 @@ function initializeTemplate(
   routeOptions,
   request
 ) {
-  const url = _.get(request, "url.path", request.url);
-
-  cacheKey = cacheKey || `${templateFile}#${cacheId}#${url}`;
+  cacheKey = cacheKey || `${templateFile}#${cacheId}#${routeOptions.path}`;
 
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
