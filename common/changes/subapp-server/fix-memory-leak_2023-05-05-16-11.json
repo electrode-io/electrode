@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Add fix for memory leak in subapp-server template cache",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-server"
+}
