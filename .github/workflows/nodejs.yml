@@ -32,7 +32,7 @@ jobs:
 
       # TODO: enable `rush change -v` after rush migration is completed.
       - name: Verify Change Logs
-        run: node common/scripts/install-run-rush.js change --verify --target-branch ${{ github.base_ref }}
+        run: node common/scripts/install-run-rush.js change --verify --target-branch origin/${{ github.base_ref }}
       
       - name: Install
         run: node common/scripts/install-run-rush.js install
