@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Fix eslint failure on prepublishOnly script",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}
