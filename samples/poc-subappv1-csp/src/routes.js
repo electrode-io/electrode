@@ -11,11 +11,17 @@ const commonRouteOptions = {
   tokenHandlers,
 };
 
-// To set CSP header
-// Option 1 - App can pass a generated cspNonceValue through cspNonce
-// Option 2 - set `cspNonce`. This would be boolean. By deafault cspHeader flag is 
-// set `false`. Electrode will generate once and set CSP header.
-// Option 3 - Selectively set boolean flag for `cspNonce`. { style: true } will add nonce only for styles
+/**
+ * To set CSP header
+ * Option 1 - App can generate and pass a nonce value to cspNonce
+ * 
+ * Option 2 - set a boolean to `cspNonce`.  if cspNonce is true, electrode will generate nonce and
+ * sets CSP header
+ * 
+ * Option 3 - Selectively set boolean flag for `cspNonce`. { style: true } will add nonce only 
+ * for styles
+ */
+
 export default {
   "/*": {
     pageTitle: "Home",
@@ -23,7 +29,7 @@ export default {
     templateFile: "./server/templates/products",
     // Enable one of these to use CSP header
     cspNonce: true,
-    // cspNonce: { style: true },
+    // cspNonce: { style: true }, // { script: true }
     // cspNonce: cspNonceValue,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
