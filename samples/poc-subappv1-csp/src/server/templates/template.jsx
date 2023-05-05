@@ -24,7 +24,8 @@ import {
           <Require _id="subapp-web/lib/init" />
           <Token _id="CUSTOM_TOKEN_HANDLER" />
           <Token _id="CRITICAL_CSS" />
-          <Token _id="INLINE_CSS" />
+          {/* Enable this to see inline style blocked with CSP */}
+          {/* <Token _id="INLINE_CSS" /> */}
         </head>
         <Token _id="HEAD_CLOSED" />
         <body>
