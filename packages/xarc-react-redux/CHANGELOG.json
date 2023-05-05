@@ -1,0 +1,22 @@
+{
+  "name": "@xarc/react-redux",
+  "entries": [
+    {
+      "version": "1.1.0",
+      "tag": "@xarc/react-redux_v1.1.0",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Upgrade dev dependencies -` typescript`, `@types/react`, `@types/react-dom `"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.3.4` to `^0.3.5`"
+          }
+        ]
+      }
+    }
+  ]
+}

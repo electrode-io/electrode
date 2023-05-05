@@ -1,0 +1,28 @@
+{
+  "name": "@xarc/react",
+  "entries": [
+    {
+      "version": "1.0.2",
+      "tag": "@xarc/react_v1.0.2",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependency - `opt-archetype-check`"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.8` to `^1.0.9`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.3.4` to `^0.3.5`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.10` to `^1.0.11`"
+          }
+        ]
+      }
+    }
+  ]
+}

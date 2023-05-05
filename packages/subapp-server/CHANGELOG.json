@@ -1,0 +1,39 @@
+{
+  "name": "subapp-server",
+  "entries": [
+    {
+      "version": "2.2.0",
+      "tag": "subapp-server_v2.2.0",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding CSP header feature to Subapp V1"
+          },
+          {
+            "comment": "Add phantom dependency `@xarc/render-context`. Add `@xarc/run` to dev dependency"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Enhancement to set CSP nonce separately for script and styles"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/index-page\" from `^1.1.0` to `^1.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.11` to `^1.0.12`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.10` to `^1.0.11`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `1.0.8` to `1.0.9`"
+          }
+        ]
+      }
+    }
+  ]
+}

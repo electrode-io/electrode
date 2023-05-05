@@ -1,0 +1,25 @@
+{
+  "name": "@xarc/subapp",
+  "entries": [
+    {
+      "version": "0.3.5",
+      "tag": "@xarc/subapp_v0.3.5",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add `@xarc/run` to dev dependency"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.8` to `^1.0.9`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.10` to `^1.0.11`"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@xarc/opt-sass",
+  "entries": [
+    {
+      "version": "4.1.1",
+      "tag": "@xarc/opt-sass_v4.1.1",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependency - `opt-archetype-check`"
+          }
+        ]
+      }
+    }
+  ]
+}
