@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/jsx-renderer",
+      "comment": "Fix eslint failure on prepublishOnly script",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/jsx-renderer"
+}

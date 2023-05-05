@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "Fix eslint failure on prepublishOnly script",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}
