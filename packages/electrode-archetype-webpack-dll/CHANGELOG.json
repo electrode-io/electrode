@@ -1,0 +1,17 @@
+{
+  "name": "electrode-archetype-webpack-dll",
+  "entries": [
+    {
+      "version": "3.0.1",
+      "tag": "electrode-archetype-webpack-dll_v3.0.1",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "`electrode-archetype-webpack-dll-dev` dev dependency upgrade"
+          }
+        ]
+      }
+    }
+  ]
+}

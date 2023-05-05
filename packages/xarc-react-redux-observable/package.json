@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux-observable",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "xarc React.js application redux observable support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -27,14 +27,13 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^1.0.1",
+    "@xarc/react-redux": "^1.1.0",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@xarc/run": "^1.1.1",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.16",
@@ -45,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "@xarc/module-dev": "^3.0.2",
+    "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^7.16.0",

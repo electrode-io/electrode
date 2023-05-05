@@ -1,0 +1,17 @@
+{
+  "name": "@xarc/app",
+  "entries": [
+    {
+      "version": "11.0.3",
+      "tag": "@xarc/app_v11.0.3",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add `@xarc/run` to dev dependency"
+          }
+        ]
+      }
+    }
+  ]
+}

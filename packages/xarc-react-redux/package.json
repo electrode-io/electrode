@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "xarc React.js application redux support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -28,7 +28,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.3.4",
+    "@xarc/subapp": "^0.3.5",
     "react-redux": ">= 8",
     "redux": ">= 4",
     "tslib": "^2.1.0"
@@ -36,7 +36,6 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/react": "^13.2.0",
-    "@xarc/run": "^1.1.1",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
@@ -47,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "@xarc/module-dev": "^3.0.2",
+    "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
     "eslint": "^8.15.0",
@@ -66,7 +66,7 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.7.0",
     "typedoc": "^0.22.15",
-    "typescript": "^4.9.3" 
+    "typescript": "^4.9.3"
   },
   "files": [
     "dist",

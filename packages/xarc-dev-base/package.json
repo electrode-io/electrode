@@ -1,6 +1,6 @@
 {
   "name": "@xarc/dev-base",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/index.js",
   "homepage": "http://www.electrode.io",
@@ -30,11 +30,11 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@xarc/run": "^1.1.1",
     "@types/node": "^14.14.16",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "@xarc/module-dev": "^4.0.0",
+    "@xarc/run": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.16.0",
     "eslint-config-walmart": "^2.2.1",

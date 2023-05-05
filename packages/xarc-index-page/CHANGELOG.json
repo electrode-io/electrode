@@ -1,0 +1,33 @@
+{
+  "name": "@xarc/index-page",
+  "entries": [
+    {
+      "version": "1.2.0",
+      "tag": "@xarc/index-page_v1.2.0",
+      "date": "Thu, 04 May 2023 21:08:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Enhancement to set CSP nonce separately for script and styles"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Adds phantom dependencies `loadash` and `require-at`"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.11` to `^1.0.12`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.8` to `^1.0.9`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.10` to `^1.0.11`"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
  * This is the main configuration file for Rush.
  * For full documentation, please see https://rushjs.io
  */
-{
+ {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
   /**
@@ -423,13 +423,15 @@
       "packageName": "electrode-archetype-webpack-dll",
       "projectFolder": "packages/electrode-archetype-webpack-dll",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "archetypeDllVersion"
     },
     {
       "packageName": "electrode-archetype-webpack-dll-dev",
       "projectFolder": "packages/electrode-archetype-webpack-dll-dev",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "archetypeDllVersion"
     },
     {
       "packageName": "electrode-cdn-file-loader",
@@ -531,18 +533,20 @@
       "packageName": "@xarc/app",
       "projectFolder": "packages/xarc-app",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "xarcAppVersion"
     },
     {
       "packageName": "@xarc/app-dev",
       "projectFolder": "packages/xarc-app-dev",
       "shouldPublish": true,
-      "skipRushCheck": true
+      "skipRushCheck": true,
+      "versionPolicyName": "xarcAppVersion"
     },
     {
       "packageName": "@xarc/create-app",
       "projectFolder": "packages/xarc-create-app",
-      "shouldPublish": true,
+      "shouldPublish": false,
       "skipRushCheck": true
     },
     {
