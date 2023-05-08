@@ -2,6 +2,26 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.1",
+      "tag": "@xarc/webpack_v11.2.1",
+      "date": "Mon, 08 May 2023 22:49:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix eslint failure on prepublishOnly script"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.3 to ^11.0.4."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.3 to ^11.0.4."
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.0",
       "tag": "@xarc/webpack_v11.2.0",
       "date": "Thu, 04 May 2023 21:08:31 GMT",
