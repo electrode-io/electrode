@@ -23,7 +23,7 @@ export const tokens = {
 };
 
 export const getNonceValue = (routeOptions) => {
-  const {scriptNonce: scriptToken = "", styleNonce: styleToken = "" } = routeOptions.cspNonceValue;
+  const { scriptNonce: scriptToken = "", styleNonce: styleToken = "" } = routeOptions.cspNonceValue || {};
 
   return {
     scriptNonce: scriptToken ? ` nonce="${scriptToken}"` : "",
