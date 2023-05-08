@@ -2,6 +2,29 @@
   "name": "subapp-server",
   "entries": [
     {
+      "version": "2.2.1",
+      "tag": "subapp-server_v2.2.1",
+      "date": "Mon, 08 May 2023 22:49:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add fix for memory leak in subapp-server template cache"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.12` to `^1.0.13`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `1.0.9` to `1.0.10`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.11` to `^1.0.12`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.0",
       "tag": "subapp-server_v2.2.0",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

@@ -40,8 +40,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.9",
-    "@xarc/tag-renderer": "^1.0.11",
+    "@xarc/render-context": "^1.0.10",
+    "@xarc/tag-renderer": "^1.0.12",
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },
