@@ -23,12 +23,9 @@ const otherStats = getOtherStats();
 /*eslint-disable max-statements*/
 function initializeTemplate(
   { templateFile, tokenHandlers, cacheId, cacheKey, options },
-  routeOptions,
-  request
+  routeOptions
 ) {
-  const url = _.get(request, "url.path", request.url);
-
-  cacheKey = cacheKey || `${templateFile}#${cacheId}#${url}`;
+  cacheKey = cacheKey || `${templateFile}#${cacheId}#${routeOptions.path}`;
 
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
@@ -126,6 +123,7 @@ function makeRouteTemplateSelector(routeOptions) {
     assert(!defaultSelection.htmlFile, `subapp-server doesn't support htmlFile templates`);
 
     const asyncTemplate = initializeTemplate(defaultSelection, routeOptions, options.request);
+
     return asyncTemplate.render(options);
   };
 }

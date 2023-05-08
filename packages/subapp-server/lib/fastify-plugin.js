@@ -100,7 +100,7 @@ async function registerFastifyRoutesFromFile({ fastify, srcDir, routes, topOpts 
   for (const path in routes) {
     const route = routes[path];
 
-    const routeOptions = Object.assign({}, topOpts, route);
+    const routeOptions = Object.assign({}, topOpts, route, { path });
 
     routeOptions.uiConfig = _.get(fastify, "settings.app.config.ui", {});
 
