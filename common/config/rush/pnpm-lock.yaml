@@ -21539,7 +21539,7 @@ packages:
     dev: false
 
   file:projects/subapp-server.tgz:
-    resolution: {integrity: sha512-i7xIdmvGnqsdrvxwXqMzqFiAW2KFQOoJmVX/zaXl376Z7BhoJ4I+09qS4ivDlKwdzuDESU0Di7/2iE8Jpr+sGg==, tarball: file:projects/subapp-server.tgz}
+    resolution: {integrity: sha512-jm5/dmveBjgv6pGqDzisZtpRh8MGdHn+Tj0/zc3bI8WBFXn1Veuw7QSC3p68QNLRFX0LwKqKnK0ybUlxjFtMuw==, tarball: file:projects/subapp-server.tgz}
     name: '@rush-temp/subapp-server'
     version: 0.0.0
     dependencies:

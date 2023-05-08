@@ -1,45 +1,45 @@
 /* @jsx createElement */
 
 import { IndexPage, createElement, Token, Require, RegisterTokenIds } from "@xarc/jsx-renderer";
-// import { ReserveSpot } from "subapp-web";
+import { ReserveSpot } from "subapp-web";
 import { tokenHandler } from "@xarc/index-page";
 
-// const RenderSubApps = (props, context) => {
-//   const { routeOptions } = context.user;
-//   const { subApps } = routeOptions.__internals;
+const RenderSubApps = (props, context) => {
+  const { routeOptions } = context.user;
+  const { subApps } = routeOptions.__internals;
 
-//   return (
-//     subApps &&
-//     subApps.length > 0 &&
-//     createElement(
-//       "div",
-//       null,
-//       ...subApps.map((info, ix) => {
-//         const { subapp, options } = info;
-//         const elementId = props.inline ? undefined : `subapp-${subapp.name}-${ix}`;
+  return (
+    subApps &&
+    subApps.length > 0 &&
+    createElement(
+      "div",
+      null,
+      ...subApps.map((info, ix) => {
+        const { subapp, options } = info;
+        const elementId = props.inline ? undefined : `subapp-${subapp.name}-${ix}`;
 
-//         return createElement(
-//           Require,
-//           Object.assign(
-//             {
-//               _concurrent: true,
-//               elementId,
-//               timestamp: true,
-//               useStream: false,
-//               async: true,
-//               serverSideRendering: true
-//             },
-//             options,
-//             {
-//               _id: "subapp-web/lib/load",
-//               name: subapp.name
-//             }
-//           )
-//         );
-//       })
-//     )
-//   );
-// };
+        return createElement(
+          Require,
+          Object.assign(
+            {
+              _concurrent: true,
+              elementId,
+              timestamp: true,
+              useStream: false,
+              async: true,
+              serverSideRendering: true
+            },
+            options,
+            {
+              _id: "subapp-web/lib/load",
+              name: subapp.name
+            }
+          )
+        );
+      })
+    )
+  );
+};
 
 const Template = (
   <IndexPage DOCTYPE="html">
