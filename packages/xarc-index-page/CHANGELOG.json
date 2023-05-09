@@ -2,6 +2,18 @@
   "name": "@xarc/index-page",
   "entries": [
     {
+      "version": "1.2.1",
+      "tag": "@xarc/index-page_v1.2.1",
+      "date": "Tue, 09 May 2023 21:04:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix default missing default value for csp nonce flag"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "@xarc/index-page_v1.2.0",
       "date": "Thu, 04 May 2023 21:08:31 GMT",
