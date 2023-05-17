@@ -27,10 +27,14 @@ function setup(w: any) {
     return src && src !== originalSrc ? src : null;
   };
 
+  const isJsOrCss = originalSrc => {
+    return /\.js$/i.test(originalSrc) || /\.css$/i.test(originalSrc);
+  };
+
   __webpack_chunk_load__ = id => {
     __webpack_get_script_filename__ = () => {
       const originalSrc = originalGet(id);
-      return getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
+      return !isJsOrCss(originalSrc) && getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
     };
     const loading = originalLoad(id); // async function that returns promise for fetching
     __webpack_get_script_filename__ = originalGet;
@@ -41,7 +45,7 @@ function setup(w: any) {
   if (originalMiniCssF) {
     __webpack_require__.miniCssF = id => {
       const originalSrc = originalMiniCssF(id);
-      return getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
+      return !isJsOrCss(originalSrc) && getCdnMapSrc(originalSrc) || originalPublicPath + originalSrc;
     };
   }
 }
