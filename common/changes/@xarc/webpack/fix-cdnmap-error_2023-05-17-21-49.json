@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "Fixes a CDN map not found error when dynamic imports are used.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}
