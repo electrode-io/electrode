@@ -716,6 +716,18 @@
       "projectFolder": "samples/poc-subappv1-csp",
       "shouldPublish": false,
       "skipRushCheck": true
+    },
+    {
+      "packageName": "subapp2-poc",
+      "projectFolder": "samples/subapp2-poc",
+      "shouldPublish": false,
+      "skipRushCheck": true
+    },
+    {
+      "packageName": "subapp2-basic",
+      "projectFolder": "samples/subapp2-basic",
+      "shouldPublish": false,
+      "skipRushCheck": true
     }
    
   ]

@@ -51,7 +51,7 @@ const MainBody = (props) => {
         <h2>Body subApp with Redux State Demo</h2>
         <button onClick={() => dispatch(decNumber())}>&#8810;</button>
         &nbsp;{value}&nbsp;
-        <button onClick={() => dispatch(incNumber())}>&#8811;</button>
+        <button onClick={() => dispatch(incNumber())}>&#8811;</button> 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />

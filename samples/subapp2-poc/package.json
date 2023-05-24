@@ -4,11 +4,10 @@
   "description": "Web application using Electrode X",
   "homepage": "",
   "scripts": {
-    "dev": "clap -q dev",
-    "test": "clap check",
-    "build": "clap build",
-    "start": "node lib/server",
-    "mock-cloud": "clap mock-cloud"
+    "dev": "xrun electrode/dev",
+    "test": "xrun electrode/check",
+    "build": "xrun electrode/build",
+    "start": "node lib/server"
   },
   "author": {
     "name": "",
@@ -39,30 +38,19 @@
     "@xarc/react-recoil": "^1.0.0",
     "@xarc/react-redux": "^1.0.0",
     "@xarc/react-router": "^1.0.0",
-    "isomorphic-loader": "^4.5.0"
+    "isomorphic-loader": "^4.5.0",
+    "prop-types": "~15.8.1",
+    "react-dom": "~18.2.0",
+    "webpack-hot-middleware": "~2.25.3"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@xarc/run": "^1.1.1",
     "@xarc/app-dev": "^11.0.1",
     "@xarc/opt-eslint": "^1.0.0",
     "@xarc/opt-postcss": "^1.0.0",
     "@xarc/opt-stylus": "^1.0.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
-  },
-  "fyn": {
-    "dependencies": {
-      "@xarc/app": "../../packages/xarc-app",
-      "@xarc/react": "../../packages/xarc-react",
-      "@xarc/react-query": "../../packages/xarc-react-query",
-      "@xarc/react-redux": "../../packages/xarc-react-redux",
-      "@xarc/react-router": "../../packages/xarc-react-router"
-    },
-    "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
-      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
-      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
-    }
   }
 }

@@ -1,6 +1,6 @@
-import { loadXarcDevTasks, xclap } from "@xarc/app-dev";
+import { loadDevTasks, xrun } from "@xarc/app-dev";
 
-xclap.updateEnv(
+xrun.updateEnv(
   {
     /*
      * Configure local development with http://localhost:3000
@@ -24,9 +24,10 @@ xclap.updateEnv(
   }
 );
 
-loadXarcDevTasks(xclap, {
-  namespace: "poc1",
+loadDevTasks(xrun, {
+  // options to customize features
   webpackOptions: {
-    cssModuleSupport: true
-  }
+    // enable CSS module for files other than `.mod.css`
+    cssModuleSupport: "byModExt",
+  },
 });
