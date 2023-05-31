@@ -1,0 +1,30 @@
+:root {
+  --primary-box-color: #112055;
+  --primary-box-text: #fff;
+  --padding : 10px;
+  --border-rad: 5px;
+  --shadow: 4px 3px 19px 0px rgba(0,0,0,0.3);
+}
+
+.box__wrapper_scss {
+  display: flex;
+justify-content: center;
+  font-family: sans-serif;
+  div:hover {
+    box-shadow: none;
+  }
+}
+
+%box-shape{
+  padding: var(--padding);
+  border-radius: var(--border-rad);
+  box-shadow: var(--shadow);
+  
+}
+
+.box-primary_scss {
+  @extend %box-shape;
+  background-color: var(--primary-box-color);
+  color: var(--primary-box-text);
+  margin-right: 10px;
+}
