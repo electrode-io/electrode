@@ -9,7 +9,6 @@ specifiers:
   '@babel/preset-typescript': ^7.17.12
   '@hapi/boom': ^9.1.4
   '@jchip/redbird': ^1.3.0
-  '@module-federation/concat-runtime': ^0.0.1
   '@rush-temp/app': file:./projects/app.tgz
   '@rush-temp/app-dev': file:./projects/app-dev.tgz
   '@rush-temp/create-app': file:./projects/create-app.tgz
@@ -55,6 +54,7 @@ specifiers:
   '@rush-temp/subapp-server': file:./projects/subapp-server.tgz
   '@rush-temp/subapp-util': file:./projects/subapp-util.tgz
   '@rush-temp/subapp-web': file:./projects/subapp-web.tgz
+  '@rush-temp/subapp2-basic': file:./projects/subapp2-basic.tgz
   '@rush-temp/subapp2-poc': file:./projects/subapp2-poc.tgz
   '@rush-temp/tag-renderer': file:./projects/tag-renderer.tgz
   '@rush-temp/webpack': file:./projects/webpack.tgz
@@ -62,9 +62,6 @@ specifiers:
   '@types/chai-as-promised': ^7.1.3
   '@types/jest': ^26.0.4
   '@types/webpack': 5.28.0
-  '@xarc/opt-eslint': ^1.0.0
-  '@xarc/opt-postcss': ^1.0.0
-  '@xarc/opt-stylus': ^1.0.0
   ansi-to-html: ^0.7.2
   autoprefixer: ^9.6.0
   babel-core: ^6.0.15
@@ -198,7 +195,6 @@ dependencies:
   '@babel/preset-typescript': 7.21.5
   '@hapi/boom': 9.1.4
   '@jchip/redbird': 1.3.0
-  '@module-federation/concat-runtime': 0.0.1
   '@rush-temp/app': file:projects/app.tgz
   '@rush-temp/app-dev': file:projects/app-dev.tgz_uglify-js@2.8.29+webpack@5.84.0
   '@rush-temp/create-app': file:projects/create-app.tgz_uglify-js@2.8.29
@@ -244,6 +240,7 @@ dependencies:
   '@rush-temp/subapp-server': file:projects/subapp-server.tgz
   '@rush-temp/subapp-util': file:projects/subapp-util.tgz
   '@rush-temp/subapp-web': file:projects/subapp-web.tgz
+  '@rush-temp/subapp2-basic': file:projects/subapp2-basic.tgz
   '@rush-temp/subapp2-poc': file:projects/subapp2-poc.tgz
   '@rush-temp/tag-renderer': file:projects/tag-renderer.tgz
   '@rush-temp/webpack': file:projects/webpack.tgz_73b0bf351ab9a055d7b5b1930428d9b3
@@ -251,9 +248,6 @@ dependencies:
   '@types/chai-as-promised': 7.1.5
   '@types/jest': 26.0.24
   '@types/webpack': 5.28.0_uglify-js@2.8.29
-  '@xarc/opt-eslint': 1.0.0
-  '@xarc/opt-postcss': 1.0.1
-  '@xarc/opt-stylus': 1.0.1
   ansi-to-html: 0.7.2
   autoprefixer: 9.8.8
   babel-core: 6.26.3
@@ -2069,6 +2063,13 @@ packages:
       regenerator-runtime: 0.13.11
     dev: false
 
+  /@babel/runtime/7.22.3:
+    resolution: {integrity: sha512-XsDuspWKLUsxwCp6r7EhsExHtYfbe5oAGQ19kqngTdCPUoPQzOPdUbD/pB9PJiwb2ptYKQDjSJT3R6dC+EPqfQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
+
   /@babel/template/7.0.0-beta.44:
     resolution: {integrity: sha512-w750Sloq0UNifLx1rUqwfbnC6uSUk0mfwwgGRfdLiaUzfAOiH0tHJE6ILQIUi3KYkjiCDTskoIsnfqZvWLBDng==}
     dependencies:
@@ -3057,7 +3058,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       '@babel/code-frame': 7.21.4
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@types/aria-query': 4.2.2
       aria-query: 4.2.2
       chalk: 4.1.2
@@ -3071,7 +3072,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@babel/code-frame': 7.21.4
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@types/aria-query': 5.0.1
       aria-query: 5.1.3
       chalk: 4.1.2
@@ -3087,7 +3088,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@testing-library/dom': 7.31.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -3100,7 +3101,7 @@ packages:
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@testing-library/dom': 8.20.0
       '@types/react-dom': 18.2.4
       react: 18.2.0
@@ -3284,6 +3285,10 @@ packages:
 
   /@types/node/20.2.3:
     resolution: {integrity: sha512-pg9d0yC4rVNWQzX8U7xb4olIOFuuVL9za3bzMT2pu2SU0SNEi66i2qrvhE2qt0HvkhuCaWJu7pLNOt/Pj8BIrw==}
+    dev: false
+
+  /@types/node/20.2.5:
+    resolution: {integrity: sha512-JJulVEQXmiY9Px5axXHeYGLSjhkZEnD+MDPDGbCbIAbMslkKwmygtZFy1X6s/075Yo94sf8GuSlFfPzysQrWZQ==}
     dev: false
 
   /@types/normalize-package-data/2.4.1:
@@ -4657,7 +4662,7 @@ packages:
     resolution: {integrity: sha512-o/HelwhuKpTj/frsOsbNLNgnNGVIFsVP/SW2BSF14gVl7kAfMOJ6/8wUAUvG1R1NHKrfG+2sHZTu0yauT1qBrA==}
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@babel/runtime-corejs3': 7.21.5
     dev: false
 
@@ -10823,7 +10828,7 @@ packages:
   /history/4.10.1:
     resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
       tiny-invariant: 1.3.1
@@ -16216,7 +16221,7 @@ packages:
       react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
       redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       hoist-non-react-statics: 3.3.2
       invariant: 2.2.4
       loose-envify: 1.4.0
@@ -16248,7 +16253,7 @@ packages:
       redux:
         optional: true
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.2.7
       '@types/react-dom': 18.2.4
@@ -16282,7 +16287,7 @@ packages:
       redux:
         optional: true
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@types/hoist-non-react-statics': 3.3.1
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
@@ -16318,7 +16323,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       history: 4.10.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -16346,7 +16351,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       history: 4.10.1
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
@@ -16597,7 +16602,7 @@ packages:
   /redux/4.2.1:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
     dev: false
 
   /reflect.ownkeys/0.2.0:
@@ -16638,7 +16643,7 @@ packages:
   /regenerator-transform/0.15.1:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
     dev: false
 
   /regex-cache/0.4.4:
@@ -18846,6 +18851,37 @@ packages:
       yn: 3.1.1
     dev: false
 
+  /ts-node/10.9.1_b01a0586f393de61408c9af31f072577:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.2.5
+      acorn: 8.8.2
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.0.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: false
+
   /ts-node/10.9.1_ed48111304c4429e7ad7db9b45e4a6a6:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -19230,6 +19266,12 @@ packages:
   /typescript/4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: false
+
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: false
 
@@ -20586,7 +20628,7 @@ packages:
     name: '@rush-temp/app'
     version: 0.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@types/chai': 4.3.5
       '@types/mocha': 9.1.1
@@ -21148,7 +21190,7 @@ packages:
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
       '@xarc/fastify-server': 3.3.0
       '@xarc/run': 1.1.1
@@ -21178,7 +21220,7 @@ packages:
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
       '@xarc/fastify-server': 2.2.0
       '@xarc/run': 1.1.1
@@ -21206,7 +21248,7 @@ packages:
     name: '@rush-temp/poc-subappv1-csp'
     version: 0.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
       '@xarc/fastify-server': 3.3.0
       '@xarc/run': 1.1.1
@@ -21454,10 +21496,11 @@ packages:
     dev: false
 
   file:projects/react-router.tgz:
-    resolution: {integrity: sha512-BjWgdYT0PPnNx8qhvthiowKUm7qunaOK72eGB4zlceri69oJ1TF4OIXJjnifAd/okIgMARmXpldsW5Wnx/hCLA==, tarball: file:projects/react-router.tgz}
+    resolution: {integrity: sha512-TDiiV6nJ1F/KLgSRFvpjCWNFSLa9//HcqusvZrRI5PFV0MLLqyRXzQYDrosq+sM1AYVOGotaPYGygcL2+WFvMQ==, tarball: file:projects/react-router.tgz}
     name: '@rush-temp/react-router'
     version: 0.0.0
     dependencies:
+      '@babel/runtime': 7.22.3
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@testing-library/react': 13.4.0_react-dom@18.2.0+react@18.2.0
       '@types/chai': 4.3.5
@@ -21507,10 +21550,11 @@ packages:
     dev: false
 
   file:projects/react.tgz:
-    resolution: {integrity: sha512-yIEFNR4dTRGUgg75sj/PRElhgvN8UEX6BudN1aInrHrp6xMpcB2HyOLC/2LOjEQ8FI3an9ZS6iAsRBqZ/EZQWg==, tarball: file:projects/react.tgz}
+    resolution: {integrity: sha512-zCrSzRKrIb5koKtFweP6IrpWGEtOgbwsXelRBeo2AD1WdzBFAeCTze+PhZB3D+eb21UXx3ihNDK6xYo88NIc1g==, tarball: file:projects/react.tgz}
     name: '@rush-temp/react'
     version: 0.0.0
     dependencies:
+      '@babel/runtime': 7.22.3
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@types/chai': 4.3.5
       '@types/mocha': 9.1.1
@@ -21598,7 +21642,7 @@ packages:
       '@babel/preset-env': 7.21.5_@babel+core@7.21.8
       '@babel/preset-react': 7.18.6_@babel+core@7.21.8
       '@babel/register': 7.21.0_@babel+core@7.21.8
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@xarc/run': 1.1.1
       babel-preset-minify: 0.5.2
       electrode-archetype-njs-module-dev: 3.0.3
@@ -21635,7 +21679,7 @@ packages:
       '@babel/preset-env': 7.21.5_@babel+core@7.21.8
       '@babel/preset-react': 7.18.6_@babel+core@7.21.8
       '@babel/register': 7.21.0_@babel+core@7.21.8
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@xarc/run': 1.1.1
       babel-preset-minify: 0.5.2
       electrode-archetype-njs-module-dev: 3.0.3
@@ -21669,7 +21713,7 @@ packages:
       '@babel/preset-env': 7.21.5_@babel+core@7.21.8
       '@babel/preset-react': 7.18.6_@babel+core@7.21.8
       '@babel/register': 7.21.0_@babel+core@7.21.8
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@xarc/run': 1.1.1
       babel-preset-minify: 0.5.2
       electrode-archetype-njs-module-dev: 3.0.3
@@ -21734,7 +21778,7 @@ packages:
       '@babel/preset-env': 7.21.5_@babel+core@7.21.8
       '@babel/preset-react': 7.18.6_@babel+core@7.21.8
       '@babel/register': 7.21.0_@babel+core@7.21.8
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.3
       '@xarc/module-dev': 4.1.0
       '@xarc/run': 1.1.1
       babel-preset-minify: 0.5.2
@@ -21812,13 +21856,33 @@ packages:
       - utf-8-validate
     dev: false
 
+  file:projects/subapp2-basic.tgz:
+    resolution: {integrity: sha512-F7R2Yplfm7cyCq2pxdE3hXP+yRuC4a1f65ciaL3+LHU2mtd3ntq8dUN5wyYixG2eqnvZd0VxVsw9OjGsM/9+tw==, tarball: file:projects/subapp2-basic.tgz}
+    name: '@rush-temp/subapp2-basic'
+    version: 0.0.0
+    dependencies:
+      '@babel/runtime': 7.22.3
+      '@module-federation/concat-runtime': 0.0.1
+      '@types/node': 20.2.5
+      '@xarc/fastify-server': 3.3.0
+      '@xarc/run': 1.1.1
+      prettier: 2.8.8
+      ts-node: 10.9.1_b01a0586f393de61408c9af31f072577
+      typescript: 5.0.4
+      webpack-hot-middleware: 2.25.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - supports-color
+    dev: false
+
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-mTi8JqOqKFvQuf0sdPr77xahHNHSMUr2YLApXfq1qgvWWCP4++HYiOLrY7YbNEF63J9I2FlQfSOi8YKF3z0p3A==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-r1RBpCPXAeAiYzSq3BIMSFRoOO1vT7zuxJqirYGprGcv2K/Nl08scyCZTxHRNyGzyzGcQl3s0Nf6wckomkA16w==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:
-      '@babel/runtime': 7.21.5
-      '@types/node': 18.16.14
+      '@babel/runtime': 7.22.3
+      '@types/node': 20.2.5
       '@xarc/fastify-server': 3.3.0
       '@xarc/opt-eslint': 1.0.0
       '@xarc/opt-postcss': 1.0.1
@@ -21827,10 +21891,12 @@ packages:
       isomorphic-loader: 4.5.0
       prop-types: 15.8.1
       react-dom: 18.2.0
-      ts-node: 9.1.1_typescript@4.9.5
-      typescript: 4.9.5
+      ts-node: 10.9.1_b01a0586f393de61408c9af31f072577
+      typescript: 5.0.4
       webpack-hot-middleware: 2.25.3
     transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
       - react
       - supports-color
     dev: false
