@@ -10,7 +10,7 @@ const Demo1 = props => {
             <p>abc subapp demo1: {message}</p>
             <p>props: {JSON.stringify(props)}</p>
             <h4>
-              isSSR: {"" + isSsr} | Has request: {ssr.request ? "yes" : "no"}
+              isSSR: {`${isSsr}`} | Has request: {ssr.request ? "yes" : "no"}
             </h4>
             <p>
               <a href="https://www.electrode.io/electrode/">Electrode Docs</a>

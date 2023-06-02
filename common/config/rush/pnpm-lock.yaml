@@ -65,7 +65,6 @@ specifiers:
   ansi-to-html: ^0.7.2
   autoprefixer: ^9.6.0
   babel-core: ^6.0.15
-  babel-eslint: ^10.1.0
   babel-jest: ^26.1.0
   babel-plugin-istanbul: ^5.1.0
   babel-plugin-lodash: ^3.3.4
@@ -251,7 +250,6 @@ dependencies:
   ansi-to-html: 0.7.2
   autoprefixer: 9.8.8
   babel-core: 6.26.3
-  babel-eslint: 10.1.0
   babel-jest: 26.6.3
   babel-plugin-istanbul: 5.2.0
   babel-plugin-lodash: 3.3.4
@@ -18789,6 +18787,37 @@ packages:
       yn: 3.1.1
     dev: false
 
+  /ts-node/10.9.1_18191548ee48d1462c4c1bad9e7252f5:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.2.5
+      acorn: 8.8.2
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.1.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: false
+
   /ts-node/10.9.1_1fb4fb79adb33018fc63dd3f17c9e751:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -18847,37 +18876,6 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       typescript: 4.9.5
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: false
-
-  /ts-node/10.9.1_b01a0586f393de61408c9af31f072577:
-    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.2.5
-      acorn: 8.8.2
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.0.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: false
@@ -19269,9 +19267,9 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/5.0.4:
-    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
-    engines: {node: '>=12.20'}
+  /typescript/5.1.3:
+    resolution: {integrity: sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==}
+    engines: {node: '>=14.17'}
     hasBin: true
     dev: false
 
@@ -21867,8 +21865,8 @@ packages:
       '@xarc/fastify-server': 3.3.0
       '@xarc/run': 1.1.1
       prettier: 2.8.8
-      ts-node: 10.9.1_b01a0586f393de61408c9af31f072577
-      typescript: 5.0.4
+      ts-node: 10.9.1_18191548ee48d1462c4c1bad9e7252f5
+      typescript: 5.1.3
       webpack-hot-middleware: 2.25.3
     transitivePeerDependencies:
       - '@swc/core'
@@ -21877,7 +21875,7 @@ packages:
     dev: false
 
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-r1RBpCPXAeAiYzSq3BIMSFRoOO1vT7zuxJqirYGprGcv2K/Nl08scyCZTxHRNyGzyzGcQl3s0Nf6wckomkA16w==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-6Q691nBiwehf+ezWuUHuHupKLo61/dgCMKm8hcHXzf9FnHAxErl0dfZBxHsiMCXAG3FkTr9SUIjqyesdKg4p4A==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:
@@ -21888,16 +21886,17 @@ packages:
       '@xarc/opt-postcss': 1.0.1
       '@xarc/opt-stylus': 1.0.1
       '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0
       isomorphic-loader: 4.5.0
       prop-types: 15.8.1
       react-dom: 18.2.0
-      ts-node: 10.9.1_b01a0586f393de61408c9af31f072577
-      typescript: 5.0.4
+      ts-node: 10.9.1_18191548ee48d1462c4c1bad9e7252f5
+      typescript: 5.1.3
       webpack-hot-middleware: 2.25.3
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
-      - react
+      - eslint
       - supports-color
     dev: false
 
