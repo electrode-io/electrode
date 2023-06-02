@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "11.2.1",
+  "version": "11.2.2",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -121,10 +121,6 @@
     "extends": [
       "@istanbuljs/nyc-config-typescript"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
   },
   "mocha": {
     "require": [
