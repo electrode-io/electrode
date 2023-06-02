@@ -122,10 +122,6 @@
       "@istanbuljs/nyc-config-typescript"
     ]
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "mocha": {
     "require": [
       "ts-node/register",
