@@ -2,6 +2,18 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.2",
+      "tag": "@xarc/webpack_v11.2.2",
+      "date": "Fri, 02 Jun 2023 17:01:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixes a CDN map not found error when dynamic imports are used."
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.1",
       "tag": "@xarc/webpack_v11.2.1",
       "date": "Mon, 08 May 2023 22:49:30 GMT",
