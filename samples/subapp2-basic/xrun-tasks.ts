@@ -1,4 +1,4 @@
-import { loadDevTasks, xrun } from "@xarc/app-dev";
+const { loadDevTasks, xrun } = require("@xarc/app-dev");
 
 xrun.updateEnv(
   {

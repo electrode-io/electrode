@@ -1,4 +1,4 @@
-import { loadDevTasks, xrun } from "@xarc/app-dev";
+const { loadDevTasks, xrun } = require("@xarc/app-dev");
 
 xrun.updateEnv(
   {
@@ -16,11 +16,11 @@ xrun.updateEnv(
     /*
      * Enable Electrode's built-in webpack dev server and reverse proxy for development
      */
-    WEBPACK_DEV_MIDDLEWARE: true
+    WEBPACK_DEV_MIDDLEWARE: true,
   },
   {
     // do not override any env flag already set in process.env
-    override: false
+    override: false,
   }
 );
 
