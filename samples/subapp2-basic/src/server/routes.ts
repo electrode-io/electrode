@@ -1,4 +1,4 @@
-import { MainBody, Products, Footer, Header } from "../app";
+import { MainBody, Footer, Header } from "../app";
 import { PageRenderer } from "@xarc/react";
 import { ElectrodeFastifyInstance } from "@xarc/fastify-server";
 /**

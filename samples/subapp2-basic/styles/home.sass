@@ -1,0 +1,17 @@
+$primary-box-color: #112055
+$primary-box-text: #fff
+$padding : 10px
+$border-rad: 5px
+$shadow: 4px 3px 19px 0px rgba(0,0,0,0.3)
+
+@mixin box-shape
+  padding: $padding
+  border-radius: $border-rad
+  box-shadow: $shadow
+  
+
+.box-primary_sass 
+  @include box-shape()
+  background-color: $primary-box-color
+  color: $primary-box-text
+

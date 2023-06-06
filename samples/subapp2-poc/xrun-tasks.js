@@ -1,6 +1,6 @@
-import { loadXarcDevTasks, xclap } from "@xarc/app-dev";
+const { loadDevTasks, xrun } = require("@xarc/app-dev");
 
-xclap.updateEnv(
+xrun.updateEnv(
   {
     /*
      * Configure local development with http://localhost:3000
@@ -16,17 +16,18 @@ xclap.updateEnv(
     /*
      * Enable Electrode's built-in webpack dev server and reverse proxy for development
      */
-    WEBPACK_DEV_MIDDLEWARE: true
+    WEBPACK_DEV_MIDDLEWARE: true,
   },
   {
     // do not override any env flag already set in process.env
-    override: false
+    override: false,
   }
 );
 
-loadXarcDevTasks(xclap, {
-  namespace: "poc1",
+loadDevTasks(xrun, {
+  // options to customize features
   webpackOptions: {
-    cssModuleSupport: true
-  }
+    // enable CSS module for files other than `.mod.css`
+    cssModuleSupport: "byModExt",
+  },
 });
