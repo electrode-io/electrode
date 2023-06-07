@@ -57,7 +57,7 @@
     "@xarc/dev-base": "^0.1.1",
     "@xarc/run": "^1.0.5",
     "@xarc/subapp": "^0.3.5",
-    "@xarc/webpack": "^11.2.2",
+    "@xarc/webpack": "^11.2.3",
     "ansi-to-html": "^0.7.2",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-minify-dead-code-elimination": "^0.5.2",
