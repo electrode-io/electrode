@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "Revert the fix added for cdn map issue as this created unexpected sideeffects",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}

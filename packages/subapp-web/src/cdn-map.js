@@ -18,13 +18,14 @@
   };
 
   // cdnMap(key) - lookup CDN URL for key in the mapping
+  // TODO: Do better handling than console.error. Commenting this for now since this throws error for any dynamic JS imports although chunks are getting loaded properly.
   xv1.cdnMap = f => {
     for (const k in xv1.rt.md) {
       if (k.indexOf(f) >= 0) {
         return xv1.rt.md[k];
       }
     }
-    console.error("CDN map not found:", f);
+    // console.error("CDN map not found:", f);
   };
 
   // compatible with window._wml.cdn
