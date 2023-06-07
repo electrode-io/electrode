@@ -26,7 +26,7 @@ function setup(w: any) {
     const src = xarc && xarc.cdnMap(originalSrc);
     return src && src !== originalSrc ? src : null;
   };
-  
+
   __webpack_chunk_load__ = id => {
     __webpack_get_script_filename__ = () => {
       const originalSrc = originalGet(id);

@@ -52,7 +52,7 @@
     "subapp-react": "^1.1.1",
     "subapp-redux": "^2.2.1",
     "subapp-server": "^2.2.1",
-    "subapp-web": "^2.1.1"
+    "subapp-web": "^2.1.2"
   },
   "devDependencies": {
     "@xarc/opt-eslint": "^3.0.1",

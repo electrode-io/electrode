@@ -2,6 +2,18 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.3",
+      "tag": "@xarc/webpack_v11.2.3",
+      "date": "Wed, 07 Jun 2023 19:40:52 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Revert the fix added for cdn map issue as this created unexpected sideeffects"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.2",
       "tag": "@xarc/webpack_v11.2.2",
       "date": "Fri, 02 Jun 2023 17:01:48 GMT",

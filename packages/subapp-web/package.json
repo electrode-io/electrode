@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -18,10 +18,6 @@
     "react",
     "subapp"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"

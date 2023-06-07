@@ -35,7 +35,7 @@
     "@babel/runtime": "^7.17.9",
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.4",
-    "subapp-web": "^2.1.1"
+    "subapp-web": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
