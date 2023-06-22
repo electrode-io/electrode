@@ -121,7 +121,7 @@ export class Middleware {
     const encodeHmrPath = encodeURIComponent(webpackHotOptions.path);
 
     // webpack 5 entry config: https://webpack.js.org/concepts/entry-points/
-    injectEntry(config, [`webpack-hot-middleware/client?path=${encodeHmrPath}`]);
+    injectEntry(config, [`${require.resolve("./middlewareClientOverride/client")}?path=${encodeHmrPath}`]); //https://www.npmjs.com/package/webpack-hot-middleware
     console.log("Webpack config entry updated with HMR client");
 
     config.plugins = [

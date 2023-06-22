@@ -3070,6 +3070,7 @@ packages:
 
   /@sinonjs/fake-timers/10.2.0:
     resolution: {integrity: sha512-OPwQlEdg40HAj5KNF8WW6q2KG4Z+cBCZb3m4ninfTZKaBmbIJodviQsDBoYMPHkOyJJMHnOJo5j2+LKDOhOACg==}
+    deprecated: Use version 10.1.0. Version 10.2.0 has potential breaking issues
     dependencies:
       '@sinonjs/commons': 3.0.0
     dev: false
@@ -4159,8 +4160,8 @@ packages:
       webpack-cli: 4.8.0_e8d61f3ea10b82d790e1fdaef8cb0a3d
     dev: false
 
-  /@xarc/fastify-server/2.2.0:
-    resolution: {integrity: sha512-VqA16vmqf+3egL66a4mGZc6cpq75ACb7BdJypQXal9tVk2M2IpIigmZMWy3UaT0SP6jzB4xoWYHbSfiY/LFJcw==}
+  /@xarc/fastify-server/2.2.1:
+    resolution: {integrity: sha512-P/fd87MYHjm3fZy4zKpZxmQ3WEIu1AM2yLLzWHDYidKFroyXs8Tx6bHOAWTG4Iu++YOCY5cC31UxindAzPOS6g==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       async-eventemitter: 0.2.4
@@ -4176,8 +4177,8 @@ packages:
       - supports-color
     dev: false
 
-  /@xarc/fastify-server/3.3.0:
-    resolution: {integrity: sha512-Feea07dbHwl55Ha9DVl2rQV+QYHxPUp0+pud0Zr7y/NnyP48SIY6PtqXcKVo1UGGocmuwwA+xblQP+eFHJoWKg==}
+  /@xarc/fastify-server/3.3.1:
+    resolution: {integrity: sha512-p/y/q3oAp8IGfnRfwA4PwjqSrM++jua1oMMZY0PkGFFfAwrURkZvwYrk32CDF2v57cM45PPi9p1eUOLpiiM6EA==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       async-eventemitter: 0.2.4
@@ -7918,7 +7919,7 @@ packages:
     resolution: {integrity: sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==}
     deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
     dependencies:
-      ms: 2.1.1
+      ms: 2.1.3
     dev: false
 
   /debug/3.2.7:
@@ -10425,7 +10426,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -10436,7 +10437,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -20478,7 +20479,7 @@ packages:
     dev: false
 
   file:projects/app-dev.tgz_uglify-js@2.8.29+webpack@5.86.0:
-    resolution: {integrity: sha512-iQUuTX0js4SkG9UjJFXKRBe+sqpvk2eb1m+KEMiOh+WymceS7YiktgocrHq3vSjfmCO3EZM5YiuzbpTWwrOgTg==, tarball: file:projects/app-dev.tgz}
+    resolution: {integrity: sha512-Qon/i89F0A618j0u5mYVdpZO47ZoVaOhbckXp4GNhXUIrgq/nMHywp3rgHjMMoV/p06JMU5qEL2L+4d5X59idQ==, tarball: file:projects/app-dev.tgz}
     id: file:projects/app-dev.tgz
     name: '@rush-temp/app-dev'
     version: 0.0.0
@@ -20507,6 +20508,7 @@ packages:
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 4.1.0
       '@xarc/run': 1.1.1
+      ansi-html-community: 0.0.8
       ansi-to-html: 0.7.2
       babel-eslint: 10.1.0_eslint@7.32.0
       babel-plugin-lodash: 3.3.4
@@ -21142,14 +21144,14 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.86.0:
-    resolution: {integrity: sha512-eRbmIDXQPc2MTTFhpKhc0G8td0mqEx7Bgwd1a+pXTcD+4LVlVWuWNB3juVjEmqlgdLZcyLERIBgexGBIZCJL1A==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-TVwk++rRelv2gyd9mOxjFk8OsidCVOolcHcffhrElNX1ghO2Dxc8tk5A6O5hZyhBGD/4/LYgPL8+2PCzImYsIA==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
-      '@xarc/fastify-server': 3.3.0
+      '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       electrode-confippet: 1.7.1
       history: 5.3.0
@@ -21173,14 +21175,14 @@ packages:
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.86.0:
-    resolution: {integrity: sha512-hoEfRtQZZpPt/4k0uNjZcoRkmW6ctYHs56/WK0C0PxUkYHwafLp+ioL3uZpNDQAP7I69jSwnmG//Fg74z1VT7A==, tarball: file:projects/poc-subapp.tgz}
+    resolution: {integrity: sha512-tIDzzNGX8H1L6z7dM1If7/jKuGooTe8kTLC7+AsnZvz9AIJIzZikgyIMErfdxlp8TocGv+KWYBZqS7Es3ze0+w==, tarball: file:projects/poc-subapp.tgz}
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
-      '@xarc/fastify-server': 2.2.0
+      '@xarc/fastify-server': 2.2.1
       '@xarc/run': 1.1.1
       electrode-confippet: 1.7.1
       history: 5.3.0
@@ -21203,13 +21205,13 @@ packages:
     dev: false
 
   file:projects/poc-subappv1-csp.tgz:
-    resolution: {integrity: sha512-57yWsafJ3y2OYrOsjl2+1KQBYogf6/lJMxHmc2STKdKyqGHmADABD7ObJT2Vtwks5h9VRbz5mJ9Xr4vH/mi9UQ==, tarball: file:projects/poc-subappv1-csp.tgz}
+    resolution: {integrity: sha512-R3NOvkcffRBvAPIqHDz7/wUQBtpyQYl7VVHgfxqVmjDi2KF/zjRWNtwxoT4BPzd4OM0jWxQTxmwQXEY5+N+R7w==, tarball: file:projects/poc-subappv1-csp.tgz}
     name: '@rush-temp/poc-subappv1-csp'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
-      '@xarc/fastify-server': 3.3.0
+      '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       crypto: 1.0.1
       electrode-confippet: 1.7.1
@@ -21594,7 +21596,7 @@ packages:
     dev: false
 
   file:projects/subapp-pbundle.tgz:
-    resolution: {integrity: sha512-CuvjrshuPRhpkU1Sj9RA+Qmjqj4DvOaKfwsF+i/QjafBeScjS3+YacPEOcwm++mEl+VsQz3220UPyo/EYmV6EQ==, tarball: file:projects/subapp-pbundle.tgz}
+    resolution: {integrity: sha512-Qglc/4dUNgRVcxg4G2UDFTIm46tlKNMfU/I2kGqd1aZdLwMDKhEyZGK2GsRxTsx75QiLflIt+0EeZFVjzZwthQ==, tarball: file:projects/subapp-pbundle.tgz}
     name: '@rush-temp/subapp-pbundle'
     version: 0.0.0
     dependencies:
@@ -21631,7 +21633,7 @@ packages:
     dev: false
 
   file:projects/subapp-react.tgz:
-    resolution: {integrity: sha512-44CMZ9NcrpQMExuNeiAkjQPhyilMHvwnuXJ3d1M6QttVsojQF1PoI+JtdZSEV4zPNjV9nuf3nggcO/7Hl1cmKw==, tarball: file:projects/subapp-react.tgz}
+    resolution: {integrity: sha512-VZYUyCtRY2zyrbOdYXvDYF/50l1rvsbsqm2HIo3LXL6CuI14//upitJzINgX+D24v73GORpBqarg9KelLIpUmA==, tarball: file:projects/subapp-react.tgz}
     name: '@rush-temp/subapp-react'
     version: 0.0.0
     dependencies:
@@ -21666,7 +21668,7 @@ packages:
     dev: false
 
   file:projects/subapp-redux.tgz:
-    resolution: {integrity: sha512-SdeQG1KZAcfFfG9le8F39+/ohdErGQimXhrYV+0xItY9ki36kW719tPUno9jSCbyrWD5mdaq/Y4DQYzodyRAAQ==, tarball: file:projects/subapp-redux.tgz}
+    resolution: {integrity: sha512-l5T2tTRVt4IzmT8VbOkY8+b9w9m+zDf/9MRcj8gWkYs662WQdghXDtuMGCmGDJTikrO6hN6uQvAfFTy7AQpddA==, tarball: file:projects/subapp-redux.tgz}
     name: '@rush-temp/subapp-redux'
     version: 0.0.0
     dependencies:
@@ -21705,7 +21707,7 @@ packages:
       '@babel/preset-react': 7.22.3_@babel+core@7.22.1
       '@babel/register': 7.21.0_@babel+core@7.22.1
       '@hapi/boom': 9.1.4
-      '@xarc/fastify-server': 3.3.0
+      '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       chai: 4.3.6
       crypto: 1.0.1
@@ -21828,7 +21830,7 @@ packages:
       '@babel/runtime': 7.22.3
       '@module-federation/concat-runtime': 0.0.1
       '@types/node': 20.2.5
-      '@xarc/fastify-server': 3.3.0
+      '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       prettier: 2.8.8
       ts-node: 10.9.1_18191548ee48d1462c4c1bad9e7252f5
@@ -21847,7 +21849,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.3
       '@types/node': 20.2.5
-      '@xarc/fastify-server': 3.3.0
+      '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       isomorphic-loader: 4.5.0
       prop-types: 15.8.1
