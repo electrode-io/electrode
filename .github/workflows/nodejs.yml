@@ -28,11 +28,11 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
+          fetch-depth: 0
           node-version: ${{ matrix.node-version }}
 
-      # TODO: enable `rush change -v` after rush migration is completed.
-      # - name: Verify Change Logs
-        # run: node common/scripts/install-run-rush.js change --verify --target-branch upstream/master
+      - name: Verify Change Logs
+        run: node common/scripts/install-run-rush.js change --verify
       
       - name: Install
         run: node common/scripts/install-run-rush.js install
