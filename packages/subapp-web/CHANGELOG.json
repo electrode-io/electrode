@@ -2,6 +2,23 @@
   "name": "subapp-web",
   "entries": [
     {
+      "version": "2.1.2",
+      "tag": "subapp-web_v2.1.2",
+      "date": "Wed, 07 Jun 2023 19:40:52 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.3 to ^11.0.4."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Commenting unnecessary console error and parking this for additional analysis"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.1.1",
       "tag": "subapp-web_v2.1.1",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

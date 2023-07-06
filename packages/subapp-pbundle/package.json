@@ -35,7 +35,7 @@
     "@babel/runtime": "^7.8.3",
     "redux-bundler-preact": "^2.0.1",
     "subapp-util": "^1.1.4",
-    "subapp-web": "^2.1.1"
+    "subapp-web": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
