@@ -32,7 +32,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # TODO: enable `rush change -v` after rush migration is completed.
       - name: Verify Change files and fail build if not available
         run: node common/scripts/install-run-rush.js change --verify
       
