@@ -32,7 +32,7 @@ jobs:
 
       # TODO: enable `rush change -v` after rush migration is completed.
       - name: Verify Change files and fail build if not available
-        run: node common/scripts/install-run-rush.js change --verify
+        run: git fetch origin main:refs/remotes/origin/main -a && node common/scripts/install-run-rush.js change --verify
       
       - name: Install
         run: node common/scripts/install-run-rush.js install
