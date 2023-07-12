@@ -24,6 +24,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
       
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -32,7 +34,7 @@ jobs:
 
       # TODO: enable `rush change -v` after rush migration is completed.
       - name: Verify Change files and fail build if not available
-        run: node common/scripts/install-run-rush.js change --verify --target-branch origin/master
+        run: node common/scripts/install-run-rush.js change --verify
       
       - name: Install
         run: node common/scripts/install-run-rush.js install
