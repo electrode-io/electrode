@@ -157,7 +157,7 @@ Publishing is a three step process. When its time to publish packages (as per re
 - Review the CHANGELOG.md updates at this point
 
 #### **2. Publish Packages**
-- Run `rush publish --include-all --publish`
+- Run `rush publish --include-all --publish --apply`
   - This will publish all the public packages that have version increased.
 - Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
 
