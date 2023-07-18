@@ -34,9 +34,9 @@
     "loadjs": "^4.2.0",
     "lodash": "^4.17.15",
     "optional-require": "^1.1.8",
-    "request": "^2.88.0",
     "subapp-util": "^1.1.4",
-    "xaa": "^1.7.3"
+    "xaa": "^1.7.3",
+    "axios": "^1.4.0"
   },
   "peerDependencies": {
     "@xarc/app": "^11.0.4"
