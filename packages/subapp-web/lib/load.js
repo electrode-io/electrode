@@ -16,7 +16,7 @@ const assert = require("assert");
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
-const retrieveUrl = require("axios");
+const retrieveUrl = require("node-fetch");
 const util = require("./util");
 const xaa = require("xaa");
 const jsesc = require("jsesc");
@@ -82,11 +82,10 @@ module.exports = function setup(setupContext, { props: setupProps }) {
       const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
       const { scriptNonce } = util.getNonceValue(setupContext.routeOptions);
 
-      retrieveUrl
-        .get(bundleUrl)
-        .then(resp => {
-          const { data: body, status } = resp;
-          if (status === 200) {
+      retrieveUrl(bundleUrl) //ToDo: Replace node-fetch with inbuilt fetch api when supports node 18+ versions
+        .then(async resp => {
+          const body = await resp.text();
+          if (resp.status === 200) {
             resolve(`<script${scriptNonce}>/*${name}*/${body}</script>`);
           } else {
             const msg = makeDevDebugMessage(
@@ -306,10 +305,10 @@ module.exports = function setup(setupContext, { props: setupProps }) {
               type="application/json" 
               id="${dataId}">
 ${jsesc(JSON.parse(initialStateStr), {
-            json: true,
-            isScriptContext: true,
-            wrap: true
-          })}
+  json: true,
+  isScriptContext: true,
+  wrap: true
+})}
 </script>
 `;
           initialStateScript = `JSON.parse(document.getElementById("${dataId}").innerHTML)`;
@@ -373,8 +372,9 @@ ${stack}`,
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}<script${scriptNonce} >
-${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${namespace ? ", " + JSON.stringify(namespace) : ""
-            });</script>
+${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
+            namespace ? ", " + JSON.stringify(namespace) : ""
+          });</script>
 `);
         }
         if (preLoads.length > 0) {

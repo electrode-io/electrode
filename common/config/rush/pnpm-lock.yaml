@@ -136,6 +136,7 @@ specifiers:
   mini-css-extract-plugin: ^1.3.9
   munchy: ^1.0.9
   nix-clap: ^1.3.13
+  node-fetch: 2.6.12
   object-assign: ^4.1.0
   open: ^8.4.0
   opfs: ^1.1.1
@@ -323,6 +324,7 @@ dependencies:
   mini-css-extract-plugin: 1.6.2_webpack@5.88.2
   munchy: 1.0.9
   nix-clap: 1.3.13
+  node-fetch: 2.6.12
   object-assign: 4.1.1
   open: 8.4.2
   opfs: 1.1.1
@@ -13993,6 +13995,18 @@ packages:
       semver: 5.7.2
     dev: false
 
+  /node-fetch/2.6.12:
+    resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: false
+
   /node-int64/0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: false
@@ -19757,6 +19771,13 @@ packages:
       webidl-conversions: 3.0.1
     dev: false
 
+  /whatwg-url/5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
+    dev: false
+
   /whatwg-url/7.1.0:
     resolution: {integrity: sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==}
     dependencies:
@@ -20908,6 +20929,7 @@ packages:
       electrode-confippet: 1.7.1
       history: 5.3.0
       html-webpack-plugin: 5.5.3_webpack@5.88.2
+      node-fetch: 2.6.12
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -21479,7 +21501,7 @@ packages:
     dev: false
 
   file:projects/subapp-web.tgz:
-    resolution: {integrity: sha512-lA2LOAo1jAxXaVERRAg/fPT5jdzeK1G1XmHr3rm9Lif493r3x4BKxSslvcFBvCcgsYF2KSzieeiRKj1MlTb7lA==, tarball: file:projects/subapp-web.tgz}
+    resolution: {integrity: sha512-2BMoPgmCIaFVkjGrWeQ/Gxr7XQKkppI+ihQabmy0rtDR2yQ3vVYVE0p6r1bAjKlWPrrKd1H/h/hsaJCS8p+6Bg==, tarball: file:projects/subapp-web.tgz}
     name: '@rush-temp/subapp-web'
     version: 0.0.0
     dependencies:
@@ -21508,6 +21530,7 @@ packages:
       lodash: 4.17.21
       mocha: 7.2.0
       mock-require: 3.0.3
+      node-fetch: 2.6.12
       optional-require: 1.1.8
       request: 2.88.2
       run-verify: 1.2.6
@@ -21516,6 +21539,7 @@ packages:
       - bufferutil
       - canvas
       - debug
+      - encoding
       - supports-color
       - utf-8-validate
     dev: false
