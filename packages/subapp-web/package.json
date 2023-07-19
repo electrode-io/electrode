@@ -36,7 +36,6 @@
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.4",
     "xaa": "^1.7.3",
-    "axios": "^1.4.0",
     "node-fetch": "2.6.12"
   },
   "peerDependencies": {
