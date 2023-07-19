@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-karma",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Electrode karma addon for unit tests",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",
@@ -16,10 +16,6 @@
     "plugins",
     "lib"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"

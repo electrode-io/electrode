@@ -64,7 +64,6 @@ specifiers:
   '@types/webpack': 5.28.0
   ansi-to-html: ^0.7.2
   autoprefixer: ^9.6.0
-  axios: ^1.4.0
   babel-core: ^6.0.15
   babel-eslint: ^10.1.0
   babel-jest: ^26.1.0
@@ -252,7 +251,6 @@ dependencies:
   '@types/webpack': 5.28.0_uglify-js@2.8.29
   ansi-to-html: 0.7.2
   autoprefixer: 9.8.8
-  axios: 1.4.0
   babel-core: 6.26.3
   babel-eslint: 10.1.0
   babel-jest: 26.6.3
@@ -3408,7 +3406,7 @@ packages:
     resolution: {integrity: sha512-/19t63pFYU0ikrdbXKBWj9PCdnKyTd0Qkz0X91Ta081cYsq90OxYdcWwK/dwEoDa6dtXgj2HJfmzgq+QZTHdmQ==}
     dependencies:
       '@types/chai': 4.3.5
-      '@types/sinon': 10.0.15
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.15:
@@ -4976,16 +4974,6 @@ packages:
     resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
     dev: false
 
-  /axios/1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
-    dependencies:
-      follow-redirects: 1.15.2
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /b64/3.0.3:
     resolution: {integrity: sha512-Pbeh0i6OLubPJdIdCepn8ZQHwN2MWznZHbHABSTEfQ706ie+yuxNSaPdqX1xRatT6WanaS1EazMiSg0NUW2XxQ==}
     engines: {node: '>=4.0.0'}
@@ -6511,7 +6499,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001516
-      electron-to-chromium: 1.4.463
+      electron-to-chromium: 1.4.464
     dev: false
 
   /browserslist/4.21.9:
@@ -6520,7 +6508,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001516
-      electron-to-chromium: 1.4.463
+      electron-to-chromium: 1.4.464
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11_browserslist@4.21.9
     dev: false
@@ -7834,7 +7822,7 @@ packages:
     resolution: {integrity: sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==}
     deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
     dependencies:
-      ms: 2.1.3
+      ms: 2.1.1
     dev: false
 
   /debug/3.2.7:
@@ -8351,8 +8339,8 @@ packages:
       xaa: 1.7.3
     dev: false
 
-  /electron-to-chromium/1.4.463:
-    resolution: {integrity: sha512-fT3hvdUWLjDbaTGzyOjng/CQhQJSQP8ThO3XZAoaxHvHo2kUXiRQVMj9M235l8uDFiNPsPa6KHT1p3RaR6ugRw==}
+  /electron-to-chromium/1.4.464:
+    resolution: {integrity: sha512-guZ84yoou4+ILNdj0XEbmGs6DEWj6zpVOWYpY09GU66yEb0DSYvP/biBPzHn0GuW/3RC/pnaYNUWlQE1fJYtgA==}
     dev: false
 
   /emittery/0.7.2:
@@ -10300,7 +10288,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.1.2
+      minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -10311,7 +10299,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.1.2
+      minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -15713,10 +15701,6 @@ packages:
       ipaddr.js: 1.9.1
     dev: false
 
-  /proxy-from-env/1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-    dev: false
-
   /prr/1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
     dev: false
@@ -20929,7 +20913,6 @@ packages:
       electrode-confippet: 1.7.1
       history: 5.3.0
       html-webpack-plugin: 5.5.3_webpack@5.88.2
-      node-fetch: 2.6.12
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -21501,7 +21484,7 @@ packages:
     dev: false
 
   file:projects/subapp-web.tgz:
-    resolution: {integrity: sha512-2BMoPgmCIaFVkjGrWeQ/Gxr7XQKkppI+ihQabmy0rtDR2yQ3vVYVE0p6r1bAjKlWPrrKd1H/h/hsaJCS8p+6Bg==, tarball: file:projects/subapp-web.tgz}
+    resolution: {integrity: sha512-SeW2JK5nf3Pi2zdQV7G2pVLqqy3OdmVDbrPgPNy+JXeqT54K7TmNpMh9QLQ1Tv+StNUvsuwIrhh+Hp76kfVcLQ==, tarball: file:projects/subapp-web.tgz}
     name: '@rush-temp/subapp-web'
     version: 0.0.0
     dependencies:
@@ -21514,7 +21497,6 @@ packages:
       '@babel/runtime': 7.22.6
       '@xarc/module-dev': 4.1.0
       '@xarc/run': 1.1.1
-      axios: 1.4.0
       babel-preset-minify: 0.5.2
       chai: 4.3.6
       chai-as-promised: 7.1.1_chai@4.3.6
@@ -21532,13 +21514,11 @@ packages:
       mock-require: 3.0.3
       node-fetch: 2.6.12
       optional-require: 1.1.8
-      request: 2.88.2
       run-verify: 1.2.6
       xaa: 1.7.3
     transitivePeerDependencies:
       - bufferutil
       - canvas
-      - debug
       - encoding
       - supports-color
       - utf-8-validate
