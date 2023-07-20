@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-web",
+      "comment": "replace request package with node-fetch to fix snyk vulnerabilities",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-web"
+}

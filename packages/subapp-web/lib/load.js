@@ -16,7 +16,7 @@ const assert = require("assert");
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
-const retrieveUrl = require("request");
+const retrieveUrl = require("node-fetch");
 const util = require("./util");
 const xaa = require("xaa");
 const jsesc = require("jsesc");
@@ -81,20 +81,29 @@ module.exports = function setup(setupContext, { props: setupProps }) {
       const path = Path.posix.join(bundleBase, bundleAsset.name);
       const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
       const { scriptNonce } = util.getNonceValue(setupContext.routeOptions);
-      retrieveUrl(bundleUrl, (err, resp, body) => {
-        if (err || resp.statusCode !== 200) {
+
+      retrieveUrl(bundleUrl) //ToDo: Replace node-fetch with inbuilt fetch api when supports node 18+ versions
+        .then(async resp => {
+          const body = await resp.text();
+          if (resp.status === 200) {
+            resolve(`<script${scriptNonce}>/*${name}*/${body}</script>`);
+          } else {
+            const msg = makeDevDebugMessage(
+              `Error: fail to retrieve subapp bundle from '${bundleUrl}' for inlining in index HTML
+            Response: ${body}`
+            );
+            console.error(msg); // eslint-disable-line
+            resolve(makeDevDebugHtml(msg));
+          }
+        })
+        .catch(err => {
           const msg = makeDevDebugMessage(
             `Error: fail to retrieve subapp bundle from '${bundleUrl}' for inlining in index HTML
-Response: ${err || body}`
+            Response: ${err}`
           );
           console.error(msg); // eslint-disable-line
           resolve(makeDevDebugHtml(msg));
-        } else {
-          resolve(
-            `<script${scriptNonce}>/*${name}*/${body}</script>`
-          );
-        }
-      });
+        });
     });
   };
 
@@ -115,11 +124,9 @@ Response: ${err || body}`
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
         const ext = Path.extname(bundleAsset.name);
         if (ext === ".js") {
-          inlineSubAppJs =
-            `<script${scriptNonce}>/*${name}*/${src}</script>`;
+          inlineSubAppJs = `<script${scriptNonce}>/*${name}*/${src}</script>`;
         } else if (ext === ".css") {
-          inlineSubAppJs =
-            `<style${styleNonce} id="${name}">${src}</style>`;
+          inlineSubAppJs = `<style${styleNonce} id="${name}">${src}</style>`;
         } else {
           const msg = makeDevDebugMessage(`Error: UNKNOWN bundle extension ${name}`);
           console.error(msg); // eslint-disable-line
@@ -170,26 +177,26 @@ Response: ${err || body}`
                         rel="preload" 
                         href="${jsBundle}" 
                         as="script">`
-                      );
+                    );
                   }
                   a.push(
                     `<script${scriptNonce}
                       src="${jsBundle}" 
                       async></script>`
-                    );
+                  );
                 } else if (ext === ".css") {
                   if (context.user.headEntries) {
                     headSplits.push(
                       `<link${styleNonce}
                         rel="stylesheet"
                         href="${jsBundle}">`
-                      );
+                    );
                   } else {
                     a.push(
                       `<link${styleNonce}
                         rel="stylesheet"
                         href="${jsBundle}">`
-                      );
+                    );
                   }
                 } else {
                   a.push(`<!-- UNKNOWN bundle extension ${jsBundle} -->`);
@@ -294,8 +301,7 @@ Response: ${err || body}`
         } else {
           // embed large initial state as text and parse with JSON.parse instead.
           const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
-          dynInitialState =
-            `<script${scriptNonce} 
+          dynInitialState = `<script${scriptNonce} 
               type="application/json" 
               id="${dataId}">
 ${jsesc(JSON.parse(initialStateStr), {
