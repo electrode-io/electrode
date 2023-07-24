@@ -2,6 +2,18 @@
   "name": "subapp-web",
   "entries": [
     {
+      "version": "2.1.3",
+      "tag": "subapp-web_v2.1.3",
+      "date": "Mon, 24 Jul 2023 18:40:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "replace request package with node-fetch to fix snyk vulnerabilities"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.1.2",
       "tag": "subapp-web_v2.1.2",
       "date": "Wed, 07 Jun 2023 19:40:52 GMT",

@@ -1,6 +1,6 @@
 // eslint-disable no-unused-vars, no-unused-expressions, no-undef
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import Home from "client/components/home";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -12,10 +12,11 @@ describe("Home", () => {
 
   beforeEach(() => {
     container = document.createElement("div");
+    const root = createRoot(container);
   });
 
   afterEach(() => {
-    ReactDOM.unmountComponentAtNode(container);
+    root.unmount(container);
   });
 
   it("has expected content with deep render", () => {
@@ -26,7 +27,7 @@ describe("Home", () => {
 
     const store = createStore(rootReducer, initialState);
 
-    component = ReactDOM.render(<Provider store={store}><Home /></Provider>, container);
+    root.render(<Provider store={store}><Home /></Provider>);
 
     expect(component).to.not.be.false;
   });
