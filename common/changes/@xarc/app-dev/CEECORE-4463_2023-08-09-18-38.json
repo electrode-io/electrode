@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "update jest config testUrl to testEnvironmentOptions.url",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}
