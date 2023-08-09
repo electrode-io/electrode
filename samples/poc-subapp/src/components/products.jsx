@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-// temp
-import { render } from "react-dom";
 
 const DealItem = props => {
   const { item } = props;
