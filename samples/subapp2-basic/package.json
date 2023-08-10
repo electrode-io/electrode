@@ -52,7 +52,8 @@
     "@xarc/opt-postcss": "^2.0.1",
     "@xarc/opt-sass": "^4.1.1",
     "webpack-hot-middleware": "^2.25.4",
-    "@testing-library/react": "~14.0.0",
-    "@testing-library/jest-dom": "~5.17.0"
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "jest-environment-jsdom": "^29.6.2"
   }
 }
