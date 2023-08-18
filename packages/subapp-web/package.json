@@ -61,7 +61,7 @@
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^30.7.9",
     "jsdom": "^19.0.0",
-    "mocha": "^7.1.2",
+    "mocha": "^10.2.0",
     "mock-require": "^3.0.3",
     "run-verify": "^1.2.6",
     "subapp-pkg-util": "0.0.1"
