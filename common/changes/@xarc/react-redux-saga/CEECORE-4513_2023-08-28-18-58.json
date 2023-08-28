@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux-saga",
+      "comment": "Update dev dependencies",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react-redux-saga"
+}
