@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/jsx-renderer",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/jsx-renderer"
+}

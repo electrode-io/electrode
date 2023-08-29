@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-mocha",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/opt-mocha"
+}

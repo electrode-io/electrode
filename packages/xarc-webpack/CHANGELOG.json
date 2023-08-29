@@ -2,6 +2,18 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.5",
+      "tag": "@xarc/webpack_v11.2.5",
+      "date": "Tue, 29 Aug 2023 22:13:08 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Rename setup function to avoid conflict with a mocha function causing build failure"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.4",
       "tag": "@xarc/webpack_v11.2.4",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

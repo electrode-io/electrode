@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "11.2.4",
+  "version": "11.2.5",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -20,7 +20,7 @@
     "test": "xrun xarc/test-only",
     "coverage": "xrun xarc/test-cov",
     "check": "xrun xarc/check",
-    "lint": "clap lint",
+    "lint": "xrun xarc/lint",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },

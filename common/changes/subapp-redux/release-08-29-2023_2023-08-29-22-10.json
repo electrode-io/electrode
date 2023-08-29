@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-redux",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "subapp-redux"
+}
