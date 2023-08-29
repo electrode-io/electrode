@@ -3,4 +3,4 @@
 # Each user will be requested for
 # review when someone opens a pull request.
 
-electrode/core
+* @electrode-io/electrode-core

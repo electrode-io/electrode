@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Update dev dependencies",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}
