@@ -2,6 +2,29 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.4",
+      "tag": "@xarc/webpack_v11.2.4",
+      "date": "Tue, 29 Aug 2023 14:57:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.4 to ^11.0.5."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.4 to ^11.0.5."
+          },
+          {
+            "comment": "Updating dependency \"webpack-config-composer\" from `^1.2.0` to `^1.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.3",
       "tag": "@xarc/webpack_v11.2.3",
       "date": "Wed, 07 Jun 2023 19:40:52 GMT",

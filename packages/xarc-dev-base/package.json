@@ -24,10 +24,6 @@
     "Joel Chen <xchen@walmart.com>"
   ],
   "license": "Apache-2.0",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/node": "^14.14.16",

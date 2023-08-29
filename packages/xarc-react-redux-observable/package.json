@@ -1,16 +1,12 @@
 {
   "name": "@xarc/react-redux-observable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "xarc React.js application redux observable support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
     "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -27,7 +23,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^1.1.0",
+    "@xarc/react-redux": "^1.1.1",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0"

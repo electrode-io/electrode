@@ -2,6 +2,29 @@
   "name": "@xarc/index-page",
   "entries": [
     {
+      "version": "1.2.2",
+      "tag": "@xarc/index-page_v1.2.2",
+      "date": "Tue, 29 Aug 2023 14:57:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.13` to `^1.0.14`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.10` to `^1.0.11`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.12` to `^1.0.13`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "tag": "@xarc/index-page_v1.2.1",
       "date": "Fri, 02 Jun 2023 17:01:48 GMT",

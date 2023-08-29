@@ -2,6 +2,23 @@
   "name": "@xarc/react-redux-saga",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@xarc/react-redux-saga_v1.1.1",
+      "date": "Tue, 29 Aug 2023 14:57:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependencies"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/react-redux\" from `^1.1.0` to `^1.1.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@xarc/react-redux-saga_v1.1.0",
       "date": "Thu, 04 May 2023 21:08:31 GMT",
