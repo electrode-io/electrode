@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/render-context",
+      "comment": "Update dev dependencies",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/render-context"
+}

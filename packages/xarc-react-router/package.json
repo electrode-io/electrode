@@ -8,10 +8,6 @@
     "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
@@ -35,7 +31,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/react": "^13.2.0",
     "@types/chai": "^4.3.1",
-    "@types/mocha": "^10.0.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
@@ -54,7 +50,7 @@
     "eslint-plugin-tsdoc": "^0.2.16",
     "jsdom": "^19.0.0",
     "jsdom-global": "^3.0.2",
-    "mocha": "^10.0.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

@@ -64,21 +64,21 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.1",
-    "@types/mocha": "^10.0.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.9",
     "@types/sinon": "^9.0.0",
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
     "@xarc/app": "^11.0.4",
-    "@xarc/module-dev": "^2.2.5",
+    "@xarc/module-dev": "^4.1.0",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^30.7.9",
-    "mocha": "^7.1.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.0",
     "prettier": "^1.14.2",
     "run-verify": "^1.2.1",
@@ -90,7 +90,7 @@
     "typescript": "^4.9.3"
   },
   "engines": {
-    "node": ">= 12",
+    "node": ">= 14",
     "npm": ">= 6"
   },
   "nyc": {
