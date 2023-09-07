@@ -16,7 +16,6 @@ import { createStore, combineReducers } from "redux";
 //    after will use the initial state from it
 //  - a top level initializer can be specified to do this
 //
-
 let persistentStoreContainer = { namedStores: {} };
 
 /**
