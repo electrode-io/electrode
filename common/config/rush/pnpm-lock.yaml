@@ -3414,7 +3414,7 @@ packages:
     resolution: {integrity: sha512-/19t63pFYU0ikrdbXKBWj9PCdnKyTd0Qkz0X91Ta081cYsq90OxYdcWwK/dwEoDa6dtXgj2HJfmzgq+QZTHdmQ==}
     dependencies:
       '@types/chai': 4.3.6
-      '@types/sinon': 10.0.16
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.16:
@@ -6533,7 +6533,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001528
-      electron-to-chromium: 1.4.510
+      electron-to-chromium: 1.4.511
     dev: false
 
   /browserslist/4.21.10:
@@ -6542,7 +6542,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001528
-      electron-to-chromium: 1.4.510
+      electron-to-chromium: 1.4.511
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11_browserslist@4.21.10
     dev: false
@@ -8326,8 +8326,8 @@ packages:
       xaa: 1.7.3
     dev: false
 
-  /electron-to-chromium/1.4.510:
-    resolution: {integrity: sha512-xPfLIPFcN/WLXBpQ/K4UgE98oUBO5Tia6BD4rkSR0wE7ep/PwBVlgvPJQrIBpmJGVAmUzwPKuDbVt9XV6+uC2g==}
+  /electron-to-chromium/1.4.511:
+    resolution: {integrity: sha512-udHyLfdy390CObLy3uFQitCBvK+WxWu6WZWQMBzO/npNiRy6tanDKR1c/F6OImfAiSt1ylgNszPJBxix2c0w3w==}
     dev: false
 
   /emittery/0.7.2:
@@ -20379,7 +20379,7 @@ packages:
     dev: false
 
   file:projects/create-app.tgz_uglify-js@2.8.29:
-    resolution: {integrity: sha512-T0nJBISoCdo8W6c3FrfQ7gUXx3eL41EH9xn1wRKbB8WzfSoFpImamAoZf8xaBX07w32oSfjijTsH0IlQh6JbdA==, tarball: file:projects/create-app.tgz}
+    resolution: {integrity: sha512-8iK3svduLZaRTYBp8YR1fNmTtJjfSy968Vb4rbBQbtnAa643kHl2AlHTGxWiuzBUZOf9FlOvJoXbhHVbotKKhw==, tarball: file:projects/create-app.tgz}
     id: file:projects/create-app.tgz
     name: '@rush-temp/create-app'
     version: 0.0.0
@@ -21083,7 +21083,7 @@ packages:
     dev: false
 
   file:projects/react-redux-observable.tgz:
-    resolution: {integrity: sha512-qQElYVpD9bBZTNCxYuLhS3fhyt7MhE9yFI/0S0WphCPL/LIbvi6zBQ28mjHE3/AEH1d7UjOaLe3qOk8jH5tyUA==, tarball: file:projects/react-redux-observable.tgz}
+    resolution: {integrity: sha512-eQ8FV70GN6//F1SBLY7uWASSGdW2weOMjRsuuFtRlKZ7+1eSgTzR6S88H2ek1LZyU/bP220A6p41kLedD8pbkA==, tarball: file:projects/react-redux-observable.tgz}
     name: '@rush-temp/react-redux-observable'
     version: 0.0.0
     dependencies:
@@ -21126,7 +21126,7 @@ packages:
     dev: false
 
   file:projects/react-redux-saga.tgz:
-    resolution: {integrity: sha512-wcm85tAm2weP+BTr6tHYel3JGE/inp61WE6UDHdtbwofQgDluN4iEbfXwMchPZp+OsVT7UjWZpk0Jd+bCBuWsg==, tarball: file:projects/react-redux-saga.tgz}
+    resolution: {integrity: sha512-xzZXpoYxad99VQt0Vxj377AwpGOwnKJS9+em2KHtGMKJC3Qil44ECt4oW/CLM8+PoWLzRb84difqtMPFxZ0/AA==, tarball: file:projects/react-redux-saga.tgz}
     name: '@rush-temp/react-redux-saga'
     version: 0.0.0
     dependencies:
@@ -21580,7 +21580,7 @@ packages:
     dev: false
 
   file:projects/subapp2-basic.tgz:
-    resolution: {integrity: sha512-qQlGWuA7nuAKHpHvCCJnEOTZkt5dmh+K+M5YWu7Ydy3g3zZ9ypUQguKeo6nCW0BMpCEM7I5fWFLi0+zwXJy4LQ==, tarball: file:projects/subapp2-basic.tgz}
+    resolution: {integrity: sha512-YV7vjvhwzErpALnINZrbHOgl1TmOlKh6rO4o0yrB75CD4xxMNB2bbzhBJbjL5NdQuN2Tx7W6SAkuQ0pEGZg0hQ==, tarball: file:projects/subapp2-basic.tgz}
     name: '@rush-temp/subapp2-basic'
     version: 0.0.0
     dependencies:
@@ -21600,7 +21600,7 @@ packages:
     dev: false
 
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-OfArntiAgLqz9oN5tEGQttYRbjnXJp7DNKqdM5PsyIwx5qRGNhg15RJGfrovrKAJ/uk6oUSJcrlzxeiw4y3rHQ==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-JMZHKNRmg6lRWtXzFF//nR5lA1C1RDce5yl5CAD3EA233+mWgWL314y0LQWBnhoLxIzCwR4FOxEpbNnaFYXYdQ==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:

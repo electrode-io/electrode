@@ -2,6 +2,18 @@
   "name": "@xarc/react-query",
   "entries": [
     {
+      "version": "1.0.3",
+      "tag": "@xarc/react-query_v1.0.3",
+      "date": "Thu, 07 Sep 2023 22:19:14 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Minor change to force publish esm bundles"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.2",
       "tag": "@xarc/react-query_v1.0.2",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",
