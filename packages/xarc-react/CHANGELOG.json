@@ -2,6 +2,34 @@
   "name": "@xarc/react",
   "entries": [
     {
+      "version": "1.0.3",
+      "tag": "@xarc/react_v1.0.3",
+      "date": "Tue, 29 Aug 2023 14:57:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependencies"
+          }
+        ],
+        "none": [
+          {
+            "comment": "add @babel/runtime in devDependencies as rush requires it in runtime"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.10` to `^1.0.11`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.3.5` to `^0.3.6`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.12` to `^1.0.13`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.2",
       "tag": "@xarc/react_v1.0.2",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

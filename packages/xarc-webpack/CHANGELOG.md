@@ -1,6 +1,20 @@
 # Change Log - @xarc/webpack
 
-This log was last generated on Wed, 07 Jun 2023 19:40:52 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Aug 2023 22:13:08 GMT and should not be manually modified.
+
+## 11.2.5
+Tue, 29 Aug 2023 22:13:08 GMT
+
+### Patches
+
+- Rename setup function to avoid conflict with a mocha function causing build failure
+
+## 11.2.4
+Tue, 29 Aug 2023 14:57:37 GMT
+
+### Patches
+
+- Update dev dependencies
 
 ## 11.2.3
 Wed, 07 Jun 2023 19:40:52 GMT

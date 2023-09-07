@@ -1,16 +1,12 @@
 {
   "name": "@xarc/react-redux",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "xarc React.js application redux support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
     "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -28,7 +24,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.3.5",
+    "@xarc/subapp": "^0.3.6",
     "react-redux": ">= 8",
     "redux": ">= 4",
     "tslib": "^2.1.0"

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-jest",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/opt-jest"
+}
