@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux",
+      "comment": "minor change to force publish to publish esm bundles",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react-redux"
+}
