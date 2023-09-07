@@ -34,10 +34,10 @@
     "@xarc/app": "^11.0.5",
     "@xarc/fastify-server": "^3.3.0",
     "@xarc/react": "^1.0.3",
-    "@xarc/react-query": "^1.0.2",
-    "@xarc/react-recoil": "^1.1.1",
+    "@xarc/react-query": "^1.0.3",
+    "@xarc/react-recoil": "^1.1.2",
     "@xarc/react-redux": "^1.1.2",
-    "@xarc/react-router": "^1.1.1",
+    "@xarc/react-router": "^1.1.2",
     "isomorphic-loader": "^4.5.0",
     "prop-types": "~15.8.1",
     "react-dom": "~18.2.0"
