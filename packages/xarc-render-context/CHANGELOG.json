@@ -2,6 +2,18 @@
   "name": "@xarc/render-context",
   "entries": [
     {
+      "version": "1.0.11",
+      "tag": "@xarc/render-context_v1.0.11",
+      "date": "Tue, 29 Aug 2023 14:57:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dev dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.10",
       "tag": "@xarc/render-context_v1.0.10",
       "date": "Mon, 08 May 2023 22:49:30 GMT",

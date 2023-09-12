@@ -1,6 +1,13 @@
 # Change Log - subapp-web
 
-This log was last generated on Mon, 24 Jul 2023 18:40:18 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Aug 2023 14:57:37 GMT and should not be manually modified.
+
+## 2.1.4
+Tue, 29 Aug 2023 14:57:37 GMT
+
+### Patches
+
+- Update dev dependencies
 
 ## 2.1.3
 Mon, 24 Jul 2023 18:40:18 GMT

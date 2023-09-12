@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "webpack-config-composer",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "webpack-config-composer"
+}

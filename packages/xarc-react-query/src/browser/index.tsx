@@ -4,7 +4,6 @@ import { SubAppDef, SubAppFeatureFactory, SubAppFeature, envHooks } from "@xarc/
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { featureId, featureSubId } from "../common/feature-info";
-
 import { ReactQueryFeature, ReactQueryFeatureOptions } from "../common";
 
 //

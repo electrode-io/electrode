@@ -13,7 +13,6 @@ export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddlew
 //
 // re-export react-redux as ReactRedux etc
 //
-
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 

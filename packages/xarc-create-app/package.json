@@ -10,10 +10,6 @@
     "coverage": "nyc npm test",
     "check": "nyc npm test"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
-  },
   "bin": {
     "create-app": "bin/create-app.js"
   },
@@ -39,12 +35,12 @@
     "@babel/preset-env": "^7.22.10",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^10.0.1",
-    "@xarc/app": "^11.0.4",
-    "@xarc/app-dev": "^11.0.4",
+    "@xarc/app": "^11.0.5",
+    "@xarc/app-dev": "^11.0.5",
     "@xarc/module-dev": "^2.2.4",
-    "@xarc/react": "^1.0.2",
-    "@xarc/react-query": "^1.0.1",
-    "@xarc/react-redux": "^1.1.0",
+    "@xarc/react": "^1.0.3",
+    "@xarc/react-query": "^1.0.3",
+    "@xarc/react-redux": "^1.1.2",
     "babel-loader": "^9.1.3",
     "chai": "^4.2.0",
     "chalker": "^1.2.0",

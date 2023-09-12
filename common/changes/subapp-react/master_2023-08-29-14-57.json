@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "changeType": 1,
+      "comment": "Dependency @xarc/app version bump from ^11.0.4 to ^11.0.5.",
+      "packageName": "subapp-react"
+    }
+  ],
+  "packageName": "subapp-react",
+  "email": "1584121+arunvishnun@users.noreply.github.com"
+}
