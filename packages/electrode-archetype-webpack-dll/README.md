@@ -1,4 +1,4 @@
-# Electrode Webpack DLL Archetype
+# Electrode Webpack DLL Archetype(Deprecated)
 
 Electrode Webpack DLL Archetype
 

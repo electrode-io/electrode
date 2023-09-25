@@ -1,4 +1,4 @@
-# electrode-ui-config
+# electrode-ui-config(Deprecated)
 
 Makes the `ui` section from your app config available to your UI code. It works isomorphically.
 

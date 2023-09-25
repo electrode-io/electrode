@@ -1,4 +1,4 @@
-# Electrode Cookies
+# Electrode Cookies(Deprecated)
 
 Electrode isomorphic cookies lib.
 

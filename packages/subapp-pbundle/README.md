@@ -1,4 +1,4 @@
-# Electrode Subapp For Preact and Redux Bundler
+# Electrode Subapp For Preact and Redux Bundler(Deprecated)
 
 This module mainly serve to setup subapp-web with [Preact] framework, and the support for [redux-bundler] for Electrode subapps.
 

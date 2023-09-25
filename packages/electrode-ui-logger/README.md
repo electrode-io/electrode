@@ -1,4 +1,4 @@
-<h1>electrode-ui-logger</h1>
+<h1>electrode-ui-logger(Deprecated)</h1>
 
 Log well and prosper. Happy Logging!
 
