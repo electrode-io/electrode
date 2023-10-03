@@ -433,18 +433,6 @@
       "skipRushCheck": true
     },
     {
-      "packageName": "electrode-react-webapp",
-      "projectFolder": "packages/electrode-react-webapp",
-      "shouldPublish": true,
-      "skipRushCheck": true
-    },
-    {
-      "packageName": "electrode-redux-router-engine",
-      "projectFolder": "packages/electrode-redux-router-engine",
-      "shouldPublish": true,
-      "skipRushCheck": true
-    },
-    {
       "packageName": "opt-archetype-check",
       "projectFolder": "packages/opt-archetype-check",
       "shouldPublish": false,
