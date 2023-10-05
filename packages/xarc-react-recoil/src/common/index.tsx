@@ -1,7 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable dot-notation */
 /* eslint-disable max-statements, complexity */
-
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { atom, RecoilState, RecoilRoot } from "recoil";
 

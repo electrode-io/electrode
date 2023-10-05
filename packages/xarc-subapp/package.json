@@ -1,6 +1,6 @@
 {
   "name": "@xarc/subapp",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "xarc subapp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -12,10 +12,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/electrode-io/electrode.git"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -40,8 +36,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.10",
-    "@xarc/tag-renderer": "^1.0.12",
+    "@xarc/render-context": "^1.0.11",
+    "@xarc/tag-renderer": "^1.0.13",
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },
@@ -53,7 +49,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
-    "@types/mocha": "^8.2.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^14.14.16",
     "@types/sinon": "^9.0.10",
     "@types/sinon-chai": "^3.2.5",
@@ -72,12 +68,12 @@
     "eslint-plugin-jsdoc": "^32.0.2",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
-    "mocha": "^8.2.1",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "sinon": "^9.2.2",
     "sinon-chai": "^3.5.0",
     "source-map-support": "^0.5.19",
-    "ts-node": "^10.7.0",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.22.15",
     "typescript": "^4.1.3",
     "xsh": "^0.4.5"

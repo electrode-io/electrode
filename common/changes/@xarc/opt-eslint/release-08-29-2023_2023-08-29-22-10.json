@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-eslint",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/opt-eslint"
+}

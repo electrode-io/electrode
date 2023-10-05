@@ -1,6 +1,6 @@
 {
   "name": "@xarc/index-page",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
@@ -15,17 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/electrode-io/electrode.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "webapp",
     "index-page"
   ],
   "dependencies": {
-    "@xarc/jsx-renderer": "^1.0.13",
-    "@xarc/render-context": "^1.0.10",
-    "@xarc/tag-renderer": "^1.0.12",
+    "@xarc/jsx-renderer": "^1.0.14",
+    "@xarc/render-context": "^1.0.11",
+    "@xarc/tag-renderer": "^1.0.13",
     "lodash": "^4.17.21",
     "require-at": "^1.0.6"
   },
@@ -38,7 +35,7 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.11",
-    "@types/mocha": "^7.0.2",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^13.7.6",
     "@types/sinon": "^9.0.0",
     "@types/sinon-chai": "^3.2.4",
@@ -52,12 +49,12 @@
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^30.3.0",
-    "mocha": "^7.1.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.0",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
-    "ts-node": "^8.6.2",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.17.4",
     "typescript": "^3.8.3",
     "xclap": "^0.2.51",

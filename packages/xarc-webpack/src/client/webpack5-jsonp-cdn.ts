@@ -10,7 +10,7 @@
 /* eslint-disable no-undef, @typescript-eslint/camelcase */
 // @ts-nocheck
 
-function setup(w: any) {
+function setupCDNChunkLoading(w: any) {
   const originalGet = __webpack_get_script_filename__;
   const originalLoad = __webpack_chunk_load__;
   const originalPublicPath = __webpack_public_path__;
@@ -47,5 +47,5 @@ function setup(w: any) {
 }
 
 if (!module.hot && typeof __webpack_chunk_load__ !== "undefined") {
-  setup(window);
+  setupCDNChunkLoading(window);
 }

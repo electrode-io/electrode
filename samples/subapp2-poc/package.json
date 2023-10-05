@@ -31,13 +31,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.3",
-    "@xarc/app": "^11.0.4",
+    "@xarc/app": "^11.0.5",
     "@xarc/fastify-server": "^3.3.0",
-    "@xarc/react": "^1.0.2",
-    "@xarc/react-query": "^1.0.1",
-    "@xarc/react-recoil": "^1.1.0",
-    "@xarc/react-redux": "^1.1.0",
-    "@xarc/react-router": "^1.1.0",
+    "@xarc/react": "^1.0.3",
+    "@xarc/react-query": "^1.0.3",
+    "@xarc/react-recoil": "^1.1.2",
+    "@xarc/react-redux": "^1.1.2",
+    "@xarc/react-router": "^1.1.2",
     "isomorphic-loader": "^4.5.0",
     "prop-types": "~15.8.1",
     "react-dom": "~18.2.0"
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/node": "^20.2.5",
     "@xarc/run": "^1.1.1",
-    "@xarc/app-dev": "^11.0.4",
+    "@xarc/app-dev": "^11.0.5",
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/opt-postcss": "^2.0.1",
     "@xarc/opt-stylus": "^2.0.1",

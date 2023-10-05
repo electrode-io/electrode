@@ -1,16 +1,12 @@
 {
   "name": "@xarc/react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "xarc web app platform support for React framework",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
     "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
-    "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -25,9 +21,9 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@types/react": ">=18",
-    "@xarc/render-context": "^1.0.10",
-    "@xarc/subapp": "^0.3.5",
-    "@xarc/tag-renderer": "^1.0.12",
+    "@xarc/render-context": "^1.0.11",
+    "@xarc/subapp": "^0.3.6",
+    "@xarc/tag-renderer": "^1.0.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tslib": "^2.4.0"
@@ -36,7 +32,7 @@
     "@babel/runtime": "^7.22.3",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.1",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.4",
@@ -53,7 +49,7 @@
     "eslint-plugin-filenames": "^1.3.2",
     "eslint-plugin-jsdoc": "^30.7.9",
     "eslint-plugin-tsdoc": "^0.2.16",
-    "mocha": "^10.0.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
