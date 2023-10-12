@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-jest",
+      "comment": "update jest version to 29",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/opt-jest"
+}

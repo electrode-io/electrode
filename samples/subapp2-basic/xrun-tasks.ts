@@ -37,3 +37,10 @@ loadDevTasks(xrun, {
     cssModuleSupport: "byModExt",
   },
 });
+/*
+ * Load some custom xrun tasks into app namespace
+ */
+xrun.load("app", {
+  ".jest.test-frontend-cov":
+  "node  ./node_modules/@xarc/opt-jest/node_modules/jest/bin/jest.js  --config ./jest.config.js",
+});
