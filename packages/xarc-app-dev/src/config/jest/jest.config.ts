@@ -43,7 +43,9 @@ const jestDefaultConfig = {
     "\\.(css|less|styl|sass|scss)$": "identity-obj-proxy"
   },
   modulePathIgnorePatterns: ["<rootDir>/test"],
-  testURL: "http://localhost/"
+  testEnvironmentOptions: {
+    url: "http://localhost/"
+}
 };
 
 const jestSetupFilesDeprecated = { setupTestFrameworkScriptFile: frameworkMock };
