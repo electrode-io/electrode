@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "subapp-server",
-      "comment": "Add missing direct dependency. This was awailable as transitive dependency before",
+      "comment": "Add missing direct dependency. This was available as transitive dependency before",
       "type": "patch"
     }
   ],
