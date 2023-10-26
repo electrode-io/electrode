@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Add missing direct dependency. This was awailable as transitive dependency before",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-server"
+}
