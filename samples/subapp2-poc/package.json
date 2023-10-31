@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.3",
-    "@xarc/app": "^11.0.5",
+    "@xarc/app": "^11.0.6",
     "@xarc/fastify-server": "^3.3.0",
     "@xarc/react": "^1.0.3",
     "@xarc/react-query": "^1.0.3",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/node": "^20.2.5",
     "@xarc/run": "^1.1.1",
-    "@xarc/app-dev": "^11.0.5",
+    "@xarc/app-dev": "^11.0.6",
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/opt-postcss": "^2.0.1",
     "@xarc/opt-stylus": "^2.0.1",

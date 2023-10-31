@@ -2,6 +2,18 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "11.0.6",
+      "tag": "@xarc/app-dev_v11.0.6",
+      "date": "Tue, 31 Oct 2023 04:39:40 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "update jest config testUrl to testEnvironmentOptions.url"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.0.5",
       "tag": "@xarc/app-dev_v11.0.5",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",
