@@ -1,6 +1,13 @@
 # Change Log - @xarc/app-dev
 
-This log was last generated on Tue, 29 Aug 2023 14:57:37 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Oct 2023 04:39:40 GMT and should not be manually modified.
+
+## 11.0.6
+Tue, 31 Oct 2023 04:39:40 GMT
+
+### Updates
+
+- update jest config testUrl to testEnvironmentOptions.url
 
 ## 11.0.5
 Tue, 29 Aug 2023 14:57:37 GMT

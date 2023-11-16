@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-jest",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Electrode X jest addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",
@@ -27,10 +27,11 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "@types/jest": "^26.0.4",
-    "babel-jest": "^26.1.0",
-    "eslint-plugin-jest": "^23.18.0",
-    "jest": "^26.1.0"
+    "@types/jest": "^29.5.3",
+    "babel-jest": "^29.6.2",
+    "eslint-plugin-jest": "^27.2.3",
+    "jest": "^29.6.2",
+    "jest-environment-jsdom": "^29.6.2"
   },
   "devDependencies": {
     "opt-archetype-check": "1.0.0",
