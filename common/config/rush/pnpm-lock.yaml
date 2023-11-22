@@ -177,8 +177,13 @@ dependencies:
   '@hapi/boom': 9.1.4
   '@jchip/redbird': 1.3.0
   '@rush-temp/app': file:projects/app.tgz
+<<<<<<< HEAD
   '@rush-temp/app-dev': file:projects/app-dev.tgz_webpack-cli@4.8.0+webpack@5.89.0
   '@rush-temp/create-app': file:projects/create-app.tgz
+=======
+  '@rush-temp/app-dev': file:projects/app-dev.tgz_uglify-js@2.8.29+webpack@5.89.0
+  '@rush-temp/create-app': file:projects/create-app.tgz_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
   '@rush-temp/dev-base': file:projects/dev-base.tgz
   '@rush-temp/electrode-cdn-file-loader': file:projects/electrode-cdn-file-loader.tgz
   '@rush-temp/electrode-node-resolver': file:projects/electrode-node-resolver.tgz
@@ -219,9 +224,15 @@ dependencies:
   '@rush-temp/webpack': file:projects/webpack.tgz_webpack-bundle-analyzer@3.9.0
   '@rush-temp/webpack-config-composer': file:projects/webpack-config-composer.tgz
   '@testing-library/jest-dom': 5.17.0
+<<<<<<< HEAD
   '@types/chai-as-promised': 7.1.8
   '@types/jest': 29.5.8
   '@types/webpack': 5.28.0_webpack-cli@4.8.0
+=======
+  '@types/chai-as-promised': 7.1.7
+  '@types/jest': 29.5.6
+  '@types/webpack': 5.28.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
   ansi-to-html: 0.7.2
   autoprefixer: 9.8.8
   babel-eslint: 10.1.0
@@ -241,7 +252,10 @@ dependencies:
   chokidar: 3.5.3
   css-loader: 6.8.1_webpack@5.89.0
   css-minimizer-webpack-plugin: 1.3.0_webpack@5.89.0
+<<<<<<< HEAD
   electrode-archetype-njs-module-dev: 3.0.3
+=======
+>>>>>>> 2ddced9c (fix: add missing dependency)
   electrode-confippet: 1.7.1
   electrode-react-webapp: 5.1.1
   electrode-server: 3.3.0
@@ -279,6 +293,11 @@ dependencies:
   karma-sourcemap-loader: 0.4.0
   karma-spec-reporter: 0.0.36_karma@6.4.2
   karma-webpack: 5.0.0_webpack@5.89.0
+<<<<<<< HEAD
+=======
+  koa: 2.14.2
+  koa-router: 7.4.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
   less: 3.13.1
   less-loader: 4.1.0_less@3.13.1+webpack@5.89.0
   loader-utils: 1.4.2
@@ -323,6 +342,7 @@ dependencies:
   sudo-prompt: 9.2.1
   sugarss: 2.0.0
   typedoc-plugin-external-module-name: 3.1.0
+<<<<<<< HEAD
   url-loader: 4.1.1_file-loader@6.2.0+webpack@5.89.0
   visual-logger: 1.1.3
   webpack: 5.89.0_webpack-cli@4.8.0
@@ -330,6 +350,16 @@ dependencies:
   webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
   webpack-dev-middleware: 4.3.0_webpack@5.89.0
   webpack-stats-plugin: 1.1.3
+=======
+  uglify-js: 2.8.29
+  uglifyjs-webpack-plugin: 2.2.0_webpack@5.89.0
+  url-loader: 4.1.1_file-loader@6.2.0+webpack@5.89.0
+  visual-logger: 1.1.3
+  webpack: 5.89.0_uglify-js@2.8.29
+  webpack-bundle-analyzer: 3.9.0
+  webpack-dev-middleware: 4.3.0_webpack@5.89.0
+  whatwg-fetch: 2.0.4
+>>>>>>> 2ddced9c (fix: add missing dependency)
   xenv-config: 1.3.1
   xsh: 0.4.5
   xstdout: 0.1.1
@@ -379,7 +409,11 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
+<<<<<<< HEAD
       '@babel/core': 7.23.3
+=======
+      '@babel/core': 7.23.2
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@jridgewell/trace-mapping': 0.3.20
       commander: 4.1.1
       convert-source-map: 2.0.0
@@ -1767,9 +1801,15 @@ packages:
       '@babel/core': 7.23.3
       '@babel/helper-module-imports': 7.22.15
       '@babel/helper-plugin-utils': 7.22.5
+<<<<<<< HEAD
       babel-plugin-polyfill-corejs2: 0.4.6_@babel+core@7.23.3
       babel-plugin-polyfill-corejs3: 0.8.6_@babel+core@7.23.3
       babel-plugin-polyfill-regenerator: 0.5.3_@babel+core@7.23.3
+=======
+      babel-plugin-polyfill-corejs2: 0.4.6_@babel+core@7.23.2
+      babel-plugin-polyfill-corejs3: 0.8.6_@babel+core@7.23.2
+      babel-plugin-polyfill-regenerator: 0.5.3_@babel+core@7.23.2
+>>>>>>> 2ddced9c (fix: add missing dependency)
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -1905,6 +1945,7 @@ packages:
       '@babel/helper-compilation-targets': 7.22.15
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-validator-option': 7.22.15
+<<<<<<< HEAD
       '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression': 7.23.3_@babel+core@7.23.3
       '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining': 7.23.3_@babel+core@7.23.3
       '@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly': 7.23.3_@babel+core@7.23.3
@@ -1980,6 +2021,83 @@ packages:
       babel-plugin-polyfill-corejs3: 0.8.6_@babel+core@7.23.3
       babel-plugin-polyfill-regenerator: 0.5.3_@babel+core@7.23.3
       core-js-compat: 3.33.2
+=======
+      '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-proposal-private-property-in-object': 7.21.0-placeholder-for-preset-env.2_@babel+core@7.23.2
+      '@babel/plugin-syntax-async-generators': 7.8.4_@babel+core@7.23.2
+      '@babel/plugin-syntax-class-properties': 7.12.13_@babel+core@7.23.2
+      '@babel/plugin-syntax-class-static-block': 7.14.5_@babel+core@7.23.2
+      '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-export-namespace-from': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-import-assertions': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-syntax-import-attributes': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-syntax-import-meta': 7.10.4_@babel+core@7.23.2
+      '@babel/plugin-syntax-json-strings': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4_@babel+core@7.23.2
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-numeric-separator': 7.10.4_@babel+core@7.23.2
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-optional-catch-binding': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.23.2
+      '@babel/plugin-syntax-private-property-in-object': 7.14.5_@babel+core@7.23.2
+      '@babel/plugin-syntax-top-level-await': 7.14.5_@babel+core@7.23.2
+      '@babel/plugin-syntax-unicode-sets-regex': 7.18.6_@babel+core@7.23.2
+      '@babel/plugin-transform-arrow-functions': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-async-generator-functions': 7.23.2_@babel+core@7.23.2
+      '@babel/plugin-transform-async-to-generator': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-block-scoped-functions': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-block-scoping': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-class-properties': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-class-static-block': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-classes': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-transform-computed-properties': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-destructuring': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-dotall-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-duplicate-keys': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-dynamic-import': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-exponentiation-operator': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-export-namespace-from': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-for-of': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-transform-function-name': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-json-strings': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-literals': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-logical-assignment-operators': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-member-expression-literals': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-modules-amd': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-modules-commonjs': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-modules-systemjs': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-modules-umd': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-named-capturing-groups-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-new-target': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-nullish-coalescing-operator': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-numeric-separator': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-object-rest-spread': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-transform-object-super': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-optional-catch-binding': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-optional-chaining': 7.23.0_@babel+core@7.23.2
+      '@babel/plugin-transform-parameters': 7.22.15_@babel+core@7.23.2
+      '@babel/plugin-transform-private-methods': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-private-property-in-object': 7.22.11_@babel+core@7.23.2
+      '@babel/plugin-transform-property-literals': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-regenerator': 7.22.10_@babel+core@7.23.2
+      '@babel/plugin-transform-reserved-words': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-shorthand-properties': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-spread': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-sticky-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-template-literals': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-typeof-symbol': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-unicode-escapes': 7.22.10_@babel+core@7.23.2
+      '@babel/plugin-transform-unicode-property-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-unicode-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/plugin-transform-unicode-sets-regex': 7.22.5_@babel+core@7.23.2
+      '@babel/preset-modules': 0.1.6-no-external-plugins_@babel+core@7.23.2
+      '@babel/types': 7.23.0
+      babel-plugin-polyfill-corejs2: 0.4.6_@babel+core@7.23.2
+      babel-plugin-polyfill-corejs3: 0.8.6_@babel+core@7.23.2
+      babel-plugin-polyfill-regenerator: 0.5.3_@babel+core@7.23.2
+      core-js-compat: 3.33.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -2060,7 +2178,11 @@ packages:
     resolution: {integrity: sha512-54cIh74Z1rp4oIjsHjqN+WM4fMyCBYe+LpZ9jWm51CZ1fbH3SkAzQD/3XLoNkjbJ7YEmjobLXyvQrFypRHOrXw==}
     engines: {node: '>=6.9.0'}
     dependencies:
+<<<<<<< HEAD
       core-js-pure: 3.33.2
+=======
+      core-js-pure: 3.33.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       regenerator-runtime: 0.14.0
     dev: false
 
@@ -2187,13 +2309,21 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
+<<<<<<< HEAD
   /@eslint-community/eslint-utils/4.4.0_eslint@8.53.0:
+=======
+  /@eslint-community/eslint-utils/4.4.0_eslint@8.52.0:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
     dependencies:
+<<<<<<< HEAD
       eslint: 8.53.0
+=======
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-visitor-keys: 3.4.3
     dev: false
 
@@ -2236,8 +2366,13 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /@eslint/js/8.53.0:
     resolution: {integrity: sha512-Kn7K8dx/5U6+cT1yEhpX1w4PCSg0M+XyRILPgvwcEBjerFWCwQj5sbr3/VmxqV0JGHCBCzyd6LxypEuehypY1w==}
+=======
+  /@eslint/js/8.52.0:
+    resolution: {integrity: sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
@@ -2687,7 +2822,11 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -2708,14 +2847,22 @@ packages:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
+<<<<<<< HEAD
       jest-config: 29.7.0_@types+node@20.9.0
+=======
+      jest-config: 29.7.0_@types+node@20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -2743,7 +2890,11 @@ packages:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-mock: 29.7.0
     dev: false
 
@@ -2770,7 +2921,11 @@ packages:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -2803,7 +2958,11 @@ packages:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.20
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -2847,7 +3006,11 @@ packages:
     dependencies:
       '@jest/console': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/istanbul-lib-coverage': 2.0.6
+=======
+      '@types/istanbul-lib-coverage': 2.0.5
+>>>>>>> 2ddced9c (fix: add missing dependency)
       collect-v8-coverage: 1.0.2
     dev: false
 
@@ -2888,10 +3051,17 @@ packages:
     resolution: {integrity: sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ==}
     engines: {node: '>= 10.14.2'}
     dependencies:
+<<<<<<< HEAD
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
       '@types/node': 14.18.63
       '@types/yargs': 15.0.18
+=======
+      '@types/istanbul-lib-coverage': 2.0.5
+      '@types/istanbul-reports': 3.0.3
+      '@types/node': 18.18.7
+      '@types/yargs': 15.0.17
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
     dev: false
 
@@ -2900,10 +3070,17 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/schemas': 29.6.3
+<<<<<<< HEAD
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
       '@types/node': 20.9.0
       '@types/yargs': 17.0.31
+=======
+      '@types/istanbul-lib-coverage': 2.0.5
+      '@types/istanbul-reports': 3.0.3
+      '@types/node': 20.8.9
+      '@types/yargs': 17.0.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
     dev: false
 
@@ -3055,8 +3232,13 @@ packages:
     resolution: {integrity: sha512-1dgmkh+3so0+LlBWRhGA33ua4MYr7tUOj+a9Si28vUi0IUFNbff1T3sgpeDJI/LaC75bBYnQ0A3wXjn0OrRNBA==}
     dev: false
 
+<<<<<<< HEAD
   /@remix-run/router/1.11.0:
     resolution: {integrity: sha512-BHdhcWgeiudl91HvVa2wxqZjSHbheSgIiDvxrF1VjFzBzpTtuDPkOdOi3Iqvc08kXtFkLjhbS+ML9aM8mJS+wQ==}
+=======
+  /@remix-run/router/1.10.0:
+    resolution: {integrity: sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: '>=14.0.0'}
     dev: false
 
@@ -3181,7 +3363,11 @@ packages:
     dependencies:
       '@babel/code-frame': 7.22.13
       '@babel/runtime': 7.23.2
+<<<<<<< HEAD
       '@types/aria-query': 5.0.4
+=======
+      '@types/aria-query': 5.0.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       aria-query: 5.1.3
       chalk: 4.1.2
       dom-accessibility-api: 0.5.16
@@ -3195,7 +3381,11 @@ packages:
     dependencies:
       '@babel/code-frame': 7.22.13
       '@babel/runtime': 7.23.2
+<<<<<<< HEAD
       '@types/aria-query': 5.0.4
+=======
+      '@types/aria-query': 5.0.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       aria-query: 5.1.3
       chalk: 4.1.2
       dom-accessibility-api: 0.5.16
@@ -3240,7 +3430,11 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       '@testing-library/dom': 8.20.1
+<<<<<<< HEAD
       '@types/react-dom': 18.2.15
+=======
+      '@types/react-dom': 18.2.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -3254,7 +3448,11 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       '@testing-library/dom': 9.3.3
+<<<<<<< HEAD
       '@types/react-dom': 18.2.15
+=======
+      '@types/react-dom': 18.2.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -3287,6 +3485,7 @@ packages:
     resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
     dev: false
 
+<<<<<<< HEAD
   /@types/aria-query/5.0.4:
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
     dev: false
@@ -3303,23 +3502,52 @@ packages:
 
   /@types/babel__generator/7.6.7:
     resolution: {integrity: sha512-6Sfsq+EaaLrw4RmdFWE9Onp63TOUue71AWb4Gpa6JxzgTYtimbM086WnYTy2U67AofR++QKCo08ZP6pwx8YFHQ==}
+=======
+  /@types/aria-query/5.0.3:
+    resolution: {integrity: sha512-0Z6Tr7wjKJIk4OUEjVUQMtyunLDy339vcMaj38Kpj6jM2OE1p3S4kXExKZ7a3uXQAPCoy3sbrP1wibDKaf39oA==}
+    dev: false
+
+  /@types/babel__core/7.20.3:
+    resolution: {integrity: sha512-54fjTSeSHwfan8AyHWrKbfBWiEUrNTZsUwPTDSNaaP1QDQIZbeNUg3a59E9D+375MzUw/x1vx2/0F5LBz+AeYA==}
+    dependencies:
+      '@babel/parser': 7.23.0
+      '@babel/types': 7.23.0
+      '@types/babel__generator': 7.6.6
+      '@types/babel__template': 7.4.3
+      '@types/babel__traverse': 7.20.3
+    dev: false
+
+  /@types/babel__generator/7.6.6:
+    resolution: {integrity: sha512-66BXMKb/sUWbMdBNdMvajU7i/44RkrA3z/Yt1c7R5xejt8qh84iU54yUWCtm0QwGJlDcf/gg4zd/x4mpLAlb/w==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       '@babel/types': 7.23.3
     dev: false
 
+<<<<<<< HEAD
   /@types/babel__template/7.4.4:
     resolution: {integrity: sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==}
+=======
+  /@types/babel__template/7.4.3:
+    resolution: {integrity: sha512-ciwyCLeuRfxboZ4isgdNZi/tkt06m8Tw6uGbBSBgWrnnZGNXiEyM27xc/PjXGQLqlZ6ylbgHMnm7ccF9tCkOeQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       '@babel/parser': 7.23.3
       '@babel/types': 7.23.3
     dev: false
 
+<<<<<<< HEAD
   /@types/babel__traverse/7.20.4:
     resolution: {integrity: sha512-mSM/iKUk5fDDrEV/e83qY+Cr3I1+Q3qqTuEn++HAWYjEa1+NxZr6CNrcJGf2ZTnq4HoFGC3zaTPZTobCzCFukA==}
+=======
+  /@types/babel__traverse/7.20.3:
+    resolution: {integrity: sha512-Lsh766rGEFbaxMIDH7Qa+Yha8cMVI3qAK6CHt3OR0YfxOIn5Z54iHiyDRycHrBqeIiqGa20Kpsv1cavfBKkRSw==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       '@babel/types': 7.23.3
     dev: false
 
+<<<<<<< HEAD
   /@types/chai-as-promised/7.1.8:
     resolution: {integrity: sha512-ThlRVIJhr69FLlh6IctTXFkmhtP3NpMZ2QGq69StYLyKZFp/HOp1VdKZj7RvfNWYYcJ1xlbLGLLWj1UvP5u/Gw==}
     dependencies:
@@ -3328,12 +3556,23 @@ packages:
 
   /@types/chai/4.3.10:
     resolution: {integrity: sha512-of+ICnbqjmFCiixUnqRulbylyXQrPqIGf/B3Jax1wIF3DvSheysQxAWvqHhZiW3IQrycvokcLcFQlveGp+vyNg==}
+=======
+  /@types/chai-as-promised/7.1.7:
+    resolution: {integrity: sha512-APucaP5rlmTRYKtRA6FE5QPP87x76ejw5t5guRJ4y5OgMnwtsvigw7HHhKZlx2MGXLeZd6R/GNZR/IqDHcbtQw==}
+    dependencies:
+      '@types/chai': 4.3.9
+    dev: false
+
+  /@types/chai/4.3.9:
+    resolution: {integrity: sha512-69TtiDzu0bcmKQv3yg1Zx409/Kd7r0b5F1PfpYJfSHzLGtB53547V4u+9iqKYsTu/O2ai6KTb0TInNpvuQ3qmg==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
     dev: false
 
+<<<<<<< HEAD
   /@types/cors/2.8.16:
     resolution: {integrity: sha512-Trx5or1Nyg1Fq138PCuWqoApzvoSLWzZ25ORBiHMbbUT42g578lH1GT4TwYDbiUOLFuDsCkfLneT2105fsFWGg==}
     dependencies:
@@ -3345,12 +3584,26 @@ packages:
     dependencies:
       '@types/eslint': 8.44.7
       '@types/estree': 1.0.5
+=======
+  /@types/cors/2.8.15:
+    resolution: {integrity: sha512-n91JxbNLD8eQIuXDIChAN1tCKNWCEgpceU9b7ZMbFA+P+Q4yIeh80jizFLEvolRPc1ES0VdwFlGv+kJTSirogw==}
+    dependencies:
+      '@types/node': 20.8.9
+    dev: false
+
+  /@types/eslint-scope/3.7.6:
+    resolution: {integrity: sha512-zfM4ipmxVKWdxtDaJ3MP3pBurDXOCoyjvlpE3u6Qzrmw4BPbfm4/ambIeTk/r/J0iq/+2/xp0Fmt+gFvXJY2PQ==}
+    dependencies:
+      '@types/eslint': 8.44.6
+      '@types/estree': 1.0.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/eslint-visitor-keys/1.0.0:
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
     dev: false
 
+<<<<<<< HEAD
   /@types/eslint/8.44.7:
     resolution: {integrity: sha512-f5ORu2hcBbKei97U73mf+l9t4zTGl74IqZ0GQk4oVea/VS8tQZYkUveSYojk+frraAVYId0V2WC9O4PTNru2FQ==}
     dependencies:
@@ -3372,6 +3625,29 @@ packages:
     resolution: {integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==}
     dependencies:
       '@types/react': 18.2.37
+=======
+  /@types/eslint/8.44.6:
+    resolution: {integrity: sha512-P6bY56TVmX8y9J87jHNgQh43h6VVU+6H7oN7hgvivV81K2XY8qJZ5vqPy/HdUoVIelii2kChYVzQanlswPWVFw==}
+    dependencies:
+      '@types/estree': 1.0.3
+      '@types/json-schema': 7.0.14
+    dev: false
+
+  /@types/estree/1.0.3:
+    resolution: {integrity: sha512-CS2rOaoQ/eAgAfcTfq6amKG7bsN+EMcgGY4FAFQdvSj2y1ixvOZTUA9mOtCai7E1SYu283XNw7urKK30nP3wkQ==}
+    dev: false
+
+  /@types/graceful-fs/4.1.8:
+    resolution: {integrity: sha512-NhRH7YzWq8WiNKVavKPBmtLYZHxNY19Hh+az28O/phfp68CF45pMFud+ZzJ8ewnxnC5smIdF3dqFeiSUQ5I+pw==}
+    dependencies:
+      '@types/node': 20.8.9
+    dev: false
+
+  /@types/hoist-non-react-statics/3.3.4:
+    resolution: {integrity: sha512-ZchYkbieA+7tnxwX/SCBySx9WwvWR8TaP5tb2jRAzwvLb/rWchGw3v0w3pqUbUvj0GCwW2Xz/AVPSk6kUGctXQ==}
+    dependencies:
+      '@types/react': 18.2.33
+>>>>>>> 2ddced9c (fix: add missing dependency)
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -3379,6 +3655,7 @@ packages:
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==}
     dev: false
 
+<<<<<<< HEAD
   /@types/istanbul-lib-coverage/2.0.6:
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
     dev: false
@@ -3397,6 +3674,26 @@ packages:
 
   /@types/jest/29.5.8:
     resolution: {integrity: sha512-fXEFTxMV2Co8ZF5aYFJv+YeA08RTYJfhtN5c9JSv/mFEMe+xxjufCb+PHL+bJcMs/ebPUsBu+UNTEz+ydXrR6g==}
+=======
+  /@types/istanbul-lib-coverage/2.0.5:
+    resolution: {integrity: sha512-zONci81DZYCZjiLe0r6equvZut0b+dBRPBN5kBDjsONnutYNtJMoWQ9uR2RkL1gLG9NMTzvf+29e5RFfPbeKhQ==}
+    dev: false
+
+  /@types/istanbul-lib-report/3.0.2:
+    resolution: {integrity: sha512-8toY6FgdltSdONav1XtUHl4LN1yTmLza+EuDazb/fEmRNCwjyqNVIQWs2IfC74IqjHkREs/nQ2FWq5kZU9IC0w==}
+    dependencies:
+      '@types/istanbul-lib-coverage': 2.0.5
+    dev: false
+
+  /@types/istanbul-reports/3.0.3:
+    resolution: {integrity: sha512-1nESsePMBlf0RPRffLZi5ujYh7IH1BWL4y9pr+Bn3cJBdxz+RTP8bUFljLz9HvzhhOSWKdyBZ4DIivdL6rvgZg==}
+    dependencies:
+      '@types/istanbul-lib-report': 3.0.2
+    dev: false
+
+  /@types/jest/29.5.6:
+    resolution: {integrity: sha512-/t9NnzkOpXb4Nfvg17ieHE6EeSjDS2SGSpNYfoLbUAeL/EOueU/RSdOWFpfQTXBEM7BguYW1XQ0EbM+6RlIh6w==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       expect: 29.7.0
       pretty-format: 29.7.0
@@ -3405,6 +3702,7 @@ packages:
   /@types/jsdom/20.0.1:
     resolution: {integrity: sha512-d0r18sZPmMQr1eG35u12FZfhIXNrnsPU/g5wvRKCUf/tOGilKKwYMYGqh33BNR6ba+2gkHw1EUiHoN3mn7E5IQ==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.9.0
       '@types/tough-cookie': 4.0.5
       parse5: 7.1.2
@@ -3412,6 +3710,15 @@ packages:
 
   /@types/json-schema/7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+=======
+      '@types/node': 20.8.9
+      '@types/tough-cookie': 4.0.4
+      parse5: 7.1.2
+    dev: false
+
+  /@types/json-schema/7.0.14:
+    resolution: {integrity: sha512-U3PUjAudAdJBeC2pgN8uTIKgxrb4nlDF3SF0++EldXQvQBGkpFZMSnwQiIoDU77tv45VgNkl/L4ouD+rEomujw==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/mocha/10.0.0:
@@ -3422,8 +3729,13 @@ packages:
     resolution: {integrity: sha512-/fvYntiO1GeICvqbQ3doGDIP97vWmvFt83GKguJ6prmQM2iXZfFcq6YE8KteFyRtX2/h5Hf91BYvPodJKFYv5Q==}
     dev: false
 
+<<<<<<< HEAD
   /@types/mocha/10.0.4:
     resolution: {integrity: sha512-xKU7bUjiFTIttpWaIZ9qvgg+22O1nmbA+HRxdlR+u6TWsGfmFdXrheJoK4fFxrHNVIOBDvDNKZG+LYBpMHpX3w==}
+=======
+  /@types/mocha/10.0.3:
+    resolution: {integrity: sha512-RsOPImTriV/OE4A9qKjMtk2MnXiuLLbcO3nCXK+kvq4nr0iMfFgpjaX3MPLb6f7+EL1FGSelYvuJMV6REH+ZPQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/node/13.13.52:
@@ -3438,18 +3750,29 @@ packages:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
 
+<<<<<<< HEAD
   /@types/node/18.18.9:
     resolution: {integrity: sha512-0f5klcuImLnG4Qreu9hPj/rEfFq6YRc5n2mAjSsH+ec/mJL+3voBH0+8T7o8RpFjH7ovc+TRsL/c7OYIQsPTfQ==}
+=======
+  /@types/node/18.18.7:
+    resolution: {integrity: sha512-bw+lEsxis6eqJYW8Ql6+yTqkE6RuFtsQPSe5JxXbqYRFQEER5aJA9a5UH9igqDWm3X4iLHIKOHlnAXLM4mi7uQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       undici-types: 5.26.5
     dev: false
 
+<<<<<<< HEAD
   /@types/node/20.9.0:
     resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
+=======
+  /@types/node/20.8.9:
+    resolution: {integrity: sha512-UzykFsT3FhHb1h7yD4CA4YhBHq545JC0YnEz41xkipN88eKQtL6rSgocL5tbAP6Ola9Izm/Aw4Ora8He4x0BHg==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       undici-types: 5.26.5
     dev: false
 
+<<<<<<< HEAD
   /@types/normalize-package-data/2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
@@ -3489,17 +3812,63 @@ packages:
     dependencies:
       '@types/chai': 4.3.10
       '@types/sinon': 9.0.11
+=======
+  /@types/normalize-package-data/2.4.3:
+    resolution: {integrity: sha512-ehPtgRgaULsFG8x0NeYJvmyH1hmlfsNLujHe9dQEia/7MAJYdzMSi19JtchUHjmBA6XC/75dK55mzZH+RyieSg==}
+    dev: false
+
+  /@types/prop-types/15.7.9:
+    resolution: {integrity: sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==}
+    dev: false
+
+  /@types/q/1.5.7:
+    resolution: {integrity: sha512-HBPgtzp44867rkL+IzQ3560/E/BlobwCjeXsuKqogrcE99SKgZR4tvBBCuNJZMhUFMz26M7cjKWZg785lllwpA==}
+    dev: false
+
+  /@types/react-dom/18.2.14:
+    resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
+    dependencies:
+      '@types/react': 18.2.33
+    dev: false
+
+  /@types/react/18.2.33:
+    resolution: {integrity: sha512-v+I7S+hu3PIBoVkKGpSYYpiBT1ijqEzWpzQD62/jm4K74hPpSP7FF9BnKG6+fg2+62weJYkkBWDJlZt5JO/9hg==}
+    dependencies:
+      '@types/prop-types': 15.7.9
+      '@types/scheduler': 0.16.5
+      csstype: 3.1.2
+    dev: false
+
+  /@types/scheduler/0.16.5:
+    resolution: {integrity: sha512-s/FPdYRmZR8SjLWGMCuax7r3qCWQw9QKHzXVukAuuIJkXkDRwp+Pu5LMIVFi0Fxbav35WURicYr8u1QsoybnQw==}
+    dev: false
+
+  /@types/semver/7.5.4:
+    resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
+    dev: false
+
+  /@types/sinon-chai/3.2.11:
+    resolution: {integrity: sha512-1C5SBFzwn9hjiMr1xfqbULcSI9qXVpkGZT/LYbbd3jWiTo2MSvA+iFfwODlSoAXGeCgBw6S509dxy8zSIacr3Q==}
+    dependencies:
+      '@types/chai': 4.3.9
+      '@types/sinon': 10.0.20
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/sinon/10.0.20:
     resolution: {integrity: sha512-2APKKruFNCAZgx3daAyACGzWuJ028VVCUDk6o2rw/Z4PXT0ogwdV4KUegW0MwVs0Zu59auPXbbuBJHF12Sx1Eg==}
     dependencies:
+<<<<<<< HEAD
       '@types/sinonjs__fake-timers': 8.1.5
+=======
+      '@types/sinonjs__fake-timers': 8.1.4
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/sinon/9.0.11:
     resolution: {integrity: sha512-PwP4UY33SeeVKodNE37ZlOsR9cReypbMJOhZ7BVE0lB+Hix3efCOxiJWiE5Ia+yL9Cn2Ch72EjFTRze8RZsNtg==}
     dependencies:
+<<<<<<< HEAD
       '@types/sinonjs__fake-timers': 8.1.5
     dev: false
 
@@ -3509,6 +3878,17 @@ packages:
 
   /@types/stack-utils/2.0.3:
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
+=======
+      '@types/sinonjs__fake-timers': 8.1.4
+    dev: false
+
+  /@types/sinonjs__fake-timers/8.1.4:
+    resolution: {integrity: sha512-GDV68H0mBSN449sa5HEj51E0wfpVQb8xNSMzxf/PrypMFcLTMwJMOM/cgXiv71Mq5drkOQmUGvL1okOZcu6RrQ==}
+    dev: false
+
+  /@types/stack-utils/2.0.2:
+    resolution: {integrity: sha512-g7CK9nHdwjK2n0ymT2CW698FuWJRIx+RP6embAzZ2Qi8/ilIrA1Imt2LVSeHUzKvpoi7BhmmQcXz95eS0f2JXw==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/strip-bom/3.0.0:
@@ -3522,6 +3902,7 @@ packages:
   /@types/testing-library__jest-dom/5.14.9:
     resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
     dependencies:
+<<<<<<< HEAD
       '@types/jest': 29.5.8
     dev: false
 
@@ -3531,6 +3912,17 @@ packages:
 
   /@types/triple-beam/1.3.5:
     resolution: {integrity: sha512-6WaYesThRMCl19iryMYP7/x2OVgCtbIVflDGFpWnb9irXI3UjYE4AzmYuiUKY1AJstGijoY+MgUszMgRxIYTYw==}
+=======
+      '@types/jest': 29.5.6
+    dev: false
+
+  /@types/tough-cookie/4.0.4:
+    resolution: {integrity: sha512-95Sfz4nvMAb0Nl9DTxN3j64adfwfbBPEYq14VN7zT5J5O2M9V6iZMIIQU1U+pJyl9agHYHNCqhCXgyEtIRRa5A==}
+    dev: false
+
+  /@types/triple-beam/1.3.4:
+    resolution: {integrity: sha512-HlJjF3wxV4R2VQkFpKe0YqJLilYNgtRtsqqZtby7RkVsSs+i+vbyzjtUwpFEdUCKcrGzCiEJE7F/0mKjh0sunA==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@types/use-sync-external-store/0.0.3:
@@ -3540,9 +3932,15 @@ packages:
   /@types/webpack/5.28.0_webpack-cli@4.8.0:
     resolution: {integrity: sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.9.0
       tapable: 2.2.1
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      '@types/node': 20.8.9
+      tapable: 2.2.1
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
@@ -3550,6 +3948,7 @@ packages:
       - webpack-cli
     dev: false
 
+<<<<<<< HEAD
   /@types/yargs-parser/21.0.3:
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
     dev: false
@@ -3564,6 +3963,22 @@ packages:
     resolution: {integrity: sha512-bocYSx4DI8TmdlvxqGpVNXOgCNR1Jj0gNPhhAY+iz1rgKDAaYrAYdFYnhDV1IFuiuVc9HkOwyDcFxaTElF3/wg==}
     dependencies:
       '@types/yargs-parser': 21.0.3
+=======
+  /@types/yargs-parser/21.0.2:
+    resolution: {integrity: sha512-5qcvofLPbfjmBfKaLfj/+f+Sbd6pN4zl7w7VSVI5uz7m9QZTuB2aZAa2uo1wHFBNN2x6g/SoTkXmd8mQnQF2Cw==}
+    dev: false
+
+  /@types/yargs/15.0.17:
+    resolution: {integrity: sha512-cj53I8GUcWJIgWVTSVe2L7NJAB5XWGdsoMosVvUgv1jEnMbAcsbaCzt1coUcyi8Sda5PgTWAooG8jNyDTD+CWA==}
+    dependencies:
+      '@types/yargs-parser': 21.0.2
+    dev: false
+
+  /@types/yargs/17.0.29:
+    resolution: {integrity: sha512-nacjqA3ee9zRF/++a3FUY1suHTFKZeHba2n8WeDw9cCVdmzmHpIxyzOJBcpHvvEmS8E9KqWlSnWHUkOrkhWcvA==}
+    dependencies:
+      '@types/yargs-parser': 21.0.2
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@typescript-eslint/eslint-plugin/2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35:
@@ -3662,7 +4077,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /@typescript-eslint/eslint-plugin/5.62.0_63d0a08aa4e4e25f3e2a55fd6c2d89c0:
+=======
+  /@typescript-eslint/eslint-plugin/5.62.0_374149f9d03209d58d12a5ce111ab746:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-TiZzBSJja/LbhNPvk6yc0JrX9XqhQ0hdh6M2svYfsHGejaKFIAGd9MQ+ERIMzLGlN/kZoYIgdxFV0PuljTKXag==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3674,12 +4093,21 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.10.0
+<<<<<<< HEAD
       '@typescript-eslint/parser': 5.62.0_eslint@8.53.0+typescript@4.9.5
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/type-utils': 5.62.0_eslint@8.53.0+typescript@4.9.5
       '@typescript-eslint/utils': 5.62.0_eslint@8.53.0+typescript@4.9.5
       debug: 4.3.4
       eslint: 8.53.0
+=======
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@typescript-eslint/scope-manager': 5.62.0
+      '@typescript-eslint/type-utils': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@typescript-eslint/utils': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      debug: 4.3.4
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       graphemer: 1.4.0
       ignore: 5.2.4
       natural-compare-lite: 1.4.0
@@ -3696,7 +4124,11 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/typescript-estree': 2.34.0_typescript@3.9.10
       eslint: 6.8.0
       eslint-scope: 5.1.1
@@ -3712,7 +4144,11 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/typescript-estree': 2.34.0_typescript@4.9.5
       eslint: 6.8.0
       eslint-scope: 5.1.1
@@ -3728,7 +4164,11 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/scope-manager': 4.33.0
       '@typescript-eslint/types': 4.33.0
       '@typescript-eslint/typescript-estree': 4.33.0_typescript@4.8.4
@@ -3746,7 +4186,11 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/scope-manager': 4.33.0
       '@typescript-eslint/types': 4.33.0
       '@typescript-eslint/typescript-estree': 4.33.0_typescript@4.9.5
@@ -3838,7 +4282,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /@typescript-eslint/parser/5.62.0_eslint@8.53.0+typescript@4.9.5:
+=======
+  /@typescript-eslint/parser/5.62.0_eslint@8.52.0+typescript@4.9.5:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-VlJEV0fOQ7BExOsHYAGrgbEiZoi8D+Bl2+f6V2RrXerRSylnp+ZBHmPvaIa8cz0Ajx7WO7Z5RqfgYg7ED1nRhA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3852,7 +4300,11 @@ packages:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0_typescript@4.9.5
       debug: 4.3.4
+<<<<<<< HEAD
       eslint: 8.53.0
+=======
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       typescript: 4.9.5
     transitivePeerDependencies:
       - supports-color
@@ -3874,7 +4326,11 @@ packages:
       '@typescript-eslint/visitor-keys': 5.62.0
     dev: false
 
+<<<<<<< HEAD
   /@typescript-eslint/type-utils/5.62.0_eslint@8.53.0+typescript@4.9.5:
+=======
+  /@typescript-eslint/type-utils/5.62.0_eslint@8.52.0+typescript@4.9.5:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-xsSQreu+VnfbqQpW5vnCJdq1Z3Q0U31qiWmRhr98ONQmcp/yhiPJFPq8MXiJVLiksmOKSjIldZzkebzHuCGzew==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3885,9 +4341,15 @@ packages:
         optional: true
     dependencies:
       '@typescript-eslint/typescript-estree': 5.62.0_typescript@4.9.5
+<<<<<<< HEAD
       '@typescript-eslint/utils': 5.62.0_eslint@8.53.0+typescript@4.9.5
       debug: 4.3.4
       eslint: 8.53.0
+=======
+      '@typescript-eslint/utils': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      debug: 4.3.4
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       tsutils: 3.21.0_typescript@4.9.5
       typescript: 4.9.5
     transitivePeerDependencies:
@@ -4036,8 +4498,13 @@ packages:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
       '@types/semver': 7.5.5
+=======
+      '@types/json-schema': 7.0.14
+      '@types/semver': 7.5.4
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0
@@ -4048,12 +4515,17 @@ packages:
       - typescript
     dev: false
 
+<<<<<<< HEAD
   /@typescript-eslint/utils/5.62.0_eslint@8.53.0+typescript@4.9.5:
+=======
+  /@typescript-eslint/utils/5.62.0_eslint@8.52.0+typescript@4.9.5:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
+<<<<<<< HEAD
       '@eslint-community/eslint-utils': 4.4.0_eslint@8.53.0
       '@types/json-schema': 7.0.15
       '@types/semver': 7.5.5
@@ -4061,6 +4533,15 @@ packages:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0_typescript@4.9.5
       eslint: 8.53.0
+=======
+      '@eslint-community/eslint-utils': 4.4.0_eslint@8.52.0
+      '@types/json-schema': 7.0.14
+      '@types/semver': 7.5.4
+      '@typescript-eslint/scope-manager': 5.62.0
+      '@typescript-eslint/types': 5.62.0
+      '@typescript-eslint/typescript-estree': 5.62.0_typescript@4.9.5
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-scope: 5.1.1
       semver: 7.5.4
     transitivePeerDependencies:
@@ -4194,14 +4675,42 @@ packages:
       '@xtuc/long': 4.2.2
     dev: false
 
+<<<<<<< HEAD
+  /@webpack-cli/configtest/1.2.0_webpack-cli@4.8.0+webpack@5.89.0:
+=======
+  /@webpack-cli/configtest/1.2.0_bd0b6fd64ce1cd6d10b911e1d9e60f31:
+>>>>>>> 2ddced9c (fix: add missing dependency)
+    resolution: {integrity: sha512-4FB8Tj6xyVkyqjj1OaTqCjXYULB9FMkqQ8yGrZjRDrYh0nOE+7Lhs45WioWQQMV+ceFlE368Ukhe6xdvJM9Egg==}
+    peerDependencies:
+      webpack: 4.x.x || 5.x.x
+      webpack-cli: 4.x.x
+    dependencies:
+<<<<<<< HEAD
+      webpack: 5.89.0_webpack-cli@4.8.0
+      webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
+=======
+      webpack: 5.89.0_17c93feb39fd8f95264c9b12c9d849ca
+      webpack-cli: 4.10.0_2556d219610e9f18d4977e3f769c7cc6
+    dev: false
+
   /@webpack-cli/configtest/1.2.0_webpack-cli@4.8.0+webpack@5.89.0:
     resolution: {integrity: sha512-4FB8Tj6xyVkyqjj1OaTqCjXYULB9FMkqQ8yGrZjRDrYh0nOE+7Lhs45WioWQQMV+ceFlE368Ukhe6xdvJM9Egg==}
     peerDependencies:
       webpack: 4.x.x || 5.x.x
       webpack-cli: 4.x.x
     dependencies:
-      webpack: 5.89.0_webpack-cli@4.8.0
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
       webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
+    dev: false
+
+  /@webpack-cli/info/1.5.0_webpack-cli@4.10.0:
+    resolution: {integrity: sha512-e8tSXZpw2hPl2uMJY6fsMswaok5FdlGNRTktvFk2sD8RjH0hE2+XistawJx1vmKteh4NmGmNUrp+Tb2w+udPcQ==}
+    peerDependencies:
+      webpack-cli: 4.x.x
+    dependencies:
+      envinfo: 7.10.0
+      webpack-cli: 4.10.0_2556d219610e9f18d4977e3f769c7cc6
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@webpack-cli/info/1.5.0_webpack-cli@4.8.0:
@@ -4209,8 +4718,25 @@ packages:
     peerDependencies:
       webpack-cli: 4.x.x
     dependencies:
+<<<<<<< HEAD
       envinfo: 7.11.0
       webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
+=======
+      envinfo: 7.10.0
+      webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
+    dev: false
+
+  /@webpack-cli/serve/1.7.0_webpack-cli@4.10.0:
+    resolution: {integrity: sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==}
+    peerDependencies:
+      webpack-cli: 4.x.x
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      webpack-cli: 4.10.0_2556d219610e9f18d4977e3f769c7cc6
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /@webpack-cli/serve/1.7.0_webpack-cli@4.8.0:
@@ -4371,16 +4897,28 @@ packages:
   /acorn-globals/7.0.1:
     resolution: {integrity: sha512-umOSDSDrfHbTNPuNpC2NSnnA3LUrqpevPb4T9jRx4MagXNS0rs+gwiTcAvqCRmsD6utzsrzNt+ebm00SNWiC3Q==}
     dependencies:
+<<<<<<< HEAD
       acorn: 8.11.2
       acorn-walk: 8.3.0
     dev: false
 
   /acorn-import-assertions/1.9.0_acorn@8.11.2:
+=======
+      acorn: 8.11.1
+      acorn-walk: 8.3.0
+    dev: false
+
+  /acorn-import-assertions/1.9.0_acorn@8.11.1:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
     peerDependencies:
       acorn: ^8
     dependencies:
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /acorn-jsx/3.0.1:
@@ -4397,12 +4935,25 @@ packages:
       acorn: 7.4.1
     dev: false
 
+<<<<<<< HEAD
   /acorn-jsx/5.3.2_acorn@8.11.2:
+=======
+  /acorn-jsx/5.3.2_acorn@8.11.1:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+    dev: false
+
+  /acorn-walk/6.2.0:
+    resolution: {integrity: sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==}
+    engines: {node: '>=0.4.0'}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /acorn-walk/7.2.0:
@@ -4433,8 +4984,13 @@ packages:
     hasBin: true
     dev: false
 
+<<<<<<< HEAD
   /acorn/8.11.2:
     resolution: {integrity: sha512-nc0Axzp/0FILLEVsm4fNwLCwMttvhEI263QtVPQcbpfZZ3ts0hLsZGOpE6czNlid7CJ9MlyH8reXkpsf3YUY4w==}
+=======
+  /acorn/8.11.1:
+    resolution: {integrity: sha512-IJTNCJMRHfRfb8un89z1QtS0x890C2QUrUxFMK8zy+RizcId6mfnqOf68Bu9YkDgpLYuvCm6aYbwDatXVZPjMQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: false
@@ -4919,7 +5475,11 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.22.1
+<<<<<<< HEAD
       caniuse-lite: 1.0.30001562
+=======
+      caniuse-lite: 1.0.30001554
+>>>>>>> 2ddced9c (fix: add missing dependency)
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -5028,7 +5588,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /babel-eslint/10.1.0_eslint@8.53.0:
+=======
+  /babel-eslint/10.1.0_eslint@8.52.0:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==}
     engines: {node: '>=6'}
     deprecated: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
@@ -5036,10 +5600,17 @@ packages:
       eslint: '>= 4.12.1'
     dependencies:
       '@babel/code-frame': 7.22.13
+<<<<<<< HEAD
       '@babel/parser': 7.23.3
       '@babel/traverse': 7.23.3
       '@babel/types': 7.23.3
       eslint: 8.53.0
+=======
+      '@babel/parser': 7.23.0
+      '@babel/traverse': 7.23.2
+      '@babel/types': 7.23.0
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-visitor-keys: 1.3.0
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -5094,7 +5665,11 @@ packages:
       '@babel/core': ^7.8.0
     dependencies:
       '@jest/transform': 29.7.0
+<<<<<<< HEAD
       '@types/babel__core': 7.20.4
+=======
+      '@types/babel__core': 7.20.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 29.6.3
       chalk: 4.1.2
@@ -5112,7 +5687,11 @@ packages:
     dependencies:
       '@babel/core': 7.23.3
       '@jest/transform': 29.7.0
+<<<<<<< HEAD
       '@types/babel__core': 7.20.4
+=======
+      '@types/babel__core': 7.20.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 29.6.3_@babel+core@7.23.3
       chalk: 4.1.2
@@ -5133,10 +5712,17 @@ packages:
       loader-utils: 2.0.4
       make-dir: 3.1.0
       schema-utils: 2.7.1
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
     dev: false
 
   /babel-loader/9.1.3_8d9fd6ebbdf323464e360929a56a208f:
+=======
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+    dev: false
+
+  /babel-loader/9.1.3_85d142c61dc522489a2c8b240e96c971:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-xG3ST4DglodGf8qSwv0MdeWLhrDsw/32QMdTO5T1ZIp9gQur0HkCyFs7Awskr10JKXFXwpAhiCuYX5oGXnRGbw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -5146,7 +5732,23 @@ packages:
       '@babel/core': 7.23.3
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+    dev: false
+
+  /babel-messages/6.23.0:
+    resolution: {integrity: sha512-Bl3ZiA+LjqaMtNYopA9TYE9HP1tQ+E5dLxE0XrAzcIJeK2UqF0/EaqXwBn9esd4UmTfEab+P+UYQ1GnioFIb/w==}
+    dependencies:
+      babel-runtime: 6.26.0
+    dev: false
+
+  /babel-plugin-check-es2015-constants/6.22.0:
+    resolution: {integrity: sha512-B1M5KBP29248dViEo1owyY32lk1ZSH2DaNNrXLGt8lyjjHm7pBqAdQ7VKUPR6EEDO323+OvT3MQXbCin8ooWdA==}
+    dependencies:
+      babel-runtime: 6.26.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /babel-plugin-istanbul/6.1.1:
@@ -5167,9 +5769,15 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@babel/template': 7.22.15
+<<<<<<< HEAD
       '@babel/types': 7.23.3
       '@types/babel__core': 7.20.4
       '@types/babel__traverse': 7.20.4
+=======
+      '@babel/types': 7.23.0
+      '@types/babel__core': 7.20.3
+      '@types/babel__traverse': 7.20.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /babel-plugin-lodash/3.3.4:
@@ -5260,14 +5868,24 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /babel-plugin-polyfill-corejs3/0.8.6_@babel+core@7.23.3:
+=======
+  /babel-plugin-polyfill-corejs3/0.8.6_@babel+core@7.23.2:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-leDIc4l4tUgU7str5BWLS2h8q2N4Nf6lGZP6UrNDxdtfF2g69eJ5L0H7S8A5Ln/arfFAfHor5InAdZuIOwZdgQ==}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
     dependencies:
+<<<<<<< HEAD
       '@babel/core': 7.23.3
       '@babel/helper-define-polyfill-provider': 0.4.3_@babel+core@7.23.3
       core-js-compat: 3.33.2
+=======
+      '@babel/core': 7.23.2
+      '@babel/helper-define-polyfill-provider': 0.4.3_@babel+core@7.23.2
+      core-js-compat: 3.33.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5650,13 +6268,29 @@ packages:
     resolution: {integrity: sha512-qhAVI1+Av2X7qelOfAIYwXONood6XlZE/fXaBSmW/T5SzLAmCgzi+eiWE7fUvbHaeNBQH13UftjpXxsfLkMpgw==}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /browserslist/3.2.8:
+    resolution: {integrity: sha512-WHVocJYavUwVgVViC0ORikPHQquXwVh939TaelZ4WDqpWgTX/FsGhl/+P4qBUAGcRvtOgDgC+xftNWWp2RUTAQ==}
+    hasBin: true
+    dependencies:
+      caniuse-lite: 1.0.30001554
+      electron-to-chromium: 1.4.567
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /browserslist/4.22.1:
     resolution: {integrity: sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
+<<<<<<< HEAD
       caniuse-lite: 1.0.30001562
       electron-to-chromium: 1.4.585
+=======
+      caniuse-lite: 1.0.30001554
+      electron-to-chromium: 1.4.567
+>>>>>>> 2ddced9c (fix: add missing dependency)
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13_browserslist@4.22.1
     dev: false
@@ -5796,13 +6430,22 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.22.1
+<<<<<<< HEAD
       caniuse-lite: 1.0.30001562
+=======
+      caniuse-lite: 1.0.30001554
+>>>>>>> 2ddced9c (fix: add missing dependency)
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: false
 
+<<<<<<< HEAD
   /caniuse-lite/1.0.30001562:
     resolution: {integrity: sha512-kfte3Hym//51EdX4239i+Rmp20EsLIYGdPkERegTgU19hQWCRhsRFGKHTliUlsry53tv17K7n077Kqa0WJU4ng==}
+=======
+  /caniuse-lite/1.0.30001554:
+    resolution: {integrity: sha512-A2E3U//MBwbJVzebddm1YfNp7Nud5Ip+IPn4BozBmn4KqVX7AvluoIDFWjsv5OkGnKUXQVmMSoMKLa3ScCblcQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /caseless/0.12.0:
@@ -6117,7 +6760,11 @@ packages:
     resolution: {integrity: sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA==}
     engines: {node: '>= 4.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/q': 1.5.8
+=======
+      '@types/q': 1.5.7
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 2.4.2
       q: 1.5.1
     dev: false
@@ -6302,12 +6949,35 @@ packages:
       is-what: 3.14.1
     dev: false
 
+<<<<<<< HEAD
   /core-js-compat/3.33.2:
     resolution: {integrity: sha512-axfo+wxFVxnqf8RvxTzoAlzW4gRoacrHeoFlc9n0x50+7BEyZL/Rt3hicaED1/CEd7I6tPCPVUYcJwCMO5XUYw==}
+=======
+  /copy-concurrently/1.0.5:
+    resolution: {integrity: sha512-f2domd9fsVDFtaFcbaRZuYXwtdmnzqbADSwhSWYxYB/Q8zsdUUFMXVRwXGDMWmbEzAn1kdRrtI1T/KTFOL4X2A==}
+    dependencies:
+      aproba: 1.2.0
+      fs-write-stream-atomic: 1.0.10
+      iferr: 0.1.5
+      mkdirp: 0.5.6
+      rimraf: 2.7.1
+      run-queue: 1.0.3
+    dev: false
+
+  /copy-descriptor/0.1.1:
+    resolution: {integrity: sha512-XgZ0pFcakEUlbwQEVNg3+QAis1FyTL3Qel9FYy8pSkQqoG3PNoT0bOCQtOXcOkur21r2Eq2kI+IE+gsmAEVlYw==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+    optional: true
+
+  /core-js-compat/3.33.1:
+    resolution: {integrity: sha512-6pYKNOgD/j/bkC5xS5IIg6bncid3rfrI42oBH1SQJbsmYPKF7rhzcFzYCcxYMmNQQ0rCEB8WqpW7QHndOggaeQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dependencies:
       browserslist: 4.22.1
     dev: false
 
+<<<<<<< HEAD
   /core-js-pure/3.33.2:
     resolution: {integrity: sha512-a8zeCdyVk7uF2elKIGz67AjcXOxjRbwOLz8SbklEso1V+2DoW4OkAMZN9S9GBgvZIaqQi/OemFX4OiSoQEmg1Q==}
     requiresBuild: true
@@ -6315,6 +6985,21 @@ packages:
 
   /core-js/3.33.2:
     resolution: {integrity: sha512-XeBzWI6QL3nJQiHmdzbAOiMYqjrb7hwU7A39Qhvd/POSa/t9E1AeZyEZx3fNvp/vtM8zXwhoL0FsiS0hD0pruQ==}
+=======
+  /core-js-pure/3.33.1:
+    resolution: {integrity: sha512-wCXGbLjnsP10PlK/thHSQlOLlLKNEkaWbTzVvHHZ79fZNeN1gUmw2gBlpItxPv/pvqldevEXFh/d5stdNvl6EQ==}
+    requiresBuild: true
+    dev: false
+
+  /core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
+
+  /core-js/3.33.1:
+    resolution: {integrity: sha512-qVSq3s+d4+GsqN0teRCJtM6tdEEXyWxjzbhVrCHmBS5ZTM0FS2MOS0D13dUXAWDUN6a+lHI/N1hF9Ytz6iLl9Q==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     requiresBuild: true
     dev: false
 
@@ -6450,7 +7135,11 @@ packages:
       postcss-modules-values: 4.0.0_postcss@8.4.31
       postcss-value-parser: 4.2.0
       semver: 7.5.4
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /css-minimizer-webpack-plugin/1.3.0_webpack@5.89.0:
@@ -6467,7 +7156,11 @@ packages:
       schema-utils: 3.3.0
       serialize-javascript: 5.0.1
       source-map: 0.6.1
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-sources: 1.4.3
     dev: false
 
@@ -7186,8 +7879,13 @@ packages:
       xaa: 1.7.3
     dev: false
 
+<<<<<<< HEAD
   /electron-to-chromium/1.4.585:
     resolution: {integrity: sha512-B4yBlX0azdA3rVMxpYwLQfDpdwOgcnLCkpvSOd68iFmeedo+WYjaBJS3/W58LVD8CB2nf+o7C4K9xz1l09RkWg==}
+=======
+  /electron-to-chromium/1.4.567:
+    resolution: {integrity: sha512-8KR114CAYQ4/r5EIEsOmOMqQ9j0MRbJZR3aXD/KFA8RuKzyoUB4XrUCg+l8RUGqTVQgKNIgTpjaG8YHRPAbX2w==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /emittery/0.13.1:
@@ -7242,8 +7940,13 @@ packages:
     engines: {node: '>=10.2.0'}
     dependencies:
       '@types/cookie': 0.4.1
+<<<<<<< HEAD
       '@types/cors': 2.8.16
       '@types/node': 20.9.0
+=======
+      '@types/cors': 2.8.15
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.4.2
@@ -7586,12 +8289,20 @@ packages:
       lodash.upperfirst: 4.3.1
     dev: false
 
+<<<<<<< HEAD
   /eslint-plugin-filenames/1.3.2_eslint@8.53.0:
+=======
+  /eslint-plugin-filenames/1.3.2_eslint@8.52.0:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-tqxJTiEM5a0JmRCUYQmxw23vtTxrb2+a3Q2mMOPhFxvt7ZQQJmdiuMby9B/vUAuVMghyP7oET+nIf6EO6CBd/w==}
     peerDependencies:
       eslint: '*'
     dependencies:
+<<<<<<< HEAD
       eslint: 8.53.0
+=======
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       lodash.camelcase: 4.3.0
       lodash.kebabcase: 4.1.1
       lodash.snakecase: 4.1.1
@@ -7675,7 +8386,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /eslint-plugin-jsdoc/30.7.13_eslint@8.53.0:
+=======
+  /eslint-plugin-jsdoc/30.7.13_eslint@8.52.0:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-YM4WIsmurrp0rHX6XiXQppqKB8Ne5ATiZLJe2+/fkp9l9ExXFr43BbAbjZaVrpCT+tuPYOZ8k1MICARHnURUNQ==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -7683,7 +8398,11 @@ packages:
     dependencies:
       comment-parser: 0.7.6
       debug: 4.3.4
+<<<<<<< HEAD
       eslint: 8.53.0
+=======
+      eslint: 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jsdoctypeparser: 9.0.0
       lodash: 4.17.21
       regextras: 0.7.1
@@ -7999,6 +8718,7 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /eslint/8.53.0:
     resolution: {integrity: sha512-N4VuiPjXDUa4xVeV/GC/RV3hQW9Nw+Y463lkWaKKXKYMvmRiRDAtfpuPFLN+E1/6ZhyR8J2ig+eVREnYgUsiag==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8008,6 +8728,17 @@ packages:
       '@eslint-community/regexpp': 4.10.0
       '@eslint/eslintrc': 2.1.3
       '@eslint/js': 8.53.0
+=======
+  /eslint/8.52.0:
+    resolution: {integrity: sha512-zh/JHnaixqHZsolRB/w9/02akBk9EPrOs9JwcTP2ek7yL5bVvXuRariiaAjjoJ5DvuwQ1WAE/HsMz+w17YgBCg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    hasBin: true
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0_eslint@8.52.0
+      '@eslint-community/regexpp': 4.10.0
+      '@eslint/eslintrc': 2.1.2
+      '@eslint/js': 8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@humanwhocodes/config-array': 0.11.13
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8
@@ -8076,8 +8807,13 @@ packages:
     resolution: {integrity: sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
+<<<<<<< HEAD
       acorn: 8.11.2
       acorn-jsx: 5.3.2_acorn@8.11.2
+=======
+      acorn: 8.11.1
+      acorn-jsx: 5.3.2_acorn@8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-visitor-keys: 3.4.3
     dev: false
 
@@ -8385,8 +9121,13 @@ packages:
       fast-json-stringify: 5.9.1
       find-my-way: 7.7.0
       light-my-request: 5.11.0
+<<<<<<< HEAD
       pino: 8.16.2
       process-warning: 2.3.0
+=======
+      pino: 8.16.1
+      process-warning: 2.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       proxy-addr: 2.0.7
       rfdc: 1.3.0
       secure-json-parse: 2.7.0
@@ -8460,7 +9201,11 @@ packages:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /filesize/3.6.1:
@@ -9195,6 +9940,15 @@ packages:
     dependencies:
       array.prototype.filter: 1.0.3
       call-bind: 1.0.5
+<<<<<<< HEAD
+=======
+    dev: false
+
+  /html-encoding-sniffer/1.0.2:
+    resolution: {integrity: sha512-71lZziiDnsuabfdYiUeWdCVyKuqwWi23L8YeIgV9jSSZHCtb6wB1BKWooH7L3tn4/FuZJMVWyNaIDr4RGmaSYw==}
+    dependencies:
+      whatwg-encoding: 1.0.5
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /html-encoding-sniffer/2.0.1:
@@ -9230,7 +9984,11 @@ packages:
       he: 1.2.0
       param-case: 3.0.4
       relateurl: 0.2.7
+<<<<<<< HEAD
       terser: 5.24.0
+=======
+      terser: 5.22.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /html-webpack-plugin/5.5.3_webpack@5.89.0:
@@ -9244,7 +10002,11 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /htmlparser2/6.1.0:
@@ -9586,6 +10348,25 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /is-accessor-descriptor/0.1.6:
+    resolution: {integrity: sha512-e1BM1qnDbMRG3ll2U9dSK0UMHuWOs3pY3AtcFsmvwPtKL3MML/Q86i+GilLfvqEs4GW+ExB91tQ3Ig9noDIZ+A==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      kind-of: 3.2.2
+    dev: false
+    optional: true
+
+  /is-accessor-descriptor/1.0.1:
+    resolution: {integrity: sha512-YBUanLI8Yoihw923YeFUS5fs0fF2f5TSFTNiYAAzhhDscDa3lEqYuz1pDOEP5KvX94I9ey3vsqjJcLVFVU+3QA==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      hasown: 2.0.0
+    dev: false
+    optional: true
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /is-arguments/1.1.1:
     resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}
     engines: {node: '>= 0.4'}
@@ -9667,6 +10448,25 @@ packages:
       hasown: 2.0.0
     dev: false
 
+<<<<<<< HEAD
+=======
+  /is-data-descriptor/0.1.4:
+    resolution: {integrity: sha512-+w9D5ulSoBNlmw9OHn3U2v51SyoCd0he+bB3xMl62oijhrspxowjU+AIcDY0N3iEJbUEkB15IlMASQsxYigvXg==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      kind-of: 3.2.2
+    dev: false
+    optional: true
+
+  /is-data-descriptor/1.0.1:
+    resolution: {integrity: sha512-bc4NlCDiCr28U4aEsQ3Qs2491gVq4V8G7MQyws968ImqjKuYtTJXrl7Vq7jsN7Ly/C3xj5KWFrY7sHNeDkAzXw==}
+    engines: {node: '>= 0.4'}
+    dependencies:
+      hasown: 2.0.0
+    dev: false
+    optional: true
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /is-date-object/1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
     engines: {node: '>= 0.4'}
@@ -9674,6 +10474,29 @@ packages:
       has-tostringtag: 1.0.0
     dev: false
 
+<<<<<<< HEAD
+=======
+  /is-descriptor/0.1.6:
+    resolution: {integrity: sha512-avDYr0SB3DwO9zsMov0gKCESFYqCnE4hq/4z3TdUlukEy5t9C0YRq7HLrsN52NAcqXKaepeCD0n+B0arnVG3Hg==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      is-accessor-descriptor: 0.1.6
+      is-data-descriptor: 0.1.4
+      kind-of: 5.1.0
+    dev: false
+    optional: true
+
+  /is-descriptor/1.0.2:
+    resolution: {integrity: sha512-2eis5WqQGV7peooDyLmNEPUrps9+SXX5c9pL3xEB+4e9HnGuDa7mB7kHxHw4CbqS9k1T2hOH3miL8n8WtiYVtg==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      is-accessor-descriptor: 1.0.1
+      is-data-descriptor: 1.0.1
+      kind-of: 6.0.3
+    dev: false
+    optional: true
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /is-directory/0.3.1:
     resolution: {integrity: sha512-yVChGzahRFvbkscn2MlwGismPO12i9+znNruC5gVEntG3qu0xQMzsGg/JFbrsqDOHtHFPci+V5aP5T9I+yeKqw==}
     engines: {node: '>=0.10.0'}
@@ -9694,6 +10517,14 @@ packages:
     resolution: {integrity: sha512-0by5vtUJs8iFQb5TYUHHPudOR+qXYIMKtiUzvLIZITZUjknFmziyBJuLhVRc+Ds0dREFlskDNJKYIdIzu/9pfw==}
     dependencies:
       call-bind: 1.0.5
+<<<<<<< HEAD
+=======
+    dev: false
+
+  /is-finite/1.1.0:
+    resolution: {integrity: sha512-cdyMtqX/BOqqNBBiKlIVkytNHm49MtMlYyn1zxzvJKWmFMlGzm+ry5BBfYyeY9YmNKbRSo/o7OX9w9ale0wg3w==}
+    engines: {node: '>=0.10.0'}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /is-fullwidth-code-point/2.0.0:
@@ -10068,7 +10899,11 @@ packages:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.1
@@ -10156,7 +10991,11 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
   /jest-config/29.7.0_@types+node@20.9.0:
+=======
+  /jest-config/29.7.0_@types+node@20.8.9:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-uXbpfeQ7R6TZBqI3/TxCU4q4ttk3u0PJeC+E0zbfSoSjq6bJ7buBPxzQPL0ifrkY4DNu4JUdk0ImlBUYi840eQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
@@ -10171,8 +11010,13 @@ packages:
       '@babel/core': 7.23.3
       '@jest/test-sequencer': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
       babel-jest: 29.7.0_@babel+core@7.23.3
+=======
+      '@types/node': 20.8.9
+      babel-jest: 29.7.0_@babel+core@7.23.2
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       ci-info: 3.9.0
       deepmerge: 4.3.1
@@ -10237,7 +11081,11 @@ packages:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
       '@types/jsdom': 20.0.1
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-mock: 29.7.0
       jest-util: 29.7.0
       jsdom: 20.0.3
@@ -10254,7 +11102,11 @@ packages:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-mock: 29.7.0
       jest-util: 29.7.0
     dev: false
@@ -10269,8 +11121,13 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/graceful-fs': 4.1.9
       '@types/node': 20.9.0
+=======
+      '@types/graceful-fs': 4.1.8
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -10307,7 +11164,11 @@ packages:
     dependencies:
       '@babel/code-frame': 7.22.13
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/stack-utils': 2.0.3
+=======
+      '@types/stack-utils': 2.0.2
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       graceful-fs: 4.2.11
       micromatch: 4.0.5
@@ -10321,7 +11182,11 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-util: 29.7.0
     dev: false
 
@@ -10376,7 +11241,11 @@ packages:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -10407,7 +11276,11 @@ packages:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       cjs-module-lexer: 1.2.3
       collect-v8-coverage: 1.0.2
@@ -10459,7 +11332,11 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -10484,7 +11361,11 @@ packages:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -10496,7 +11377,11 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: false
@@ -10505,7 +11390,11 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false
@@ -10514,7 +11403,11 @@ packages:
     resolution: {integrity: sha512-eIz2msL/EzL9UFTFFx7jBTkeZfku0yUAyZZZmJ93H2TYEiroIx2PQjEXcwYtYl8zXCxb+PAmA2hLIt/6ZEkPHw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -10659,7 +11552,11 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.6
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
@@ -10701,7 +11598,11 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.6
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-globals: 6.0.0
       cssom: 0.5.0
       cssstyle: 2.3.0
@@ -10743,7 +11644,11 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.6
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-globals: 7.0.1
       cssom: 0.5.0
       cssstyle: 2.3.0
@@ -10992,7 +11897,11 @@ packages:
     dependencies:
       glob: 7.2.3
       minimatch: 3.1.2
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-merge: 4.2.2
     dev: false
 
@@ -11048,10 +11957,83 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /koa-compose/3.2.1:
+    resolution: {integrity: sha512-8gen2cvKHIZ35eDEik5WOo8zbVp9t4cP8p4hW4uE55waxolLRexKKrqfCpwhGVppnB40jWeF8bZeTVg99eZgPw==}
+    dependencies:
+      any-promise: 1.3.0
+    dev: false
+
+  /koa-compose/4.1.0:
+    resolution: {integrity: sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==}
+    dev: false
+
+  /koa-convert/2.0.0:
+    resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
+    engines: {node: '>= 10'}
+    dependencies:
+      co: 4.6.0
+      koa-compose: 4.1.0
+    dev: false
+
+  /koa-router/7.4.0:
+    resolution: {integrity: sha512-IWhaDXeAnfDBEpWS6hkGdZ1ablgr6Q6pGdXCyK38RbzuH4LkUOpPqPw+3f8l8aTDrQmBQ7xJc0bs2yV4dzcO+g==}
+    engines: {node: '>= 4'}
+    deprecated: '**IMPORTANT 10x+ PERFORMANCE UPGRADE**: Please upgrade to v12.0.1+ as we have fixed an issue with debuglog causing 10x slower router benchmark performance, see https://github.com/koajs/router/pull/173'
+    dependencies:
+      debug: 3.2.7
+      http-errors: 1.8.1
+      koa-compose: 3.2.1
+      methods: 1.1.2
+      path-to-regexp: 1.8.0
+      urijs: 1.19.11
+    dev: false
+
+  /koa/2.14.2:
+    resolution: {integrity: sha512-VFI2bpJaodz6P7x2uyLiX6RLYpZmOJqNmoCst/Yyd7hQlszyPwG/I9CQJ63nOtKSxpt5M7NH67V6nJL2BwCl7g==}
+    engines: {node: ^4.8.4 || ^6.10.1 || ^7.10.1 || >= 8.1.4}
+    dependencies:
+      accepts: 1.3.8
+      cache-content-type: 1.0.1
+      content-disposition: 0.5.4
+      content-type: 1.0.5
+      cookies: 0.8.0
+      debug: 4.3.4
+      delegates: 1.0.0
+      depd: 2.0.0
+      destroy: 1.2.0
+      encodeurl: 1.0.2
+      escape-html: 1.0.3
+      fresh: 0.5.2
+      http-assert: 1.5.0
+      http-errors: 1.8.1
+      is-generator-function: 1.0.10
+      koa-compose: 4.1.0
+      koa-convert: 2.0.0
+      on-finished: 2.4.1
+      only: 0.0.2
+      parseurl: 1.3.3
+      statuses: 1.5.0
+      type-is: 1.6.18
+      vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /kuler/2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /lazy-cache/1.0.4:
+    resolution: {integrity: sha512-RE2g0b5VGZsOCFOCgP7omTRYFqydmZkBwl5oNnQ1lDYC57uyO9KqNnNVxT7COSHTxrRCWVcAVOcbjk+tvh/rgQ==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /less-loader/4.1.0_less@3.13.1+webpack@5.89.0:
     resolution: {integrity: sha512-KNTsgCE9tMOM70+ddxp9yyt9iHqgmSs0yTZc5XH5Wo+g80RWRIYNqE58QJKm/yMud5wZEvz50ugRDuzVIkyahg==}
     engines: {node: '>= 4.8 < 5.0.0 || >= 5.10'}
@@ -11063,7 +12045,11 @@ packages:
       less: 3.13.1
       loader-utils: 1.4.2
       pify: 3.0.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /less/3.13.1:
@@ -11352,7 +12338,11 @@ packages:
     engines: {node: '>= 12.0.0'}
     dependencies:
       '@colors/colors': 1.6.0
+<<<<<<< HEAD
       '@types/triple-beam': 1.3.5
+=======
+      '@types/triple-beam': 1.3.4
+>>>>>>> 2ddced9c (fix: add missing dependency)
       fecha: 4.2.3
       ms: 2.1.3
       safe-stable-stringify: 2.4.3
@@ -11610,7 +12600,11 @@ packages:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-sources: 1.4.3
     dev: false
 
@@ -12578,8 +13572,13 @@ packages:
       sonic-boom: 1.4.1
     dev: false
 
+<<<<<<< HEAD
   /pino/8.16.2:
     resolution: {integrity: sha512-2advCDGVEvkKu9TTVSa/kWW7Z3htI/sBKEZpqiHk6ive0i/7f5b1rsU8jn0aimxqfnSz5bj/nOYkwhBUn5xxvg==}
+=======
+  /pino/8.16.1:
+    resolution: {integrity: sha512-3bKsVhBmgPjGV9pyn4fO/8RtoVDR8ssW1ev819FsRXlRNgW8gR/9Kx+gCK4UPWd4JjrRDLWpzd/pb1AyWm3MGA==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
@@ -13179,7 +14178,11 @@ packages:
     dependencies:
       autoprefixer: 9.8.8
       browserslist: 4.22.1
+<<<<<<< HEAD
       caniuse-lite: 1.0.30001562
+=======
+      caniuse-lite: 1.0.30001554
+>>>>>>> 2ddced9c (fix: add missing dependency)
       css-blank-pseudo: 0.1.4
       css-has-pseudo: 0.10.0
       css-prefers-color-scheme: 3.1.1
@@ -13700,6 +14703,26 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+<<<<<<< HEAD
+=======
+  /react-redux/5.1.2_react@18.2.0+redux@4.2.1:
+    resolution: {integrity: sha512-Ns1G0XXc8hDyH/OcBHOxNgQx9ayH3SPxBnFCOidGKSle8pKihysQw2rG/PmciUQRoclhVBO8HMhiRmGXnDja9Q==}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
+      redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
+    dependencies:
+      '@babel/runtime': 7.23.2
+      hoist-non-react-statics: 3.3.2
+      invariant: 2.2.4
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 16.13.1
+      react-lifecycles-compat: 3.0.4
+      redux: 4.2.1
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /react-redux/8.1.3_218d4c23caa91839c5aa0af611b88026:
     resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
     peerDependencies:
@@ -13722,7 +14745,45 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.23.2
+<<<<<<< HEAD
       '@types/hoist-non-react-statics': 3.3.5
+=======
+      '@types/hoist-non-react-statics': 3.3.4
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
+      redux: 4.2.1
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /react-redux/8.1.3_37607727ae30e477f5210de2d896ef2b:
+    resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4 || ^5.0.0-beta.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@types/hoist-non-react-statics': 3.3.4
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
@@ -13766,13 +14827,34 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
+<<<<<<< HEAD
   /react-router-dom/6.18.0_react-dom@18.2.0+react@18.2.0:
     resolution: {integrity: sha512-Ubrue4+Ercc/BoDkFQfc6og5zRQ4A8YxSO3Knsne+eRbZ+IepAsK249XBH/XaFuOYOYr3L3r13CXTLvYt5JDjw==}
+=======
+  /react-router-dom/5.3.4_react@18.2.0:
+    resolution: {integrity: sha512-m4EqFMHv/Ih4kpcBCONHbkT68KoAeHN4p3lAGoNryfHi0dMy0kCzEZakiKRsvg5wHZ/JLrLW8o8KomWiz/qbYQ==}
+    peerDependencies:
+      react: '>=15'
+    dependencies:
+      '@babel/runtime': 7.23.2
+      history: 4.10.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-router: 5.3.4_react@18.2.0
+      tiny-invariant: 1.3.1
+      tiny-warning: 1.0.3
+    dev: false
+
+  /react-router-dom/6.17.0_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-qWHkkbXQX+6li0COUUPKAUkxjNNqPJuiBd27dVwQGDNsuFBdMbrS6UZ0CLYc4CsbdLYTckn4oB4tGDuPZpPhaQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
+<<<<<<< HEAD
       '@remix-run/router': 1.11.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -13781,11 +14863,42 @@ packages:
 
   /react-router/6.18.0_react@18.2.0:
     resolution: {integrity: sha512-vk2y7Dsy8wI02eRRaRmOs9g2o+aE72YCx5q9VasT1N9v+lrdB79tIqrjMfByHiY5+6aYkH2rUa5X839nwWGPDg==}
+=======
+      '@remix-run/router': 1.10.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router: 6.17.0_react@18.2.0
+    dev: false
+
+  /react-router/5.3.4_react@18.2.0:
+    resolution: {integrity: sha512-Ys9K+ppnJah3QuaRiLxk+jDWOR1MekYQrlytiXxC1RyfbdsZkS5pvKAzCCr031xHixZwpnsYNT5xysdFHQaYsA==}
+    peerDependencies:
+      react: '>=15'
+    dependencies:
+      '@babel/runtime': 7.23.2
+      history: 4.10.1
+      hoist-non-react-statics: 3.3.2
+      loose-envify: 1.4.0
+      path-to-regexp: 1.8.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 16.13.1
+      tiny-invariant: 1.3.1
+      tiny-warning: 1.0.3
+    dev: false
+
+  /react-router/6.17.0_react@18.2.0:
+    resolution: {integrity: sha512-YJR3OTJzi3zhqeJYADHANCGPUu9J+6fT5GLv82UWRGSxu6oJYCKVmxUcaBQuGm9udpWmPsvpme/CdHumqgsoaA==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
     dependencies:
+<<<<<<< HEAD
       '@remix-run/router': 1.11.0
+=======
+      '@remix-run/router': 1.10.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       react: 18.2.0
     dev: false
 
@@ -13826,7 +14939,11 @@ packages:
     resolution: {integrity: sha512-Ug69mNOpfvKDAc2Q8DRpMjjzdtrnv9HcSMX+4VsZxD1aZ6ZzrIE7rlzXBtWTyhULSMKg076AW6WR5iZpD0JiOg==}
     engines: {node: '>=8'}
     dependencies:
+<<<<<<< HEAD
       '@types/normalize-package-data': 2.4.4
+=======
+      '@types/normalize-package-data': 2.4.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       normalize-package-data: 2.5.0
       parse-json: 5.2.0
       type-fest: 0.6.0
@@ -14375,7 +15492,11 @@ packages:
     dependencies:
       neo-async: 2.6.2
       sass: 1.69.5
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /sass/1.69.5:
@@ -14432,7 +15553,11 @@ packages:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
     engines: {node: '>= 8.9.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
@@ -14441,7 +15566,11 @@ packages:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
@@ -14450,7 +15579,11 @@ packages:
     resolution: {integrity: sha512-L0jRsrPpjdckP3oPug3/VxNKt2trR8TcabrM6FOAAlvC/9Phcmm+cuAgTlxBqdBR1WJx7Naj9WHw+aOmheSVbw==}
     engines: {node: '>= 12.13.0'}
     dependencies:
+<<<<<<< HEAD
       '@types/json-schema': 7.0.15
+=======
+      '@types/json-schema': 7.0.14
+>>>>>>> 2ddced9c (fix: add missing dependency)
       ajv: 8.12.0
       ajv-formats: 2.1.1
       ajv-keywords: 5.1.0_ajv@8.12.0
@@ -14760,6 +15893,20 @@ packages:
       sinon: 9.2.4
     dev: false
 
+<<<<<<< HEAD
+=======
+  /sinon/1.17.7:
+    resolution: {integrity: sha512-M9rtyQxKfcTTdB64rpPSRaTzOvunb+HHPv/3PxvNPrEDnFSny95Pi6/3VoD471ody0ay0IHyzT3BErfcLXj6NA==}
+    engines: {node: '>=0.1.103'}
+    deprecated: 16.1.1
+    dependencies:
+      formatio: 1.1.1
+      lolex: 1.3.2
+      samsam: 1.1.2
+      util: 0.12.5
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /sinon/13.0.2:
     resolution: {integrity: sha512-KvOrztAVqzSJWMDoxM4vM+GPys1df2VBoXm+YciyB/OLMamfS3VXh3oGh5WtrAGSzrgczNWFFY22oKb7Fi5eeA==}
     deprecated: 16.1.1
@@ -15142,6 +16289,20 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       internal-slot: 1.0.6
+<<<<<<< HEAD
+=======
+    dev: false
+
+  /stream-each/1.2.3:
+    resolution: {integrity: sha512-vlMC2f8I2u/bZGqkdfLQW/13Zihpej/7PmSiMQsbYddxuTsJp8vRe2x2FvVExZg7FaOds43ROAuFJwPR4MTZLw==}
+    dependencies:
+      end-of-stream: 1.4.4
+      stream-shift: 1.0.1
+    dev: false
+
+  /stream-shift/1.0.1:
+    resolution: {integrity: sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /stream-to-array/2.3.0:
@@ -15258,6 +16419,13 @@ packages:
       call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.3
+<<<<<<< HEAD
+=======
+    dev: false
+
+  /string_decoder/0.10.31:
+    resolution: {integrity: sha512-ev2QzSzWPYmy9GuqfIVildA4OdcGLeFZQrq5ys6RtiuF+RQQiZWr8TZNyAcuVXyQRYfEO+MsoB/1BuQVhOJuoQ==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /string_decoder/1.1.1:
@@ -15515,7 +16683,24 @@ packages:
       yallist: 4.0.0
     dev: false
 
+<<<<<<< HEAD
   /terser-webpack-plugin/5.3.9_webpack@5.89.0:
+=======
+  /teamwork/3.2.0:
+    resolution: {integrity: sha512-xAmJ8PIVjRZMXAHgUuOP8ITsv0SedyWAit2UWiNImXgg/F+BxrsG46ZegElNBM0Dwp+iMfbigg/Ll/M2oDRYww==}
+    deprecated: This module has moved and is now available at @hapi/teamwork. Please update your dependencies as this version is no longer maintained an may contain bugs and security issues.
+    dev: false
+
+  /temp/0.9.4:
+    resolution: {integrity: sha512-yYrrsWnrXMcdsnu/7YMYAofM1ktpL5By7vZhf15CrXijWWrEYZks5AXBudalfSWJLlnen/QUJUB5aoB0kqZUGA==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      mkdirp: 0.5.6
+      rimraf: 2.6.3
+    dev: false
+
+  /terser-webpack-plugin/5.3.9_uglify-js@2.8.29+webpack@5.89.0:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -15535,17 +16720,31 @@ packages:
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
+<<<<<<< HEAD
       terser: 5.24.0
       webpack: 5.89.0_webpack-cli@4.8.0
     dev: false
 
   /terser/5.24.0:
     resolution: {integrity: sha512-ZpGR4Hy3+wBEzVEnHvstMvqpD/nABNelQn/z2r0fjVWGQsN3bpOLzQlqDxmb4CDZnXq5lpjnQ+mHQLAOpfM5iw==}
+=======
+      terser: 5.22.0
+      uglify-js: 2.8.29
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+    dev: false
+
+  /terser/5.22.0:
+    resolution: {integrity: sha512-hHZVLgRA2z4NWcN6aS5rQDc+7Dcy58HOf2zbYwmFcQ+ua3h6eEFf5lIDKTzbWwlazPyOZsFQO8V80/IjVNExEw==}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.5
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: false
@@ -15704,7 +16903,11 @@ packages:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 17.0.45
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
@@ -15735,7 +16938,11 @@ packages:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 14.18.63
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
@@ -15746,6 +16953,40 @@ packages:
       yn: 3.1.1
     dev: false
 
+<<<<<<< HEAD
+=======
+  /ts-node/10.9.1_43909d7b1a0e0d63830e449c0c10eccd:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.8.9
+      acorn: 8.11.1
+      acorn-walk: 8.3.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.2.2
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /ts-node/10.9.1_71a24838bb56fb7264838813e7b47cee:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -15766,7 +17007,11 @@ packages:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 14.18.63
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
@@ -15777,7 +17022,11 @@ packages:
       yn: 3.1.1
     dev: false
 
+<<<<<<< HEAD
   /ts-node/10.9.1_721a34788963c5729ab2b00819529bae:
+=======
+  /ts-node/10.9.1_df68547c065902cf3c7273e0b3a8b69c:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -15796,6 +17045,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
+<<<<<<< HEAD
       '@types/node': 20.9.0
       acorn: 8.11.2
       acorn-walk: 8.3.0
@@ -15829,6 +17079,10 @@ packages:
       '@tsconfig/node16': 1.0.4
       '@types/node': 18.18.9
       acorn: 8.11.2
+=======
+      '@types/node': 18.18.7
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
@@ -15859,7 +17113,11 @@ packages:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 13.13.52
+<<<<<<< HEAD
       acorn: 8.11.2
+=======
+      acorn: 8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       acorn-walk: 8.3.0
       arg: 4.1.3
       create-require: 1.1.1
@@ -16245,6 +17503,27 @@ packages:
     dev: false
     optional: true
 
+<<<<<<< HEAD
+=======
+  /uglifyjs-webpack-plugin/2.2.0_webpack@5.89.0:
+    resolution: {integrity: sha512-mHSkufBmBuJ+KHQhv5H0MXijtsoA1lynJt1lXOaotja8/I0pR4L9oGaPIZw+bQBOFittXZg9OC1sXSGO9D9ZYg==}
+    engines: {node: '>= 6.9.0'}
+    peerDependencies:
+      webpack: ^4.0.0
+    dependencies:
+      cacache: 12.0.4
+      find-cache-dir: 2.1.0
+      is-wsl: 1.1.0
+      schema-utils: 1.0.0
+      serialize-javascript: 1.9.1
+      source-map: 0.6.1
+      uglify-js: 3.17.4
+      webpack: 5.89.0_uglify-js@2.8.29
+      webpack-sources: 1.4.3
+      worker-farm: 1.7.0
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
     dependencies:
@@ -16355,6 +17634,19 @@ packages:
       punycode: 2.3.1
     dev: false
 
+<<<<<<< HEAD
+=======
+  /urijs/1.19.11:
+    resolution: {integrity: sha512-HXgFDgDommxn5/bIv0cnQZsPhHDA90NPHD6+c/v21U5+Sx5hoP8+dP9IZXBU1gIfvdRfhG8cel9QNPeionfcCQ==}
+    dev: false
+
+  /urix/0.1.0:
+    resolution: {integrity: sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==}
+    deprecated: Please see https://github.com/lydell/urix#deprecated
+    dev: false
+    optional: true
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /url-loader/4.1.1_file-loader@6.2.0+webpack@5.89.0:
     resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
     engines: {node: '>= 10.13.0'}
@@ -16369,7 +17661,11 @@ packages:
       loader-utils: 2.0.4
       mime-types: 2.1.35
       schema-utils: 3.3.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /url-parse/1.5.10:
@@ -16400,6 +17696,19 @@ packages:
       object.getownpropertydescriptors: 2.1.7
     dev: false
 
+<<<<<<< HEAD
+=======
+  /util/0.12.5:
+    resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
+    dependencies:
+      inherits: 2.0.4
+      is-arguments: 1.1.1
+      is-generator-function: 1.0.10
+      is-typed-array: 1.1.12
+      which-typed-array: 1.1.13
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /utila/0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
     dev: false
@@ -16433,7 +17742,11 @@ packages:
     engines: {node: '>=10.12.0'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.20
+<<<<<<< HEAD
       '@types/istanbul-lib-coverage': 2.0.6
+=======
+      '@types/istanbul-lib-coverage': 2.0.5
+>>>>>>> 2ddced9c (fix: add missing dependency)
       convert-source-map: 2.0.0
     dev: false
 
@@ -16585,6 +17898,45 @@ packages:
       ws: 6.2.2
     dev: false
 
+<<<<<<< HEAD
+=======
+  /webpack-cli/4.10.0_2556d219610e9f18d4977e3f769c7cc6:
+    resolution: {integrity: sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      '@webpack-cli/generators': '*'
+      '@webpack-cli/migrate': '*'
+      webpack: 4.x.x || 5.x.x
+      webpack-bundle-analyzer: '*'
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      '@webpack-cli/generators':
+        optional: true
+      '@webpack-cli/migrate':
+        optional: true
+      webpack-bundle-analyzer:
+        optional: true
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      '@discoveryjs/json-ext': 0.5.7
+      '@webpack-cli/configtest': 1.2.0_bd0b6fd64ce1cd6d10b911e1d9e60f31
+      '@webpack-cli/info': 1.5.0_webpack-cli@4.10.0
+      '@webpack-cli/serve': 1.7.0_webpack-cli@4.10.0
+      colorette: 2.0.20
+      commander: 7.2.0
+      cross-spawn: 7.0.3
+      fastest-levenshtein: 1.0.16
+      import-local: 3.1.0
+      interpret: 2.2.0
+      rechoir: 0.7.1
+      webpack: 5.89.0_17c93feb39fd8f95264c9b12c9d849ca
+      webpack-bundle-analyzer: 3.9.0
+      webpack-merge: 5.10.0
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /webpack-cli/4.8.0_2556d219610e9f18d4977e3f769c7cc6:
     resolution: {integrity: sha512-+iBSWsX16uVna5aAYN6/wjhJy1q/GKk4KjKvfg90/6hykCTSgozbfz5iRgDTSJt/LgSbYxdBX3KBHeobIs+ZEw==}
     engines: {node: '>=10.13.0'}
@@ -16617,7 +17969,11 @@ packages:
       interpret: 2.2.0
       rechoir: 0.7.1
       v8-compile-cache: 2.4.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-bundle-analyzer: 3.9.0
       webpack-merge: 5.10.0
     dev: false
@@ -16634,7 +17990,11 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 3.3.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
     dev: false
 
   /webpack-hot-middleware/2.25.4:
@@ -16684,7 +18044,11 @@ packages:
     resolution: {integrity: sha512-yUKYyy+e0iF/w31QdfioRKY+h3jDBRpthexBOWGKda99iu2l/wxYsI/XqdlP5IU58/0KB9CsJZgWNAl+/MPkRw==}
     dev: false
 
+<<<<<<< HEAD
   /webpack/5.89.0_webpack-cli@4.8.0:
+=======
+  /webpack/5.89.0_17c93feb39fd8f95264c9b12c9d849ca:
+>>>>>>> 2ddced9c (fix: add missing dependency)
     resolution: {integrity: sha512-qyfIC10pOr70V+jkmud8tMfajraGCZMBWJtrmuBymQKCrLTRejBI8STDp1MCyZu/QTdZSeacCQYpYNQVOzX5kw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -16694,6 +18058,7 @@ packages:
       webpack-cli:
         optional: true
     dependencies:
+<<<<<<< HEAD
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.5
       '@webassemblyjs/ast': 1.11.6
@@ -16701,6 +18066,15 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.11.2
       acorn-import-assertions: 1.9.0_acorn@8.11.2
+=======
+      '@types/eslint-scope': 3.7.6
+      '@types/estree': 1.0.3
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.11.1
+      acorn-import-assertions: 1.9.0_acorn@8.11.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       browserslist: 4.22.1
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
@@ -16715,7 +18089,93 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
+<<<<<<< HEAD
       terser-webpack-plugin: 5.3.9_webpack@5.89.0
+=======
+      terser-webpack-plugin: 5.3.9_uglify-js@2.8.29+webpack@5.89.0
+      watchpack: 2.4.0
+      webpack-cli: 4.10.0_2556d219610e9f18d4977e3f769c7cc6
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    dev: false
+
+  /webpack/5.89.0_f52b93474dd2fb1e4f90db635f9d54a8:
+    resolution: {integrity: sha512-qyfIC10pOr70V+jkmud8tMfajraGCZMBWJtrmuBymQKCrLTRejBI8STDp1MCyZu/QTdZSeacCQYpYNQVOzX5kw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': 3.7.6
+      '@types/estree': 1.0.3
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.11.1
+      acorn-import-assertions: 1.9.0_acorn@8.11.1
+      browserslist: 4.22.1
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.15.0
+      es-module-lexer: 1.3.1
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.9_uglify-js@2.8.29+webpack@5.89.0
+      watchpack: 2.4.0
+      webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    dev: false
+
+  /webpack/5.89.0_uglify-js@2.8.29:
+    resolution: {integrity: sha512-qyfIC10pOr70V+jkmud8tMfajraGCZMBWJtrmuBymQKCrLTRejBI8STDp1MCyZu/QTdZSeacCQYpYNQVOzX5kw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': 3.7.6
+      '@types/estree': 1.0.3
+      '@webassemblyjs/ast': 1.11.6
+      '@webassemblyjs/wasm-edit': 1.11.6
+      '@webassemblyjs/wasm-parser': 1.11.6
+      acorn: 8.11.1
+      acorn-import-assertions: 1.9.0_acorn@8.11.1
+      browserslist: 4.22.1
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.15.0
+      es-module-lexer: 1.3.1
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.9_uglify-js@2.8.29+webpack@5.89.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       watchpack: 2.4.0
       webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
       webpack-sources: 3.2.3
@@ -16857,6 +18317,14 @@ packages:
     resolution: {integrity: sha512-CC1bOL87PIWSBhDcTrdeLo6eGT7mCFtrg0uIJtqJUFyK+eJnzl8A1niH56uu7KMa5XFrtiV+AQuHO3n7DsHnLQ==}
     dev: false
 
+<<<<<<< HEAD
+=======
+  /window-size/0.1.0:
+    resolution: {integrity: sha512-1pTPQDKTdd61ozlKGNCjhNRd+KPmgLSGa3mZTHoOliaGcESD8G1PXhh7c1fgiPjVbNVfgy2Faw4BI8/m0cC8Mg==}
+    engines: {node: '>= 0.8.0'}
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   /winston-transport/4.6.0:
     resolution: {integrity: sha512-wbBA9PbPAHxKiygo7ub7BYRiKxms0tpfU2ljtWzb3SjRjv5yl6Ozuy/TkXf00HTAt+Uylo3gSkNwzc4ME0wiIg==}
     engines: {node: '>= 12.0.0'}
@@ -17185,8 +18653,13 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
+<<<<<<< HEAD
   file:projects/app-dev.tgz_webpack-cli@4.8.0+webpack@5.89.0:
     resolution: {integrity: sha512-NAb6dEh+UNBgD+3NA6BQ6PDwiOhh02CNeSLN48FKdjTQgqLPEssBqnyLwEjf7dV3D6SzuFwpOz4KHLiSmZIFHQ==, tarball: file:projects/app-dev.tgz}
+=======
+  file:projects/app-dev.tgz_uglify-js@2.8.29+webpack@5.89.0:
+    resolution: {integrity: sha512-tXLy4j3liGX+mqJe1rsZC4pScp1IKO+U4KVrkzrlwuawe/6g8Rb1Rxebaov1SivAnkcPu9ySZVO54rF1f1ArBg==, tarball: file:projects/app-dev.tgz}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     id: file:projects/app-dev.tgz
     name: '@rush-temp/app-dev'
     version: 0.0.0
@@ -17205,12 +18678,21 @@ packages:
       '@babel/register': 7.22.15_@babel+core@7.23.3
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@jchip/redbird': 1.3.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
       '@types/webpack': 5.28.0_webpack-cli@4.8.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+      '@types/webpack': 5.28.0_uglify-js@2.8.29
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_96a109dcf9607f5a1aa576228794cffa
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 4.1.0
@@ -17226,7 +18708,11 @@ packages:
       chai: 4.3.10
       chalker: 1.2.0
       chokidar: 3.5.3
+<<<<<<< HEAD
       core-js: 3.33.2
+=======
+      core-js: 3.33.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       electrode-server: 3.3.0
       electrode-server1: /electrode-server/1.9.0
       eslint: 7.32.0
@@ -17295,6 +18781,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 17.0.45
@@ -17311,6 +18798,24 @@ packages:
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.53.0
       eslint-plugin-jsdoc: 30.7.13_eslint@8.53.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 17.0.45
+      '@types/sinon': 10.0.20
+      '@types/sinon-chai': 3.2.11
+      '@typescript-eslint/eslint-plugin': 5.62.0_374149f9d03209d58d12a5ce111ab746
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0_eslint@8.52.0
+      chai: 4.3.10
+      chalk: 5.3.0
+      eslint: 8.52.0
+      eslint-config-walmart: 2.2.1
+      eslint-plugin-filenames: 1.3.2_eslint@8.52.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-plugin-tsdoc: 0.2.17
       isomorphic-loader: 4.5.0
       mocha: 10.2.0
@@ -17338,12 +18843,21 @@ packages:
     name: '@rush-temp/create-app'
     version: 0.0.0
     dependencies:
+<<<<<<< HEAD
       '@babel/core': 7.23.3
       '@babel/preset-env': 7.23.3_@babel+core@7.23.3
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@xarc/module-dev': 2.2.5
       babel-loader: 9.1.3_8d9fd6ebbdf323464e360929a56a208f
+=======
+      '@babel/core': 7.23.2
+      '@babel/preset-env': 7.23.2_@babel+core@7.23.2
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@xarc/module-dev': 2.2.5
+      babel-loader: 9.1.3_85d142c61dc522489a2c8b240e96c971
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chai: 4.3.10
       chalker: 1.2.0
       lodash: 4.17.21
@@ -17356,7 +18870,11 @@ packages:
       shcmd: 0.8.4
       sinon: 7.5.0
       sinon-chai: 3.7.0_chai@4.3.10+sinon@7.5.0
+<<<<<<< HEAD
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-bundle-analyzer: 3.9.0
       webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
       xclap: 0.2.53
@@ -17399,6 +18917,47 @@ packages:
       - supports-color
     dev: false
 
+<<<<<<< HEAD
+=======
+  file:projects/electrode-archetype-webpack-dll-dev.tgz_73b0bf351ab9a055d7b5b1930428d9b3:
+    resolution: {integrity: sha512-KyyQcvOJwtLORxmhgBqy31GxD8g7VBV8G1KgQJWcMRhKbuRU5z90akqKaY0fEUJPydEO8D9yxgohH9a6KG6VQQ==, tarball: file:projects/electrode-archetype-webpack-dll-dev.tgz}
+    id: file:projects/electrode-archetype-webpack-dll-dev.tgz
+    name: '@rush-temp/electrode-archetype-webpack-dll-dev'
+    version: 0.0.0
+    dependencies:
+      bluebird: 3.7.2
+      electrode-archetype-njs-module-dev: 3.0.3
+      glob: 7.2.3
+      optional-require: 1.1.8
+      require-at: 1.0.6
+      source-map-explorer: 1.8.0
+      uglifyjs-webpack-plugin: 2.2.0_webpack@5.89.0
+      webpack: 5.89.0_17c93feb39fd8f95264c9b12c9d849ca
+      webpack-cli: 4.10.0_2556d219610e9f18d4977e3f769c7cc6
+      webpack-stats-plugin: 1.1.3
+      xclap: 0.2.53
+      xsh: 0.4.5
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@webpack-cli/generators'
+      - '@webpack-cli/migrate'
+      - esbuild
+      - uglify-js
+      - webpack-bundle-analyzer
+      - webpack-dev-server
+    dev: false
+
+  file:projects/electrode-archetype-webpack-dll.tgz:
+    resolution: {integrity: sha512-KD1VVQ83rKadS4luJ2W1Q/f72roHetECvlhKruW3G05OWM+kRxm/LRdntra71B5nb9phFykDFVFsJ/4wTzdXgA==, tarball: file:projects/electrode-archetype-webpack-dll.tgz}
+    name: '@rush-temp/electrode-archetype-webpack-dll'
+    version: 0.0.0
+    dependencies:
+      electrode-archetype-njs-module-dev: 3.0.3
+      optional-require: 1.1.8
+      xsh: 0.4.5
+    dev: false
+
+>>>>>>> 2ddced9c (fix: add missing dependency)
   file:projects/electrode-cdn-file-loader.tgz:
     resolution: {integrity: sha512-c3xOXllloxjYyAhjzmTT1MQZ2nJmrCxwiNLilUULWJIlwwy7R1yC+m3tnX1cUxSMYYXvRBjcFCrirVnpgrzcXw==, tarball: file:projects/electrode-cdn-file-loader.tgz}
     name: '@rush-temp/electrode-cdn-file-loader'
@@ -17422,11 +18981,19 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 13.13.52
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 13.13.52
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.10
       '@xarc/module-dev': 2.2.5
@@ -17467,11 +19034,19 @@ packages:
       '@babel/preset-react': 7.23.3_@babel+core@7.23.3
       '@babel/register': 7.22.15_@babel+core@7.23.3
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 13.13.52
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 13.13.52
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.10
       '@xarc/module-dev': 2.2.5
@@ -17535,7 +19110,11 @@ packages:
     name: '@rush-temp/opt-jest'
     version: 0.0.0
     dependencies:
+<<<<<<< HEAD
       '@types/jest': 29.5.8
+=======
+      '@types/jest': 29.5.6
+>>>>>>> 2ddced9c (fix: add missing dependency)
       babel-jest: 29.7.0
       eslint-plugin-jest: 27.6.0_jest@29.7.0
       jest: 29.7.0
@@ -17567,7 +19146,11 @@ packages:
       chai: 4.3.10
       chai-as-promised: 7.1.1_chai@4.3.10
       chai-shallowly: 1.0.0
+<<<<<<< HEAD
       core-js: 3.33.2
+=======
+      core-js: 3.33.1
+>>>>>>> 2ddced9c (fix: add missing dependency)
       enzyme: 3.11.0
       enzyme-adapter-react-16: 1.15.7_enzyme@3.11.0
       karma: 6.4.2
@@ -17615,7 +19198,11 @@ packages:
     name: '@rush-temp/opt-mocha'
     version: 0.0.0
     dependencies:
+<<<<<<< HEAD
       '@types/mocha': 10.0.4
+=======
+      '@types/mocha': 10.0.3
+>>>>>>> 2ddced9c (fix: add missing dependency)
       chai: 4.3.10
       chai-as-promised: 7.1.1_chai@4.3.10
       chai-shallowly: 1.0.0
@@ -17691,7 +19278,11 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.89.0:
+<<<<<<< HEAD
     resolution: {integrity: sha512-TOzeULnFtgTY3T0J0yEwV987w0MeZpvuf+pk7kKEbeXy0NEH17I9vqqh22cPvmTWDDfvKo9kbyrhF0pOsvYmrA==, tarball: file:projects/poc-subapp-redux.tgz}
+=======
+    resolution: {integrity: sha512-qncp52V6p2LOjMYOgAuW863tosNdXdv4s2HvJVeJo+D28DLTRX5Pj3rtHHMWLTMHE1HNbaR9qHGGgITzRp/xBQ==, tarball: file:projects/poc-subapp-redux.tgz}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -17707,8 +19298,13 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.1.3_218d4c23caa91839c5aa0af611b88026
+<<<<<<< HEAD
       react-router: 6.18.0_react@18.2.0
       react-router-dom: 6.18.0_react-dom@18.2.0+react@18.2.0
+=======
+      react-router: 6.17.0_react@18.2.0
+      react-router-dom: 6.17.0_react-dom@18.2.0+react@18.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       redux-logger: 3.0.6
       webpack-hot-middleware: 2.25.4
@@ -17721,7 +19317,11 @@ packages:
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.89.0:
+<<<<<<< HEAD
     resolution: {integrity: sha512-nqTfndeseIdLae4tnXaJm88oNv1uc7LbLld/UewlTtJ/PtnxGVz1NTNbtSw8iU6LnzNxJdPCu+tSJuuXB4n01w==, tarball: file:projects/poc-subapp.tgz}
+=======
+    resolution: {integrity: sha512-K32XyYWk7281v8Rh+z2+5lyb/nhBGhgUcW2v6LTvBOKk6uatpShzu3zPmjf3a/+uKDYgv8+l+akbWD1Sz32XOg==, tarball: file:projects/poc-subapp.tgz}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
@@ -17737,8 +19337,13 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.1.3_218d4c23caa91839c5aa0af611b88026
+<<<<<<< HEAD
       react-router: 6.18.0_react@18.2.0
       react-router-dom: 6.18.0_react-dom@18.2.0+react@18.2.0
+=======
+      react-router: 6.17.0_react@18.2.0
+      react-router-dom: 6.17.0_react-dom@18.2.0+react@18.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       webpack-hot-middleware: 2.25.4
     transitivePeerDependencies:
@@ -17764,8 +19369,13 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.1.3_218d4c23caa91839c5aa0af611b88026
+<<<<<<< HEAD
       react-router: 6.18.0_react@18.2.0
       react-router-dom: 6.18.0_react-dom@18.2.0+react@18.2.0
+=======
+      react-router: 6.17.0_react@18.2.0
+      react-router-dom: 6.17.0_react-dom@18.2.0+react@18.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       webpack-hot-middleware: 2.25.4
     transitivePeerDependencies:
@@ -17782,6 +19392,7 @@ packages:
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@testing-library/react': 11.2.7_react-dom@18.2.0+react@18.2.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 18.18.9
@@ -17799,6 +19410,25 @@ packages:
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.53.0
       eslint-plugin-jsdoc: 30.7.13_eslint@8.53.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 18.18.7
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 10.0.20
+      '@types/sinon-chai': 3.2.11
+      '@typescript-eslint/eslint-plugin': 5.62.0_374149f9d03209d58d12a5ce111ab746
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0_eslint@8.52.0
+      chai: 4.3.10
+      eslint: 8.52.0
+      eslint-config-walmart: 2.2.1
+      eslint-plugin-filenames: 1.3.2_eslint@8.52.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-plugin-tsdoc: 0.2.17
       jsdom: 16.7.0
       jsdom-global: 3.0.2_jsdom@16.7.0
@@ -17810,7 +19440,11 @@ packages:
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.3.10+sinon@14.0.2
       source-map-support: 0.5.21
+<<<<<<< HEAD
       ts-node: 10.9.1_b564d767cbb6ef4fcd0eea51cb35af34
+=======
+      ts-node: 10.9.1_df68547c065902cf3c7273e0b3a8b69c
+>>>>>>> 2ddced9c (fix: add missing dependency)
       tslib: 2.6.2
       typedoc: 0.22.18_typescript@4.9.5
       typescript: 4.9.5
@@ -17831,6 +19465,7 @@ packages:
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@testing-library/react': 11.2.7_react-dom@18.2.0+react@18.2.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
@@ -17838,6 +19473,15 @@ packages:
       '@types/react-dom': 18.2.15
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_96a109dcf9607f5a1aa576228794cffa
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 3.2.3
@@ -17878,6 +19522,7 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
@@ -17885,6 +19530,15 @@ packages:
       '@types/react-dom': 18.2.15
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_96a109dcf9607f5a1aa576228794cffa
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 3.2.3
@@ -17921,6 +19575,7 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
@@ -17928,6 +19583,15 @@ packages:
       '@types/react-dom': 18.2.15
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_96a109dcf9607f5a1aa576228794cffa
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 3.2.3
@@ -17963,6 +19627,7 @@ packages:
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@testing-library/react': 13.4.0_react-dom@18.2.0+react@18.2.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 18.18.9
@@ -17980,18 +19645,45 @@ packages:
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.53.0
       eslint-plugin-jsdoc: 30.7.13_eslint@8.53.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 18.18.7
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 10.0.20
+      '@types/sinon-chai': 3.2.11
+      '@typescript-eslint/eslint-plugin': 5.62.0_374149f9d03209d58d12a5ce111ab746
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@xarc/module-dev': 3.2.3
+      '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0_eslint@8.52.0
+      chai: 4.3.10
+      eslint: 8.52.0
+      eslint-config-walmart: 2.2.1
+      eslint-plugin-filenames: 1.3.2_eslint@8.52.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       jsdom: 19.0.0
       jsdom-global: 3.0.2_jsdom@19.0.0
       mocha: 10.2.0
       nyc: 15.1.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+<<<<<<< HEAD
       react-redux: 8.1.3_b0d8773158d93ab9331cc19fc521bfe9
+=======
+      react-redux: 8.1.3_37607727ae30e477f5210de2d896ef2b
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.3.10+sinon@14.0.2
       source-map-support: 0.5.21
+<<<<<<< HEAD
       ts-node: 10.9.1_b564d767cbb6ef4fcd0eea51cb35af34
+=======
+      ts-node: 10.9.1_df68547c065902cf3c7273e0b3a8b69c
+>>>>>>> 2ddced9c (fix: add missing dependency)
       tslib: 2.6.2
       typedoc: 0.22.18_typescript@4.9.5
       typescript: 4.9.5
@@ -18013,6 +19705,7 @@ packages:
       '@babel/runtime': 7.23.2
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
       '@testing-library/react': 13.4.0_react-dom@18.2.0+react@18.2.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 18.18.9
@@ -18030,6 +19723,25 @@ packages:
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.53.0
       eslint-plugin-jsdoc: 30.7.13_eslint@8.53.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 18.18.7
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 10.0.20
+      '@types/sinon-chai': 3.2.11
+      '@typescript-eslint/eslint-plugin': 5.62.0_374149f9d03209d58d12a5ce111ab746
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0_eslint@8.52.0
+      chai: 4.3.10
+      eslint: 8.52.0
+      eslint-config-walmart: 2.2.1
+      eslint-plugin-filenames: 1.3.2_eslint@8.52.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-plugin-tsdoc: 0.2.17
       history: 5.3.0
       jsdom: 19.0.0
@@ -18038,14 +19750,24 @@ packages:
       nyc: 15.1.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+<<<<<<< HEAD
       react-redux: 8.1.3_b0d8773158d93ab9331cc19fc521bfe9
       react-router: 6.18.0_react@18.2.0
       react-router-dom: 6.18.0_react-dom@18.2.0+react@18.2.0
+=======
+      react-redux: 8.1.3_37607727ae30e477f5210de2d896ef2b
+      react-router: 6.17.0_react@18.2.0
+      react-router-dom: 6.17.0_react-dom@18.2.0+react@18.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.3.10+sinon@14.0.2
       source-map-support: 0.5.21
+<<<<<<< HEAD
       ts-node: 10.9.1_b564d767cbb6ef4fcd0eea51cb35af34
+=======
+      ts-node: 10.9.1_df68547c065902cf3c7273e0b3a8b69c
+>>>>>>> 2ddced9c (fix: add missing dependency)
       tslib: 2.6.2
       typedoc: 0.22.18_typescript@4.9.5
       typescript: 4.9.5
@@ -18066,6 +19788,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 18.18.9
@@ -18083,6 +19806,25 @@ packages:
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.53.0
       eslint-plugin-jsdoc: 30.7.13_eslint@8.53.0
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 18.18.7
+      '@types/react': 18.2.33
+      '@types/react-dom': 18.2.14
+      '@types/sinon': 10.0.20
+      '@types/sinon-chai': 3.2.11
+      '@typescript-eslint/eslint-plugin': 5.62.0_374149f9d03209d58d12a5ce111ab746
+      '@typescript-eslint/parser': 5.62.0_eslint@8.52.0+typescript@4.9.5
+      '@xarc/module-dev': 4.1.0
+      '@xarc/run': 1.1.1
+      babel-eslint: 10.1.0_eslint@8.52.0
+      chai: 4.3.10
+      eslint: 8.52.0
+      eslint-config-walmart: 2.2.1
+      eslint-plugin-filenames: 1.3.2_eslint@8.52.0
+      eslint-plugin-jsdoc: 30.7.13_eslint@8.52.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       eslint-plugin-tsdoc: 0.2.17
       mocha: 10.2.0
       nyc: 15.1.0
@@ -18091,7 +19833,11 @@ packages:
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.3.10+sinon@14.0.2
       source-map-support: 0.5.21
+<<<<<<< HEAD
       ts-node: 10.9.1_b564d767cbb6ef4fcd0eea51cb35af34
+=======
+      ts-node: 10.9.1_df68547c065902cf3c7273e0b3a8b69c
+>>>>>>> 2ddced9c (fix: add missing dependency)
       tslib: 2.6.2
       typedoc: 0.23.28_typescript@4.9.5
       typescript: 4.9.5
@@ -18107,11 +19853,19 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 13.13.52
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 13.13.52
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.10
       '@xarc/module-dev': 2.2.5
@@ -18172,8 +19926,13 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.1.3_218d4c23caa91839c5aa0af611b88026
+<<<<<<< HEAD
       react-router: 6.18.0_react@18.2.0
       react-router-dom: 6.18.0_react-dom@18.2.0+react@18.2.0
+=======
+      react-router: 6.17.0_react@18.2.0
+      react-router-dom: 6.17.0_react-dom@18.2.0+react@18.2.0
+>>>>>>> 2ddced9c (fix: add missing dependency)
       redux: 4.2.1
       run-verify: 1.2.6
     transitivePeerDependencies:
@@ -18215,7 +19974,7 @@ packages:
     dev: false
 
   file:projects/subapp-server.tgz:
-    resolution: {integrity: sha512-w+qFzw6qgoBJgXwc70oXDdC91Zyc73/5zdgBr0MzF2FTT1dv3ocx1MlPA3Y/l6/h/WajyhQkG3dxXo5xbrgizw==, tarball: file:projects/subapp-server.tgz}
+    resolution: {integrity: sha512-pmgrylYHI6mEJrQE9vMVfFRceqn9cZT6aqPdUa7N/qgwGIJ8JTBLqfbK12dtA6UtlyZOYPvi9YEg/CNzghqAdg==, tarball: file:projects/subapp-server.tgz}
     name: '@rush-temp/subapp-server'
     version: 0.0.0
     dependencies:
@@ -18300,12 +20059,21 @@ packages:
     dependencies:
       '@babel/cli': 7.23.0
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/chai-as-promised': 7.1.8
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/chai-as-promised': 7.1.7
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_96a109dcf9607f5a1aa576228794cffa
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.9.5
       '@xarc/module-dev': 3.2.3
@@ -18343,19 +20111,32 @@ packages:
     dev: false
 
   file:projects/subapp2-basic.tgz:
+<<<<<<< HEAD
     resolution: {integrity: sha512-2UwtUt1xhYiGHlQmQR+jRpkUq1ymCY3S9cQ+KdnX3epxmtdbQT7iOjA57uiVoSPZ56fa8ZIZb/RQ7eg1mM+jpQ==, tarball: file:projects/subapp2-basic.tgz}
+=======
+    resolution: {integrity: sha512-BZEbPxwUlsVKNtY8e7INM3WTBHX0K0m0rZjRphdgVS3UEXdKcdBJShWCoTdOtNP+BE5W7tx+xVOUCJBk5g6d+w==, tarball: file:projects/subapp2-basic.tgz}
+>>>>>>> 2ddced9c (fix: add missing dependency)
     name: '@rush-temp/subapp2-basic'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.23.2
       '@module-federation/concat-runtime': 0.0.1
       '@testing-library/jest-dom': 5.17.0
+<<<<<<< HEAD
       '@testing-library/react': 14.1.0
       '@types/node': 20.9.0
       '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       prettier: 3.1.0
       ts-node: 10.9.1_721a34788963c5729ab2b00819529bae
+=======
+      '@testing-library/react': 14.0.0
+      '@types/node': 20.8.9
+      '@xarc/fastify-server': 3.3.1
+      '@xarc/run': 1.1.1
+      prettier: 3.0.3
+      ts-node: 10.9.1_43909d7b1a0e0d63830e449c0c10eccd
+>>>>>>> 2ddced9c (fix: add missing dependency)
       typescript: 5.2.2
       webpack-hot-middleware: 2.25.4
     transitivePeerDependencies:
@@ -18372,13 +20153,21 @@ packages:
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.23.2
+<<<<<<< HEAD
       '@types/node': 20.9.0
+=======
+      '@types/node': 20.8.9
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       isomorphic-loader: 4.5.0
       prop-types: 15.8.1
       react-dom: 18.2.0
+<<<<<<< HEAD
       ts-node: 10.9.1_721a34788963c5729ab2b00819529bae
+=======
+      ts-node: 10.9.1_43909d7b1a0e0d63830e449c0c10eccd
+>>>>>>> 2ddced9c (fix: add missing dependency)
       typescript: 5.2.2
       webpack-hot-middleware: 2.25.4
     transitivePeerDependencies:
@@ -18394,11 +20183,19 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 13.13.52
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 13.13.52
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 2.34.0_2b015b1c4b7c4a3ed9a197dc233b1a35
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.10
       '@xarc/module-dev': 2.2.5
@@ -18432,11 +20229,19 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.4
       '@types/node': 14.18.63
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.3
+      '@types/node': 14.18.63
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 4.33.0_5717ef02ba985de55f36ee939304b942
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.8.4
       '@xarc/module-dev': 4.1.0
@@ -18473,11 +20278,19 @@ packages:
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+<<<<<<< HEAD
       '@types/chai': 4.3.10
       '@types/mocha': 10.0.0
       '@types/node': 18.18.9
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
+=======
+      '@types/chai': 4.3.9
+      '@types/mocha': 10.0.0
+      '@types/node': 18.18.7
+      '@types/sinon': 9.0.11
+      '@types/sinon-chai': 3.2.11
+>>>>>>> 2ddced9c (fix: add missing dependency)
       '@typescript-eslint/eslint-plugin': 2.34.0_78673f6a350169a27f383eda83199f64
       '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@4.9.5
       '@xarc/module-dev': 4.1.0
@@ -18507,11 +20320,19 @@ packages:
       sinon: 7.5.0
       sinon-chai: 3.7.0_chai@4.3.10+sinon@7.5.0
       source-map-support: 0.5.21
+<<<<<<< HEAD
       ts-node: 10.9.1_b564d767cbb6ef4fcd0eea51cb35af34
       typedoc: 0.17.8_typescript@4.9.5
       typescript: 4.9.5
       url-loader: 4.1.1_file-loader@6.2.0+webpack@5.89.0
       webpack: 5.89.0_webpack-cli@4.8.0
+=======
+      ts-node: 10.9.1_df68547c065902cf3c7273e0b3a8b69c
+      typedoc: 0.17.8_typescript@4.9.5
+      typescript: 4.9.5
+      url-loader: 4.1.1_file-loader@6.2.0+webpack@5.89.0
+      webpack: 5.89.0_f52b93474dd2fb1e4f90db635f9d54a8
+>>>>>>> 2ddced9c (fix: add missing dependency)
       webpack-cli: 4.8.0_2556d219610e9f18d4977e3f769c7cc6
       webpack-stats-plugin: 1.1.3
       xsh: 0.4.5
