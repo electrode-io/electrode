@@ -38,12 +38,13 @@ json files, and updates the shrinkwrap file as needed.
 
 ### Try a sample
 
-Now you can go to the `samples` folder and try the `create-app-demo` sample app, develop and test your changes over there. This is the exact same app that our create-app package generates.
+Now you can go to the `samples` folder and try the `poc-subappv1-csp` sample app, develop and test your changes over there. This is the exact same app that our create-app package generates.
 
 ```bash
-$ cd samples/create-app-demo
+$ cd samples/poc-subappv1-csp
 $ rushx dev
 ```
+>> Note that the app you are trying to run should be there in the projects list of `rush.json`
 
 You should see some output in the console with `[DEV ADMIN]`. You can press `M` for the dev menu.
 

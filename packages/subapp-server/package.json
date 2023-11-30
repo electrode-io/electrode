@@ -38,7 +38,8 @@
     "http-status-codes": "^2.2.0",
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.4",
-    "xaa": "^1.7.3"
+    "xaa": "^1.7.3",
+    "subapp-web": "^2.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
