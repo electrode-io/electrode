@@ -1,1 +1,0 @@
-exports.tokenHandler = function asTokenHandler() {};
