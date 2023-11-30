@@ -32,7 +32,8 @@
   "scripts": {
     "dev": "xrun electrode/dev",
     "test": "xrun electrode/check",
-    "build": "xrun electrode/build"
+    "build": "xrun electrode/build",
+    "start": "node lib/server"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.10",
