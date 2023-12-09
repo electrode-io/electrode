@@ -206,8 +206,13 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
   return `${scriptSrc}${styleSrc}`;
 }
 
+/**
+ * Wait for a condition and execute rest of the code. 
+ * @param conditionFunction - A function that returns conditions to be waited for.
+ * @param maxWait - Max duration (in ms) to wait before promise resolves to avoid indefinite wait.
+ * @returns A promise that resolves after given condition in conditionFunction is satisfied or after the max wait time.
+ */
 function until(conditionFunction, maxWait) {
-
   const poll = (resolve) => {
     if (conditionFunction()) {
       resolve();

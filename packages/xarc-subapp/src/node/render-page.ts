@@ -123,8 +123,6 @@ ${body.end}
     if (process.env.WEBPACK_DEV) {
       await until(() =>  options.request.app.webpackDev.valid === true, 400);
       console.log(`Webpack stats valid: ${options.request.app.webpackDev.valid}`);
-
-      return await this._renderer.render(options);
     }
 
     return await this._renderer.render(options);
