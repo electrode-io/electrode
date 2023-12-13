@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "added react-router-dom v6 in peer dependencies",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-react"
+}
