@@ -143,3 +143,16 @@ export const SSR_PIPELINES = Symbol("subapp-ssr-pipelines");
 export function safeStringifyJson(obj) {
   return JSON.stringify(obj).replace(/<(\/?)script>/g, "&lt;$1script>");
 }
+
+export function until(conditionFunction, maxWait) {
+
+  const poll = (resolve) => {
+    if (conditionFunction()) {
+      resolve();
+    } else {
+      setTimeout(_ => poll(resolve), maxWait);
+    }
+  }
+
+  return new Promise(poll);
+}

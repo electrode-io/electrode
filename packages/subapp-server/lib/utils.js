@@ -206,11 +206,14 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
   return `${scriptSrc}${styleSrc}`;
 }
 
-function until(conditionFunction) {
+function until(conditionFunction, maxWait) {
 
-  const poll = resolve => {
-    if(conditionFunction()) resolve();
-    else setTimeout(_ => poll(resolve), 400);
+  const poll = (resolve) => {
+    if (conditionFunction()) {
+      resolve();
+    } else {
+      setTimeout(_ => poll(resolve), maxWait);
+    }
   }
 
   return new Promise(poll);

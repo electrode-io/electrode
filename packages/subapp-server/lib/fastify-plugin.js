@@ -43,7 +43,7 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       // wait for webpack stats to be valid if webpackDev
       if (webpackDev) {
-        await until(() => request.app.webpackDev.valid === true);
+        await until(() => request.app.webpackDev.valid === true, 400);
         console.log(`Webpack stats valid: ${request.app.webpackDev.valid}`);
       }
       
