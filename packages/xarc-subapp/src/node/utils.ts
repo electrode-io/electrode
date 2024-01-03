@@ -143,3 +143,21 @@ export const SSR_PIPELINES = Symbol("subapp-ssr-pipelines");
 export function safeStringifyJson(obj) {
   return JSON.stringify(obj).replace(/<(\/?)script>/g, "&lt;$1script>");
 }
+
+/**
+ * Wait for a condition and execute rest of the code. 
+ * @param conditionFunction - A function that returns conditions to be waited for.
+ * @param maxWait - Max duration (in ms) to wait before promise resolves to avoid indefinite wait.
+ * @returns A promise that resolves after given condition in conditionFunction is satisfied or after the max wait time.
+ */
+export function until(conditionFunction, maxWait) {
+  const poll = (resolve) => {
+    if (conditionFunction()) {
+      resolve();
+    } else {
+      setTimeout(_ => poll(resolve), maxWait);
+    }
+  }
+
+  return new Promise(poll);
+}
