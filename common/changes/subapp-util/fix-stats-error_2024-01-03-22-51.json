@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-util",
+      "comment": "Add the missing lodash direct dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-util"
+}

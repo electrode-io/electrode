@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Fix webpack stats error in dev mode during initial start up",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-server"
+}
