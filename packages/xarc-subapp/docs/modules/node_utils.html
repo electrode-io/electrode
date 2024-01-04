@@ -1,494 +1,56 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>node/utils | @xarc/subapp</title>
-	<meta name="description" content="Documentation for @xarc/subapp">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../assets/css/main.css">
-	<script async src="../assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="../index.html" class="title">@xarc/subapp</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="../modules.html">@xarc/subapp</a>
-				</li>
-				<li>
-					<a href="node_utils.html">node/utils</a>
-				</li>
-			</ul>
-			<h1>Module node/utils</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="node_utils.html#ssr_pipelines" class="tsd-kind-icon">SSR_<wbr>PIPELINES</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#generatenonce" class="tsd-kind-icon">generate<wbr>Nonce</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#loadcdnmap" class="tsd-kind-icon">load<wbr>Cdn<wbr>Map</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#mapcdn" class="tsd-kind-icon">map<wbr>Cdn</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#noncegenerator" class="tsd-kind-icon">nonce<wbr>Generator</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#safestringifyjson" class="tsd-kind-icon">safe<wbr>Stringify<wbr>Json</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#urljoin" class="tsd-kind-icon">url<wbr>Join</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#wrapstringfragment" class="tsd-kind-icon">wrap<wbr>String<wbr>Fragment</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="ssr_pipelines" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> SSR_<wbr>PIPELINES</h3>
-					<div class="tsd-signature tsd-kind-icon">SSR_<wbr>PIPELINES<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="node_utils.html#ssr_pipelines" class="tsd-signature-type" data-tsd-kind="Variable">SSR_PIPELINES</a><span class="tsd-signature-symbol"> = ...</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L129">node/utils.ts:129</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="generatenonce" class="tsd-anchor"></a>
-					<h3>generate<wbr>Nonce</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">generate<wbr>Nonce<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>props<span class="tsd-signature-symbol">: </span><a href="node_types.html#initprops" class="tsd-signature-type" data-tsd-kind="Type alias">InitProps</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span>, fallback<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a>, tag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> }</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L79">node/utils.ts:79</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>generate nonce token</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>token: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>props<span class="tsd-signature-symbol">: </span><a href="node_types.html#initprops" class="tsd-signature-type" data-tsd-kind="Type alias">InitProps</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>init props</p>
-									</div>
-								</li>
-								<li>
-									<h5>fallback: <a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> = null</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>nonce fallback</p>
-									</div>
-								</li>
-								<li>
-									<h5>tag: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>nonce token tag or nonce generator tag</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> }</span></h4>
-							<p>an object with generated string token and nonce info</p>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter">
-									<h5>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a></h5>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="loadcdnmap" class="tsd-anchor"></a>
-					<h3>load<wbr>Cdn<wbr>Map</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Cdn<wbr>Map<span class="tsd-signature-symbol">(</span>cdnMap<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L15">node/utils.ts:15</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Load CDN map</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>cdnMap: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>CDN map</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-							<p>cdn Map, if not found, return undefined</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="mapcdn" class="tsd-anchor"></a>
-					<h3>map<wbr>Cdn</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">map<wbr>Cdn<span class="tsd-signature-symbol">(</span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L34">node/utils.ts:34</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>get</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>file: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string to wrap</p>
-									</div>
-								</li>
-								<li>
-									<h5>data: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string go before fragment</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h4>
-							<p>if found, return request&#39;s path name, if not, return false</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="noncegenerator" class="tsd-anchor"></a>
-					<h3>nonce<wbr>Generator</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">nonce<wbr>Generator<span class="tsd-signature-symbol">(</span>_<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L64">node/utils.ts:64</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="safestringifyjson" class="tsd-anchor"></a>
-					<h3>safe<wbr>Stringify<wbr>Json</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">safe<wbr>Stringify<wbr>Json<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L139">node/utils.ts:139</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Stringify a JSON object and replace some tags to avoid XSS:</p>
-									<ul>
-										<li><code>&lt;script&gt;</code> =&gt; <code>&amp;lt;script&gt;</code></li>
-										<li><code>&lt;/script&gt;</code> =&gt; <code>&amp;lt;/script&gt;</code></li>
-									</ul>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>obj: <span class="tsd-signature-type">any</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>object to stringify</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>JSON string of object</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="urljoin" class="tsd-anchor"></a>
-					<h3>url<wbr>Join</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">url<wbr>Join<span class="tsd-signature-symbol">(</span>baseUrl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>pathParts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L112">node/utils.ts:112</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Join a base url with path parts</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>baseUrl: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>base url (protocol, host, port, first path parts)</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>pathParts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>other path parts.  the first one start with ? or &amp; causes
-										the remaining parts to be treated as query params</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>full URL</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="wrapstringfragment" class="tsd-anchor"></a>
-					<h3>wrap<wbr>String<wbr>Fragment</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">wrap<wbr>String<wbr>Fragment<span class="tsd-signature-symbol">(</span>fragment<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, postfix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/67c2d46a/packages/xarc-subapp/src/node/utils.ts#L55">node/utils.ts:55</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Wrap a string fragment with prefix and postfix
-									If fragment is falsy, then return empty string <code>&quot;&quot;</code></p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>fragment: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string to wrap</p>
-									</div>
-								</li>
-								<li>
-									<h5>prefix: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>string go before fragment</p>
-									</div>
-								</li>
-								<li>
-									<h5>postfix: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>go after fragment</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>wrapped string</p>
-						</li>
-					</ul>
-				</section>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="../modules.html">Exports</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node.html">node</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_init_context.html">node/init-<wbr>context</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_init_v2.html">node/init-<wbr>v2</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_load_v2.html">node/load-<wbr>v2</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_render_page.html">node/render-<wbr>page</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_server_render_pipeline.html">node/server-<wbr>render-<wbr>pipeline</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_start_v2.html">node/start-<wbr>v2</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_types.html">node/types</a>
-					</li>
-					<li class="current tsd-kind-module">
-						<a href="node_utils.html">node/utils</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_webpack_stats.html">node/webpack-<wbr>stats</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_xarc_subapp_v2_node.html">node/xarc-<wbr>subapp-<wbr>v2-<wbr>node</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp.html">subapp</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_client_framework_lib.html">subapp/client-<wbr>framework-<wbr>lib</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_client_render_pipeline.html">subapp/client-<wbr>render-<wbr>pipeline</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_envhooks.html">subapp/envhooks</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_subapp_ready.html">subapp/subapp-<wbr>ready</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_subapp_render_pipeline.html">subapp/subapp-<wbr>render-<wbr>pipeline</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="subapp_types.html">subapp/types</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="node_utils.html#ssr_pipelines" class="tsd-kind-icon">SSR_<wbr>PIPELINES</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#generatenonce" class="tsd-kind-icon">generate<wbr>Nonce</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#loadcdnmap" class="tsd-kind-icon">load<wbr>Cdn<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#mapcdn" class="tsd-kind-icon">map<wbr>Cdn</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#noncegenerator" class="tsd-kind-icon">nonce<wbr>Generator</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#safestringifyjson" class="tsd-kind-icon">safe<wbr>Stringify<wbr>Json</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#urljoin" class="tsd-kind-icon">url<wbr>Join</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="node_utils.html#wrapstringfragment" class="tsd-kind-icon">wrap<wbr>String<wbr>Fragment</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="../assets/js/main.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>node/utils | @xarc/subapp</title><meta name="description" content="Documentation for @xarc/subapp"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">@xarc/subapp</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><ul class="tsd-breadcrumb"><li><a href="../modules.html">@xarc/subapp</a></li><li><a href="node_utils.html">node/utils</a></li></ul><h1>Module node/utils </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><section class="tsd-panel-group tsd-index-group"><h2>Index</h2><section class="tsd-panel tsd-index-panel"><div class="tsd-index-content"><section class="tsd-index-section "><h3>Variables</h3><ul class="tsd-index-list"><li class="tsd-kind-variable tsd-parent-kind-module"><a href="node_utils.html#SSR_PIPELINES" class="tsd-kind-icon">SSR_<wbr/>PIPELINES</a></li></ul></section><section class="tsd-index-section "><h3>Functions</h3><ul class="tsd-index-list"><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#generateNonce" class="tsd-kind-icon">generate<wbr/>Nonce</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#loadCdnMap" class="tsd-kind-icon">load<wbr/>Cdn<wbr/>Map</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#mapCdn" class="tsd-kind-icon">map<wbr/>Cdn</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#nonceGenerator" class="tsd-kind-icon">nonce<wbr/>Generator</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#safeStringifyJson" class="tsd-kind-icon">safe<wbr/>Stringify<wbr/>Json</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#until" class="tsd-kind-icon">until</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#urlJoin" class="tsd-kind-icon">url<wbr/>Join</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#wrapStringFragment" class="tsd-kind-icon">wrap<wbr/>String<wbr/>Fragment</a></li></ul></section></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Variables</h2><section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module"><a id="SSR_PIPELINES" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagConst">Const</span> SSR_<wbr/>PIPELINES<a href="#SSR_PIPELINES" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">SSR_<wbr/>PIPELINES<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="node_utils.html#SSR_PIPELINES" class="tsd-signature-type" data-tsd-kind="Variable">SSR_PIPELINES</a><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L133">node/utils.ts:133</a></li></ul></aside></section></section><section class="tsd-panel-group tsd-member-group "><h2>Functions</h2><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="generateNonce" class="tsd-anchor"></a><h3 class="tsd-anchor-link">generate<wbr/>Nonce<a href="#generateNonce" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">generate<wbr/>Nonce<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>props<span class="tsd-signature-symbol">: </span><a href="node_types.html#InitProps" class="tsd-signature-type" data-tsd-kind="Type alias">InitProps</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span>, fallback<span class="tsd-signature-symbol">?: </span><a href="node_types.html#NonceInfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a>, tag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#NonceInfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> }</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L79">node/utils.ts:79</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>generate nonce token</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>token: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>props<span class="tsd-signature-symbol">: </span><a href="node_types.html#InitProps" class="tsd-signature-type" data-tsd-kind="Type alias">InitProps</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>init props</p>
+</div></div></li><li><h5>fallback: <a href="node_types.html#NonceInfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> = null</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>nonce fallback</p>
+</div></div></li><li><h5>tag: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>nonce token tag or nonce generator tag</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#NonceInfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> }</span></h4><div><p>an object with generated string token and nonce info</p>
+</div><ul class="tsd-parameters"><li class="tsd-parameter"><h5>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li><li class="tsd-parameter"><h5><span class="tsd-flag ts-flagOptional">Optional</span> nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#NonceInfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a></h5></li></ul></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="loadCdnMap" class="tsd-anchor"></a><h3 class="tsd-anchor-link">load<wbr/>Cdn<wbr/>Map<a href="#loadCdnMap" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">load<wbr/>Cdn<wbr/>Map<span class="tsd-signature-symbol">(</span>cdnMap<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L15">node/utils.ts:15</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Load CDN map</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>cdnMap: <span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>CDN map</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><div><p>cdn Map, if not found, return undefined</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="mapCdn" class="tsd-anchor"></a><h3 class="tsd-anchor-link">map<wbr/>Cdn<a href="#mapCdn" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">map<wbr/>Cdn<span class="tsd-signature-symbol">(</span>file<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L34">node/utils.ts:34</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>get</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>file: <span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>string to wrap</p>
+</div></div></li><li><h5>data: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>string go before fragment</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h4><div><p>if found, return request&#39;s path name, if not, return false</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="nonceGenerator" class="tsd-anchor"></a><h3 class="tsd-anchor-link">nonce<wbr/>Generator<a href="#nonceGenerator" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">nonce<wbr/>Generator<span class="tsd-signature-symbol">(</span>_<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L64">node/utils.ts:64</a></li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5><span class="tsd-flag ts-flagOptional">Optional</span> _: <span class="tsd-signature-type">string</span></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="safeStringifyJson" class="tsd-anchor"></a><h3 class="tsd-anchor-link">safe<wbr/>Stringify<wbr/>Json<a href="#safeStringifyJson" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">safe<wbr/>Stringify<wbr/>Json<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L143">node/utils.ts:143</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Stringify a JSON object and replace some tags to avoid XSS:</p>
+<ul>
+<li><code>&lt;script&gt;</code> =&gt; <code>&amp;lt;script&gt;</code></li>
+<li><code>&lt;/script&gt;</code> =&gt; <code>&amp;lt;/script&gt;</code></li>
+</ul>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>obj: <span class="tsd-signature-type">any</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>object to stringify</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><div><p>JSON string of object</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="until" class="tsd-anchor"></a><h3 class="tsd-anchor-link">until<a href="#until" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">until<span class="tsd-signature-symbol">(</span>conditionFunction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, maxWait<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L153">node/utils.ts:153</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Wait for a condition and execute rest of the code.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>conditionFunction: <span class="tsd-signature-type">any</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>A function that returns conditions to be waited for.</p>
+</div></div></li><li><h5>maxWait: <span class="tsd-signature-type">any</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Max duration (in ms) to wait before promise resolves to avoid indefinite wait.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4><div><p>A promise that resolves after given condition in conditionFunction is satisfied or after the max wait time.</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="urlJoin" class="tsd-anchor"></a><h3 class="tsd-anchor-link">url<wbr/>Join<a href="#urlJoin" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">url<wbr/>Join<span class="tsd-signature-symbol">(</span>baseUrl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>pathParts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L116">node/utils.ts:116</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Join a base url with path parts</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>baseUrl: <span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>base url (protocol, host, port, first path parts)</p>
+</div></div></li><li><h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>pathParts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>other path parts.  the first one start with ? or &amp; causes
+  the remaining parts to be treated as query params</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><div><p>full URL</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module"><a id="wrapStringFragment" class="tsd-anchor"></a><h3 class="tsd-anchor-link">wrap<wbr/>String<wbr/>Fragment<a href="#wrapStringFragment" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module"><li class="tsd-signature tsd-kind-icon">wrap<wbr/>String<wbr/>Fragment<span class="tsd-signature-symbol">(</span>fragment<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, postfix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/arunvishnun/electrode/blob/55072c1a/packages/xarc-subapp/src/node/utils.ts#L55">node/utils.ts:55</a></li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Wrap a string fragment with prefix and postfix
+If fragment is falsy, then return empty string <code>&quot;&quot;</code></p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>fragment: <span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>string to wrap</p>
+</div></div></li><li><h5>prefix: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>string go before fragment</p>
+</div></div></li><li><h5>postfix: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>go after fragment</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><div><p>wrapped string</p>
+</div></li></ul></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="node.html">node</a></li><li class=" tsd-kind-module"><a href="node_init_context.html">node/init-<wbr/>context</a></li><li class=" tsd-kind-module"><a href="node_init_v2.html">node/init-<wbr/>v2</a></li><li class=" tsd-kind-module"><a href="node_load_v2.html">node/load-<wbr/>v2</a></li><li class=" tsd-kind-module"><a href="node_render_page.html">node/render-<wbr/>page</a></li><li class=" tsd-kind-module"><a href="node_server_render_pipeline.html">node/server-<wbr/>render-<wbr/>pipeline</a></li><li class=" tsd-kind-module"><a href="node_start_v2.html">node/start-<wbr/>v2</a></li><li class=" tsd-kind-module"><a href="node_types.html">node/types</a></li><li class="current tsd-kind-module"><a href="node_utils.html">node/utils</a></li><li class=" tsd-kind-module"><a href="node_webpack_stats.html">node/webpack-<wbr/>stats</a></li><li class=" tsd-kind-module"><a href="node_xarc_subapp_v2_node.html">node/xarc-<wbr/>subapp-<wbr/>v2-<wbr/>node</a></li><li class=" tsd-kind-module"><a href="subapp.html">subapp</a></li><li class=" tsd-kind-module"><a href="subapp_client_framework_lib.html">subapp/client-<wbr/>framework-<wbr/>lib</a></li><li class=" tsd-kind-module"><a href="subapp_client_render_pipeline.html">subapp/client-<wbr/>render-<wbr/>pipeline</a></li><li class=" tsd-kind-module"><a href="subapp_envhooks.html">subapp/envhooks</a></li><li class=" tsd-kind-module"><a href="subapp_subapp_ready.html">subapp/subapp-<wbr/>ready</a></li><li class=" tsd-kind-module"><a href="subapp_subapp_render_pipeline.html">subapp/subapp-<wbr/>render-<wbr/>pipeline</a></li><li class=" tsd-kind-module"><a href="subapp_types.html">subapp/types</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-variable tsd-parent-kind-module"><a href="node_utils.html#SSR_PIPELINES" class="tsd-kind-icon">SSR_<wbr/>PIPELINES</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#generateNonce" class="tsd-kind-icon">generate<wbr/>Nonce</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#loadCdnMap" class="tsd-kind-icon">load<wbr/>Cdn<wbr/>Map</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#mapCdn" class="tsd-kind-icon">map<wbr/>Cdn</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#nonceGenerator" class="tsd-kind-icon">nonce<wbr/>Generator</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#safeStringifyJson" class="tsd-kind-icon">safe<wbr/>Stringify<wbr/>Json</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#until" class="tsd-kind-icon">until</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#urlJoin" class="tsd-kind-icon">url<wbr/>Join</a></li><li class="tsd-kind-function tsd-parent-kind-module"><a href="node_utils.html#wrapStringFragment" class="tsd-kind-icon">wrap<wbr/>String<wbr/>Fragment</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li><li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li><li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="../assets/main.js"></script></body></html>

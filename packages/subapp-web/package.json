@@ -35,11 +35,11 @@
     "lodash": "^4.17.15",
     "node-fetch": "2.6.12",
     "optional-require": "^1.1.8",
-    "subapp-util": "^1.1.4",
+    "subapp-util": "^1.1.5",
     "xaa": "^1.7.3"
   },
   "peerDependencies": {
-    "@xarc/app": "^11.0.6"
+    "@xarc/app": "^11.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
@@ -48,7 +48,7 @@
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
     "@babel/register": "^7.22.5",
-    "@xarc/app": "^11.0.6",
+    "@xarc/app": "^11.0.7",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",

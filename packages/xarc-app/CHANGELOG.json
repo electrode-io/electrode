@@ -2,6 +2,18 @@
   "name": "@xarc/app",
   "entries": [
     {
+      "version": "11.0.7",
+      "tag": "@xarc/app_v11.0.7",
+      "date": "Wed, 03 Jan 2024 23:41:10 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"subapp-util\" from `^1.1.4` to `^1.1.5`"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.0.6",
       "tag": "@xarc/app_v11.0.6",
       "date": "Tue, 31 Oct 2023 04:39:40 GMT",
