@@ -2,6 +2,18 @@
   "name": "@xarc/react",
   "entries": [
     {
+      "version": "1.0.4",
+      "tag": "@xarc/react_v1.0.4",
+      "date": "Wed, 03 Jan 2024 23:41:10 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.3.6` to `^0.4.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.3",
       "tag": "@xarc/react_v1.0.3",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

@@ -14,7 +14,7 @@ import {
   InitProps,
 } from "./index";
 
-import { until } from './utils';
+import { until } from "./utils";
 /**
  * Options for rendering a page for each request
  */
@@ -119,9 +119,9 @@ ${body.end}
       // asynchronously load all of them
       subAppReady(true, readyNames);
     }
-    
+
     if (process.env.WEBPACK_DEV) {
-      await until(() =>  options.request.app.webpackDev.valid === true, 400);
+      await until(() => options.request.app.webpackDev.valid === true, 400);
       console.log(`Webpack stats valid: ${options.request.app.webpackDev.valid}`);
     }
 

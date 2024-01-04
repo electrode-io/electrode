@@ -145,7 +145,7 @@ export function safeStringifyJson(obj) {
 }
 
 /**
- * Wait for a condition and execute rest of the code. 
+ * Wait for a condition and execute rest of the code.
  * @param conditionFunction - A function that returns conditions to be waited for.
  * @param maxWait - Max duration (in ms) to wait before promise resolves to avoid indefinite wait.
  * @returns A promise that resolves after given condition in conditionFunction is satisfied or after the max wait time.
@@ -157,7 +157,7 @@ export function until(conditionFunction, maxWait) {
     } else {
       setTimeout(_ => poll(resolve), maxWait);
     }
-  }
+  };
 
   return new Promise(poll);
 }

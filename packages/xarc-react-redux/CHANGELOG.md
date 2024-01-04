@@ -1,6 +1,11 @@
 # Change Log - @xarc/react-redux
 
-This log was last generated on Thu, 07 Sep 2023 21:29:15 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Jan 2024 23:41:10 GMT and should not be manually modified.
+
+## 1.1.3
+Wed, 03 Jan 2024 23:41:10 GMT
+
+_Version update only_
 
 ## 1.1.2
 Thu, 07 Sep 2023 21:29:15 GMT
