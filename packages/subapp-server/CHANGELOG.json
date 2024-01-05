@@ -2,6 +2,28 @@
   "name": "subapp-server",
   "entries": [
     {
+      "version": "2.3.0",
+      "tag": "subapp-server_v2.3.0",
+      "date": "Wed, 03 Jan 2024 23:41:10 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add missing direct dependency. This was available as transitive dependency before"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Fix webpack stats error in dev mode during initial start up"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"subapp-util\" from `^1.1.4` to `^1.1.5`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.2",
       "tag": "subapp-server_v2.2.2",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

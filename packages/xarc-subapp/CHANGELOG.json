@@ -2,6 +2,18 @@
   "name": "@xarc/subapp",
   "entries": [
     {
+      "version": "0.4.0",
+      "tag": "@xarc/subapp_v0.4.0",
+      "date": "Wed, 03 Jan 2024 23:41:10 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fix webpack stats error in dev mode during initial start up"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.3.6",
       "tag": "@xarc/subapp_v0.3.6",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",
