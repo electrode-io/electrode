@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-query",
+      "comment": "Fix an issue with npm packing and not publishing all dist folders",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react-query"
+}
