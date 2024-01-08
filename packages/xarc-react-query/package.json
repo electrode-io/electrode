@@ -64,7 +64,10 @@
   },
   "files": [
     "dist",
-    "dist*",
+    "dist-browser~es2x~esm~",
+    "dist-browser~es5~cjs~",
+    "dist-node-cjs",
+    "dist-node-esm",
     "src"
   ],
   "nyc": {
