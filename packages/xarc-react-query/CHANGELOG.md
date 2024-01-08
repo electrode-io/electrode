@@ -1,6 +1,13 @@
 # Change Log - @xarc/react-query
 
-This log was last generated on Wed, 03 Jan 2024 23:41:10 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jan 2024 20:33:22 GMT and should not be manually modified.
+
+## 1.0.5
+Mon, 08 Jan 2024 20:33:22 GMT
+
+### Patches
+
+- Fix an issue with npm packing and not publishing all dist folders
 
 ## 1.0.4
 Wed, 03 Jan 2024 23:41:10 GMT

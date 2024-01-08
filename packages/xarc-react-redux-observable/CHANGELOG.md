@@ -1,6 +1,13 @@
 # Change Log - @xarc/react-redux-observable
 
-This log was last generated on Thu, 07 Sep 2023 22:19:14 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Jan 2024 20:33:22 GMT and should not be manually modified.
+
+## 1.1.3
+Mon, 08 Jan 2024 20:33:22 GMT
+
+### Patches
+
+- Fix an issue with npm packing and not publishing all dist folders
 
 ## 1.1.2
 Thu, 07 Sep 2023 22:19:14 GMT

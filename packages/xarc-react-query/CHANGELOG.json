@@ -2,6 +2,18 @@
   "name": "@xarc/react-query",
   "entries": [
     {
+      "version": "1.0.5",
+      "tag": "@xarc/react-query_v1.0.5",
+      "date": "Mon, 08 Jan 2024 20:33:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix an issue with npm packing and not publishing all dist folders"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.4",
       "tag": "@xarc/react-query_v1.0.4",
       "date": "Wed, 03 Jan 2024 23:41:10 GMT",
