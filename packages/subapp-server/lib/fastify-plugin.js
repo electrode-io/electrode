@@ -12,6 +12,8 @@ const HttpStatusCodes = require("http-status-codes");
 const Fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(Fs.readFile);
+const optionalRequire = require("optional-require")(require);
+const getDevProxy = optionalRequire("@xarc/app-dev/config/get-dev-proxy");
 const {
   utils: { resolveChunkSelector }
 } = require("@xarc/index-page");
@@ -22,7 +24,8 @@ const {
   checkSSRMetricsReporting,
   updateFullTemplate,
   setCSPNonce,
-  getCSPHeader
+  getCSPHeader,
+  until
 } = require("./utils");
 
 const routesFromFile = require("./routes-from-file");
@@ -31,11 +34,19 @@ const templateRouting = require("./template-routing");
 
 function makeRouteHandler({ path, routeRenderer, routeOptions }) {
   const useStream = routeOptions.useStream !== false;
+  const { settings = {} } = getDevProxy ? getDevProxy() : {};
+  const { webpackDev } = settings;
 
   return async (request, reply) => {
     try {
       const { styleNonce = "", scriptNonce = "" } = setCSPNonce({ routeOptions });
 
+      // wait for webpack stats to be valid if webpackDev
+      if (webpackDev) {
+        await until(() => request.app.webpackDev.valid === true, 400);
+        console.log(`Webpack stats valid: ${request.app.webpackDev.valid}`);
+      }
+      
       const context = await routeRenderer({
         useStream,
         mode: "",
@@ -66,6 +77,7 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
         reply.code(status);
         return reply.send(data);
       }
+      
     } catch (err) {
       reply.status(HttpStatusCodes.INTERNAL_SERVER_ERROR);
       if (process.env.NODE_ENV !== "production") {

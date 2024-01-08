@@ -1,6 +1,11 @@
 # Change Log - @xarc/react-query
 
-This log was last generated on Thu, 07 Sep 2023 22:19:14 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Jan 2024 23:41:10 GMT and should not be manually modified.
+
+## 1.0.4
+Wed, 03 Jan 2024 23:41:10 GMT
+
+_Version update only_
 
 ## 1.0.3
 Thu, 07 Sep 2023 22:19:14 GMT

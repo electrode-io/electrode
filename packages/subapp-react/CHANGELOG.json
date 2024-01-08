@@ -2,6 +2,35 @@
   "name": "subapp-react",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "subapp-react_v1.2.0",
+      "date": "Wed, 03 Jan 2024 23:41:10 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.4 to ^11.0.5."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.5 to ^11.0.6."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.6 to ^11.0.7."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.3 to ^11.0.4."
+          },
+          {
+            "comment": "Updating dependency \"subapp-util\" from `^1.1.4` to `^1.1.5`"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "added react-router-dom v6 in peer dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "subapp-react_v1.1.1",
       "date": "Thu, 04 May 2023 21:08:31 GMT",
