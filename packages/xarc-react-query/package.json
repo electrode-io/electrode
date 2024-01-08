@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-query",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "xarc React.js application react-query support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
