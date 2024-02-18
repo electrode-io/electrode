@@ -1,0 +1,19 @@
+{
+  "ts-node": {
+    "swc": true
+  },
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": true,
+    "declaration": false,
+    "noEmit": true,
+    "outDir": "./.ts-node",
+    "target": "es5",
+    "module": "NodeNext",
+    "types": ["node"]
+  }
+}
