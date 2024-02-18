@@ -7,7 +7,7 @@ Uses TypeScript and rsbuild.
 ## Usage
 
 ```bash
-npx @xarc/create-app my-app
+npx @xarc/rsbuild-create-app my-app
 ```
 
 Once you have your app created, follow instructions it prints to try out the app, or check its `README.md` file for more information.

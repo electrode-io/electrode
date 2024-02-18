@@ -5,12 +5,12 @@ import shellcommand from "shelljs";
 import _ from "lodash";
 import ck from "chalker";
 
-import { __dirname } from "./esm-utils.ts";
+import { __dirname } from "./esm-utils";
 
-import { sortDeps } from "./sort-deps.ts";
-import { checkDir } from "./check-dir.ts";
-import makePkg from "../template/_package.ts";
-import { prepareAppDir } from "./prep-app-dir.ts";
+import { sortDeps } from "./sort-deps";
+import { checkDir } from "./check-dir";
+import makePkg from "../template/_package";
+import { prepareAppDir } from "./prep-app-dir";
 
 async function create() {
   const shcmd = shellcommand;

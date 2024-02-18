@@ -3,6 +3,7 @@
     "swc": true
   },
   "compilerOptions": {
+    "isolatedModules": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
@@ -11,9 +12,15 @@
     "inlineSources": true,
     "declaration": false,
     "noEmit": true,
-    "outDir": "./.ts-node",
+    "outDir": "./dist",
     "target": "es5",
-    "module": "NodeNext",
-    "types": ["node"]
-  }
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "types": ["node"],
+    "jsx": "preserve"
+  },
+  "exclude": [
+    "node_modules",
+    "template"
+  ]
 }

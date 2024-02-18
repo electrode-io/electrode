@@ -6,13 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "echo \"Nothing to build. Just a placeholder\"",
-    "prepublishOnly": "webpack",
+    "prepublishOnly": "rsbuild build",
     "test": "mocha",
     "coverage": "nyc npm test",
     "check": "nyc npm test"
   },
   "bin": {
-    "create-app": "bin/rsbuild-create-app.js"
+    "create-app": "bin/create-app.cjs"
   },
   "keywords": [
     "electrode",
@@ -34,7 +34,10 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7.22.11",
+    "@babel/plugin-syntax-import-attributes": "^7.23.3",
     "@babel/preset-env": "^7.22.10",
+    "@rsbuild/core": "^0.4.2",
+    "@rsbuild/plugin-babel": "^0.4.2",
     "@swc/core": "^1.4.1",
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.202",

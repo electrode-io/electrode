@@ -1,4 +1,4 @@
-import create from "./create.ts";
+import create from "./create";
 
 (async function runCreate(){
   await create();

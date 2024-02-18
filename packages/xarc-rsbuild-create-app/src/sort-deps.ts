@@ -1,4 +1,4 @@
-import { sortObjKeys } from "./sort-obj-keys.ts";
+import { sortObjKeys } from "./sort-obj-keys";
 
 export function sortDeps(pkg: object) {
   ["dependencies", "devDependencies", "optionalDependencies", "peerDependencies"].forEach((x) => {
