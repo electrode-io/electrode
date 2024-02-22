@@ -10,6 +10,16 @@ const tokenHandlers = [path.join(__dirname, "./server/token-handler")];
 const commonRouteOptions = {
   tokenHandlers,
 };
+/**
+ * to set CSP directives pass the cspDirectives as an object
+ * key should be the name of the directive
+ * value should be the value of the directive.
+ */
+const additionalDirective = {
+  "frame-src": "'self' allowed-site.example.com",
+  "prefetch-src": "'none'",
+  "manifest-src": "'none'"
+};
 
 /**
  * To set CSP header
@@ -31,6 +41,7 @@ export default {
     cspNonce: true,
     // cspNonce: { style: true }, // { script: true }
     // cspNonce: cspNonceValue,
+    cspDirectives: additionalDirective,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
   }
