@@ -203,7 +203,7 @@ function setCSPDirectives({routeOptions}){
    */
   if(routeOptions.cspDirectives && typeof routeOptions.cspDirectives === "object"){
     const data = Object.entries(routeOptions.cspDirectives).map(([key,value]) => {
-      return ` ${key} ${value} `
+      return ` ${key} ${value}`
     });
     routeOptions.cspDirectivesValue = data.join(";");
   }
@@ -218,7 +218,7 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "", directiveNonce = "" }
   
   const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
 
-  const directiveSrc = directiveNonce ? `${directiveNonce} ;`: "";
+  const directiveSrc = directiveNonce ? `${directiveNonce};`: "";
 
   return `${scriptSrc}${styleSrc}${directiveSrc}`;
 }
