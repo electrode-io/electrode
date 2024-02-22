@@ -47,7 +47,9 @@ function getDefaultRouteOptions() {
     cspNonce: false, 
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
-    reporting: { enable: false }
+    reporting: { enable: false },
+    cspDirectives: undefined,
+    cspDirectivesValue : undefined
   };
 }
 
@@ -195,7 +197,17 @@ function setCSPNonce({ routeOptions }) {
   return routeOptions.cspNonceValue;
 }
 
-function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
+function setCSPDirectives({routeOptions}){
+  if(routeOptions.cspDirectives){
+    let str='';
+    const directivesArr = Object.entries(routeOptions.cspDirectives);
+    const data = directivesArr.map(([key,value]) => str + ` ${key} ${value} `);
+    routeOptions.cspDirectivesValue = data;
+  }
+  return routeOptions.cspDirectivesValue;
+}
+
+function getCSPHeader({ styleNonce = "", scriptNonce = "", directiveNonce = "" }) {
   const unsafeEval = process.env.NODE_ENV !== "production" ? 
         `'unsafe-eval'` : "";
 
@@ -203,7 +215,9 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
   
   const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
 
-  return `${scriptSrc}${styleSrc}`;
+  const directiveSrc = directiveNonce ? `${directiveNonce} ${unsafeEval}; `: "";
+
+  return `${scriptSrc}${styleSrc}${directiveSrc}`;
 }
 
 /**
@@ -234,5 +248,6 @@ module.exports = {
   invokeTemplateProcessor,
   setCSPNonce,
   getCSPHeader,
-  until
+  until,
+  setCSPDirectives
 };
