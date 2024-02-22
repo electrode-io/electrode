@@ -41,7 +41,7 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
   return async (request, reply) => {
     try {
       const { styleNonce = "", scriptNonce = ""} = setCSPNonce({ routeOptions });
-      const {directiveNonce = ""} = setCSPDirectives({routeOptions})
+      const directiveNonce = setCSPDirectives({routeOptions})
 
       // wait for webpack stats to be valid if webpackDev
       if (webpackDev) {
@@ -59,7 +59,6 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
       const status = data.status;
 
       const cspHeader = getCSPHeader({ styleNonce, scriptNonce, directiveNonce });
-      console.log('RahulCSP ', cspHeader)
 
       if (cspHeader) {
         reply.header("Content-Security-Policy", cspHeader);

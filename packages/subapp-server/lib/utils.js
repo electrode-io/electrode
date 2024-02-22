@@ -198,11 +198,14 @@ function setCSPNonce({ routeOptions }) {
 }
 
 function setCSPDirectives({routeOptions}){
-  if(routeOptions.cspDirectives){
-    let str='';
-    const directivesArr = Object.entries(routeOptions.cspDirectives);
-    const data = directivesArr.map(([key,value]) => str + ` ${key} ${value} `);
-    routeOptions.cspDirectivesValue = data;
+  /**
+   * Check if cspDirectives is present in routerOptions and cspDirectives is an Object
+   */
+  if(routeOptions.cspDirectives && typeof routeOptions.cspDirectives === "object"){
+    const data = Object.entries(routeOptions.cspDirectives).map(([key,value]) => {
+      return ` ${key} ${value} `
+    });
+    routeOptions.cspDirectivesValue = data.join(";");
   }
   return routeOptions.cspDirectivesValue;
 }
@@ -215,7 +218,7 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "", directiveNonce = "" }
   
   const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
 
-  const directiveSrc = directiveNonce ? `${directiveNonce} ${unsafeEval}; `: "";
+  const directiveSrc = directiveNonce ? `${directiveNonce} ;`: "";
 
   return `${scriptSrc}${styleSrc}${directiveSrc}`;
 }
