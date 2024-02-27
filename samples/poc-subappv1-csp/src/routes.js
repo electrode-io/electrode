@@ -18,7 +18,8 @@ const commonRouteOptions = {
 const additionalDirective = {
   "frame-src": "'self' allowed-site.example.com",
   "prefetch-src": "'none'",
-  "manifest-src": "'none'"
+  "manifest-src": "'none'",
+  "script-src": "'self"
 };
 
 /**

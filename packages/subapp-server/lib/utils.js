@@ -202,10 +202,13 @@ function setCSPDirectives({routeOptions}){
    * Check if cspDirectives is present in routerOptions and cspDirectives is an Object
    */
   if(routeOptions.cspDirectives && typeof routeOptions.cspDirectives === "object"){
-    const data = Object.entries(routeOptions.cspDirectives).map(([key,value]) => {
-      return ` ${key} ${value}`
+    const data = Object.entries(routeOptions.cspDirectives).filter(([key,value]) => {
+      /** Check if script-src or style-src is explicitly set as additional directives */
+      if(key !== 'script-src' && key !== 'style-src'){
+        return ` ${key} ${value}`
+      }
     });
-    routeOptions.cspDirectivesValue = data.join(";");
+    routeOptions.cspDirectivesValue = data.join("; ");
   }
   return routeOptions.cspDirectivesValue;
 }
