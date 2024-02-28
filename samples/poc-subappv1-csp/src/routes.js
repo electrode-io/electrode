@@ -1,6 +1,5 @@
 const path = require("path");
 const { cspNonceValue } = require("./server/utils");
-
 const subAppOptions = {
   serverSideRendering: false,
 };
@@ -11,15 +10,19 @@ const commonRouteOptions = {
   tokenHandlers,
 };
 /**
- * to set CSP directives pass the cspDirectives as an object
- * key should be the name of the directive
- * value should be the value of the directive.
+ * 
+ * @param {*} param0 
+ * @returns CSP header value as string
  */
-const additionalDirective = {
-  "frame-src": "'self' allowed-site.example.com",
-  "prefetch-src": "'none'",
-  "manifest-src": "'none'",
-  "script-src": "'self"
+const setCSPHeaderValues = ({styleNonce, scriptNonce}) => {
+  const cspHeader = `
+                script-src 'self' 'nonce-${scriptNonce}' 'strict-dynamic' 'unsafe-eval';
+                style-src 'self' 'nonce-${styleNonce}' 'strict-dynamic' 'unsafe-eval';
+                font-src 'self';
+                object-src 'none';
+                form-action 'self';
+              `;
+      return cspHeader;
 };
 
 /**
@@ -31,6 +34,9 @@ const additionalDirective = {
  * 
  * Option 3 - Selectively set boolean flag for `cspNonce`. { style: true } will add nonce only 
  * for styles
+ * 
+ * Option 4 - write a function which would return list of CSP directives and values as string
+ * and pass that "function" to getCSPHeader
  */
 
 export default {
@@ -41,8 +47,8 @@ export default {
     // Enable one of these to use CSP header
     cspNonce: true,
     // cspNonce: { style: true }, // { script: true }
-    // cspNonce: cspNonceValue,
-    cspDirectives: additionalDirective,
+    //  cspNonce: cspNonceValue,
+    getCSPHeader: setCSPHeaderValues,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
   }

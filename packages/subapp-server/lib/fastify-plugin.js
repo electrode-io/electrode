@@ -25,8 +25,7 @@ const {
   updateFullTemplate,
   setCSPNonce,
   getCSPHeader,
-  until,
-  setCSPDirectives
+  until
 } = require("./utils");
 
 const routesFromFile = require("./routes-from-file");
@@ -41,7 +40,6 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
   return async (request, reply) => {
     try {
       const { styleNonce = "", scriptNonce = ""} = setCSPNonce({ routeOptions });
-      const directiveNonce = setCSPDirectives({routeOptions})
 
       // wait for webpack stats to be valid if webpackDev
       if (webpackDev) {
@@ -58,8 +56,15 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
       const data = context.result;
       const status = data.status;
 
-      const cspHeader = getCSPHeader({ styleNonce, scriptNonce, directiveNonce });
-
+      let cspHeader;
+      /** If csp headers are provided by application in route options then use that otherwise generate CSP headers */
+      if(routeOptions.getCSPHeader && typeof routeOptions.getCSPHeader === "function"){
+        const rawCSPHeader = routeOptions.getCSPHeader({ styleNonce, scriptNonce });
+        // Replace newline characters and spaces
+        cspHeader = rawCSPHeader.replace(/\s{2,}/g, " ").trim();
+      }else{
+        cspHeader = getCSPHeader({ styleNonce, scriptNonce });
+      }
       if (cspHeader) {
         reply.header("Content-Security-Policy", cspHeader);
       }

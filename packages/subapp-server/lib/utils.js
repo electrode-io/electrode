@@ -47,9 +47,7 @@ function getDefaultRouteOptions() {
     cspNonce: false, 
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
-    reporting: { enable: false },
-    cspDirectives: undefined,
-    cspDirectivesValue : undefined
+    reporting: { enable: false }
   };
 }
 
@@ -197,23 +195,7 @@ function setCSPNonce({ routeOptions }) {
   return routeOptions.cspNonceValue;
 }
 
-function setCSPDirectives({routeOptions}){
-  /**
-   * Check if cspDirectives is present in routerOptions and cspDirectives is an Object
-   */
-  if(routeOptions.cspDirectives && typeof routeOptions.cspDirectives === "object"){
-    const data = Object.entries(routeOptions.cspDirectives).filter(([key,value]) => {
-      /** Check if script-src or style-src is explicitly set as additional directives */
-      if(key !== 'script-src' && key !== 'style-src'){
-        return ` ${key} ${value}`
-      }
-    });
-    routeOptions.cspDirectivesValue = data.join("; ");
-  }
-  return routeOptions.cspDirectivesValue;
-}
-
-function getCSPHeader({ styleNonce = "", scriptNonce = "", directiveNonce = "" }) {
+function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
   const unsafeEval = process.env.NODE_ENV !== "production" ? 
         `'unsafe-eval'` : "";
 
@@ -221,9 +203,7 @@ function getCSPHeader({ styleNonce = "", scriptNonce = "", directiveNonce = "" }
   
   const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
 
-  const directiveSrc = directiveNonce ? `${directiveNonce};`: "";
-
-  return `${scriptSrc}${styleSrc}${directiveSrc}`;
+  return `${scriptSrc}${styleSrc}`;
 }
 
 /**
@@ -254,6 +234,5 @@ module.exports = {
   invokeTemplateProcessor,
   setCSPNonce,
   getCSPHeader,
-  until,
-  setCSPDirectives
+  until
 };
