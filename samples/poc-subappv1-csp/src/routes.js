@@ -11,8 +11,9 @@ const commonRouteOptions = {
 };
 /**
  * 
- * @param {*} param0 
- * @returns CSP header value as string
+ * @param {string} styleNonce Value
+ * @param {string} scriptNonce Value
+ * @returns {string} CSP header value
  */
 const setCSPHeaderValues = ({styleNonce, scriptNonce}) => {
   const cspHeader = `
