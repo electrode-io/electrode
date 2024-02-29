@@ -58,8 +58,8 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
 
       let cspHeader;
       /** If csp headers are provided by application in route options then use that otherwise generate CSP headers */
-      if(routeOptions.getCSPHeader && typeof routeOptions.getCSPHeader === "function"){
-        const rawCSPHeader = routeOptions.getCSPHeader({ styleNonce, scriptNonce });
+      if(routeOptions.cspHeaderValues instanceof Function ){
+        const rawCSPHeader = routeOptions.cspHeaderValues({ styleNonce, scriptNonce });
         // Replace newline characters and spaces
         cspHeader = rawCSPHeader.replace(/\s{2,}/g, " ").trim();
       }else{

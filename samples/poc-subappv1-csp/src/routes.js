@@ -36,8 +36,6 @@ const setCSPHeaderValues = ({styleNonce, scriptNonce}) => {
  * Option 3 - Selectively set boolean flag for `cspNonce`. { style: true } will add nonce only 
  * for styles
  * 
- * Option 4 - write a function which would return list of CSP directives and values as string
- * and pass that "function" to getCSPHeader
  */
 
 export default {
@@ -49,7 +47,7 @@ export default {
     cspNonce: true,
     // cspNonce: { style: true }, // { script: true }
     //  cspNonce: cspNonceValue,
-    getCSPHeader: setCSPHeaderValues,
+    cspHeaderValues: setCSPHeaderValues,
     criticalCSS: path.join(__dirname, "./server/critical.css"),
     ...commonRouteOptions
   }
