@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Ablity to add CSP directives by application.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-server"
+}
