@@ -23,9 +23,12 @@ const updateFullTemplate = (baseDir, options) => {
 };
 
 function getDefaultRouteOptions() {
-  const { settings = {}, devServer = {}, fullDevServer = {}, httpDevServer = {} } = getDevProxy
-    ? getDevProxy()
-    : {};
+  const {
+    settings = {},
+    devServer = {},
+    fullDevServer = {},
+    httpDevServer = {}
+  } = getDevProxy ? getDevProxy() : {};
   const { webpackDev, useDevProxy } = settings;
   // temporary location to write build artifacts in dev mode
   const buildArtifacts = ".etmp";
@@ -42,9 +45,9 @@ function getDefaultRouteOptions() {
     buildArtifacts,
     prodBundleBase: "/js",
     devBundleBase: "/js",
-    cspNonceValue: undefined, 
+    cspNonceValue: undefined,
     // if `true`, electrode will generate nonce and add CSP header
-    cspNonce: false, 
+    cspNonce: false,
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
     cdn: {},
     reporting: { enable: false }
@@ -143,46 +146,49 @@ function nonceGenerator(_) {
 /**
  * Sets CSP nonce to routeOptions and returns the nonce value
  * cspNonce - boolean || object || string
- * 
- * @param {*} param0 
+ *
+ * @param {*} param0
  * @returns nonce value
  */
 function setCSPNonce({ routeOptions }) {
   let nonce = nonceGenerator();
-  
-  switch(typeof routeOptions.cspNonce) {
+
+  switch (typeof routeOptions.cspNonce) {
     // if cspNonce is a string, electrode validates it for nonce value and uses the same to set CSP header
     case "string": {
-      assert(routeOptions.cspNonce.match(/^[A-Za-z0-9+=\/]{22}$/), "Error: unable to set CSP header. Invalid nonce value passed!");
+      assert(
+        routeOptions.cspNonce.match(/^[A-Za-z0-9+=\/]{22}$/),
+        "Error: unable to set CSP header. Invalid nonce value passed!"
+      );
 
       routeOptions.cspNonceValue = {
         styleNonce: routeOptions.cspNonce,
         scriptNonce: routeOptions.cspNonce
       };
       break;
-    };
+    }
 
-    // if cspNonce is true, electrode will generate nonce and sets CSP header for both 
+    // if cspNonce is true, electrode will generate nonce and sets CSP header for both
     // styles and script.
     case "boolean": {
-      nonce = !!routeOptions.cspNonce === true ? nonce : ""
+      nonce = !!routeOptions.cspNonce === true ? nonce : "";
       routeOptions.cspNonceValue = {
         styleNonce: nonce,
         scriptNonce: nonce
       };
       break;
-    };
-    // if cspHeader is an object, app should explicitly enable it for script and/or style. 
+    }
+    // if cspHeader is an object, app should explicitly enable it for script and/or style.
     // cspHeader: { style: true } - will enable nonce only for styles
     case "object": {
       routeOptions.cspNonceValue = {
         styleNonce: routeOptions.cspNonce && !!routeOptions.cspNonce.style === true ? nonce : "",
-        scriptNonce: routeOptions.cspNonce && !!routeOptions.cspNonce.script  === true ? nonce : ""
+        scriptNonce: routeOptions.cspNonce && !!routeOptions.cspNonce.script === true ? nonce : ""
       };
       break;
-    };
+    }
     // TODO: add 'case' so that app can pass a nonce generator function.
-    
+
     default: {
       routeOptions.cspNonceValue = {
         styleNonce: "",
@@ -191,35 +197,36 @@ function setCSPNonce({ routeOptions }) {
       break;
     }
   }
-  
+
   return routeOptions.cspNonceValue;
 }
 
 function getCSPHeader({ styleNonce = "", scriptNonce = "" }) {
-  const unsafeEval = process.env.NODE_ENV !== "production" ? 
-        `'unsafe-eval'` : "";
+  const unsafeEval = process.env.NODE_ENV !== "production" ? `'unsafe-eval'` : "";
 
   const styleSrc = styleNonce ? `style-src 'nonce-${styleNonce}' 'strict-dynamic';` : "";
-  
-  const scriptSrc = scriptNonce ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `: "";
+
+  const scriptSrc = scriptNonce
+    ? `script-src 'nonce-${scriptNonce}' 'strict-dynamic' ${unsafeEval}; `
+    : "";
 
   return `${scriptSrc}${styleSrc}`;
 }
 
 /**
- * Wait for a condition and execute rest of the code. 
+ * Wait for a condition and execute rest of the code.
  * @param conditionFunction - A function that returns conditions to be waited for.
  * @param maxWait - Max duration (in ms) to wait before promise resolves to avoid indefinite wait.
  * @returns A promise that resolves after given condition in conditionFunction is satisfied or after the max wait time.
  */
 function until(conditionFunction, maxWait) {
-  const poll = (resolve) => {
+  const poll = resolve => {
     if (conditionFunction()) {
       resolve();
     } else {
       setTimeout(_ => poll(resolve), maxWait);
     }
-  }
+  };
 
   return new Promise(poll);
 }
