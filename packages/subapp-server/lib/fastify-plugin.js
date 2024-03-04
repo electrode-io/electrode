@@ -46,7 +46,7 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
         await until(() => request.app.webpackDev.valid === true, 400);
         console.log(`Webpack stats valid: ${request.app.webpackDev.valid}`);
       }
-      
+
       const context = await routeRenderer({
         useStream,
         mode: "",
@@ -56,8 +56,15 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
       const data = context.result;
       const status = data.status;
 
-      const cspHeader = getCSPHeader({ styleNonce, scriptNonce });
-
+      let cspHeader;
+      /** If csp headers are provided by application in route options then use that otherwise generate CSP headers */
+      if (routeOptions.cspHeaderValues instanceof Function) {
+        const rawCSPHeader = routeOptions.cspHeaderValues({ styleNonce, scriptNonce });
+        // Replace newline characters and spaces
+        cspHeader = rawCSPHeader.replace(/\s{2,}/g, " ").trim();
+      } else {
+        cspHeader = getCSPHeader({ styleNonce, scriptNonce });
+      }
       if (cspHeader) {
         reply.header("Content-Security-Policy", cspHeader);
       }
@@ -77,7 +84,6 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
         reply.code(status);
         return reply.send(data);
       }
-      
     } catch (err) {
       reply.status(HttpStatusCodes.INTERNAL_SERVER_ERROR);
       if (process.env.NODE_ENV !== "production") {
