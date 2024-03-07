@@ -36,6 +36,7 @@ const setCSPHeaderValues = ({styleNonce, scriptNonce}) => {
  * Option 3 - Selectively set boolean flag for `cspNonce`. { style: true } will add nonce only 
  * for styles
  * 
+ * cspHeaderValues - A function whose return value is list of CPS headers. If provided, this function will be used to configure headers specified by the application. In the absense of this function, Electrode will configure `script-src` and `style-src` directives based on settings determined by `cspNonce` value
  */
 
 export default {
