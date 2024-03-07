@@ -1,6 +1,13 @@
 # Change Log - subapp-server
 
-This log was last generated on Wed, 03 Jan 2024 23:41:10 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Mar 2024 02:33:25 GMT and should not be manually modified.
+
+## 2.4.0
+Thu, 07 Mar 2024 02:33:25 GMT
+
+### Minor changes
+
+- Ablity to add CSP directives by application.
 
 ## 2.3.0
 Wed, 03 Jan 2024 23:41:10 GMT

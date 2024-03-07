@@ -2,6 +2,18 @@
   "name": "subapp-server",
   "entries": [
     {
+      "version": "2.4.0",
+      "tag": "subapp-server_v2.4.0",
+      "date": "Thu, 07 Mar 2024 02:33:25 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Ablity to add CSP directives by application."
+          }
+        ]
+      }
+    },
+    {
       "version": "2.3.0",
       "tag": "subapp-server_v2.3.0",
       "date": "Wed, 03 Jan 2024 23:41:10 GMT",
