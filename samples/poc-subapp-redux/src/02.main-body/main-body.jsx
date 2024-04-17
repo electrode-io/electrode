@@ -9,12 +9,20 @@ import { Deals } from "../components/deals";
 import { Navigation } from "../components/navigation";
 import reduxReducers, { decNumber, incNumber } from "./reducers";
 
+
 const mapStateToProps = (state) => state;
 
 const HomeComp = (props) => {
+  const unmountSubapp = ({ subappName, elementId }) => {
+    const subapp = xarcV1.getSubApp(subappName);
+    const { subappRoot } = subapp.info;
+    subappRoot.unmount();
+  };
   return (
     <div className="container-fluid text-center">
       <p>HOME</p>
+      <button onClick={() => unmountSubapp({subappName: "Header", elementId: "subapp-header01" })}> Unmount Header</button>
+      <button onClick={() => unmountSubapp({subappName: "Footer", elementId: "subapp-footer" })}> Unmount Footer</button>
       
       <div>
         <span style={{color: "orange", fontSize: "large"}}>
@@ -38,6 +46,7 @@ const Stores = () => `Stores`;
 const Contact = () => `Contact`;
 
 const MainBody = (props) => {
+
   return (
     <div>
       <Navigation />

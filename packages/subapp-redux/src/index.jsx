@@ -16,21 +16,24 @@ export function reduxRenderStart(options) {
   const store = options._store || options.reduxCreateStore(options.initialState);
   const { Component, props } = options;
 
+  let subappRoot;
+
   if (options.serverSideRendering) {
-    hydrateRoot(options.element,
+    subappRoot = hydrateRoot(options.element,
       <Provider store={store}>
         <Component {...props} />
       </Provider>
     );
   } else {
-    createRoot(options.element).render(
+    subappRoot = createRoot(options.element)
+    subappRoot.render(
       <Provider store={store}>
         <Component {...props} />
       </Provider>
     );
   }
 
-  return store;
+  return { store, subappRoot };
 }
 
 //
@@ -45,7 +48,7 @@ export function reduxLoadSubApp(info) {
     const Component = this.info.StartComponent || this.info.Component;
     const props = instance.props || {}
 
-    const store = reduxRenderStart({
+    const { store, subappRoot } = reduxRenderStart({
       _store: instance._store,
       initialState,
       reduxCreateStore,
@@ -56,6 +59,7 @@ export function reduxLoadSubApp(info) {
     });
 
     instance._store = store;
+    this.info.subappRoot = subappRoot;
     return store;
   };
 
