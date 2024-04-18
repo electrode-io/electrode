@@ -83,7 +83,6 @@ describe("FE React framework", function() {
 
     expect(element.innerHTML).to.equal(`<p>Hello bar</p>`);
 
-    // Test unmounting
     act(() => {
       root.unmount();
     });
@@ -111,7 +110,6 @@ describe("FE React framework", function() {
 
     expect(element.innerHTML).to.equal("<p>Hello bar</p>");
 
-    // Test unmounting
     act(() => {
       root.unmount();
     });
