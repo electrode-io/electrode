@@ -21,7 +21,7 @@ class FrameworkLib {
   // from the renderToPipeableStream() onShellReady event
   onShellReady(element) {
     const passThrough = new Stream.PassThrough();
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const pipeable = ReactDOMServer.renderToPipeableStream(element, {
         onShellReady () {
           resolve(pipeable.pipe(passThrough));
@@ -34,7 +34,7 @@ class FrameworkLib {
   // from the renderToPipeableStream() onAllReady event
   onAllReady(element) {
     const passThrough = new Stream.PassThrough();
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const pipeable = ReactDOMServer.renderToPipeableStream(element, {
         onAllReady () {
           resolve(pipeable.pipe(passThrough));

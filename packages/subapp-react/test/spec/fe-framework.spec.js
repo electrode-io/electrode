@@ -62,4 +62,60 @@ describe("FE React framework", function() {
     const c = framework.renderStart();
     expect(c.type).equals(Component);
   });
+
+  it("should render and unmount component into DOM element", () => {
+    const dom = new JSDOM(`<div id="test"><p>Hello bar</p></div>`);
+    global.window = dom.window;
+    const element = dom.window.document.getElementById("test");
+    const framework = new feLib.FrameworkLib({
+      subApp: {
+        info: {
+          Component: props => <p>Hello {props.foo}</p>,
+          subappRoot: {}
+        }
+      },
+      element,
+      options: { props: { foo: "bar" } }
+    });
+
+    framework.renderStart();
+    const root = framework.ref.subApp.info.subappRoot;
+
+    expect(element.innerHTML).to.equal(`<p>Hello bar</p>`);
+
+    // Test unmounting
+    act(() => {
+      root.unmount();
+    });
+
+    expect(element.innerHTML).to.equal("");
+  });
+
+  it("should hydrate and unmount a server-side rendered component", () => {
+    const dom = new JSDOM(`<div id="test"><p>Hello bar</p></div>`);
+    global.window = dom.window;
+    const element = dom.window.document.getElementById("test");
+    const framework = new feLib.FrameworkLib({
+      subApp: {
+        info: {
+          Component: props => <p>Hello {props.foo}</p>,
+          subappRoot: {}
+        }
+      },
+      element,
+      options: { props: { foo: "bar" }, serverSideRendering: true }
+    });
+
+    framework.renderStart();
+    const root = framework.ref.subApp.info.subappRoot;
+
+    expect(element.innerHTML).to.equal("<p>Hello bar</p>");
+
+    // Test unmounting
+    act(() => {
+      root.unmount();
+    });
+
+    expect(element.innerHTML).to.equal("");
+  });
 });
