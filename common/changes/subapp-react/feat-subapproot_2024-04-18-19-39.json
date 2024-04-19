@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "Expose subapp root to provide better lifecycle control for applications",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-react"
+}

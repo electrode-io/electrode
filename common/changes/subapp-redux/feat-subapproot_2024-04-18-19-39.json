@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-redux",
+      "comment": "expose subapp root to provide better lifecycle control for applications",
+      "type": "minor"
+    }
+  ],
+  "packageName": "subapp-redux"
+}
