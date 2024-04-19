@@ -2,6 +2,18 @@
   "name": "subapp-redux",
   "entries": [
     {
+      "version": "2.3.0",
+      "tag": "subapp-redux_v2.3.0",
+      "date": "Fri, 19 Apr 2024 20:43:30 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "expose subapp root to provide better lifecycle control for applications"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.1",
       "tag": "subapp-redux_v2.2.1",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

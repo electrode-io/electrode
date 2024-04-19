@@ -2,6 +2,23 @@
   "name": "subapp-react",
   "entries": [
     {
+      "version": "1.3.0",
+      "tag": "subapp-react_v1.3.0",
+      "date": "Fri, 19 Apr 2024 20:43:30 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose subapp root to provide better lifecycle control for applications"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.7 to ^11.0.8."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "subapp-react_v1.2.0",
       "date": "Wed, 03 Jan 2024 23:41:10 GMT",
