@@ -67,7 +67,7 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "typedoc": "^0.22.15",
-    "typescript": "^4.6.4",
+    "typescript": "^5.4.5",
     "xsh": "^0.4.5"
   },
   "engines": {

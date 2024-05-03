@@ -42,7 +42,7 @@
     "source-map-support": "^0.5.16",
     "ts-node": "^10.9.1",
     "typedoc": "^0.17.4",
-    "typescript": "^3.8.3",
+    "typescript": "^5.4.5",
     "xsh": "^0.4.5",
     "xstdout": "^0.1.1"
   },

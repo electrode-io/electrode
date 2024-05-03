@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["es2018"],
+    "lib": ["dom", "es2018"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ES2018",
@@ -14,7 +14,8 @@
     "alwaysStrict": true,
     "strictFunctionTypes": true,
     "allowJs": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "typeRoots": ["./node_modules/@types"]
   },
   "typedocOptions": {
     "entryPointStrategy": "expand"
