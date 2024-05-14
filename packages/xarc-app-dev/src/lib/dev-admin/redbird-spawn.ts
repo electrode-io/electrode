@@ -2,7 +2,7 @@
 /* eslint-disable no-magic-numbers, no-process-exit, global-require, no-console, max-statements */
 
 import sudoPrompt from "sudo-prompt";
-import fetch from 'node-fetch';
+import request from "request";
 import http from "http";
 import Util from "util";
 import { formUrl } from "../utils";
@@ -39,8 +39,8 @@ const isProxyRunning = async () => {
   });
 
   try {
-    const response = await fetch(statusUrl);
-    return response.ok; // Returns true if the status code is 2xx
+    await Util.promisify(request)(statusUrl);
+    return true;
   } catch {
     return false;
   }
@@ -58,12 +58,11 @@ const handleRestart = type => {
         .map(k => `${k}=${options[k]}`)
         .join("&")
     });
-    fetch(restartUrl)
-      .then(res => res.text())
-      .then(body => console.log('Restart response:', body))
-      .catch(err => {
-        console.error("Restarting failed, Error:", err, "\nrestart URL", restartUrl);
-      });
+    request(restartUrl, (err, _res, body) => {
+      if (err) {
+        console.error("Restarting failed, body:", body, "Error", err, "\nrestart URL", restartUrl);
+      }
+    });
   };
 
   process.on("SIGHUP", restart);
@@ -117,12 +116,10 @@ async function mainSpawn() {
 
     const handleElevatedProxy = () => {
       process.on("SIGINT", () => {
-        fetch(exitUrl)
-          .then(() => {
-            console.log("Elevated Electrode dev proxy terminating");
-            process.nextTick(() => process.exit(0));
-          })
-          .catch(console.error);
+        request(exitUrl, () => {
+          console.log("Elevated Electrode dev proxy terminating");
+          process.nextTick(() => process.exit(0));
+        });
       });
     };
 
