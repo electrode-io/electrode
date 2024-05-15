@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "Typescript version upgrade",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux",
+      "comment": "Typescript version upgrade",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react-redux"
+}
