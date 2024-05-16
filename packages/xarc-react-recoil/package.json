@@ -59,7 +59,7 @@
     "source-map-support": "^0.5.19",
     "ts-node": "^10.9.1",
     "typedoc": "^0.22.15",
-    "typescript": "^4.1.3"
+    "typescript": "^5.4.5"
   },
   "files": [
     "dist-browser~es2x~esm~",

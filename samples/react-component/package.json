@@ -37,7 +37,7 @@
     "source-map-support": "^0.5.16",
     "ts-node": "^8.6.2",
     "typedoc": "^0.17.4",
-    "typescript": "^3.8.3"
+    "typescript": "^5.4.5"
   },
   "files": [
     "dist-node-cjs",

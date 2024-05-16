@@ -7,17 +7,21 @@ import { SubAppDef, SubAppContainer, envHooks } from "@xarc/subapp";
 import { Provider } from "react-redux";
 import { render, waitFor, screen } from "@testing-library/react";
 import sinon from "sinon";
-import { createStore, reduxFeature, ReduxFeature } from "../../src/browser/index";
+import {
+  createStore,
+  reduxFeature,
+  ReduxFeature,
+} from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
 
-const mockPrepare = async initialState => {
+const mockPrepare = async (initialState) => {
   return { initialState: "init-state-" + initialState };
 };
 
 const options = {
   React,
-  prepare: mockPrepare
+  prepare: mockPrepare,
 };
 
 const MockComponent = () => {
@@ -45,7 +49,7 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
     container.declare("test", def);
 
@@ -76,7 +80,7 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
@@ -88,11 +92,13 @@ describe("reactReduxFeature", function () {
     render(
       redux.wrap({
         Component: MockComponent,
-        store: createStore(state => state)
+        store: createStore((state) => state),
       })
     );
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).contains(`test<p>mock-component-content</p>`);
   });
@@ -108,7 +114,7 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
@@ -118,12 +124,14 @@ describe("reactReduxFeature", function () {
     const redux: Partial<ReduxFeature> = def._features.redux;
 
     sinon
-      .stub(require("redux"), "createStore") // eslint-disable-line
-      .callsFake((reducer, initalState) => reducer(initalState));
+      .stub(require("redux"), "createStore")
+      .callsFake((reducer: any, initalState) => reducer(initalState));
 
-    const mockFn = x => x + "-----withMockFn";
+    const mockFn = (x) => x + "-----withMockFn";
 
-    expect((redux.createStore as any)(mockFn, "test")).equal("test-----withMockFn");
+    expect((redux.createStore as any)(mockFn, "test")).equal(
+      "test-----withMockFn"
+    );
 
     expect((redux.createStore as any)(undefined, "test")).equal("test");
 
@@ -141,30 +149,32 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
 
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     const res = await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: true
+      reload: true,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
@@ -182,28 +192,30 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: { a: (x) => x || "1", b: (x) => x || "2" } };
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: true
+      reload: true,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
@@ -228,30 +240,32 @@ describe("reactReduxFeature", function () {
             <div>
               test <p>get-export-mock-content</p>
             </div>
-          )
+          ),
         };
-      }
+      },
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
 
-    (def._features.redux as any)._store = createStore(x => x);
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
-        Component: undefined
+        Component: undefined,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: true
+      reload: true,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test <p>get-export-mock-content</p>`);
 
@@ -269,18 +283,24 @@ describe("reactReduxFeature", function () {
         {
           decorate: (reduxFeat, reduxDecoratorParam) => {
             return {
-              store: "mock-store1" + JSON.stringify(reduxFeat) + JSON.stringify(reduxDecoratorParam)
+              store:
+                "mock-store1" +
+                JSON.stringify(reduxFeat) +
+                JSON.stringify(reduxDecoratorParam),
             };
-          }
+          },
         },
         {
           decorate: (reduxFeat, reduxDecoratorParam) => {
             return {
-              store: "mock-store2" + JSON.stringify(reduxFeat) + JSON.stringify(reduxDecoratorParam)
+              store:
+                "mock-store2" +
+                JSON.stringify(reduxFeat) +
+                JSON.stringify(reduxDecoratorParam),
             };
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
     const factory = reduxFeature(reduxFeatureOptions);
     const spy1 = sinon.spy(reduxFeatureOptions.decorators[0], "decorate");
@@ -291,25 +311,25 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
 
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: false
+      reload: false,
     });
 
     expect(spy1.calledOnce && spy2.calledOnce).to.eql(true);
@@ -323,7 +343,7 @@ describe("reactReduxFeature", function () {
 
     const reduxFeatureOptions = {
       ...options,
-      reducers: x => x || "1"
+      reducers: (x) => x || "1",
     };
     const factory = reduxFeature(reduxFeatureOptions);
 
@@ -332,30 +352,35 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
 
-    const stub1 = sinon.stub(def._features.redux as any, "wrap").callsFake(obj => obj);
+    const stub1 = sinon
+      .stub(def._features.redux as any, "wrap")
+      .callsFake((obj) => obj);
 
     const res = await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: false
+      reload: false,
     });
     //  eslint-disable-next-line
     res.Component();
     expect(stub1.calledOnce).to.eql(true);
     expect(
-      stub1.calledWith({ Component: MockComponent, store: (def._features.redux as any)._store })
+      stub1.calledWith({
+        Component: MockComponent,
+        store: (def._features.redux as any)._store,
+      })
     ).to.eql(true);
   });
 
@@ -370,29 +395,31 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: x => x };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: (x) => x };
+    (def._features.redux as any)._store = createStore((x) => x);
 
     const res = await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: false
+      reload: false,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
@@ -410,28 +437,30 @@ describe("reactReduxFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
-    (def._features.redux as any)._store = createStore(x => x);
+    def._module = { reduxReducers: { a: (x) => x || "1", b: (x) => x || "2" } };
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
-        Component: MockComponent
+        Component: MockComponent,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: false
+      reload: false,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
@@ -456,30 +485,32 @@ describe("reactReduxFeature", function () {
             <div>
               test <p>get-export-mock-content</p>
             </div>
-          )
+          ),
         };
-      }
+      },
     } as SubAppDef;
 
     container.declare("test", def);
 
     factory.add(def);
 
-    (def._features.redux as any)._store = createStore(x => x);
+    (def._features.redux as any)._store = createStore((x) => x);
     const res = await def._features.redux.execute({
       input: {
-        Component: undefined
+        Component: undefined,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
+        getInitialState: () => "test",
       },
-      reload: false
+      reload: false,
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test <p>get-export-mock-content</p>`);
 

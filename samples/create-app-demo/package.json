@@ -47,6 +47,6 @@
     "@xarc/opt-stylus": "^2.0.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "typescript": "^5.4.5"
   }
 }

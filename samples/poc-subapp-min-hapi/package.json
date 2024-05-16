@@ -43,8 +43,8 @@
     "electrode-static-paths": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^5.1.0",
-    "react-router-dom": "^5.1.0",
+    "react-router": "^6.23.1",
+    "react-router-dom": "^6.23.1",
     "subapp-react": "^0.0.22",
     "subapp-server": "^1.3.0"
   },

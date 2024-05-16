@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Typescript version upgrade",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}

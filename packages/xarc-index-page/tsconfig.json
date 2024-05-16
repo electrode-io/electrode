@@ -1,19 +1,30 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["es2018"],
+    "lib": [
+      "es2018"
+    ],
     "module": "CommonJS",
     "esModuleInterop": false,
+    "importHelpers": true,
     "target": "ES2018",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["node", "mocha"],
+    "types": [
+      "node",
+      "mocha",
+      "chai",
+      "sinon",
+      "sinon-chai"
+    ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": false,
     "strictFunctionTypes": true,
     "jsx": "react"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
