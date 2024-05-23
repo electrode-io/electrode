@@ -74,8 +74,6 @@
       "text-summary"
     ],
     "exclude": [
-      "*clap.js",
-      "*clap.ts",
       "xrun-tasks.*",
       "coverage",
       "dist",
