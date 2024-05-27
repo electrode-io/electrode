@@ -1,10 +1,6 @@
-/* @jsx createElement */
+import { IndexPage, Token, Require, Literal, Component } from "../../lib/jsx";
 
-/* eslint-disable no-unused-vars */
-
-import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx";
-
-const MyTest = (props, context) => {
+const MyTest = (props) => {
   return (
     <div {...props} v={() => 50}>
       <Token _id="PAGE_TITLE" />
@@ -23,7 +19,7 @@ class TestComponent1 extends Component {
   }
 }
 
-function AsyncComponent(props, context, scope) {
+function AsyncComponent(props, scope) {
   return new Promise(resolve => {
     setTimeout(() => {
       scope.output.add(`${props.indent}async component ${props.key}\n`);
