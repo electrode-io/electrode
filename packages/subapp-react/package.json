@@ -44,7 +44,7 @@
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.2",
     "electrode-archetype-njs-module-dev": "^3.0.3",
-    "jsdom": "^23.0.1",
+    "jsdom": "^21.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
