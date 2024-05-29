@@ -4,7 +4,7 @@
 
 import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx"; // eslint-disable-line
 
-const MyTest = (props, context) => {
+const MyTest = (props) => {
   return (
     <div {...props} v={() => 50}>
       <Token _id="PAGE_TITLE" />

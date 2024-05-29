@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "no change",
+      "type": "none"
+    }
+  ],
+  "packageName": "subapp-react"
+}
