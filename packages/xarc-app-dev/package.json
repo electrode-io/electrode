@@ -15,7 +15,7 @@
   "scripts": {
     "compile": "tsc",
     "build": "xrun -s compile user/moveDist",
-    "lint": "xrun xarc/lint --fix",
+    "lint": "xrun xarc/lint",
     "test": "xrun xarc/test-only",
     "coverage": "xrun xarc/test-cov",
     "check": "xrun xarc/check",
