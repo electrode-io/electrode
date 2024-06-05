@@ -35,7 +35,7 @@ const isProxyRunning = async () => {
   const statusUrl = formUrl({
     host,
     port: httpPort,
-    path: controlPaths.status
+    path: controlPaths.status,
   });
 
   try {
@@ -46,7 +46,7 @@ const isProxyRunning = async () => {
   }
 };
 
-const handleRestart = type => {
+const handleRestart = (type) => {
   const restart = (options: any = {}) => {
     if (!options.quiet) {
       console.log(`${type}Electrode dev proxy restarting`, options);
@@ -55,18 +55,25 @@ const handleRestart = type => {
       ...httpDevServer,
       path: controlPaths.restart,
       search: Object.keys(options)
-        .map(k => `${k}=${options[k]}`)
-        .join("&")
+        .map((k) => `${k}=${options[k]}`)
+        .join("&"),
     });
     request(restartUrl, (err, _res, body) => {
       if (err) {
-        console.error("Restarting failed, body:", body, "Error", err, "\nrestart URL", restartUrl);
+        console.error(
+          "Restarting failed, body:",
+          body,
+          "Error",
+          err,
+          "\nrestart URL",
+          restartUrl
+        );
       }
     });
   };
 
   process.on("SIGHUP", restart);
-  process.on("message", data => {
+  process.on("message", (data) => {
     if (data.name === "restart") {
       restart(_.omit(data, "name"));
     } else if (data.name === "update-ports") {
@@ -102,7 +109,7 @@ async function mainSpawn() {
       sudoPrompt.exec(
         `node ${proxyJs}`,
         {
-          name: "Electrode Development Reverse Proxy"
+          name: "Electrode Development Reverse Proxy",
         },
         (error, stdout, stderr) => {
           console.log("stdout:", stdout);
