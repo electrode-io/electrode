@@ -19117,7 +19117,7 @@ packages:
     dev: false
 
   file:projects/app-dev.tgz_webpack-cli@4.8.0+webpack@5.91.0:
-    resolution: {integrity: sha512-goMGzejfPjDkvniWRWIrD6hsMjCnfchtarh0P0QVKFFmnOxrYerZxLWZ8V9tZZMTxrWwPGnGyeqj6uUKwrAMkA==, tarball: file:projects/app-dev.tgz}
+    resolution: {integrity: sha512-0pYklFuKDGx5W8XKLfBRjX3lVNW7Pxs4JR/l4SRsaQKfPkBU+1COh/ZC0IB7R3f7MeO0xJzQv6f11P2jDqolHg==, tarball: file:projects/app-dev.tgz}
     id: file:projects/app-dev.tgz
     name: '@rush-temp/app-dev'
     version: 0.0.0
@@ -19144,7 +19144,7 @@ packages:
       '@types/webpack': 5.28.0_webpack-cli@4.8.0
       '@typescript-eslint/eslint-plugin': 5.62.0_6480892044262f9a1d61d34c10a742f7
       '@typescript-eslint/parser': 5.62.0_eslint@7.32.0+typescript@5.4.5
-      '@xarc/module-dev': 5.0.0
+      '@xarc/module-dev': 4.1.0
       '@xarc/run': 1.1.1
       ansi-to-html: 0.7.2
       babel-eslint: 10.1.0_eslint@7.32.0
