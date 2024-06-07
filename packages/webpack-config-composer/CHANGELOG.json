@@ -2,6 +2,18 @@
   "name": "webpack-config-composer",
   "entries": [
     {
+      "version": "1.2.2",
+      "tag": "webpack-config-composer_v1.2.2",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "tag": "webpack-config-composer_v1.2.1",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

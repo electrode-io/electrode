@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { TokenModule } from "../../src";
 import { expect } from "chai";
 import * as Path from "path";
@@ -22,6 +23,7 @@ describe("TokenModule ", function () {
   it("not a module and custom is defined", function () {
     const tk = new TokenModule("custom", 0, { _call: "setup" }, templateDir);
     tk.load({});
+    // eslint-disable-next-line
     expect(tk[TOKEN_HANDLER]).to.be.null;
     //    expect(Object.keys(tk[TOKEN_HANDLER]).length).to.equal(0);
   });
@@ -110,10 +112,11 @@ describe("_call in options ", function () {
   it.skip("should set default for options when calling load", function () {
     const tk = new TokenModule("test", 0, null, templateDir);
     expect(tk.props).to.deep.equal({});
-
+    // eslint-disable-next-line
     console.log(tk._modCall);
     tk.load();
     expect(tk.custom).to.deep.equal({});
+    // eslint-disable-next-line
     console.log(tk.custom);
   });
 

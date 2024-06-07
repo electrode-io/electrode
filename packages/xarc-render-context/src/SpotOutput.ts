@@ -31,7 +31,7 @@ export class SpotOutput extends BaseOutput {
     this._closeCb();
   }
 
-  _onClose(cb: Function) {
+  _onClose(cb: any) {
     this._closeCb = cb;
   }
 

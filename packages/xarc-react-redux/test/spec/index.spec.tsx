@@ -124,7 +124,7 @@ describe("reactReduxFeature", function () {
     const redux: Partial<ReduxFeature> = def._features.redux;
 
     sinon
-      .stub(require("redux"), "createStore")
+      .stub(require("redux"), "createStore") // eslint-disable-line
       .callsFake((reducer: any, initalState) => reducer(initalState));
 
     const mockFn = (x) => x + "-----withMockFn";

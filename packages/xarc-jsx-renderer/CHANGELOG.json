@@ -2,6 +2,23 @@
   "name": "@xarc/jsx-renderer",
   "entries": [
     {
+      "version": "1.0.15",
+      "tag": "@xarc/jsx-renderer_v1.0.15",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.11` to `^1.0.12`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.14",
       "tag": "@xarc/jsx-renderer_v1.0.14",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

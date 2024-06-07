@@ -23,6 +23,9 @@
     "alwaysStrict": true,
     "strictFunctionTypes": true
   },
+  "typedocOptions": {
+    "entryPointStrategy": "expand"
+  },
   "include": [
     "src"
   ]

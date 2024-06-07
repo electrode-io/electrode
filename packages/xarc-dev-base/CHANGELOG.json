@@ -2,6 +2,18 @@
   "name": "@xarc/dev-base",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "@xarc/dev-base_v0.1.2",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "@xarc/dev-base_v0.1.1",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

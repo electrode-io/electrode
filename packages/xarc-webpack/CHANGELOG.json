@@ -2,6 +2,50 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "11.2.6",
+      "tag": "@xarc/webpack_v11.2.6",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.5 to ^11.0.6."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.5 to ^11.0.6."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.6 to ^11.0.7."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.6 to ^11.0.7."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.7 to ^11.0.8."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.7 to ^11.0.8."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.8 to ^11.0.9."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.8 to ^11.0.9."
+          },
+          {
+            "comment": "Updating dependency \"@xarc/dev-base\" from `^0.1.1` to `^0.1.2`"
+          },
+          {
+            "comment": "Updating dependency \"webpack-config-composer\" from `^1.2.1` to `^1.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.5",
       "tag": "@xarc/webpack_v11.2.5",
       "date": "Tue, 29 Aug 2023 22:13:08 GMT",

@@ -15,5 +15,8 @@
     "strictFunctionTypes": true,
     "jsx": "react"
   },
+  "typedocOptions": {
+    "entryPointStrategy": "expand"
+  },
   "include": ["src", "lib"]
 }
