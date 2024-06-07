@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { loadTokenModuleHandler } from "../../src";
 import { expect } from "chai";
 import * as Path from "path";

@@ -2,6 +2,18 @@
   "name": "@xarc/render-context",
   "entries": [
     {
+      "version": "1.0.12",
+      "tag": "@xarc/render-context_v1.0.12",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.11",
       "tag": "@xarc/render-context_v1.0.11",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

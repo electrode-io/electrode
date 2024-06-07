@@ -21,7 +21,7 @@ export class BaseOutput {
    */
   _open: boolean;
   _pos: number;
-  _closeCb: Function;
+  _closeCb: (...args: any[]) => any;
   /**
    * number of pending spots in the output
    *
@@ -104,7 +104,7 @@ export class BaseOutput {
    * @param done - callback after output has been consumed by munchy
    *
    */
-  sendToMunchy(munchy: any, done: Function) {
+  sendToMunchy(munchy: any, done: (...args: any[]) => any) {
     if (this._items.length > 0) {
       munchy.once("munched", done);
       this._munchItems(munchy);

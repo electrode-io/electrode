@@ -25,7 +25,7 @@ export type Element = {
   children: any;
   props: object;
   tag?: string;
-  Construct?: Function;
+  Construct?: (...args: any[]) => any;
   memoize?: any;
 };
 

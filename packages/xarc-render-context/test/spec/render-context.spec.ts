@@ -1,5 +1,4 @@
-"use strict";
-
+/* eslint-disable no-unused-expressions */
 import { RenderContext } from "../../src/RenderContext";
 import { RenderOutput } from "../../src/RenderOutput";
 import { expect } from "chai";

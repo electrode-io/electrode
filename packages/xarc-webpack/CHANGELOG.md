@@ -1,6 +1,13 @@
 # Change Log - @xarc/webpack
 
-This log was last generated on Tue, 29 Aug 2023 22:13:08 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+
+## 11.2.6
+Wed, 05 Jun 2024 20:03:59 GMT
+
+### Patches
+
+- Typescript version upgrade
 
 ## 11.2.5
 Tue, 29 Aug 2023 22:13:08 GMT

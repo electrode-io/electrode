@@ -2,6 +2,29 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "11.0.9",
+      "tag": "@xarc/app-dev_v11.0.9",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Typescript version upgrade"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/dev-base\" from `^0.1.1` to `^0.1.2`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.4.0` to `^0.4.1`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/webpack\" from `^11.2.5` to `^11.2.6`"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.0.8",
       "tag": "@xarc/app-dev_v11.0.8",
       "date": "Mon, 08 Jan 2024 20:33:22 GMT",

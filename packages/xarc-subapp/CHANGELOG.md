@@ -1,6 +1,13 @@
 # Change Log - @xarc/subapp
 
-This log was last generated on Wed, 03 Jan 2024 23:41:10 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+
+## 0.4.1
+Wed, 05 Jun 2024 20:03:59 GMT
+
+### Patches
+
+- Typescript version upgrade
 
 ## 0.4.0
 Wed, 03 Jan 2024 23:41:10 GMT

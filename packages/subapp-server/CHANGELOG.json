@@ -2,6 +2,27 @@
   "name": "subapp-server",
   "entries": [
     {
+      "version": "2.4.1",
+      "tag": "subapp-server_v2.4.1",
+      "date": "Wed, 05 Jun 2024 20:03:59 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/index-page\" from `^1.2.2` to `^1.2.3`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.14` to `^1.0.15`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `1.0.11` to `1.0.12`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.13` to `^1.0.14`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.4.0",
       "tag": "subapp-server_v2.4.0",
       "date": "Thu, 07 Mar 2024 02:33:25 GMT",

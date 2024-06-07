@@ -1,6 +1,4 @@
-"use strict";
-
-/* eslint-disable no-unused-vars, comma-dangle, arrow-parens */
+/* eslint-disable no-unused-vars, comma-dangle, arrow-parens, max-statements */
 
 import { RenderOutput } from "../../src";
 import * as Munchy from "munchy";
