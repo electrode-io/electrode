@@ -99,7 +99,7 @@ export class AppDevMiddleware {
   }
 
   setup({ serverPort = undefined } = {}) {
-    process.on("message", data => {
+    process.on("message", (data: any) => {
       switch (data.name) {
         case WEBPACK_EVENT_REPORT:
           this.handleWebpackReport(data);

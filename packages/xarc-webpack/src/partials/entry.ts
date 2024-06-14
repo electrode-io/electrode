@@ -78,7 +78,6 @@ function makeEntryPartial() {
       reducerHmrCode = `
 import { getReduxCreateStore } from "subapp-redux";
 import reducers from "${subAppReducers}";
-
 if (subApp.reduxReducers && (!subApp.reduxCreateStore || subApp._genReduxCreateStore)) {
   subApp._genReduxCreateStore = "hmr";
   const createStore = getReduxCreateStore(subApp);

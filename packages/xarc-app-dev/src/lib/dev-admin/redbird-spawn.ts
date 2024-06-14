@@ -73,7 +73,7 @@ const handleRestart = (type) => {
   };
 
   process.on("SIGHUP", restart);
-  process.on("message", (data) => {
+  process.on("message", (data: any) => {
     if (data.name === "restart") {
       restart(_.omit(data, "name"));
     } else if (data.name === "update-ports") {

@@ -23,7 +23,7 @@ const {
   STEP_SUB_TEMPLATE
 } = executeSteps;
 
-function handleSubTemplate(tkId: string, step, result: any, xt: any, cb: Function) {
+function handleSubTemplate(tkId: string, step, result: any, xt: any, cb: any) {
   if (!result) {
     return cb();
   }
