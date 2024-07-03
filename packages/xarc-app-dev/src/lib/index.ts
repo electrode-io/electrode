@@ -14,7 +14,7 @@ export { fastifyPlugin } from "./webpack-dev-fastify";
 export { expressMiddleware } from "./webpack-dev-express";
 export { koaMiddleware } from "./webpack-dev-koa";
 
-const makeEslintRcFile = file => Path.posix.join(__dirname, "../config/eslint", file);
+const makeEslintRcFile = file => Path.join(__dirname, "../config/eslint", file);
 
 /** path to built-in eslintrc for React test code */
 export const eslintRcReactTest = makeEslintRcFile(".eslintrc-react-test");
