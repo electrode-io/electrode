@@ -1,3 +1,17 @@
+# 7/5/2024
+
+## Packages
+
+### Directly Updated
+
+- `subapp-web@1.0.53` `(1.0.52 => 1.0.53)`
+
+## Commits
+
+- `packages/subapp-web`
+
+  - patch: fix security vulnerability [commit](http://github.com/electrode-io/electrode/commit/efe01a762416a58f0bb10e308d5655487fb9c53b)
+
 # 3/7/2022
 
 ## Packages
