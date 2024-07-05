@@ -38,7 +38,7 @@
     "http-status-codes": "^2.2.0",
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.5",
-    "subapp-web": "^2.1.4",
+    "subapp-web": "^2.1.5",
     "xaa": "^1.7.3"
   },
   "devDependencies": {

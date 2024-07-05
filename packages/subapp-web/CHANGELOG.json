@@ -2,6 +2,32 @@
   "name": "subapp-web",
   "entries": [
     {
+      "version": "2.1.5",
+      "tag": "subapp-web_v2.1.5",
+      "date": "Fri, 05 Jul 2024 20:08:52 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.5 to ^11.0.6."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.6 to ^11.0.7."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.7 to ^11.0.8."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.8 to ^11.0.9."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "replace polyfill.io url to avoid security issues"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.1.4",
       "tag": "subapp-web_v2.1.4",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

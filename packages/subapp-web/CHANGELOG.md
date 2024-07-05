@@ -1,6 +1,13 @@
 # Change Log - subapp-web
 
-This log was last generated on Tue, 29 Aug 2023 14:57:37 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Jul 2024 20:08:52 GMT and should not be manually modified.
+
+## 2.1.5
+Fri, 05 Jul 2024 20:08:52 GMT
+
+### Patches
+
+- replace polyfill.io url to avoid security issues
 
 ## 2.1.4
 Tue, 29 Aug 2023 14:57:37 GMT
