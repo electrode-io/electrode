@@ -11,7 +11,7 @@ export const executeSteps = {
   STEP_NO_HANDLER: 2,
   STEP_LITERAL_HANDLER: 3,
   STEP_FUNC_HANDLER: 4,
-  STEP_SUB_TEMPLATE: 5
+  STEP_SUB_TEMPLATE: 5,
 };
 
 const {
@@ -20,18 +20,29 @@ const {
   STEP_NO_HANDLER,
   STEP_LITERAL_HANDLER,
   STEP_FUNC_HANDLER,
-  STEP_SUB_TEMPLATE
+  STEP_SUB_TEMPLATE,
 } = executeSteps;
 
-function handleSubTemplate(tkId: string, step, result: any, xt: any, cb: Function) {
+function handleSubTemplate(
+  tkId: string,
+  step,
+  result: any,
+  xt: any,
+  cb: Function
+) {
   if (!result) {
     return cb();
   }
 
-  const handle = res => {
+  const handle = (res) => {
     if (res[TAG_TYPE] && res[TAG_TYPE] === "template") {
       const step2 = xt.template.handleSubTemplate(step, res);
-      return executeTagTemplate(step2.template, step2.tk, xt.context, true).then(cb, cb);
+      return executeTagTemplate(
+        step2.template,
+        step2.tk,
+        xt.context,
+        true
+      ).then(cb as any, cb as any);
     } else {
       return xt.context.handleTokenResult(tkId, res, cb);
     }
@@ -56,15 +67,21 @@ export function renderNext(err: Error, xt: any) {
     context.handleError(err);
   }
 
-  const insertTokenId = tk => {
-    context.output.add(`<!-- BEGIN ${tk.id} props: ${JSON.stringify(tk.props)} -->\n`);
+  const insertTokenId = (tk) => {
+    context.output.add(
+      `<!-- BEGIN ${tk.id} props: ${JSON.stringify(tk.props)} -->\n`
+    );
   };
 
-  const insertTokenIdEnd = tk => {
+  const insertTokenIdEnd = (tk) => {
     context.output.add(`<!-- ${tk.id} END -->\n`);
   };
 
-  if (context.isFullStop || context.isVoidStop || xt.stepIndex >= tagTokens.length) {
+  if (
+    context.isFullStop ||
+    context.isVoidStop ||
+    xt.stepIndex >= tagTokens.length
+  ) {
     if (!xt.subTemplate) {
       xt.resolve(context.output.close());
     } else {
@@ -91,7 +108,9 @@ export function renderNext(err: Error, xt: any) {
       case STEP_FUNC_HANDLER: {
         const result = tk(context);
         // in case the function handler returned a sub template
-        return handleSubTemplate("", step, result, xt, (e: Error) => renderNext(e, xt));
+        return handleSubTemplate("", step, result, xt, (e: Error) =>
+          renderNext(e, xt)
+        );
       }
       case STEP_HANDLER: {
         if (withId) {
@@ -132,8 +151,15 @@ export function executeTagTemplate(
   context,
   subTemplate = false
 ) {
-  return new Promise(resolve => {
-    const xt = { stepIndex: 0, template, tagTokens, context, resolve, subTemplate };
+  return new Promise((resolve) => {
+    const xt = {
+      stepIndex: 0,
+      template,
+      tagTokens,
+      context,
+      resolve,
+      subTemplate,
+    };
     return renderNext(null, xt);
   });
 }

@@ -14,40 +14,38 @@ const deps = require("./package.json").dependencies;
 
 loadDevTasks(xrun, {
   webpackOptions: {
-    minify: true,
-    devtool: "eval-cheap-module-source-map",
     v1RemoteSubApps: {
-      name: "poc-subapp",
-      subAppsToExpose: ["Deal", "Extras"],
+      name: "v1-federation-demo-subapp",
+      subAppsToExpose: ["Demo"],
       shared: {
         react: {
-          eager: true,
-          requiredVersion: deps.react,
-          import: "react",
-          shareKey: "react",
-          shareScope: "default",
-          singleton: true
-        },
-        "react-dom": {
-          eager: true,
-          requiredVersion: deps["react-dom"],
-          singleton: true
-        },
-        history: {
-          eager: true,
-          requiredVersion: deps["history"],
-          singleton: true
-        },
-        "subapp-web": {
-          eager: true,
-          requiredVersion: deps["subapp-web"],
-          singleton: true
-        },
-        "@babel/runtime": {
-          eager: true,
-          requiredVersion: deps["@babel/runtime"],
+          eager: false,
+          // requiredVersion: deps.react,
+          // import: "react",
+          // shareKey: "react",
+          // shareScope: "default",
           singleton: true
         }
+        // "react-dom": {
+        //   eager: true,
+        //   requiredVersion: deps["react-dom"],
+        //   singleton: true
+        // },
+        // history: {
+        //   eager: true,
+        //   requiredVersion: deps["history"],
+        //   singleton: true
+        // },
+        // "subapp-web": {
+        //   eager: true,
+        //   requiredVersion: deps["subapp-web"],
+        //   singleton: true
+        // },
+        // "@babel/runtime": {
+        //   eager: true,
+        //   requiredVersion: deps["@babel/runtime"],
+        //   singleton: true
+        // }
       }
     }
   }
