@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/dev-base",
+      "comment": "@types/node",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/dev-base"
+}
