@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@xarc/dev-base",
-      "comment": "@types/node",
+      "comment": "Upgrade @types/node",
       "type": "patch"
     }
   ],
