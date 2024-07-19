@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "Upgrade @types/node",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}

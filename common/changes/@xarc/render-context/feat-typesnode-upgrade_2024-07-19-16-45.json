@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/render-context",
+      "comment": "Upgrade @types/node",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/render-context"
+}

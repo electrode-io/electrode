@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Upgrade @types/node",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/index-page",
+      "comment": "Upgrade @types/node",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/index-page"
+}

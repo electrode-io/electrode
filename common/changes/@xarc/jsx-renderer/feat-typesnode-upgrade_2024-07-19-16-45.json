@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/jsx-renderer",
+      "comment": "Upgrade @types/node",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/jsx-renderer"
+}
