@@ -42,7 +42,7 @@ export const webpackPartial = () => {
     output: {
       path,
       pathinfo: inspectpack, // Enable path information for inspectpack
-      publicPath: "/js/",
+      publicPath: "auto",
       chunkFilename: getOutputFilename(),
       filename: getOutputFilename()
     }
