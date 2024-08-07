@@ -16,27 +16,26 @@ const DEV_HMR_DIR = ".__dev_hmr";
 /**
  * Generates the HMR string.
  */
-function hmrString(req: string): string {
+function hmrString(subAppReq: string): string {
   return `
-const refresh = info => {
-  const subApp = window.xarcV1.getSubApp(info.name);
-  subApp.info = info;
-  subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
-};
-if (module.hot) {
-  module.hot.accept("${req}", () => {
-    var info = import("${req}");
-    info = info.default || info; // check for es6 module
-    if (info.then) {
-      info.then((mod) => {
-        refresh(mod.default || mod);
-      });
-    } else {
-      refresh(info);
-    }
-  });
-}
-`;
+  const refresh = info => {
+    const subApp = window.xarcV1.getSubApp(info.name);
+    subApp.info = info;
+    subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
+  };
+  if (module.hot) {
+    module.hot.accept("${subAppReq}", () => {
+      var info = import("${subAppReq}");
+      info = info.default || info; // check for es6 module
+      if (info.then) {
+        info.then((mod) => {
+          refresh(mod.default || mod);
+        });
+      } else {
+        refresh(info);
+      }
+    });
+  }`;
 }
 
 /**
@@ -44,36 +43,32 @@ if (module.hot) {
  */
 function generateReducerHmrCode(subAppReducers: string): string {
   return `
-import("${subAppReducers}").then(({ default: reducers }) => {
-  import("subapp-redux").then(({ getReduxCreateStore }) => {
-    if (subApp.reduxReducers && (!subApp.reduxCreateStore || subApp._genReduxCreateStore)) {
-      subApp._genReduxCreateStore = "hmr";
-      const createStore = getReduxCreateStore(subApp);
-      subApp.reduxCreateStore = initialState => {
-        const store = createStore(initialState);
-        module.hot.accept("${subAppReducers}", () => {
-          import("${subAppReducers}").then((mod) => {
-            store.replaceReducer(mod.default || mod, subApp);
+  import("subapp-redux").then(({ getReduxCreateStore })=> {
+    import("${subAppReducers}").then(({ default: reducers }) => {
+      if (subApp.reduxReducers && (!subApp.reduxCreateStore || subApp._genReduxCreateStore)) {
+        subApp._genReduxCreateStore = "hmr";
+        const createStore = getReduxCreateStore(subApp);
+        subApp.reduxCreateStore = initialState => {
+          const store = createStore(initialState);
+          module.hot.accept("${subAppReducers}", () => {
+            import("${subAppReducers}").then((mod) => {
+              store.replaceReducer(mod.default || mod, subApp);
+            });
           });
-        });
-        return store;
-      };
-    }
-  });
-});
-`;
+          return store;
+        };
+      }
+    });
+  });`;
 }
 
 /**
  * Writes the HMR entry file.
  */
 function writeHmrEntryFile(hmrDir: string, hmrEntry: string, subAppReq: string, hasReducers: boolean, reducerHmrCode?: string, manifest?: any): void {
-  const content = `
-console.log("${manifest}")
-import(/* webpackChunkName: "${subAppReq}" */ "${subAppReq}").then(subApp => {
-  ${hasReducers ? reducerHmrCode : ""}${hmrString(subAppReq)}
-});
-`;
+  const content = `import(/* webpackChunkName: "${manifest.entry}" */ "${subAppReq}").then(({ default: subApp }) => {
+    ${hasReducers ?reducerHmrCode:""}${hmrString(subAppReq)}
+});`;
   Fs.writeFileSync(Path.join(hmrDir, hmrEntry), content);
 }
 
@@ -102,7 +97,7 @@ function genSubAppHmrEntry(hmrDir: string, isDev: boolean, manifest: any): strin
     reducerHmrCode = generateReducerHmrCode(subAppReducers);
   }
 
-  writeHmrEntryFile(hmrDir, hmrEntry, subAppReq, hasReducers, reducerHmrCode);
+  writeHmrEntryFile(hmrDir, hmrEntry, subAppReq, hasReducers, reducerHmrCode, manifest);
 
   return `./${DEV_HMR_DIR}/${hmrEntry}`;
 }
