@@ -26,7 +26,7 @@ function hmrString(subAppReq: string): string {
   if (module.hot) {
     module.hot.accept("${subAppReq}", () => {
       var info = import("${subAppReq}");
-      info = info.default || info; // check for es6 module
+      info = info.default || info;
       if (info.then) {
         info.then((mod) => {
           refresh(mod.default || mod);
