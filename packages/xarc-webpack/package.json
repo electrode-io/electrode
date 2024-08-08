@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "11.2.6",
+  "version": "11.2.0-beta.0",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",

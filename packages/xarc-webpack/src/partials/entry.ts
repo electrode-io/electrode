@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
-/* eslint-disable no-process-exit */
+/* eslint-disable no-process-exit, max-params */
 
 import * as Fs from "fs";
 import * as Path from "path";
@@ -67,7 +67,7 @@ function generateReducerHmrCode(subAppReducers: string): string {
  */
 function writeHmrEntryFile(hmrDir: string, hmrEntry: string, subAppReq: string, hasReducers: boolean, reducerHmrCode?: string, manifest?: any): void {
   const content = `import(/* webpackChunkName: "${manifest.entry}" */ "${subAppReq}").then(({ default: subApp }) => {
-    ${hasReducers ?reducerHmrCode:""}${hmrString(subAppReq)}
+    ${hasReducers ? reducerHmrCode : ""}${hmrString(subAppReq)}
 });`;
   Fs.writeFileSync(Path.join(hmrDir, hmrEntry), content);
 }
@@ -138,7 +138,6 @@ function searchEntryConfig(partial: any): any {
 }
 
 /**
- * 
  * Look for src/client/<name>/subapp.js files.  If found, then assume app follows
  * the subapp architecture, and automatically generate one entry for each subapp.
  */
