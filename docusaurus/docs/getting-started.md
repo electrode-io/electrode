@@ -3,7 +3,11 @@ id: getting-started
 title: Getting Started
 ---
 
+
 ## Web Applications with node.js and React
+
+>[!NOTE]
+> We maintain additional code and documentations for internal Walmart systems. If you are a Walmart developer, please check internal docs to get started.
 
 Welcome! This is the documentation for building web application using Electrode X for node.js and React.
 
