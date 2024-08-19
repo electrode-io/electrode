@@ -11,7 +11,7 @@ const {
   enableFlow,
   transformClassProps,
   looseClassProps,
-  envTargets = {}
+  envTargets = {},
 } = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
@@ -23,21 +23,21 @@ export = {
     [
       "@babel/preset-env",
       {
-        targets: node
-      }
+        targets: node,
+      },
     ],
     enableTypeScript && "@babel/preset-typescript",
-    "@babel/preset-react"
-  ].filter(x => x),
+    "@babel/preset-react",
+  ].filter((x) => x),
   plugins: [
     addFlowPlugin && [
       "@babel/plugin-transform-flow-strip-types",
-      { requireDirective: flowRequireDirective }
+      { requireDirective: flowRequireDirective },
     ],
     (enableTypeScript || transformClassProps) && [
-      "@babel/plugin-proposal-class-properties",
-      { loose: looseClassProps }
+      "@babel/plugin-transform-class-properties",
+      { loose: looseClassProps },
     ],
-    enableTypeScript && "@babel/proposal-object-rest-spread"
-  ].filter(x => x)
+    enableTypeScript && "@babel/proposal-object-rest-spread",
+  ].filter((x) => x),
 };

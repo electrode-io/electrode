@@ -37,7 +37,7 @@ const basePlugins = [
     },
   ],
   // allow decorators on class and method
-  // Note: This must go before @babel/plugin-proposal-class-properties
+  // Note: This must go before @babel/plugin-proposal-transform-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
     { legacy: legacyDecorators, ...proposalDecorators },
@@ -48,7 +48,7 @@ const basePlugins = [
   // Note: This must go before @babel/plugin-transform-classes
   //
   (enableTypeScript || transformClassProps) && [
-    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-transform-properties",
     { loose: looseClassProps, ...transformClassProps },
   ],
   //
@@ -102,7 +102,9 @@ const plugins = basePlugins.concat(
       "babel-plugin-react-css-modules",
       {
         context: "./src",
-        generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        generateScopedName: `${
+          isProduction ? "" : "[name]__[local]___"
+        }[hash:base64:5]`,
         filetypes: {
           ".scss": {
             syntax: "postcss-scss",
@@ -119,13 +121,18 @@ const plugins = basePlugins.concat(
     ],
   ],
   enableKarmaCov && [
-    getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul"),
+    getPluginFrom(
+      ["@xarc/opt-karma", "electrode-archetype-opt-karma"],
+      "babel-plugin-istanbul"
+    ),
   ]
 );
 
 const targets = envTargets[babelTarget];
 const coreJsVersion = require("core-js/package.json").version.split(".")[0];
-const useBuiltIns = hasMultiTargets ? { useBuiltIns: "entry", corejs: coreJsVersion } : {};
+const useBuiltIns = hasMultiTargets
+  ? { useBuiltIns: "entry", corejs: coreJsVersion }
+  : {};
 
 const presets = [
   //

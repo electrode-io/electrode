@@ -44,9 +44,9 @@
   "dependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.12",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-transform-class-properties": "^7.24.1",
     "@babel/plugin-proposal-decorators": "^7.17.12",
-    "@babel/plugin-proposal-object-rest-spread": "^7.17.12",
+    "@babel/plugin-transform-object-rest-spread": "^7.24.7",
     "@babel/plugin-transform-react-constant-elements": "^7.17.12",
     "@babel/plugin-transform-react-inline-elements": "^7.16.7",
     "@babel/plugin-transform-runtime": "^7.17.12",
@@ -73,7 +73,7 @@
     "fast-async": "^7.0.5",
     "filter-scan-dir": "1.5.5",
     "fs-extra": "^10.1.0",
-    "glob": "^8.0.3",
+    "glob": "^9.0.0",
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "^2.0.0",
     "lodash": "^4.17.21",
@@ -89,7 +89,6 @@
     "ps-get": "^1.1.0",
     "read-pkg-up": "^7.0.1",
     "regenerator-runtime": "^0.13.9",
-    "request": "^2.88.2",
     "require-at": "^1.0.6",
     "semver": "^7.3.7",
     "serve-index-fs": "^1.10.1",
@@ -102,7 +101,8 @@
     "winston": "^3.7.2",
     "xaa": "^1.7.3",
     "xenv-config": "^1.3.1",
-    "xsh": "^0.4.5"
+    "xsh": "^0.4.5",
+    "axios": "^1.7.4"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
@@ -117,7 +117,8 @@
     "@xarc/app": "^11.0.9",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/core": "^7.11.0",
     "chai": "^4.3.6",
     "electrode-server": "^3.3.0",
     "electrode-server1": "npm:electrode-server@^1.0.0",

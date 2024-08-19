@@ -27,7 +27,8 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/core": "^7.11.0",
     "eslint": "^7.15.0",
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.3.2",

@@ -33,7 +33,8 @@ const {
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
-const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } = process.env;
+const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } =
+  process.env;
 
 const enableCssModule = detectCSSModule(xOptions);
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
@@ -68,7 +69,9 @@ const getReactCssModulePlugin = (): any => {
       "babel-plugin-react-css-modules",
       {
         context: "./src",
-        generateScopedName: `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        generateScopedName: `${
+          enableShortHash ? "" : "[name]__[local]___"
+        }[hash:base64:5]`,
         filetypes: {
           ".scss": {
             syntax: "postcss-scss",
@@ -101,7 +104,7 @@ const basePlugins = [
     },
   ],
   // allow decorators on class and method
-  // Note: This must go before @babel/plugin-proposal-class-properties
+  // Note: This must go before @babel/plugin-transform-class-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
     { legacy: legacyDecorators, ...proposalDecorators },
@@ -112,7 +115,7 @@ const basePlugins = [
   // Note: This must go before @babel/plugin-transform-classes
   //
   (enableTypeScript || transformClassProps) && [
-    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-class-properties",
     { loose: looseClassProps, ...transformClassProps },
   ],
   //
@@ -159,7 +162,10 @@ const plugins = basePlugins.concat(
   getReactCssModulePlugin(),
   !isNodeTarget &&
     enableKarmaCov && [
-      getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul"),
+      getPluginFrom(
+        ["@xarc/opt-karma", "electrode-archetype-opt-karma"],
+        "babel-plugin-istanbul"
+      ),
     ]
 );
 
@@ -167,9 +173,13 @@ const target = isNodeTarget ? "node" : babelTarget;
 
 const targets = envTargets[target];
 if (!isJest) {
-  const srcMsg = _.isEmpty(targets) ? " (will read from '.browserslistrc')" : "";
+  const srcMsg = _.isEmpty(targets)
+    ? " (will read from '.browserslistrc')"
+    : "";
   console.log(
-    ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>${srcMsg}`
+    ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(
+      targets
+    )}</>${srcMsg}`
   );
 }
 
