@@ -28,5 +28,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Docs
-        run: cd docusaurus && npm install && npm run build && npm run deploy
+        run: cd docusaurus && npm install pnpm && pnpm build && pnpm deploy
 
