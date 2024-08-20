@@ -1,0 +1,32 @@
+name: Docs
+
+on:
+  push:
+    branches: [ "docupdate*" ]
+  pull_request:
+    branches: [ "docupdate*" ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        # with: 
+        #   fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Docs
+        run: cd docusaurus && pnpm install && pnpm run build && pnpm run deploy
+
