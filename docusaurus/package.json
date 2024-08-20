@@ -34,6 +34,7 @@
     "@mdx-js/react": "^1.6.22",
     "hogan.js": "^3.0.2",
     "autocomplete.js": "^0.38.1",
-    "lunr": "^2.3.9"
+    "lunr": "^2.3.9",
+    "@types/http-proxy": "^1.17.15"
   }
 }
