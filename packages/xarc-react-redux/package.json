@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@xarc/subapp": "^0.4.1",
-    "@reduxjs/toolkit": "^1.9.0",
-    "react-redux": "^8.0.1",
+    "@reduxjs/toolkit": "^2.2.7",
+    "react-redux": "^9.1.2",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
