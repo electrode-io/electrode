@@ -1,37 +1,34 @@
 /* eslint-disable max-statements, complexity */
 
-import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
+import { configureStore, combineReducers, Reducer, AnyAction, EnhancedStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { combineReducers, createStore, Reducer } from "redux";
+import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
 
-//
-// re-export redux as Redux etc
-//
-export * as Redux from "redux";
-export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddleware } from "redux";
+// Re-export necessary modules
 
-//
-// re-export react-redux as ReactRedux etc
-//
+export * as Redux from "@reduxjs/toolkit";
+export { combineReducers, configureStore, Reducer, bindActionCreators } from "@reduxjs/toolkit";
+
+// Re-export react-redux
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
 /**
- * redux decorator params
+ * Redux decorator params
  */
 export type ReduxDecoratorParams = {
-  /** initial state  */
+  /** initial state */
   initialState: unknown;
   /** reducers */
   reducers: unknown;
 };
 
 /**
- * redux decorator result
+ * Redux decorator result
  */
 export type ReduxDecoratorResult = {
   /** store if the decorator created one */
-  store: any;
+  store: EnhancedStore<any, AnyAction>;
 };
 
 /**
@@ -44,7 +41,7 @@ export type ReduxFeatureDecorator = FeatureDecorator<
 >;
 
 /**
- * options for redux feature
+ * Options for redux feature
  */
 export type ReduxFeatureOptions = {
   /**
@@ -59,8 +56,7 @@ export type ReduxFeatureOptions = {
    * This is needed for the redux feature to wrap subapp's component inside
    * the Redux Provider component.
    */
-  React: Partial<{ createElement: unknown }>;
-
+  React: Partial<{ createElement: any }>;
   /**
    * Configure the redux store to use
    *
@@ -78,8 +74,7 @@ export type ReduxFeatureOptions = {
    * - If it's `true`, then the subapp module should export the named reducers as `reduxReducers`
    * - If it's a function, then it's used as the reducer
    */
-  reducers?: Reducer<unknown, any> | Record<string, Reducer<unknown, any>> | boolean;
-
+  reducers?: Reducer<any, AnyAction> | Record<string, Reducer<any, AnyAction>> | boolean;
   /**
    * prepare redux initial state
    *
@@ -88,19 +83,19 @@ export type ReduxFeatureOptions = {
    *
    * @returns Promise<{initialState: any}>
    */
-  prepare(initialState: any): Promise<any>;
+  prepare(initialState: any): Promise<{ initialState: any }>;
 };
 
 /**
- * redux support for a subapp
+ * Redux support for a subapp
  */
 export type ReduxFeature = SubAppFeature & {
   options: ReduxFeatureOptions;
   wrap: (_: any) => any;
   Provider: typeof Provider;
-  createStore: typeof createStore;
+  configureStore: (reducer: Reducer<any, AnyAction>, initialState: any) => EnhancedStore<any, AnyAction>;
   prepare: any;
-  _store: any;
+  _store?: EnhancedStore<any, AnyAction>;
 };
 
 /**
@@ -128,8 +123,13 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
       );
     };
     redux.Provider = Provider;
-    redux.createStore = (reducer, initialState) => {
-      return createStore(reducer || (x => x), initialState);
+
+    // Updated configureStore method with correct typing and handling
+    redux.configureStore = (reducer, initialState) => {
+      return configureStore({
+        reducer: reducer || ((state) => state),
+        preloadedState: initialState,
+      });
     };
     redux.prepare = options.prepare;
 
@@ -149,9 +149,13 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
           if (typeof reducers === "object") {
-            reducers = combineReducers(reducers) as Reducer<unknown, any>;
+            reducers = combineReducers(reducers) as Reducer<any, AnyAction>;
           }
-          redux._store.replaceReducer(reducers);
+        }
+
+        // Ensure reducers is a valid Reducer before calling replaceReducer
+        if (typeof reducers === "function" || typeof reducers === "object") {
+          redux._store?.replaceReducer(reducers as Reducer<any, AnyAction>);
         }
       } else {
         const props = csrData && (await csrData.getInitialState());
@@ -161,14 +165,17 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
 
         if (typeof reducers === "object") {
-          reducers = combineReducers(reducers) as Reducer<unknown, any>;
+          reducers = combineReducers(reducers) as Reducer<any, AnyAction>;
         }
 
         initialState = (await options.prepare(props)).initialState;
 
         if (decorators) {
           for (const decor of decorators) {
-            const { store } = decor.decorate(redux as ReduxFeature, { reducers, initialState });
+            const { store } = decor.decorate(redux as ReduxFeature, {
+              reducers,
+              initialState,
+            });
             if (store) {
               redux._store = store;
             }
@@ -176,7 +183,11 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
 
         if (!redux._store) {
-          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+          const validReducer = (typeof reducers === "function" || typeof reducers === "object")
+            ? reducers
+            : (state => state);
+
+          redux._store = redux.configureStore(validReducer as Reducer<any, AnyAction>, initialState);
         }
       }
 
@@ -184,11 +195,12 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         Component: () =>
           this.wrap({
             Component: input.Component || subapp._getExport()?.Component,
-            store: redux._store
+            store: redux._store!,
           }),
-        props: initialState
+        props: initialState,
       };
     };
+
     return subapp;
   };
 
