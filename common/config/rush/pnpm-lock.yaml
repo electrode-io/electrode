@@ -3259,7 +3259,7 @@ packages:
       reselect: 5.1.1
     dev: false
 
-  /@reduxjs/toolkit/2.2.7_react-redux@8.1.3+react@18.3.1:
+  /@reduxjs/toolkit/2.2.7_react-redux@9.1.2+react@18.3.1:
     resolution: {integrity: sha512-faI3cZbSdFb8yv9dhDTmGwclW0vk0z5o1cia+kf7gCbaCwHI5e+7tP57mJUv22pNcNbeA62GSrPpfrUfdXcQ6g==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -3272,7 +3272,7 @@ packages:
     dependencies:
       immer: 10.1.1
       react: 18.3.1
-      react-redux: 8.1.3_0b338fe26d75c42c584d5f65152410c0
+      react-redux: 9.1.2_@types+react@18.3.4+react@18.3.1
       redux: 5.0.1
       redux-thunk: 3.1.0_redux@5.0.1
       reselect: 5.1.1
@@ -3710,7 +3710,7 @@ packages:
     resolution: {integrity: sha512-9y0Gflk3b0+NhQZ/oxGtaAJDvRywCa5sIyaVnounqLvmf93yBF4EgIRspePtkMs3Tr844nCclYMlcCNmLCvjuQ==}
     dependencies:
       '@types/chai': 4.3.19
-      '@types/sinon': 9.0.11
+      '@types/sinon': 10.0.20
     dev: false
 
   /@types/sinon/10.0.20:
@@ -14467,39 +14467,6 @@ packages:
       react-dom: 18.3.1_react@18.3.1
     dev: false
 
-  /react-redux/8.1.3_0b338fe26d75c42c584d5f65152410c0:
-    resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4 || ^5.0.0-beta.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.25.4
-      '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.3.4
-      '@types/react-dom': 18.3.0
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      react-is: 18.3.1
-      use-sync-external-store: 1.2.2_react@18.3.1
-    dev: false
-
   /react-redux/8.1.3_25914b775dd669e94923110b39c04f2c:
     resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
     peerDependencies:
@@ -14563,6 +14530,24 @@ packages:
       react-dom: 18.3.1_react@18.3.1
       react-is: 18.3.1
       redux: 4.2.1
+      use-sync-external-store: 1.2.2_react@18.3.1
+    dev: false
+
+  /react-redux/9.1.2_@types+react@18.3.4+react@18.3.1:
+    resolution: {integrity: sha512-0OA4dhM1W48l3uzmv6B7TXPCGmokUU4p1M44DGN2/D9a1FjVPukVjER1PcPX97jIg6aUeLq1XJo1IpfbgULn0w==}
+    peerDependencies:
+      '@types/react': ^18.2.25
+      react: ^18.0
+      redux: ^5.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@types/react': 18.3.4
+      '@types/use-sync-external-store': 0.0.3
+      react: 18.3.1
       use-sync-external-store: 1.2.2_react@18.3.1
     dev: false
 
@@ -18765,12 +18750,12 @@ packages:
     dev: false
 
   file:projects/react-redux.tgz:
-    resolution: {integrity: sha512-qJ+lgp7eAKcfDOd6UpyBXQKae0e5OExhVdQ+8DAHDV0ENwg97ThPCgkInfazZ7od1IPfcKu9K2EhadeZEo6/Pg==, tarball: file:projects/react-redux.tgz}
+    resolution: {integrity: sha512-Z94khtBqndNFCnh7aRJXdxK4lNecM4jF2AJkcMSjFZ1moPUR/8bAjANANcEV4/mFU7uKtpW6B331RkaveqtQDw==, tarball: file:projects/react-redux.tgz}
     name: '@rush-temp/react-redux'
     version: 0.0.0
     dependencies:
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
-      '@reduxjs/toolkit': 2.2.7_react-redux@8.1.3+react@18.3.1
+      '@reduxjs/toolkit': 2.2.7_react-redux@9.1.2+react@18.3.1
       '@testing-library/react': 13.4.0_react-dom@18.3.1+react@18.3.1
       '@types/chai': 4.3.19
       '@types/mocha': 10.0.7
@@ -18795,7 +18780,7 @@ packages:
       nyc: 15.1.0
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
-      react-redux: 8.1.3_0b338fe26d75c42c584d5f65152410c0
+      react-redux: 9.1.2_@types+react@18.3.4+react@18.3.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.5.0+sinon@14.0.2
       source-map-support: 0.5.21
@@ -18808,7 +18793,6 @@ packages:
       - '@swc/wasm'
       - bufferutil
       - canvas
-      - react-native
       - redux
       - supports-color
       - utf-8-validate
