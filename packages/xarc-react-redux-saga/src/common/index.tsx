@@ -1,12 +1,6 @@
 import createSagaMiddleware from "redux-saga";
-import {
-  applyMiddleware,
-  Reducer,
-  createStore,
-  ReduxFeature,
-  ReduxDecoratorParams,
-  ReduxFeatureDecorator
-} from "@xarc/react-redux";
+import { configureStore, Reducer } from "@reduxjs/toolkit";
+import { ReduxFeature, ReduxDecoratorParams, ReduxFeatureDecorator } from "@xarc/react-redux";
 
 /**
  * Redux saga options
@@ -30,11 +24,11 @@ export function reduxSagaDecor(options: ReduxSagaOption): ReduxFeatureDecorator 
   return {
     decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
       const sagaMiddleware = createSagaMiddleware();
-      const store = createStore(
-        (params.reducers as Reducer<unknown, any>) || (x => x),
-        params.initialState,
-        applyMiddleware(sagaMiddleware)
-      );
+      const store = configureStore({
+        reducer: (params.reducers as Reducer<unknown, any>) || (x => x),
+        preloadedState: params.initialState,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
+      });
       sagaMiddleware.run(rootSaga);
       return { store };
     }

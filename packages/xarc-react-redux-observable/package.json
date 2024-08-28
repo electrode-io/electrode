@@ -23,7 +23,8 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^1.1.6",
+    "@xarc/react-redux": "^1.1.5",
+    "@reduxjs/toolkit": "^2.2.7",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0"
