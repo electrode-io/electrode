@@ -184,7 +184,7 @@ describe("shareStore", () => {
       };
 
       const store = createSharedStore({ a: "test" }, info, storeContainer);
-      expect(store[originalReplaceReducerSym]).to.be.a("function");
+      expect(store?.[originalReplaceReducerSym]).to.be.a("function");
 
       const spy = sinon.spy();
 
@@ -208,7 +208,7 @@ describe("shareStore", () => {
       };
 
       const mockReducers = { t1: x => x, t2: y => y + 1 };
-      store.replaceReducer(mockReducers, info2, storeContainer2);
+      store?.replaceReducer(mockReducers, info2, storeContainer2);
 
       expect(spy.called).to.equal(true);
       sinon.restore();
