@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}
