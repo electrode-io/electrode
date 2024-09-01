@@ -6,7 +6,7 @@
 const _ = require("lodash");
 const Util = require("util");
 const Fs = require("fs-extra");
-const getFilePaths = Util.promisify(require("glob"));
+const { glob: getFilePaths } = Util.promisify(require("glob"));
 const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
 const RAW_MESSAGES_DIR = "./dist/";
 const RAW_MESSAGES_NAME = "raw-messages.json";
@@ -39,7 +39,10 @@ function readFileAsJSON(filePath) {
  *                     from all files
  */
 async function getAllDefaultMessages(messageFilesPathPattern) {
-  const fileJsons = await xaa.map(await getFilePaths(messageFilesPathPattern), readFileAsJSON);
+  const fileJsons = await xaa.map(
+    await getFilePaths(messageFilesPathPattern),
+    readFileAsJSON
+  );
   return fileJsons.reduce((previousValue, defaultMessageDescriptors) => {
     defaultMessageDescriptors.forEach((descriptor) => {
       previousValue[descriptor.id] = descriptor;
@@ -48,12 +51,19 @@ async function getAllDefaultMessages(messageFilesPathPattern) {
   }, {});
 }
 
-const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
+const writeRawMessages = _.partial(
+  writeFileAsJSON,
+  RAW_MESSAGES_DIR,
+  RAW_MESSAGES_NAME
+);
 
 const isMain = require.main === module;
 
 function flattenMessagesL10n() {
-  return Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), Fs.ensureDir(RAW_MESSAGES_DIR)])
+  return Promise.all([
+    getAllDefaultMessages(MESSAGES_PATTERN),
+    Fs.ensureDir(RAW_MESSAGES_DIR),
+  ])
     .then(_.first)
     .then(writeRawMessages)
     .then(() => {

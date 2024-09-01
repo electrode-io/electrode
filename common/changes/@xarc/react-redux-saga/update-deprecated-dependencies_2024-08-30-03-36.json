@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux-saga",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/react-redux-saga"
+}
