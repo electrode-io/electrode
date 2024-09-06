@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-web",
+      "comment": "fix hmr error",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-web"
+}
