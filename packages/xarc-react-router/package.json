@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-router",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "xarc React Router support for SubApp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -20,13 +20,15 @@
   "author": "WalmartLabs GTP.js team",
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/subapp": "^0.4.1",
+    "@xarc/subapp": "^0.4.2",
     "history": "^5.3.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@babel/runtime": "^7.22.3",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/react": "^13.2.0",
@@ -41,8 +43,6 @@
     "@typescript-eslint/parser": "^5.26.0",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/core": "^7.11.0",
     "chai": "^4.3.6",
     "eslint": "^8.16.0",
     "eslint-config-walmart": "^2.2.1",

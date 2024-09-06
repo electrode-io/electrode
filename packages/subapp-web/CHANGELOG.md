@@ -1,6 +1,13 @@
 # Change Log - subapp-web
 
-This log was last generated on Fri, 05 Jul 2024 20:08:52 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+
+## 2.1.6
+Fri, 06 Sep 2024 17:12:11 GMT
+
+### Patches
+
+- fix hmr error
 
 ## 2.1.5
 Fri, 05 Jul 2024 20:08:52 GMT

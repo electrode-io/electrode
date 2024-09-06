@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-composer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Flexible webpack config partials composing",
   "homepage": "http://www.electrode.io",
   "main": "lib/index.js",
@@ -32,6 +32,8 @@
     "tslib": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^10.0.1",
@@ -42,8 +44,6 @@
     "@typescript-eslint/parser": "^4.11.0",
     "@xarc/module-dev": "^4.0.0",
     "@xarc/run": "^1.1.1",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/core": "^7.25.2",
     "chai": "4.3.6",
     "eslint": "^7.32.0",
     "eslint-config-walmart": "^2.2.1",

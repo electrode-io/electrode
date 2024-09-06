@@ -35,10 +35,10 @@
     "@babel/runtime": "^7.21.5",   
     "@xarc/fastify-server": "^3.3.0",
     "@xarc/app": "^11.0.9",
-    "@xarc/react": "^1.0.5",
-    "@xarc/react-query": "^1.0.6",
-    "@xarc/react-redux": "^1.1.5",
-    "@xarc/react-router": "^1.1.5",
+    "@xarc/react": "^1.0.6",
+    "@xarc/react-query": "^1.0.7",
+    "@xarc/react-redux": "^1.1.6",
+    "@xarc/react-router": "^1.1.6",
     "@module-federation/concat-runtime": "~0.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@xarc/index-page",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
@@ -21,9 +21,9 @@
     "index-page"
   ],
   "dependencies": {
-    "@xarc/jsx-renderer": "^1.0.15",
-    "@xarc/render-context": "^1.0.12",
-    "@xarc/tag-renderer": "^1.0.14",
+    "@xarc/jsx-renderer": "^1.0.16",
+    "@xarc/render-context": "^1.0.13",
+    "@xarc/tag-renderer": "^1.0.15",
     "lodash": "^4.17.21",
     "require-at": "^1.0.6"
   },
@@ -34,6 +34,8 @@
   },
   "homepage": "https://github.com/electrode-io/electrode#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.6",
@@ -44,8 +46,6 @@
     "@typescript-eslint/parser": "7.10.0",
     "@xarc/module-dev": "^5.0.0",
     "@xarc/run": "^1.1.1",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/core": "^7.11.0",
     "chai": "^4.2.0",
     "eslint": "^8.52.0",
     "eslint-config-walmart": "^2.2.1",

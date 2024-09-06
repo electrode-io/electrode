@@ -1,6 +1,13 @@
 # Change Log - @xarc/jsx-renderer
 
-This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+
+## 1.0.16
+Fri, 06 Sep 2024 17:12:11 GMT
+
+### Patches
+
+- Upgrade @types/node
 
 ## 1.0.15
 Wed, 05 Jun 2024 20:03:59 GMT
