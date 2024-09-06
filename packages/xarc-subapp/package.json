@@ -1,6 +1,6 @@
 {
   "name": "@xarc/subapp",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "xarc subapp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -36,8 +36,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.12",
-    "@xarc/tag-renderer": "^1.0.14",
+    "@xarc/render-context": "^1.0.13",
+    "@xarc/tag-renderer": "^1.0.15",
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },
@@ -46,6 +46,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
@@ -57,8 +59,6 @@
     "@typescript-eslint/parser": "^4.11.0",
     "@xarc/module-dev": "^3.0.2",
     "@xarc/run": "^1.1.1",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/core": "^7.11.0",
     "babel-plugin-transform-remove-strict-mode": "^0.0.2",
     "babel-preset-minify": "^0.5.1",
     "chai": "^4.2.0",

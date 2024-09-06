@@ -28,7 +28,7 @@
   "dependencies": {
     "optional-require": "^1.1.6",
     "subapp-util": "^1.1.5",
-    "subapp-web": "^2.1.5"
+    "subapp-web": "^2.1.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

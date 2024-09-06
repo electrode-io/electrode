@@ -2,6 +2,26 @@
   "name": "@xarc/subapp",
   "entries": [
     {
+      "version": "0.4.2",
+      "tag": "@xarc/subapp_v0.4.2",
+      "date": "Fri, 06 Sep 2024 17:12:11 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade @types/node"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.12` to `^1.0.13`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.14` to `^1.0.15`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.4.1",
       "tag": "@xarc/subapp_v0.4.1",
       "date": "Wed, 05 Jun 2024 20:03:59 GMT",
