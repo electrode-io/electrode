@@ -1,6 +1,6 @@
 /* eslint-disable max-statements, complexity */
 
-import { configureStore, combineReducers, Reducer, AnyAction, EnhancedStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers, Reducer, UnknownAction, EnhancedStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
 
@@ -28,7 +28,7 @@ export type ReduxDecoratorParams = {
  */
 export type ReduxDecoratorResult = {
   /** store if the decorator created one */
-  store: EnhancedStore<any, AnyAction>;
+  store: EnhancedStore<any, UnknownAction>;
 };
 
 /**
@@ -74,7 +74,7 @@ export type ReduxFeatureOptions = {
    * - If it's `true`, then the subapp module should export the named reducers as `reduxReducers`
    * - If it's a function, then it's used as the reducer
    */
-  reducers?: Reducer<any, AnyAction> | Record<string, Reducer<any, AnyAction>> | boolean;
+  reducers?: Reducer<any, UnknownAction> | Record<string, Reducer<any, UnknownAction>> | boolean;
   /**
    * prepare redux initial state
    *
@@ -93,9 +93,9 @@ export type ReduxFeature = SubAppFeature & {
   options: ReduxFeatureOptions;
   wrap: (_: any) => any;
   Provider: typeof Provider;
-  configureStore: (reducer: Reducer<any, AnyAction>, initialState: any) => EnhancedStore<any, AnyAction>;
+  configureStore: (reducer: Reducer<any, UnknownAction>, initialState: any) => EnhancedStore<any, UnknownAction>;
   prepare: any;
-  _store?: EnhancedStore<any, AnyAction>;
+  _store?: EnhancedStore<any, UnknownAction>;
 };
 
 /**
@@ -149,13 +149,13 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
           if (typeof reducers === "object") {
-            reducers = combineReducers(reducers) as Reducer<any, AnyAction>;
+            reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
           }
         }
 
         // Ensure reducers is a valid Reducer before calling replaceReducer
         if (typeof reducers === "function" || typeof reducers === "object") {
-          redux._store?.replaceReducer(reducers as Reducer<any, AnyAction>);
+          redux._store?.replaceReducer(reducers as Reducer<any, UnknownAction>);
         }
       } else {
         const props = csrData && (await csrData.getInitialState());
@@ -165,7 +165,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
 
         if (typeof reducers === "object") {
-          reducers = combineReducers(reducers) as Reducer<any, AnyAction>;
+          reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
         }
 
         initialState = (await options.prepare(props)).initialState;
@@ -187,7 +187,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
             ? reducers
             : (state => state);
 
-          redux._store = redux.configureStore(validReducer as Reducer<any, AnyAction>, initialState);
+          redux._store = redux.configureStore(validReducer as Reducer<any, UnknownAction>, initialState);
         }
       }
 

@@ -23,10 +23,10 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^1.1.5",
-    "@reduxjs/toolkit": "^2.2.7",
+    "@xarc/react-redux": "^1.1.6",
+    "@reduxjs/toolkit": ">= 2",
     "redux-observable": "^1.2.0",
-    "rxjs": "^6.6.3",
+    "rxjs": "^7.8.1",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
