@@ -3749,7 +3749,7 @@ packages:
     resolution: {integrity: sha512-9y0Gflk3b0+NhQZ/oxGtaAJDvRywCa5sIyaVnounqLvmf93yBF4EgIRspePtkMs3Tr844nCclYMlcCNmLCvjuQ==}
     dependencies:
       '@types/chai': 4.3.19
-      '@types/sinon': 10.0.20
+      '@types/sinon': 9.0.11
     dev: false
 
   /@types/sinon/10.0.20:
@@ -6078,7 +6078,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001660
-      electron-to-chromium: 1.5.23
+      electron-to-chromium: 1.5.24
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0_browserslist@4.23.3
     dev: false
@@ -7654,8 +7654,8 @@ packages:
       xaa: 1.7.3
     dev: false
 
-  /electron-to-chromium/1.5.23:
-    resolution: {integrity: sha512-mBhODedOXg4v5QWwl21DjM5amzjmI1zw9EPrPK/5Wx7C8jt33bpZNrC7OhHUG3pxRtbLpr3W2dXT+Ph1SsfRZA==}
+  /electron-to-chromium/1.5.24:
+    resolution: {integrity: sha512-0x0wLCmpdKFCi9ulhvYZebgcPmHTkFVUfU2wzDykadkslKwT4oAmDTHEKLnlrDsMGZe4B+ksn8quZfZjYsBetA==}
     dev: false
 
   /emittery/0.13.1:

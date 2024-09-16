@@ -124,7 +124,6 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     };
     redux.Provider = Provider;
 
-    // Updated configureStore method with correct typing and handling
     redux.configureStore = (reducer, initialState) => {
       return configureStore({
         reducer: reducer || ((state) => state),
@@ -152,11 +151,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
             reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
           }
         }
-
-        // Ensure reducers is a valid Reducer before calling replaceReducer
-        if (typeof reducers === "function" || typeof reducers === "object") {
-          redux._store?.replaceReducer(reducers as Reducer<any, UnknownAction>);
-        }
+        redux._store?.replaceReducer(reducers as Reducer<any, UnknownAction>);
       } else {
         const props = csrData && (await csrData.getInitialState());
 

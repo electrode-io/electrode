@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 
-import { configureStore, combineReducers, Reducer, AnyAction } from "@reduxjs/toolkit";
+import { configureStore, combineReducers, Reducer, UnknownAction } from "@reduxjs/toolkit";
 
 //
 // - stores can be shared between subapps with reduxShareStore flag
@@ -123,7 +123,7 @@ const errReducersMustBeObject = `${WHEN_SHARED_MSG}, reduxReducers must be an ob
 const addSharedReducer = (
   info: any,
   container: any,
-  reducers: Record<string, Reducer<any, AnyAction>>
+  reducers: Record<string, Reducer<any, UnknownAction>>
 ) => {
   assert(typeof reducers === "object", errReducersMustBeObject);
 
@@ -161,7 +161,7 @@ const combineSharedReducers = (info, container, reducers) => {
  * @returns {object} - The shared store's original replaced reducer.
  */
 export function replaceReducer(
-  newReducers: Reducer<any, AnyAction> | Record<string, Reducer<any, AnyAction>>,
+  newReducers: Reducer<any, UnknownAction> | Record<string, Reducer<any, UnknownAction>>,
   info: any,
   storeContainer: any
 ): any {
