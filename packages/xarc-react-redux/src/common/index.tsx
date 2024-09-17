@@ -124,6 +124,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     };
     redux.Provider = Provider;
 
+    // Configure the Redux store
     redux.configureStore = (reducer, initialState) => {
       return configureStore({
         reducer: reducer || ((state) => state),
@@ -132,12 +133,14 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     };
     redux.prepare = options.prepare;
 
+    // Execute the redux feature
     redux.execute = async function ({ input, csrData, reload }) {
       let initialState: any;
 
       let reducers = options.reducers;
       const decorators = options.decorators;
 
+      // Reload case (CSR)
       if (reload) {
         //
         // reload is only for the client side, and store would be created already, so
@@ -147,12 +150,15 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         // replace the reducers maybe have been updated.
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
-          if (typeof reducers === "object") {
-            reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
-          }
         }
-        redux._store?.replaceReducer(reducers as Reducer<any, UnknownAction>);
+        // Ensure reducers is valid when replacing
+        if (typeof reducers === "object") {
+          reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
+        }
+        const validReducer = typeof reducers === "function" ? reducers : (state => state);
+        redux._store?.replaceReducer(validReducer as Reducer<any, UnknownAction>);
       } else {
+        // Normal execution (SSR or initial CSR)
         const props = csrData && (await csrData.getInitialState());
 
         if (reducers === true) {
