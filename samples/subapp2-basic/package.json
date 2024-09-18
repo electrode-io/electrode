@@ -34,10 +34,10 @@
   "dependencies": {
     "@babel/runtime": "^7.21.5",   
     "@xarc/fastify-server": "^3.3.0",
-    "@xarc/app": "^11.0.9",
+    "@xarc/app": "^11.0.10",
     "@xarc/react": "^1.0.6",
     "@xarc/react-query": "^1.0.7",
-    "@xarc/react-redux": "^1.1.6",
+    "@xarc/react-redux": "^2.0.0",
     "@xarc/react-router": "^1.1.6",
     "@module-federation/concat-runtime": "~0.0.1"
   },
@@ -47,7 +47,7 @@
     "prettier": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.4.5",
-    "@xarc/app-dev": "^11.0.9",
+    "@xarc/app-dev": "^11.0.10",
     "@xarc/opt-jest": "^3.0.0",
     "@xarc/opt-postcss": "^2.0.1",
     "@xarc/opt-sass": "^4.1.1",

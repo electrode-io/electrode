@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback */
+/* eslint-disable prefer-arrow-callback, max-statements */
 import "jsdom-global/register";
 import React from "react"; // eslint-disable-line
 import { describe, it } from "mocha";
@@ -127,7 +127,7 @@ describe("reactReduxFeature", function () {
 
     sinon
       .stub(require("@reduxjs/toolkit"), "configureStore") // eslint-disable-line
-      .callsFake((options: any) => options.reducer("test"));
+      .callsFake((opt: any) => opt.reducer("test"));
 
     const mockFn = (x: string) => x + "-----withMockFn";
 
@@ -397,7 +397,7 @@ describe("reactReduxFeature", function () {
       },
       reload: false,
     });
-    res?.Component?.();
+    res?.Component?.(); // eslint-disable-line
     expect(stub1.calledOnce).to.eql(true);
     expect(
       stub1.calledWith({
