@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@xarc/subapp": "^0.4.2",
-    "react-redux": ">= 8",
-    "redux": ">= 4",
+    "@reduxjs/toolkit": ">= 2",
+    "react-redux": ">= 9",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
@@ -56,8 +56,6 @@
     "nyc": "^15.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "source-map-support": "^0.5.21",

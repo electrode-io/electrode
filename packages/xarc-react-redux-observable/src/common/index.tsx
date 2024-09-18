@@ -1,13 +1,6 @@
-import { createEpicMiddleware, Epic } from "redux-observable";
-
-import {
-  applyMiddleware,
-  Reducer,
-  createStore,
-  ReduxFeature,
-  ReduxDecoratorParams,
-  ReduxFeatureDecorator
-} from "@xarc/react-redux";
+import { configureStore, Reducer, Middleware } from "@reduxjs/toolkit";
+import { createEpicMiddleware, Epic, EpicMiddleware } from "redux-observable";
+import { ReduxFeature, ReduxDecoratorParams, ReduxFeatureDecorator } from "@xarc/react-redux";
 
 /**
  * Options for creating a redux observable for use with redux feature
@@ -20,7 +13,7 @@ export type ReduxObservableOptions = {
 };
 
 /**
- * adds decorator for redux observable support to the redux feature
+ * Adds decorator for redux observable support to the redux feature
  *
  * @param options redux observable options
  * @returns redux decorator result
@@ -30,18 +23,21 @@ export function reduxObservableDecor(options: ReduxObservableOptions): ReduxFeat
 
   return {
     decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
-      const epicMiddleware = createEpicMiddleware();
-      const observerMiddleware = applyMiddleware(epicMiddleware);
+      // Create the Redux Observable middleware
+      const epicMiddleware: EpicMiddleware<any, any, any, any> = createEpicMiddleware();
 
-      const store = createStore(
-        (params.reducers as Reducer<unknown, any>) || (x => x),
-        params.initialState,
-        observerMiddleware
-      );
+      // Configure the Redux store using Redux Toolkit's configureStore
+      const store = configureStore({
+        reducer: (params.reducers as Reducer<unknown, any>) || ((state) => state),
+        preloadedState: params.initialState,
+        middleware: (getDefaultMiddleware) =>
+          getDefaultMiddleware().concat(epicMiddleware as Middleware),
+      });
 
+      // Run the root epic
       epicMiddleware.run(rootEpic);
 
       return { store };
-    }
+    },
   };
 }
