@@ -1,6 +1,13 @@
 # Change Log - @xarc/app
 
-This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Sep 2024 19:17:24 GMT and should not be manually modified.
+
+## 11.0.10
+Wed, 18 Sep 2024 19:17:24 GMT
+
+### Updates
+
+- Upgrade @types/node
 
 ## 11.0.9
 Wed, 05 Jun 2024 20:03:59 GMT

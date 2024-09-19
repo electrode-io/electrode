@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "11.0.9",
+  "version": "11.0.10",
   "description": "Electrode X application development support",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -39,13 +39,13 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "peerDependencies": {
-    "@xarc/app": "^11.0.9"
+    "@xarc/app": "^11.0.10"
   },
   "dependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.12",
-    "@babel/plugin-transform-class-properties": "^7.24.1",
     "@babel/plugin-proposal-decorators": "^7.17.12",
+    "@babel/plugin-transform-class-properties": "^7.24.1",
     "@babel/plugin-transform-object-rest-spread": "^7.24.7",
     "@babel/plugin-transform-react-constant-elements": "^7.17.12",
     "@babel/plugin-transform-react-inline-elements": "^7.16.7",
@@ -104,6 +104,8 @@
     "xsh": "^0.4.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^10.0.1",
@@ -113,11 +115,9 @@
     "@types/webpack": "5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "@xarc/app": "^11.0.9",
+    "@xarc/app": "^11.0.10",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/core": "^7.11.0",
     "chai": "^4.3.6",
     "electrode-server": "^3.3.0",
     "electrode-server1": "npm:electrode-server@^1.0.0",
