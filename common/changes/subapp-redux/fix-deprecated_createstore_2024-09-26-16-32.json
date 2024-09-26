@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-redux",
+      "comment": "replace createStore of redux by configureStore of @reduxjs/toolkit",
+      "type": "major"
+    }
+  ],
+  "packageName": "subapp-redux"
+}
