@@ -1,5 +1,4 @@
-import { createStore, combineReducers } from "redux";
-
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 //
 // - stores can be shared between subapps with reduxShareStore flag
 //  - if it's true, then a common global store is used
@@ -75,7 +74,10 @@ const combineSharedReducers = (info, container, reducers) => {
 };
 
 function replaceReducer(newReducers, info, storeContainer) {
-  let { store, reducerContainer } = getSharedStore(info.reduxShareStore, storeContainer);
+  let { store, reducerContainer } = getSharedStore(
+    info.reduxShareStore,
+    storeContainer
+  );
   const reducer = combineSharedReducers(info, reducerContainer, newReducers);
   return store[originalReplaceReducerSym](reducer);
 }
@@ -88,7 +90,10 @@ function createSharedStore(initialState, info, storeContainer) {
       info._genReduxCreateStore || !info.reduxCreateStore,
       `${WHEN_SHARED_MSG}, you cannot have reduxCreateStore`
     );
-    let { store, reducerContainer } = getSharedStore(sharedStoreName, storeContainer);
+    let { store, reducerContainer } = getSharedStore(
+      sharedStoreName,
+      storeContainer
+    );
     if (store) {
       // TODO: redux doesn't have a way to set initial state
       // after store's created?  What can we do about this?
@@ -96,16 +101,24 @@ function createSharedStore(initialState, info, storeContainer) {
     } else {
       reducerContainer = newReducerContainer();
       if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
-        store = createStore(
-          combineSharedReducers(info, reducerContainer, info.reduxReducers),
-          initialState,
-          info.reduxEnhancer()
-        );
+        store = configureStore({
+          reducer: combineSharedReducers(
+            info,
+            reducerContainer,
+            info.reduxReducers
+          ),
+          preloadedState: initialState,
+          enhancer: info.reduxEnhancer(),
+        });
       } else {
-        store = createStore(
-          combineSharedReducers(info, reducerContainer, info.reduxReducers),
-          initialState
-        );
+        store = configureStore({
+          reducer: combineSharedReducers(
+            info,
+            reducerContainer,
+            info.reduxReducers
+          ),
+          preloadedState: initialState,
+        });
       }
       store[originalReplaceReducerSym] = store.replaceReducer;
       //
@@ -124,7 +137,11 @@ function createSharedStore(initialState, info, storeContainer) {
         return replaceReducer(reducers, info2, storeContainer2);
       };
     }
-    setSharedStore(sharedStoreName, { store, reducerContainer }, storeContainer);
+    setSharedStore(
+      sharedStoreName,
+      { store, reducerContainer },
+      storeContainer
+    );
     return store;
   }
 
@@ -142,17 +159,22 @@ function createSharedStore(initialState, info, storeContainer) {
   } else if (reducerType === "object") {
     reducer = combineReducers(info.reduxReducers);
   } else {
-    reducer = x => x;
+    reducer = (x) => x;
   }
 
   if (info.reduxEnhancer && info.reduxEnhancer instanceof Function) {
-    return createStore(reducer, initialState, info.reduxEnhancer());
+    return configureStore({
+      reducer,
+      preloadedState: initialState,
+      enhancer: info.reduxEnhancer(),
+    });
   }
-  return createStore(reducer, initialState);
+  return configureStore({ reducer, preloadedState: initialState });
 }
 
 function getReduxCreateStore(info) {
-  return (initialState, storeContainer) => createSharedStore(initialState, info, storeContainer);
+  return (initialState, storeContainer) =>
+    createSharedStore(initialState, info, storeContainer);
 }
 
 export {
@@ -161,5 +183,5 @@ export {
   createSharedStore,
   getSharedStore,
   setSharedStore,
-  clearSharedStore
+  clearSharedStore,
 };
