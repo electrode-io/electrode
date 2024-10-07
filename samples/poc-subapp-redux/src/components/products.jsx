@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-import {decNumber, incNumber} from "../02.main-body/reducers";
+import { decNumber, incNumber } from "../redux-store/actions/number-actions";
 
-const DealItem = props => {
+const DealItem = (props) => {
   const { item } = props;
   const panelClass = `panel panel-${item.type || "primary"}`;
   return (
@@ -25,7 +25,8 @@ const DealItem = props => {
   );
 };
 
-const DealRow = props => {
+const DealRow = (props) => {
+  console.log("!!!", props);
   const { items, index } = props;
   const elements = [];
   for (let i = 0; i < 3 && index + i < items.length; i++) {
@@ -34,7 +35,8 @@ const DealRow = props => {
   return <div className="row">{elements}</div>;
 };
 
-const Products = props => {
+const Products = (props) => {
+  console.log("propsProducts", props);
   const { items, dispatch } = props;
   const rows = [];
   for (let i = 0; i < items.length; i += 3) {
@@ -56,16 +58,13 @@ const Products = props => {
 
 Products.propTypes = {
   items: PropTypes.array,
-  value: PropTypes.number
+  value: PropTypes.number,
 };
 
-const mapStateToProps = state => {
-  return { items: state.items, number: state.number };
+const mapStateToProps = (state) => {
+  return { items: state.numberReducer.items, number: state.numberReducer.number };
 };
 
-const ReduxProducts = connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Products);
+const ReduxProducts = connect(mapStateToProps, (dispatch) => ({ dispatch }))(Products);
 
 export { ReduxProducts as Products };

@@ -138,7 +138,6 @@ specifiers:
   recoil: ^0.7.5
   redux-logger: ^3.0.6
   redux-observable: ^1.2.0
-  redux-saga: ^1.1.3
   regenerator-runtime: ^0.13.9
   require-at: ^1.0.6
   rxjs: ^7.8.1
@@ -303,7 +302,6 @@ dependencies:
   recoil: 0.7.7
   redux-logger: 3.0.6
   redux-observable: 1.2.0_rxjs@7.8.1
-  redux-saga: 1.3.0
   regenerator-runtime: 0.13.11
   require-at: 1.0.6
   rxjs: 7.8.1
@@ -3262,7 +3260,7 @@ packages:
     dependencies:
       immer: 10.1.1
       react: 18.3.1
-      react-redux: 8.1.3_edcd1fa4b9ab5122e51453c929bbffcf
+      react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
       redux: 5.0.1
       redux-thunk: 3.1.0_redux@5.0.1
       reselect: 5.1.1
@@ -15520,6 +15518,12 @@ packages:
       rxjs: 7.8.1
     dev: false
 
+  /redux-saga/1.1.3:
+    resolution: {integrity: sha512-RkSn/z0mwaSa5/xH/hQLo8gNf4tlvT18qXDNvedihLcfzh+jMchDgaariQoehCpgRltEm4zHKJyINEz6aqswTw==}
+    dependencies:
+      '@redux-saga/core': 1.3.0
+    dev: false
+
   /redux-saga/1.3.0:
     resolution: {integrity: sha512-J9RvCeAZXSTAibFY0kGw6Iy4EdyDNW7k6Q+liwX+bsck7QVsU78zz8vpBRweEfANxnnlG/xGGeOvf6r8UXzNJQ==}
     dependencies:
@@ -19476,13 +19480,14 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.95.0:
-    resolution: {integrity: sha512-A99o5WX4YSoZnZuUb7MbhLrdARsPvaMJVgXOZQyJImmUnLx8qtIoViYwltzt0JvHI7Btki0Ebo2+BKuDmQIdDA==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-mQaNDlaDZ1WXQaxRIYy1YnyNgMQJZTEo1v/jLEOQ5hj04dVmqqr8o6HuMXG9XnLEtPaiiFfmWxmEe+5Fb35faA==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.25.6
       '@module-federation/concat-runtime': 0.0.1
+      '@reduxjs/toolkit': 2.2.7_react-redux@8.1.3+react@18.3.1
       '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       electrode-confippet: 1.7.1
@@ -19496,6 +19501,7 @@ packages:
       react-router-dom: 6.26.2_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       redux-logger: 3.0.6
+      redux-saga: 1.1.3
       webpack-hot-middleware: 2.26.1
     transitivePeerDependencies:
       - '@rspack/core'
@@ -20167,17 +20173,19 @@ packages:
     dev: false
 
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-AbpOI+TSTc758ahjT0xQo+EdJ8/wcv30p3+mwlimbgVS6d2wpAKJphQCq1Bj1fP7izqsg1clipdPDmoMHbnj4Q==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-/y3IU0gqIuGMA/34qbirRp7gH9Rp5j3KDbcR0SkhuwcZmIjLh06pDhnyvPvU5J4A81+oX5i8sw+Kqg3C6HSdFg==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:
       '@babel/runtime': 7.25.6
+      '@reduxjs/toolkit': 2.2.7
       '@types/node': 20.16.9
       '@xarc/fastify-server': 3.3.1
       '@xarc/run': 1.1.1
       isomorphic-loader: 4.5.0
       prop-types: 15.8.1
       react-dom: 18.2.0
+      redux-saga: 1.1.3
       ts-node: 10.9.2_492015353cf3cc324b31c8417e055f66
       typescript: 5.6.2
       webpack-hot-middleware: 2.25.4
@@ -20185,6 +20193,7 @@ packages:
       - '@swc/core'
       - '@swc/wasm'
       - react
+      - react-redux
       - supports-color
     dev: false
 

@@ -13,19 +13,44 @@ setStoreContainer(window);
 // client side function to start a subapp with redux support
 //
 export function reduxRenderStart(options) {
-  const store = options._store || options.reduxCreateStore(options.initialState);
-  const { Component, props } = options;
-
+  const {
+    Component,
+    props,
+    decorators,
+    initialState,
+    reduxCreateStore,
+    _store,
+    reducers,
+  } = options;
   let subappRoot;
+  let store = null;
+  if (decorators) {
+    for (const decor of decorators) {
+      const { store: _decorStore } = decor.decorate(
+        {},
+        {
+          reducers,
+          initialState,
+        }
+      );
+      if (_decorStore) {
+        store = _decorStore;
+      }
+    }
+  }
+  if (!store) {
+    store = _store || reduxCreateStore(initialState);
+  }
 
   if (options.serverSideRendering) {
-    subappRoot = hydrateRoot(options.element,
+    subappRoot = hydrateRoot(
+      options.element,
       <Provider store={store}>
         <Component {...props} />
       </Provider>
     );
   } else {
-    subappRoot = createRoot(options.element)
+    subappRoot = createRoot(options.element);
     subappRoot.render(
       <Provider store={store}>
         <Component {...props} />
@@ -42,12 +67,12 @@ export function reduxRenderStart(options) {
 // onLoadStartElement - the HTML element to render into upon loaded by the browser
 //
 export function reduxLoadSubApp(info) {
-  const renderStart = function(instance, element) {
+  const renderStart = function (instance, element) {
     const initialState = instance._prepared || instance.initialState;
-    const reduxCreateStore = instance.reduxCreateStore || this.info.reduxCreateStore;
+    const reduxCreateStore =
+      instance.reduxCreateStore || this.info.reduxCreateStore;
     const Component = this.info.StartComponent || this.info.Component;
-    const props = instance.props || {}
-
+    const props = instance.props || {};
     const { store, subappRoot } = reduxRenderStart({
       _store: instance._store,
       initialState,
@@ -55,7 +80,9 @@ export function reduxLoadSubApp(info) {
       Component,
       serverSideRendering: instance.serverSideRendering,
       element,
-      props
+      props,
+      decorators: this.info.decorators,
+      reducers: this.info.reduxReducers,
     });
 
     instance._store = store;
@@ -64,7 +91,7 @@ export function reduxLoadSubApp(info) {
   };
 
   const extras = {
-    __redux: true
+    __redux: true,
   };
 
   if (!info.reduxCreateStore) {
@@ -73,7 +100,7 @@ export function reduxLoadSubApp(info) {
 
   return loadSubApp(
     Object.assign(extras, info, {
-      reduxCreateStore: getReduxCreateStore(info)
+      reduxCreateStore: getReduxCreateStore(info),
     }),
     renderStart
   );
