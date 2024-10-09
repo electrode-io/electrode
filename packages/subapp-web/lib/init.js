@@ -51,24 +51,24 @@ module.exports = function setup(setupContext) {
 
   let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
-  if (process.env.NODE_ENV === "production") {
-    runtimeEntryPoints = Object.keys(assets.chunksById.js).filter(ep =>
-      assets.chunksById.js[ep].startsWith("runtime.bundle")
-    );
-    inlineRuntimeJS =
-      "/*rt*/" +
-      runtimeEntryPoints
-        .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
-        .filter(fullPath => Fs.existsSync(fullPath))
-        .map(fullPath => Fs.readFileSync(fullPath))
-        .join(" ")
-        .replace(/\/\/#\ssourceMappingURL=.*$/, "") +
-      "/*rt*/";
+  // if (process.env.NODE_ENV === "production") {
+  //   runtimeEntryPoints = Object.keys(assets.chunksById.js).filter(ep =>
+  //     assets.chunksById.js[ep].startsWith("runtime.bundle")
+  //   );
+  //   inlineRuntimeJS =
+  //     "/*rt*/" +
+  //     runtimeEntryPoints
+  //       .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
+  //       .filter(fullPath => Fs.existsSync(fullPath))
+  //       .map(fullPath => Fs.readFileSync(fullPath))
+  //       .join(" ")
+  //       .replace(/\/\/#\ssourceMappingURL=.*$/, "") +
+  //     "/*rt*/";
 
-    inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)}${
-      namespace ? ", " + JSON.stringify(namespace) : ""
-    });`;
-  }
+  //   inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)}${
+  //     namespace ? ", " + JSON.stringify(namespace) : ""
+  //   });`;
+  // }
 
   const namespaceScriptJs = namespace ? `window.__default__namespace="${namespace}";` : "";
 
