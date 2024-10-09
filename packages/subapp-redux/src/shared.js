@@ -86,10 +86,10 @@ function createSharedStore(initialState, info, storeContainer) {
   const sharedStoreName = info.reduxShareStore;
 
   if (sharedStoreName) {
-    assert(
-      info._genReduxCreateStore || !info.reduxCreateStore,
-      `${WHEN_SHARED_MSG}, you cannot have reduxCreateStore`
-    );
+    // assert(
+    //   info._genReduxCreateStore || !info.reduxCreateStore,
+    //   `${WHEN_SHARED_MSG}, you cannot have reduxCreateStore`
+    // );
     let { store, reducerContainer } = getSharedStore(
       sharedStoreName,
       storeContainer
