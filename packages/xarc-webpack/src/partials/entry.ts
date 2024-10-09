@@ -127,7 +127,7 @@ export default subApp;
  */
 function genSubAppHmrEntry(hmrDir, isDev, manifest, xarcOptions) {
   const subAppReq = manifest.module ? manifest.entry : `${manifest.subAppDir}/${manifest.entry}`;
-  const isStandaloneEnabled = xarcOptions.webpack.MFE_STANDALONE_ENABLED;
+  const isStandaloneEnabled = xarcOptions.mfeOptions.MFE_STANDALONE_ENABLED;
 
   if (manifest.hmrSelfAccept || !isDev) {
     return manifest.module ? subAppReq : `./${subAppReq}`;
@@ -155,7 +155,7 @@ function genSubAppHmrEntry(hmrDir, isDev, manifest, xarcOptions) {
  */
 function genSubAppProdEntry(prodDir, manifest, xarcOptions) {
   const subAppReq = manifest.module ? manifest.entry : `${manifest.subAppDir}/${manifest.entry}`;
-  return writeProdEntry(prodDir, subAppReq, manifest, xarcOptions.webpack.MFE_STANDALONE_ENABLED);
+  return writeProdEntry(prodDir, subAppReq, manifest, xarcOptions.mfeOptions.MFE_STANDALONE_ENABLED);
 }
 
 /**
