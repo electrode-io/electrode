@@ -9,8 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 // Configure Redux store
 const store = configureStore({
   reducer: reducers,
-  middleware: () => [sagaMiddleware, logger],
-  // devTools: process.env.NODE_ENV !== "production",
+  middleware: () => [sagaMiddleware],
 });
 sagaMiddleware.run(rootSaga);
 

@@ -8,6 +8,7 @@ import { Navigation } from "../components/navigation";
 import { reducers } from "../redux-store/reducers/root-reducer";
 import store from "../redux-store/store";
 import { decNumber, incNumber } from "../redux-store/actions/number-actions";
+import logger from "redux-logger";
 const mapStateToProps = (state) => state;
 
 const HomeComp = (props) => {
@@ -66,7 +67,7 @@ export default reduxLoadSubApp({
   name: "MainBody",
   Component,
   useReactRouter: true,
-  // reduxEnhancer: () => applyMiddleware(logger),
+  middleware: () => [logger],
   reduxShareStore: true,
   reduxReducers: reducers,
   reduxCreateStore: () => store,
