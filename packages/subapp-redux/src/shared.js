@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+
 //
 // - stores can be shared between subapps with reduxShareStore flag
 //  - if it's true, then a common global store is used
@@ -109,6 +110,7 @@ function createSharedStore(initialState, info, storeContainer) {
           ),
           preloadedState: initialState,
           enhancer: info.reduxEnhancer(),
+          middleware: info.middleware,
         });
       } else {
         store = configureStore({
@@ -118,6 +120,7 @@ function createSharedStore(initialState, info, storeContainer) {
             info.reduxReducers
           ),
           preloadedState: initialState,
+          middleware: info.middleware,
         });
       }
       store[originalReplaceReducerSym] = store.replaceReducer;
@@ -167,6 +170,7 @@ function createSharedStore(initialState, info, storeContainer) {
       reducer,
       preloadedState: initialState,
       enhancer: info.reduxEnhancer(),
+      middleware: info.middleware,
     });
   }
   return configureStore({ reducer, preloadedState: initialState });
