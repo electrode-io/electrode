@@ -31,7 +31,7 @@ function makeConfig(options) {
     return config;
   }
 
-  let runtimeChunk = "single";
+  const runtimeChunk = "single";
 
   if (webpack.v1RemoteSubApps) {
     let exposeRemote = 0;
