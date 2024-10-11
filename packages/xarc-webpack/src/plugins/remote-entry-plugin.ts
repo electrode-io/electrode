@@ -38,8 +38,6 @@ class CombineRuntimeAndRemoteEntryPlugin {
 
             const mergedRuntime = new ConcatSource(runtimeSource, "\n", remoteEntrySource);
             assets[remoteEntry] = mergedRuntime;
-          } else {
-            console.log(`No remote entry file found.`); //eslint-disable-line no-console
           }
         }
       );
