@@ -79,7 +79,6 @@ const basePlugins = [
 
 const { BABEL_ENV, NODE_ENV, ENABLE_KARMA_COV } = process.env;
 
-const enableCssModule = Boolean(_.get(xOptions, "webpack.cssModuleSupport"));
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 // const isTest = (BABEL_ENV || NODE_ENV) === "test";
@@ -96,30 +95,7 @@ const plugins = basePlugins.concat(
       },
     ],
   ],
-  // css module support
-  enableCssModule && [
-    [
-      "babel-plugin-react-css-modules",
-      {
-        context: "./src",
-        generateScopedName: `${
-          isProduction ? "" : "[name]__[local]___"
-        }[hash:base64:5]`,
-        filetypes: {
-          ".scss": {
-            syntax: "postcss-scss",
-            plugins: ["postcss-nested"],
-          },
-          ".styl": {
-            syntax: "sugarss",
-          },
-          ".less": {
-            syntax: "postcss-less",
-          },
-        },
-      },
-    ],
-  ],
+
   enableKarmaCov && [
     getPluginFrom(
       ["@xarc/opt-karma", "electrode-archetype-opt-karma"],
