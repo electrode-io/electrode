@@ -13,14 +13,13 @@ const email = (email = "", action = {}) => {
 const setEmail = (value) => {
   return {
     type: "EMAIL",
-    payload: value
+    payload: value,
   };
 };
 
-const reducers = {email};
+const reducers = { email };
 
-const Footer = props => {
-
+const Footer = (props) => {
   const onSubmit = () => {
     const email = document.getElementById("email").value;
     props.dispatch(setEmail(email));
@@ -31,7 +30,13 @@ const Footer = props => {
     <footer className="container-fluid text-center">
       <h4>Redux state change demo in a subApp</h4>
       Footer is a subApp. Click "Submit" to see Redux state change in browser console.
-      <input type="email" id="email" className="form-control" size="50" placeholder="Email Address, no validation" />
+      <input
+        type="email"
+        id="email"
+        className="form-control"
+        size="50"
+        placeholder="Email Address, no validation"
+      />
       <button type="button" className="btn btn-danger" onClick={onSubmit}>
         Submit
       </button>
@@ -40,12 +45,12 @@ const Footer = props => {
 };
 
 Footer.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 const Component = connect(
-  state => state,
-  dispatch => ({ dispatch })
+  (state) => state,
+  (dispatch) => ({ dispatch })
 )(Footer);
 
 export default reduxLoadSubApp({
@@ -54,12 +59,12 @@ export default reduxLoadSubApp({
   reduxShareStore: true,
   reduxReducers: reducers,
   prepare: () => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          title: "Online Store Copyright"
+          title: "Online Store Copyright",
         });
       }, 2000);
     });
-  }
+  },
 });

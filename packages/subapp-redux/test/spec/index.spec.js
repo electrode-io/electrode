@@ -1,12 +1,16 @@
 "use strict";
 
 const subappRedux = require("../..");
-const { getReduxCreateStore, clearSharedStore, setStoreContainer } = require("../../src/shared");
+const {
+  getReduxCreateStore,
+  clearSharedStore,
+  setStoreContainer,
+} = require("../../src/shared");
 const { getSubAppContainer } = require("subapp-util");
 
 const SimpleReducer = (x = true) => x;
 
-describe("subapp-redux", function() {
+describe("subapp-redux", function () {
   afterEach(() => {
     clearSharedStore();
   });
@@ -18,7 +22,7 @@ describe("subapp-redux", function() {
 
   it("should create store based on reduxCreateStore if it is passed", () => {
     const store = getReduxCreateStore({
-      reduxCreateStore: () => 5
+      reduxCreateStore: () => 5,
     })({});
 
     expect(store).to.equal(5);
@@ -27,12 +31,12 @@ describe("subapp-redux", function() {
   it("should use true reduxShareStore to name and persist primary store instance", () => {
     const defaultStore = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     const defaultStore2 = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     expect(defaultStore).to.equal(defaultStore2);
@@ -41,12 +45,12 @@ describe("subapp-redux", function() {
   it("should not conflate true reduxShareStore with named reduxShareStore", () => {
     const defaultStore = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     const green = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: "green"
+      reduxShareStore: "green",
     })({});
 
     expect(defaultStore).to.not.equal(green);
@@ -55,12 +59,12 @@ describe("subapp-redux", function() {
   it("should use string reduxShareStore to name and persist store instances", () => {
     const blue = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: "blue"
+      reduxShareStore: "blue",
     })({});
 
     const blue2 = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: "blue"
+      reduxShareStore: "blue",
     })({});
 
     expect(blue).to.equal(blue2);
@@ -69,12 +73,12 @@ describe("subapp-redux", function() {
   it("should not conflate two different reduxShareStore keys", () => {
     const blue = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: "blue"
+      reduxShareStore: "blue",
     })({});
 
     const green = getReduxCreateStore({
       reduxReducers: { a: SimpleReducer },
-      reduxShareStore: "green"
+      reduxShareStore: "green",
     })({});
 
     expect(blue).to.not.equal(green);
@@ -84,7 +88,7 @@ describe("subapp-redux", function() {
     expect(() =>
       getReduxCreateStore({
         reduxCreateStore: () => 5,
-        reduxShareStore: true
+        reduxShareStore: true,
       })({})
     ).throws("cannot have reduxCreateStore");
   });
@@ -92,8 +96,8 @@ describe("subapp-redux", function() {
   it("should not allow functional reducers in a shared store", () => {
     expect(() => {
       getReduxCreateStore({
-        reduxReducers: x => x,
-        reduxShareStore: true
+        reduxReducers: (x) => x,
+        reduxShareStore: true,
       })({});
     }).to.throw();
   });
@@ -102,13 +106,13 @@ describe("subapp-redux", function() {
     getReduxCreateStore({
       name: "app1",
       reduxReducers: { pi: (x = 3.146) => x },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     const store = getReduxCreateStore({
       name: "app2",
       reduxReducers: { sqrt2: (x = 1.414) => x },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     const state = store.getState();
@@ -120,7 +124,7 @@ describe("subapp-redux", function() {
     getReduxCreateStore({
       name: "app1",
       reduxReducers: { pi: (x = 3.146) => x },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     const app2 = {
@@ -128,9 +132,9 @@ describe("subapp-redux", function() {
       reduxReducers: {
         sqrt2: (x = 1.414) => {
           return x;
-        }
+        },
       },
-      reduxShareStore: true
+      reduxShareStore: true,
     };
     const store = getReduxCreateStore(app2)({});
 
@@ -141,11 +145,11 @@ describe("subapp-redux", function() {
       {
         sqrt2: () => {
           return 11;
-        }
+        },
       },
       app2
     );
-    store.dispatch({ type: 1 });
+    store.dispatch({ type: "1" });
     const state2 = store.getState();
     expect(state2.sqrt2).to.equal(11);
   });
@@ -156,7 +160,7 @@ describe("subapp-redux", function() {
     const store = getReduxCreateStore({
       name: "app1",
       reduxReducers: { pi: (x = 3.146) => x },
-      reduxShareStore: true
+      reduxShareStore: true,
     })({});
 
     expect(container.namedStores._.store).equals(store);
@@ -169,7 +173,7 @@ describe("subapp-redux", function() {
       name: "app",
       reduxReducers: () => {
         return { v: 1 };
-      }
+      },
     })({});
     expect(container.namedStores).to.deep.equal({});
     const state = store.getState();
@@ -184,8 +188,8 @@ describe("subapp-redux", function() {
       reduxReducers: {
         a: () => {
           return 2;
-        }
-      }
+        },
+      },
     })({});
     expect(container.namedStores).to.deep.equal({});
     const state = store.getState();
@@ -196,7 +200,7 @@ describe("subapp-redux", function() {
     const container = {};
     setStoreContainer(container);
     const store = getReduxCreateStore({
-      name: "app"
+      name: "app",
     })({ a: 1 });
     expect(container.namedStores).to.deep.equal({});
     const state = store.getState();

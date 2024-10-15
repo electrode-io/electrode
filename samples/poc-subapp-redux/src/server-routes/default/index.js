@@ -93,7 +93,7 @@ const Template = (
           />
         </div>
 
-       <div style="background: #e88f41; padding: 10px">
+        <div style="background: #e88f41; padding: 10px">
           <Require
             _id="subapp-web/lib/load"
             _concurrent
@@ -105,7 +105,7 @@ const Template = (
             serverSideRendering
             suspenseSsr
           />
-        </div> 
+        </div>
 
         <Require
           _id="subapp-web/lib/load"
