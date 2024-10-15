@@ -4,7 +4,6 @@ import * as Crypto from "crypto";
 import { loadXarcOptions } from "../util/load-xarc-options";
 import * as _ from "lodash";
 import { ModuleFederationPlugin } from "../container/ModuleFederationPlugin";
-import { CombineRuntimeAndRemoteEntryPlugin } from "../plugins/remote-entry-plugin";
 const splitMap = {};
 
 function hashChunks(mod, chunks, key) {
@@ -31,7 +30,7 @@ function makeConfig(options) {
     return config;
   }
 
-  const runtimeChunk = "single";
+  let runtimeChunk = "single";
 
   if (webpack.v1RemoteSubApps) {
     let exposeRemote = 0;
@@ -85,8 +84,8 @@ function makeConfig(options) {
         // remote container to load its bundles
         options.currentConfig.output.publicPath = "auto";
       }
+      runtimeChunk = undefined;
     }
-    config.plugins = [].concat(config.plugins, new CombineRuntimeAndRemoteEntryPlugin()).filter(x => x);
   }
 
   if (webpack.minimizeSubappChunks) {
