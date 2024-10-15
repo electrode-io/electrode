@@ -99,7 +99,7 @@ const plugins = basePlugins.concat(
   // css module support
   enableCssModule && [
     [
-      "babel-plugin-react-css-modules",
+      "@dr.pogodin/babel-plugin-react-css-modules",
       {
         context: "./src",
         generateScopedName: `${

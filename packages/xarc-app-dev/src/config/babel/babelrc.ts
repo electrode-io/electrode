@@ -53,9 +53,9 @@ const isNodeTarget = XARC_BABEL_TARGET === "node";
  * and there's some compatibility issue with css-loader 4.x.
  * https://github.com/gajus/babel-plugin-react-css-modules/issues/291
  *
- * Resolution: TBD
+ * Resolution: migrate to @dr.pogodin/babel-plugin-react-css-modules
  *
- * @returns null or settings for babel-plugin-react-css-modules
+ * @returns null or settings for @dr.pogodin/babel-plugin-react-css-modules
  */
 const getReactCssModulePlugin = (): any => {
   if (!enableCssModule) {
@@ -66,7 +66,7 @@ const getReactCssModulePlugin = (): any => {
   const enableShortHash = isProduction && enableShortenCSSNames;
   return [
     [
-      "babel-plugin-react-css-modules",
+      "@dr.pogodin/babel-plugin-react-css-modules",
       {
         context: "./src",
         generateScopedName: `${
