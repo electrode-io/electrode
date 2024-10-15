@@ -11,7 +11,6 @@ import logger from "redux-logger";
 const mapStateToProps = (state) => state;
 
 const HomeComp = (props) => {
-  console.log("HomeComp props", props);
   const unmountSubapp = ({ subappName }) => {
     const subapp = xarcV1.getSubApp(subappName);
     const { subappRoot } = subapp.info;
@@ -68,9 +67,6 @@ export default reduxLoadSubApp({
   useReactRouter: true,
   middleware: () => [logger],
   reduxShareStore: true,
-  // reduxEnhancer: () => {
-  //   console.log("enhancers calls");
-  // },
   reduxReducers: reducers,
   StartComponent: (props) => {
     return (

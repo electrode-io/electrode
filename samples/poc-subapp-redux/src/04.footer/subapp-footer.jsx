@@ -20,7 +20,6 @@ const setEmail = (value) => {
 const reducers = { email };
 
 const Footer = (props) => {
-  console.log("Footer props", props);
   const onSubmit = () => {
     const email = document.getElementById("email").value;
     props.dispatch(setEmail(email));

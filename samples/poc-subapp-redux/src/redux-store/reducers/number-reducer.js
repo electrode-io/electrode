@@ -7,9 +7,9 @@ export const numberReducer = createReducer(initialState, (builder) => {
   builder
     // eslint-disable-next-line consistent-return
     .addCase(incNumber, (state, action) => {
-      state.number = state.number + 1;
+      state.number += 1;
     })
     .addCase(decNumber, (state, action) => {
-      state.number = state.number - 1;
+      state.number -= 1;
     });
 });
