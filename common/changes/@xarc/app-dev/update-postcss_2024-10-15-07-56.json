@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "migrate babel-plugin-react-css-modules which is not maintained to @dr.pogodin/babel-plugin-react-css-modules",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}
