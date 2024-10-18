@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "remove babel-plugin-react-css-modules which is not maintained",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}

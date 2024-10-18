@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-postcss",
+      "comment": "update postcss related dependencies",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/opt-postcss"
+}
