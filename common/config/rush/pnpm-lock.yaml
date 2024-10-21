@@ -133,7 +133,6 @@ specifiers:
   postcss-scss: ^2.0.0
   preact: ^10.0.5
   ps-get: ^1.1.0
-  react-query: ~3.39.0
   read-pkg-up: ^7.0.1
   recoil: ^0.7.5
   redux-logger: ^3.0.6
@@ -298,7 +297,6 @@ dependencies:
   postcss-scss: 2.1.1
   preact: 10.24.1
   ps-get: 1.1.0
-  react-query: 3.39.3
   read-pkg-up: 7.0.1
   recoil: 0.7.7
   redux-logger: 3.0.6
@@ -3464,6 +3462,19 @@ packages:
 
   /@socket.io/component-emitter/3.1.2:
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
+    dev: false
+
+  /@tanstack/query-core/5.59.13:
+    resolution: {integrity: sha512-Oou0bBu/P8+oYjXsJQ11j+gcpLAMpqW42UlokQYEz4dE7+hOtVO9rVuolJKgEccqzvyFzqX4/zZWY+R/v1wVsQ==}
+    dev: false
+
+  /@tanstack/react-query/5.59.15_react@18.3.1:
+    resolution: {integrity: sha512-QbVlAkTI78wB4Mqgf2RDmgC0AOiJqer2c5k9STOOSXGv1S6ZkY37r/6UpE8DbQ2Du0ohsdoXgFNEyv+4eDoPEw==}
+    peerDependencies:
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-core': 5.59.13
+      react: 18.3.1
     dev: false
 
   /@testing-library/dom/7.31.2:
@@ -15150,23 +15161,6 @@ packages:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
     dev: false
 
-  /react-query/3.39.3:
-    resolution: {integrity: sha512-nLfLz7GiohKTJDuT4us4X3h/8unOh+00MLb2yJoGTPjxKs2bc1iDhkNx2bd5MKklXnOD3NrVZ+J2UXujA5In4g==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.25.6
-      broadcast-channel: 3.7.0
-      match-sorter: 6.3.4
-    dev: false
-
   /react-query/3.39.3_react-dom@18.3.1+react@18.3.1:
     resolution: {integrity: sha512-nLfLz7GiohKTJDuT4us4X3h/8unOh+00MLb2yJoGTPjxKs2bc1iDhkNx2bd5MKklXnOD3NrVZ+J2UXujA5In4g==}
     peerDependencies:
@@ -19477,7 +19471,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.95.0:
-    resolution: {integrity: sha512-dCKp3vPbRcCZe27b7AeJ47LlQ9y0jPvLr9EYhnF9Yb4NxlZH2N6DK70HQpcpWzzW238ADsaNRZBGzm33VoMylw==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-uxzrRfvwwn9+hwUlmcRogQ+JsO49KPATktIE4G5l4F7r8cLOEJDP3URUcPlBs+e0rT5mFBHxw59zoNmYdP1AFQ==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -19565,13 +19559,14 @@ packages:
     dev: false
 
   file:projects/react-query.tgz:
-    resolution: {integrity: sha512-+wkaXBnBN1uNqW/5ic1XytjvlfD7eORlPNA/UyQW99BvVeZ5o+yS3WvxPc/19xlhFkYW7zRRwYqoz5h5TDJuRA==, tarball: file:projects/react-query.tgz}
+    resolution: {integrity: sha512-6mYiZRmT6zgT/qmwcpxpRVUMoMfBuNOW1GGf0q/iPcFrSkVpuj9qRwHnOa9jG4LqnflOequ1eWnMKATAe3HTzw==, tarball: file:projects/react-query.tgz}
     name: '@rush-temp/react-query'
     version: 0.0.0
     dependencies:
       '@babel/core': 7.25.2
       '@babel/eslint-parser': 7.25.1_@babel+core@7.25.2+eslint@8.57.1
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
+      '@tanstack/react-query': 5.59.15_react@18.3.1
       '@testing-library/react': 11.2.7_react-dom@18.3.1+react@18.3.1
       '@types/chai': 4.3.20
       '@types/mocha': 10.0.8
@@ -19609,7 +19604,6 @@ packages:
       - '@swc/wasm'
       - bufferutil
       - canvas
-      - react-native
       - supports-color
       - utf-8-validate
     dev: false

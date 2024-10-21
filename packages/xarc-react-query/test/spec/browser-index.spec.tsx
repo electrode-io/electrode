@@ -4,7 +4,7 @@ import React from "react"; // eslint-disable-line
 import { describe, it } from "mocha";
 import { expect } from "chai";
 import { SubAppDef, SubAppContainer, envHooks } from "@xarc/subapp";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { reactQueryFeature } from "../../src/browser/index";
 import { testFetch } from "../prefetch";
 import { render, waitFor, screen } from "@testing-library/react";
@@ -15,11 +15,11 @@ describe("reactQueryFeature browser", function () {
   it("should return a feature factory", async () => {
     const factory = reactQueryFeature({ React });
     expect(factory.id).equal("state-provider");
-    expect(factory.subId).equal("react-query");
+    expect(factory.subId).equal("@tanstack/react-query");
     expect(factory.add).to.be.a("function");
   });
 
-  it("should add react-query feature to a subapp", async () => {
+  it("should add @tanstack/react-query feature to a subapp", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
     const factory = reactQueryFeature({ React });
@@ -28,7 +28,7 @@ describe("reactQueryFeature browser", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
     container.declare("test", def);
 
@@ -37,7 +37,7 @@ describe("reactQueryFeature browser", function () {
     expect(def._features.reactQuery).to.be.an("object");
   });
 
-  it("should render subapp with react-query when component exists on input", async () => {
+  it("should render subapp with @tanstack/react-query when component exists on input", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
 
@@ -48,7 +48,7 @@ describe("reactQueryFeature browser", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
@@ -58,9 +58,10 @@ describe("reactQueryFeature browser", function () {
     const res = await def._features.reactQuery.execute({
       input: {
         Component: () => {
-          const { data } = useQuery("test", testFetch, {
-            // ensure react-query doesn't keep node.js running with its timers
-            cacheTime: 200
+          const { data } = useQuery({
+            queryKey: ["test"],
+            queryFn: testFetch,
+            gcTime: 200,
           });
           return data ? (
             <div>
@@ -69,22 +70,25 @@ describe("reactQueryFeature browser", function () {
           ) : (
             ""
           );
-        }
+        },
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
-      }
+        getInitialState: () => "test",
+      },
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
-
-    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
+    expect(element.innerHTML).contains(
+      `<p>{"msg":"foo","queryKey":["test"]}</p>`
+    );
   });
 
-  it("should render subapp with react-query when input component does not exist", async () => {
+  it("should render subapp with @tanstack/react-query when input component does not exist", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
 
@@ -102,9 +106,9 @@ describe("reactQueryFeature browser", function () {
             <div>
               test <p>text</p>
             </div>
-          )
+          ),
         };
-      }
+      },
     } as SubAppDef;
 
     container.declare("test", def);
@@ -113,17 +117,19 @@ describe("reactQueryFeature browser", function () {
 
     const res = await def._features.reactQuery.execute({
       input: {
-        Component: undefined
+        Component: undefined,
       },
       csrData: {
         name: "test",
-        getInitialState: () => "test"
-      }
+        getInitialState: () => "test",
+      },
     });
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).equal(`test <p>text</p>`);
   });
