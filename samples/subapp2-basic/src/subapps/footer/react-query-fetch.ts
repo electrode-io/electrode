@@ -8,12 +8,12 @@ export const demo3QueryFn = async ({ queryKey }) => {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
   }).then(() => {
-    return { msg: "react-query", queryKey, delay };
+    return { msg: "@tanstack/react-query", queryKey, delay };
   });
 };
 
 export const prefetchQuery = async ({ queryClient, ssrData }) => {
-  await queryClient.prefetchQuery("demo3", demo3QueryFn);
+  await queryClient.prefetchQuery({ queryKey: ["demo3"], queryFn: demo3QueryFn });
 
   return {
     queryClient,

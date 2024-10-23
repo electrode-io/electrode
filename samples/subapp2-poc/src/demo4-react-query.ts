@@ -7,17 +7,20 @@ export const demo4QueryFn = async ({ queryKey }) => {
 
   console.debug("demo4 react-query getting data, delay:", delay);
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, delay);
   }).then(() => {
-    return { msg: "react-query", queryKey, delay };
+    return { msg: "@tanstack/react-query", queryKey, delay };
   });
 };
 
 export const prefetchQuery = async ({ queryClient, ssrData }) => {
-  await queryClient.prefetchQuery("demo4", demo4QueryFn);
+  await queryClient.prefetchQuery({
+    queryKey: ["demo4"],
+    queryFn: demo4QueryFn,
+  });
   return {
     queryClient,
-    dehydratedState: dehydrate(queryClient)
+    dehydratedState: dehydrate(queryClient),
   };
 };
