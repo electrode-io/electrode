@@ -1,17 +1,17 @@
 /* eslint-disable max-statements */
 
 import { SubAppFeature, SubAppSSRData } from "@xarc/subapp";
-import { QueryClient } from "react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 //
 // re-export
 //
-export * from "react-query";
-export { dehydrate, Hydrate } from "react-query/hydration";
+export * from "@tanstack/react-query";
+export { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 export type prefetchQueryMethod = ({
   queryClient,
-  ssrData
+  ssrData,
 }: {
   queryClient: QueryClient;
   ssrData: SubAppSSRData;
@@ -25,7 +25,7 @@ export type PrefetchQueryServerModule = {
 };
 
 /**
- * react-query feature options
+ * @tanstack/react-query feature options
  */
 export type ReactQueryFeatureOptions = {
   /**
@@ -37,7 +37,7 @@ export type ReactQueryFeatureOptions = {
   React: Partial<{ createElement: unknown }>;
 
   /**
-   * Custom react-query client.
+   * Custom @tanstack/react-query client.
    *
    * If not provided, then create from `new QueryClient`
    */

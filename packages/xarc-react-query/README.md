@@ -1,6 +1,6 @@
 # `@xarc/react-query`
 
-This module is part of the [Electrode X React Web App platform] for using [react-query] in version 2 of its SubApp design.
+This module is part of the [Electrode X React Web App platform] for using [@tanstack/react-query] in version 2 of its SubApp design.
 
 
 

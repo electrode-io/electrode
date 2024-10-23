@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-query",
+      "comment": "update react query to @tanstack/react-query",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/react-query"
+}

@@ -12,7 +12,7 @@ import { demo3QueryFn } from "./react-query-fetch";
 import { DisplayInfo } from "./display-info";
 
 const Footer = () => {
-  const { data } = useQuery("demo3", demo3QueryFn, { staleTime: 2000 });
+  const { data } = useQuery({ queryKey: ["demo3"], queryFn: demo3QueryFn, staleTime: 2000 });
 
   return (
     <div>

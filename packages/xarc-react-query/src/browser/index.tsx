@@ -1,8 +1,13 @@
 /* eslint-disable max-statements */
 
-import { SubAppDef, SubAppFeatureFactory, SubAppFeature, envHooks } from "@xarc/subapp";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { Hydrate } from "react-query/hydration";
+import {
+  SubAppDef,
+  SubAppFeatureFactory,
+  SubAppFeature,
+  envHooks,
+} from "@xarc/subapp";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HydrationBoundary } from "@tanstack/react-query";
 import { featureId, featureSubId } from "../common/feature-info";
 import { ReactQueryFeature, ReactQueryFeatureOptions } from "../common";
 
@@ -17,7 +22,9 @@ export * from "../common";
  * @param meta
  * @returns unknown
  */
-export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeatureFactory {
+export function reactQueryFeature(
+  options: ReactQueryFeatureOptions
+): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line
 
   const id = featureId;
@@ -34,9 +41,9 @@ export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeat
     reactQuery.wrap = ({ Component, queryClient, dehydratedState }) => {
       return (
         <QueryClientProvider client={queryClient}>
-          <Hydrate state={dehydratedState}>
+          <HydrationBoundary state={dehydratedState}>
             <Component />
-          </Hydrate>
+          </HydrationBoundary>
         </QueryClientProvider>
       );
     };
@@ -48,12 +55,13 @@ export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeat
 
       const WrapComp = this.wrap({
         Component:
-          input.Component || envHooks.getContainer().get(subAppName)._getExport()?.Component,
+          input.Component ||
+          envHooks.getContainer().get(subAppName)._getExport()?.Component,
         queryClient,
-        dehydratedState
+        dehydratedState,
       });
       return {
-        Component: () => WrapComp
+        Component: () => WrapComp,
       };
     };
     return subapp;

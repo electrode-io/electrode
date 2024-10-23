@@ -1,2 +1,2 @@
 export const featureId = "state-provider";
-export const featureSubId = "react-query";
+export const featureSubId = "@tanstack/react-query";
