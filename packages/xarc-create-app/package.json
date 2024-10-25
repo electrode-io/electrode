@@ -39,7 +39,7 @@
     "@xarc/app-dev": "^11.0.10",
     "@xarc/module-dev": "^2.2.4",
     "@xarc/react": "^1.0.6",
-    "@xarc/react-query": "^1.0.7",
+    "@xarc/react-query": "^2.0.0",
     "@xarc/react-redux": "^2.0.0",
     "babel-loader": "^9.1.3",
     "chai": "^4.2.0",

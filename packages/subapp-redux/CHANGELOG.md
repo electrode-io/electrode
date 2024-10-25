@@ -1,6 +1,13 @@
 # Change Log - subapp-redux
 
-This log was last generated on Fri, 19 Apr 2024 20:43:30 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Oct 2024 17:22:04 GMT and should not be manually modified.
+
+## 3.0.0
+Fri, 25 Oct 2024 17:22:04 GMT
+
+### Breaking changes
+
+- Upgrade internal implementation to use @reduxjs/toolkit
 
 ## 2.3.0
 Fri, 19 Apr 2024 20:43:30 GMT
