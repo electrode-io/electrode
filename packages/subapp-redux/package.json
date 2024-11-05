@@ -1,6 +1,6 @@
 {
   "name": "subapp-redux",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Electrode subapp redux support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -38,13 +38,13 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.17.7",
     "@babel/runtime": "^7.17.9",
+    "@reduxjs/toolkit": ">= 2",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
     "run-verify": "^1.2.6",
     "subapp-pkg-util": "0.0.1"
   },

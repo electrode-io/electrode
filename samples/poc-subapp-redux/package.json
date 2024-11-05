@@ -51,9 +51,10 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "subapp-react": "^1.3.0",
-    "subapp-redux": "^2.3.0",
+    "subapp-redux": "^3.0.0",
     "subapp-server": "^2.4.2",
-    "subapp-web": "^2.1.6"
+    "subapp-web": "^2.1.6",
+    "@reduxjs/toolkit": ">= 2"
   },
   "devDependencies": {
     "@xarc/app-dev": "^11.0.10",

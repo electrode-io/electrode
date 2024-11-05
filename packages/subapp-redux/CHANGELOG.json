@@ -2,6 +2,18 @@
   "name": "subapp-redux",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "subapp-redux_v3.0.0",
+      "date": "Fri, 25 Oct 2024 17:22:04 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade internal implementation to use @reduxjs/toolkit"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.3.0",
       "tag": "subapp-redux_v2.3.0",
       "date": "Fri, 19 Apr 2024 20:43:30 GMT",
