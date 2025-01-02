@@ -4,7 +4,7 @@ import { xarcV2 } from "@xarc/react";
 import { demo1 } from "./home";
 import custom from "./styles/custom.module.css"; // eslint-disable-line no-unused-vars
 
-const Demo1 = createDynamicComponent(demo1, { ssr: true });
+const Demo1 = createDynamicComponent(demo1, { ssr: true, fallback: <div>Loading...</div>});
 
 xarcV2.debug("static.tsx");
 const StaticHome = props => {
