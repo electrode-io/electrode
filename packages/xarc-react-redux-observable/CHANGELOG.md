@@ -1,6 +1,20 @@
 # Change Log - @xarc/react-redux-observable
 
-This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Sep 2024 19:17:24 GMT and should not be manually modified.
+
+## 2.0.0
+Wed, 18 Sep 2024 19:17:24 GMT
+
+### Breaking changes
+
+- Update to use @reduxjs/toolkit
+
+## 1.1.5
+Fri, 06 Sep 2024 17:12:11 GMT
+
+### Patches
+
+- Upgrade @types/node
 
 ## 1.1.4
 Wed, 05 Jun 2024 20:03:59 GMT

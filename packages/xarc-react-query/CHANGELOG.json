@@ -2,6 +2,35 @@
   "name": "@xarc/react-query",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@xarc/react-query_v2.0.0",
+      "date": "Fri, 25 Oct 2024 17:22:04 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "update react query to @tanstack/react-query"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.7",
+      "tag": "@xarc/react-query_v1.0.7",
+      "date": "Fri, 06 Sep 2024 17:12:11 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade @types/node"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.4.1` to `^0.4.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.6",
       "tag": "@xarc/react-query_v1.0.6",
       "date": "Wed, 05 Jun 2024 20:03:59 GMT",

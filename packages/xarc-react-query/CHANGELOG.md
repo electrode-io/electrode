@@ -1,6 +1,20 @@
 # Change Log - @xarc/react-query
 
-This log was last generated on Wed, 05 Jun 2024 20:03:59 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Oct 2024 17:22:04 GMT and should not be manually modified.
+
+## 2.0.0
+Fri, 25 Oct 2024 17:22:04 GMT
+
+### Breaking changes
+
+- update react query to @tanstack/react-query
+
+## 1.0.7
+Fri, 06 Sep 2024 17:12:11 GMT
+
+### Patches
+
+- Upgrade @types/node
 
 ## 1.0.6
 Wed, 05 Jun 2024 20:03:59 GMT

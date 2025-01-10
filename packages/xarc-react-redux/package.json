@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "xarc React.js application redux support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -24,12 +24,14 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.4.1",
-    "react-redux": ">= 8",
-    "redux": ">= 4",
+    "@reduxjs/toolkit": ">= 2",
+    "@xarc/subapp": "^0.4.2",
+    "react-redux": ">= 9",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testing-library/react": "^13.2.0",
     "@types/chai": "^4.3.1",
@@ -43,7 +45,6 @@
     "@typescript-eslint/parser": "^5.25.0",
     "@xarc/module-dev": "^3.0.2",
     "@xarc/run": "^1.1.1",
-    "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
     "eslint": "^8.15.0",
     "eslint-config-walmart": "^2.2.1",
@@ -55,8 +56,6 @@
     "nyc": "^15.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
     "source-map-support": "^0.5.21",

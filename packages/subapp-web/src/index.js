@@ -91,7 +91,7 @@ export function loadSubApp(info, renderStart, options) {
   subApp.start = (instance, options, info) => {
     instance = instance || subApp.preStart(instance, options, info);
     info = info || subApp.info;
-    if (instance && !instance.props) {
+    if (instance && !instance.props && options) {
       instance.props = options.props;
     }
     // if user provided a start function, then user is expected to
@@ -187,7 +187,16 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback, ns, props }) {
+export function lazyLoadSubApp({
+  name,
+  id,
+  timeout = 15000,
+  onLoad,
+  onError,
+  fallback,
+  ns,
+  props
+}) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 

@@ -31,7 +31,7 @@
     "@babel/runtime": "^7.23.6",
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.5",
-    "subapp-web": "^2.1.5"
+    "subapp-web": "^2.1.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
@@ -40,7 +40,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.23.3",
     "@babel/register": "^7.22.15",
-    "@xarc/app": "^11.0.9",
+    "@xarc/app": "^11.0.10",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.2",
     "electrode-archetype-njs-module-dev": "^3.0.3",

@@ -48,7 +48,7 @@ export type BabelOptions = {
   // DEPRECATE: legacyDecorators?: boolean;
 
   /**
-   * Add `@babel/plugin-proposal-class-properties` for class properties support
+   * Add `@babel/plugin-transform-class-properties` for class properties support
    * - **Default: `false`**
    * - if not set, then we check env `BABEL_CLASS_PROPS`
    *

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react",
+      "comment": "use fallback props in create Dynamic component",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react"
+}

@@ -2,6 +2,18 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "11.0.10",
+      "tag": "@xarc/app-dev_v11.0.10",
+      "date": "Wed, 18 Sep 2024 19:17:24 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Upgrade @types/node"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.0.9",
       "tag": "@xarc/app-dev_v11.0.9",
       "date": "Wed, 05 Jun 2024 20:03:59 GMT",

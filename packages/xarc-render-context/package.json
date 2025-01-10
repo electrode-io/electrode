@@ -1,6 +1,6 @@
 {
   "name": "@xarc/render-context",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {
@@ -15,6 +15,7 @@
   "author": "Electrode <https://github.com/electrode-io/electrode>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.11.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^10.0.1",
@@ -25,7 +26,6 @@
     "@typescript-eslint/parser": "^5.25.0",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^8.15.0",
     "eslint-config-walmart": "^2.2.1",

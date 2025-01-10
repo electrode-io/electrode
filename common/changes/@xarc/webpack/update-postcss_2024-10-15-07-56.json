@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "update postcss and related dependencies",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}

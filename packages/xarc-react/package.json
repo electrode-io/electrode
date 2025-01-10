@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "xarc web app platform support for React framework",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -21,14 +21,16 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@types/react": ">=18",
-    "@xarc/render-context": "^1.0.12",
-    "@xarc/subapp": "^0.4.1",
-    "@xarc/tag-renderer": "^1.0.14",
+    "@xarc/render-context": "^1.0.13",
+    "@xarc/subapp": "^0.4.2",
+    "@xarc/tag-renderer": "^1.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/eslint-parser": "^7.25.1",
     "@babel/runtime": "^7.22.3",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.1",
@@ -42,7 +44,6 @@
     "@typescript-eslint/parser": "^5.25.0",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "babel-eslint": "^10.1.0",
     "chai": "^4.3.6",
     "eslint": "^8.15.0",
     "eslint-config-walmart": "^2.2.1",
