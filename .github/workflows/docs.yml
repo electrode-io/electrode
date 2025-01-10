@@ -27,6 +27,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Docs
-        run: cd docusaurus && npm install pnpm && pnpm build && pnpm deploy
+      - name: Install pnpm
+        run: npm install -g pnpm        
+
+      - name: Install and Build Docs
+        working-directory: ./docusaurus
+        run: |
+          pnpm install --force
+          pnpm build
+
+      - name: Deploy Docs
+        working-directory: ./docusaurus
+        run: |
+          touch build/.nojekyll
+          rm -rf ../docs
+          cp -r build ../docs 
 
