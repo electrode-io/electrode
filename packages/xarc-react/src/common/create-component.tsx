@@ -45,7 +45,7 @@ export class SubAppComponent extends Component {
     this._options = props.__options;
     this.resolveName = this._options.resolveName || this.subapp.resolveName;
     this.state = this.makeState();
-    this.loading = <div>subapp {this.subapp.name} component loading... </div>;
+    this.loading = this._options.fallback || <div>subapp {this.subapp.name} component loading... </div>;
     this._info = { component: this, subapp: props.__subapp, type: "dynamic" };
     this.subapp._mount(this._info);
   }
