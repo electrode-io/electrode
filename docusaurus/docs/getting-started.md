@@ -11,7 +11,7 @@ title: Getting Started
 
 Welcome! This is the documentation for building web application using Electrode X for node.js and React.
 
-In this quick start guide, we will show you how to create and run your first app.
+In this quick start guide, we will show you how to create and run your first app Shubham.
 
 ### Requirements
 
