@@ -7,7 +7,7 @@
     "build": "docusaurus build",
     "start": "pnpm build && docusaurus start --port 4000",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus build && touch build/.nojekyll && rm -rf ../docs && cp -r build ../docs"
+    "deploy": "touch build/.nojekyll && rm -rf ../docs && cp -r build ../docs"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"

@@ -34,5 +34,12 @@ jobs:
         working-directory: ./docusaurus
         run: |
           pnpm install --force
-          pnpm deploy
+          pnpm build
+
+      - name: Deploy Docs
+        working-directory: ./docusaurus
+        run: |
+          touch build/.nojekyll
+          rm -rf ../docs
+          cp -r build ../docs 
 
