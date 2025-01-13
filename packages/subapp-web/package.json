@@ -39,7 +39,7 @@
     "xaa": "^1.7.3"
   },
   "peerDependencies": {
-    "@xarc/app": "^11.0.10"
+    "@xarc/app": "^11.0.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
@@ -48,7 +48,7 @@
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
     "@babel/register": "^7.22.5",
-    "@xarc/app": "^11.0.10",
+    "@xarc/app": "^11.0.11",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.1",
