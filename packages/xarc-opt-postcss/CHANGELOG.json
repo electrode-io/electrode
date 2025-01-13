@@ -2,6 +2,18 @@
   "name": "@xarc/opt-postcss",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "@xarc/opt-postcss_v3.0.0",
+      "date": "Mon, 13 Jan 2025 16:06:03 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "update postcss related dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.1",
       "tag": "@xarc/opt-postcss_v2.0.1",
       "date": "Thu, 04 May 2023 21:08:31 GMT",

@@ -2,6 +2,18 @@
   "name": "@xarc/react",
   "entries": [
     {
+      "version": "1.0.7",
+      "tag": "@xarc/react_v1.0.7",
+      "date": "Mon, 13 Jan 2025 16:06:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "use fallback props in create Dynamic component"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.6",
       "tag": "@xarc/react_v1.0.6",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",
