@@ -60,8 +60,7 @@
     "@xarc/app-dev": "^11.0.10",
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/run": "^1.1.1",
-    "webpack-hot-middleware": "^2.25.3",
-    "@xarc/opt-postcss": "~2.0.1"
+    "webpack-hot-middleware": "^2.25.3"
   },
   "prettier": {
     "printWidth": 100

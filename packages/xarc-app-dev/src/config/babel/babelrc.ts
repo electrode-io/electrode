@@ -8,7 +8,7 @@
 import ck from "chalker";
 import { makeOptionalRequire } from "optional-require";
 import _ from "lodash";
-import { getPluginFrom, loadXarcOptions } from "./common";
+import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
 
 const optionalRequire = makeOptionalRequire(require);
 
@@ -36,10 +36,58 @@ const addFlowPlugin = Boolean(enableFlow && optFlow);
 const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } =
   process.env;
 
+const enableCssModule = detectCSSModule(xOptions);
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 // const isTest = (BABEL_ENV || NODE_ENV) === "test";
 const isNodeTarget = XARC_BABEL_TARGET === "node";
+
+/**
+ * https://www.npmjs.com/package/babel-plugin-react-css-modules
+ *
+ * This plugin enhances the CSS module support from css-loader.  It adds a new
+ * prop styleName in addition to the className prop.  This also automatically
+ * make it work for SSR.
+ *
+ * Currently, looks like the author has been inactive on maintaining this plugin
+ * and there's some compatibility issue with css-loader 4.x.
+ * https://github.com/gajus/babel-plugin-react-css-modules/issues/291
+ *
+ * Resolution: TBD
+ *
+ * @returns null or settings for babel-plugin-react-css-modules
+ */
+const getReactCssModulePlugin = (): any => {
+  if (!enableCssModule) {
+    return null;
+  }
+
+  const enableShortenCSSNames = xOptions.webpack.enableShortenCSSNames;
+  const enableShortHash = isProduction && enableShortenCSSNames;
+  return [
+    [
+      "babel-plugin-react-css-modules",
+      {
+        context: "./src",
+        generateScopedName: `${
+          enableShortHash ? "" : "[name]__[local]___"
+        }[hash:base64:5]`,
+        filetypes: {
+          ".scss": {
+            syntax: "postcss-scss",
+            plugins: ["postcss-nested"],
+          },
+          ".styl": {
+            syntax: "sugarss",
+          },
+          ".less": {
+            syntax: "postcss-less",
+          },
+        },
+      },
+    ],
+  ];
+};
 
 const basePlugins = [
   // plugin to transpile async/await to Promise
@@ -109,6 +157,9 @@ const plugins = basePlugins.concat(
         },
       ],
     ],
+  // css module support
+  // Note: this is needed for server side (node.js) also.
+  getReactCssModulePlugin(),
   !isNodeTarget &&
     enableKarmaCov && [
       getPluginFrom(

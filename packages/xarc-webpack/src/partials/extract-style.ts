@@ -15,34 +15,22 @@ const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 
 // Stylus support
-const optStylusRequire = getOptRequire([
-  "@xarc/opt-stylus",
-  "electrode-archetype-opt-stylus",
-]);
+const optStylusRequire = getOptRequire(["@xarc/opt-stylus", "electrode-archetype-opt-stylus"]);
 const stylusLoader = optStylusRequire.resolve("stylus-relative-loader");
 
 // SASS support
-const optSassRequire = getOptRequire([
-  "@xarc/opt-sass",
-  "electrode-archetype-opt-sass",
-]);
+const optSassRequire = getOptRequire(["@xarc/opt-sass", "electrode-archetype-opt-sass"]);
 const sassLoader = optSassRequire.resolve("sass-loader");
 
 // LESS support
-const optLessRequire = getOptRequire([
-  "@xarc/opt-less",
-  "electrode-archetype-opt-less",
-]);
+const optLessRequire = getOptRequire(["@xarc/opt-less", "electrode-archetype-opt-less"]);
 const lessLoader = optLessRequire.resolve("less-loader");
 
 // isomorphic-loader
 const isomorphicLoader = xAppRequire.resolve("isomorphic-loader");
 
 function loadPostCss() {
-  const optPostcssRequire = getOptRequire([
-    "@xarc/opt-postcss",
-    "electrode-archetype-opt-postcss",
-  ]);
+  const optPostcssRequire = getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]);
 
   if (optPostcssRequire.invalid) {
     return { hasPostCss: false };
@@ -89,12 +77,7 @@ module.exports = function() {
 
   const { enableCssModule, cssModuleRegExp } = detectCssModule(xarcOptions);
 
-  const {
-    hasPostCss,
-    atImport,
-    postcssPresetEnv,
-    postcssLoader,
-  } = loadPostCss();
+  const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
   const rules = [];
 
@@ -109,14 +92,13 @@ module.exports = function() {
     hasPostCss && {
       loader: postcssLoader,
       options: {
-        postcssOptions: {
-          plugins: (loader) => [
-            autoprefixer(),
-            atImport({ root: loader.resourcePath }),
-            postcssPresetEnv(),
-          ],
-        },
-      },
+        ident: "postcss",
+        plugins: loader => [
+          autoprefixer(),
+          atImport({ root: loader.resourcePath }),
+          postcssPresetEnv()
+        ]
+      }
     };
 
   /*
@@ -125,15 +107,13 @@ module.exports = function() {
   const getCSSModuleOptions = () => {
     const enableShortenCSSNames = xarcOptions.webpack.enableShortenCSSNames;
     const enableShortHash = isProduction && enableShortenCSSNames;
-    const localIdentName = `${
-      enableShortHash ? "" : "[name]__[local]___"
-    }[hash:base64:5]`;
+    const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 
     return {
       modules: {
         localIdentName,
-        localIdentContext: Path.resolve(xarcCwd, "src"),
-      },
+        localIdentContext: Path.resolve(xarcCwd, "src")
+      }
     };
   };
 
@@ -142,8 +122,8 @@ module.exports = function() {
       isModule
         ? { loader: cssLoader, options: getCSSModuleOptions() }
         : { loader: cssLoader, options: { modules: false, esModule: false } },
-      getPostCssQuery(),
-    ].filter((x) => x);
+      getPostCssQuery()
+    ].filter(x => x);
   };
 
   /*
@@ -157,10 +137,10 @@ module.exports = function() {
       // hmr: isDevelopment,
       // reload: isDevelopment,
       publicPath: "",
-      esModule: !isModule,
+      esModule: !isModule
       // TODO: webpack5 update - modules options
       // modules: Boolean(isModule)
-    },
+    }
   });
 
   /*
@@ -171,17 +151,13 @@ module.exports = function() {
       _name: `extract-css`,
       test: /\.css$/,
       use: [miniCssExtractLoader(false), ...getCssQueryUse(false)],
-      ...(enableCssModule && { exclude: cssModuleRegExp }),
+      ...(enableCssModule && { exclude: cssModuleRegExp })
     },
     enableCssModule && {
       _name: `extract-css-modules`,
       test: /\.css$/,
-      use: [
-        isomorphicLoader,
-        miniCssExtractLoader(true),
-        ...getCssQueryUse(true),
-      ],
-      include: cssModuleRegExp,
+      use: [isomorphicLoader, miniCssExtractLoader(true), ...getCssQueryUse(true)],
+      include: cssModuleRegExp
     }
   );
 
@@ -196,9 +172,9 @@ module.exports = function() {
         test: /\.(scss|sass)$/,
         use: [
           miniCssExtractLoader(false),
-          ...getCssQueryUse(false).concat({ loader: sassLoader } as any),
+          ...getCssQueryUse(false).concat({ loader: sassLoader } as any)
         ],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-scss`,
@@ -206,9 +182,9 @@ module.exports = function() {
         use: [
           isomorphicLoader,
           miniCssExtractLoader(true),
-          ...getCssQueryUse(true).concat({ loader: sassLoader } as any),
+          ...getCssQueryUse(true).concat({ loader: sassLoader } as any)
         ],
-        include: cssModuleRegExp,
+        include: cssModuleRegExp
       }
     );
   }
@@ -224,11 +200,8 @@ module.exports = function() {
       {
         _name: `extract-css-stylus`,
         test: /\.styl$/,
-        use: [
-          miniCssExtractLoader(false),
-          ...getCssQueryUse(false).concat(stylusQuery),
-        ],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        use: [miniCssExtractLoader(false), ...getCssQueryUse(false).concat(stylusQuery)],
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-stylus`,
@@ -236,9 +209,9 @@ module.exports = function() {
         use: [
           isomorphicLoader,
           miniCssExtractLoader(true),
-          ...getCssQueryUse(true).concat(stylusQuery),
+          ...getCssQueryUse(true).concat(stylusQuery)
         ],
-        include: cssModuleRegExp,
+        include: cssModuleRegExp
       }
     );
   }
@@ -253,9 +226,9 @@ module.exports = function() {
         test: /\.less$/,
         use: [
           miniCssExtractLoader(false),
-          ...getCssQueryUse(false).concat({ loader: lessLoader } as any),
+          ...getCssQueryUse(false).concat({ loader: lessLoader } as any)
         ],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-less`,
@@ -263,9 +236,9 @@ module.exports = function() {
         use: [
           isomorphicLoader,
           miniCssExtractLoader(true),
-          ...getCssQueryUse(true).concat({ loader: lessLoader } as any),
+          ...getCssQueryUse(true).concat({ loader: lessLoader } as any)
         ],
-        include: cssModuleRegExp,
+        include: cssModuleRegExp
       }
     );
   }
@@ -279,15 +252,14 @@ module.exports = function() {
       : `${nsTag}[name].style.[contenthash].css`;
 
   return {
-    module: { rules: rules.filter((x) => x) },
+    module: { rules: rules.filter(x => x) },
     plugins: [
       new MiniCssExtractPlugin({ filename: styleBundleFilename }),
-      isProduction &&
-        new CssMinimizerPlugin(xarcOptions.webpack.optimizeCssOptions),
+      isProduction && new CssMinimizerPlugin(xarcOptions.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
-        options: { context: Path.resolve(xarcCwd, "src") },
-      }),
-    ].filter((x) => !!x),
+        options: { context: Path.resolve(xarcCwd, "src") }
+      })
+    ].filter(x => !!x)
   };
 };

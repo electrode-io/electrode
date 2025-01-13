@@ -27,13 +27,13 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
-    "postcss-import": "^16.1.0",
-    "postcss-less": "^6.0.0",
-    "postcss-loader": "^8.1.1",
-    "postcss-nested": "^6.2.0",
-    "postcss-preset-env": "^10.0.7",
-    "postcss-scss": "^4.0.9",
-    "sugarss": "^4.0.1"
+    "postcss-import": "^12.0.1",
+    "postcss-less": "^3.1.4",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-scss": "^2.0.0",
+    "sugarss": "^2.0.0"
   },
   "devDependencies": {
     "opt-archetype-check": "1.0.0",
