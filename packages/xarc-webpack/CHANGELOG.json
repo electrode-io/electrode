@@ -2,6 +2,32 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "12.0.0",
+      "tag": "@xarc/webpack_v12.0.0",
+      "date": "Mon, 13 Jan 2025 05:19:59 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.9 to ^11.0.10."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.9 to ^11.0.10."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.10 to ^11.0.11."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.10 to ^11.0.11."
+          }
+        ],
+        "major": [
+          {
+            "comment": "update postcss and related dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.7",
       "tag": "@xarc/webpack_v11.2.7",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",

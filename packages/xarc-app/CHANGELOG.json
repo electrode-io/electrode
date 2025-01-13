@@ -2,6 +2,12 @@
   "name": "@xarc/app",
   "entries": [
     {
+      "version": "11.0.11",
+      "tag": "@xarc/app_v11.0.11",
+      "date": "Mon, 13 Jan 2025 05:19:59 GMT",
+      "comments": {}
+    },
+    {
       "version": "11.0.10",
       "tag": "@xarc/app_v11.0.10",
       "date": "Wed, 18 Sep 2024 19:17:24 GMT",

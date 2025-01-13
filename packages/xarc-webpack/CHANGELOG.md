@@ -1,6 +1,13 @@
 # Change Log - @xarc/webpack
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jan 2025 05:19:59 GMT and should not be manually modified.
+
+## 12.0.0
+Mon, 13 Jan 2025 05:19:59 GMT
+
+### Breaking changes
+
+- update postcss and related dependencies
 
 ## 11.2.7
 Fri, 06 Sep 2024 17:12:11 GMT

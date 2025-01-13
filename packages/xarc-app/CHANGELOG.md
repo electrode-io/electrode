@@ -1,6 +1,11 @@
 # Change Log - @xarc/app
 
-This log was last generated on Wed, 18 Sep 2024 19:17:24 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jan 2025 05:19:59 GMT and should not be manually modified.
+
+## 11.0.11
+Mon, 13 Jan 2025 05:19:59 GMT
+
+_Version update only_
 
 ## 11.0.10
 Wed, 18 Sep 2024 19:17:24 GMT
