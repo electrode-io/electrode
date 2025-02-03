@@ -54,7 +54,7 @@ module.exports = function() {
     } else if (process.env.APP_SERVER_PORT) {
       // we running with a reverse proxy that join app and webpack dev
       // under the same host and port, so use a relative path
-      return "/js/";
+      return "auto";
     } else {
       const { https, devHostname, devPort } = xarcOptions.webpack;
       // original dev assets URLs
