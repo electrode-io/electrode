@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "feature for micro front-ends to run independently",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}
