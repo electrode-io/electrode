@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-recoil",
+      "comment": "lock @types/react dev dependency to v18",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@xarc/react-recoil"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-web",
+      "comment": "feature for micro front-ends to run independently",
+      "type": "major"
+    }
+  ],
+  "packageName": "subapp-web"
+}

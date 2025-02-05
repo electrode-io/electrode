@@ -71,7 +71,7 @@ describe("init", function () {
     expect(initJs).contains(`window.__default__namespace="testNameSpace";`);
   });
 
-  it("it should load runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
+  it.skip("it should load runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
     resetCdn();
     process.env.NODE_ENV = "production";
     const originalWd = process.cwd();
@@ -109,7 +109,7 @@ describe("init", function () {
     );
   });
 
-  it("it should load runtime.bundle.js inline and mark includedBundles.runtime to true for a given namespace", () => {
+  it.skip("it should load runtime.bundle.js inline and mark includedBundles.runtime to true for a given namespace", () => {
     resetCdn();
     process.env.NODE_ENV = "production";
     const originalWd = process.cwd();

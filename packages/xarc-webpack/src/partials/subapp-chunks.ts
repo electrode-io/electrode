@@ -114,7 +114,7 @@ function makeConfig(options) {
         chunks: "all",
         minSize: 30 * 1024,
         maxSize: 250 * 1024,
-        minChunks: 2,
+        minChunks: 1,
         maxAsyncRequests: 500,
         maxInitialRequests: 500,
         automaticNameDelimiter: "~",
