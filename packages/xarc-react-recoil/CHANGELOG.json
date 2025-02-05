@@ -2,6 +2,18 @@
   "name": "@xarc/react-recoil",
   "entries": [
     {
+      "version": "1.1.7",
+      "tag": "@xarc/react-recoil_v1.1.7",
+      "date": "Wed, 05 Feb 2025 04:10:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "lock @types/react dev dependency to v18"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.6",
       "tag": "@xarc/react-recoil_v1.1.6",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",

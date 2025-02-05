@@ -63,6 +63,13 @@ const utils = {
       );
     }
 
+    const asyncChunk = assets.chunks.find(
+      chunk => chunk.names.indexOf(`${entryName.replace("/", "_")}~.bootstrap`) >= 0
+    );
+
+    if (asyncChunk) {
+      entryPoints.push(asyncChunk.id);
+    }
     //
     // Normal entry output bundles are generated as <entryName>.bundle[.dev].js,
     // like header.bundle.js
@@ -77,6 +84,7 @@ const utils = {
         // if a subapp comes from a package in node_modules, webpack5 names entry like this
         x.startsWith(`${entryName}~_.bundle`) ||
         x.startsWith(`${entryName}.~`) ||
+        x.startsWith(`${entryName}~.bootstrap`) ||
         x.startsWith(`${entryName}~`));
     // map all IDs to actual assets
     const bundleAssets = entryPoints

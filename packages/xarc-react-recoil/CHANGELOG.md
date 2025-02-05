@@ -1,6 +1,13 @@
 # Change Log - @xarc/react-recoil
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 1.1.7
+Wed, 05 Feb 2025 04:10:48 GMT
+
+### Patches
+
+- lock @types/react dev dependency to v18
 
 ## 1.1.6
 Fri, 06 Sep 2024 17:12:11 GMT

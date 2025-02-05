@@ -2,6 +2,23 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "12.0.0",
+      "tag": "@xarc/app-dev_v12.0.0",
+      "date": "Wed, 05 Feb 2025 04:10:48 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "remove babel-plugin-react-css-modules which is not maintained"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/webpack\" from `^11.2.7` to `^12.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.0.10",
       "tag": "@xarc/app-dev_v11.0.10",
       "date": "Wed, 18 Sep 2024 19:17:24 GMT",

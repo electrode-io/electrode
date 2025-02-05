@@ -2,6 +2,18 @@
   "name": "subapp-server",
   "entries": [
     {
+      "version": "2.4.3",
+      "tag": "subapp-server_v2.4.3",
+      "date": "Wed, 05 Feb 2025 04:10:48 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"subapp-web\" from `^2.1.6` to `^3.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.4.2",
       "tag": "subapp-server_v2.4.2",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",
