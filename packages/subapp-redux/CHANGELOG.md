@@ -1,6 +1,11 @@
 # Change Log - subapp-redux
 
-This log was last generated on Fri, 25 Oct 2024 17:22:04 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 3.0.1
+Wed, 05 Feb 2025 04:10:48 GMT
+
+_Version update only_
 
 ## 3.0.0
 Fri, 25 Oct 2024 17:22:04 GMT

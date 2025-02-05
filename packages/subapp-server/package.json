@@ -1,6 +1,6 @@
 {
   "name": "subapp-server",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "http-status-codes": "^2.2.0",
     "optional-require": "^1.1.8",
     "subapp-util": "^1.1.5",
-    "subapp-web": "^2.1.6",
+    "subapp-web": "^3.0.0",
     "xaa": "^1.7.3"
   },
   "devDependencies": {

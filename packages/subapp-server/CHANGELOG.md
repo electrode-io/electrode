@@ -1,6 +1,11 @@
 # Change Log - subapp-server
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 2.4.3
+Wed, 05 Feb 2025 04:10:48 GMT
+
+_Version update only_
 
 ## 2.4.2
 Fri, 06 Sep 2024 17:12:11 GMT
