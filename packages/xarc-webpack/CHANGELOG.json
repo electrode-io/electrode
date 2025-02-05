@@ -2,6 +2,35 @@
   "name": "@xarc/webpack",
   "entries": [
     {
+      "version": "12.0.0",
+      "tag": "@xarc/webpack_v12.0.0",
+      "date": "Wed, 05 Feb 2025 04:10:48 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.9 to ^11.0.10."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.9 to ^11.0.10."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^11.0.10 to ^12.0.0."
+          },
+          {
+            "comment": "Dependency @xarc/app-dev version bump from ^11.0.10 to ^12.0.0."
+          }
+        ],
+        "major": [
+          {
+            "comment": "feature for micro front-ends to run independently"
+          },
+          {
+            "comment": "update postcss and related dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "11.2.7",
       "tag": "@xarc/webpack_v11.2.7",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @xarc/app-dev
 
-This log was last generated on Wed, 18 Sep 2024 19:17:24 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 12.0.0
+Wed, 05 Feb 2025 04:10:48 GMT
+
+### Breaking changes
+
+- remove babel-plugin-react-css-modules which is not maintained
 
 ## 11.0.10
 Wed, 18 Sep 2024 19:17:24 GMT

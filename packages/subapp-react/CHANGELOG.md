@@ -1,6 +1,11 @@
 # Change Log - subapp-react
 
-This log was last generated on Fri, 19 Apr 2024 20:43:30 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 1.3.1
+Wed, 05 Feb 2025 04:10:48 GMT
+
+_Version update only_
 
 ## 1.3.0
 Fri, 19 Apr 2024 20:43:30 GMT

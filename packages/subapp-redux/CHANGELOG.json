@@ -2,6 +2,18 @@
   "name": "subapp-redux",
   "entries": [
     {
+      "version": "3.0.1",
+      "tag": "subapp-redux_v3.0.1",
+      "date": "Wed, 05 Feb 2025 04:10:48 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"subapp-web\" from `^2.1.6` to `^3.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.0",
       "tag": "subapp-redux_v3.0.0",
       "date": "Fri, 25 Oct 2024 17:22:04 GMT",

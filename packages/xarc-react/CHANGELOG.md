@@ -1,6 +1,13 @@
 # Change Log - @xarc/react
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+
+## 1.0.7
+Wed, 05 Feb 2025 04:10:48 GMT
+
+### Patches
+
+- use fallback props in create Dynamic component
 
 ## 1.0.6
 Fri, 06 Sep 2024 17:12:11 GMT
