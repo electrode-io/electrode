@@ -55,7 +55,8 @@
     "source-map-support": "^0.5.19",
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "react-redux": "^9.2.0"
   },
   "files": [
     "dist-browser~es2x~esm~",

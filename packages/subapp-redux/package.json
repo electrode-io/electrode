@@ -46,7 +46,8 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.1",
     "run-verify": "^1.2.6",
-    "subapp-pkg-util": "0.0.1"
+    "subapp-pkg-util": "0.0.1",
+    "@types/react": "^18.2.0"
   },
   "peerDependencies": {
     "react": "*",

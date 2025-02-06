@@ -58,7 +58,9 @@
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/app-dev": "^12.0.0",
     "@xarc/run": "^1.1.1",
-    "webpack-hot-middleware": "^2.25.3"
+    "webpack-hot-middleware": "^2.25.3",
+    "@types/react-dom": "^18.2.0",
+    "@babel/plugin-transform-react-jsx":"~7.25.9"
   },
   "prettier": {
     "printWidth": 100,
