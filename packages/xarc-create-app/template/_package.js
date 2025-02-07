@@ -43,7 +43,7 @@ module.exports = (base, merge) => {
       "@xarc/react-redux": "^1.0.0", // version will come from ../package.json
     },
     devDependencies: {
-      "@types/node": "^20.14.10",
+      "@types/node": "^22.13.1",
       "@xarc/app-dev": "^11.0.0", // version will come from ../package.json
       "@xarc/opt-postcss": "^2.0.0",
       "@xarc/opt-stylus": "^2.0.0",

@@ -42,7 +42,7 @@
     "@module-federation/concat-runtime": "~0.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@xarc/run": "^1.1.1",
     "prettier": "^3.0.1",
     "ts-node": "^10.9.1",

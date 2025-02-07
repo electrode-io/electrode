@@ -37,7 +37,7 @@
     "@xarc/react-redux": "^0.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@xarc/app-dev": "^8.2.0",
     "classnames": "^2.2.6",
     "ts-node": "^9.0.0",

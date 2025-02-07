@@ -1,5 +1,5 @@
 import { React } from "@xarc/react";
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, act, screen } from "@testing-library/react";
 import Home from "../components/Home";
 
 // Note: running cleanup afterEach is done automatically for you in @testing-library/react@9.0.0 or higher
@@ -7,6 +7,10 @@ import Home from "../components/Home";
 afterEach(cleanup);
 
 it("Home component renders", async () => {
-  const { getByTestId } = render(<Home />);
-  expect(getByTestId("home")).toBeInTheDocument();
+  await act(async () => {
+    render(<Home />);
+  });
+
+  const homeElement = await screen.findByTestId("home");
+  expect(homeElement).toBeInTheDocument();
 });

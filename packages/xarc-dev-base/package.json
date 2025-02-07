@@ -28,7 +28,7 @@
     "@babel/core": "^7.11.0",
     "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "@xarc/module-dev": "^4.0.0",

@@ -35,7 +35,11 @@
   },
   "devDependencies": {
     "opt-archetype-check": "1.0.0",
-    "shx": "^0.3.4"
+    "shx": "^0.3.4",
+    "@types/node": "^20.17.17",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "ts-node": "^10.9.1"
   },
   "xarcOptCheck": {
     "optionalTagName": "jest",
