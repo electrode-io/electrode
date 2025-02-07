@@ -43,7 +43,7 @@
     "recoil": "^0.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@xarc/app-dev": "^8.1.8",
     "@xarc/opt-eslint": "^1.0.0",
     "@xarc/opt-postcss": "^1.0.0",

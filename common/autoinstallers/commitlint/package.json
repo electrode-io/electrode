@@ -4,7 +4,8 @@
     "private": true,
     "dependencies": {
       "@commitlint/cli": "^19.7.1",
-      "@commitlint/config-conventional": "^19.7.1"
+      "@commitlint/config-conventional": "^19.7.1",
+      "typescript":"5.7.3"
     }
   }
   

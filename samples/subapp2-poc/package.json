@@ -44,7 +44,7 @@
 
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@xarc/run": "^1.1.1",
     "@xarc/app-dev": "^12.0.0",
     "@xarc/opt-eslint": "^3.0.1",

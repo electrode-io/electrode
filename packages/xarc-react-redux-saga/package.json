@@ -34,7 +34,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.1",
     "@types/react": "^18.0.4",
     "@types/react-dom": "^18.0.4",
     "@types/sinon": "^9.0.10",
