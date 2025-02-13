@@ -1,7 +1,7 @@
 import { reduxLoadSubApp } from "subapp-redux";
 import { React } from "subapp-react";
 import { connect } from "react-redux";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router";
 import { Products } from "../components/products";
 import { Deals } from "../components/deals";
 import { Navigation } from "../components/navigation";
@@ -50,10 +50,10 @@ const MainBody = (props) => {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/deals" element={<Deals />} {...props} />
-        <Route path="/stores" element={<Stores />} {...props} />
-        <Route path="/contact" element={<Contact />} {...props} />
+        <Route path="products" element={<Products />} />
+        <Route path="deals" element={<Deals />} {...props} />
+        <Route path="stores" element={<Stores />} {...props} />
+        <Route path="contact" element={<Contact />} {...props} />
       </Routes>
     </div>
   );
@@ -70,7 +70,11 @@ export default reduxLoadSubApp({
   reduxReducers: reducers,
   StartComponent: (props) => {
     return (
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+        }}
+      >
         <Component {...props} />
       </BrowserRouter>
     );

@@ -4,7 +4,7 @@
 const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
-const { Routes, Route } = require("react-router-dom"); // eslint-disable-line
+const { Routes, Route } = require("react-router"); // eslint-disable-line
 const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");

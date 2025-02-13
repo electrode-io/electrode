@@ -1,6 +1,6 @@
 import React from "react";
 import subApp from "./bottom";
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouter } from "react-router";
 import Fs from "fs";
 
 let filterImages;
