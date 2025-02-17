@@ -70,11 +70,7 @@ export default reduxLoadSubApp({
   reduxReducers: reducers,
   StartComponent: (props) => {
     return (
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-        }}
-      >
+      <BrowserRouter>
         <Component {...props} />
       </BrowserRouter>
     );

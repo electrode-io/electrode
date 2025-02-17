@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "update router dependency to v7",
+      "type": "major"
+    }
+  ],
+  "packageName": "subapp-react"
+}
