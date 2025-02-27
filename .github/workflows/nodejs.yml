@@ -7,10 +7,10 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
-    
+    branches: ["master"]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -20,29 +20,27 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v3
-        # with: 
+        # with:
         #   fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-     
+
       # TODO: enable `rush change -v` after rush migration is completed.
       # - name: Verify Change files and fail build if not available
       #   run: node common/scripts/install-run-rush.js change --verify
 
       - name: Install
         run: node common/scripts/install-run-rush.js install
-      
+
       - name: Build
         run: node common/scripts/install-run-rush.js rebuild --verbose
-      
+
       - name: Test
         run: node common/scripts/install-run-rush.js test --verbose
-      
-

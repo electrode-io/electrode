@@ -1,6 +1,6 @@
 import { React } from "subapp-react";
 import { reduxLoadSubApp } from "subapp-redux";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router";
 import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

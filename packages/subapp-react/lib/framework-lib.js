@@ -9,7 +9,7 @@ const ReactDOMServer = require("react-dom/server");
 const { default: AppContext } = require("../dist/node/app-context");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
-const { StaticRouter } = require("react-router-dom/server");
+const { StaticRouter } = require("react-router");
 const { Stream } = require("stream");
 class FrameworkLib {
   constructor(ref) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const NavItem = props => {
   const { to, children } = props;
@@ -36,16 +36,16 @@ export const Navigation = () => {
             <NavItem exact={true} to="/">
               Home
             </NavItem>
-            <NavItem to="/products">Products</NavItem>
-            <NavItem to="/deals">Deals</NavItem>
-            <NavItem to="/stores">Stores</NavItem>
-            <NavItem to="/contact">Contact</NavItem>
+            <NavItem to="../products">Products</NavItem>
+            <NavItem to="../deals">Deals</NavItem>
+            <NavItem to="../stores">Stores</NavItem>
+            <NavItem to="../contact">Contact</NavItem>
           </ul>
           <ul className="nav navbar-nav navbar-right">
-            <NavItem to="/account">
+            <NavItem to="../account">
               <span className="glyphicon glyphicon-user" /> Your Account
             </NavItem>
-            <NavItem to="/cart">
+            <NavItem to="../cart">
               <span className="glyphicon glyphicon-shopping-cart" /> Cart
             </NavItem>
           </ul>
