@@ -66,6 +66,22 @@
       "associatedCommands": [
         "find-deps"
       ]
+    },
+    {
+      "parameterKind": "flag",
+      "longName": "--no-node-modules",
+      "description": "Exclude dependencies found in node_modules directories from the results",
+      "associatedCommands": [
+        "find-deps"
+      ]
+    },
+    {
+      "parameterKind": "flag",
+      "longName": "--direct-only",
+      "description": "Only show direct dependencies, excluding transitive dependencies in the results",
+      "associatedCommands": [
+        "find-deps"
+      ]
     }
   ]
 }
