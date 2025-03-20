@@ -12,6 +12,14 @@
       "enableParallelism": false
     },
     {
+      "commandKind": "global",
+      "name": "find-deps",
+      "summary": "Find all references to a dependency package in the mono repo",
+      "description": "Searches through all packages in the repository to find which ones depend on a specified package. Usage: rush find-deps --package <package-name>",
+      "safeForSimultaneousRushProcesses": true,
+      "shellCommand": "node common/scripts/find-deps.js"
+    },
+    {
       "commandKind": "bulk",
       "name": "lint",
       "summary": "Run lint in each packages",
@@ -48,6 +56,15 @@
       "description": "Command for commitlint",
       "associatedCommands": [
         "commitlint"
+      ]
+    },
+    {
+      "parameterKind": "string",
+      "argumentName": "PACKAGE",
+      "longName": "--package",
+      "description": "Command for find-deps",
+      "associatedCommands": [
+        "find-deps"
       ]
     }
   ]
