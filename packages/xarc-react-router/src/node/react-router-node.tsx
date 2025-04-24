@@ -1,5 +1,5 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouter } from "react-router";
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
 
 /**

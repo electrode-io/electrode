@@ -2,7 +2,7 @@ import { reduxLoadSubApp } from "subapp-redux";
 import { React } from "subapp-react";
 import { AppContext } from "subapp-react";
 import { connect } from "react-redux";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes } from "react-router";
 import { Products } from "../components/products";
 import { Navigation } from "../components/navigation";
 import { Deals } from "../components/deals";

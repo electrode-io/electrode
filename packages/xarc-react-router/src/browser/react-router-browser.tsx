@@ -1,5 +1,5 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
-import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { BrowserRouter, unstable_HistoryRouter as HistoryRouter } from "react-router";
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
 import { createBrowserHistory } from "history";
 

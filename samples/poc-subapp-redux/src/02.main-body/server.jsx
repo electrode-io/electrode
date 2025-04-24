@@ -1,6 +1,6 @@
 import React from "react";
 import subApp from "./main-body";
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouter } from "react-router";
 
 module.exports = {
   // eslint-disable-next-line
