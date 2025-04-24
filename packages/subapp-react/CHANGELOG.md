@@ -1,6 +1,13 @@
 # Change Log - subapp-react
 
-This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Apr 2025 17:42:46 GMT and should not be manually modified.
+
+## 2.0.0
+Thu, 24 Apr 2025 17:42:46 GMT
+
+### Breaking changes
+
+- Update router dependency to v7
 
 ## 1.3.1
 Wed, 05 Feb 2025 04:10:48 GMT
