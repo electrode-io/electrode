@@ -133,6 +133,7 @@ specifiers:
   postcss-scss: ^4.0.9
   preact: ^10.0.5
   ps-get: ^1.1.0
+  react-router: ^7.5.2
   read-pkg-up: ^7.0.1
   recoil: ^0.7.5
   redux-logger: ^3.0.6
@@ -297,6 +298,7 @@ dependencies:
   postcss-scss: 4.0.9
   preact: 10.26.0
   ps-get: 1.1.0
+  react-router: 7.5.2
   read-pkg-up: 7.0.1
   recoil: 0.7.7
   redux-logger: 3.0.6
@@ -4148,10 +4150,6 @@ packages:
     resolution: {integrity: sha512-5T8ajsg3M/FOncpLYW7sdOcD6yf4+722sze/tc4KQV0P8Z2rAr3SAuHCIkYmYpt8VbcQlnz8SxlOlPQYefe4cA==}
     dependencies:
       '@types/deep-eql': 4.0.2
-    dev: false
-
-  /@types/cookie/0.6.0:
-    resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
     dev: false
 
   /@types/cors/2.8.17:
@@ -15450,8 +15448,8 @@ packages:
       use-sync-external-store: 1.4.0_react@18.3.1
     dev: false
 
-  /react-router/7.2.0_react-dom@18.3.1+react@18.3.1:
-    resolution: {integrity: sha512-fXyqzPgCPZbqhrk7k3hPcCpYIlQ2ugIXDboHUzhJISFVy2DEPsmHgN588MyGmkIOv3jDgNfUE3kJi83L28s/LQ==}
+  /react-router/7.5.2:
+    resolution: {integrity: sha512-9Rw8r199klMnlGZ8VAsV/I8WrIF6IyJ90JQUdboupx1cdkgYqwnrYjH+I/nY/7cA1X5zia4mDJqH36npP7sxGQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -15460,7 +15458,21 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@types/cookie': 0.6.0
+      cookie: 1.0.2
+      set-cookie-parser: 2.7.1
+      turbo-stream: 2.4.0
+    dev: false
+
+  /react-router/7.5.2_react-dom@18.3.1+react@18.3.1:
+    resolution: {integrity: sha512-9Rw8r199klMnlGZ8VAsV/I8WrIF6IyJ90JQUdboupx1cdkgYqwnrYjH+I/nY/7cA1X5zia4mDJqH36npP7sxGQ==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+    dependencies:
       cookie: 1.0.2
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
@@ -19569,7 +19581,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.98.0:
-    resolution: {integrity: sha512-/zj4HNG7bucbxtG7iU5dxmyuSG2dLWOjLF90WSPlnRWefy9NQ43wiQZe7obw8SMaedHmEwZuZAN7aIKTWAGVtA==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-hKxsTtov7yioqEdRCq1NRDD82jGRN5DtU972GrwOKeE7W5vyuFP4CMN47FVRda8aXdVKe+j1qzfipaT72gtcHA==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -19586,7 +19598,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.2.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.5.2_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       redux-logger: 3.0.6
       webpack-hot-middleware: 2.26.1
@@ -19600,7 +19612,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.98.0:
-    resolution: {integrity: sha512-p6EG+EtAU3sQLd6ox0xH5jxhVn9hTUEuWAW4xf92xy6IloSRMO5vWDjlnGkiCYzDM/OOckCC4JcS4QirXrpzJg==, tarball: file:projects/poc-subapp.tgz}
+    resolution: {integrity: sha512-Jde4jCV4p6oY/LZAdK7LEHR94z5z0plv4XaQmcIbL+/ySgpNq9dpPFsfXXk4j7H+iCp/mQ+zGRcbztQYk5m4Zg==, tarball: file:projects/poc-subapp.tgz}
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
@@ -19616,7 +19628,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.2.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.5.2_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       webpack-hot-middleware: 2.26.1
     transitivePeerDependencies:
@@ -19628,7 +19640,7 @@ packages:
     dev: false
 
   file:projects/poc-subappv1-csp.tgz:
-    resolution: {integrity: sha512-PStxUJixu9tgSzo/rg9EOYXhPo0/2iNxm/WBboenR2qeWwG80QjfCyELJR0RACyjegzViOnyz+iFYl2QSKbP+g==, tarball: file:projects/poc-subappv1-csp.tgz}
+    resolution: {integrity: sha512-RBOrlhiUKp04ZMCYZbdA1XAPmLZKuiAuQuEGBFtKYnMe9/huJM/LL7mCdWruoduXtINIWX1ba7RpPSLHiTiT1w==, tarball: file:projects/poc-subappv1-csp.tgz}
     name: '@rush-temp/poc-subappv1-csp'
     version: 0.0.0
     dependencies:
@@ -19642,7 +19654,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.2.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.5.2_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       webpack-hot-middleware: 2.26.1
     transitivePeerDependencies:
@@ -19892,7 +19904,7 @@ packages:
     dev: false
 
   file:projects/react-router.tgz:
-    resolution: {integrity: sha512-zc5kAgOw9Ys7Tovc/Hzm5cKDYuBe008gGmB26qdtZi4zR4jmm8Oa1bM7blDntI37p4bcPxT1bSP2fhlbb6ncHw==, tarball: file:projects/react-router.tgz}
+    resolution: {integrity: sha512-uf5qsRIaWDUHLbryfOc+0aDuu2AkIOoz25sS7vJgOovUZCPmhKi+hiqvz4wU2l+AlVq1pfjQMCjuafH67ZpyNQ==, tarball: file:projects/react-router.tgz}
     name: '@rush-temp/react-router'
     version: 0.0.0
     dependencies:
@@ -19926,7 +19938,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_7281c0aaeb20b9722d0d4e488f01d3c2
-      react-router: 7.2.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.5.2_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.5.0+sinon@14.0.2
@@ -20042,7 +20054,7 @@ packages:
     dev: false
 
   file:projects/subapp-react.tgz:
-    resolution: {integrity: sha512-eyiiearlrA2MITVaI0jgWBcmfPDwhA2s8R+ccsWqwlQUteKp7DTYaoc7KdCTeSfpGk6rAxTBNQzc2ADYXIEh0Q==, tarball: file:projects/subapp-react.tgz}
+    resolution: {integrity: sha512-/t2bSc54Dho9E82ZKW3rqMuXpJR2JzdJJNEYQaaPGvZQCZBjYwFWfFeNGG9xwEL3CvPQeze64Fiq5/l7MJnsug==, tarball: file:projects/subapp-react.tgz}
     name: '@rush-temp/subapp-react'
     version: 0.0.0
     dependencies:
@@ -20061,7 +20073,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 9.2.0_react@18.3.1+redux@5.0.1
-      react-router: 7.2.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.5.2_react-dom@18.3.1+react@18.3.1
       redux: 5.0.1
       run-verify: 1.2.6
     transitivePeerDependencies:
