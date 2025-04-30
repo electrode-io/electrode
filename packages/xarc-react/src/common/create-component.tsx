@@ -1,7 +1,7 @@
 /* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
 /* global window */
 
-import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import React, { createElement, Component } from "react";
 // rename declareSubApp to avoid triggering subapp webpack plugin
 import {
   SubAppDef,
@@ -9,7 +9,7 @@ import {
   SubAppOptions,
   SubAppMountInfo,
   declareSubApp,
-  envHooks
+  envHooks,
 } from "@xarc/subapp";
 
 /**
@@ -19,14 +19,14 @@ export type CreateComponentOptions = {
   /** Support Server Side Rendering */
   ssr?: boolean;
   /** Fall back JSX element to render while component module is loading */
-  fallback?: JSX.Element;
+  fallback?: React.JSX.Element;
   /** Specify a different resolve name to get the subapp from the module */
   resolveName?: string;
 };
 
 export class SubAppComponent extends Component {
   subapp: SubAppDef;
-  loading: JSX.Element;
+  loading: React.JSX.Element;
   resolveName: string | false;
   state: { module: any; TheComponent: typeof Component };
   _info: SubAppMountInfo;
@@ -81,7 +81,9 @@ export class SubAppComponent extends Component {
       if (this.state.TheComponent) {
         return <this.state.TheComponent {...this._props} />;
       } else {
-        return <div>subapp {this.subapp.name}'s module did not export a SubApp</div>;
+        return (
+          <div>subapp {this.subapp.name}'s module did not export a SubApp</div>
+        );
       }
     }
 
