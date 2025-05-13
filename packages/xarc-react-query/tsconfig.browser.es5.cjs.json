@@ -3,7 +3,7 @@
     "outDir": "dist-browser~es5~cjs~",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["es2018", "DOM"],
+    "lib": ["DOM", "ES2020"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
