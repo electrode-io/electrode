@@ -49,10 +49,10 @@
     "subapp-pkg-util": "0.0.1"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-redux": "*",
-    "redux": "*"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.1",
+    "@reduxjs/toolkit": ">= 2"
   },
   "nyc": {
     "all": true,
