@@ -1317,7 +1317,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             `--reporter=text --reporter=lcov node_modules/mocha/bin/_mocha --config`,
             quote(mochaConfig(".mocharc.js")),
             brk,
-            mochaOpts
+            mochaOpts.join(" ")
           );
         },
         "test-server-cov": () => {
