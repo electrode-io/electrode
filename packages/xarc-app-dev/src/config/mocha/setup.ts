@@ -1,14 +1,22 @@
 import { makeOptionalRequire } from "optional-require";
 const optionalRequire = makeOptionalRequire(require);
-
 const Enzyme = optionalRequire("enzyme");
 const Adapter = optionalRequire("enzyme-adapter-react-16");
+
+const jsDomGlobal = optionalRequire("jsdom-global");
+const tsNode = optionalRequire("ts-node");
 
 if (Enzyme && Adapter) {
   Enzyme.configure({ adapter: new Adapter() });
 }
+if (jsDomGlobal) {
+  require("jsdom-global/register");
+}
 
-const chai = optionalRequire("chai");
+if (tsNode) {
+  require("ts-node/register");
+}
+const chai = optionalRequire("chai").default;
 
 /**
  * @param addons
