@@ -150,23 +150,23 @@ Publishing is a three step process. When its time to publish packages (as per re
 
 - Use below command to login to npm from commandline
   - `npm login`
-#### **1. Increase the package versions**
+#### **1. Delete all local tags**
+- `git tag -d $(git tag)`
+
+#### **2. Increase the package versions**
 - Run `rush version --bump`
   - This is [dry run mode]. 
   - Changes are added to the changelog files for each package.
   - The `package.json` files are updated with new version numbers and written to disk. Nothing is actually committed to the source repository or published at this point
 - Review the CHANGELOG.md updates at this point
 
-#### **2. Publish Packages**
+#### **3. Publish Packages**
 - Run `rush publish --include-all --publish --apply`
   - This will publish all the public packages that have version increased.
 - Push the changes as PR to get the `CHANGELOG.md` updated to `master`.
 
-#### **3. Create Tag**
-- Add release tag, where <#> is the major archetype version, and <date> as YYYYMMDD (ie: rel-v11-20230327)
-  - `git tag -a rel-v<#>-date`
-- Push the tag created
-  - `git push origin rel-v<#>-date`
+#### **4. Push all newly created tags to the remote**
+- `git push <remote> --tags`
 
 
 Read more about [rush publishing] and [best practices]

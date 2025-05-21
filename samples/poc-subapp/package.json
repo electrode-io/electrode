@@ -49,7 +49,7 @@
     "react-redux": "^8.1.2",
     "react-router": "^7.1.5",
     "redux": "^4.2.1",
-    "subapp-react": "^1.3.1",
+    "subapp-react": "^2.0.0",
     "subapp-redux": "^3.0.1",
     "subapp-server": "^2.4.3",
     "subapp-web": "^3.0.0"
