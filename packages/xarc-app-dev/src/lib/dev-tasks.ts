@@ -159,7 +159,16 @@ export function loadXarcDevTasks(
 
   const config = xarcOptions.config;
   const karmaConfig = (file) => Path.join(config.karma, file);
-  const mochaConfig = (file) => Path.join(config.mocha, file);
+  const makeConfigResolver = (configDir: string) => (file: string) => {
+    const rootConfig = Path.join(xarcCwd, file);
+    if (Fs.existsSync(rootConfig)) {
+      return rootConfig;
+    }
+    return Path.join(configDir, file);
+  };
+
+  const mochaConfig = makeConfigResolver(config.mocha);
+  const jestConfig = makeConfigResolver(config.jest);
 
   const shell = xsh.$;
   const exec = xsh.exec;
@@ -1081,7 +1090,8 @@ You only need to run this if you are doing something not through the xarc tasks.
       "test-cov": [
         "?.karma.test-frontend-cov",
         "?.jest.test-frontend-cov",
-        "test-server-cov",
+        "?.mocha.test-frontend-cov",
+        "?.test-server-cov",
       ].filter((x) => x),
       "test-dev": ["test-frontend-dev", "test-server-dev"],
 
@@ -1282,7 +1292,7 @@ You only need to run this if you are doing something not through the xarc tasks.
               brk,
               jestBinJs,
               jestOpts.join(" "),
-              `--config ${xarcOptions.config.jest}/jest.config.js`
+              `--config ${quote(jestConfig("jest.config.js"))}`
             );
           } else {
             return undefined;
