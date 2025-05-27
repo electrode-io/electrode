@@ -19,7 +19,10 @@ import { SubAppInlineOptions } from "../common";
  * @param options
  * @returns A react component to be inlined in another subapp
  */
-export function subAppInlineComponent(subapp: SubAppDef, options: SubAppInlineOptions = {}) {
+export function subAppInlineComponent(
+  subapp: SubAppDef,
+  options: SubAppInlineOptions = {}
+) {
   if (options.ssr) {
     subapp._ssr = true;
   }
@@ -58,13 +61,15 @@ export function subAppInlineComponent(subapp: SubAppDef, options: SubAppInlineOp
 
   const id = `subapp-${subapp.name}-inline`;
 
-  const Comp = () => <SubAppInlineComponent subapp={subapp} inlineId={id} __props={{}} />;
+  const Comp = () => (
+    <SubAppInlineComponent subapp={subapp} inlineId={id} __props={{}} />
+  );
 
   Comp.loadOptions = {
     name: subapp.name,
     ssr: options.ssr,
     prepareOnly: true,
-    inlineId: id
+    inlineId: id,
   };
 
   return Comp;

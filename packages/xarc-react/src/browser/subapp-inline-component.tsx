@@ -2,7 +2,10 @@
 /* global window */
 
 import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
-import { SubAppStartComponent, SubAppStartComponentPropsType } from "./subapp-start-component";
+import {
+  SubAppStartComponent,
+  SubAppStartComponentPropsType,
+} from "./subapp-start-component";
 import { xarcV2 } from "@xarc/subapp";
 
 type SubAppInlineComponentPropsType = SubAppStartComponentPropsType & {
@@ -14,13 +17,17 @@ type SubAppInlineComponentPropsType = SubAppStartComponentPropsType & {
  * subapp as a component.
  */
 export class SubAppInlineComponent extends SubAppStartComponent {
-  props: SubAppInlineComponentPropsType;
+  // props: SubAppInlineComponentPropsType;
   inlineId: string;
 
   constructor(props: SubAppInlineComponentPropsType, context: any) {
     super(props, context, "inline");
-    this.inlineId = this.props.inlineId;
-    xarcV2.debug("SubAppInlineComponent subapp", props.subapp.name, this.inlineId);
+    this.inlineId = props.inlineId;
+    xarcV2.debug(
+      "SubAppInlineComponent subapp",
+      props.subapp.name,
+      this.inlineId
+    );
   }
 
   shouldComponentUpdate() {
@@ -31,7 +38,10 @@ export class SubAppInlineComponent extends SubAppStartComponent {
   }
 
   render() {
-    xarcV2.debug("SubAppInlineComponent rendering subapp", this.props.subapp.name);
+    xarcV2.debug(
+      "SubAppInlineComponent rendering subapp",
+      this.props.subapp.name
+    );
     const subapp = this.getSubApp();
     if (!subapp._module) {
       subapp._getModule().then(() => this.reload());

@@ -1,7 +1,7 @@
 /* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
 /* global window */
 
-import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import React, { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 // rename declareSubApp to avoid triggering subapp webpack plugin
 import {
   SubAppDef,
@@ -9,7 +9,7 @@ import {
   SubAppOptions,
   SubAppMountInfo,
   declareSubApp,
-  envHooks
+  envHooks,
 } from "@xarc/subapp";
 
 /**
@@ -19,14 +19,14 @@ export type CreateComponentOptions = {
   /** Support Server Side Rendering */
   ssr?: boolean;
   /** Fall back JSX element to render while component module is loading */
-  fallback?: JSX.Element;
+  fallback?: React.JSX.Element;
   /** Specify a different resolve name to get the subapp from the module */
   resolveName?: string;
 };
 
 export class SubAppComponent extends Component {
   subapp: SubAppDef;
-  loading: JSX.Element;
+  loading: React.JSX.Element;
   resolveName: string | false;
   state: { module: any; TheComponent: typeof Component };
   _info: SubAppMountInfo;
@@ -45,7 +45,9 @@ export class SubAppComponent extends Component {
     this._options = props.__options;
     this.resolveName = this._options.resolveName || this.subapp.resolveName;
     this.state = this.makeState();
-    this.loading = <div>subapp {this.subapp.name} component loading... </div>;
+    this.loading = this._options.fallback || (
+      <div>subapp {this.subapp.name} component loading... </div>
+    );
     this._info = { component: this, subapp: props.__subapp, type: "dynamic" };
     this.subapp._mount(this._info);
   }
@@ -81,7 +83,9 @@ export class SubAppComponent extends Component {
       if (this.state.TheComponent) {
         return <this.state.TheComponent {...this._props} />;
       } else {
-        return <div>subapp {this.subapp.name}'s module did not export a SubApp</div>;
+        return (
+          <div>subapp {this.subapp.name}'s module did not export a SubApp</div>
+        );
       }
     }
 
