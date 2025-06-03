@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-esm",
-    "jsx": "react",
-    "jsxFactory": "createElement",
-    "lib": ["es2018", "DOM"],
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM"],
     "module": "ES2020",
     "esModuleInterop": true,
     "importHelpers": true,

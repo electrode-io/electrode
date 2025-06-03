@@ -14,8 +14,7 @@
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
-    "jsx": "react",
-    "jsxFactory": "createElement",
+    "jsx": "react-jsx",
     "moduleResolution": "Node"
   },
   "typedocOptions": {

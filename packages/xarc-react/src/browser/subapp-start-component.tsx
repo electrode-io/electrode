@@ -1,7 +1,7 @@
+/* eslint-disable max-statements */
 /* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
-/* global window */
 
-import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import React, { useState, useEffect, useRef } from "react";
 import { envHooks } from "@xarc/subapp";
 import { SubAppDef, SubAppMountInfo, xarcV2, MountType } from "@xarc/subapp";
 import { ReactClientRenderPipeline } from "./react-render-pipeline";
@@ -13,64 +13,104 @@ export type SubAppStartComponentPropsType = {
 };
 
 /**
- * wrapping component for starting a subapp, either for hot reload or nesting within another
- * subapp as a component.
+ * Functional component for starting a subapp, handling mount/unmount/reload logic.
+ * @param props SubAppStartComponentPropsType
+ * @returns React.JSX.Element
  */
-export class SubAppStartComponent extends Component {
-  subapp: SubAppDef;
-  state: { count: number };
-  _mountInfo: SubAppMountInfo;
-  props: SubAppStartComponentPropsType;
-  pipeline?: ReactClientRenderPipeline;
+export function SubAppStartComponent(
+  props: SubAppStartComponentPropsType
+): React.JSX.Element {
+  const { subapp, pipeline, __props } = props;
+  const [, setCount] = useState(0);
+  const subappRef = useRef(subapp);
+  const pipelineRef = useRef(pipeline);
+  const mountInfoRef = useRef<SubAppMountInfo | null>(null);
 
-  constructor(props: SubAppStartComponentPropsType, context: any, type: MountType = "start") {
-    super(props);
-    this.state = { count: 0 };
-    this.subapp = props.subapp;
-    this.pipeline = props.pipeline;
-    this._mountInfo = { component: this, subapp: this.subapp, type };
-    xarcV2.debug(this.constructor.name, "constructor wrap component for subapp", this.subapp.name);
-    if (this.pipeline) {
-      this.pipeline._mount(this._mountInfo);
-    } else {
-      this.subapp._mount(this._mountInfo);
+  // Helper to reload the subapp
+  const reload = () => {
+    xarcV2.debug(
+      "SubAppStartComponent (fn) reloading subapp",
+      subappRef.current?.name
+    );
+    const container = envHooks.getContainer?.();
+    if (container && subappRef.current) {
+      const newSubapp = container.get(subappRef.current.name);
+      if (newSubapp) {
+        subappRef.current = newSubapp;
+        setCount((c) => c + 1);
+      }
     }
-  }
+  };
 
-  reload() {
-    xarcV2.debug(this.constructor.name, "wrap component reloading subapp", this.subapp.name);
-    this.subapp = envHooks.getContainer().get(this.subapp.name);
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  componentWillUnmount() {
-    if (this.pipeline) {
-      this.pipeline._unmount(this._mountInfo);
-    } else {
-      this.subapp._unmount(this._mountInfo);
+  // Mount/unmount logic
+  useEffect(() => {
+    const type: MountType = "start";
+    const mountInfo: SubAppMountInfo = {
+      component: { reload },
+      subapp: subappRef.current,
+      type,
+    };
+    mountInfoRef.current = mountInfo;
+    xarcV2.debug("SubAppStartComponent (fn) mount", subappRef.current?.name);
+    if (pipelineRef.current && pipelineRef.current._mount) {
+      pipelineRef.current._mount(mountInfo);
+    } else if (subappRef.current && subappRef.current._mount) {
+      subappRef.current._mount(mountInfo);
     }
-  }
+    return () => {
+      xarcV2.debug(
+        "SubAppStartComponent (fn) unmount",
+        subappRef.current?.name
+      );
+      if (pipelineRef.current && pipelineRef.current._unmount) {
+        pipelineRef.current._unmount(mountInfo);
+      } else if (subappRef.current && subappRef.current._unmount) {
+        subappRef.current._unmount(mountInfo);
+      }
+    };
+  }, []);
 
-  getSubApp() {
-    const container = envHooks.getContainer();
-    return container.get(this.subapp.name);
-  }
+  // Helper to get the subapp instance
+  const getSubApp = () => {
+    const container = envHooks.getContainer?.();
+    if (!container || !subappRef.current) return undefined;
+    return container.get(subappRef.current.name);
+  };
 
-  getPipeline(): ReactClientRenderPipeline {
-    const subapp = this.getSubApp();
-    // TODO: more than one
-    return subapp._renderPipelines[0] as ReactClientRenderPipeline;
+  // Render logic
+  xarcV2.debug(
+    "SubAppStartComponent (fn) rendering subapp",
+    subappRef.current?.name
+  );
+  const currentSubApp = getSubApp();
+  if (!currentSubApp || !currentSubApp._module) {
+    currentSubApp?._getModule?.().then(() => reload());
+    return (
+      <div>
+        SubAppStartComponent - module not loaded: {subappRef.current?.name}
+      </div>
+    );
   }
-
-  render() {
-    xarcV2.debug("SubAppStartComponent rendering subapp", this.props.subapp.name);
-    const subapp = this.getSubApp();
-    if (!subapp._module) {
-      subapp._getModule().then(() => this.reload());
-      return <div>SubAppStartComponent - module not loaded: {this.subapp.name}</div>;
-    }
-
-    const Comp = subapp._getExport<typeof Component>()?.Component;
-    return <Comp {...this.props.__props} />;
+  const Comp =
+    currentSubApp._getExport?.() && currentSubApp._getExport()?.Component;
+  if (!Comp) {
+    return (
+      <div>
+        SubAppStartComponent - no Component export for {subappRef.current?.name}
+      </div>
+    );
   }
+  // Ensure Comp is a valid React component type
+  if (
+    typeof Comp === "function" ||
+    (typeof Comp === "object" && Comp !== null)
+  ) {
+    return React.createElement(Comp as React.ElementType, { ...__props });
+  }
+  return (
+    <div>
+      SubAppStartComponent - invalid component type for{" "}
+      {subappRef.current?.name}
+    </div>
+  );
 }
