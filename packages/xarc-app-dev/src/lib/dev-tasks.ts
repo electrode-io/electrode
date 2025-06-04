@@ -10,6 +10,7 @@ import Path from "path";
 import assert from "assert";
 import requireAt from "require-at";
 import { makeOptionalRequire } from "optional-require";
+import type { TaskRunner } from "@xarc/run";
 import xrun from "@xarc/run";
 import { getDevOptions } from "../config/archetype";
 import ck from "chalker";
@@ -136,7 +137,7 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
  * @returns The `@xarc/run` task runner instance that was used.
  */
 export function loadXarcDevTasks(
-  userXrun?: any,
+  userXrun?: TaskRunner,
   userOptions: XarcOptions = {}
 ) {
   let xarcOptions = getDevOptions(userOptions);
