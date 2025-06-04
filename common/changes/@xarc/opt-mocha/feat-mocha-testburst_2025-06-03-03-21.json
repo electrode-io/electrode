@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-mocha",
+      "comment": "remove deprecated dependencies to support latest react versions",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/opt-mocha"
+}

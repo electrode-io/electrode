@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "update mocha configs and remove deprecated implementation",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}
