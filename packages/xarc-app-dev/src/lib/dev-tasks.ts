@@ -425,10 +425,10 @@ ie >= 11
     };
 
     const makeBabelConfig = (
-      destDir,
-      _rcFile,
-      resultFile = "babel.config.js"
-    ) => {
+      destDir: string,
+      _rcFile: string,
+      resultFile: string = "babel.config.js"
+    ): void => {
       destDir = Path.resolve(xarcCwd, destDir);
 
       const files = [".babelrc.js", resultFile];
