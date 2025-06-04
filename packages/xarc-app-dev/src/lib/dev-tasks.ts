@@ -158,14 +158,17 @@ export function loadXarcDevTasks(
   const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
   const config = xarcOptions.config;
-  const karmaConfig = (file) => Path.join(config.karma, file);
-  const makeConfigResolver = (configDir: string) => (file: string) => {
-    const rootConfig = Path.join(xarcCwd, file);
-    if (Fs.existsSync(rootConfig)) {
-      return rootConfig;
-    }
-    return Path.join(configDir, file);
-  };
+  const karmaConfig = (filePath: string): string =>
+    Path.join(config.karma, filePath);
+  const makeConfigResolver =
+    (configDir: string) =>
+    (filePath: string): string => {
+      const rootConfig = Path.join(xarcCwd, filePath);
+      if (Fs.existsSync(rootConfig)) {
+        return rootConfig;
+      }
+      return Path.join(configDir, filePath);
+    };
 
   const mochaConfig = makeConfigResolver(config.mocha);
   const jestConfig = makeConfigResolver(config.jest);
@@ -891,8 +894,8 @@ module.exports =  {
         task(context) {
           userXrun.updateEnv({ NODE_ENV: "production" }, { override: false });
           if (process.env.APP_SERVER_PORT === "0") {
-            console.log(
-              "mock-cloud need to explicitly set APP_SERVER_PORT, changing 0 to 3100"
+            process.stdout.write(
+              "mock-cloud need to explicitly set APP_SERVER_PORT, changing 0 to 3100\n"
             );
             process.env.APP_SERVER_PORT = "3100";
           }
@@ -914,15 +917,15 @@ module.exports =  {
             return xrun2.serial(
               "build",
               () =>
-                console.log(
-                  "build completed, starting mock prod mode with proxy"
+                process.stdout.write(
+                  "build completed, starting mock prod mode with proxy\n"
                 ),
               mockTask
             );
           }
 
           return xrun2.serial(
-            () => console.log("dist exist, skipping build task"),
+            () => process.stdout.write("dist exist, skipping build task\n"),
             mockTask
           );
         },
