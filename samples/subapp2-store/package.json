@@ -40,7 +40,8 @@
     "@xarc/react-redux-observable": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
     "classnames": "^2.2.6",
-    "recoil": "^0.1.2"
+    "recoil": "^0.1.2",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

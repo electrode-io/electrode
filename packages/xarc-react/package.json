@@ -24,8 +24,8 @@
     "@xarc/render-context": "^1.0.13",
     "@xarc/subapp": "^0.4.2",
     "@xarc/tag-renderer": "^1.0.15",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

@@ -45,8 +45,8 @@
     "babel-preset-minify": "^0.5.2",
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "jsdom": "^23.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-redux": "^9.0.4",
     "react-router": "^7.2.0",
     "redux": "^5.0.0",
@@ -54,9 +54,9 @@
     "subapp-pkg-util": "0.0.1"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-router": "^7.1.5"
+    "react": ">=18.0.0 <20.0.0",
+    "react-dom": ">=18.0.0 <20.0.0",
+    "react-router": ">=6.14.0 <8.0.0"
   },
   "nyc": {
     "all": true,

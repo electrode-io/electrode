@@ -42,7 +42,7 @@
     "electrode-server": "^3.0.0",
     "electrode-static-paths": "^3.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.0.0",
     "react-router": "^6.23.1",
     "react-router-dom": "^6.23.1",
     "subapp-react": "^0.0.22",

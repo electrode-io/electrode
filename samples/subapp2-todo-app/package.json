@@ -34,7 +34,8 @@
     "@xarc/app": "^8.2.0",
     "@xarc/fastify-server": "^2.0.0",
     "@xarc/react": "^0.1.0",
-    "@xarc/react-redux": "^0.1.0"
+    "@xarc/react-redux": "^0.1.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",

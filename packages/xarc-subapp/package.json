@@ -5,7 +5,7 @@
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
-    "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
+    "./dist-node-cjs/node/index.js": "./dist-browser~es2x~esm~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
   "homepage": "http://www.electrode.io",
@@ -24,7 +24,6 @@
   "files": [
     "dist",
     "dist-browser~es2x~esm~",
-    "dist-browser~es5~cjs~",
     "dist-node-cjs",
     "dist-node-esm",
     "src"

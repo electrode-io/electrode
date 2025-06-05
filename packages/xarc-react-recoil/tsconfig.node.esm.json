@@ -3,7 +3,11 @@
     "outDir": "dist-node-esm",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["es2018"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "ES2020",
     "esModuleInterop": true,
     "importHelpers": true,

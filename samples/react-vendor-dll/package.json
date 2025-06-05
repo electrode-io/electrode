@@ -16,7 +16,7 @@
   "license": "ISC",
   "peerDependencies": {
     "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react-dom": "^19.0.0",
     "react-redux": "^5.1.1",
     "react-router": "^5.1.2",
     "redux": "^4.0.1"
@@ -25,7 +25,7 @@
     "electrode-archetype-webpack-dll": "../../packages/electrode-archetype-webpack-dll",
     "electrode-archetype-webpack-dll-dev": "../../packages/electrode-archetype-webpack-dll-dev",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react-dom": "^19.0.0",
     "react-redux": "^5.1.1",
     "react-router": "^5.1.2",
     "redux": "^4.0.1"

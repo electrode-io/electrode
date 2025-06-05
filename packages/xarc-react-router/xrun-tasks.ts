@@ -1,20 +1,17 @@
-const xsh = require("xsh");
+import xsh from "xsh";
 import { loadTasks, xrun } from "@xarc/module-dev";
 
 loadTasks();
 
-const { concurrent, exec } = xrun;
+const { concurrent } = xrun;
 
 xrun.load("user", {
   build: () => {
-    xsh.$.rm("-rf", "dist*");
-    return concurrent(
-      ...[
-        "tsconfig.node.cjs.json",
-        "tsconfig.node.esm.json",
-        "tsconfig.browser.es5.cjs.json",
-        "tsconfig.browser.es2x.esm.json"
-      ].map(config => exec(`tsc --build ${config} --pretty`))
-    );
+    xsh.exec(true, "rm -rf dist*");
+    return concurrent([
+      () => xsh.exec(true, "tsc --build tsconfig.node.cjs.json --pretty"),
+      () => xsh.exec(true, "tsc --build tsconfig.node.esm.json --pretty"),
+      () => xsh.exec(true, "tsc --build tsconfig.browser.es2x.esm.json --pretty")
+    ]);
   }
 });

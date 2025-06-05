@@ -1,21 +1,17 @@
 import { loadTasks } from "@xarc/module-dev";
 const xrun = loadTasks();
-const xsh = require("xsh");
+import xsh from "xsh";
 
-const { concurrent, serial, exec } = xrun;
+const { concurrent, serial } = xrun;
 xrun.load("user", {
   build: () => {
-    xsh.$.rm("-rf", "dist-*");
-    return serial(
-      concurrent(
-        ...[
-          "tsconfig.node.cjs.json",
-          "tsconfig.node.esm.json",
-          "tsconfig.browser.es5.cjs.json",
-          "tsconfig.browser.es2x.esm.json"
-        ].map(config => exec(`tsc --build ${config} --pretty`))
-      ),
-      exec("babel dist-browser~es5~cjs~/browser/ --no-comments --delete-dir-on-start -d dist/min")
-    );
+    return serial([
+      () => xsh.exec(true, "rm -rf dist-*"),
+      concurrent([
+        () => xsh.exec(true, "tsc --build tsconfig.node.cjs.json --pretty"),
+        () => xsh.exec(true, "tsc --build tsconfig.node.esm.json --pretty"),
+        () => xsh.exec(true, "tsc --build tsconfig.browser.es2x.esm.json --pretty")
+      ])
+    ]);
   }
 });

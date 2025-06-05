@@ -3,7 +3,11 @@
     "outDir": "dist-node-cjs",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["es2018"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
