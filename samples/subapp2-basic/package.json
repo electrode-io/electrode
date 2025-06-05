@@ -38,7 +38,7 @@
     "@xarc/react": "^1.0.7",
     "@xarc/react-query": "^2.0.0",
     "@xarc/react-redux": "^2.0.0",
-    "@xarc/react-router": "^1.1.6",
+    "@xarc/react-router": "^2.0.0",
     "@module-federation/concat-runtime": "~0.0.1"
   },
   "devDependencies": {

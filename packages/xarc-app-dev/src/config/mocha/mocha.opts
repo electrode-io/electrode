@@ -1,5 +1,0 @@
---require @xarc/app-dev/config/mocha/setup.js
---reporter spec
---recursive
---ui bdd
---require @babel/register

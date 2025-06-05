@@ -37,7 +37,7 @@
     "@xarc/react-query": "^2.0.0",
     "@xarc/react-recoil": "^1.1.7",
     "@xarc/react-redux": "^2.0.0",
-    "@xarc/react-router": "^1.1.6",
+    "@xarc/react-router": "^2.0.0",
     "isomorphic-loader": "^4.5.0",
     "prop-types": "~15.8.1",
     "react-dom": "~18.2.0"

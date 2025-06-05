@@ -28,16 +28,14 @@
   },
   "dependencies": {
     "@types/mocha": "^10.0.1",
-    "chai": "^4.3.6",
-    "chai-as-promised": "^7.1.1",
-    "chai-shallowly": "^1.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "mocha": "^10.2.0"
+    "chai": "^5.2.0",
+    "chai-as-promised": "^8.0.1",
+    "mocha": "^10.2.0",
+    "jsdom-global": "^3.0.2"
   },
   "devDependencies": {
     "opt-archetype-check": "1.0.0",
-    "shx": "^0.3.4"
+    "shx": "^0.4.0"
   },
   "xarcOptCheck": {
     "optionalTagName": "mocha",

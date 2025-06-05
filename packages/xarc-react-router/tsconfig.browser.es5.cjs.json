@@ -7,7 +7,7 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "ES5",
+    "target": "ES2015",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
