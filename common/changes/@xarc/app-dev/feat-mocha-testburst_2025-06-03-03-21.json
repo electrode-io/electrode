@@ -2,7 +2,12 @@
   "changes": [
     {
       "packageName": "@xarc/app-dev",
-      "comment": "update mocha configs and remove deprecated implementation",
+      "comment": "rename deprecated mocha.opts config to mocharc.js and add new xrun task for mocha",
+      "type": "minor"
+    },
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "automatically select the unit test configuration file from the project root if available, otherwise use the default configuration",
       "type": "minor"
     }
   ],
