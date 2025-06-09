@@ -2,12 +2,7 @@
   "changes": [
     {
       "packageName": "@xarc/app-dev",
-      "comment": "rename deprecated mocha.opts config to mocharc.js and add new xrun task for mocha",
-      "type": "minor"
-    },
-    {
-      "packageName": "@xarc/app-dev",
-      "comment": "automatically select the unit test configuration file from the project root if available, otherwise use the default configuration",
+      "comment": "- Migrated from the deprecated mocha.opts configuration to the modern mocharc.js format, ensuring compatibility with current Mocha standards and best practices.- Introduced a new xrun task for running Mocha tests, making it easier to execute and manage test runs within the project workflow.- Enhanced the test runner to automatically detect and use a unit test configuration file from the project root if present; otherwise, it falls back to the default configuration for seamless integration and improved developer experience.",
       "type": "minor"
     }
   ],
