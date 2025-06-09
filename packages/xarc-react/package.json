@@ -20,12 +20,12 @@
   "author": "Electrode",
   "license": "Apache-2.0",
   "dependencies": {
-    "@types/react": ">=18",
+    "@types/react": ">=19",
     "@xarc/render-context": "^1.0.13",
     "@xarc/subapp": "^0.4.2",
     "@xarc/tag-renderer": "^1.0.15",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
@@ -36,8 +36,8 @@
     "@types/chai": "^4.3.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.14.10",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.4",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "^3.2.8",
     "@typescript-eslint/eslint-plugin": "^5.25.0",

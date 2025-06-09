@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-cjs",
-    "jsx": "react",
-    "jsxFactory": "createElement",
-    "lib": ["es2018"],
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,

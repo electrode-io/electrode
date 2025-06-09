@@ -1,9 +1,9 @@
-import { createElement, Component } from "react";
+import { createElement, Component, useContext } from "react";
 import {
   SubAppDef,
   SubAppServerRenderPipeline,
   SSR_PIPELINES,
-  LoadSubAppOptions
+  LoadSubAppOptions,
 } from "@xarc/subapp";
 import { SubAppInlineOptions } from "../common";
 import { AppContext } from "../common/app-context";
@@ -14,25 +14,37 @@ type PropsType = {
 };
 
 const SubAppSSR = (props: PropsType) => {
-  return (
-    <AppContext.Consumer>
-      {({ ssr }) => {
-        const pipelines: SubAppServerRenderPipeline[] = ssr.request[SSR_PIPELINES];
-        const pipeline = pipelines.find(p => p.ssrData.subapp.name === props.subapp.name);
+  const value = useContext(AppContext);
+  if (!value || !value.ssr) {
+    throw new Error(
+      "AppContext value or value.ssr is missing. " +
+        "Make sure your component tree is wrapped in <AppContext.Provider>."
+    );
+  }
+  const ssr = value?.ssr;
+  const pipelines: SubAppServerRenderPipeline[] = ssr.request[SSR_PIPELINES];
+  const pipeline = pipelines.find(
+    (p) => p.ssrData.subapp.name === props.subapp.name
+  );
 
-        if (!pipeline) {
-          const msg = `Unable to find data for server side rendering subapp '${props.subapp.name}'.
-  It's most likely because the subapp was not specified in 'subApps' options when
-  creating the 'PageRenderer' for the server route.`;
-          console.error(`\nError: ${msg}\n`); // eslint-disable-line
-          throw new Error(msg);
-        }
-        const framework: SSRReactLib = pipeline.framework as any;
-        const ssrResult = framework.handleSSRSync(pipeline.ssrData, pipeline.prepResult);
-        const elementId = `subapp-as-component-${props.subapp.name}`;
-        return <div id={elementId} dangerouslySetInnerHTML={{ __html: ssrResult.content }} />;
-      }}
-    </AppContext.Consumer>
+  if (!pipeline) {
+    const msg = `Unable to find data for server side rendering subapp '${props.subapp.name}'.
+It's most likely because the subapp was not specified in 'subApps' options when
+creating the 'PageRenderer' for the server route.`;
+    console.error(`\nError: ${msg}\n`); // eslint-disable-line
+    throw new Error(msg);
+  }
+  const framework: SSRReactLib = pipeline.framework as any;
+  const ssrResult = framework.handleSSRSync(
+    pipeline.ssrData,
+    pipeline.prepResult
+  );
+  const elementId = `subapp-as-component-${props.subapp.name}`;
+  return (
+    <div
+      id={elementId}
+      dangerouslySetInnerHTML={{ __html: ssrResult.content }}
+    />
   );
 };
 
@@ -52,7 +64,10 @@ const SubAppSSR = (props: PropsType) => {
  * @param options
  * @returns A react component to be inlined in another subapp
  */
-export function subAppInlineComponent(subapp: SubAppDef, options: SubAppInlineOptions = {}) {
+export function subAppInlineComponent(
+  subapp: SubAppDef,
+  options: SubAppInlineOptions = {}
+) {
   if (options.ssr) {
     subapp._ssr = true;
   }
@@ -63,7 +78,7 @@ export function subAppInlineComponent(subapp: SubAppDef, options: SubAppInlineOp
     name: subapp.name,
     ssr: options.ssr,
     prepareOnly: true,
-    inlineId: `subapp-${subapp.name}-inline`
+    inlineId: `subapp-${subapp.name}-inline`,
   } as LoadSubAppOptions;
 
   return Comp;

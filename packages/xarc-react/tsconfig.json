@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-cjs",
-    "lib": ["es2018"],
+    "lib": ["es2018", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
@@ -14,8 +14,7 @@
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
-    "jsx": "react",
-    "jsxFactory": "createElement",
+    "jsx": "react-jsx",
     "moduleResolution": "Node"
   },
   "typedocOptions": {
