@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist-browser~es5~cjs~",
-    "jsx": "react",
-    "jsxFactory": "createElement",
+    "jsx": "react-jsx",
     "lib": ["es2018", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
