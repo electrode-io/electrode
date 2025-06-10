@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@xarc/opt-mocha",
-      "comment": "remove deprecated dependencies to support latest react versions",
+      "comment": "Removed deprecated dependencies to support the latest React versions:\n- Removed chai-shallowly\n- Removed enzyme\n- Removed enzyme-adapter-react-16\n- Added jsdom-global package",
       "type": "major"
     }
   ],
