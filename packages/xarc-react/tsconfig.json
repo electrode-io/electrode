@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-cjs",
-    "lib": ["es2018"],
+    "lib": ["DOM", "ES2020"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "ES2018",
+    "target": "ES2020",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["node", "react", "react-dom"],
+    "types": ["node", "react", "react-dom", "dom"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
