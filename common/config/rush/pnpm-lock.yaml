@@ -2112,7 +2112,7 @@ packages:
     dev: false
 
   /@babel/runtime/7.27.6:
-    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/@babel/runtime/-/runtime-7.27.6.tgz}
+    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
     engines: {node: '>=6.9.0'}
     dev: false
 
@@ -3748,6 +3748,27 @@ packages:
       reselect: 5.1.1
     dev: false
 
+  /@reduxjs/toolkit/2.8.2_react-redux@8.1.3+react@19.1.0:
+    resolution: {integrity: sha512-MYlOhQ0sLdw4ud48FoC5w0dH9VfWQjtCjreKwYTT3l+r427qYC5Y8PihNutepr8XrNaBUDQo9khWUwQxZaqt5A==}
+    peerDependencies:
+      react: ^16.9.0 || ^17.0.0 || ^18 || ^19
+      react-redux: ^7.2.1 || ^8.1.3 || ^9.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+    dependencies:
+      '@standard-schema/spec': 1.0.0
+      '@standard-schema/utils': 0.3.0
+      immer: 10.1.1
+      react: 19.1.0
+      react-redux: 8.1.3_823f7e69e5ec296c7da1e57598f36e54
+      redux: 5.0.1
+      redux-thunk: 3.1.0_redux@5.0.1
+      reselect: 5.1.1
+    dev: false
+
   /@reduxjs/toolkit/2.8.2_react-redux@9.2.0+react@18.3.1:
     resolution: {integrity: sha512-MYlOhQ0sLdw4ud48FoC5w0dH9VfWQjtCjreKwYTT3l+r427qYC5Y8PihNutepr8XrNaBUDQo9khWUwQxZaqt5A==}
     peerDependencies:
@@ -4055,6 +4076,22 @@ packages:
       redent: 3.0.0
     dev: false
 
+  /@testing-library/react/13.4.0_0206f0b0378b035d9f0c467899793f51:
+    resolution: {integrity: sha512-sXOGON+WNTh3MLE9rve97ftaZukN3oNf2KjDy7YTx6hcTO2uuLHuCGynMDhFwGw/jYf4OJ2Qk0i4i79qMNNkyw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/@testing-library/react/-/react-13.4.0.tgz}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@testing-library/dom': 8.20.1
+      '@types/react-dom': 18.3.7_@types+react@19.1.8
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@testing-library/react/13.4.0_53cdbb7838d996988891c66c625e9f86:
     resolution: {integrity: sha512-sXOGON+WNTh3MLE9rve97ftaZukN3oNf2KjDy7YTx6hcTO2uuLHuCGynMDhFwGw/jYf4OJ2Qk0i4i79qMNNkyw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/@testing-library/react/-/react-13.4.0.tgz}
     engines: {node: '>=12'}
@@ -4335,6 +4372,14 @@ packages:
       '@types/react': ^18.0.0
     dependencies:
       '@types/react': 18.3.23
+    dev: false
+
+  /@types/react-dom/18.3.7_@types+react@19.1.8:
+    resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/@types/react-dom/-/react-dom-18.3.7.tgz}
+    peerDependencies:
+      '@types/react': ^18.0.0
+    dependencies:
+      '@types/react': 19.1.8
     dev: false
 
   /@types/react-dom/19.1.6_@types+react@19.1.8:
@@ -5617,7 +5662,7 @@ packages:
     dev: false
 
   /airbnb-prop-types/2.16.0:
-    resolution: {integrity: sha512-7WHOFolP/6cS96PhKNrslCLMYAI8yB1Pp6u6XmxozQOiZbsI5ycglZr5cHhBFfuRcQQjzCMith5ZPZdYiJCxUg==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/airbnb-prop-types/-/airbnb-prop-types-2.16.0.tgz}
+    resolution: {integrity: sha512-7WHOFolP/6cS96PhKNrslCLMYAI8yB1Pp6u6XmxozQOiZbsI5ycglZr5cHhBFfuRcQQjzCMith5ZPZdYiJCxUg==}
     deprecated: This package has been renamed to 'prop-types-tools'
     peerDependencies:
       react: ^0.14 || ^15.0.0 || ^16.0.0-alpha
@@ -5968,7 +6013,7 @@ packages:
     dev: false
 
   /array.prototype.find/2.2.3:
-    resolution: {integrity: sha512-fO/ORdOELvjbbeIfZfzrXFMhYHGofRGqd+am9zm3tZ4GlJINj/pA2eITyfd65Vg6+ZbHd/Cys7stpoRSWtQFdA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/array.prototype.find/-/array.prototype.find-2.2.3.tgz}
+    resolution: {integrity: sha512-fO/ORdOELvjbbeIfZfzrXFMhYHGofRGqd+am9zm3tZ4GlJINj/pA2eITyfd65Vg6+ZbHd/Cys7stpoRSWtQFdA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.8
@@ -6044,7 +6089,7 @@ packages:
     dev: false
 
   /assertion-error/2.0.1:
-    resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
+    resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/assertion-error/-/assertion-error-2.0.1.tgz}
     engines: {node: '>=12'}
     dev: false
 
@@ -6059,7 +6104,7 @@ packages:
     dev: false
 
   /async-eventemitter/0.2.4:
-    resolution: {integrity: sha512-pd20BwL7Yt1zwDFy+8MX8F1+WCT8aQeKj0kQnTrH9WaeRETlRamVhD0JtRPmrV4GfOJ2F9CvdQkZeZhnh2TuHw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/async-eventemitter/-/async-eventemitter-0.2.4.tgz}
+    resolution: {integrity: sha512-pd20BwL7Yt1zwDFy+8MX8F1+WCT8aQeKj0kQnTrH9WaeRETlRamVhD0JtRPmrV4GfOJ2F9CvdQkZeZhnh2TuHw==}
     dependencies:
       async: 2.6.4
     dev: false
@@ -6074,7 +6119,7 @@ packages:
     dev: false
 
   /async/2.6.4:
-    resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/async/-/async-2.6.4.tgz}
+    resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==}
     dependencies:
       lodash: 4.17.21
     dev: false
@@ -6683,7 +6728,7 @@ packages:
     dev: false
 
   /bluebird/3.7.2:
-    resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/bluebird/-/bluebird-3.7.2.tgz}
+    resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
     dev: false
 
   /body-parser/1.20.3:
@@ -6968,7 +7013,7 @@ packages:
     dev: false
 
   /chai-as-promised/7.1.2_chai@4.3.6:
-    resolution: {integrity: sha512-aBDHZxRzYnUYuIAIPBH2s511DjlKPzXNlXSGFC8CwmroWQLfrW0LtE1nK3MAwwNhJPa9raEjNCmRoFpG0Hurdw==}
+    resolution: {integrity: sha512-aBDHZxRzYnUYuIAIPBH2s511DjlKPzXNlXSGFC8CwmroWQLfrW0LtE1nK3MAwwNhJPa9raEjNCmRoFpG0Hurdw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/chai-as-promised/-/chai-as-promised-7.1.2.tgz}
     peerDependencies:
       chai: '>= 2.1.2 < 6'
     dependencies:
@@ -6977,7 +7022,7 @@ packages:
     dev: false
 
   /chai-as-promised/7.1.2_chai@4.5.0:
-    resolution: {integrity: sha512-aBDHZxRzYnUYuIAIPBH2s511DjlKPzXNlXSGFC8CwmroWQLfrW0LtE1nK3MAwwNhJPa9raEjNCmRoFpG0Hurdw==}
+    resolution: {integrity: sha512-aBDHZxRzYnUYuIAIPBH2s511DjlKPzXNlXSGFC8CwmroWQLfrW0LtE1nK3MAwwNhJPa9raEjNCmRoFpG0Hurdw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/chai-as-promised/-/chai-as-promised-7.1.2.tgz}
     peerDependencies:
       chai: '>= 2.1.2 < 6'
     dependencies:
@@ -6986,7 +7031,7 @@ packages:
     dev: false
 
   /chai-as-promised/8.0.1_chai@5.2.0:
-    resolution: {integrity: sha512-OIEJtOL8xxJSH8JJWbIoRjybbzR52iFuDHuF8eb+nTPD6tgXLjRqsgnUGqQfFODxYvq5QdirT0pN9dZ0+Gz6rA==}
+    resolution: {integrity: sha512-OIEJtOL8xxJSH8JJWbIoRjybbzR52iFuDHuF8eb+nTPD6tgXLjRqsgnUGqQfFODxYvq5QdirT0pN9dZ0+Gz6rA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/chai-as-promised/-/chai-as-promised-8.0.1.tgz}
     peerDependencies:
       chai: '>= 2.1.2 < 6'
     dependencies:
@@ -7027,7 +7072,7 @@ packages:
     dev: false
 
   /chai/5.2.0:
-    resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==}
+    resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/chai/-/chai-5.2.0.tgz}
     engines: {node: '>=12'}
     dependencies:
       assertion-error: 2.0.1
@@ -7066,7 +7111,7 @@ packages:
     dev: false
 
   /chalk/4.1.2:
-    resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/chalk/-/chalk-4.1.2.tgz}
+    resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
     dependencies:
       ansi-styles: 4.3.0
@@ -7108,7 +7153,7 @@ packages:
     dev: false
 
   /check-error/2.1.1:
-    resolution: {integrity: sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==}
+    resolution: {integrity: sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/check-error/-/check-error-2.1.1.tgz}
     engines: {node: '>= 16'}
     dev: false
 
@@ -7419,7 +7464,7 @@ packages:
     dev: false
 
   /commondir/1.0.1:
-    resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
+    resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/commondir/-/commondir-1.0.1.tgz}
     dev: false
 
   /component-emitter/1.3.1:
@@ -7596,7 +7641,7 @@ packages:
     dev: false
 
   /cross-spawn/6.0.6:
-    resolution: {integrity: sha512-VqCUuhcd1iB+dsv8gxPttb5iZh/D0iubSP21g36KXdEuf6I5JiioesUVjpCdHV9MZRUfVFlvwtIUyPfxo5trtw==}
+    resolution: {integrity: sha512-VqCUuhcd1iB+dsv8gxPttb5iZh/D0iubSP21g36KXdEuf6I5JiioesUVjpCdHV9MZRUfVFlvwtIUyPfxo5trtw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/cross-spawn/-/cross-spawn-6.0.6.tgz}
     engines: {node: '>=4.8'}
     dependencies:
       nice-try: 1.0.5
@@ -8013,7 +8058,7 @@ packages:
     dev: false
 
   /decamelize/1.2.0:
-    resolution: {integrity: sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==}
+    resolution: {integrity: sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/decamelize/-/decamelize-1.2.0.tgz}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -8059,7 +8104,7 @@ packages:
     dev: false
 
   /deep-eql/5.0.2:
-    resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==}
+    resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/deep-eql/-/deep-eql-5.0.2.tgz}
     engines: {node: '>=6'}
     dev: false
 
@@ -8592,7 +8637,7 @@ packages:
     dev: false
 
   /enzyme-adapter-react-16/1.15.8_enzyme@3.11.0:
-    resolution: {integrity: sha512-uYGC31eGZBp5nGsr4nKhZKvxGQjyHGjS06BJsUlWgE29/hvnpgCsT1BJvnnyny7N3GIIVyxZ4O9GChr6hy2WQA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.15.8.tgz}
+    resolution: {integrity: sha512-uYGC31eGZBp5nGsr4nKhZKvxGQjyHGjS06BJsUlWgE29/hvnpgCsT1BJvnnyny7N3GIIVyxZ4O9GChr6hy2WQA==}
     peerDependencies:
       enzyme: ^3.0.0
       react: ^16.0.0-0
@@ -8611,7 +8656,7 @@ packages:
     dev: false
 
   /enzyme-adapter-utils/1.14.2:
-    resolution: {integrity: sha512-1ZC++RlsYRaiOWE5NRaF5OgsMt7F5rn/VuaJIgc7eW/fmgg8eS1/Ut7EugSPPi7VMdWMLcymRnMF+mJUJ4B8KA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/enzyme-adapter-utils/-/enzyme-adapter-utils-1.14.2.tgz}
+    resolution: {integrity: sha512-1ZC++RlsYRaiOWE5NRaF5OgsMt7F5rn/VuaJIgc7eW/fmgg8eS1/Ut7EugSPPi7VMdWMLcymRnMF+mJUJ4B8KA==}
     peerDependencies:
       react: 0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0
     dependencies:
@@ -9411,7 +9456,7 @@ packages:
     dev: false
 
   /execa/1.0.0:
-    resolution: {integrity: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==}
+    resolution: {integrity: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/execa/-/execa-1.0.0.tgz}
     engines: {node: '>=6'}
     dependencies:
       cross-spawn: 6.0.6
@@ -10207,7 +10252,7 @@ packages:
     dev: false
 
   /get-stream/4.1.0:
-    resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==}
+    resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/get-stream/-/get-stream-4.1.0.tgz}
     engines: {node: '>=6'}
     dependencies:
       pump: 3.0.2
@@ -10394,7 +10439,7 @@ packages:
     dev: false
 
   /handlebars/4.7.8:
-    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/handlebars/-/handlebars-4.7.8.tgz}
     engines: {node: '>=0.4.7'}
     hasBin: true
     dependencies:
@@ -11325,7 +11370,7 @@ packages:
     dev: false
 
   /is-stream/1.1.0:
-    resolution: {integrity: sha512-uQPm8kcs47jx38atAcWTVxyltQYoPT68y9aWYdV6yWXSyW8mzSat0TL6CiWdZeCdF3KrAvpVtnHbTv4RN+rqdQ==}
+    resolution: {integrity: sha512-uQPm8kcs47jx38atAcWTVxyltQYoPT68y9aWYdV6yWXSyW8mzSat0TL6CiWdZeCdF3KrAvpVtnHbTv4RN+rqdQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/is-stream/-/is-stream-1.1.0.tgz}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -11400,7 +11445,7 @@ packages:
     dev: false
 
   /is-windows/1.0.2:
-    resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
+    resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/is-windows/-/is-windows-1.0.2.tgz}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -12866,7 +12911,7 @@ packages:
     dev: false
 
   /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/lodash/-/lodash-4.17.21.tgz}
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
   /log-symbols/2.2.0:
@@ -12958,7 +13003,7 @@ packages:
     dev: false
 
   /loupe/3.1.3:
-    resolution: {integrity: sha512-kkIp7XSkP78ZxJEsSxW3712C6teJVoeHHwgo9zJ380de7IYyJ2ISlxojcH2pC5OFLewESmnRi/+XCDIEEVyoug==}
+    resolution: {integrity: sha512-kkIp7XSkP78ZxJEsSxW3712C6teJVoeHHwgo9zJ380de7IYyJ2ISlxojcH2pC5OFLewESmnRi/+XCDIEEVyoug==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/loupe/-/loupe-3.1.3.tgz}
     dev: false
 
   /lower-case/2.0.2:
@@ -13525,7 +13570,7 @@ packages:
     dev: false
 
   /nice-try/1.0.5:
-    resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
+    resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/nice-try/-/nice-try-1.0.5.tgz}
     dev: false
 
   /nigel/2.1.1:
@@ -13658,7 +13703,7 @@ packages:
     dev: false
 
   /npm-run-path/2.0.2:
-    resolution: {integrity: sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==}
+    resolution: {integrity: sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/npm-run-path/-/npm-run-path-2.0.2.tgz}
     engines: {node: '>=4'}
     dependencies:
       path-key: 2.0.1
@@ -14025,7 +14070,7 @@ packages:
     dev: false
 
   /p-finally/1.0.0:
-    resolution: {integrity: sha512-LICb2p9CB7FS+0eR1oqWnHhp0FljGLZCWBE9aix0Uye9W8LTQPwMTYVGWQWIw9RdQiDg4+epXQODwIYJtSJaow==}
+    resolution: {integrity: sha512-LICb2p9CB7FS+0eR1oqWnHhp0FljGLZCWBE9aix0Uye9W8LTQPwMTYVGWQWIw9RdQiDg4+epXQODwIYJtSJaow==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/p-finally/-/p-finally-1.0.0.tgz}
     engines: {node: '>=4'}
     dev: false
 
@@ -14244,7 +14289,7 @@ packages:
     dev: false
 
   /path-key/2.0.1:
-    resolution: {integrity: sha512-fEHGKCSmUSDPv4uoj8AlD+joPlq3peND+HRYyxFz4KPw4z926S/b8rIuFs2FYJg3BwsxJf6A9/3eIdLaYC+9Dw==}
+    resolution: {integrity: sha512-fEHGKCSmUSDPv4uoj8AlD+joPlq3peND+HRYyxFz4KPw4z926S/b8rIuFs2FYJg3BwsxJf6A9/3eIdLaYC+9Dw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/path-key/-/path-key-2.0.1.tgz}
     engines: {node: '>=4'}
     dev: false
 
@@ -14303,7 +14348,7 @@ packages:
     dev: false
 
   /pathval/2.0.0:
-    resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
+    resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/pathval/-/pathval-2.0.0.tgz}
     engines: {node: '>= 14.16'}
     dev: false
 
@@ -15315,7 +15360,7 @@ packages:
     dev: false
 
   /prop-types-exact/1.2.7:
-    resolution: {integrity: sha512-A4RaV6mg3jocQqBYmqi2ojJ2VnV4AKTEHhl3xHsud08/u87gcVJc8DUOtgnPegoOCQv/shUqEk4eZGYibjnHzQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/prop-types-exact/-/prop-types-exact-1.2.7.tgz}
+    resolution: {integrity: sha512-A4RaV6mg3jocQqBYmqi2ojJ2VnV4AKTEHhl3xHsud08/u87gcVJc8DUOtgnPegoOCQv/shUqEk4eZGYibjnHzQ==}
     engines: {node: '>= 0.8'}
     dependencies:
       call-bound: 1.0.4
@@ -15542,7 +15587,7 @@ packages:
       use-sync-external-store: 1.5.0_react@18.3.1
     dev: false
 
-  /react-redux/8.1.3_70c0cc21aeafcf416e2360237e706949:
+  /react-redux/8.1.3_655c4e3d56ea6bc994409af0dee4b17a:
     resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/react-redux/-/react-redux-8.1.3.tgz}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -15565,18 +15610,18 @@ packages:
     dependencies:
       '@babel/runtime': 7.27.6
       '@types/hoist-non-react-statics': 3.3.6
-      '@types/react': 18.3.23
-      '@types/react-dom': 18.3.7_@types+react@18.3.23
+      '@types/react': 19.1.8
+      '@types/react-dom': 19.1.6_@types+react@19.1.8
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
       react-is: 18.3.1
       redux: 4.2.1
-      use-sync-external-store: 1.5.0_react@18.3.1
+      use-sync-external-store: 1.5.0_react@19.1.0
     dev: false
 
-  /react-redux/8.1.3_edcd1fa4b9ab5122e51453c929bbffcf:
+  /react-redux/8.1.3_823f7e69e5ec296c7da1e57598f36e54:
     resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/react-redux/-/react-redux-8.1.3.tgz}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -15601,11 +15646,11 @@ packages:
       '@types/hoist-non-react-statics': 3.3.6
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
       react-is: 18.3.1
       redux: 5.0.1
-      use-sync-external-store: 1.5.0_react@18.3.1
+      use-sync-external-store: 1.5.0_react@19.1.0
     dev: false
 
   /react-redux/9.2.0_92d8e28d9539bb526c6f8c35017ff154:
@@ -15626,7 +15671,7 @@ packages:
       use-sync-external-store: 1.5.0_react@18.3.1
     dev: false
 
-  /react-redux/9.2.0_react@18.3.1+redux@5.0.1:
+  /react-redux/9.2.0_react@19.1.0+redux@5.0.1:
     resolution: {integrity: sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/react-redux/-/react-redux-9.2.0.tgz}
     peerDependencies:
       '@types/react': ^18.2.25 || ^19
@@ -15639,9 +15684,9 @@ packages:
         optional: true
     dependencies:
       '@types/use-sync-external-store': 0.0.6
-      react: 18.3.1
+      react: 19.1.0
       redux: 5.0.1
-      use-sync-external-store: 1.5.0_react@18.3.1
+      use-sync-external-store: 1.5.0_react@19.1.0
     dev: false
 
   /react-router/7.6.2_react-dom@18.3.1+react@18.3.1:
@@ -15660,8 +15705,24 @@ packages:
       set-cookie-parser: 2.7.1
     dev: false
 
+  /react-router/7.6.2_react-dom@19.1.0+react@19.1.0:
+    resolution: {integrity: sha512-U7Nv3y+bMimgWjhlT5CRdzHPu2/KVmqPwKUCChW8en5P3znxUqwlYFlbmyj8Rgp1SF6zs5X4+77kBVknkg6a0w==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/react-router/-/react-router-7.6.2.tgz}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+    dependencies:
+      cookie: 1.0.2
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+      set-cookie-parser: 2.7.1
+    dev: false
+
   /react-test-renderer/16.13.1:
-    resolution: {integrity: sha512-Sn2VRyOK2YJJldOqoh8Tn/lWQ+ZiKhyZTPtaO0Q6yNj+QDbmRkVFap6pZPy3YQk8DScRDfyqm/KxKYP9gCMRiQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/react-test-renderer/-/react-test-renderer-16.13.1.tgz}
+    resolution: {integrity: sha512-Sn2VRyOK2YJJldOqoh8Tn/lWQ+ZiKhyZTPtaO0Q6yNj+QDbmRkVFap6pZPy3YQk8DScRDfyqm/KxKYP9gCMRiQ==}
     peerDependencies:
       react: ^16.13.1
     dependencies:
@@ -16357,7 +16418,7 @@ packages:
     dev: false
 
   /scheduler/0.19.1:
-    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/scheduler/-/scheduler-0.19.1.tgz}
+    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==}
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
@@ -16478,7 +16539,7 @@ packages:
     dev: false
 
   /set-blocking/2.0.0:
-    resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
+    resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/set-blocking/-/set-blocking-2.0.0.tgz}
     dev: false
 
   /set-cookie-parser/2.7.1:
@@ -16583,7 +16644,7 @@ packages:
     dev: false
 
   /shelljs/0.9.2:
-    resolution: {integrity: sha512-S3I64fEiKgTZzKCC46zT/Ib9meqofLrQVbpSswtjFfAVDW+AZ54WTnAM/3/yENoxz/V1Cy6u3kiiEbQ4DNphvw==}
+    resolution: {integrity: sha512-S3I64fEiKgTZzKCC46zT/Ib9meqofLrQVbpSswtjFfAVDW+AZ54WTnAM/3/yENoxz/V1Cy6u3kiiEbQ4DNphvw==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/shelljs/-/shelljs-0.9.2.tgz}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
@@ -16642,7 +16703,7 @@ packages:
     dev: false
 
   /shx/0.4.0:
-    resolution: {integrity: sha512-Z0KixSIlGPpijKgcH6oCMCbltPImvaKy0sGH8AkLRXw1KyzpKtaCTizP2xen+hNDqVF4xxgvA0KXSb9o4Q6hnA==}
+    resolution: {integrity: sha512-Z0KixSIlGPpijKgcH6oCMCbltPImvaKy0sGH8AkLRXw1KyzpKtaCTizP2xen+hNDqVF4xxgvA0KXSb9o4Q6hnA==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/shx/-/shx-0.4.0.tgz}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
@@ -17426,7 +17487,7 @@ packages:
     dev: false
 
   /strip-eof/1.0.0:
-    resolution: {integrity: sha512-7FCwGGmx8mD5xQd3RPUvnSpUXHM3BWuzjtpD4TXsfcZ9EL4azvVVUscFYwD9nx8Kh+uCBC00XBtAykoMHwTh8Q==}
+    resolution: {integrity: sha512-7FCwGGmx8mD5xQd3RPUvnSpUXHM3BWuzjtpD4TXsfcZ9EL4azvVVUscFYwD9nx8Kh+uCBC00XBtAykoMHwTh8Q==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/strip-eof/-/strip-eof-1.0.0.tgz}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -18234,7 +18295,7 @@ packages:
     dev: false
 
   /uglify-js/3.19.3:
-    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
+    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/uglify-js/-/uglify-js-3.19.3.tgz}
     engines: {node: '>=0.8.0'}
     hasBin: true
     dev: false
@@ -18415,6 +18476,14 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
       react: 18.3.1
+    dev: false
+
+  /use-sync-external-store/1.5.0_react@19.1.0:
+    resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/use-sync-external-store/-/use-sync-external-store-1.5.0.tgz}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    dependencies:
+      react: 19.1.0
     dev: false
 
   /use/3.1.1:
@@ -18876,7 +18945,7 @@ packages:
     dev: false
 
   /which-module/2.0.1:
-    resolution: {integrity: sha512-iBdZ57RDvnOR9AGBhML2vFZf7h8vmBjhoaZqODJBFWHVtKkDmKuHai3cx5PgVMrX5YDNp27AofYbAwctSS+vhQ==}
+    resolution: {integrity: sha512-iBdZ57RDvnOR9AGBhML2vFZf7h8vmBjhoaZqODJBFWHVtKkDmKuHai3cx5PgVMrX5YDNp27AofYbAwctSS+vhQ==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/which-module/-/which-module-2.0.1.tgz}
     dev: false
 
   /which-typed-array/1.1.19:
@@ -18970,7 +19039,7 @@ packages:
     dev: false
 
   /wordwrap/1.0.0:
-    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
+    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==, tarball: https://npm.ci.artifacts.walmart.com:443/artifactory/api/npm/electrode-npm/wordwrap/-/wordwrap-1.0.0.tgz}
     dev: false
 
   /workerpool/6.5.1:
@@ -19772,12 +19841,12 @@ packages:
     dev: false
 
   file:projects/opt-react.tgz:
-    resolution: {integrity: sha512-wqa+hRHHsVSAC4xhofTmpdhDwRf4Uu+fsmguW1AFu1gwozy9f7le1w/BzRBLu+bqw8YTpGpp8wz+7q0E18PSaQ==, tarball: file:projects/opt-react.tgz}
+    resolution: {integrity: sha512-Wm1GeNh9a+tICs4uUfX7HmpVwSnZVUMVe1+aZQnzEoH4VRsRKRW5SJFrAQ5losPPNpvsRCtPYHdK06rtIoyNRg==, tarball: file:projects/opt-react.tgz}
     name: '@rush-temp/opt-react'
     version: 0.0.0
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
       shx: 0.3.4
     dev: false
 
@@ -19810,7 +19879,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.99.9:
-    resolution: {integrity: sha512-/zj4HNG7bucbxtG7iU5dxmyuSG2dLWOjLF90WSPlnRWefy9NQ43wiQZe7obw8SMaedHmEwZuZAN7aIKTWAGVtA==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-vmfAcakXNx6wEyBi/hcYIDYpnaLcCA+/A0PMfAOwggIyd8Mgdu0oqJrktyp84ixS/zcw3B0LSjw+aol0Ppd9pg==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -19841,7 +19910,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.99.9:
-    resolution: {integrity: sha512-p6EG+EtAU3sQLd6ox0xH5jxhVn9hTUEuWAW4xf92xy6IloSRMO5vWDjlnGkiCYzDM/OOckCC4JcS4QirXrpzJg==, tarball: file:projects/poc-subapp.tgz}
+    resolution: {integrity: sha512-0H4HKNkYHgRjivuxwsK6/ym8RGpgBZfQISHaj3cQPI4F4a4x2qImCPWn/KGxbFfjlncHtBk97LNc8SA4zqC0rQ==, tarball: file:projects/poc-subapp.tgz}
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
@@ -19869,7 +19938,7 @@ packages:
     dev: false
 
   file:projects/poc-subappv1-csp.tgz:
-    resolution: {integrity: sha512-PStxUJixu9tgSzo/rg9EOYXhPo0/2iNxm/WBboenR2qeWwG80QjfCyELJR0RACyjegzViOnyz+iFYl2QSKbP+g==, tarball: file:projects/poc-subappv1-csp.tgz}
+    resolution: {integrity: sha512-69j0bo5DXHeNyHr/+vqkI2cSrNdQEvl872+owHGqUFNVcPecsZKO3kKkUwXX4ZIHpIBJgrt9eTZ8UjIYXj36AQ==, tarball: file:projects/poc-subappv1-csp.tgz}
     name: '@rush-temp/poc-subappv1-csp'
     version: 0.0.0
     dependencies:
@@ -20085,7 +20154,7 @@ packages:
     dev: false
 
   file:projects/react-router.tgz:
-    resolution: {integrity: sha512-zc5kAgOw9Ys7Tovc/Hzm5cKDYuBe008gGmB26qdtZi4zR4jmm8Oa1bM7blDntI37p4bcPxT1bSP2fhlbb6ncHw==, tarball: file:projects/react-router.tgz}
+    resolution: {integrity: sha512-Eg9XqQpTfPsod9hG4uBZs4epDT1J8pawq4O3qi7XKFcs3VOIRzlB1v4JF3COgMJPaZQB2RV0Nq5GjT4k+EY4Kg==, tarball: file:projects/react-router.tgz}
     name: '@rush-temp/react-router'
     version: 0.0.0
     dependencies:
@@ -20093,12 +20162,12 @@ packages:
       '@babel/eslint-parser': 7.27.5_@babel+core@7.27.4+eslint@8.57.1
       '@babel/runtime': 7.27.6
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
-      '@testing-library/react': 13.4.0_53cdbb7838d996988891c66c625e9f86
+      '@testing-library/react': 13.4.0_0206f0b0378b035d9f0c467899793f51
       '@types/chai': 4.3.20
       '@types/mocha': 10.0.10
       '@types/node': 20.19.0
-      '@types/react': 18.3.23
-      '@types/react-dom': 18.3.7_@types+react@18.3.23
+      '@types/react': 19.1.8
+      '@types/react-dom': 19.1.6_@types+react@19.1.8
       '@types/sinon': 10.0.20
       '@types/sinon-chai': 3.2.12
       '@typescript-eslint/eslint-plugin': 5.62.0_ba5c50bde5054d918c93d920073c57b9
@@ -20116,10 +20185,10 @@ packages:
       jsdom-global: 3.0.2_jsdom@19.0.0
       mocha: 10.8.2
       nyc: 15.1.0
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      react-redux: 8.1.3_70c0cc21aeafcf416e2360237e706949
-      react-router: 7.6.2_react-dom@18.3.1+react@18.3.1
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+      react-redux: 8.1.3_655c4e3d56ea6bc994409af0dee4b17a
+      react-router: 7.6.2_react-dom@19.1.0+react@19.1.0
       redux: 4.2.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.5.0+sinon@14.0.2
@@ -20235,7 +20304,7 @@ packages:
     dev: false
 
   file:projects/subapp-react.tgz:
-    resolution: {integrity: sha512-eyiiearlrA2MITVaI0jgWBcmfPDwhA2s8R+ccsWqwlQUteKp7DTYaoc7KdCTeSfpGk6rAxTBNQzc2ADYXIEh0Q==, tarball: file:projects/subapp-react.tgz}
+    resolution: {integrity: sha512-W5mIoDOPtcdEG+dT8fRiHcrDxq8N3kdYdedXUCw6nrRNT0WGRrBrZ7dkXvLtIoLme5puvkg38KL6yn/JVWgGTw==, tarball: file:projects/subapp-react.tgz}
     name: '@rush-temp/subapp-react'
     version: 0.0.0
     dependencies:
@@ -20251,10 +20320,10 @@ packages:
       electrode-archetype-njs-module-dev: 3.0.3
       jsdom: 23.2.0
       optional-require: 1.1.8
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      react-redux: 9.2.0_react@18.3.1+redux@5.0.1
-      react-router: 7.6.2_react-dom@18.3.1+react@18.3.1
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+      react-redux: 9.2.0_react@19.1.0+redux@5.0.1
+      react-router: 7.6.2_react-dom@19.1.0+react@19.1.0
       redux: 5.0.1
       run-verify: 1.2.7
     transitivePeerDependencies:
@@ -20266,7 +20335,7 @@ packages:
     dev: false
 
   file:projects/subapp-redux.tgz:
-    resolution: {integrity: sha512-mZid+Eu78iIGJRSkr+96Oaq7/s1C3qgEIEZ9KwfMPVUnvIyPwlkegJsBKuGI6v/5JMfgKrHjN6sXKtTdvQXHuw==, tarball: file:projects/subapp-redux.tgz}
+    resolution: {integrity: sha512-paO0mQhn1V2FSRcvv7pNIZzcg9ZB+n4eNjRqyi4KvcB35gmrhtgL0EESa42MQgkmD734S30CV9gBz954oFfuWw==, tarball: file:projects/subapp-redux.tgz}
     name: '@rush-temp/subapp-redux'
     version: 0.0.0
     dependencies:
@@ -20277,14 +20346,14 @@ packages:
       '@babel/preset-react': 7.27.1_@babel+core@7.27.4
       '@babel/register': 7.27.1_@babel+core@7.27.4
       '@babel/runtime': 7.27.6
-      '@reduxjs/toolkit': 2.8.2_react-redux@8.1.3+react@18.3.1
+      '@reduxjs/toolkit': 2.8.2_react-redux@8.1.3+react@19.1.0
       '@xarc/run': 1.1.2
       babel-preset-minify: 0.5.2
       electrode-archetype-njs-module-dev: 3.0.3
       optional-require: 1.1.8
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      react-redux: 8.1.3_edcd1fa4b9ab5122e51453c929bbffcf
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+      react-redux: 8.1.3_823f7e69e5ec296c7da1e57598f36e54
       redux: 5.0.1
       run-verify: 1.2.7
     transitivePeerDependencies:
@@ -20424,7 +20493,7 @@ packages:
     dev: false
 
   file:projects/subapp2-basic.tgz:
-    resolution: {integrity: sha512-uvYa3og8dY64O3J7FeYzY9uvF58VcUGTxH18QBUFC6vm5EV8ybG2DdCXnHZY+NMhoQ+lMhOYyNV4yNg2Nc4vbA==, tarball: file:projects/subapp2-basic.tgz}
+    resolution: {integrity: sha512-1LW3+SKsY//20p3TMJurilCg8bR12x5ZKPKQEIz/SF4W7Ig0LNhFyxgmvdwGC+IQ2as9wfAQC3Nu7/mfJOWMbg==, tarball: file:projects/subapp2-basic.tgz}
     name: '@rush-temp/subapp2-basic'
     version: 0.0.0
     dependencies:
@@ -20449,7 +20518,7 @@ packages:
     dev: false
 
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-hEWubi3gs4RK0jZlL6mbIfzoKPLKSvTmmjBec1KsgxI6U/GBECL/yb+DP0uDlpdliL4Y77QfeL8QEYix3/Gsuw==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-LJWYTe0PEphh8Zu8vqbaWLcfx0o8ZVmcLBsO/AC/5M7ePe9ElCzoEX/TJYIaMUY6PRTa+1n1CMBgRqS7WeRqjA==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:
