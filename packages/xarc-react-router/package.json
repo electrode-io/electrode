@@ -62,9 +62,6 @@
     "typedoc": "^0.25.13",
     "typescript": "^4.9.3"
   },
-  "resolutions": {
-    "@types/react": "^19.1.0"
-  },
   "files": [
     "dist-browser~es2x~esm~",
     "dist-browser~es5~cjs~",
