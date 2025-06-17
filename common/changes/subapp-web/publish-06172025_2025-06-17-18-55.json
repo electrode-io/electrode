@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "changeType": 1,
+      "comment": "Dependency @xarc/app version bump from ^12.0.0 to ^12.1.0.",
+      "packageName": "subapp-web"
+    }
+  ],
+  "packageName": "subapp-web",
+  "email": "arun.vishnu.n@gmail.com"
+}

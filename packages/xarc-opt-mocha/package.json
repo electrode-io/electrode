@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-mocha",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Electrode mocha support addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",
@@ -30,8 +30,8 @@
     "@types/mocha": "^10.0.1",
     "chai": "^5.2.0",
     "chai-as-promised": "^8.0.1",
-    "mocha": "^10.2.0",
-    "jsdom-global": "^3.0.2"
+    "jsdom-global": "^3.0.2",
+    "mocha": "^10.2.0"
   },
   "devDependencies": {
     "opt-archetype-check": "1.0.0",

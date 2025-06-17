@@ -704,8 +704,8 @@ module.exports =  {
                   Fs.writeFile(
                     isomorphicPath,
                     JSON.stringify(assetsJson, null, 2),
-                    (err) => {
-                      if (err) throw err;
+                    (error) => {
+                      if (error) throw error;
                     }
                   );
                 }
