@@ -3748,7 +3748,7 @@ packages:
       reselect: 5.1.1
     dev: false
 
-  /@reduxjs/toolkit/2.8.2_react-redux@9.2.0+react@18.3.1:
+  /@reduxjs/toolkit/2.8.2_react-redux@9.2.0+react@19.1.0:
     resolution: {integrity: sha512-MYlOhQ0sLdw4ud48FoC5w0dH9VfWQjtCjreKwYTT3l+r427qYC5Y8PihNutepr8XrNaBUDQo9khWUwQxZaqt5A==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18 || ^19
@@ -3762,8 +3762,8 @@ packages:
       '@standard-schema/spec': 1.0.0
       '@standard-schema/utils': 0.3.0
       immer: 10.1.1
-      react: 18.3.1
-      react-redux: 9.2.0_92d8e28d9539bb526c6f8c35017ff154
+      react: 19.1.0
+      react-redux: 9.2.0_@types+react@19.1.8+react@19.1.0
       redux: 5.0.1
       redux-thunk: 3.1.0_redux@5.0.1
       reselect: 5.1.1
@@ -4071,22 +4071,6 @@ packages:
       - '@types/react'
     dev: false
 
-  /@testing-library/react/13.4.0_53cdbb7838d996988891c66c625e9f86:
-    resolution: {integrity: sha512-sXOGON+WNTh3MLE9rve97ftaZukN3oNf2KjDy7YTx6hcTO2uuLHuCGynMDhFwGw/jYf4OJ2Qk0i4i79qMNNkyw==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      '@babel/runtime': 7.27.6
-      '@testing-library/dom': 8.20.1
-      '@types/react-dom': 18.3.7_@types+react@18.3.23
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-    transitivePeerDependencies:
-      - '@types/react'
-    dev: false
-
   /@testing-library/react/14.3.1_react-dom@19.1.0+react@19.1.0:
     resolution: {integrity: sha512-H99XjUhWQw0lTgyMN05W3xQG1Nh4lq574D8keFf1dDoNTJgp66VbJozRaczoF+wsiaPJNt/TcnfpLGufGxSrZQ==}
     engines: {node: '>=14'}
@@ -4335,22 +4319,10 @@ packages:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
 
-  /@types/prop-types/15.7.15:
-    resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
-    dev: false
-
   /@types/react-dom/18.3.7:
     resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
     peerDependencies:
       '@types/react': ^18.0.0
-    dev: false
-
-  /@types/react-dom/18.3.7_@types+react@18.3.23:
-    resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
-    peerDependencies:
-      '@types/react': ^18.0.0
-    dependencies:
-      '@types/react': 18.3.23
     dev: false
 
   /@types/react-dom/18.3.7_@types+react@19.1.8:
@@ -4367,13 +4339,6 @@ packages:
       '@types/react': ^19.0.0
     dependencies:
       '@types/react': 19.1.8
-    dev: false
-
-  /@types/react/18.3.23:
-    resolution: {integrity: sha512-/LDXMQh55EzZQ0uVAZmKKhfENivEvWz6E+EYzh+/MCjMhNsotd+ZHhBGIjFDTi6+fz0OhQQQLbTgdQIxxCsC0w==}
-    dependencies:
-      '@types/prop-types': 15.7.15
-      csstype: 3.1.3
     dev: false
 
   /@types/react/19.1.8:
@@ -15632,7 +15597,7 @@ packages:
       use-sync-external-store: 1.5.0_react@18.3.1
     dev: false
 
-  /react-redux/9.2.0_92d8e28d9539bb526c6f8c35017ff154:
+  /react-redux/9.2.0_@types+react@19.1.8+react@19.1.0:
     resolution: {integrity: sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==}
     peerDependencies:
       '@types/react': ^18.2.25 || ^19
@@ -15644,10 +15609,10 @@ packages:
       redux:
         optional: true
     dependencies:
-      '@types/react': 18.3.23
+      '@types/react': 19.1.8
       '@types/use-sync-external-store': 0.0.6
-      react: 18.3.1
-      use-sync-external-store: 1.5.0_react@18.3.1
+      react: 19.1.0
+      use-sync-external-store: 1.5.0_react@19.1.0
     dev: false
 
   /react-redux/9.2.0_react@18.3.1+redux@5.0.1:
@@ -19989,7 +19954,7 @@ packages:
     dev: false
 
   file:projects/react-redux-observable.tgz:
-    resolution: {integrity: sha512-H0AnFff7en3tRFT8wF6DdahDBMU+sz9dLjMJh2oDeKNy19RfxgRFZNJJYkFbVjOdA5fSFhca8WmoqeQUDe381w==, tarball: file:projects/react-redux-observable.tgz}
+    resolution: {integrity: sha512-YG9SrH9rwN/A74MdydTWNxsqJ9iHkW01fauAeNDd85LEdRinCXLGaAzBAgs6xQgZS92OOC64RaFbIdUahPo9uQ==, tarball: file:projects/react-redux-observable.tgz}
     name: '@rush-temp/react-redux-observable'
     version: 0.0.0
     dependencies:
@@ -20000,8 +19965,8 @@ packages:
       '@types/chai': 4.3.20
       '@types/mocha': 10.0.10
       '@types/node': 20.19.0
-      '@types/react': 18.3.23
-      '@types/react-dom': 18.3.7_@types+react@18.3.23
+      '@types/react': 19.1.8
+      '@types/react-dom': 19.1.6_@types+react@19.1.8
       '@types/sinon': 9.0.11
       '@types/sinon-chai': 3.2.12
       '@typescript-eslint/eslint-plugin': 4.33.0_23015ef85d29d6b982438ea2e0b211ca
@@ -20080,20 +20045,20 @@ packages:
     dev: false
 
   file:projects/react-redux.tgz:
-    resolution: {integrity: sha512-hGplb8yUIbpSRtxvdKr0lrQQ//XvQQa7xR3M3pE3WX81e+ou3so0GfWjvdr5c0ecU9PmlWsPf+zfVRceFlBaYw==, tarball: file:projects/react-redux.tgz}
+    resolution: {integrity: sha512-pVmd/n4ksr3EI39ni76Bd8nmSm7+fPSC/Zz+xvJ60SL5Fm1PcIwOdXGW9pqRvBiO1gOGQVHcpsTYOPfygCg4yw==, tarball: file:projects/react-redux.tgz}
     name: '@rush-temp/react-redux'
     version: 0.0.0
     dependencies:
       '@babel/core': 7.27.4
       '@babel/eslint-parser': 7.27.5_@babel+core@7.27.4+eslint@8.57.1
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
-      '@reduxjs/toolkit': 2.8.2_react-redux@9.2.0+react@18.3.1
-      '@testing-library/react': 13.4.0_53cdbb7838d996988891c66c625e9f86
+      '@reduxjs/toolkit': 2.8.2_react-redux@9.2.0+react@19.1.0
+      '@testing-library/react': 13.4.0_0206f0b0378b035d9f0c467899793f51
       '@types/chai': 4.3.20
       '@types/mocha': 10.0.10
       '@types/node': 20.19.0
-      '@types/react': 18.3.23
-      '@types/react-dom': 18.3.7_@types+react@18.3.23
+      '@types/react': 19.1.8
+      '@types/react-dom': 19.1.6_@types+react@19.1.8
       '@types/sinon': 10.0.20
       '@types/sinon-chai': 3.2.12
       '@typescript-eslint/eslint-plugin': 5.62.0_badab33f69ff86e55d4af093f2bda148
@@ -20109,9 +20074,9 @@ packages:
       jsdom-global: 3.0.2_jsdom@19.0.0
       mocha: 10.8.2
       nyc: 15.1.0
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      react-redux: 9.2.0_92d8e28d9539bb526c6f8c35017ff154
+      react: 19.1.0
+      react-dom: 19.1.0_react@19.1.0
+      react-redux: 9.2.0_@types+react@19.1.8+react@19.1.0
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.5.0+sinon@14.0.2
       source-map-support: 0.5.21
