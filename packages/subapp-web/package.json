@@ -4,6 +4,12 @@
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/dev/index.js",
+      "require": "./lib/index.js"
+    }
+  },
   "scripts": {
     "test": "clap test",
     "lint": "clap lint",
@@ -51,7 +57,6 @@
     "@xarc/app": "^12.0.0",
     "@xarc/module-dev": "^4.1.0",
     "@xarc/run": "^1.1.1",
-    "babel-preset-minify": "^0.5.1",
     "chai": "4.3.6",
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
@@ -64,7 +69,8 @@
     "mocha": "^10.2.0",
     "mock-require": "^3.0.3",
     "run-verify": "^1.2.6",
-    "subapp-pkg-util": "0.0.1"
+    "subapp-pkg-util": "0.0.1",
+    "terser": "^5.42.0"
   },
   "nyc": {
     "all": true,
