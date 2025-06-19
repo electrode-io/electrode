@@ -1,17 +1,40 @@
 /* eslint-disable max-statements, complexity */
 
-import { configureStore, combineReducers, Reducer, UnknownAction, EnhancedStore } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  combineReducers,
+  Reducer,
+  UnknownAction,
+  EnhancedStore,
+} from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
+import {
+  SubAppDef,
+  SubAppFeatureFactory,
+  SubAppFeature,
+  FeatureDecorator,
+} from "@xarc/subapp";
 
 // Re-export necessary modules
 
 export * as Redux from "@reduxjs/toolkit";
-export { combineReducers, configureStore, Reducer, bindActionCreators } from "@reduxjs/toolkit";
+export {
+  combineReducers,
+  configureStore,
+  Reducer,
+  bindActionCreators,
+} from "@reduxjs/toolkit";
 
 // Re-export react-redux
 export * as ReactRedux from "react-redux";
-export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
+export {
+  connect,
+  Provider,
+  batch,
+  useSelector,
+  useDispatch,
+  useStore,
+} from "react-redux";
 
 /**
  * Redux decorator params
@@ -74,7 +97,10 @@ export type ReduxFeatureOptions = {
    * - If it's `true`, then the subapp module should export the named reducers as `reduxReducers`
    * - If it's a function, then it's used as the reducer
    */
-  reducers?: Reducer<any, UnknownAction> | Record<string, Reducer<any, UnknownAction>> | boolean;
+  reducers?:
+    | Reducer<any, UnknownAction>
+    | Record<string, Reducer<any, UnknownAction>>
+    | boolean;
   /**
    * prepare redux initial state
    *
@@ -93,7 +119,10 @@ export type ReduxFeature = SubAppFeature & {
   options: ReduxFeatureOptions;
   wrap: (_: any) => any;
   Provider: typeof Provider;
-  configureStore: (reducer: Reducer<any, UnknownAction>, initialState: any) => EnhancedStore<any, UnknownAction>;
+  configureStore: (
+    reducer: Reducer<any, UnknownAction>,
+    initialState: any
+  ) => EnhancedStore<any, UnknownAction>;
   prepare: any;
   _store?: EnhancedStore<any, UnknownAction>;
 };
@@ -104,7 +133,9 @@ export type ReduxFeature = SubAppFeature & {
  * @param options - redux feature options
  * @returns unknown
  */
-export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory {
+export function reduxFeature(
+  options: ReduxFeatureOptions
+): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line
   const id = "state-provider";
   const subId = "react-redux";
@@ -116,11 +147,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     // wrap: callback to wrap component with redux
     redux.options = options;
     redux.wrap = ({ Component, store }) => {
-      return (
-        <Provider store={store}>
-          <Component />
-        </Provider>
-      );
+      return <Provider store={store} children={<Component />} />;
     };
     redux.Provider = Provider;
 
@@ -155,8 +182,11 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         if (typeof reducers === "object") {
           reducers = combineReducers(reducers) as Reducer<any, UnknownAction>;
         }
-        const validReducer = typeof reducers === "function" ? reducers : (state => state);
-        redux._store?.replaceReducer(validReducer as Reducer<any, UnknownAction>);
+        const validReducer =
+          typeof reducers === "function" ? reducers : (state) => state;
+        redux._store?.replaceReducer(
+          validReducer as Reducer<any, UnknownAction>
+        );
       } else {
         // Normal execution (SSR or initial CSR)
         const props = csrData && (await csrData.getInitialState());
@@ -184,11 +214,15 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
 
         if (!redux._store) {
-          const validReducer = (typeof reducers === "function" || typeof reducers === "object")
-            ? reducers
-            : (state => state);
+          const validReducer =
+            typeof reducers === "function" || typeof reducers === "object"
+              ? reducers
+              : (state) => state;
 
-          redux._store = redux.configureStore(validReducer as Reducer<any, UnknownAction>, initialState);
+          redux._store = redux.configureStore(
+            validReducer as Reducer<any, UnknownAction>,
+            initialState
+          );
         }
       }
 
