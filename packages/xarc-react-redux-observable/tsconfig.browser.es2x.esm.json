@@ -3,7 +3,7 @@
     "outDir": "dist-browser~es2x~esm~",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["es2020", "DOM"],
     "module": "ES2020",
     "esModuleInterop": true,
     "importHelpers": true,

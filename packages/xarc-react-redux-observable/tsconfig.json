@@ -3,7 +3,7 @@
     "outDir": "dist",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["es2020", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,

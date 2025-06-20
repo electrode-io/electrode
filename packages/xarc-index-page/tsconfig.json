@@ -2,8 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "lib": [
-      "ES2020",
-      "DOM"
+      "ES2020"
     ],
     "module": "CommonJS",
     "esModuleInterop": false,

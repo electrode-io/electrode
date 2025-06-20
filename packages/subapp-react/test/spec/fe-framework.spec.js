@@ -1,7 +1,7 @@
 "use strict";
 
 const React = require("react"); // eslint-disable-line
-const { act } = require("react-dom/test-utils");
+const { act } = require("react");
 const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
 

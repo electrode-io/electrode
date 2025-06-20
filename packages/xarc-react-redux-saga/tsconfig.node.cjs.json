@@ -3,7 +3,7 @@
     "outDir": "dist-node-cjs",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES2020"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
