@@ -47,15 +47,15 @@
     "jsdom": "^23.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-redux": "^9.0.4",
-    "react-router": "^7.2.0",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.6.2",
     "redux": "^5.0.0",
     "run-verify": "^1.2.6",
     "subapp-pkg-util": "0.0.1"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-router": "^7.1.5"
   },
   "nyc": {

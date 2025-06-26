@@ -44,15 +44,15 @@
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-redux": "^8.0.1",
+    "react-redux": "^9.2.0",
     "run-verify": "^1.2.6",
     "subapp-pkg-util": "0.0.1"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-redux": "*",
-    "redux": "*"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "@reduxjs/toolkit": ">= 2"
   },
   "nyc": {
     "all": true,

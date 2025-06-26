@@ -20,8 +20,8 @@
   "author": "WalmartLabs GTP.js team",
   "license": "Apache-2.0",
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.15",

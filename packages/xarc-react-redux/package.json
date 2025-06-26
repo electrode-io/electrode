@@ -33,7 +33,7 @@
     "@babel/core": "^7.11.0",
     "@babel/eslint-parser": "^7.25.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@testing-library/react": "^13.2.0",
+    "@testing-library/react": "^16.3.0",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.14.10",
