@@ -63,7 +63,8 @@
     "mocha": "^10.2.0",
     "mock-require": "^3.0.3",
     "run-verify": "^1.2.6",
-    "subapp-pkg-util": "0.0.1"
+    "subapp-pkg-util": "0.0.1",
+    "electrode-react-webapp": "~5.1.1"
   },
   "nyc": {
     "all": true,
