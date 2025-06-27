@@ -2,7 +2,7 @@
   "compilerOptions": {
     "jsx": "react",
     "outDir": "lib",
-    "lib": ["es2018"],
+    "lib": ["es2020"],
     "allowJs": true,
     "module": "CommonJS",
     "esModuleInterop": true,

@@ -4,7 +4,7 @@
     "jsx": "react",
     "jsxFactory": "createElement",
     "lib": ["ES2020", "DOM"],
-    "module": "ESNext",
+    "module": "ES2020",
     "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES2020",

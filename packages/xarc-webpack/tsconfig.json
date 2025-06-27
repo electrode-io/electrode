@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "lib": [
-      "ES2020",
-      "DOM"
-    ],
+    "lib": ["ES2020"],
     "module": "CommonJS",
     "esModuleInterop": false,
     "importHelpers": true,
@@ -12,13 +9,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": [
-      "node",
-      "mocha",
-      "chai",
-      "sinon",
-      "sinon-chai"
-    ],
+    "types": ["node", "mocha", "chai", "sinon", "sinon-chai"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
@@ -27,7 +18,5 @@
   "typedocOptions": {
     "entryPointStrategy": "expand"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

@@ -61,7 +61,8 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@testing-library/dom": "~10.4.0"
   },
   "files": [
     "dist",
