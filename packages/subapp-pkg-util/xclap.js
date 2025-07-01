@@ -15,9 +15,14 @@ xclap.load({
   "compile-dev": exec("babel src -d dist/dev --delete-dir-on-start --source-maps", {
     env: { BABEL_ENV: "-src-dev" }
   }),
-  "compile-min": exec("babel src -d dist/min --no-comments --delete-dir-on-start", {
-    env: { BABEL_ENV: "-src-minify" }
-  }),
+  "compile-min": serial(
+    exec("babel src -d dist/min --no-comments --delete-dir-on-start", {
+      env: { BABEL_ENV: "-src-minify" }
+    }),
+    exec("for f in dist/min/*.js; do npx terser \"$f\" --compress --mangle --output \"$f\"; done", {
+      env: {}
+    })
+  ),
   "compile-node": exec("babel src -d dist/node --delete-dir-on-start --source-maps", {
     env: { BABEL_ENV: "-src-node" }
   })

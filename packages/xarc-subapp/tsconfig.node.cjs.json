@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-cjs",
-    "lib": ["es2018", "DOM"],
+    "lib": ["ES2020", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "ES2018",
+    "target": "ES2020",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
