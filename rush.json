@@ -515,12 +515,6 @@
       "skipRushCheck": true
     },
     {
-      "packageName": "@xarc/opt-preact",
-      "projectFolder": "packages/xarc-opt-preact",
-      "shouldPublish": true,
-      "skipRushCheck": true
-    },
-    {
       "packageName": "@xarc/opt-postcss",
       "projectFolder": "packages/xarc-opt-postcss",
       "shouldPublish": true,
@@ -583,12 +577,6 @@
     {
       "packageName": "@xarc/react-redux",
       "projectFolder": "packages/xarc-react-redux",
-      "shouldPublish": true,
-      "skipRushCheck": true
-    },
-    {
-      "packageName": "@xarc/react-recoil",
-      "projectFolder": "packages/xarc-react-recoil",
       "shouldPublish": true,
       "skipRushCheck": true
     },

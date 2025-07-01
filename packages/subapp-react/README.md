@@ -73,6 +73,11 @@ import { React, loadSubApp } from "subapp-react";
 export default loadSubApp({ name: "MySubapp", Component, useReactRouter: true });
 ```
 
+## React 19 Support and Requirements
+
+- This package requires `react@^19.1.0` and `react-dom@^19.1.0` as peer dependencies. Please ensure your application installs these versions.
+- If you use React Router, you must use `react-router@^7` and `react-router-dom@^7`.
+
 ## License
 
 Copyright (c) 2016-present, WalmartLabs

@@ -55,10 +55,10 @@
     "intl-format-cache": "4.2.46",
     "lodash": "^4.17.10",
     "milligram": "^1.3.0",
-    "react": "^16.13.1",
+    "react": "^19.1.0",
     "react-component": "../react-component",
-    "react-dom": "^16.13.1",
-    "react-intl": "^3.11.0",
+    "react-dom": "^19.1.0",
+    "react-intl": "^7.1.11",
     "react-notify-toast": "^0.4.1",
     "react-router-config": "^5.1.1"
   },
