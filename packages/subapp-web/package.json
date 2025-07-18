@@ -4,12 +4,6 @@
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/dev/index.js",
-      "require": "./lib/index.js"
-    }
-  },
   "scripts": {
     "test": "clap test",
     "lint": "clap lint",
