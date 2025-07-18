@@ -20,14 +20,6 @@ require("regenerator-runtime/runtime");
  */
 /*globals window:false*/
 
-/**
- * Install enzyme along with an Adapter corresponding to React 16
- * Configure enzyme to use the adapter using the top level configure(...) API
- */
-var enzyme = require("enzyme");
-var Adapter = require("enzyme-adapter-react-16");
-enzyme.configure({ adapter: new Adapter() });
-
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
@@ -61,7 +53,11 @@ window.mocha.setup({
 // Use webpack to include all app code _except_ the entry point so we can get
 // code coverage in the bundle, whether tested or not.
 // NOTE: No need to specify src even in src mode since webpack should handle that already
-var srcReq = require.context("client", true, /^((?!app).)(!(spec|test))*\.(jsx|js)?$/);
+var srcReq = require.context(
+  "client",
+  true,
+  /^((?!app).)(!(spec|test))*\.(jsx|js)?$/
+);
 srcReq.keys().map(srcReq);
 
 // Use webpack to infer and `require` tests automatically only for test/client
