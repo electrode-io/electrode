@@ -4309,7 +4309,7 @@ packages:
     resolution: {integrity: sha512-9y0Gflk3b0+NhQZ/oxGtaAJDvRywCa5sIyaVnounqLvmf93yBF4EgIRspePtkMs3Tr844nCclYMlcCNmLCvjuQ==}
     dependencies:
       '@types/chai': 4.3.20
-      '@types/sinon': 9.0.11
+      '@types/sinon': 10.0.20
     dev: false
 
   /@types/sinon/10.0.20:
@@ -5326,7 +5326,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@xarc/run': 1.1.2
-      filter-scan-dir: 1.5.5
+      filter-scan-dir: 1.5.6
       lodash: 4.17.21
       tsconfig: 7.0.0
       tslib: 2.8.1
@@ -6892,9 +6892,9 @@ packages:
       domutils: 3.2.2
     dev: false
 
-  /cheerio/1.1.0:
-    resolution: {integrity: sha512-+0hMx9eYhJvWbgpKV9hN7jg0JcwydpopZE4hgi+KvQtByZXPp04NiCWU0LzcAbP63abZckIHkTQaXVF52mX3xQ==}
-    engines: {node: '>=18.17'}
+  /cheerio/1.1.1:
+    resolution: {integrity: sha512-bTXxVZeOfc3I97S4CSYVjcYvaTp92YOlwEUrVRtYrkuVn7S8/QKnnozVlztPcXlU039S2UxtsjAMyFRbX3V9gQ==}
+    engines: {node: '>=20.18.1'}
     dependencies:
       cheerio-select: 2.1.0
       dom-serializer: 2.0.0
@@ -8301,7 +8301,7 @@ packages:
     resolution: {integrity: sha512-Dw8/Gs4vRjxY6/6i9wU0V+utmQO9kvh9XLnz3LIudviOnVYDEe2ec+0k+NQoMamn1VrjKgCUOWj5jG/5M5M0Qw==}
     dependencies:
       array.prototype.flat: 1.3.3
-      cheerio: 1.1.0
+      cheerio: 1.1.1
       enzyme-shallow-equal: 1.0.7
       function.prototype.name: 1.1.8
       has: 1.0.4
