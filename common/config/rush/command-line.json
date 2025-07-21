@@ -48,6 +48,38 @@
       "ignoreDependencyOrder": false,
       "ignoreMissingScript": false,
       "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "dev-setup",
+      "commandKind": "global",
+      "summary": "Interactive developer onboarding and setup",
+      "description": "Guides new developers through repository setup, explains branching strategy, and validates environment",
+      "safeForSimultaneousRushProcesses": true,
+      "shellCommand": "node common/scripts/dev-setup.js"
+    },
+    {
+      "name": "release:beta",
+      "commandKind": "global",
+      "summary": "Create and publish a beta release",
+      "description": "Interactive beta release workflow - creates beta branch, applies version changes, and publishes",
+      "safeForSimultaneousRushProcesses": false,
+      "shellCommand": "node common/scripts/release-beta.js"
+    },
+    {
+      "name": "release:stable",
+      "commandKind": "global",
+      "summary": "Promote beta to stable release",
+      "description": "Interactive stable release workflow - promotes beta to stable and handles branch syncing",
+      "safeForSimultaneousRushProcesses": false,
+      "shellCommand": "node common/scripts/release-stable.js"
+    },
+    {
+      "name": "release:hotfix",
+      "commandKind": "global",
+      "summary": "Create hotfix release",
+      "description": "Interactive hotfix workflow - creates hotfix branch and handles emergency releases",
+      "safeForSimultaneousRushProcesses": false,
+      "shellCommand": "node common/scripts/release-hotfix.js"
     }
     
     // {

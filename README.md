@@ -21,6 +21,29 @@ Please go to our [docs](https://www.electrode.io/electrode/docs/getting-started)
 
 > NOTE: We maintain additional code for internal Walmart systems. If you are a Walmart developer, please check internal docs to get started.
 
+## 🚀 For Developers
+
+This repository uses **fully automated releases**. As a developer:
+
+1. **Create feature branches** from `develop`
+2. **Create PRs** to `develop` 
+3. **Let maintainers handle releases** automatically
+
+**📖 See [`DEVELOPER_WORKFLOW.md`](DEVELOPER_WORKFLOW.md) for the complete developer guide.**
+
+### Quick Commands
+
+```bash
+# First time setup
+rush dev-setup              # Interactive onboarding
+
+# Daily development
+git checkout develop
+git checkout -b feature/my-feature
+# ... code your feature ...
+# Create PR to develop
+```
+
 # Contributing
 
 Do you find Electrode useful for your application development, exploring, or learning [node.js] and [React]? Please send us your encouragement with a github star.

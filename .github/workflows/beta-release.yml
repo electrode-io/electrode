@@ -1,0 +1,144 @@
+name: Beta Release
+
+on:
+  push:
+    branches: [beta-*]  # Trigger on any beta branch
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Beta release description'
+        required: true
+        default: 'automated-beta-release'
+      publish:
+        description: 'Publish beta release'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  beta-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Install dependencies
+        run: node common/scripts/install-run-rush.js update
+
+      - name: Build packages
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+      - name: Run tests
+        run: node common/scripts/install-run-rush.js test --verbose
+
+      - name: Run linting
+        run: node common/scripts/install-run-rush.js lint
+
+      - name: Setup npm authentication
+        if: github.event.inputs.publish == 'true' || github.event_name == 'push'
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Apply beta suffix and publish
+        if: github.event.inputs.publish == 'true' || github.event_name == 'push'
+        run: |
+          # Apply beta suffix if not already applied
+          if [ ! -f ".beta-applied" ]; then
+            node scripts/apply-beta-suffix.js
+            git add .
+            git commit -m "chore: apply beta suffix for release"
+            touch .beta-applied
+          fi
+          
+          # Clean local tags to avoid conflicts
+          git tag -d $(git tag) 2>/dev/null || true
+          
+          # Publish beta packages
+          node common/scripts/install-run-rush.js publish --include-all --publish --apply --tag beta
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create and push tags
+        if: github.event.inputs.publish == 'true' || github.event_name == 'push'
+        run: |
+          # Create tags for each published package
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const rushConfig = require('./rush.json');
+            
+            rushConfig.projects.forEach(project => {
+              if (project.shouldPublish) {
+                const packageJsonPath = path.join(project.projectFolder, 'package.json');
+                if (fs.existsSync(packageJsonPath)) {
+                  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+                  const tagName = \`\${packageJson.name}@\${packageJson.version}\`;
+                  console.log(\`Creating tag: \${tagName}\`);
+                  require('child_process').execSync(\`git tag \\\"\${tagName}\\\"\`);
+                }
+              }
+            });
+          "
+          git push origin --tags
+
+      - name: Create release summary
+        if: github.event.inputs.publish == 'true' || github.event_name == 'push'
+        run: |
+          # Get version from a published package
+          VERSION=$(node -e "
+            const rushConfig = require('./rush.json');
+            const firstPublishableProject = rushConfig.projects.find(p => p.shouldPublish);
+            const pkg = require('./' + firstPublishableProject.projectFolder + '/package.json');
+            console.log(pkg.version);
+          ")
+          
+          echo "RELEASE_VERSION=${VERSION}" >> $GITHUB_ENV
+          
+          echo "## 🚀 Beta Release v${VERSION} Published" >> $GITHUB_STEP_SUMMARY
+          echo "Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "Description: ${{ inputs.description || 'automated-beta-release' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Installation" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @xarc/app@beta" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @xarc/react@beta" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ⚠️ Beta Notice" >> $GITHUB_STEP_SUMMARY
+          echo "This is a pre-release version for testing. Use with caution in production." >> $GITHUB_STEP_SUMMARY
+
+  notify-result:
+    needs: beta-release
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Notify result
+        run: |
+          if [ "${{ needs.beta-release.result }}" == "success" ]; then
+            echo "✅ Beta release completed successfully!"
+            echo "📦 Install with: npm install @xarc/app@beta"
+          else
+            echo "❌ Beta release failed!"
+            echo "Check the logs above for details."
+          fi

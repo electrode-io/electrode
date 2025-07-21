@@ -1,0 +1,335 @@
+name: Stable Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      beta_branch:
+        description: 'Beta branch to promote (e.g., beta-2025-01-20T10-30-00)'
+        required: true
+        type: string
+
+jobs:
+  stable-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Validate beta branch
+        run: |
+          if ! git show-ref --verify --quiet "refs/remotes/origin/${{ inputs.beta_branch }}"; then
+            echo "❌ Beta branch '${{ inputs.beta_branch }}' does not exist!"
+            exit 1
+          fi
+          echo "✅ Beta branch '${{ inputs.beta_branch }}' found"
+
+      - name: Switch to beta branch
+        run: |
+          git fetch origin
+          git checkout ${{ inputs.beta_branch }}
+          git pull origin ${{ inputs.beta_branch }}
+
+      - name: Install dependencies
+        run: node common/scripts/install-run-rush.js update
+
+      - name: Build packages
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+      - name: Run tests
+        run: node common/scripts/install-run-rush.js test --verbose
+
+      - name: Run linting
+        run: node common/scripts/install-run-rush.js lint
+
+      - name: Merge to master
+        run: |
+          git checkout master
+          git pull origin master
+          git merge ${{ inputs.beta_branch }} --no-ff -m "chore: merge ${{ inputs.beta_branch }} for stable release"
+
+      - name: Generate change files if needed
+        run: |
+          # Check if change files exist
+          CHANGE_COUNT=$(find common/changes -name "*.json" 2>/dev/null | wc -l)
+          if [ "$CHANGE_COUNT" -eq "0" ]; then
+            echo "⚠️ No change files found. Generating change files..."
+            node common/scripts/install-run-rush.js change --target-branch master --bulk
+          else
+            echo "✅ Found $CHANGE_COUNT change files"
+          fi
+
+      - name: Bump versions
+        run: node common/scripts/install-run-rush.js version --bump
+
+      - name: Rebuild after version bump
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+      - name: Setup npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish stable packages
+        run: |
+          # Clean local tags to avoid conflicts
+          git tag -d $(git tag) 2>/dev/null || true
+          
+          # Publish stable packages
+          node common/scripts/install-run-rush.js publish --include-all --publish --apply
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create and push tags
+        run: |
+          # Create tags for each published package
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const rushConfig = require('./rush.json');
+            
+            rushConfig.projects.forEach(project => {
+              if (project.shouldPublish) {
+                const packageJsonPath = path.join(project.projectFolder, 'package.json');
+                if (fs.existsSync(packageJsonPath)) {
+                  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+                  const tagName = \`\${packageJson.name}@\${packageJson.version}\`;
+                  console.log(\`Creating tag: \${tagName}\`);
+                  require('child_process').execSync(\`git tag \\\"\${tagName}\\\"\`);
+                }
+              }
+            });
+          "
+          git push origin --tags
+
+      - name: Commit and push master
+        run: |
+          git add .
+          git commit -m "chore: bump versions for stable release" || true
+          git push origin master
+
+      - name: Sync to develop
+        run: |
+          git checkout develop
+          git pull origin develop
+          git merge master --no-ff -m "chore: sync stable release back to develop"
+          git push origin develop
+
+      - name: Clean up beta branch
+        run: |
+          git branch -d ${{ inputs.beta_branch }} || true
+          git push origin --delete ${{ inputs.beta_branch }} || true
+
+      - name: Create release summary
+        run: |
+          # Get version from a published package
+          VERSION=$(node -e "
+            const rushConfig = require('./rush.json');
+            const firstPublishableProject = rushConfig.projects.find(p => p.shouldPublish);
+            const pkg = require('./' + firstPublishableProject.projectFolder + '/package.json');
+            console.log(pkg.version);
+          ")
+          
+          echo "RELEASE_VERSION=${VERSION}" >> $GITHUB_ENV
+          
+          echo "## 🎉 Stable Release v${VERSION} Published" >> $GITHUB_STEP_SUMMARY
+          echo "Beta Branch: ${{ inputs.beta_branch }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Installation" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @xarc/app@latest" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @xarc/react@latest" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Branch Status" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Beta branch merged and cleaned up" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Master branch updated and pushed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Develop branch synced" >> $GITHUB_STEP_SUMMARY
+
+  notify-result:
+    needs: stable-release
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Notify result
+        run: |
+          if [ "${{ needs.stable-release.result }}" == "success" ]; then
+            echo "✅ Stable release completed successfully!"
+            echo "📦 Install with: npm install @xarc/app@latest"
+          else
+            echo "❌ Stable release failed!"
+            echo "Check the logs above for details."
+          fi
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: node common/scripts/install-run-rush.js install
+
+      - name: Build packages
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+      - name: Run tests
+        run: node common/scripts/install-run-rush.js test --verbose
+
+      - name: Run linting
+        run: node common/scripts/install-run-rush.js lint --verbose
+
+  publish-stable:
+    needs: test
+    runs-on: ubuntu-latest
+    if: >
+      github.ref == 'refs/heads/master' && 
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, 'chore: prepare stable release') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Install dependencies
+        run: node common/scripts/install-run-rush.js install
+
+      - name: Build packages
+        run: node common/scripts/install-run-rush.js rebuild --verbose
+
+      - name: Run tests
+        run: node common/scripts/install-run-rush.js test --verbose
+
+      - name: Setup npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "strict-ssl=false" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish stable packages
+        run: |
+          # Publish stable packages (latest tag)
+          node common/scripts/install-run-rush.js publish --include-all --publish --apply
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create release tag and sync branches
+        run: |
+          # Get version from published package
+          VERSION=$(node -e "
+            const rushConfig = require('./rush.json');
+            const firstPublishableProject = rushConfig.projects.find(p => p.shouldPublish !== false);
+            const pkg = require('./' + firstPublishableProject.projectFolder + '/package.json');
+            console.log(pkg.version);
+          ")
+          
+          # Create and push tag
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
+          
+          # Sync branches
+          git fetch origin
+          
+          # Merge to develop
+          git checkout develop || git checkout -b develop
+          git merge master --no-ff -m "merge: sync master v${VERSION} to develop"
+          git push origin develop
+          
+          # Merge to beta
+          git checkout beta || git checkout -b beta
+          git merge master --no-ff -m "merge: sync master v${VERSION} to beta"
+          git push origin beta
+          
+          # Return to master
+          git checkout master
+          
+          echo "RELEASE_VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.RELEASE_VERSION }}
+          release_name: Release v${{ env.RELEASE_VERSION }}
+          body: |
+            ## Release v${{ env.RELEASE_VERSION }}
+            
+            ### Installation
+            ```bash
+            npm install @xarc/app
+            ```
+            
+            ### Changes
+            See individual package changelogs for detailed changes.
+            
+            ### Migration Guide
+            See [CHANGELOG.md](./CHANGELOG.md) for breaking changes and migration instructions.
+          draft: false
+          prerelease: false
+
+  notify-success:
+    needs: publish-stable
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: Notify success
+        run: |
+          echo "✅ Stable release published successfully!"
+          echo "📦 Install with: npm install @xarc/app"
+
+  notify-failure:
+    needs: publish-stable
+    runs-on: ubuntu-latest
+    if: failure()
+    
+    steps:
+      - name: Notify failure
+        run: |
+          echo "❌ Stable release failed!"
+          echo "Check the logs above for details."
