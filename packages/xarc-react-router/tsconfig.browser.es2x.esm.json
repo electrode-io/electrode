@@ -3,20 +3,30 @@
     "outDir": "dist-browser~es2x~esm~",
     "jsx": "react",
     "jsxFactory": "createElement",
-    "lib": ["es2018", "DOM"],
+    "lib": [
+      "es2020",
+      "DOM"
+    ],
     "module": "ES2020",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "ES2019",
+    "target": "ES2020",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["react", "react-dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
     "moduleResolution": "Node"
   },
-  "include": ["src/browser", "src/common"]
+  "include": [
+    "src/browser",
+    "src/common"
+  ]
 }

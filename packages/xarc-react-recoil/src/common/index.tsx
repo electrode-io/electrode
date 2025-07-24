@@ -45,7 +45,9 @@ export type RecoilFeature = SubAppFeature & {
  * @param options - recoil feature options
  * @returns unknown
  */
-export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFactory {
+export function recoilFeature(
+  options: RecoilFeatureOptions
+): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line
   const id = "state-provider";
   const subId = "react-recoil";
@@ -73,7 +75,10 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
       if (initialState) {
         for (const value of Object.values(initialState.state)) {
           if (value && value["key"] && !recoil._store.get(value["key"])) {
-            const state = atom({ key: value["key"], default: value["value"] }) as RecoilState<any>;
+            const state = atom({
+              key: value["key"],
+              default: value["value"],
+            }) as RecoilState<any>;
             recoil._store.set(value["key"], state);
           }
         }
@@ -83,9 +88,9 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
         Component: () =>
           this.wrap({
             Component: input.Component || subapp._getExport()?.Component,
-            store: recoil._store
+            store: recoil._store,
           }),
-        props: initialState
+        props: initialState,
       };
     };
     return subapp;

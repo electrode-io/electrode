@@ -5,7 +5,6 @@
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
-    "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
   "scripts": {
@@ -22,7 +21,7 @@
   "dependencies": {
     "@xarc/subapp": "^0.4.2",
     "history": "^5.3.0",
-    "react-router": "^7.2.0",
+    "react-router": "^7.6.2",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
@@ -30,12 +29,12 @@
     "@babel/eslint-parser": "^7.25.1",
     "@babel/runtime": "^7.22.3",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@testing-library/react": "^13.2.0",
+    "@testing-library/react": "^16.3.0",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.14.10",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.5",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "@types/sinon": "^10.0.11",
     "@types/sinon-chai": "^3.2.8",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
@@ -52,9 +51,9 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-redux": "^8.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
     "redux": "^4.2.0",
     "sinon": "^14.0.0",
     "sinon-chai": "^3.7.0",
@@ -64,7 +63,7 @@
     "typescript": "^4.9.3"
   },
   "resolutions": {
-    "@types/react": "^18.0.9"
+    "@types/react": "^19.1.0"
   },
   "files": [
     "dist-browser~es2x~esm~",
