@@ -35,8 +35,6 @@
     "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^1.0.0",
     "core-js": "^3.31.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.8",
     "karma": "^6.4.2",
     "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "^2.2.1",
