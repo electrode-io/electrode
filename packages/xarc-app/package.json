@@ -67,7 +67,7 @@
     "sinon": "^13.0.2",
     "sinon-chai": "^3.7.0",
     "source-map-support": "^0.5.21",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
     "xsh": "^0.4.5"
