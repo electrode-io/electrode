@@ -587,6 +587,12 @@
       "skipRushCheck": true
     },
     {
+      "packageName": "@xarc/react-recoil",
+      "projectFolder": "packages/xarc-react-recoil",
+      "shouldPublish": true,
+      "skipRushCheck": true
+    },
+    {
       "packageName": "@xarc/tag-renderer",
       "projectFolder": "packages/xarc-tag-renderer",
       "shouldPublish": true,
