@@ -58,9 +58,7 @@ export function recoilFeature(
     recoil.options = options;
     recoil.wrap = ({ Component, store }) => {
       return (
-        <RecoilRoot>
-          <Component store={store} />
-        </RecoilRoot>
+        <RecoilRoot children={<Component store={store} />} />
       );
     };
 
