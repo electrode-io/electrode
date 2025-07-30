@@ -37,8 +37,8 @@
     "@xarc/app": "^12.1.0",
     "@xarc/fastify-server": "^4.0.10",
     "@xarc/react": "^2.0.0-beta.0",
-    "@xarc/react-query": "^2.0.0",
-    "@xarc/react-redux": "^2.0.0",
+    "@xarc/react-query": "^3.0.0-beta.0",
+    "@xarc/react-redux": "^3.0.0-beta.0",
     "@xarc/react-router": "^2.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
