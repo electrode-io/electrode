@@ -22,7 +22,7 @@
   "dependencies": {
     "@xarc/subapp": "^0.4.2",
     "history": "^5.3.0",
-    "react-router": "^7.2.0",
+    "react-router": "7.6.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
