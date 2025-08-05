@@ -37,7 +37,7 @@
   "dependencies": {
     "@babel/runtime": "^7.21.0",
     "@module-federation/concat-runtime": "^0.0.1",
-    "@xarc/app": "^12.0.0",
+    "@xarc/app": "^12.1.0",
     "@xarc/fastify-server": "^3.3.0",
     "electrode-confippet": "^1.7.1",
     "history": "^5.3.0",
@@ -46,7 +46,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router": "7.6.0",
+    "react-router": "~7.6.0",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "subapp-react": "^2.0.0",
@@ -56,7 +56,7 @@
     "@reduxjs/toolkit": ">= 2"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^12.0.0",
+    "@xarc/app-dev": "^12.1.0",
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/run": "^1.1.1",
     "webpack-hot-middleware": "^2.25.3",

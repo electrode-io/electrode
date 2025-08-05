@@ -133,7 +133,7 @@ specifiers:
   postcss-scss: ^4.0.9
   preact: ^10.0.5
   ps-get: ^1.1.0
-  react-router: 7.6.0
+  react-router: ~7.6.0
   read-pkg-up: ^7.0.1
   recoil: ^0.7.5
   redux-logger: ^3.0.6
@@ -217,7 +217,7 @@ dependencies:
   '@rush-temp/tag-renderer': file:projects/tag-renderer.tgz
   '@rush-temp/webpack': file:projects/webpack.tgz_webpack-bundle-analyzer@3.9.0
   '@rush-temp/webpack-config-composer': file:projects/webpack-config-composer.tgz
-  '@tanstack/react-query': 5.84.0
+  '@tanstack/react-query': 5.84.1
   '@testing-library/jest-dom': 5.17.0
   '@types/chai-as-promised': 7.1.8
   '@types/jest': 29.5.14
@@ -298,7 +298,7 @@ dependencies:
   postcss-scss: 4.0.9
   preact: 10.27.0
   ps-get: 1.1.0
-  react-router: 7.6.0
+  react-router: 7.6.3
   read-pkg-up: 7.0.1
   recoil: 0.7.7
   redux-logger: 3.0.6
@@ -2073,7 +2073,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.4.14_@babel+core@7.28.0
       babel-plugin-polyfill-corejs3: 0.13.0_@babel+core@7.28.0
       babel-plugin-polyfill-regenerator: 0.6.5_@babel+core@7.28.0
-      core-js-compat: 3.44.0
+      core-js-compat: 3.45.0
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -2156,7 +2156,7 @@ packages:
     resolution: {integrity: sha512-FVFaVs2/dZgD3Y9ZD+AKNKjyGKzwu0C54laAXWUXgLcVXcCX6YZ6GhK2cp7FogSN2OA0Fu+QT8dP3FUdo9ShSQ==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      core-js-pure: 3.44.0
+      core-js-pure: 3.45.0
     dev: false
 
   /@babel/runtime/7.28.2:
@@ -4010,16 +4010,16 @@ packages:
     resolution: {integrity: sha512-OG69LQgT7jSp+5pPuCfzltq/+7l2xoweggjme9vlbCPa/d7D7zaqv5vN/S82SzSYZ4EDLTxNO1PWrv49RAS64Q==}
     dev: false
 
-  /@tanstack/react-query/5.84.0:
-    resolution: {integrity: sha512-iPycFGLq5lltDE16Jf13Nx7SOvtfoopfOH/+Ahbdd+z4QqOfYu/SOkY86AVYVcKjneuqPxTm8e85lSGhwe0cog==}
+  /@tanstack/react-query/5.84.1:
+    resolution: {integrity: sha512-zo7EUygcWJMQfFNWDSG7CBhy8irje/XY0RDVKKV4IQJAysb+ZJkkJPcnQi+KboyGUgT+SQebRFoTqLuTtfoDLw==}
     peerDependencies:
       react: ^18 || ^19
     dependencies:
       '@tanstack/query-core': 5.83.1
     dev: false
 
-  /@tanstack/react-query/5.84.0_react@18.3.1:
-    resolution: {integrity: sha512-iPycFGLq5lltDE16Jf13Nx7SOvtfoopfOH/+Ahbdd+z4QqOfYu/SOkY86AVYVcKjneuqPxTm8e85lSGhwe0cog==}
+  /@tanstack/react-query/5.84.1_react@18.3.1:
+    resolution: {integrity: sha512-zo7EUygcWJMQfFNWDSG7CBhy8irje/XY0RDVKKV4IQJAysb+ZJkkJPcnQi+KboyGUgT+SQebRFoTqLuTtfoDLw==}
     peerDependencies:
       react: ^18 || ^19
     dependencies:
@@ -4367,7 +4367,7 @@ packages:
     resolution: {integrity: sha512-9y0Gflk3b0+NhQZ/oxGtaAJDvRywCa5sIyaVnounqLvmf93yBF4EgIRspePtkMs3Tr844nCclYMlcCNmLCvjuQ==}
     dependencies:
       '@types/chai': 4.3.20
-      '@types/sinon': 9.0.11
+      '@types/sinon': 10.0.20
     dev: false
 
   /@types/sinon/10.0.20:
@@ -6300,7 +6300,7 @@ packages:
     dependencies:
       '@babel/core': 7.28.0
       '@babel/helper-define-polyfill-provider': 0.6.5_@babel+core@7.28.0
-      core-js-compat: 3.44.0
+      core-js-compat: 3.45.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -6616,7 +6616,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001731
-      electron-to-chromium: 1.5.194
+      electron-to-chromium: 1.5.195
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3_browserslist@4.25.1
     dev: false
@@ -6861,8 +6861,8 @@ packages:
       supports-color: 7.2.0
     dev: false
 
-  /chalk/5.4.1:
-    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
+  /chalk/5.5.0:
+    resolution: {integrity: sha512-1tm8DTaJhPBG3bIkVeZt1iZM9GfSX2lzOeDVZH9R9ffRHpmHvxZ/QhgQH/aDTkswQVt+YHdXAdS/In/30OjCbg==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
     dev: false
 
@@ -7266,19 +7266,19 @@ packages:
       is-what: 3.14.1
     dev: false
 
-  /core-js-compat/3.44.0:
-    resolution: {integrity: sha512-JepmAj2zfl6ogy34qfWtcE7nHKAJnKsQFRn++scjVS2bZFllwptzw61BZcZFYBPpUznLfAvh0LGhxKppk04ClA==}
+  /core-js-compat/3.45.0:
+    resolution: {integrity: sha512-gRoVMBawZg0OnxaVv3zpqLLxaHmsubEGyTnqdpI/CEBvX4JadI1dMSHxagThprYRtSVbuQxvi6iUatdPxohHpA==}
     dependencies:
       browserslist: 4.25.1
     dev: false
 
-  /core-js-pure/3.44.0:
-    resolution: {integrity: sha512-gvMQAGB4dfVUxpYD0k3Fq8J+n5bB6Ytl15lqlZrOIXFzxOhtPaObfkQGHtMRdyjIf7z2IeNULwi1jEwyS+ltKQ==}
+  /core-js-pure/3.45.0:
+    resolution: {integrity: sha512-OtwjqcDpY2X/eIIg1ol/n0y/X8A9foliaNt1dSK0gV3J2/zw+89FcNG3mPK+N8YWts4ZFUPxnrAzsxs/lf8yDA==}
     requiresBuild: true
     dev: false
 
-  /core-js/3.44.0:
-    resolution: {integrity: sha512-aFCtd4l6GvAXwVEh3XbbVqJGHDJt0OZRa+5ePGx3LLwi12WfexqQxcsohb2wgsa/92xtl19Hd66G/L+TaAxDMw==}
+  /core-js/3.45.0:
+    resolution: {integrity: sha512-c2KZL9lP4DjkN3hk/an4pWn5b5ZefhRJnAc42n6LJ19kSnbeRbdQZE5dSeE2LBol1OwJD3X1BQvFTAsa8ReeDA==}
     requiresBuild: true
     dev: false
 
@@ -8170,8 +8170,8 @@ packages:
       xaa: 1.8.0
     dev: false
 
-  /electron-to-chromium/1.5.194:
-    resolution: {integrity: sha512-SdnWJwSUot04UR51I2oPD8kuP2VI37/CADR1OHsFOUzZIvfWJBO6q11k5P/uKNyTT3cdOsnyjkrZ+DDShqYqJA==}
+  /electron-to-chromium/1.5.195:
+    resolution: {integrity: sha512-URclP0iIaDUzqcAyV1v2PgduJ9N0IdXmWsnPzPfelvBmjmZzEy6xJcjb1cXj+TbYqXgtLrjHEoaSIdTYhw4ezg==}
     dev: false
 
   /emittery/0.13.1:
@@ -14629,8 +14629,8 @@ packages:
       use-sync-external-store: 1.5.0_react@18.3.1
     dev: false
 
-  /react-router/7.6.0:
-    resolution: {integrity: sha512-GGufuHIVCJDbnIAXP3P9Sxzq3UUsddG3rrI3ut1q6m0FI6vxVBF3JoPQ38+W/blslLH4a5Yutp8drkEpXoddGQ==}
+  /react-router/7.6.3:
+    resolution: {integrity: sha512-zf45LZp5skDC6I3jDLXQUu0u26jtuP4lEGbc7BbdyxenBN1vJSTA18czM2D+h5qyMBuMrD+9uB+mU37HIoKGRA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -14643,8 +14643,8 @@ packages:
       set-cookie-parser: 2.7.1
     dev: false
 
-  /react-router/7.6.0_react-dom@18.3.1+react@18.3.1:
-    resolution: {integrity: sha512-GGufuHIVCJDbnIAXP3P9Sxzq3UUsddG3rrI3ut1q6m0FI6vxVBF3JoPQ38+W/blslLH4a5Yutp8drkEpXoddGQ==}
+  /react-router/7.6.3_react-dom@18.3.1+react@18.3.1:
+    resolution: {integrity: sha512-zf45LZp5skDC6I3jDLXQUu0u26jtuP4lEGbc7BbdyxenBN1vJSTA18czM2D+h5qyMBuMrD+9uB+mU37HIoKGRA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -16929,7 +16929,7 @@ packages:
       minimatch: 9.0.5
       shiki: 1.29.2
       typescript: 5.9.2
-      yaml: 2.8.0
+      yaml: 2.8.1
     dev: false
 
   /typescript-compare/0.0.2:
@@ -17864,8 +17864,8 @@ packages:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
     dev: false
 
-  /yaml/2.8.0:
-    resolution: {integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==}
+  /yaml/2.8.1:
+    resolution: {integrity: sha512-lcYcMxX2PO9XMGvAJkJ3OsNMw+/7FKes7/hgerGUYWIoWu5j/+YQqcZr5JnPZWzOsEBgMbSbiSTn/dv/69Mkpw==}
     engines: {node: '>= 14.6'}
     hasBin: true
     dev: false
@@ -17961,7 +17961,7 @@ packages:
     dev: false
 
   file:projects/app-dev.tgz_976a1a70eb8be742a0f49500f22565cd:
-    resolution: {integrity: sha512-XWrekiZ3xlfrKCbKavwyZFFdIBzvM1vE234zrufh2KYk2yIaWXFAGRTgJXfuVV1VCsjIW+5y1XyZW0e3Sf5QsQ==, tarball: file:projects/app-dev.tgz}
+    resolution: {integrity: sha512-HuOCm1jYzCSAXzXJTzdbiv+iWGc8O3wMDQJyPCOnwYA5aRzbdGZMTNbMFgYZwfZFiT93ip5mWgaJZeAToqi7Sw==, tarball: file:projects/app-dev.tgz}
     id: file:projects/app-dev.tgz
     name: '@rush-temp/app-dev'
     version: 0.0.0
@@ -18000,7 +18000,7 @@ packages:
       chai: 4.5.0
       chalker: 1.2.0
       chokidar: 3.6.0
-      core-js: 3.44.0
+      core-js: 3.45.0
       electrode-server: 3.3.0
       electrode-server1: /electrode-server/1.9.0
       eslint: 7.32.0
@@ -18080,7 +18080,7 @@ packages:
       '@xarc/module-dev': 4.1.0
       '@xarc/run': 1.1.2
       chai: 4.5.0
-      chalk: 5.4.1
+      chalk: 5.5.0
       eslint: 8.57.1
       eslint-config-walmart: 2.2.1
       eslint-plugin-filenames: 1.3.2_eslint@8.57.1
@@ -18108,7 +18108,7 @@ packages:
     dev: false
 
   file:projects/create-app.tgz:
-    resolution: {integrity: sha512-YVI4fow+wctbnnoEhJE4zSTMPWeZltx9l0Gwnb2ACDSSzbArfjoL/jmjWMu0HdjSlD1LUp1ZkXbt2M4hRwQ/PQ==, tarball: file:projects/create-app.tgz}
+    resolution: {integrity: sha512-6T+iaho1NecYmp4AnxuhHGEMgTi4gu04nGniiq2Gu2QopHAbEAubr73UKwBCwVmeNi+KpjDItrYDkLTV9kj8LA==, tarball: file:projects/create-app.tgz}
     name: '@rush-temp/create-app'
     version: 0.0.0
     dependencies:
@@ -18346,7 +18346,7 @@ packages:
       chai: 4.5.0
       chai-as-promised: 7.1.2_chai@4.5.0
       chai-shallowly: 1.0.0
-      core-js: 3.44.0
+      core-js: 3.45.0
       enzyme: 3.11.0
       enzyme-adapter-react-16: 1.15.8_enzyme@3.11.0
       karma: 6.4.4
@@ -18473,7 +18473,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp-redux.tgz_webpack@5.101.0:
-    resolution: {integrity: sha512-P4gyJO4h8Xo3jPmvxBkiJEOZB73VX8fFrJOojWdyp8+fAXHO1bEhY5mitsfrsjeaUlWc3YhzKsN0AIY20jsaVg==, tarball: file:projects/poc-subapp-redux.tgz}
+    resolution: {integrity: sha512-tEB/70j6evklfGEr7bLLlwv4TKKsYsQbsiHlPNlLHiCgWq6AUnHLdkT41ET3N3wXoGVTIpmibU4jrnCBvMyeRg==, tarball: file:projects/poc-subapp-redux.tgz}
     id: file:projects/poc-subapp-redux.tgz
     name: '@rush-temp/poc-subapp-redux'
     version: 0.0.0
@@ -18490,7 +18490,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.6.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.6.3_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       redux-logger: 3.0.6
       webpack-hot-middleware: 2.26.1
@@ -18504,7 +18504,7 @@ packages:
     dev: false
 
   file:projects/poc-subapp.tgz_webpack@5.101.0:
-    resolution: {integrity: sha512-dqTJ9Y9xxj+ZAidXVX1+XRuO4BcWStlN8kCKeRdYnbX4GfsVZxtIgyuEVcAxwPETbmS0vMZlp3QU4TWyuG4FOw==, tarball: file:projects/poc-subapp.tgz}
+    resolution: {integrity: sha512-WHm8m439trPQabNKDZOBJB1zu1NrOvudbAWIQI0b6R+Zz1kcoXUyJ9r/T9ug1NTgKrZeu9oRkFSBM8+q/EGthA==, tarball: file:projects/poc-subapp.tgz}
     id: file:projects/poc-subapp.tgz
     name: '@rush-temp/poc-subapp'
     version: 0.0.0
@@ -18520,7 +18520,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.6.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.6.3_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       webpack-hot-middleware: 2.26.1
     transitivePeerDependencies:
@@ -18532,7 +18532,7 @@ packages:
     dev: false
 
   file:projects/poc-subappv1-csp.tgz:
-    resolution: {integrity: sha512-PzRvQfjVqYxTCdeAmV/tEAOeRMROv3zrKetmhym5Y3GK5Jsm0Cv6JalGpLxo+aich42bwg04T99554OJSGNxzA==, tarball: file:projects/poc-subappv1-csp.tgz}
+    resolution: {integrity: sha512-WhtvDOfE/I8Czeri8FmVQ2bdCmMfjwRFSLcFtid5wqtX1XPr42npouYaEzR6EbfEgVVImZRc2hnJlIJM8aHA1Q==, tarball: file:projects/poc-subappv1-csp.tgz}
     name: '@rush-temp/poc-subappv1-csp'
     version: 0.0.0
     dependencies:
@@ -18546,7 +18546,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_25914b775dd669e94923110b39c04f2c
-      react-router: 7.6.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.6.3_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       webpack-hot-middleware: 2.26.1
     transitivePeerDependencies:
@@ -18564,7 +18564,7 @@ packages:
       '@babel/core': 7.28.0
       '@babel/eslint-parser': 7.28.0_@babel+core@7.28.0+eslint@8.57.1
       '@istanbuljs/nyc-config-typescript': 1.0.2_nyc@15.1.0
-      '@tanstack/react-query': 5.84.0_react@18.3.1
+      '@tanstack/react-query': 5.84.1_react@18.3.1
       '@testing-library/react': 11.2.7_react-dom@18.3.1+react@18.3.1
       '@types/chai': 4.3.20
       '@types/mocha': 10.0.10
@@ -18796,7 +18796,7 @@ packages:
     dev: false
 
   file:projects/react-router.tgz:
-    resolution: {integrity: sha512-9ooVrFye1ERzEQ0UGEGDblM8NL0h3QDFJB0sdLJEDbWAKFqRckSFLf8q9Bg1HKAsw9vkAQwMv5o8q0orh7JJ0A==, tarball: file:projects/react-router.tgz}
+    resolution: {integrity: sha512-yvaBbBxJjJNOHhmofGhyUnLDdOfDjSkcqMORdIhl6ptHU8i6Ojqz/uvrczz+Hlne3fLLwY7Wq8dLuoP1YDSuIw==, tarball: file:projects/react-router.tgz}
     name: '@rush-temp/react-router'
     version: 0.0.0
     dependencies:
@@ -18830,7 +18830,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 8.1.3_70c0cc21aeafcf416e2360237e706949
-      react-router: 7.6.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.6.3_react-dom@18.3.1+react@18.3.1
       redux: 4.2.1
       sinon: 14.0.2
       sinon-chai: 3.7.0_chai@4.5.0+sinon@14.0.2
@@ -18946,7 +18946,7 @@ packages:
     dev: false
 
   file:projects/subapp-react.tgz:
-    resolution: {integrity: sha512-dAUrJcm04PsAjpeMF4LvMC+9D8o8azUrPxMfIRWKM9RZupSHWOGkHWyEdCIxrV3nY7xrKtF/EbpJCRlv+zk0mA==, tarball: file:projects/subapp-react.tgz}
+    resolution: {integrity: sha512-DKzwwNNJnvzDaW0HKQnK2zQBpX9Y4whr+cUVJmx3NvTTMkuRefZSV4jM7VzhQkRiB4uaI8kfP3xaH/uTg1r6GQ==, tarball: file:projects/subapp-react.tgz}
     name: '@rush-temp/subapp-react'
     version: 0.0.0
     dependencies:
@@ -18965,7 +18965,7 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-redux: 9.2.0_react@18.3.1+redux@5.0.1
-      react-router: 7.6.0_react-dom@18.3.1+react@18.3.1
+      react-router: 7.6.3_react-dom@18.3.1+react@18.3.1
       redux: 5.0.1
       run-verify: 1.2.7
     transitivePeerDependencies:
@@ -19044,7 +19044,7 @@ packages:
     dev: false
 
   file:projects/subapp-web.tgz:
-    resolution: {integrity: sha512-3lQBVyaUIbZWoeDf/i0AqxnpAVHGN5NvrDWPF9Y/79hXlH8lhu0Qm9SeakbAGYI8jliDK+m7zDCIHo2QwbCmSQ==, tarball: file:projects/subapp-web.tgz}
+    resolution: {integrity: sha512-tJZCzoxQ8adKt2QNsJh5Yt13h0PwCq5TnbLiZQgNq/ERNAGiKTRjqwfdXNXKRo49QkmV0U6RytfG8MBk3DLjrg==, tarball: file:projects/subapp-web.tgz}
     name: '@rush-temp/subapp-web'
     version: 0.0.0
     dependencies:
@@ -19135,7 +19135,7 @@ packages:
     dev: false
 
   file:projects/subapp2-basic.tgz:
-    resolution: {integrity: sha512-5wqqiR2Bgtvp/E9hNS8WUpFvSi+ywVkkME25pQ4RABbiCUUw0oHfg6yC54kqVS178ivwveCEvnlbGsuAvaU7Aw==, tarball: file:projects/subapp2-basic.tgz}
+    resolution: {integrity: sha512-tIXsOWm77Fm+4wBYilgoPTya32M/6zCtD2YgAYWyggAQ6z3f8NGDtrABvy53kjjIaSy0grw6RrlmRmhvypS7gA==, tarball: file:projects/subapp2-basic.tgz}
     name: '@rush-temp/subapp2-basic'
     version: 0.0.0
     dependencies:
@@ -19160,7 +19160,7 @@ packages:
     dev: false
 
   file:projects/subapp2-poc.tgz:
-    resolution: {integrity: sha512-WP2Xx87aqkj0OpI7P+u9QBG9kdUDBmisLO9iiB7TEv8LhEnVCvhOAyEVwcOHgQrNBp8qz580aWaLLj6uBxXyFw==, tarball: file:projects/subapp2-poc.tgz}
+    resolution: {integrity: sha512-D0OJ7oMns8ZpMEbD3MvwwBzAYqeGbhVvpZKN1vzmBs0F1kpR3C6PrpgXUFh4wRGjKv2X5UlyHbNHonQP3ACJew==, tarball: file:projects/subapp2-poc.tgz}
     name: '@rush-temp/subapp2-poc'
     version: 0.0.0
     dependencies:
@@ -19261,7 +19261,7 @@ packages:
     dev: false
 
   file:projects/webpack.tgz_webpack-bundle-analyzer@3.9.0:
-    resolution: {integrity: sha512-aRzPuyjchCJq3pt4Rv0W9YJP0+AzBflPxbCbk8RpCEIsPHX3gpTftnIbXs3vAmZs/WU5/W2GiaiibhPT8ofUNg==, tarball: file:projects/webpack.tgz}
+    resolution: {integrity: sha512-nUPIoie955bQ80MNztikukscxn0YElc01GScH31SH/9i/lH7qcZDm8cdLkS89/bynhMKvQ1vM262nJ96n6JoIg==, tarball: file:projects/webpack.tgz}
     id: file:projects/webpack.tgz
     name: '@rush-temp/webpack'
     version: 0.0.0

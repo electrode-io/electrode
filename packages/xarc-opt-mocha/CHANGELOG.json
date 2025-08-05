@@ -2,6 +2,18 @@
   "name": "@xarc/opt-mocha",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "@xarc/opt-mocha_v3.0.0",
+      "date": "Tue, 17 Jun 2025 18:55:43 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Removed deprecated dependencies to support the latest React versions:\n- Removed chai-shallowly\n- Removed enzyme\n- Removed enzyme-adapter-react-16\n- Added jsdom-global package"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.2",
       "tag": "@xarc/opt-mocha_v2.0.2",
       "date": "Tue, 29 Aug 2023 14:57:37 GMT",

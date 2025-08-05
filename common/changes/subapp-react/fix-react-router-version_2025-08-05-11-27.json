@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-react",
+      "comment": "lock react-router version to use react v18",
+      "type": "patch"
+    }
+  ],
+  "packageName": "subapp-react"
+}

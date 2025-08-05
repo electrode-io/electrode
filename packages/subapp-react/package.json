@@ -40,7 +40,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.23.3",
     "@babel/register": "^7.22.15",
-    "@xarc/app": "^12.0.0",
+    "@xarc/app": "^12.1.0",
     "@xarc/run": "^1.1.1",
     "babel-preset-minify": "^0.5.2",
     "electrode-archetype-njs-module-dev": "^3.0.3",
@@ -48,7 +48,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
-    "react-router": "7.6.0",
+    "react-router": "~7.6.0",
     "redux": "^5.0.0",
     "run-verify": "^1.2.6",
     "subapp-pkg-util": "0.0.1"
@@ -56,7 +56,7 @@
   "peerDependencies": {
     "react": "*",
     "react-dom": "*",
-    "react-router": "7.6.0"
+    "react-router": "~7.6.0"
   },
   "nyc": {
     "all": true,
