@@ -45,7 +45,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router": "^7.1.5",
+    "react-router": "~7.6.0",
     "redux": "^4.2.1",
     "subapp-react": "^2.0.0",
     "subapp-redux": "^3.0.1",
