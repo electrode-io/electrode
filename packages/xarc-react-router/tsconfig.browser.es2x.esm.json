@@ -11,7 +11,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["react", "react-dom", "node"],
+    "types": ["react", "react-dom"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
