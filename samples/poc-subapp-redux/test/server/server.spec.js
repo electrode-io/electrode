@@ -5,6 +5,6 @@
  * Unit Testing Server Side Rendering of the React code is not supported yet.
  */
 
-describe("server", function () {
+describe("server", () => {
   it("write some unit test for server code", () => {});
 });
