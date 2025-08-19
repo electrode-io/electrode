@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-query",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/react-query"
+}
