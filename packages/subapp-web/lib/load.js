@@ -154,9 +154,9 @@ module.exports = function setup(setupContext, { props: setupProps }) {
     const entryName = name.toLowerCase();
     //
     const entryPoints = assets.entryPoints[entryName];
-    
+
     // Add async chunk if available to entrypoints.
-    const asyncChunk = assets.chunks.find(chunk => 
+    const asyncChunk = assets.chunks.find(chunk =>
       chunk.names.includes(`${entryName.replace("/", "_")}~.bootstrap`)
     );
     if (asyncChunk) {

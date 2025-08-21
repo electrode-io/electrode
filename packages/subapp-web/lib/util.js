@@ -417,9 +417,9 @@ ${ignoreMsg}`
   getNonceValue(routeOptions) {
     const scriptNonce = _.get(routeOptions, "cspNonceValue.scriptNonce", "");
     const styleNonce = _.get(routeOptions, "cspNonceValue.styleNonce", "");
-    
-    return { 
-      scriptNonce: scriptNonce ? ` nonce="${scriptNonce}"` : "", 
+
+    return {
+      scriptNonce: scriptNonce ? ` nonce="${scriptNonce}"` : "",
       styleNonce: styleNonce ? ` nonce="${styleNonce}"` : ""
     };
   }
