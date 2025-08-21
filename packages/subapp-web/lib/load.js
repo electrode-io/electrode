@@ -382,7 +382,7 @@ ${stack}`,
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}<script${scriptNonce} >
 ${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
-            namespace ? `, ${JSON.stringify(namespace)}` : ""
+            namespace ? ", " + JSON.stringify(namespace) : ""
           });</script>
 `);
         }
