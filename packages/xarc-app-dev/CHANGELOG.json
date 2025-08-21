@@ -2,6 +2,12 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "12.2.0",
+      "tag": "@xarc/app-dev_v12.2.0",
+      "date": "Thu, 21 Aug 2025 16:09:33 GMT",
+      "comments": {}
+    },
+    {
       "version": "12.1.0",
       "tag": "@xarc/app-dev_v12.1.0",
       "date": "Tue, 17 Jun 2025 18:55:43 GMT",
