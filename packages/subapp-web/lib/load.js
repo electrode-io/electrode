@@ -154,9 +154,9 @@ module.exports = function setup(setupContext, { props: setupProps }) {
     const entryName = name.toLowerCase();
     //
     const entryPoints = assets.entryPoints[entryName];
-    
+
     // Add async chunk if available to entrypoints.
-    const asyncChunk = assets.chunks.find(chunk => 
+    const asyncChunk = assets.chunks.find(chunk =>
       chunk.names.includes(`${entryName.replace("/", "_")}~.bootstrap`)
     );
     if (asyncChunk) {
@@ -382,7 +382,7 @@ ${stack}`,
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}<script${scriptNonce} >
 ${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
-            namespace ? ", " + JSON.stringify(namespace) : ""
+            namespace ? `, ${JSON.stringify(namespace)}` : ""
           });</script>
 `);
         }
