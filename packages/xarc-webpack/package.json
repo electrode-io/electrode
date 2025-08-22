@@ -59,8 +59,8 @@
     "xsh": "^0.4.5"
   },
   "peerDependencies": {
-    "@xarc/app": "^12.1.0",
-    "@xarc/app-dev": "^12.1.0"
+    "@xarc/app": "^12.2.0",
+    "@xarc/app-dev": "^12.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
@@ -73,7 +73,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/app": "^12.1.0",
+    "@xarc/app": "^12.2.0",
     "@xarc/module-dev": "^4.1.0",
     "chai": "^4.2.0",
     "eslint": "^7.32.0",
