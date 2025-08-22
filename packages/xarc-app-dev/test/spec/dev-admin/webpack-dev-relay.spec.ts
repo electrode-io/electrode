@@ -3,12 +3,12 @@
 const { EventEmitter } = require("events");
 import { WebpackDevRelay } from "../../../src/lib/dev-admin/webpack-dev-relay";
 const isomorphicConfig = require("isomorphic-loader/lib/config");
-const { asyncVerify } = require("run-verify");
-const _ = require("lodash");
+import { asyncVerify } from "run-verify";
+import _ from "lodash";
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
-describe("webpack-dev-relay", function() {
+describe("webpack-dev-relay", function () {
   it("should clear webpack dev data if dev server exits", () => {
     const wdr = new WebpackDevRelay();
     const wds = new EventEmitter();
@@ -53,19 +53,22 @@ describe("webpack-dev-relay", function() {
     wds.emit("message", { name: isomorphicConfig.configName, valid: true });
     wds.emit("message", { name: "webpack-stats", valid: true });
     const app = new EventEmitter();
-    app.send = data => app.emit("message", data);
+    app.send = (data) => app.emit("message", data);
     const recv = [];
     return asyncVerify(
-      next => {
-        app.on("message", data => {
+      (next) => {
+        app.on("message", (data) => {
           recv.push(data);
           if (recv.length === 3) next(null, recv);
         });
         wdr.setAppServer(app);
       },
-      r => {
+      (r) => {
         const s = _.sortBy(r, "name");
-        expect(s[0]).to.include({ name: isomorphicConfig.configName, valid: true });
+        expect(s[0]).to.include({
+          name: isomorphicConfig.configName,
+          valid: true,
+        });
         expect(s[1]).to.include({ name: "webpack-report", valid: true, id: 3 });
         expect(s[2]).to.include({ name: "webpack-stats", valid: true });
       }
@@ -76,7 +79,7 @@ describe("webpack-dev-relay", function() {
     const wdr = new WebpackDevRelay();
     const wds = new EventEmitter();
     const app = new EventEmitter();
-    app.send = data => app.emit("message", data);
+    app.send = (data) => app.emit("message", data);
 
     wdr.setWebpackServer(wds);
     wdr.setAppServer(app);
@@ -88,15 +91,18 @@ describe("webpack-dev-relay", function() {
     wds.emit("message", { name: "webpack-stats", valid: true });
     const recv = [];
     return asyncVerify(
-      next => {
-        app.on("message", data => {
+      (next) => {
+        app.on("message", (data) => {
           recv.push(data);
           if (recv.length === 3) next(null, recv);
         });
       },
-      r => {
+      (r) => {
         const s = _.sortBy(r, "name");
-        expect(s[0]).to.include({ name: isomorphicConfig.configName, valid: true });
+        expect(s[0]).to.include({
+          name: isomorphicConfig.configName,
+          valid: true,
+        });
         expect(s[1]).to.include({ name: "webpack-report", valid: true, id: 3 });
         expect(s[2]).to.include({ name: "webpack-stats", valid: true });
       }

@@ -1,6 +1,20 @@
 # Change Log - @xarc/app-dev
 
-This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Aug 2025 16:09:33 GMT and should not be manually modified.
+
+## 12.2.0
+Thu, 21 Aug 2025 16:09:33 GMT
+
+_Version update only_
+
+## 12.1.0
+Tue, 17 Jun 2025 18:55:43 GMT
+
+### Minor changes
+
+- - Migrated from the deprecated mocha.opts configuration to the modern mocharc.js format, ensuring compatibility with current Mocha standards and best practices.
+- Introduced a new xrun task for running Mocha tests, making it easier to execute and manage test runs within the project workflow.
+- Enhanced the test runner to automatically detect and use a unit test configuration file from the project root if present; otherwise, it falls back to the default configuration for seamless integration and improved developer experience.
 
 ## 12.0.0
 Wed, 05 Feb 2025 04:10:48 GMT

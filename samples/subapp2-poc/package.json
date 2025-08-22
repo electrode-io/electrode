@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/node": "^20.14.10",
     "@xarc/run": "^1.1.1",
-    "@xarc/app-dev": "^12.0.0",
+    "@xarc/app-dev": "^12.2.0",
     "@xarc/opt-eslint": "^3.0.1",
     "@xarc/opt-postcss": "^3.0.0",
     "@xarc/opt-stylus": "^2.0.1",

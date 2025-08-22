@@ -1,6 +1,13 @@
 # Change Log - @xarc/react-router
 
-This log was last generated on Thu, 24 Apr 2025 17:42:46 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Aug 2025 16:09:33 GMT and should not be manually modified.
+
+## 2.0.1
+Thu, 21 Aug 2025 16:09:33 GMT
+
+### Patches
+
+- lock react-router version to use react v18
 
 ## 2.0.0
 Thu, 24 Apr 2025 17:42:46 GMT

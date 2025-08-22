@@ -1,10 +1,10 @@
 {
   "changes": [
     {
-      "packageName": "@xarc/opt-mocha",
+      "packageName": "@xarc/react",
       "comment": "",
       "type": "none"
     }
   ],
-  "packageName": "@xarc/opt-mocha"
+  "packageName": "@xarc/react"
 }
