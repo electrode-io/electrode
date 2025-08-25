@@ -2,8 +2,11 @@
 
 [![NPM version][npm-image]][npm-url][![npm downloads][npm-downloads-image]][npm-downloads-url]
 
+## Overview
 
-## Features
+`@xarc/app-dev` is the comprehensive development toolkit for the Electrode platform, providing a powerful set of tools and configurations for building modern React applications at enterprise scale. As the development companion to `@xarc/app`, it offers everything developers need for a productive development experience with hot module replacement, advanced build systems, testing frameworks, and deployment-ready configurations.
+
+## Key Features
 
 - 🚀 **Webpack Dev Server Integration** - Hot module replacement and live reloading
 - ⚡ **Build System** - Complete build pipeline with webpack, Babel, and TypeScript
@@ -13,7 +16,7 @@
 - 📝 **Configuration Presets** - Pre-configured Babel, ESLint, and webpack setups
 - 🌐 **Development Proxy** - Built-in reverse proxy for local development
 
-## Installation
+## Installation and Dependencies
 
 ```bash
 # Install as a development dependency
@@ -24,9 +27,7 @@ npm install @xarc/app
 npm install --save-dev @xarc/app-dev
 ```
 
-## Quick Start
-
-### Basic Setup
+## Basic Setup
 
 1. **Create a task runner file** (`xrun-tasks.ts`):
 
@@ -463,9 +464,6 @@ interface XarcOptions {
 }
 ```
 
-## Contributing
-
-This package is part of the [Electrode](https://github.com/electrode-io/electrode) platform. Please see the main repository for contributing guidelines.
 
 ## License
 

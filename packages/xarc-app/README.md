@@ -2,11 +2,11 @@
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
-**@xarc/app** is the core runtime support library for Electrode X applications, providing essential infrastructure for building high-performance, universal React applications with server-side rendering (SSR) capabilities.
+## Overview
 
-Originally developed for Walmart's large-scale eCommerce applications, this battle-tested library powers critical production systems and provides enterprise-grade reliability and performance.
+**@xarc/app** is the core runtime support library for Electrode X applications, providing essential infrastructure for building high-performance, universal React applications with server-side rendering (SSR) capabilities.It serves as the foundational runtime layer that enables JavaScript applications to run seamlessly in both browser and Node.js environments.
 
-## 🚀 Key Features
+## Key Features
 
 ### Universal JavaScript Applications
 - **Isomorphic/Universal Architecture**: Write once, run everywhere - your code works seamlessly on both client and server
@@ -31,7 +31,7 @@ Originally developed for Walmart's large-scale eCommerce applications, this batt
 - **Error Handling**: Graceful error handling and recovery mechanisms
 - **Comprehensive Logging**: Built-in logging system for debugging and monitoring
 
-## 🏆 Why Choose @xarc/app?
+## Why Choose @xarc/app?
 
 ### Battle-Tested at Scale
 - Powers Walmart.com and other high-traffic applications
@@ -56,7 +56,8 @@ Originally developed for Walmart's large-scale eCommerce applications, this batt
 - **Scalable Development**: Support for large development teams and codebases
 - **Production Hardened**: Comprehensive error handling and recovery mechanisms
 
-## 📦 Installation
+## Installation and Dependencies
+
 
 ```bash
 npm install @xarc/app
@@ -69,13 +70,13 @@ For development features, also install:
 npm install --save-dev @xarc/app-dev
 ```
 
-## 🔧 Basic Usage(Recommended)
+## Basic Setup(Recommended)
 ```javascript
 import { loadRuntimeSupport } from '@xarc/app';
 // Initialize application runtime
 await loadRuntimeSupport({});
 ```
-## Advance Usage
+## Advance Setup
 ```javascript
 import { loadRuntimeSupport } from '@xarc/app';
 // Initialize application runtime

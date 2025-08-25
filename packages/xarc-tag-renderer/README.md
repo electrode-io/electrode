@@ -2,9 +2,11 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
-Generate HTML pages from tag-based templates using ES6 template literals. This is a powerful template rendering system that supports token-based customization, asynchronous rendering, and flexible HTML generation.
+## Overview
 
-## Features
+**@xarc/tag-renderer** is a sophisticated template rendering engine that leverages ES6 template literals to generate HTML pages with dynamic content. Built for high-performance server-side rendering in universal JavaScript applications, it provides a flexible and type-safe approach to HTML generation with advanced features like token-based customization, asynchronous content loading, and streaming output.
+
+## Key Features
 
 - 🏷️ **Tag-based templating** - Create templates using ES6 template literals with custom tags
 - 🔄 **Asynchronous rendering** - Support for async functions, promises, and streaming output
@@ -12,13 +14,14 @@ Generate HTML pages from tag-based templates using ES6 template literals. This i
 - 📝 **Type-safe** - Written in TypeScript with full type definitions
 - ⚡ **Performance** - Efficient template compilation and rendering
 
-## Installation
+## Installation and Dependencies
 
 ```bash
 npm install @xarc/tag-renderer
 ```
+**Note:** This package is automatically included as an internal dependency of `@xarc/app-dev`, so there's no need to install it explicitly in most cases.
 
-## Quick Start
+## Basic Setup
 
 ### Basic Template Creation
 
@@ -242,10 +245,6 @@ const pageOptions = {
   }
 };
 ```
-## Contributing
-
-This package is part of the [Electrode](https://github.com/electrode-io/electrode) platform. Please see the main repository for contributing guidelines.
-
 ## License
 
 Apache-2.0 © [Electrode](https://github.com/electrode-io/electrode)

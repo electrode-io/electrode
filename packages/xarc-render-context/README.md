@@ -3,27 +3,12 @@
 [![npm version](https://badge.fury.io/js/%40xarc%2Frender-context.svg)](https://badge.fury.io/js/%40xarc%2Frender-context)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Context for index.htm generation and template rendering in the Electrode ecosystem. This package provides the core rendering context and output management functionality for template-based web applications.
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Overview](#overview)
-- [Core Classes](#core-classes)
-- [Integration with Other Packages](#integration-with-other-packages)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Installation
-
-```bash
-npm install @xarc/render-context
-```
-
 ## Overview
 
-The `@xarc/render-context` package is designed to manage the rendering context and output for template-based applications. It provides a structured way to handle:
+The `@xarc/render-context` package is designed to manage the rendering context and output for template-based applications.
 
+## Key Features
+It provides a structured way to handle:
 - Rendering context management
 - Output buffering and streaming
 - Token-based template processing  
@@ -32,6 +17,14 @@ The `@xarc/render-context` package is designed to manage the rendering context a
 - Transform operations on render output
 
 This package serves as the foundation for other Electrode rendering packages like `@xarc/tag-renderer` and `@xarc/jsx-renderer`.
+
+## Installation and Dependencies
+
+```bash
+npm install @xarc/render-context
+```
+
+**Note:** This package is automatically included as an internal dependency of `@xarc/app-dev`, so there's no need to install it explicitly in most cases.
 
 ## Core Classes
 
@@ -51,9 +44,7 @@ Represents a token module that can be loaded and executed during template render
 
 Different output implementations for various rendering scenarios.
 
-## Integration with Other Packages
-
-The `@xarc/render-context` package serves as the foundation for several other packages in the Electrode ecosystem. Here are detailed examples of how it integrates with various packages:
+## Basic Setup
 
 ### With @xarc/tag-renderer
 

@@ -3,9 +3,10 @@
 [![npm version](https://badge.fury.io/js/%40xarc%2Freact.svg)](https://badge.fury.io/js/%40xarc%2Freact)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Overview
 The official React framework integration for the Xarc web application platform. This package provides comprehensive support for building scalable React applications using the SubApp architecture pattern.
 
-## Features
+## Key Features
 
 - 🚀 **SubApp Architecture** - Build modular applications with independent, reusable components
 - ⚡ **Server-Side Rendering (SSR)** - Full SSR support with React 18
@@ -14,7 +15,7 @@ The official React framework integration for the Xarc web application platform. 
 - 📊 **Static Props** - Server-side data fetching with type safety
 - 🔧 **Feature System** - Extensible architecture with pluggable features
 
-## Installation
+## Installation and Dependencies
 
 ```bash
 npm install @xarc/react
@@ -24,7 +25,7 @@ yarn add @xarc/react
 pnpm add @xarc/react
 ```
 
-## Quick Start
+## Basic Setup
 
 ### 1. Declare a SubApp
 
@@ -63,29 +64,6 @@ export const subapp: ReactSubApp = {
 ```
 
 
-## Core Concepts
-
-### SubApp Architecture
-
-SubApps are self-contained, independently developed units within your application. Each SubApp encapsulates:
-- Component implementation
-- State management
-- Data fetching logic
-- Feature configuration
-
-```tsx
-import { ReactSubApp } from "@xarc/react";
-import { reduxFeature } from "@xarc/react-redux";
-import { reactRouterFeature } from "@xarc/react-router";
-
-export const subapp: ReactSubApp = {
-  Component: MyComponent,
-  wantFeatures: [
-    reduxFeature({ React, shareStore: true }),
-    reactRouterFeature({ React, history: true })
-  ]
-};
-```
 
 ## Usage Examples
 
@@ -577,43 +555,6 @@ interface AppContextFeatureOptions {
 }
 ```
 
-### Context and Utilities
-
-#### `AppContext`
-
-React context for sharing application-level data across SubApps.
-
-```tsx
-import { AppContext } from "@xarc/react";
-
-const MyComponent = () => {
-  const contextValue = React.useContext(AppContext);
-  return <div>{/* Use context value */}</div>;
-};
-```
-
-## Client-Side Rendering & ReactDOM Integration
-
-The `@xarc/react` framework handles ReactDOM.render functionality internally using React 18's modern rendering APIs. Understanding how this works is crucial for efficient SubApp development.
-
-### React 18 Rendering APIs
-
-The framework automatically chooses the appropriate rendering method based on your SubApp's SSR configuration:
-
-#### For SSR-enabled SubApps (Hydration)
-```tsx
-// Framework automatically uses React 18's hydrateRoot for SSR
-import { hydrateRoot } from "react-dom/client";
-hydrateRoot(element, <Component />);
-```
-
-#### For Client-Only SubApps 
-```tsx
-// Framework automatically uses React 18's createRoot for CSR
-import { createRoot } from "react-dom/client";
-createRoot(element).render(<Component />);
-```
-
 ### How Rendering is Triggered
 
 The framework handles component rendering through the `BrowserReactLib` class:
@@ -656,69 +597,6 @@ import {
   createTemplateTags, // Template tag function (Node.js only)
   PageRenderer        // Page renderer (Node.js only)
 } from "@xarc/react";
-```
-
-### Legacy ReactDOM.render Migration
-
-If migrating from legacy ReactDOM.render patterns:
-
-#### Before (Legacy)
-```tsx
-// Old pattern - don't use this
-import ReactDOM from "react-dom";
-ReactDOM.render(<Component />, element);
-```
-
-#### After (Xarc Framework)
-```tsx
-// Let the framework handle rendering
-import { declareSubApp } from "@xarc/react";
-
-export const MyApp = declareSubApp({
-  name: "my-app",
-  getModule: () => import("./my-component")
-});
-
-// Framework automatically handles React 18 rendering
-```
-
-### Performance Considerations
-
-- **SSR + Hydration**: Fastest perceived loading, SEO-friendly
-- **Client-Only Rendering**: Better for dynamic, interactive content
-- **Streaming SSR**: Use `useStream={true}` for large pages
-- **Concurrent Features**: React 18's concurrent features work out-of-the-box
-
-## Related Packages
-
-The Xarc React ecosystem includes several complementary packages:
-
-- [`@xarc/react-redux`](https://www.npmjs.com/package/@xarc/react-redux) - Redux integration
-- [`@xarc/react-router`](https://www.npmjs.com/package/@xarc/react-router) - React Router integration  
-- [`@xarc/react-query`](https://www.npmjs.com/package/@xarc/react-query) - React Query integration
-- [`@xarc/app`](https://www.npmjs.com/package/@xarc/app) - Core Xarc application framework
-- [`@xarc/webpack`](https://www.npmjs.com/package/@xarc/webpack) - Webpack configuration
-
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guide](../../CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/electrode-io/electrode.git
-cd electrode
-
-# Install dependencies
-npm install
-
-# Build the package
-cd packages/xarc-react
-npm run build
-
-# Run tests
-npm test
 ```
 
 ## License
