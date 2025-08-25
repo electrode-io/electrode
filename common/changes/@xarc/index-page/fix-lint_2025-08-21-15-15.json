@@ -1,10 +1,10 @@
 {
   "changes": [
     {
-      "packageName": "@xarc/app",
+      "packageName": "@xarc/index-page",
       "comment": "",
       "type": "none"
     }
   ],
-  "packageName": "@xarc/app"
+  "packageName": "@xarc/index-page"
 }

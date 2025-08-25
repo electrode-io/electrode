@@ -49,7 +49,7 @@ module.exports = function setup(setupContext) {
 
   const namespace = _.get(setupContext, "routeOptions.namespace");
 
-  let runtimeEntryPoints = [];
+  const runtimeEntryPoints = [];
 
   const namespaceScriptJs = namespace ? `window.__default__namespace="${namespace}";` : "";
 
