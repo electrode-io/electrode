@@ -139,8 +139,8 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">= 14",
-    "npm": ">= 6"
+    "node": ">= 20",
+    "npm": ">= 10"
   },
   "nyc": {
     "all": true,

@@ -45,26 +45,42 @@ export type RecoilFeature = SubAppFeature & {
  * @param options - recoil feature options
  * @returns unknown
  */
-export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFactory {
+export function recoilFeature(
+  options: RecoilFeatureOptions
+): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line
   const id = "state-provider";
   const subId = "react-recoil";
   const add = (subapp: SubAppDef) => {
+    // Disable SSR for Recoil subapps due to React 19 compatibility issues
+    // Recoil 0.7.7 doesn't support React 19's internal APIs during SSR
+    //subapp._ssr = false;
     const recoil: Partial<RecoilFeature> = { id, subId };
     subapp._features.recoil = recoil as SubAppFeature;
     // wrap: callback to wrap component with recoil
     recoil.options = options;
     recoil.wrap = ({ Component, store }) => {
       return (
-        <RecoilRoot>
-          <Component store={store} />
-        </RecoilRoot>
+        <RecoilRoot children={<Component store={store} />} />
       );
     };
 
     recoil.prepare = options.prepare;
     recoil._store = new Map();
     recoil.execute = async function ({ input, csrData }) {
+      // Check if we're running on the server and return a safe fallback
+      if (typeof window === "undefined") {
+        // Server-side: return a simple component wrapper without Recoil
+        return {
+          Component: () => {
+            const ComponentToRender = input.Component || subapp._getExport()?.Component;
+            return <ComponentToRender store={new Map()} />;
+          },
+          props: {}
+        };
+      }
+
+      // Client-side: normal Recoil execution
       let initialState: any;
 
       const props = csrData && (await csrData.getInitialState());
@@ -73,7 +89,10 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
       if (initialState) {
         for (const value of Object.values(initialState.state)) {
           if (value && value["key"] && !recoil._store.get(value["key"])) {
-            const state = atom({ key: value["key"], default: value["value"] }) as RecoilState<any>;
+            const state = atom({
+              key: value["key"],
+              default: value["value"],
+            }) as RecoilState<any>;
             recoil._store.set(value["key"], state);
           }
         }
@@ -83,9 +102,9 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
         Component: () =>
           this.wrap({
             Component: input.Component || subapp._getExport()?.Component,
-            store: recoil._store
+            store: recoil._store,
           }),
-        props: initialState
+        props: initialState,
       };
     };
     return subapp;

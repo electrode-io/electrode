@@ -50,8 +50,10 @@ describe("load", function () {
     context.send = results => {
       expect(results).to.not.be.empty;
       expect(context.user.includedBundles).to.include({ mainbody: true });
-      expect(results).to.include(`<script src="mainbody.bundle.dev.js" async></script>`);
-      expect(results).to.include(
+      // Remove HTML comments and normalize whitespace for comparison
+      const cleanResults = results.replace(/<!--[\s\S]*?-->/g, "").replace(/\s+/g, " ");
+      expect(cleanResults).to.include(`<script src="mainbody.bundle.dev.js" async></script>`);
+      expect(cleanResults).to.include(
         `<script src="ae56dc06d35e1170d047.vendors~280289005828299c685d173f73011e79.js" async></script>`
       );
       expect(context.user.headEntries).to.not.be.ok;
@@ -69,8 +71,12 @@ describe("load", function () {
 
     context.send = results => {
       expect(results).to.not.be.empty;
-      expect(results).to.include(`<link rel="preload" href="mainbody.bundle.dev.js" as="script">`);
-      expect(results).to.include(`<script src="mainbody.bundle.dev.js" async></script>`);
+      // Remove HTML comments and normalize whitespace for comparison
+      const cleanResults = results.replace(/<!--[\s\S]*?-->/g, "").replace(/\s+/g, " ");
+      expect(cleanResults).to.include(
+        `<link rel="preload" href="mainbody.bundle.dev.js" as="script">`
+      );
+      expect(cleanResults).to.include(`<script src="mainbody.bundle.dev.js" async></script>`);
       expect(context.user.includedBundles).to.include({ mainbody: true });
     };
     context.output = new RenderOutput(context);

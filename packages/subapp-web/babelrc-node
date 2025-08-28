@@ -1,9 +1,0 @@
-{
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "8.15.0"
-      }
-    } ], "react"
-  ]
-}

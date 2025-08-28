@@ -4,7 +4,7 @@
 
 const { registerSubApp } = require("subapp-util");
 
-const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec");
+const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec.js");
 
 const { setupFramework } = require("./util");
 const lazyLoadSubApp = () => {};
