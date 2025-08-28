@@ -589,7 +589,7 @@
     {
       "packageName": "@xarc/react-recoil",
       "projectFolder": "packages/xarc-react-recoil",
-      "shouldPublish": true,
+      "shouldPublish": false,
       "skipRushCheck": true
     },
     {

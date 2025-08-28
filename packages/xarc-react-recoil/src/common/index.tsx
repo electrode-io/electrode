@@ -54,15 +54,13 @@ export function recoilFeature(
   const add = (subapp: SubAppDef) => {
     // Disable SSR for Recoil subapps due to React 19 compatibility issues
     // Recoil 0.7.7 doesn't support React 19's internal APIs during SSR
-    //subapp._ssr = false;
+    subapp._ssr = false;
     const recoil: Partial<RecoilFeature> = { id, subId };
     subapp._features.recoil = recoil as SubAppFeature;
     // wrap: callback to wrap component with recoil
     recoil.options = options;
     recoil.wrap = ({ Component, store }) => {
-      return (
-        <RecoilRoot children={<Component store={store} />} />
-      );
+      return <RecoilRoot children={<Component store={store} />} />;
     };
 
     recoil.prepare = options.prepare;
@@ -73,10 +71,11 @@ export function recoilFeature(
         // Server-side: return a simple component wrapper without Recoil
         return {
           Component: () => {
-            const ComponentToRender = input.Component || subapp._getExport()?.Component;
+            const ComponentToRender =
+              input.Component || subapp._getExport()?.Component;
             return <ComponentToRender store={new Map()} />;
           },
-          props: {}
+          props: {},
         };
       }
 
