@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app",
+      "comment": "ts config changes to support ES2020",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/app"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-server",
+      "comment": "Upgrade to React 19",
+      "type": "major"
+    }
+  ],
+  "packageName": "subapp-server"
+}

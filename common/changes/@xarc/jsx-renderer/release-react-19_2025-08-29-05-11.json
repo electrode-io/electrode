@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/jsx-renderer",
+      "comment": "Support for ES2020",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/jsx-renderer"
+}

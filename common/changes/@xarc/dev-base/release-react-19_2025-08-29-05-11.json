@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/dev-base",
+      "comment": "React 19 changes",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/dev-base"
+}

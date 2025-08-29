@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/tag-renderer",
+      "comment": "Upgrade to React 19",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/tag-renderer"
+}

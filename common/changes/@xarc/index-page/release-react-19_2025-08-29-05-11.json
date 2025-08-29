@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/index-page",
+      "comment": "Support for ES2020",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/index-page"
+}

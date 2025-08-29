@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/webpack",
+      "comment": "Upgrade to React 19",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/webpack"
+}

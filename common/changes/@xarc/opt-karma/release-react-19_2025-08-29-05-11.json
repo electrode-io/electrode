@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/opt-karma",
+      "comment": "remove enzyme adaptor",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/opt-karma"
+}

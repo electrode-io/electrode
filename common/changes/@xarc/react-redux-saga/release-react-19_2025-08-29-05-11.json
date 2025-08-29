@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/react-redux-saga",
+      "comment": "Upgrade to React 19",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/react-redux-saga"
+}

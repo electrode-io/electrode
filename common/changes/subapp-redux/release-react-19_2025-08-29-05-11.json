@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "subapp-redux",
+      "comment": "Upgrade to React 19",
+      "type": "major"
+    }
+  ],
+  "packageName": "subapp-redux"
+}

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "React 19 upgrade and support for ES2020",
+      "type": "major"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}
