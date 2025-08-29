@@ -1,6 +1,13 @@
 # Change Log - @xarc/render-context
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+
+## 2.0.0
+Fri, 29 Aug 2025 05:42:40 GMT
+
+### Breaking changes
+
+- Upgrade to React 19
 
 ## 1.0.13
 Fri, 06 Sep 2024 17:12:11 GMT

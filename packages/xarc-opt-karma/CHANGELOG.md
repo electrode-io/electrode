@@ -1,6 +1,13 @@
 # Change Log - @xarc/opt-karma
 
-This log was last generated on Mon, 17 Jul 2023 19:21:10 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+
+## 5.0.0
+Fri, 29 Aug 2025 05:42:40 GMT
+
+### Breaking changes
+
+- remove enzyme adaptor
 
 ## 4.0.0
 Mon, 17 Jul 2023 19:21:10 GMT

@@ -2,6 +2,23 @@
   "name": "@xarc/react-query",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "@xarc/react-query_v3.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade to React 19"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.4.2` to `1.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.0",
       "tag": "@xarc/react-query_v2.0.0",
       "date": "Fri, 25 Oct 2024 17:22:04 GMT",

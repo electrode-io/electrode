@@ -1,6 +1,13 @@
 # Change Log - @xarc/react-router
 
-This log was last generated on Thu, 21 Aug 2025 16:09:33 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+
+## 3.0.0
+Fri, 29 Aug 2025 05:42:40 GMT
+
+### Breaking changes
+
+- Upgrade to React 19
 
 ## 2.0.1
 Thu, 21 Aug 2025 16:09:33 GMT

@@ -2,6 +2,29 @@
   "name": "subapp-web",
   "entries": [
     {
+      "version": "4.0.0",
+      "tag": "subapp-web_v4.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Dependency @xarc/app version bump from ^12.1.0 to ^12.2.0."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^12.0.0 to ^12.1.0."
+          },
+          {
+            "comment": "Dependency @xarc/app version bump from ^12.2.0 to ^13.0.0."
+          }
+        ],
+        "major": [
+          {
+            "comment": "Upgrade to React 19"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.0",
       "tag": "subapp-web_v3.0.0",
       "date": "Wed, 05 Feb 2025 04:10:48 GMT",

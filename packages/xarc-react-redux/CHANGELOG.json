@@ -2,6 +2,23 @@
   "name": "@xarc/react-redux",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "@xarc/react-redux_v3.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade to React 19"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.4.2` to `1.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.0",
       "tag": "@xarc/react-redux_v2.0.0",
       "date": "Wed, 18 Sep 2024 19:17:24 GMT",

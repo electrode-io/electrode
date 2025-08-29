@@ -24,7 +24,7 @@
     "react-dom": "^19.1.0"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.4.2",
+    "@xarc/subapp": "^1.0.0",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
