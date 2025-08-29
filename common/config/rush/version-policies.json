@@ -109,7 +109,7 @@
      *
      * Valid values are: "prerelease", "release", "minor", "patch", "major"
      */
-    "nextBump": "major"
+    "nextBump": "minor"
   },
   {
     "definitionName": "lockStepVersion",
