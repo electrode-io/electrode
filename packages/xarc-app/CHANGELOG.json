@@ -2,6 +2,18 @@
   "name": "@xarc/app",
   "entries": [
     {
+      "version": "13.0.0",
+      "tag": "@xarc/app_v13.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "ts config changes to support ES2020"
+          }
+        ]
+      }
+    },
+    {
       "version": "12.2.0",
       "tag": "@xarc/app_v12.2.0",
       "date": "Thu, 21 Aug 2025 16:09:33 GMT",

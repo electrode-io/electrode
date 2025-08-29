@@ -1,6 +1,13 @@
 # Change Log - @xarc/dev-base
 
-This log was last generated on Fri, 06 Sep 2024 17:12:11 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+
+## 1.0.0
+Fri, 29 Aug 2025 05:42:40 GMT
+
+### Breaking changes
+
+- React 19 changes
 
 ## 0.1.3
 Fri, 06 Sep 2024 17:12:11 GMT

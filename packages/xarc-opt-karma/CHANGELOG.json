@@ -2,6 +2,18 @@
   "name": "@xarc/opt-karma",
   "entries": [
     {
+      "version": "5.0.0",
+      "tag": "@xarc/opt-karma_v5.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "remove enzyme adaptor"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.0.0",
       "tag": "@xarc/opt-karma_v4.0.0",
       "date": "Mon, 17 Jul 2023 19:21:10 GMT",

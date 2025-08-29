@@ -10,21 +10,21 @@ import { recoilFeature, RecoilFeature } from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
 
-const mockPrepare = async initialState => {
+const mockPrepare = async (initialState) => {
   return {
     initialState: {
       state: {
         todoListState: { key: "todoListState", value: [] },
-        todoListFilterState: { key: "todoListFilterState", value: "Show All" }
+        todoListFilterState: { key: "todoListFilterState", value: "Show All" },
       },
-      selectors: {}
-    }
+      selectors: {},
+    },
   };
 };
 
 const options = {
   React,
-  prepare: mockPrepare
+  prepare: mockPrepare,
 };
 
 const MockComponent = () => {
@@ -52,7 +52,7 @@ describe("reactRecoilFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
     container.declare("test", def);
 
@@ -80,7 +80,7 @@ describe("reactRecoilFeature", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
     } as SubAppDef;
 
     container.declare("test", def);
@@ -92,20 +92,25 @@ describe("reactRecoilFeature", function () {
       initialState: {
         state: {
           todoListState: { key: "todoListState", value: [] },
-          todoListFilterState: { key: "todoListFilterState", value: "Show All" }
+          todoListFilterState: {
+            key: "todoListFilterState",
+            value: "Show All",
+          },
         },
-        selectors: {}
-      }
+        selectors: {},
+      },
     };
 
     render(
       recoil.wrap({
         Component: MockComponent,
-        store: atomsMap
+        store: atomsMap,
       })
     );
 
-    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), {
+      timeout: 500,
+    });
 
     expect(element.innerHTML).contains(`test<p>mock-component-content</p>`);
   });

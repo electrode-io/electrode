@@ -2,6 +2,29 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "13.0.0",
+      "tag": "@xarc/app-dev_v13.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "React 19 upgrade and support for ES2020"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/dev-base\" from `^0.1.3` to `1.0.0`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/subapp\" from `^0.4.2` to `1.0.0`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/webpack\" from `^12.0.0` to `13.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "12.2.0",
       "tag": "@xarc/app-dev_v12.2.0",
       "date": "Thu, 21 Aug 2025 16:09:33 GMT",

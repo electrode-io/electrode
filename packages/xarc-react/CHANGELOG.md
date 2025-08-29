@@ -1,6 +1,13 @@
 # Change Log - @xarc/react
 
-This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+
+## 2.0.0
+Fri, 29 Aug 2025 05:42:40 GMT
+
+### Breaking changes
+
+- Upgrade to React 19
 
 ## 1.0.7
 Wed, 05 Feb 2025 04:10:48 GMT

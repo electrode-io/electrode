@@ -2,6 +2,29 @@
   "name": "@xarc/index-page",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@xarc/index-page_v2.0.0",
+      "date": "Fri, 29 Aug 2025 05:42:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Support for ES2020"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/jsx-renderer\" from `^1.0.16` to `2.0.0`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/render-context\" from `^1.0.13` to `2.0.0`"
+          },
+          {
+            "comment": "Updating dependency \"@xarc/tag-renderer\" from `^1.0.15` to `2.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.4",
       "tag": "@xarc/index-page_v1.2.4",
       "date": "Fri, 06 Sep 2024 17:12:11 GMT",

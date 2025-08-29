@@ -2,13 +2,12 @@
  * This is configuration file is used for advanced publishing configurations with Rush.
  * More documentation is available on the Rush website: https://rushjs.io
  */
-
 /**
  * A list of version policy definitions.  A "version policy" is a custom package versioning
  * strategy that affects "rush change", "rush version", and "rush publish".  The strategy applies
  * to a set of projects that are specified using the "versionPolicyName" field in rush.json.
  */
- [
+[
   // {
   //   /**
   //    * (Required) Indicates the kind of version policy being defined ("lockStepVersion" or "individualVersion").
@@ -102,7 +101,7 @@
   {
     "definitionName": "lockStepVersion",
     "policyName": "xarcAppVersion",
-    "version": "12.2.0",
+    "version": "13.0.0",
     /**
      * (Required) The type of bump that will be performed when publishing the next release.
      * When creating a release branch in Git, this field should be updated according to the
@@ -115,7 +114,7 @@
   {
     "definitionName": "lockStepVersion",
     "policyName": "archetypeDllVersion",
-    "version": "3.0.7",
+    "version": "3.0.8",
     "nextBump": "patch"
   }
 ]
