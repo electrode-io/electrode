@@ -10,7 +10,7 @@ const electrodeConfippet = require("electrode-confippet");
 const { loadRuntimeSupport } = require("@xarc/app");
 
 //
-const electrodeServer = require("@xarc/fastify-server");
+const { electrodeServer } = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events

@@ -32,7 +32,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.3",
     "@xarc/app": "^13.0.0",
-    "@xarc/fastify-server": "^4.0.10",
+    "@xarc/fastify-server": "^5.0.0",
     "@xarc/react": "^2.0.0",
     "@xarc/react-query": "^3.0.0",
     "@xarc/react-recoil": "^1.1.7",
