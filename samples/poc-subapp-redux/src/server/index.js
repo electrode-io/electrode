@@ -8,7 +8,7 @@ const electrodeConfippet = require("electrode-confippet");
 const { loadRuntimeSupport } = require("@xarc/app");
 
 //
-const electrodeServer = require("@xarc/fastify-server");
+const { electrodeServer } = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events
@@ -24,7 +24,7 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("complete", (data, next) => next());
 }
 
-const startServer = config => {
+const startServer = (config) => {
   if (!config.listener) {
     config.listener = setupElectrodeServerEvents;
   }
