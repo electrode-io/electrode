@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@xarc/app-dev",
+      "comment": "fix breaking test command",
+      "type": "none"
+    }
+  ],
+  "packageName": "@xarc/app-dev"
+}

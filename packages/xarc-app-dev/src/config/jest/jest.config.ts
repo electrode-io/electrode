@@ -3,14 +3,6 @@
 const Path = require("path");
 const _ = require("lodash");
 const fileMock = Path.join(__dirname, "__mocks__", "file-mock.js");
-const frameworkMock = Path.join(__dirname, "__mocks__", "framework-mock.js");
-const { getOptArchetypeRequire } = require("../../lib/utils");
-const optRequire = getOptArchetypeRequire(["@xarc/opt-jest", "electrode-archetype-opt-jest"]);
-
-const jestPkg = optRequire("jest/package.json");
-const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
-// Jest changed its config setting for setup files on version 24
-const SETUP_FILES_VERSION_SPLIT = 24;
 
 import { loadXarcOptions } from "../../lib/utils";
 
@@ -48,15 +40,8 @@ const jestDefaultConfig = {
 }
 };
 
-const jestSetupFilesDeprecated = { setupTestFrameworkScriptFile: frameworkMock };
-const jestSetupFilesNew = { setupFilesAfterEnv: [frameworkMock] };
-
-const jestSetupFilesConfig =
-  jestMajVersion >= SETUP_FILES_VERSION_SPLIT ? jestSetupFilesNew : jestSetupFilesDeprecated;
-
 export = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
-  jestSetupFilesConfig,
   xarcOptions.jest
 );

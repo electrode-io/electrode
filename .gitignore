@@ -530,3 +530,4 @@ common/autoinstallers/*/.npmrc
 
 # Heft temporary files
 .heft
+.github/instructions/wmt-copilot.instructions.md
