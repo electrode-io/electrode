@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "changeType": 1,
+      "comment": "Dependency @xarc/app version bump from ^13.0.0 to ^13.1.0.",
+      "packageName": "subapp-react"
+    }
+  ],
+  "packageName": "subapp-react",
+  "email": "Shubham.Sharma3@walmart.com"
+}

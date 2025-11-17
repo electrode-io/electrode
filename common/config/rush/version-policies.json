@@ -101,7 +101,7 @@
   {
     "definitionName": "lockStepVersion",
     "policyName": "xarcAppVersion",
-    "version": "13.0.0",
+    "version": "13.1.0",
     /**
      * (Required) The type of bump that will be performed when publishing the next release.
      * When creating a release branch in Git, this field should be updated according to the
@@ -114,7 +114,7 @@
   {
     "definitionName": "lockStepVersion",
     "policyName": "archetypeDllVersion",
-    "version": "3.0.8",
+    "version": "3.0.9",
     "nextBump": "patch"
   }
 ]
