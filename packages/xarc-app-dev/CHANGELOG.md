@@ -1,6 +1,13 @@
 # Change Log - @xarc/app-dev
 
-This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Nov 2025 03:19:05 GMT and should not be manually modified.
+
+## 13.1.0
+Mon, 17 Nov 2025 03:19:05 GMT
+
+### Updates
+
+- fix breaking test command
 
 ## 13.0.0
 Fri, 29 Aug 2025 05:42:40 GMT

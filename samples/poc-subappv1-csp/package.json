@@ -37,7 +37,7 @@
   "dependencies": {
     "@babel/runtime": "^7.21.0",
     "@module-federation/concat-runtime": "^0.0.1",
-    "@xarc/app": "^13.0.0",
+    "@xarc/app": "^13.1.0",
     "@xarc/fastify-server": "^3.3.0",
     "@xarc/index-page": "^2.0.0",
     "electrode-confippet": "^1.7.1",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@xarc/opt-eslint": "^3.0.1",
-    "@xarc/app-dev": "^13.0.0",
+    "@xarc/app-dev": "^13.1.0",
     "@xarc/run": "^1.1.1",
     "webpack-hot-middleware": "^2.25.3"
   },

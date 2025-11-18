@@ -1,0 +1,16 @@
+{
+  "changes": [
+    {
+      "changeType": 1,
+      "comment": "Dependency @xarc/app version bump from ^13.0.0 to ^13.1.0.",
+      "packageName": "@xarc/webpack"
+    },
+    {
+      "changeType": 1,
+      "comment": "Dependency @xarc/app-dev version bump from ^13.0.0 to ^13.1.0.",
+      "packageName": "@xarc/webpack"
+    }
+  ],
+  "packageName": "@xarc/webpack",
+  "email": "Shubham.Sharma3@walmart.com"
+}

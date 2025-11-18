@@ -34,7 +34,7 @@
   "dependencies": {
     "@babel/runtime": "^7.21.5",
     "@module-federation/concat-runtime": "~0.0.1",
-    "@xarc/app": "^13.0.0",
+    "@xarc/app": "^13.1.0",
     "@xarc/fastify-server": "^4.0.10",
     "@xarc/react": "^2.0.0",
     "@xarc/react-query": "^3.0.0",
@@ -48,7 +48,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20.14.10",
-    "@xarc/app-dev": "^13.0.0",
+    "@xarc/app-dev": "^13.1.0",
     "@xarc/opt-jest": "^3.0.0",
     "@xarc/opt-postcss": "^3.0.0",
     "@xarc/opt-sass": "^4.1.1",
