@@ -1,16 +1,17 @@
 import { loadTasks } from "@xarc/module-dev";
-const xrun = loadTasks();
-const xsh = require("xsh");
+import * as xrun from "@xarc/run";
+import { $ } from "zx";
 
-const { serial, exec } = xrun;
+loadTasks();
+
+const { concurrent } = xrun;
 
 xrun.load("user", {
-  build: () => {
-    xsh.$.rm("-rf", "lib");
-    xsh.$.rm("-rf", "lib-esm");
-    return serial(
-      exec("tsc"),
-      exec("tsc --build tsconfig.esm.json")
+  build: async () => {
+    await $`rm -rf lib dist-node-esm dist-node-cjs`;
+    return concurrent(
+      async () => await $`tsc --build tsconfig.cjs.json --pretty`,
+      async () => await $`tsc --build tsconfig.esm.json --pretty`
     );
   }
 });

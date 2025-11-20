@@ -1,0 +1,13 @@
+dist-node-esm
+dist-node-cjs
+node_modules
+.rush
+.vscode
+.idea
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.DS_Store
+.npmignore

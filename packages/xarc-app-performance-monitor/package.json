@@ -47,6 +47,7 @@
   "devDependencies": {
     "@xarc/run": "~2.3.0",
     "@types/node": "~24.10.1",
-    "@xarc/module-dev": "~5.0.0"
+    "@xarc/module-dev": "~5.0.0",
+    "zx": "~8.8.5"
   }
 }
