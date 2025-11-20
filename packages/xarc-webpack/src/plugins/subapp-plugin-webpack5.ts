@@ -6,7 +6,7 @@ import Path = require("path");
 
 /**
  * This plugin (SubAppWebpackPlugin) add hooks for webpack's compiler and parser, and listen
- * for any code that call the SubApp APIs declareSubApp or createDynamicComponent.
+ * for any code that call the SubApp APIs declareSubApp or createDynamicComponent.s
  *
  * It then take the parser's AST to analyze the arguments passed to the APIs to extract subapp
  * import module and name.
@@ -43,6 +43,8 @@ const assert = (ok: boolean, fail: string | Function) => {
 
 const SHIM_parseCommentOptions = Symbol("parseCommentOptions");
 const SYM_HMR_INJECT = Symbol("sym-hmr-inject");
+
+const isVerbose = (typeof process !== "undefined" && process.env?.VERBOSE === "true");
 
 import { hmrSetup } from "../client/hmr-accept";
 
@@ -86,6 +88,53 @@ class SubAppHotAcceptDependency extends ModuleDependency {
   get injected() {
     return this.parent[SYM_HMR_INJECT];
   }
+
+  /**
+   * Serialize dependency for webpack 5 filesystem cache
+   *
+   * @param context - webpack serialization context
+   */
+  serialize(context) {
+    const { write } = context;
+
+    // Serialize parent module identifier (not the full object reference)
+    write(this.parent ? this.parent.identifier() : null);
+
+    // Serialize only the data parts of subapp (exclude functions)
+    write({
+      name: this.subapp.name,
+      source: this.subapp.source,
+      module: this.subapp.module,
+      range: this.subapp.range,
+      loc: this.subapp.loc,
+    });
+
+    // Call parent class serialization
+    super.serialize(context);
+  }
+
+  /**
+   * Deserialize dependency from webpack 5 filesystem cache
+   *
+   * @param context - webpack deserialization context
+   */
+  deserialize(context) {
+    const { read } = context;
+
+    // Read parent identifier (will be resolved by webpack)
+    const parentIdentifier = read();
+    this._parentIdentifier = parentIdentifier;
+
+    // Read subapp data
+    this.subapp = read();
+
+    // Note: parent reference will be restored by webpack's module graph
+    // during the compilation process
+
+    // Call parent class deserialization
+    super.deserialize(context);
+  }
+
 }
 
 const where = (source, loc) => {
@@ -143,6 +192,56 @@ ${script.join("\n")} /***/`
   }
 }
 
+// Link template to dependency class (webpack convention)
+SubAppHotAcceptDependency.Template = SubAppHotAcceptTemplate;
+
+/**
+ * Register SubAppHotAcceptDependency for webpack 5 filesystem cache serialization
+ * This enables persistent caching across server restarts
+ *
+ * @param compiler - webpack compiler instance
+ */
+const registerSubAppDependencySerializer = (compiler) => {
+  const { webpack } = compiler;
+
+  if (isVerbose) {
+    process.stderr.write("[SubApp] Registering serializer...\n");
+    process.stderr.write(`[SubApp] webpack available: ${!!webpack}\n`);
+    process.stderr.write(`[SubApp] webpack.util available: ${!!(webpack && webpack.util)}\n`);
+    process.stderr.write(`[SubApp] webpack.util.serialization available: ${!!(webpack && webpack.util && webpack.util.serialization)}\n`);
+  }
+
+  if (webpack && webpack.util && webpack.util.serialization) {
+    try {
+      webpack.util.serialization.register(
+        SubAppHotAcceptDependency,
+        "@xarc/webpack/lib/plugins/SubAppHotAcceptDependency",
+        null,
+        {
+          serialize(obj, context) {
+            obj.serialize(context);
+          },
+          deserialize(context) {
+            const obj = new SubAppHotAcceptDependency(null, null, null);
+            obj.deserialize(context);
+            return obj;
+          }
+        }
+      );
+      if (isVerbose) {
+        process.stderr.write("[SubApp] ✅ Serializer registered successfully for SubAppHotAcceptDependency\n");
+      }
+    } catch (error) {
+      process.stderr.write(`[SubApp] ❌ Failed to register serializer: ${error.message}\n`);
+      if (isVerbose) {
+        process.stderr.write(`[SubApp] Error stack: ${error.stack}\n`);
+      }
+    }
+  } else {
+    process.stderr.write("[SubApp] ⚠️  Webpack serialization API not available - filesystem cache will not work\n");
+  }
+};
+
 /**
  * This plugin will look for `declareSubApp` calls and do these:
  *
@@ -185,6 +284,10 @@ export class SubAppWebpackPlugin {
      */
     assetsFile?: string;
   } = {}) {
+    if (isVerbose) {
+      process.stderr.write("\n🔧🔧🔧 [SubApp Plugin] CONSTRUCTOR CALLED 🔧🔧🔧\n");
+      process.stderr.write(`[SubApp Plugin] assetsFile: ${assetsFile}\n`);
+    }
     this._declareApiNames = [].concat(declareApiName);
     this._subApps = {};
     this._webpackMajorVersion = webpackVersion;
@@ -299,6 +402,11 @@ export class SubAppWebpackPlugin {
   }
 
   apply(compiler) {
+    // Register serializer first for webpack 5 filesystem cache support
+    process.stderr.write("\n🔧 [SubApp Plugin] apply() method called\n");
+    registerSubAppDependencySerializer(compiler);
+    process.stderr.write("🔧 [SubApp Plugin] registerSubAppDependencySerializer() completed\n\n");
+
     this._tapAssets(compiler);
 
     const findGetModule = props => {
