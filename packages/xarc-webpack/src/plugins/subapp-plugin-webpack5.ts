@@ -6,7 +6,7 @@ import Path = require("path");
 
 /**
  * This plugin (SubAppWebpackPlugin) add hooks for webpack's compiler and parser, and listen
- * for any code that call the SubApp APIs declareSubApp or createDynamicComponent.
+ * for any code that call the SubApp APIs declareSubApp or createDynamicComponent.s
  *
  * It then take the parser's AST to analyze the arguments passed to the APIs to extract subapp
  * import module and name.
@@ -44,7 +44,7 @@ const assert = (ok: boolean, fail: string | Function) => {
 const SHIM_parseCommentOptions = Symbol("parseCommentOptions");
 const SYM_HMR_INJECT = Symbol("sym-hmr-inject");
 
-const isVerbose = (typeof process !== 'undefined' && process.env?.VERBOSE === 'true');
+const isVerbose = (typeof process !== "undefined" && process.env?.VERBOSE === "true");
 
 import { hmrSetup } from "../client/hmr-accept";
 
@@ -205,7 +205,7 @@ const registerSubAppDependencySerializer = (compiler) => {
   const { webpack } = compiler;
 
   if (isVerbose) {
-    process.stderr.write('[SubApp] Registering serializer...\n');
+    process.stderr.write("[SubApp] Registering serializer...\n");
     process.stderr.write(`[SubApp] webpack available: ${!!webpack}\n`);
     process.stderr.write(`[SubApp] webpack.util available: ${!!(webpack && webpack.util)}\n`);
     process.stderr.write(`[SubApp] webpack.util.serialization available: ${!!(webpack && webpack.util && webpack.util.serialization)}\n`);
@@ -229,7 +229,7 @@ const registerSubAppDependencySerializer = (compiler) => {
         }
       );
       if (isVerbose) {
-        process.stderr.write('[SubApp] ✅ Serializer registered successfully for SubAppHotAcceptDependency\n');
+        process.stderr.write("[SubApp] ✅ Serializer registered successfully for SubAppHotAcceptDependency\n");
       }
     } catch (error) {
       process.stderr.write(`[SubApp] ❌ Failed to register serializer: ${error.message}\n`);
@@ -238,7 +238,7 @@ const registerSubAppDependencySerializer = (compiler) => {
       }
     }
   } else {
-    process.stderr.write('[SubApp] ⚠️  Webpack serialization API not available - filesystem cache will not work\n');
+    process.stderr.write("[SubApp] ⚠️  Webpack serialization API not available - filesystem cache will not work\n");
   }
 };
 
@@ -285,7 +285,7 @@ export class SubAppWebpackPlugin {
     assetsFile?: string;
   } = {}) {
     if (isVerbose) {
-      process.stderr.write('\n🔧🔧🔧 [SubApp Plugin] CONSTRUCTOR CALLED 🔧🔧🔧\n');
+      process.stderr.write("\n🔧🔧🔧 [SubApp Plugin] CONSTRUCTOR CALLED 🔧🔧🔧\n");
       process.stderr.write(`[SubApp Plugin] assetsFile: ${assetsFile}\n`);
     }
     this._declareApiNames = [].concat(declareApiName);
@@ -403,9 +403,9 @@ export class SubAppWebpackPlugin {
 
   apply(compiler) {
     // Register serializer first for webpack 5 filesystem cache support
-    process.stderr.write('\n🔧 [SubApp Plugin] apply() method called\n');
+    process.stderr.write("\n🔧 [SubApp Plugin] apply() method called\n");
     registerSubAppDependencySerializer(compiler);
-    process.stderr.write('🔧 [SubApp Plugin] registerSubAppDependencySerializer() completed\n\n');
+    process.stderr.write("🔧 [SubApp Plugin] registerSubAppDependencySerializer() completed\n\n");
 
     this._tapAssets(compiler);
 
