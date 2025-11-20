@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "electrode-node-resolver",
+      "comment": "moved optional-require from transitive dependency to actual dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "electrode-node-resolver"
+}
