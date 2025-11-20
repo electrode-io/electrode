@@ -284,8 +284,10 @@ export class SubAppWebpackPlugin {
      */
     assetsFile?: string;
   } = {}) {
-    process.stderr.write('\n🔧🔧🔧 [SubApp Plugin] CONSTRUCTOR CALLED 🔧🔧🔧\n');
-    process.stderr.write(`[SubApp Plugin] assetsFile: ${assetsFile}\n`);
+    if (isVerbose) {
+      process.stderr.write('\n🔧🔧🔧 [SubApp Plugin] CONSTRUCTOR CALLED 🔧🔧🔧\n');
+      process.stderr.write(`[SubApp Plugin] assetsFile: ${assetsFile}\n`);
+    }
     this._declareApiNames = [].concat(declareApiName);
     this._subApps = {};
     this._webpackMajorVersion = webpackVersion;
