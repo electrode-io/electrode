@@ -616,6 +616,12 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },
+    {
+      "packageName": "@xarc/app-performance-monitor",
+      "projectFolder": "packages/xarc-app-performance-monitor",
+      "shouldPublish": true,
+      "skipRushCheck": true
+    },
     // Sample apps
     {
       "packageName": "poc-subapp",

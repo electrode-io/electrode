@@ -1,0 +1,52 @@
+{
+  "name": "@xarc/app-performance-monitor",
+  "version": "1.0.0",
+  "description": "Client-side performance monitoring utility for tracking bundle loads, paint metrics, and web vitals",
+  "main": "lib/index.js",
+  "module": "lib-esm/index.js",
+  "types": "lib/index.d.ts",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git",
+    "directory": "packages/xarc-app-performance-monitor"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "xrun user/build",
+    "test": "xrun xarc/test-only",
+    "prepublishOnly": "xrun build"
+  },
+  "keywords": [
+    "performance",
+    "monitoring",
+    "metrics",
+    "web-vitals",
+    "lcp",
+    "fid",
+    "fcp",
+    "client-side",
+    "browser",
+    "bundle",
+    "analytics"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "engines": {
+    "node": ">= 14",
+    "npm": ">= 6"
+  },
+  "files": [
+    "lib",
+    "lib-esm",
+    "src"
+  ],
+  "sideEffects": false,
+  "devDependencies": {
+    "@xarc/run": "~2.3.0",
+    "@types/node": "~24.10.1",
+    "@xarc/module-dev": "~5.0.0"
+  }
+}
