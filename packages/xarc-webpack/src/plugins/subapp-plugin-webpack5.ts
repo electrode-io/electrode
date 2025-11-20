@@ -44,6 +44,8 @@ const assert = (ok: boolean, fail: string | Function) => {
 const SHIM_parseCommentOptions = Symbol("parseCommentOptions");
 const SYM_HMR_INJECT = Symbol("sym-hmr-inject");
 
+const isVerbose = (typeof process !== 'undefined' && process.env?.VERBOSE === 'true');
+
 import { hmrSetup } from "../client/hmr-accept";
 
 /**
@@ -202,10 +204,12 @@ SubAppHotAcceptDependency.Template = SubAppHotAcceptTemplate;
 const registerSubAppDependencySerializer = (compiler) => {
   const { webpack } = compiler;
 
-  process.stderr.write('[SubApp] Registering serializer...\n');
-  process.stderr.write(`[SubApp] webpack available: ${!!webpack}\n`);
-  process.stderr.write(`[SubApp] webpack.util available: ${!!(webpack && webpack.util)}\n`);
-  process.stderr.write(`[SubApp] webpack.util.serialization available: ${!!(webpack && webpack.util && webpack.util.serialization)}\n`);
+  if (isVerbose) {
+    process.stderr.write('[SubApp] Registering serializer...\n');
+    process.stderr.write(`[SubApp] webpack available: ${!!webpack}\n`);
+    process.stderr.write(`[SubApp] webpack.util available: ${!!(webpack && webpack.util)}\n`);
+    process.stderr.write(`[SubApp] webpack.util.serialization available: ${!!(webpack && webpack.util && webpack.util.serialization)}\n`);
+  }
 
   if (webpack && webpack.util && webpack.util.serialization) {
     try {
@@ -224,10 +228,14 @@ const registerSubAppDependencySerializer = (compiler) => {
           }
         }
       );
-      process.stderr.write('[SubApp] ✅ Serializer registered successfully for SubAppHotAcceptDependency\n');
+      if (isVerbose) {
+        process.stderr.write('[SubApp] ✅ Serializer registered successfully for SubAppHotAcceptDependency\n');
+      }
     } catch (error) {
       process.stderr.write(`[SubApp] ❌ Failed to register serializer: ${error.message}\n`);
-      process.stderr.write(`[SubApp] Error stack: ${error.stack}\n`);
+      if (isVerbose) {
+        process.stderr.write(`[SubApp] Error stack: ${error.stack}\n`);
+      }
     }
   } else {
     process.stderr.write('[SubApp] ⚠️  Webpack serialization API not available - filesystem cache will not work\n');
