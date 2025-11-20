@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "dist-node-cjs",
+    "lib": ["ES2020"],
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "target": "ES2020",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src"]
+}
