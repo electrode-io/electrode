@@ -616,6 +616,12 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },
+    {
+      "packageName": "@xarc/webpack-metrics-plugin",
+      "projectFolder": "packages/xarc-webpack-metrics-plugin",
+      "shouldPublish": true,
+      "skipRushCheck": true
+    },
     // Sample apps
     {
       "packageName": "poc-subapp",
