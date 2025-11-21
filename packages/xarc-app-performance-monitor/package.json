@@ -2,9 +2,9 @@
   "name": "@xarc/app-performance-monitor",
   "version": "1.0.0",
   "description": "Client-side performance monitoring utility for tracking bundle loads, paint metrics, and web vitals",
-  "main": "lib/index.js",
-  "module": "lib-esm/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist-node-cjs/index.js",
+  "module": "dist-node-esm/index.js",
+  "types": "dist-node-cjs/index.d.ts",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
@@ -42,8 +42,8 @@
     "npm": ">= 6"
   },
   "files": [
-    "lib",
-    "lib-esm",
+    "dist-node-cjs",
+    "dist-node-esm",
     "src"
   ],
   "sideEffects": false,

@@ -267,4 +267,12 @@ if (typeof window !== 'undefined') {
   defaultMonitor = new PerformanceMonitor();
 }
 
+// Export server-side utilities
+export {
+  generatePerfMonitorScript,
+  injectPerfMonitorScript,
+  extractNonce,
+  type InjectScriptOptions
+} from './server-utils';
+
 export default defaultMonitor;
