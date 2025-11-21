@@ -1,0 +1,57 @@
+{
+  "name": "@xarc/app-performance-monitor",
+  "version": "1.0.0",
+  "description": "Client-side performance monitoring utility for tracking bundle loads, paint metrics, and web vitals",
+  "main": "dist-node-cjs/index.js",
+  "module": "dist-node-esm/index.js",
+  "types": "dist-node-cjs/index.d.ts",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git",
+    "directory": "packages/xarc-app-performance-monitor"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "xrun user/build",
+    "test": "echo \"Tests are not implemented yet\"; exit 0;",
+    "coverage": "echo \"Coverage is not implemented yet\"; exit 0;",
+    "check": "echo \"Check is not implemented yet\"; exit 0;",
+    "lint": "echo \"Lint is not implemented yet\"; exit 0;",
+    "prepublishOnly": "xrun build"
+  },
+  "keywords": [
+    "performance",
+    "monitoring",
+    "metrics",
+    "web-vitals",
+    "lcp",
+    "fid",
+    "fcp",
+    "client-side",
+    "browser",
+    "bundle",
+    "analytics"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "engines": {
+    "node": ">= 14",
+    "npm": ">= 6"
+  },
+  "files": [
+    "dist-node-cjs",
+    "dist-node-esm",
+    "src"
+  ],
+  "sideEffects": false,
+  "devDependencies": {
+    "@xarc/run": "~2.3.0",
+    "@types/node": "~24.10.1",
+    "@xarc/module-dev": "~5.0.0",
+    "zx": "~8.8.5",
+    "require-at": "~1.0.6"
+  }
+}
