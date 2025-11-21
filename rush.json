@@ -616,6 +616,12 @@
       "shouldPublish": true,
       "skipRushCheck": true
     },
+    {
+      "packageName": "@xarc/webpack-devcache-config",
+      "projectFolder": "packages/xarc-webpack-devcache-config",
+      "shouldPublish": true,
+      "skipRushCheck": true
+    },
     // Sample apps
     {
       "packageName": "poc-subapp",
