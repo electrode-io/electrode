@@ -502,6 +502,9 @@ importers:
       xstdout:
         specifier: ^0.1.1
         version: 0.1.1
+      zx:
+        specifier: ~8.8.5
+        version: 8.8.5
 
 packages:
 
@@ -1999,7 +2002,7 @@ packages:
     version: 0.0.0
 
   '@rush-temp/app-performance-monitor@file:projects/app-performance-monitor.tgz':
-    resolution: {integrity: sha512-oYrD+mgtURUx30EnuKBs5dwsYsPyRIZJkF8feGFI0HZN52ERv23ywvZgxcuKA84kD/5hWEhzalREaFfEXXwGTQ==, tarball: file:projects/app-performance-monitor.tgz}
+    resolution: {integrity: sha512-ZNad4jZOwOzBO5fHdtEoHZ7YJijqZdJkovHYe6JKt3xSOHfJ8Wu7Jo5mXdSmKwgVIdK1BW/hoX9EyLStaYhZAg==, tarball: file:projects/app-performance-monitor.tgz}
     version: 0.0.0
 
   '@rush-temp/app@file:projects/app.tgz':
@@ -10966,6 +10969,7 @@ snapshots:
       '@types/node': 24.10.1
       '@xarc/module-dev': 5.0.0
       '@xarc/run': 2.3.0
+      require-at: 1.0.6
       zx: 8.8.5
 
   '@rush-temp/app@file:projects/app.tgz':
