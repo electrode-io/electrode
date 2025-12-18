@@ -1,0 +1,54 @@
+{
+  "name": "@xarc/webpack-devcache-config",
+  "version": "1.0.0",
+  "description": "Webpack 5 filesystem cache configuration helper for development mode",
+  "main": "dist-node-cjs/index.js",
+  "module": "dist-node-esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist-node-esm/index.js",
+      "require": "./dist-node-cjs/index.js"
+    }
+  },
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git",
+    "directory": "packages/xarc-webpack-devcache-config"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "xrun user/build",
+    "test": "echo \"tests not implemented yet\"; exit 0;",
+    "lint": "echo \"linting not implemented yet\"; exit 0;",
+    "prepublishOnly": "xrun build"
+  },
+  "keywords": [
+    "webpack",
+    "cache",
+    "filesystem",
+    "development",
+    "performance",
+    "build"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "engines": {
+    "node": ">= 14",
+    "npm": ">= 6"
+  },
+  "files": [
+    "dist-node-cjs",
+    "dist-node-esm",
+    "src"
+  ],
+  "devDependencies": {
+    "@xarc/run": "~2.3.0",
+    "@types/node": "~24.10.1",
+    "@xarc/module-dev": "~5.0.0",
+    "zx": "~8.8.5",
+    "tslib": "~2.8.1"
+  }
+}
