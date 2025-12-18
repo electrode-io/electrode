@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "lib": ["ES2020", "DOM"],
+    "sourceMap": true,
+    "declaration": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
