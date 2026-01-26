@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "chore: upgrade glob to v11 for ESM compatibility",
+      "type": "patch",
+      "packageName": "@xarc/app-dev"
+    }
+  ],
+  "packageName": "@xarc/app-dev",
+  "email": "kyle.jeske@walmart.com"
+}

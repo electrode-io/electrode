@@ -4,9 +4,8 @@
 /* eslint-disable no-process-exit, no-console */
 
 const _ = require("lodash");
-const Util = require("util");
 const Fs = require("fs-extra");
-const { glob: getFilePaths } = Util.promisify(require("glob"));
+const { glob: getFilePaths } = require("glob");
 const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
 const RAW_MESSAGES_DIR = "./dist/";
 const RAW_MESSAGES_NAME = "raw-messages.json";
