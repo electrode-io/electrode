@@ -1,6 +1,13 @@
 # Change Log - @xarc/app-dev
 
-This log was last generated on Mon, 17 Nov 2025 03:19:05 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Jan 2026 17:41:18 GMT and should not be manually modified.
+
+## 13.2.0
+Mon, 26 Jan 2026 17:41:18 GMT
+
+### Patches
+
+- chore: upgrade glob to v11 for ESM compatibility
 
 ## 13.1.0
 Mon, 17 Nov 2025 03:19:05 GMT
