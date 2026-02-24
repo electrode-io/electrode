@@ -2,7 +2,7 @@
 
 import { RenderContext } from "@xarc/render-context";
 
-import * as _ from "lodash";
+import _ = require("lodash");
 import { RenderProcessor } from "./render-processor";
 import { TagTemplate } from "./tag-template";
 

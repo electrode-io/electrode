@@ -15,7 +15,8 @@
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "types": ["react", "react-dom"]
   },
   "include": ["src/browser", "src/common"]
 }

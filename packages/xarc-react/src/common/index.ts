@@ -1,6 +1,4 @@
-import React from "react";
-import ReactDom from "react-dom";
-import ReactDomServer from "react-dom/server";
+import type { Component, FunctionComponent } from "react";
 import { SubApp } from "@xarc/subapp";
 
 export { xarcV2 } from "@xarc/subapp";
@@ -14,7 +12,8 @@ export { xarcV2 } from "@xarc/subapp";
  * Example:
  *
  * ```tsx
- * import { ReactSubApp, React } from "@xarc/react";
+ * import { ReactSubApp } from "@xarc/react";
+ * import React from "react";
  *
  * const Sample = () => <div>sample react component</div>;
  *
@@ -23,15 +22,14 @@ export { xarcV2 } from "@xarc/subapp";
  * };
  * ```
  */
-export type ReactSubApp = SubApp<React.Component | React.FunctionComponent>;
+export type ReactSubApp = SubApp<Component | FunctionComponent>;
 
 //
-// re-exports
+// re-exports (type-only React exports for consumers that need the types)
 //
-export { React, ReactDom, ReactDomServer };
+export type { FC, Component, ComponentType, ReactNode } from "react";
 export { AppContext } from "./app-context";
 export { CreateComponentOptions } from "./create-component";
-export { Component } from "react";
 
 export {
   StaticPropsMethodParams,

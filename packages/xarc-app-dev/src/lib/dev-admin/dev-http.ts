@@ -2,7 +2,7 @@
 
 import { createReadStream } from "fs";
 import { Readable } from "stream";
-import { getType } from "mime";
+import mime from "mime";
 import { createServer, Server } from "http";
 import Url from "url";
 import { resolve as pathResolve } from "path";
@@ -72,11 +72,11 @@ export const setupHttpDevServer = function({
         replyError: err => res.writeHead(500, err) && res.end(),
         replyNotFound: () => res.writeHead(404, "dev server express Not Found") && res.end(), //res.status(404).send("dev server express Not Found"),
         replyStaticData: data => {
-          res.writeHead(200, { "Content-Type": getType(req.url) });
+          res.writeHead(200, { "Content-Type": (mime as unknown as { getType: (path: string) => string | null }).getType(req.url) });
           Readable.from(data).pipe(res);
         },
         replyFile: file =>
-          res.writeHead(200, { "Content-Type": getType(file) }) &&
+          res.writeHead(200, { "Content-Type": (mime as unknown as { getType: (path: string) => string | null }).getType(file) }) &&
           createReadStream(pathResolve(file)).pipe(res)
       });
 

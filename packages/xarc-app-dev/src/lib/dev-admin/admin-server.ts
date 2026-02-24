@@ -593,7 +593,8 @@ ${instruction}`
       context._deferIx = [];
     }
 
-    if (_.isEmpty(context._deferIx) || store.length - _.last(context._deferIx) > 1) {
+    const lastDeferIx = _.last(context._deferIx) as number | undefined;
+    if (_.isEmpty(context._deferIx) || store.length - (lastDeferIx ?? -1) > 1) {
       context._deferIx.push(store.length - 1);
     }
 

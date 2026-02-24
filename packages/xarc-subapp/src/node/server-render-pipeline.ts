@@ -1,6 +1,6 @@
 /* eslint-disable max-statements, no-console */
 
-import _ from "lodash";
+import { pick, isEmpty } from "lodash";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
 import {
   SubAppSSRData,
@@ -56,7 +56,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
 
   constructor(data: SubAppSSRData) {
     const { context, options } = data;
-    this.options = { ...options, ..._.pick(context.options, ["ssr", "prepareOnly"]) };
+    this.options = { ...options, ...pick(context.options, ["ssr", "prepareOnly"]) };
     this.ssrData = data;
     this.outputSpot = context.output.reserve();
     this.framework = data.subapp._frameworkFactory();
@@ -135,7 +135,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     const now = Date.now();
     let initialStateData = "";
     let initialStateScript = "{}";
-    if (!_.isEmpty(ssrProps)) {
+    if (!isEmpty(ssrProps)) {
       const dataId = `${namespace}.${name}-initial-state-${Date.now()}-${++SubAppServerRenderPipeline.INITIAL_STATE_TAG_ID}`;
       initialStateData = `
 <script${scriptNonceAttr} type="application/json" id="${dataId}">

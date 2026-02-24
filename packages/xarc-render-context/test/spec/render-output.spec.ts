@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars, comma-dangle, arrow-parens, max-statements */
 
 import { RenderOutput } from "../../src";
-import * as Munchy from "munchy";
-import * as streamToArray from "stream-to-array";
+
+import Munchy = require("munchy");
+import streamToArray = require("stream-to-array");
 import { describe, it } from "mocha";
 import { asyncVerify, expectError } from "run-verify";
 

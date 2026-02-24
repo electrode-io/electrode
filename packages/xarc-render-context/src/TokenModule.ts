@@ -3,7 +3,7 @@
 /* eslint-disable no-magic-numbers, no-console, max-params, max-statements */
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex */
 
-import * as assert from "assert";
+import assert = require("assert");
 import { loadTokenModuleHandler } from "./load-handler";
 import { TEMPLATE_DIR, TOKEN_HANDLER } from "./symbols";
 const viewTokenModules = {};

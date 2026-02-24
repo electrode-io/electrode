@@ -1,6 +1,7 @@
 {
   "name": "@xarc/tag-renderer",
   "version": "2.0.0",
+  "type": "commonjs",
   "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {
@@ -41,7 +42,7 @@
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.19.0",
     "typedoc": "^0.26.3",
     "typescript": "^5.5.3",
     "xsh": "^0.4.5",
@@ -49,10 +50,11 @@
   },
   "mocha": {
     "require": [
-      "ts-node/register",
+      "tsx/cjs",
       "source-map-support/register",
       "@xarc/module-dev/config/test/setup.js"
     ],
+    "node-option": ["import=tsx"],
     "recursive": true
   },
   "files": [

@@ -1,24 +1,38 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["ES2020", "DOM"],
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
     "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ES2020",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
     "allowJs": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "skipLibCheck": true
   },
   "typedocOptions": {
     "entryPointStrategy": "expand"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "lib", "config", "dist", "src/**/*.js"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "config",
+    "dist",
+    "src/**/*.js"
+  ]
 }

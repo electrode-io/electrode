@@ -1,9 +1,10 @@
 /* eslint-disable new-cap */
 
 import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
-import * as tokenHandler from "../fixtures/token-handler";
 
-import * as custom1 from "../fixtures/custom-1";
+import tokenHandler = require("../fixtures/token-handler");
+
+import custom1 = require("../fixtures/custom-1");
 
 const nullTokenProcess = () => {
   return null;

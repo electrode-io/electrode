@@ -144,16 +144,16 @@ describe("Jsx Renderer", function () {
       });
   });
 
-  const test1ExpectedOutput = Fs.readFileSync(
-    Path.join(__dirname, "test1-output.txt"),
+  const test3ExpectedOutputForRender = Fs.readFileSync(
+    Path.join(__dirname, "test3-output.txt"),
     "utf8"
   ).trim();
 
   it("should render index page in JSX", () => {
     const renderer = new JsxRenderer({
       insertTokenIds: true,
-      templateFullPath: Path.dirname(require.resolve("../jsx-templates/test1")),
-      template: Template,
+      templateFullPath: Path.dirname(require.resolve("../jsx-templates/test3")),
+      template: Template3,
       tokenHandlers: "../fixtures/token-handler"
     });
 
@@ -164,7 +164,7 @@ describe("Jsx Renderer", function () {
         .map(x => x.trimRight())
         .join("\n");
 
-      expect(r).contains(test1ExpectedOutput);
+      expect(r).to.equal(test3ExpectedOutputForRender);
     };
 
     renderer.initializeRenderer();
@@ -183,11 +183,12 @@ describe("Jsx Renderer", function () {
   });
 
   it("should handle failure in nesting async components", async () => {
+    const Template2AsyncFail = require("../jsx-templates/test2-async-fail").default;
     const renderer = new JsxRenderer({
       insertTokenIds: true,
-      templateFullPath: null, // test passing no templateFullPath so CWD would be used
-      template: Template2,
-      tokenHandlers: "./test/fixtures/token-handler"
+      templateFullPath: Path.dirname(require.resolve("../jsx-templates/test2-async-fail")),
+      template: Template2AsyncFail,
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     renderer.initializeRenderer();

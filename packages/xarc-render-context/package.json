@@ -1,6 +1,7 @@
 {
   "name": "@xarc/render-context",
   "version": "2.0.0",
+  "type": "commonjs",
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {
@@ -38,17 +39,18 @@
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
     "stream-to-array": "^2.3.0",
-    "ts-node": "^10.9.1",
+    "tsx": "^4.19.0",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
     "xsh": "^0.4.5"
   },
   "mocha": {
     "require": [
-      "ts-node/register",
+      "tsx/cjs",
       "source-map-support/register",
       "@xarc/module-dev/config/test/setup.js"
     ],
+    "node-option": ["import=tsx"],
     "recursive": true
   },
   "files": [

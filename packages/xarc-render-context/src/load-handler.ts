@@ -4,7 +4,7 @@
 /* eslint-disable no-magic-numbers, no-console */
 
 import * as Path from "path";
-import * as requireAt from "require-at";
+import requireAt = require("require-at");
 import { makeOptionalRequire } from "optional-require";
 
 const failLoadTokenModule = (msg: string, err: Error) => {

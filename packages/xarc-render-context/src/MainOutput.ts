@@ -5,7 +5,7 @@
 
 /* eslint-disable filenames/match-regex */
 
-import * as assert from "assert";
+import assert = require("assert");
 import { BaseOutput } from "./BaseOutput";
 
 export class MainOutput extends BaseOutput {

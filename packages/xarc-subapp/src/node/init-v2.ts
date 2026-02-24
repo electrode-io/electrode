@@ -57,10 +57,7 @@ function getXarcAppVersion() {
  * @returns assets
  */
 function initializeStaticAssets(props: InitProps) {
-  const isProd = process.env.NODE_ENV === "production";
-  const distDir = isProd
-    ? Path.join(__dirname, "../../dist/min")
-    : Path.join(__dirname, "../../dist-browser~es5~cjs~/browser");
+  const distDir = Path.join(__dirname, "../../dist-browser~es5~cjs~/browser");
 
   const getClientJs = (file: string, exportName: string) => {
     const code = require(Path.join(distDir, file))[exportName].toString();

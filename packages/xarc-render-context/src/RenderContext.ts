@@ -5,7 +5,8 @@
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex, no-magic-numbers */
 
 import { RenderOutput } from "./RenderOutput";
-import * as Munchy from "munchy";
+
+import Munchy = require("munchy");
 import { munchyHandleStreamError, isReadableStream } from "./utils";
 
 /**

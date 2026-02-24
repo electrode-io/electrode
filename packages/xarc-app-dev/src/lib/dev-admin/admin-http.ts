@@ -192,7 +192,7 @@ export class AdminHttp {
   _sendLogsToStreamClients() {
     this._sendStreamTimer = null;
     const logs = this._getLogs("app").filter(x => x);
-    const lastLog = _.last(logs) || { ts: 0, tx: 0 };
+    const lastLog = (_.last(logs) as LogEntryId | undefined) || { ts: 0, tx: 0 };
     const clients = Object.entries(this._eventClients)
       .map(e => e[1])
       .filter(client => {

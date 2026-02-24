@@ -262,7 +262,10 @@ const startProxy = (inOptions = {}) => {
     inOptions
   );
 
-  const proxyOptions = _.pick(options, ["port", "xfwd", "pino", "resolvers"]);
+  const proxyOptions = _.pick(options, ["port", "xfwd", "pino", "resolvers"]) as Record<
+    string,
+    unknown
+  >;
   const { host, port, protocol } = options;
 
   const ssl = Boolean(options.httpsPort);
@@ -270,12 +273,12 @@ const startProxy = (inOptions = {}) => {
 
   let listenReportTimer;
   const proxyUrls = {} as any;
-  proxyOptions.reportListening = (proto, _port, actualPort) => {
+  proxyOptions.reportListening = (proto: string, _port: number, actualPort: number) => {
     clearTimeout(listenReportTimer);
     if (!regAppPort) {
       return;
     }
-    proxyUrls[proto] = formUrl({ protocol: proto, host, port: actualPort });
+    proxyUrls[proto] = formUrl({ protocol: proto, host, port: String(actualPort) });
     console.log(`Electrode dev proxy listening on ${proto} port`, actualPort);
     listenReportTimer = setTimeout(() => {
       const mockCdnMsg = enableCdnMock

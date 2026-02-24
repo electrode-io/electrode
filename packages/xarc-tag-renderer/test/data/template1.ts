@@ -2,8 +2,8 @@
 
 import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
 
-import * as custom1 from "../fixtures/custom-1";
-import * as tokenHandler from "../fixtures/token-handler";
+import custom1 = require("../fixtures/custom-1");
+import tokenHandler = require("../fixtures/token-handler");
 
 const subTags2 = createTemplateTags`${RegisterTokenIds(tokenHandler)}
   ${RegisterTokenIds(() => {

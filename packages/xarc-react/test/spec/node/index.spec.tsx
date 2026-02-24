@@ -1,3 +1,5 @@
+/** @jsxRuntime classic */
+/** @jsx createElement */
 import { createDynamicComponent } from "../../../src/node";
 import { getContainer } from "@xarc/subapp";
 import { renderToString } from "react-dom/server";

@@ -71,6 +71,10 @@ export class JsxRenderer {
   async render(options) {
     const defer = makeDefer();
     const context = new RenderContext(options, this);
+    // Ensure context.user is an object for token handlers (e.g. subapp-web init) that expect it
+    context.user = this._handlerContext.user && typeof this._handlerContext.user === "object"
+      ? this._handlerContext.user
+      : {};
 
     try {
       await each(this._beforeRenders, (r: any) => r.beforeRender(context));
