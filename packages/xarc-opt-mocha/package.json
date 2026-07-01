@@ -23,8 +23,7 @@
     "build": "echo \"Nothing to build. Just a placeholder\"",
     "test": "echo OK",
     "coverage": "echo OK",
-    "preinstall": "node xarc-opt-check.js",
-    "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
+    "preinstall": "node xarc-opt-check.js"
   },
   "dependencies": {
     "@types/mocha": "^10.0.1",
@@ -34,7 +33,6 @@
     "mocha": "^10.2.0"
   },
   "devDependencies": {
-    "opt-archetype-check": "1.0.0",
     "shx": "^0.4.0"
   },
   "xarcOptCheck": {
