@@ -19,6 +19,14 @@ export function reduxRenderStart(options) {
 
   let subappRoot;
 
+  if (!options.element) {
+    return (
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    );
+  }
+
   if (options.serverSideRendering) {
     subappRoot = hydrateRoot(
       options.element,
