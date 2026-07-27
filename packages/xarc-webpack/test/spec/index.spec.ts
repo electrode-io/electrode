@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+/* eslint-disable max-nested-callbacks */
 import { expect } from "chai";
 import { SubAppWebpackPlugin } from "../../lib/plugins/subapp-plugin-webpack5";
 
@@ -20,9 +22,10 @@ describe("SubAppWebpackPlugin", () => {
         type: "ImportExpression",
         source: { type: "Literal", value: "./my-subapp", loc: undefined }
       };
+      const call = () => plugin.findImportCall(ast, "/app/src/app.tsx");
 
-      expect(() => plugin.findImportCall(ast, "/app/src/app.tsx")).to.not.throw();
-      expect(plugin.findImportCall(ast, "/app/src/app.tsx")).to.equal("./my-subapp");
+      expect(call).to.not.throw();
+      expect(call()).to.equal("./my-subapp");
     });
 
     it("returns import value without throwing when loc is defined and source is Literal", () => {
@@ -34,9 +37,10 @@ describe("SubAppWebpackPlugin", () => {
           loc: { start: { line: 5, column: 2 } }
         }
       };
+      const call = () => plugin.findImportCall(ast, "/app/src/app.tsx");
 
-      expect(() => plugin.findImportCall(ast, "/app/src/app.tsx")).to.not.throw();
-      expect(plugin.findImportCall(ast, "/app/src/app.tsx")).to.equal("./my-subapp");
+      expect(call).to.not.throw();
+      expect(call()).to.equal("./my-subapp");
     });
 
     it("includes line/column in error message when loc is defined and source is non-Literal", () => {
@@ -56,14 +60,14 @@ describe("SubAppWebpackPlugin", () => {
         msg = e.message;
       }
 
-      expect(msg).to.include("10");     // line number
-      expect(msg).to.include("6");      // column + 1
+      expect(msg).to.include("10"); // line number
+      expect(msg).to.include("6"); // column + 1
       expect(msg).to.include("subapp module import must use literal string");
       expect(msg).to.include("CallExpression");
     });
 
     it("produces a non-crashing error message when loc is undefined and source is non-Literal", () => {
-      // This is the primary CEECORE-7071 crash path: loc undefined + non-Literal type
+      // Primary CEECORE-7071 crash path: loc undefined + non-Literal type
       const ast = {
         type: "ImportExpression",
         source: { type: "CallExpression", value: undefined, loc: undefined }
