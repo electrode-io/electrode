@@ -2,6 +2,13 @@
 
 This log was last generated on Wed, 05 Feb 2025 04:10:48 GMT and should not be manually modified.
 
+## 12.0.1
+Mon, 27 Jul 2026
+
+### Patches
+
+- fix: guard against undefined loc in webpack >=5.109.0 AST (CEECORE-7072)
+
 ## 12.0.0
 Wed, 05 Feb 2025 04:10:48 GMT
 
