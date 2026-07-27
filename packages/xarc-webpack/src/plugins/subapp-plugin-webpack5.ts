@@ -89,6 +89,7 @@ class SubAppHotAcceptDependency extends ModuleDependency {
 }
 
 const where = (source, loc) => {
+  if (!loc) return source;
   return `${source}:${loc.start.line}:${loc.start.column + 1}`;
 };
 
@@ -267,10 +268,11 @@ export class SubAppWebpackPlugin {
       case "ImportExpression":
         assert(
           ast.source.type === "Literal",
-          `${where(
-            noCwd(source),
-            ast.source.loc
-          )}: subapp module import must use literal string, got ${ast.source.type}`
+          () =>
+            `${where(
+              noCwd(source),
+              ast.source.loc
+            )}: subapp module import must use literal string, got ${ast.source.type}`
         );
         return ast.source.value;
     }
@@ -375,7 +377,7 @@ export class SubAppWebpackPlugin {
           // getModule function: function () { return import("./subapp-module") }
           const mod = this.findImportCall(gm, currentSource);
 
-          assert(mod, `${cw()}: unable to find the request of the subapp's module import call`);
+          assert(mod, () => `${cw()}: unable to find the request of the subapp's module import call`);
 
           this._subApps[nameVal] = {
             name: nameVal,
