@@ -2,6 +2,18 @@
   "name": "@xarc/app-dev",
   "entries": [
     {
+      "version": "13.3.0",
+      "tag": "@xarc/app-dev_v13.3.0",
+      "date": "Wed, 29 Jul 2026 08:22:23 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@xarc/webpack\" from `^13.0.0` to `13.0.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "13.2.0",
       "tag": "@xarc/app-dev_v13.2.0",
       "date": "Mon, 26 Jan 2026 17:41:18 GMT",

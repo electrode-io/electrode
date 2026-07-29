@@ -1,6 +1,13 @@
 # Change Log - @xarc/webpack
 
-This log was last generated on Fri, 29 Aug 2025 05:42:40 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Jul 2026 08:22:23 GMT and should not be manually modified.
+
+## 13.0.1
+Wed, 29 Jul 2026 08:22:23 GMT
+
+### Patches
+
+- fix: guard against undefined loc in webpack >=5.109.0 AST (CEECORE-7072)
 
 ## 13.0.0
 Fri, 29 Aug 2025 05:42:40 GMT
