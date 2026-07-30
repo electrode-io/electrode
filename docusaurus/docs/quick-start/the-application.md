@@ -17,7 +17,7 @@ Your app consists of these essential top level directories and files:
 | `xrun-tasks.ts`   | The file that loads Electrode X's development tasks for `xrun` task runner |
 | `tsconfig.json`   | Typescript config                                                          |
 | `babel.config.js` | Babel config                                                               |
-| `.browserslitsrc` | configuration for [browserslist]                                           |
+| `.browserslistrc` | configuration for [browserslist]                                           |
 | `static`          | static web assets                                                          |
 | `src`             | Directory for your app's source code                                       |
 
